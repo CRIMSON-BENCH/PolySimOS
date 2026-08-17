@@ -87,6 +87,8 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
         title: "Reference",
         links: [
           { name: "Materials Database", href: "/materials" },
+          { name: "Unit Converters", href: "/convert" },
+          { name: "Physical Constants", href: "/constants" },
           { name: "Templates", href: "/templates" },
           { name: "Blog", href: "/blog" },
           { name: "Courses", href: "/education" },
