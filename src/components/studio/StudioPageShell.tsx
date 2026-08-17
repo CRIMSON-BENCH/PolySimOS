@@ -7,6 +7,7 @@ import { CrossLinks } from "@/components/CrossLinks";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
 import { softwareAppLd, faqLd } from "@/lib/seo";
 import { EmbedButton } from "./EmbedButton";
+import { UnlockSolverSlot, UpgradeSlot, DataUploadSlot, ExportSlot } from "@/components/monetization/Slots";
 
 const OTHER_SIMS = [
   { name: "Visual Node Graph", href: "/studio/graph" },
@@ -341,6 +342,13 @@ export function StudioPageShell({
       <p className="mt-3 max-w-3xl text-lg text-slate-600 dark:text-slate-400">{lede}</p>
 
       <div className="mt-8">{children}</div>
+
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <UnlockSolverSlot slug={slug} name={name} />
+        <UpgradeSlot next={`/studio/${slug}`} />
+        <DataUploadSlot next={`/studio/${slug}`} />
+        <ExportSlot next={`/studio/${slug}`} />
+      </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
         <EmbedButton slug={slug} />

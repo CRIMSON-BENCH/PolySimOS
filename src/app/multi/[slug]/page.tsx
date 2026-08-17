@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MULTIS, multiBySlug } from "@/lib/multi";
 import { MultiStudioSteps } from "@/components/studio/MultiStudioSteps";
+import { UnlockMultiSlot, UpgradeSlot, ExportSlot, CloudRunSlot, CustomBuildSlot } from "@/components/monetization/Slots";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclaimer } from "@/components/Disclaimer";
 import { JsonLd } from "@/components/JsonLd";
@@ -38,13 +39,16 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         </ol>
       </section>
 
+      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <UnlockMultiSlot slug={m.s} name={m.n} />
+        <UpgradeSlot next={`/multi/${m.s}`} />
+        <ExportSlot next={`/multi/${m.s}`} />
+        <CloudRunSlot next={`/multi/${m.s}`} />
+      </div>
+
       <div className="mt-10"><MultiStudioSteps steps={m.steps} /></div>
 
-      <section className="mt-14 max-w-3xl rounded-2xl border border-cyan-300/40 bg-gradient-to-br from-cyan-500/10 to-transparent p-6">
-        <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Need this as a private, branded workflow?</h2>
-        <p className="mt-2 text-slate-600 dark:text-slate-400">We build custom multi-solver packs for labs, firms, agencies, and courses — your parameters, your branding, your data, delivered as a ready-to-use tool.</p>
-        <Link href="/custom-solvers" className="mt-4 inline-block rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white">Explore Custom Solver Sets →</Link>
-      </section>
+      <div className="mt-14 max-w-3xl"><CustomBuildSlot /></div>
 
       <CrossLinks title={`More in the ${m.p} pack`} links={related} />
 

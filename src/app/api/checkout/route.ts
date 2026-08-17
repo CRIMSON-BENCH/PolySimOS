@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
-import { getProduct } from "@/lib/products";
 import { getStripe, priceIdForSlug, siteBaseUrl } from "@/lib/stripe";
+import { resolveSku } from "@/lib/pricing";
 import type Stripe from "stripe";
 
 export const runtime = "nodejs";
@@ -15,41 +15,49 @@ export async function POST(req: Request) {
   }
 
   let slug: string;
+  let cycle: "month" | "year" | undefined;
+  let next: string | undefined;
   try {
-    ({ slug } = await req.json());
+    ({ slug, cycle, next } = await req.json());
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const product = getProduct(slug);
-  if (!product || product.price === 0) {
+  const sku = resolveSku(slug, cycle);
+  if (!sku) {
     return NextResponse.json({ error: "Unknown or free product." }, { status: 400 });
   }
 
-  const isSub = product.billing === "subscription";
   const base = siteBaseUrl();
-  const existingPrice = priceIdForSlug(slug);
+  // Prefer a pre-existing Stripe Price if one is configured for a catalog slug.
+  const existingPrice = sku.metadata.kind === "product" || sku.metadata.kind === "subscription"
+    ? priceIdForSlug(slug)
+    : undefined;
 
-  // Prefer a pre-existing Stripe Price if configured; otherwise build one on the fly.
   const lineItem: Stripe.Checkout.SessionCreateParams.LineItem = existingPrice
     ? { price: existingPrice, quantity: 1 }
     : {
         quantity: 1,
         price_data: {
           currency: "usd",
-          unit_amount: Math.round(product.price * 100),
-          product_data: { name: product.name, description: product.blurb },
-          ...(isSub ? { recurring: { interval: product.interval === "year" ? "year" : "month" } } : {}),
+          unit_amount: sku.amount,
+          product_data: { name: sku.name, description: sku.description },
+          ...(sku.mode === "subscription" ? { recurring: { interval: sku.interval ?? "month" } } : {}),
         },
       };
 
+  const nextPath = next && next.startsWith("/") ? next : "/dashboard";
+  const success = `${base}/unlocked?k=${encodeURIComponent(sku.grantKey)}&next=${encodeURIComponent(nextPath)}`;
+  const referer = req.headers.get("referer");
+  const cancel = referer && referer.startsWith(base) ? referer : `${base}${nextPath}`;
+
   try {
     const session = await stripe.checkout.sessions.create({
-      mode: isSub ? "subscription" : "payment",
+      mode: sku.mode,
       line_items: [lineItem],
-      success_url: `${base}/dashboard?success=1&product=${slug}`,
-      cancel_url: `${base}/tools/${slug}?canceled=1`,
-      metadata: { slug },
+      success_url: success,
+      cancel_url: cancel,
+      metadata: { ...sku.metadata, grantKey: sku.grantKey },
       allow_promotion_codes: true,
     });
     return NextResponse.json({ url: session.url });
