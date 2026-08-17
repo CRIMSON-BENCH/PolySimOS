@@ -47,6 +47,14 @@ const SIMS = [
   { slug: "grapher", name: "Function Grapher", desc: "Plot up to three functions at once.", tag: "Math" },
   { slug: "surface-3d", name: "3D Surface Plotter", desc: "Orbit any z = f(x, y) surface.", tag: "Math" },
   { slug: "matrix", name: "Matrix Calculator", desc: "Multiply, invert, determinant, transpose.", tag: "Math" },
+  { slug: "attractors", name: "Strange Attractors", desc: "Lorenz, Rössler, Aizawa & more in 3D.", tag: "Physics" },
+  { slug: "rlc", name: "RLC Circuit", desc: "Step response and damping regimes.", tag: "Engineering" },
+  { slug: "wave-interference", name: "Wave Interference", desc: "Two-source ripple-tank fringes.", tag: "Physics" },
+  { slug: "cellular-automata", name: "Cellular Automata", desc: "Wolfram rules & Conway's Life.", tag: "CS / Math" },
+  { slug: "random-walk", name: "Random Walk", desc: "Brownian motion and diffusion.", tag: "Physics" },
+  { slug: "taylor", name: "Taylor Series", desc: "Polynomial approximation, live.", tag: "Math" },
+  { slug: "newton", name: "Newton's Method", desc: "Root finding, tangent by tangent.", tag: "Math" },
+  { slug: "distributions", name: "Distributions", desc: "Normal, Poisson, binomial & more.", tag: "Math" },
 ];
 
 export default function StudioIndex() {

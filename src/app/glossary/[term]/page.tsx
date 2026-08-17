@@ -6,6 +6,7 @@ import { getTerm, getAllTermSlugs, GLOSSARY } from "@/lib/glossary";
 import { ProductGrid } from "@/components/ProductCard";
 import { contextualProducts } from "@/lib/products";
 import { definedTermLd } from "@/lib/seo";
+import { StudioPromo } from "@/components/StudioPromo";
 
 export function generateStaticParams() {
   return getAllTermSlugs().map((term) => ({ term }));
@@ -57,6 +58,7 @@ export default async function TermPage({ params }: { params: Promise<{ term: str
       )}
 
       <ProductGrid products={contextualProducts(t.slug, 6)} title="Related products" />
+      <StudioPromo links={t.studio ? [{ name: `See ${t.term} live`, href: t.studio }] : undefined} />
     </PageShell>
   );
 }

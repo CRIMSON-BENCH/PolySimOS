@@ -8,6 +8,7 @@ import { PremiumCTA } from "@/components/PremiumCTA";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
 import { ACCURACY_NOTE } from "@/lib/disclaimer";
 import { faqLd } from "@/lib/seo";
+import { StudioPromo } from "@/components/StudioPromo";
 
 export function generateStaticParams() {
   return getAllMaterialSlugs().map((material) => ({ material }));
@@ -66,6 +67,7 @@ export default async function MaterialPage({ params }: { params: Promise<{ mater
 
       <PremiumCTA product={premiumUpsell(m.slug)} heading="Get the full sourced property sheet" />
       <ProductGrid products={contextualProducts(m.slug, 6)} title="Related products" />
+      <StudioPromo heading="Put this material to work in a simulation" links={[{ name: "FEA Truss", href: "/studio/fea" }, { name: "3D FEA", href: "/studio/fea-3d" }, { name: "Heat & Wave", href: "/studio/fields" }, { name: "Molecular Dynamics", href: "/studio/molecular-dynamics" }]} />
     </PageShell>
   );
 }

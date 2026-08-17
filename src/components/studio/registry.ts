@@ -31,6 +31,14 @@ import { IsingStudio } from "./IsingStudio";
 import { MatrixStudio } from "./MatrixStudio";
 import { GrapherStudio } from "./GrapherStudio";
 import { ProjectileStudio } from "./ProjectileStudio";
+import { AttractorStudio } from "./AttractorStudio";
+import { RLCStudio } from "./RLCStudio";
+import { WaveInterferenceStudio } from "./WaveInterferenceStudio";
+import { CellularAutomataStudio } from "./CellularAutomataStudio";
+import { RandomWalkStudio } from "./RandomWalkStudio";
+import { TaylorStudio } from "./TaylorStudio";
+import { NewtonStudio } from "./NewtonStudio";
+import { DistributionsStudio } from "./DistributionsStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -66,6 +74,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   matrix: MatrixStudio,
   grapher: GrapherStudio,
   projectile: ProjectileStudio,
+  attractors: AttractorStudio,
+  rlc: RLCStudio,
+  "wave-interference": WaveInterferenceStudio,
+  "cellular-automata": CellularAutomataStudio,
+  "random-walk": RandomWalkStudio,
+  taylor: TaylorStudio,
+  newton: NewtonStudio,
+  distributions: DistributionsStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

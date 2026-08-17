@@ -8,6 +8,7 @@ import { ProductGrid } from "@/components/ProductCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
 import { faqLd } from "@/lib/seo";
+import { StudioPromo } from "@/components/StudioPromo";
 
 export function generateStaticParams() {
   return getAllIndustrySlugs().map((industry) => ({ industry }));
@@ -70,6 +71,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ indus
 
       <PremiumCTA product={premiumUpsell(i.slug)} />
       <ProductGrid products={contextualProducts(i.slug, 6)} title={`Products for ${i.name}`} />
+      <StudioPromo heading={`Simulate ${i.name.toLowerCase()} problems live`} />
     </PageShell>
   );
 }

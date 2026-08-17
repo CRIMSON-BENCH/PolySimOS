@@ -41,6 +41,14 @@ const OTHER_SIMS = [
   { name: "Function Grapher", href: "/studio/grapher" },
   { name: "3D Surface Plotter", href: "/studio/surface-3d" },
   { name: "Matrix Calculator", href: "/studio/matrix" },
+  { name: "Strange Attractors", href: "/studio/attractors" },
+  { name: "RLC Circuit", href: "/studio/rlc" },
+  { name: "Wave Interference", href: "/studio/wave-interference" },
+  { name: "Cellular Automata", href: "/studio/cellular-automata" },
+  { name: "Random Walk", href: "/studio/random-walk" },
+  { name: "Taylor Series", href: "/studio/taylor" },
+  { name: "Newton's Method", href: "/studio/newton" },
+  { name: "Distributions", href: "/studio/distributions" },
 ];
 
 export function StudioPageShell({

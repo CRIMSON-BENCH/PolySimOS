@@ -8,6 +8,7 @@ import { ProductGrid } from "@/components/ProductCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
 import { faqLd } from "@/lib/seo";
+import { StudioPromo } from "@/components/StudioPromo";
 
 export function generateStaticParams() {
   return getAllMethodSlugs().map((method) => ({ method }));
@@ -65,6 +66,7 @@ export default async function MethodPage({ params }: { params: Promise<{ method:
 
       <PremiumCTA product={premiumUpsell(m.slug)} />
       <ProductGrid products={contextualProducts(m.slug, 6)} title="Related products" />
+      <StudioPromo />
     </PageShell>
   );
 }

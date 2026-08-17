@@ -7,6 +7,7 @@ import { ProductGrid } from "@/components/ProductCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
 import { faqLd } from "@/lib/seo";
+import { StudioPromo } from "@/components/StudioPromo";
 
 export function generateStaticParams() {
   return getAllModelSlugs().map((model) => ({ model }));
@@ -70,6 +71,7 @@ export default async function ModelPage({ params }: { params: Promise<{ model: s
 
       <PremiumCTA product={premiumUpsell(m.slug)} />
       <ProductGrid products={contextualProducts(m.slug, 6)} title="Related products" />
+      <StudioPromo links={m.studio ? [{ name: `Run the ${m.name}`, href: m.studio }] : undefined} />
     </PageShell>
   );
 }
