@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HeatPumpStudio } from "@/components/studio/HeatPumpStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Heat Pump COP Calculator (Browser)", description: "See how a heat pump's coefficient of performance depends on indoor and outdoor temperature, versus the Carnot limit. Free.", alternates: { canonical: "/studio/heat-pump" } };
+export default function Page() { return <StudioPageShell slug="heat-pump" name="Heat Pump COP" keyword="heat pump COP calculator" lede="How can a heater put out more energy than it uses? A heat pump doesn&apos;t create heat — it moves it, delivering several kilowatts of warmth per kilowatt of power." about="A heat pump&apos;s coefficient of performance is the heat delivered per unit of electricity, bounded by the Carnot limit T_hot/(T_hot − T_cold). The colder it is outside, the bigger that temperature lift and the lower the COP — but even at freezing a heat pump beats a resistance heater several times over, which is why it is central to decarbonizing heating."><HeatPumpStudio /></StudioPageShell>; }

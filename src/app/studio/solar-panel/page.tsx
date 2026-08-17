@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SolarPanelStudio } from "@/components/studio/SolarPanelStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Solar Panel / PV System Calculator (Browser)", description: "Estimate solar PV system output from area, efficiency, peak sun hours, and tilt — daily and annual kWh. Free, interactive.", alternates: { canonical: "/studio/solar-panel" } };
+export default function Page() { return <StudioPageShell slug="solar-panel" name="Solar PV System" keyword="solar panel output calculator" lede="How much power will those rooftop panels really make? It comes down to area, efficiency, and how many peak sun hours your location gets." about="A solar array&apos;s daily output is its rated power — panel area times efficiency at standard 1000 W/m² — multiplied by the peak sun hours your site receives. Tilting the panels near your latitude maximizes annual energy. Real systems shave off a bit more for heat, shading, wiring, and inverter losses."><SolarPanelStudio /></StudioPageShell>; }

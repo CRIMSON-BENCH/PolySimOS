@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { WindPowerStudio } from "@/components/studio/WindPowerStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Wind Turbine Power Calculator (Betz Limit, Browser)", description: "Compute wind turbine power from rotor diameter and wind speed, bounded by the Betz limit, with the power curve. Free.", alternates: { canonical: "/studio/wind-power" } };
+export default function Page() { return <StudioPageShell slug="wind-power" name="Wind Turbine Power" keyword="wind turbine power Betz limit" lede="Why do wind turbines keep getting enormous? Because power grows with the cube of wind speed and the square of rotor diameter — small changes pay off big." about="A turbine&apos;s power is ½·ρ·A·v³·Cp: air density times swept area times wind speed cubed times the power coefficient. No machine can capture more than 59.3% of the wind&apos;s energy — Betz&apos;s limit — and real turbines reach about 45%. Below the cut-in and above the cut-out wind speed they generate nothing at all."><WindPowerStudio /></StudioPageShell>; }

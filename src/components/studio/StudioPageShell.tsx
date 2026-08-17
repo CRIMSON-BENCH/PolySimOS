@@ -262,6 +262,14 @@ const OTHER_SIMS = [
   { name: "Radiation Dose", href: "/studio/radiation-dose" },
   { name: "Reactor Kinetics", href: "/studio/reactor-kinetics" },
   { name: "Neutron Transport", href: "/studio/neutron-transport" },
+  { name: "Solar PV System", href: "/studio/solar-panel" },
+  { name: "Wind Turbine Power", href: "/studio/wind-power" },
+  { name: "Hydroelectric Power", href: "/studio/hydro-power" },
+  { name: "Heat Pump COP", href: "/studio/heat-pump" },
+  { name: "EV Range & Efficiency", href: "/studio/ev-efficiency" },
+  { name: "Battery Storage", href: "/studio/battery-storage" },
+  { name: "Carbon Footprint", href: "/studio/carbon-footprint" },
+  { name: "Levelized Cost of Energy", href: "/studio/lcoe" },
 ];
 
 export function StudioPageShell({

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HydroPowerStudio } from "@/components/studio/HydroPowerStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Hydroelectric Power Calculator (Browser)", description: "Compute hydroelectric power from head, flow rate, and turbine efficiency, with annual energy. Free, interactive.", alternates: { canonical: "/studio/hydro-power" } };
+export default function Page() { return <StudioPageShell slug="hydro-power" name="Hydroelectric Power" keyword="hydroelectric power calculator" lede="A dam turns falling water into electricity with elegant simplicity: how high it drops times how much flows, times how good the turbine is." about="Hydroelectric power follows P = ρ·g·Q·H·η — the weight of water falling per second times its drop height times turbine efficiency. High-head mountain schemes need only a trickle; low-head river plants need vast flow. Hydropower is the most efficient and dispatchable major renewable, able to ramp up and down on demand."><HydroPowerStudio /></StudioPageShell>; }

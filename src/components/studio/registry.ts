@@ -252,6 +252,14 @@ import { RadiationShieldingStudio } from "./RadiationShieldingStudio";
 import { RadiationDoseStudio } from "./RadiationDoseStudio";
 import { ReactorKineticsStudio } from "./ReactorKineticsStudio";
 import { NeutronTransportStudio } from "./NeutronTransportStudio";
+import { SolarPanelStudio } from "./SolarPanelStudio";
+import { WindPowerStudio } from "./WindPowerStudio";
+import { HydroPowerStudio } from "./HydroPowerStudio";
+import { HeatPumpStudio } from "./HeatPumpStudio";
+import { EVEfficiencyStudio } from "./EVEfficiencyStudio";
+import { BatteryStorageStudio } from "./BatteryStorageStudio";
+import { CarbonFootprintStudio } from "./CarbonFootprintStudio";
+import { LCOEStudio } from "./LCOEStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -508,6 +516,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "radiation-dose": RadiationDoseStudio,
   "reactor-kinetics": ReactorKineticsStudio,
   "neutron-transport": NeutronTransportStudio,
+  "solar-panel": SolarPanelStudio,
+  "wind-power": WindPowerStudio,
+  "hydro-power": HydroPowerStudio,
+  "heat-pump": HeatPumpStudio,
+  "ev-efficiency": EVEfficiencyStudio,
+  "battery-storage": BatteryStorageStudio,
+  "carbon-footprint": CarbonFootprintStudio,
+  lcoe: LCOEStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

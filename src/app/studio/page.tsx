@@ -268,6 +268,14 @@ const SIMS = [
   { slug: "radiation-dose", name: "Radiation Dose", desc: "Time, distance, shielding.", tag: "Nuclear" },
   { slug: "reactor-kinetics", name: "Reactor Kinetics", desc: "Reactivity & period.", tag: "Nuclear" },
   { slug: "neutron-transport", name: "Neutron Transport", desc: "Random walk & moderation.", tag: "Nuclear" },
+  { slug: "solar-panel", name: "Solar PV System", desc: "Panels to kilowatt-hours.", tag: "Energy" },
+  { slug: "wind-power", name: "Wind Turbine Power", desc: "Betz-limited power curve.", tag: "Energy" },
+  { slug: "hydro-power", name: "Hydroelectric Power", desc: "Head × flow × gravity.", tag: "Energy" },
+  { slug: "heat-pump", name: "Heat Pump COP", desc: "Heat moved vs energy in.", tag: "Energy" },
+  { slug: "ev-efficiency", name: "EV Range & Efficiency", desc: "Speed vs range.", tag: "Energy" },
+  { slug: "battery-storage", name: "Battery Storage", desc: "Usable capacity & backup.", tag: "Energy" },
+  { slug: "carbon-footprint", name: "Carbon Footprint", desc: "Annual CO₂ breakdown.", tag: "Energy" },
+  { slug: "lcoe", name: "Levelized Cost of Energy", desc: "True $/MWh.", tag: "Energy" },
 ];
 
 export default function StudioIndex() {
