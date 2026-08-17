@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MonteCarloStudio } from "@/components/studio/MonteCarloStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Monte Carlo Stock Price Simulator (GBM, Browser)", description: "Simulate hundreds of price paths with geometric Brownian motion and see the full distribution of outcomes. Free, interactive.", alternates: { canonical: "/studio/monte-carlo" } };
+export default function Page() { return <StudioPageShell slug="monte-carlo" name="Monte Carlo Price Simulation" keyword="Monte Carlo stock simulation" lede="The future is a distribution, not a point. Run hundreds of simulated price paths and watch the cone of possible outcomes — and their odds — take shape." about="Geometric Brownian motion models an asset price with steady drift and random volatility, the foundation of the Black-Scholes world. Monte Carlo simulation runs many such paths to estimate the distribution of outcomes, percentiles, and tail risk that a single forecast cannot capture. Educational tool, not investment advice."><MonteCarloStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BlackScholesStudio } from "@/components/studio/BlackScholesStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Black-Scholes Option Pricing Calculator (Browser)", description: "Price European call and put options and compute the Greeks (delta, gamma, vega, theta) with the Black-Scholes model. Free, interactive.", alternates: { canonical: "/studio/black-scholes" } };
+export default function Page() { return <StudioPageShell slug="black-scholes" name="Black-Scholes Option Pricing" keyword="Black-Scholes calculator" lede="The Nobel-winning formula that built the modern derivatives market. Price an option from five inputs and see how the Greeks measure its every sensitivity." about="The Black-Scholes model gives the fair value of a European option from spot price, strike, time to expiry, risk-free rate, and volatility. The Greeks — delta, gamma, vega, theta, rho — quantify how that value responds to each input, and are the language of options hedging. This is an educational tool, not investment advice."><BlackScholesStudio /></StudioPageShell>; }

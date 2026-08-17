@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OptionPayoffStudio } from "@/components/studio/OptionPayoffStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Option Strategy Payoff Diagram Builder (Browser)", description: "Visualize payoff diagrams for calls, puts, spreads, straddles, and iron condors at expiration. Free, interactive.", alternates: { canonical: "/studio/option-payoff" } };
+export default function Page() { return <StudioPageShell slug="option-payoff" name="Option Strategy Payoff" keyword="option payoff diagram" lede="Every options strategy has a signature shape. See the profit-and-loss profile of spreads, straddles, and iron condors, and understand exactly where each makes or loses money." about="A payoff diagram plots profit or loss against the underlying price at expiration. Combining long and short calls and puts at different strikes sculpts the curve — bull spreads cap both upside and risk, straddles profit from big moves either way, iron condors earn from a quiet market. Educational tool, not investment advice."><OptionPayoffStudio /></StudioPageShell>; }

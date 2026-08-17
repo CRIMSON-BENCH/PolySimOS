@@ -124,6 +124,14 @@ import { CarbonCycleStudio } from "./CarbonCycleStudio";
 import { SeismicStudio } from "./SeismicStudio";
 import { GroundwaterStudio } from "./GroundwaterStudio";
 import { LapseRateStudio } from "./LapseRateStudio";
+import { BlackScholesStudio } from "./BlackScholesStudio";
+import { OptionPayoffStudio } from "./OptionPayoffStudio";
+import { MonteCarloStudio } from "./MonteCarloStudio";
+import { EfficientFrontierStudio } from "./EfficientFrontierStudio";
+import { VaRStudio } from "./VaRStudio";
+import { BondPricingStudio } from "./BondPricingStudio";
+import { CompoundInterestStudio } from "./CompoundInterestStudio";
+import { AmortizationStudio } from "./AmortizationStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -252,6 +260,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   seismic: SeismicStudio,
   groundwater: GroundwaterStudio,
   "lapse-rate": LapseRateStudio,
+  "black-scholes": BlackScholesStudio,
+  "option-payoff": OptionPayoffStudio,
+  "monte-carlo": MonteCarloStudio,
+  "efficient-frontier": EfficientFrontierStudio,
+  "value-at-risk": VaRStudio,
+  "bond-pricing": BondPricingStudio,
+  "compound-interest": CompoundInterestStudio,
+  amortization: AmortizationStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

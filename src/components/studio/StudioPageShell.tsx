@@ -134,6 +134,14 @@ const OTHER_SIMS = [
   { name: "Earthquake Shaking", href: "/studio/seismic" },
   { name: "Groundwater Drawdown", href: "/studio/groundwater" },
   { name: "Lapse Rate", href: "/studio/lapse-rate" },
+  { name: "Black-Scholes", href: "/studio/black-scholes" },
+  { name: "Option Payoff", href: "/studio/option-payoff" },
+  { name: "Monte Carlo (GBM)", href: "/studio/monte-carlo" },
+  { name: "Efficient Frontier", href: "/studio/efficient-frontier" },
+  { name: "Value at Risk", href: "/studio/value-at-risk" },
+  { name: "Bond Pricing", href: "/studio/bond-pricing" },
+  { name: "Compound Interest", href: "/studio/compound-interest" },
+  { name: "Loan Amortization", href: "/studio/amortization" },
 ];
 
 export function StudioPageShell({

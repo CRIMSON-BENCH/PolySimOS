@@ -140,6 +140,14 @@ const SIMS = [
   { slug: "seismic", name: "Earthquake Shaking", desc: "Magnitude, energy, intensity.", tag: "Earth & Climate" },
   { slug: "groundwater", name: "Groundwater Drawdown", desc: "Well cone of depression.", tag: "Earth & Climate" },
   { slug: "lapse-rate", name: "Lapse Rate", desc: "Atmosphere & cloud base.", tag: "Earth & Climate" },
+  { slug: "black-scholes", name: "Black-Scholes", desc: "Option pricing + Greeks.", tag: "Finance" },
+  { slug: "option-payoff", name: "Option Payoff", desc: "Strategy P/L diagrams.", tag: "Finance" },
+  { slug: "monte-carlo", name: "Monte Carlo (GBM)", desc: "Price-path distributions.", tag: "Finance" },
+  { slug: "efficient-frontier", name: "Efficient Frontier", desc: "Portfolio risk vs return.", tag: "Finance" },
+  { slug: "value-at-risk", name: "Value at Risk", desc: "VaR & expected shortfall.", tag: "Finance" },
+  { slug: "bond-pricing", name: "Bond Pricing", desc: "Price, yield & duration.", tag: "Finance" },
+  { slug: "compound-interest", name: "Compound Interest", desc: "Investment growth over time.", tag: "Finance" },
+  { slug: "amortization", name: "Loan Amortization", desc: "Mortgage payment breakdown.", tag: "Finance" },
 ];
 
 export default function StudioIndex() {

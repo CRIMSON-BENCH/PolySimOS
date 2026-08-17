@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { VaRStudio } from "@/components/studio/VaRStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Value at Risk (VaR) Calculator (Browser)", description: "Compute parametric Value at Risk and expected shortfall for a portfolio at any confidence level and horizon. Free, interactive.", alternates: { canonical: "/studio/value-at-risk" } };
+export default function Page() { return <StudioPageShell slug="value-at-risk" name="Value at Risk (VaR)" keyword="value at risk calculator" lede="How bad could a bad day get? Value at Risk answers with a single number — the loss your portfolio should not exceed at a chosen confidence level." about="Parametric VaR assumes returns are normally distributed and scales volatility by the square root of time. At 95% confidence, the VaR is the loss exceeded only 5% of the time; expected shortfall (CVaR) averages the losses beyond it. Both are core to risk management and regulation. Educational tool, not investment advice."><VaRStudio /></StudioPageShell>; }

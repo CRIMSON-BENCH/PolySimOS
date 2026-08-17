@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BondPricingStudio } from "@/components/studio/BondPricingStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bond Pricing & Duration Calculator (Browser)", description: "Price a bond from coupon, yield, and maturity, and compute Macaulay and modified duration to gauge interest-rate risk. Free.", alternates: { canonical: "/studio/bond-pricing" } };
+export default function Page() { return <StudioPageShell slug="bond-pricing" name="Bond Pricing & Duration" keyword="bond pricing calculator" lede="Why do bond prices fall when rates rise? Price a bond, watch its value slide along the yield curve, and see how duration measures that interest-rate risk." about="A bond&apos;s price is the present value of its future coupons and principal, discounted at the yield to maturity. Price and yield move inversely along a convex curve. Macaulay duration is the weighted-average time to cash flows; modified duration estimates the percentage price change per one-point yield move. Educational tool, not investment advice."><BondPricingStudio /></StudioPageShell>; }
