@@ -21,6 +21,7 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
         title: "Live Studio",
         links: [
           { name: "Visual Node Graph", href: "/studio/graph" },
+          { name: "GPU Compute (WebGPU)", href: "/studio/gpu" },
           { name: "Particle / N-Body", href: "/studio/particles" },
           { name: "2D Fluid (CFD)", href: "/studio/fluid" },
           { name: "Dynamical Systems", href: "/studio/dynamics" },
