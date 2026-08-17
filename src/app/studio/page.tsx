@@ -71,6 +71,14 @@ const SIMS = [
   { slug: "percolation", name: "Percolation", desc: "A phase transition in connectivity.", tag: "Physics" },
   { slug: "dla", name: "DLA Growth", desc: "Branching fractals from random walks.", tag: "Physics" },
   { slug: "ray-optics", name: "Ray Optics / Lenses", desc: "Trace rays through lenses.", tag: "Physics" },
+  { slug: "gas", name: "Gas in a Box", desc: "Kinetic theory → pressure (PV=nRT).", tag: "Physics" },
+  { slug: "collisions", name: "Elastic Collisions", desc: "Momentum & energy conservation.", tag: "Physics" },
+  { slug: "buoyancy", name: "Buoyancy", desc: "Archimedes — float or sink by density.", tag: "Physics" },
+  { slug: "rocket", name: "Rocket Equation", desc: "Tsiolkovsky Δv budget calculator.", tag: "Aerospace" },
+  { slug: "blackbody", name: "Blackbody Radiation", desc: "Planck curve + Wien's law.", tag: "Physics" },
+  { slug: "pendulum-wave", name: "Pendulum Wave", desc: "Phase art from many periods.", tag: "Physics" },
+  { slug: "orbital-transfer", name: "Orbital Transfer", desc: "Hohmann transfer Δv.", tag: "Aerospace" },
+  { slug: "standing-waves", name: "Standing Waves", desc: "Harmonics, nodes & antinodes.", tag: "Physics" },
 ];
 
 export default function StudioIndex() {

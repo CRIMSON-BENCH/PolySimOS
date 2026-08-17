@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CollisionsStudio } from "@/components/studio/CollisionsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Elastic Collision Simulator (Browser) — Momentum & Energy", description: "Simulate elastic and inelastic collisions with real impulse physics. Watch momentum and kinetic energy conservation. Free.", alternates: { canonical: "/studio/collisions" } };
+export default function Page() { return <StudioPageShell slug="collisions" name="Elastic Collisions" keyword="collision simulation" lede="Balls of different masses collide and exchange momentum. At perfect restitution, total kinetic energy is conserved; below it, energy dissipates." about="Every collision is resolved with impulse-based physics that conserves momentum, and (at restitution 1) kinetic energy. It's the core of billiards, particle physics demos, and game engines — and a clean way to see conservation laws hold in real time."><CollisionsStudio /></StudioPageShell>; }

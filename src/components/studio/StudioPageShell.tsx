@@ -65,6 +65,14 @@ const OTHER_SIMS = [
   { name: "Percolation", href: "/studio/percolation" },
   { name: "DLA Growth", href: "/studio/dla" },
   { name: "Ray Optics / Lenses", href: "/studio/ray-optics" },
+  { name: "Gas in a Box", href: "/studio/gas" },
+  { name: "Elastic Collisions", href: "/studio/collisions" },
+  { name: "Buoyancy", href: "/studio/buoyancy" },
+  { name: "Rocket Equation", href: "/studio/rocket" },
+  { name: "Blackbody Radiation", href: "/studio/blackbody" },
+  { name: "Pendulum Wave", href: "/studio/pendulum-wave" },
+  { name: "Orbital Transfer", href: "/studio/orbital-transfer" },
+  { name: "Standing Waves", href: "/studio/standing-waves" },
 ];
 
 export function StudioPageShell({

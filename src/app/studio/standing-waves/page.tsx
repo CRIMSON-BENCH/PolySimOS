@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { StandingWaveStudio } from "@/components/studio/StandingWaveStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Standing Waves Simulator (Browser) — Harmonics on a String", description: "Visualize standing waves and harmonics on a fixed string, with nodes and antinodes. The physics of every stringed instrument. Free.", alternates: { canonical: "/studio/standing-waves" } };
+export default function Page() { return <StudioPageShell slug="standing-waves" name="Standing Waves" keyword="standing waves harmonics" lede="Pluck a string and only certain notes survive. A string fixed at both ends resonates only at its harmonics — each with fixed nodes and swinging antinodes." about="A string clamped at both ends supports standing waves whose wavelengths fit an exact number of half-wavelengths. Each harmonic n has n antinodes and n+1 nodes. This is the physics of guitars, violins, and organ pipes — and of resonance everywhere."><StandingWaveStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PendulumWaveStudio } from "@/components/studio/PendulumWaveStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Pendulum Wave Simulator (Browser)", description: "Watch a row of pendulums with slightly different lengths drift in and out of phase, weaving mesmerizing traveling waves. Free.", alternates: { canonical: "/studio/pendulum-wave" } };
+export default function Page() { return <StudioPageShell slug="pendulum-wave" name="Pendulum Wave" keyword="pendulum wave" lede="A row of pendulums, each a touch longer than the last. As their periods drift apart they paint traveling waves — then snap back into perfect sync." about="Each pendulum has a slightly different length and therefore period. Starting in phase, they gradually separate, producing snake-like traveling and standing patterns, before realigning after a full cycle — a beautiful demonstration of phase and frequency."><PendulumWaveStudio /></StudioPageShell>; }

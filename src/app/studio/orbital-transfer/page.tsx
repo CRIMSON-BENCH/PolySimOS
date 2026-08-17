@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OrbitalTransferStudio } from "@/components/studio/OrbitalTransferStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Hohmann Transfer Simulator (Browser) — Orbital Δv", description: "Visualize the Hohmann transfer between two circular orbits and compute the two delta-v burns. The fuel-optimal way to change orbits. Free.", alternates: { canonical: "/studio/orbital-transfer" } };
+export default function Page() { return <StudioPageShell slug="orbital-transfer" name="Orbital Transfer" keyword="Hohmann transfer" lede="How do you move a spacecraft to a higher orbit for the least fuel? The Hohmann transfer: one burn onto an ellipse, a second to circularize. See both Δv costs." about="The Hohmann transfer is the minimum-energy maneuver between two circular orbits. This tool draws the transfer ellipse and computes each burn from the vis-viva equation, so you can see how the delta-v budget grows with the orbit-radius ratio — core to every mission plan."><OrbitalTransferStudio /></StudioPageShell>; }

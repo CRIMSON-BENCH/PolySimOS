@@ -55,6 +55,14 @@ import { MagneticPendulumStudio } from "./MagneticPendulumStudio";
 import { PercolationStudio } from "./PercolationStudio";
 import { DLAStudio } from "./DLAStudio";
 import { RayOpticsStudio } from "./RayOpticsStudio";
+import { GasStudio } from "./GasStudio";
+import { CollisionsStudio } from "./CollisionsStudio";
+import { BuoyancyStudio } from "./BuoyancyStudio";
+import { RocketStudio } from "./RocketStudio";
+import { BlackbodyStudio } from "./BlackbodyStudio";
+import { PendulumWaveStudio } from "./PendulumWaveStudio";
+import { OrbitalTransferStudio } from "./OrbitalTransferStudio";
+import { StandingWaveStudio } from "./StandingWaveStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -114,6 +122,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   percolation: PercolationStudio,
   dla: DLAStudio,
   "ray-optics": RayOpticsStudio,
+  gas: GasStudio,
+  collisions: CollisionsStudio,
+  buoyancy: BuoyancyStudio,
+  rocket: RocketStudio,
+  blackbody: BlackbodyStudio,
+  "pendulum-wave": PendulumWaveStudio,
+  "orbital-transfer": OrbitalTransferStudio,
+  "standing-waves": StandingWaveStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

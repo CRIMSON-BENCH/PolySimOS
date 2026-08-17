@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { GasStudio } from "@/components/studio/GasStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Gas in a Box Simulator (Browser) — Kinetic Theory", description: "See pressure emerge from molecules colliding with the walls. Tune particle count and temperature and watch PV=nRT in action. Free.", alternates: { canonical: "/studio/gas" } };
+export default function Page() { return <StudioPageShell slug="gas" name="Gas in a Box" keyword="kinetic theory of gases" lede="Where does pressure come from? Watch molecules bounce off the walls — the sum of those tiny impacts is exactly the pressure of an ideal gas." about="This kinetic-theory simulation models gas molecules as elastic particles bouncing in a box. Pressure is measured directly from wall impacts; raising the temperature or particle count raises it, demonstrating the ideal gas law PV = nRT from first principles."><GasStudio /></StudioPageShell>; }

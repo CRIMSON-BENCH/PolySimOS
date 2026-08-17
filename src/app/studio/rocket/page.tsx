@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RocketStudio } from "@/components/studio/RocketStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Rocket Equation Calculator (Tsiolkovsky) — Δv Budget", description: "Compute a rocket's delta-v from mass ratio and specific impulse with the Tsiolkovsky equation, and see if it reaches orbit, the Moon, or Mars. Free.", alternates: { canonical: "/studio/rocket" } };
+export default function Page() { return <StudioPageShell slug="rocket" name="Rocket Equation" keyword="rocket equation calculator" lede="The equation that governs all of spaceflight. Your delta-v budget depends only on exhaust velocity and the ratio of full-to-empty mass — and it's punishingly logarithmic." about="The Tsiolkovsky rocket equation, Δv = g·Isp·ln(m₀/m_f), sets how much velocity change a rocket can achieve. This calculator shows your Δv against real mission targets — low Earth orbit, lunar and Mars transfers, Earth escape — so you can feel why staging matters."><RocketStudio /></StudioPageShell>; }

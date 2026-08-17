@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BuoyancyStudio } from "@/components/studio/BuoyancyStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Buoyancy Simulator (Browser) — Archimedes' Principle", description: "See how much of an object floats above water based on its density. Explore Archimedes' principle interactively. Free.", alternates: { canonical: "/studio/buoyancy" } };
+export default function Page() { return <StudioPageShell slug="buoyancy" name="Buoyancy & Archimedes" keyword="buoyancy simulation" lede="Why do some things float and others sink? An object settles with exactly the fraction ρ_object/ρ_fluid submerged — adjust the densities and watch it find its level." about="This models Archimedes' principle: the buoyant force equals the weight of displaced fluid, so an object floats with the density ratio submerged. Make it denser than the fluid and it sinks — the physics behind ships, submarines, and hot-air balloons."><BuoyancyStudio /></StudioPageShell>; }

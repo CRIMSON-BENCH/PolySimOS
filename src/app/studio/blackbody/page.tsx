@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BlackbodyStudio } from "@/components/studio/BlackbodyStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Blackbody Radiation Simulator (Browser) — Planck's Law", description: "Plot the Planck blackbody spectrum at any temperature and see Wien's law shift the peak. Understand why stars glow different colors. Free.", alternates: { canonical: "/studio/blackbody" } };
+export default function Page() { return <StudioPageShell slug="blackbody" name="Blackbody Radiation" keyword="blackbody radiation" lede="Everything warm glows. Heat an object and its Planck spectrum shifts to shorter, bluer wavelengths — which is why stars run from red to blue-white." about="The Planck radiation law gives the intensity a blackbody emits at each wavelength for a given temperature, and Wien's displacement law fixes the peak. This tool plots the curve live against the visible spectrum — the physics that launched quantum mechanics."><BlackbodyStudio /></StudioPageShell>; }
