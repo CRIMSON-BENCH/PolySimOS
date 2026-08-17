@@ -236,6 +236,14 @@ import { PsychrometricsStudio } from "./PsychrometricsStudio";
 import { GeostrophicWindStudio } from "./GeostrophicWindStudio";
 import { RossbyWaveStudio } from "./RossbyWaveStudio";
 import { RankineVortexStudio } from "./RankineVortexStudio";
+import { LaserCavityStudio } from "./LaserCavityStudio";
+import { FiberOpticsStudio } from "./FiberOpticsStudio";
+import { GaussianBeamStudio } from "./GaussianBeamStudio";
+import { PolarizationStudio } from "./PolarizationStudio";
+import { ThinFilmStudio } from "./ThinFilmStudio";
+import { SingleSlitStudio } from "./SingleSlitStudio";
+import { BraggMirrorStudio } from "./BraggMirrorStudio";
+import { LEDStudio } from "./LEDStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -476,6 +484,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "geostrophic-wind": GeostrophicWindStudio,
   "rossby-waves": RossbyWaveStudio,
   "rankine-vortex": RankineVortexStudio,
+  "laser-cavity": LaserCavityStudio,
+  "fiber-optics": FiberOpticsStudio,
+  "gaussian-beam": GaussianBeamStudio,
+  polarization: PolarizationStudio,
+  "thin-film": ThinFilmStudio,
+  "single-slit": SingleSlitStudio,
+  "bragg-mirror": BraggMirrorStudio,
+  led: LEDStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

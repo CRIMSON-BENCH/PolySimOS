@@ -252,6 +252,14 @@ const SIMS = [
   { slug: "geostrophic-wind", name: "Geostrophic Wind", desc: "Wind along isobars.", tag: "Weather" },
   { slug: "rossby-waves", name: "Rossby Waves", desc: "Meandering jet stream.", tag: "Weather" },
   { slug: "rankine-vortex", name: "Tornado Vortex", desc: "Rankine wind profile.", tag: "Weather" },
+  { slug: "laser-cavity", name: "Laser Cavity", desc: "Gain, loss & threshold.", tag: "Photonics" },
+  { slug: "fiber-optics", name: "Fiber Optics", desc: "Total internal reflection.", tag: "Photonics" },
+  { slug: "gaussian-beam", name: "Gaussian Beam", desc: "Waist & divergence.", tag: "Photonics" },
+  { slug: "polarization", name: "Polarization", desc: "Malus's law.", tag: "Photonics" },
+  { slug: "thin-film", name: "Thin-Film Coating", desc: "Anti-reflection interference.", tag: "Photonics" },
+  { slug: "single-slit", name: "Single-Slit Diffraction", desc: "Fraunhofer pattern.", tag: "Photonics" },
+  { slug: "bragg-mirror", name: "Bragg Mirror", desc: "Dielectric reflector.", tag: "Photonics" },
+  { slug: "led", name: "LED Band Gap", desc: "Gap sets the color.", tag: "Photonics" },
 ];
 
 export default function StudioIndex() {

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { GaussianBeamStudio } from "@/components/studio/GaussianBeamStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Gaussian Beam Simulator (Laser Optics, Browser)", description: "Explore how a Gaussian laser beam narrows to a waist and diverges, with Rayleigh range and divergence angle. Free, interactive.", alternates: { canonical: "/studio/gaussian-beam" } };
+export default function Page() { return <StudioPageShell slug="gaussian-beam" name="Gaussian Beam" keyword="Gaussian beam Rayleigh range" lede="A laser beam is not a perfect straight ray. It pinches to a minimum waist, then inevitably spreads — the diffraction limit written into every beam of light." about="A Gaussian beam narrows to a waist and expands as a hyperbola. Within one Rayleigh range of the waist it stays nearly collimated; beyond that it diverges at an angle set by wavelength divided by waist size. Focusing tighter forces faster spreading — the unavoidable trade-off that shapes laser cutting, microscopy, and free-space optical links."><GaussianBeamStudio /></StudioPageShell>; }

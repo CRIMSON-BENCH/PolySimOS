@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ThinFilmStudio } from "@/components/studio/ThinFilmStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Thin-Film & Anti-Reflection Coating Simulator (Browser)", description: "See how a thin-film coating cancels reflections by interference — the physics of AR coatings, soap bubbles, and oil slicks. Free.", alternates: { canonical: "/studio/thin-film" } };
+export default function Page() { return <StudioPageShell slug="thin-film" name="Thin-Film / AR Coating" keyword="thin film anti-reflection coating" lede="Why do camera lenses have a purple sheen, and soap bubbles swirl with color? A film just a fraction of a wavelength thick makes light interfere with itself." about="When light reflects off the two surfaces of a thin film, the two waves interfere. A quarter-wavelength-thick film makes them cancel, forming an anti-reflection coating that all but eliminates reflection at one wavelength — giving lenses their faint tint. Varying film thickness produces the shifting colors of soap bubbles and oil on water."><ThinFilmStudio /></StudioPageShell>; }

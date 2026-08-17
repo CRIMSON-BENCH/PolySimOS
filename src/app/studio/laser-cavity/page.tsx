@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LaserCavityStudio } from "@/components/studio/LaserCavityStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Laser Cavity & Threshold Simulator (Browser)", description: "Explore how gain must exceed cavity loss for a laser to fire, and the sharp lasing threshold. Free, interactive photonics.", alternates: { canonical: "/studio/laser-cavity" } };
+export default function Page() { return <StudioPageShell slug="laser-cavity" name="Laser Cavity" keyword="laser cavity threshold" lede="What makes a laser a laser? A sharp threshold: pump it too weakly and it just glows, but cross the line and stimulated emission takes over." about="Laser action requires the optical gain of the pumped medium to overcome the losses of its mirror cavity. Below threshold the device emits weak, incoherent light; above it, output climbs steeply and linearly with pump power as stimulated emission dominates. This threshold behavior distinguishes a laser from an ordinary lamp or LED."><LaserCavityStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LEDStudio } from "@/components/studio/LEDStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "LED Band Gap & Color Simulator (Browser)", description: "See how a semiconductor's band gap sets an LED's emission wavelength and color, from infrared to ultraviolet. Free, interactive.", alternates: { canonical: "/studio/led" } };
+export default function Page() { return <StudioPageShell slug="led" name="LED Band Gap & Color" keyword="LED band gap color" lede="Why did blue LEDs win a Nobel Prize when red ones were everywhere? Because an LED&apos;s color is locked to its material&apos;s band gap — and blue needed a whole new one." about="An LED emits a photon each time an electron crosses the semiconductor band gap, with energy exactly equal to that gap. Since a photon&apos;s energy fixes its wavelength (λ ≈ 1240/Eg nanometers), the band gap directly determines the color. Wider gaps give blue and ultraviolet, narrower ones red and infrared — and achieving efficient blue with gallium nitride revolutionized lighting."><LEDStudio /></StudioPageShell>; }

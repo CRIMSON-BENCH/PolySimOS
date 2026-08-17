@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SingleSlitStudio } from "@/components/studio/SingleSlitStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Single-Slit Diffraction Simulator (Browser)", description: "See the sinc-squared intensity pattern of single-slit diffraction and how slit width and wavelength set the spread. Free.", alternates: { canonical: "/studio/single-slit" } };
+export default function Page() { return <StudioPageShell slug="single-slit" name="Single-Slit Diffraction" keyword="single-slit diffraction" lede="Squeeze light through a narrow slit and it refuses to travel straight — it fans out into a bright band with fading fringes. That is diffraction." about="Light passing a single slit spreads into a central bright maximum flanked by weaker fringes, following a sinc-squared intensity pattern. The first dark fringe appears where the path difference across the slit equals one wavelength, so narrower slits spread light more. This diffraction sets the ultimate resolution limit of every lens, microscope, and telescope."><SingleSlitStudio /></StudioPageShell>; }

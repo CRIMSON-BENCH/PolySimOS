@@ -246,6 +246,14 @@ const OTHER_SIMS = [
   { name: "Geostrophic Wind", href: "/studio/geostrophic-wind" },
   { name: "Rossby Waves", href: "/studio/rossby-waves" },
   { name: "Tornado Vortex", href: "/studio/rankine-vortex" },
+  { name: "Laser Cavity", href: "/studio/laser-cavity" },
+  { name: "Fiber Optics", href: "/studio/fiber-optics" },
+  { name: "Gaussian Beam", href: "/studio/gaussian-beam" },
+  { name: "Polarization", href: "/studio/polarization" },
+  { name: "Thin-Film Coating", href: "/studio/thin-film" },
+  { name: "Single-Slit Diffraction", href: "/studio/single-slit" },
+  { name: "Bragg Mirror", href: "/studio/bragg-mirror" },
+  { name: "LED Band Gap", href: "/studio/led" },
 ];
 
 export function StudioPageShell({
