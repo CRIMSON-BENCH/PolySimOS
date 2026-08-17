@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ChromeGate } from "@/components/ChromeGate";
 import { ChatWidget } from "@/components/ChatWidget";
+import { AuthProvider } from "@/lib/auth";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.polysimos.com"),
@@ -46,10 +47,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
-        <ChromeGate><Navbar /></ChromeGate>
-        <main className="min-h-screen">{children}</main>
-        <ChromeGate><Footer /></ChromeGate>
-        <ChromeGate><ChatWidget /></ChromeGate>
+        <AuthProvider>
+          <ChromeGate><Navbar /></ChromeGate>
+          <main className="min-h-screen">{children}</main>
+          <ChromeGate><Footer /></ChromeGate>
+          <ChromeGate><ChatWidget /></ChromeGate>
+        </AuthProvider>
       </body>
     </html>
   );

@@ -17,8 +17,9 @@ export async function POST(req: Request) {
   let slug: string;
   let cycle: "month" | "year" | undefined;
   let next: string | undefined;
+  let email: string | undefined;
   try {
-    ({ slug, cycle, next } = await req.json());
+    ({ slug, cycle, next, email } = await req.json());
   } catch {
     return NextResponse.json({ error: "Invalid request." }, { status: 400 });
   }
@@ -51,13 +52,19 @@ export async function POST(req: Request) {
   const referer = req.headers.get("referer");
   const cancel = referer && referer.startsWith(base) ? referer : `${base}${nextPath}`;
 
+  const meta = { ...sku.metadata, grantKey: sku.grantKey, ...(email ? { email } : {}) };
+
   try {
     const session = await stripe.checkout.sessions.create({
       mode: sku.mode,
       line_items: [lineItem],
       success_url: success,
       cancel_url: cancel,
-      metadata: { ...sku.metadata, grantKey: sku.grantKey },
+      metadata: meta,
+      ...(email ? { customer_email: email } : {}),
+      // Carry grantKey + email onto the subscription so renewal/cancel webhook
+      // events can update the right person's entitlement.
+      ...(sku.mode === "subscription" ? { subscription_data: { metadata: meta } } : {}),
       allow_promotion_codes: true,
     });
     return NextResponse.json({ url: session.url });

@@ -1,21 +1,54 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { DISCLAIMER_SHORT } from "@/lib/disclaimer";
+import { useAuth } from "@/lib/auth";
 
-// Supabase-ready auth form. Wire signInWithPassword / signInWithOAuth once
-// NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY are set.
+// Real Supabase-backed auth: OAuth (Google/Apple), email+password, and a
+// passwordless magic-link fallback. Degrades to a friendly message until the
+// NEXT_PUBLIC_SUPABASE_* keys are present.
 export function AuthForm({ mode }: { mode: "login" | "signup" }) {
+  const router = useRouter();
+  const { configured, signInPassword, signUpPassword, signInMagicLink, signInOAuth } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState("");
-
+  const [err, setErr] = useState("");
   const isSignup = mode === "signup";
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
-    setMsg("Authentication is ready to connect — add your Supabase keys to enable sign-in.");
+    setBusy(true); setErr(""); setMsg("");
+    try {
+      if (isSignup) {
+        const r = await signUpPassword(email, password);
+        if (r.error) setErr(r.error);
+        else if (r.needsConfirm) setMsg("Check your email to confirm your account, then log in.");
+        else router.push("/dashboard");
+      } else {
+        const r = await signInPassword(email, password);
+        if (r.error) setErr(r.error);
+        else router.push("/dashboard");
+      }
+    } finally { setBusy(false); }
+  }
+
+  async function magic() {
+    if (!email) { setErr("Enter your email first."); return; }
+    setBusy(true); setErr(""); setMsg("");
+    const r = await signInMagicLink(email);
+    if (r.error) setErr(r.error);
+    else setMsg("Magic link sent — check your email to sign in.");
+    setBusy(false);
+  }
+
+  async function oauth(provider: "google" | "apple") {
+    setErr(""); setMsg("");
+    const r = await signInOAuth(provider);
+    if (r.error) setErr(r.error);
   }
 
   return (
@@ -29,10 +62,10 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         </p>
 
         <div className="mt-6 grid gap-2">
-          <button className="flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
+          <button onClick={() => oauth("google")} disabled={busy} className="flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 disabled:opacity-60 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
             Continue with Google
           </button>
-          <button className="flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
+          <button onClick={() => oauth("apple")} disabled={busy} className="flex items-center justify-center gap-2 rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-medium text-slate-700 hover:bg-slate-100 disabled:opacity-60 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
             Continue with Apple
           </button>
         </div>
@@ -44,14 +77,20 @@ export function AuthForm({ mode }: { mode: "login" | "signup" }) {
         <form onSubmit={submit} className="space-y-3">
           <input type="email" required placeholder="you@example.com" value={email} onChange={(e) => setEmail(e.target.value)}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100" />
-          <input type="password" required placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
+          <input type="password" required minLength={6} placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)}
             className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100" />
-          <button type="submit" className="w-full rounded-lg bg-cyan-600 px-4 py-2.5 font-semibold text-white hover:bg-cyan-700">
-            {isSignup ? "Create account" : "Log in"}
+          <button type="submit" disabled={busy} className="w-full rounded-lg bg-cyan-600 px-4 py-2.5 font-semibold text-white hover:bg-cyan-700 disabled:opacity-60">
+            {busy ? "Please wait…" : isSignup ? "Create account" : "Log in"}
           </button>
         </form>
 
-        {msg && <p className="mt-3 text-xs text-amber-600 dark:text-amber-400">{msg}</p>}
+        <button onClick={magic} disabled={busy} className="mt-2 w-full text-center text-xs font-medium text-cyan-600 hover:underline disabled:opacity-60 dark:text-cyan-400">
+          Email me a magic link instead
+        </button>
+
+        {msg && <p className="mt-3 text-xs text-emerald-600 dark:text-emerald-400">{msg}</p>}
+        {err && <p className="mt-3 text-xs text-amber-600 dark:text-amber-400">{err}</p>}
+        {!configured && <p className="mt-3 text-xs text-slate-400">Sign-in activates once Supabase keys are added to the environment.</p>}
 
         <p className="mt-4 text-center text-sm text-slate-500">
           {isSignup ? (

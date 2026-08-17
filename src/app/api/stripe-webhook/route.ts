@@ -28,7 +28,7 @@ export async function POST(req: Request) {
   switch (event.type) {
     case "checkout.session.completed": {
       const s = event.data.object as { customer_details?: { email?: string | null }; customer?: string | null; metadata?: Record<string, string> | null };
-      const email = s.customer_details?.email ?? null;
+      const email = s.metadata?.email ?? s.customer_details?.email ?? null;
       const grantKey = s.metadata?.grantKey ?? null;
       if (grantKey) await recordEntitlement({ email, customer: s.customer ?? null, grantKey, status: "active" });
       break;
@@ -37,13 +37,15 @@ export async function POST(req: Request) {
     case "customer.subscription.updated": {
       const sub = event.data.object as { customer?: string | null; metadata?: Record<string, string> | null; status?: string };
       const grantKey = sub.metadata?.grantKey ?? null;
-      if (grantKey) await recordEntitlement({ email: null, customer: sub.customer ?? null, grantKey, status: sub.status ?? "active" });
+      const email = sub.metadata?.email ?? null;
+      if (grantKey) await recordEntitlement({ email, customer: sub.customer ?? null, grantKey, status: sub.status ?? "active" });
       break;
     }
     case "customer.subscription.deleted": {
       const sub = event.data.object as { customer?: string | null; metadata?: Record<string, string> | null };
       const grantKey = sub.metadata?.grantKey ?? null;
-      if (grantKey) await recordEntitlement({ email: null, customer: sub.customer ?? null, grantKey, status: "canceled" });
+      const email = sub.metadata?.email ?? null;
+      if (grantKey) await recordEntitlement({ email, customer: sub.customer ?? null, grantKey, status: "canceled" });
       break;
     }
     case "invoice.payment_failed":
@@ -67,8 +69,8 @@ async function recordEntitlement(row: { email: string | null; customer: string |
     const { createClient } = await import("@supabase/supabase-js");
     const db = createClient(url, key);
     await db.from("entitlements").upsert(
-      { email: row.email, stripe_customer: row.customer, grant_key: row.grantKey, status: row.status },
-      { onConflict: "stripe_customer,grant_key" }
+      { email: row.email, stripe_customer: row.customer, grant_key: row.grantKey, status: row.status, updated_at: new Date().toISOString() },
+      { onConflict: "email,grant_key" }
     );
   } catch {
     /* logging/persistence unavailable — ignore (payment already succeeded) */

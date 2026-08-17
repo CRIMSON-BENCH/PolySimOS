@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useEntitlement } from "@/lib/entitlements";
+import { useAuth } from "@/lib/auth";
 import {
   SOLVER_UNLOCK_PREFIX,
   MULTI_UNLOCK_PREFIX,
@@ -13,11 +14,11 @@ import {
 
 // Shared checkout initiator. `sku` is what /api/checkout resolves; `next` is
 // where to return after a successful purchase (the current page).
-async function startCheckout(sku: string, next: string, cycle?: "month" | "year") {
+async function startCheckout(sku: string, next: string, cycle?: "month" | "year", email?: string | null) {
   const res = await fetch("/api/checkout", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ slug: sku, next, cycle }),
+    body: JSON.stringify({ slug: sku, next, cycle, email }),
   });
   const data = await res.json();
   if (data.url) window.location.href = data.url as string;
@@ -25,6 +26,7 @@ async function startCheckout(sku: string, next: string, cycle?: "month" | "year"
 }
 
 function CheckoutCTA({ sku, label, sublabel, next, cycle }: { sku: string; label: string; sublabel?: string; next: string; cycle?: "month" | "year" }) {
+  const { user } = useAuth();
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   return (
@@ -32,7 +34,7 @@ function CheckoutCTA({ sku, label, sublabel, next, cycle }: { sku: string; label
       <button
         onClick={async () => {
           setLoading(true); setErr("");
-          try { await startCheckout(sku, next, cycle); }
+          try { await startCheckout(sku, next, cycle, user?.email); }
           catch (e) { setErr((e as Error).message); }
           finally { setLoading(false); }
         }}
