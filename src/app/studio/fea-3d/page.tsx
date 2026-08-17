@@ -3,7 +3,7 @@ import { FEA3DStudio } from "@/components/studio/FEA3DStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "3D FEA Space-Frame Simulator (Browser) | PolySim OS",
+  title: "3D FEA Space-Frame Simulator (Browser)",
   description: "A real 3D finite-element space-frame solver in your browser. Load a tower and orbit around the deformed structure with members colored by axial force. Free.",
   alternates: { canonical: "/studio/fea-3d" },
 };

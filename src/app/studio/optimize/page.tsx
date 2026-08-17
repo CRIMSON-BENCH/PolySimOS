@@ -3,7 +3,7 @@ import { OptimizeStudio } from "@/components/studio/OptimizeStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Optimization & Uncertainty Simulator (Browser) | PolySim OS",
+  title: "Optimization & Uncertainty Simulator (Browser)",
   description: "Minimize any function with gradient descent and propagate input uncertainty with Monte-Carlo — see the minimum and the output distribution live. Free.",
   alternates: { canonical: "/studio/optimize" },
 };

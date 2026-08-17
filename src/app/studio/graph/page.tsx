@@ -3,7 +3,7 @@ import { NodeEditor } from "@/components/studio/NodeEditor";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Visual Node Graph Editor — Build Simulations by Wiring Blocks | PolySim OS",
+  title: "Visual Node Graph Editor — Build Simulations by Wiring Blocks",
   description:
     "A real drag-and-wire node graph, in your browser. Compose sources, math, symbolic calculus, and plots into a live dataflow that recomputes as you edit. Free, no install.",
   alternates: { canonical: "/studio/graph" },

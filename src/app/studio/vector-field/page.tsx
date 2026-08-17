@@ -3,7 +3,7 @@ import { VectorFieldStudio } from "@/components/studio/VectorFieldStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Vector Field Visualizer (Browser) — Plot F(x,y) | PolySim OS",
+  title: "Vector Field Visualizer (Browser) — Plot F(x,y)",
   description: "Type any two-component vector field F(x,y) = (u, v) and see it plotted as a live quiver diagram. Rotation, source, saddle, spiral presets. Free.",
   alternates: { canonical: "/studio/vector-field" },
 };

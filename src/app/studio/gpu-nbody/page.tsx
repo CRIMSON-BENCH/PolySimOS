@@ -3,7 +3,7 @@ import { GPUNBody } from "@/components/studio/GPUNBody";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "GPU N-Body Simulator (WebGPU) — Thousands of Bodies | PolySim OS",
+  title: "GPU N-Body Simulator (WebGPU) — Thousands of Bodies",
   description: "Thousands of mutually-attracting bodies, with every pairwise gravitational force computed on your GPU using workgroup tiling. Real O(n²) N-body in the browser.",
   alternates: { canonical: "/studio/gpu-nbody" },
 };

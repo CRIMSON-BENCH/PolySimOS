@@ -3,7 +3,7 @@ import { EMStudio } from "@/components/studio/EMStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Electrostatics Simulator (Browser) — Fields & Potential | PolySim OS",
+  title: "Electrostatics Simulator (Browser) — Fields & Potential",
   description: "Place point charges and see the electric potential heatmap and field lines update live. A real 2D electrostatics simulator in your browser. Free.",
   alternates: { canonical: "/studio/electromagnetics" },
 };

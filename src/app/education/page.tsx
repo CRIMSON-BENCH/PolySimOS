@@ -6,7 +6,7 @@ import { getProduct } from "@/lib/products";
 import { PremiumCTA } from "@/components/PremiumCTA";
 
 export const metadata: Metadata = {
-  title: "Simulation Software for Universities & Colleges | PolySim OS",
+  title: "Simulation Software for Universities & Colleges",
   description: "Browser-native simulation for students, educators, and researchers. See how PolySim OS fits your institution's physics, engineering, and math courses — free to start.",
   alternates: { canonical: "/education" },
 };

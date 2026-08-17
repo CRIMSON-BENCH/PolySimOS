@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ term: str
   const t = getTerm(term);
   if (!t) return {};
   return {
-    title: `${t.term} — Definition | PolySim OS Glossary`,
+    title: `${t.term} — Definition`,
     description: t.definition.slice(0, 155),
     alternates: { canonical: `/glossary/${t.slug}` },
   };

@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ method: s
   const m = getMethod(method);
   if (!m) return {};
   return {
-    title: `${m.name} — Simulation Method Explained | PolySim OS`,
+    title: `${m.name} — Simulation Method Explained`,
     description: `${m.summary}`,
     alternates: { canonical: `/methods/${m.slug}` },
   };

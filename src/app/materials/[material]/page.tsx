@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ material:
   const m = getMaterial(material);
   if (!m) return {};
   return {
-    title: `${m.name} — Material Properties for Simulation | PolySim OS`,
+    title: `${m.name} — Material Properties for Simulation`,
     description: `${m.name} (${m.category}): density ${m.density} kg/m³, Young's modulus ${m.youngsModulus} GPa, thermal conductivity ${m.thermalConductivity} W/(m·K), and more.`,
     alternates: { canonical: `/materials/${m.slug}` },
   };

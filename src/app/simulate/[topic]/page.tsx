@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ topic: st
   const t = getSimTopic(topic);
   if (!t) return {};
   return {
-    title: `How to Simulate ${t.name} in Your Browser | PolySim OS`,
+    title: `How to Simulate ${t.name} in Your Browser`,
     description: `${t.summary} A step-by-step guide to simulating ${t.name.toLowerCase()} online, free, with PolySim OS.`,
     alternates: { canonical: `/simulate/${t.slug}` },
   };

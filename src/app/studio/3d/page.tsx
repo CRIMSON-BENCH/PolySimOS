@@ -3,7 +3,7 @@ import { Studio3D } from "@/components/studio/Studio3D";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "3D N-Body Simulator (Browser) — Orbits & Gravitation in 3D | PolySim OS",
+  title: "3D N-Body Simulator (Browser) — Orbits & Gravitation in 3D",
   description: "A real 3D gravitational N-body simulator with an orbit camera, running in your browser. Drag to rotate, scroll to zoom. Free, no install.",
   alternates: { canonical: "/studio/3d" },
 };

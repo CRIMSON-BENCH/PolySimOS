@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: { params: Promise<{ topic: st
   const t = getSimTopic(topic); const ind = getIndustry(industry);
   if (!t || !ind) return {};
   return {
-    title: `Simulating ${t.name} for ${ind.name} | PolySim OS`,
+    title: `Simulating ${t.name} for ${ind.name}`,
     description: `How ${ind.name.toLowerCase()} teams simulate ${t.name.toLowerCase()} in the browser with PolySim OS — free to start, AI-assisted.`,
     alternates: { canonical: `/simulate/${t.slug}/${ind.slug}` },
   };

@@ -5,7 +5,7 @@ import { materialsByCategory, PROPERTIES } from "@/lib/materials";
 import { ACCURACY_NOTE } from "@/lib/disclaimer";
 
 export const metadata: Metadata = {
-  title: "Materials Database — Properties for Simulation | PolySim OS",
+  title: "Materials Database — Properties for Simulation",
   description: "A searchable materials database with density, Young's modulus, thermal conductivity, and more — the property inputs your simulations need.",
   alternates: { canonical: "/materials" },
 };

@@ -6,7 +6,7 @@ import { getProduct } from "@/lib/products";
 import { PremiumCTA } from "@/components/PremiumCTA";
 
 export const metadata: Metadata = {
-  title: "Marketplace — Forkable Simulations, Nodes & Templates | PolySim OS",
+  title: "Marketplace — Forkable Simulations, Nodes & Templates",
   description: "Browse and buy community-built simulation models, custom nodes, and templates. Fork free examples or sell your own and keep 70%.",
   alternates: { canonical: "/marketplace" },
 };

@@ -4,7 +4,7 @@ import { PageShell } from "@/components/PageShell";
 import { SIM_TOPICS } from "@/lib/simulate";
 
 export const metadata: Metadata = {
-  title: "Simulation Templates — Forkable Example Projects | PolySim OS",
+  title: "Simulation Templates — Forkable Example Projects",
   description: "Start from a working example. Fork ready-made simulation templates across physics, biology, chemistry, math, and engineering.",
   alternates: { canonical: "/templates" },
 };

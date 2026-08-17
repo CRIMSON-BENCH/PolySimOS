@@ -3,7 +3,7 @@ import { FEAStudio } from "@/components/studio/FEAStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "FEA Truss Simulator (Browser) — Stress & Deflection | PolySim OS",
+  title: "FEA Truss Simulator (Browser) — Stress & Deflection",
   description: "A real finite-element truss solver in your browser: apply a load and see member forces (tension/compression) and the deformed shape. Direct stiffness method. Free.",
   alternates: { canonical: "/studio/fea" },
 };

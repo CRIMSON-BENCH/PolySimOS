@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const l = getListing(slug);
   if (!l) return {};
-  return { title: `${l.title} — ${l.kind} | PolySim Marketplace`, description: l.blurb, alternates: { canonical: `/marketplace/${l.slug}` } };
+  return { title: `${l.title} — ${l.kind}`, description: l.blurb, alternates: { canonical: `/marketplace/${l.slug}` } };
 }
 
 export default async function ListingPage({ params }: { params: Promise<{ slug: string }> }) {

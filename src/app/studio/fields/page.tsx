@@ -3,7 +3,7 @@ import { FieldStudio } from "@/components/studio/FieldStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Heat & Wave Equation Simulator (Browser PDE) | PolySim OS",
+  title: "Heat & Wave Equation Simulator (Browser PDE)",
   description:
     "Solve the 2D heat equation and the 1D wave equation live in your browser with explicit finite differences. Click to add heat or pluck the string. Free, no install.",
   alternates: { canonical: "/studio/fields" },

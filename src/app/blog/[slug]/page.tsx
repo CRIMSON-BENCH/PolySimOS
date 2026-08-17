@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const a = getArticle(slug);
   if (!a) return {};
-  return { title: `${a.title} | PolySim OS Blog`, description: a.excerpt, alternates: { canonical: `/blog/${a.slug}` } };
+  return { title: `${a.title}`, description: a.excerpt, alternates: { canonical: `/blog/${a.slug}` } };
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ slug: string }> }) {

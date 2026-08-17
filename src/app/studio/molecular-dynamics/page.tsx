@@ -3,7 +3,7 @@ import { MDStudio } from "@/components/studio/MDStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Molecular Dynamics Simulator (Browser) — Lennard-Jones | PolySim OS",
+  title: "Molecular Dynamics Simulator (Browser) — Lennard-Jones",
   description: "A real 2D molecular-dynamics simulator with a Lennard-Jones potential and velocity-Verlet integration. Heat it up and watch the lattice melt. Free, in-browser.",
   alternates: { canonical: "/studio/molecular-dynamics" },
 };

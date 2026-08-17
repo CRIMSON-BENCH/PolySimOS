@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ domain: s
   const found = getTopic(domain, topic);
   if (!found) return {};
   return {
-    title: `How to Simulate ${found.topic.name} — ${found.domain.name} | PolySim OS`,
+    title: `How to Simulate ${found.topic.name} — ${found.domain.name}`,
     description: `${found.topic.summary} Learn how to model ${found.topic.name.toLowerCase()} in your browser with PolySim OS.`,
     alternates: { canonical: `/domains/${domain}/${topic}` },
   };

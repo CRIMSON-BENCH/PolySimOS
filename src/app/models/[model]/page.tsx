@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ model: st
   const m = getModel(model);
   if (!m) return {};
   return {
-    title: `${m.name} — Formula, Meaning & Live Simulation | PolySim OS`,
+    title: `${m.name} — Formula, Meaning & Live Simulation`,
     description: `${m.summary} ${m.detail.slice(0, 100)}`,
     alternates: { canonical: `/models/${m.slug}` },
   };

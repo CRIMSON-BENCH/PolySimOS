@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ method: s
   const m = getMethod(method); const ind = getIndustry(industry);
   if (!m || !ind) return {};
   return {
-    title: `${m.name} for ${ind.name} — Simulation Guide | PolySim OS`,
+    title: `${m.name} for ${ind.name} — Simulation Guide`,
     description: `How the ${m.name.toLowerCase()} is applied in ${ind.name.toLowerCase()}: ${ind.useCases.join(", ")}.`,
     alternates: { canonical: `/methods/${m.slug}/${ind.slug}` },
   };

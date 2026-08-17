@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: Promise<{ material:
   const m = getMaterial(material); const p = getProperty(property);
   if (!m || !p) return {};
   return {
-    title: `${p.label} of ${m.name} — ${formatProp(m, p)} | PolySim OS`,
+    title: `${p.label} of ${m.name} — ${formatProp(m, p)}`,
     description: `The ${p.label.toLowerCase()} of ${m.name} is approximately ${formatProp(m, p)}. ${p.blurb}`,
     alternates: { canonical: `/materials/${m.slug}/${p.slug}` },
   };

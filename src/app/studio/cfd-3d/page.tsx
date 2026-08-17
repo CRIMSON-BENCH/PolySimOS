@@ -3,7 +3,7 @@ import { CFD3DStudio } from "@/components/studio/CFD3DStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "3D CFD Simulator (Browser) — 3D Navier–Stokes | PolySim OS",
+  title: "3D CFD Simulator (Browser) — 3D Navier–Stokes",
   description: "A real 3D computational-fluid-dynamics simulator in your browser: a dye plume rising through incompressible 3D flow, with scrubbable z-slices. Free, no install.",
   alternates: { canonical: "/studio/cfd-3d" },
 };

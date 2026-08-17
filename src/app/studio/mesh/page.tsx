@@ -3,7 +3,7 @@ import { MeshStudio } from "@/components/studio/MeshStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Meshing & Boundary Conditions — Steady Heat Solver | PolySim OS",
+  title: "Meshing & Boundary Conditions — Steady Heat Solver",
   description: "Paint boundary conditions onto a meshed domain and solve steady-state heat conduction (Laplace's equation) live in your browser. Free, no install.",
   alternates: { canonical: "/studio/mesh" },
 };

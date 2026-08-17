@@ -3,7 +3,7 @@ import { GPUParticles } from "@/components/studio/GPUParticles";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "WebGPU Particle Simulator — GPU Compute in the Browser | PolySim OS",
+  title: "WebGPU Particle Simulator — GPU Compute in the Browser",
   description: "Hundreds of thousands of particles simulated on your GPU with real WebGPU compute shaders, at interactive frame rates. Move your cursor to steer the swarm. Free.",
   alternates: { canonical: "/studio/gpu" },
 };

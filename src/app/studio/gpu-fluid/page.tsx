@@ -3,7 +3,7 @@ import { GPUFluid } from "@/components/studio/GPUFluid";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "WebGPU Fluid Simulator — GPU Smoke in the Browser | PolySim OS",
+  title: "WebGPU Fluid Simulator — GPU Smoke in the Browser",
   description: "A high-resolution fluid/smoke field advected entirely on your GPU with WebGPU compute shaders. Drag to inject smoke into the flow. Free.",
   alternates: { canonical: "/studio/gpu-fluid" },
 };

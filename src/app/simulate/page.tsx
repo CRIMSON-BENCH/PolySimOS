@@ -4,7 +4,7 @@ import { PageShell } from "@/components/PageShell";
 import { SIM_TOPICS } from "@/lib/simulate";
 
 export const metadata: Metadata = {
-  title: "How to Simulate Anything in Your Browser | PolySim OS Guides",
+  title: "How to Simulate Anything in Your Browser",
   description: "Step-by-step guides to simulate physics, biology, chemistry, math, and engineering phenomena in your browser — many with a live, runnable model.",
   alternates: { canonical: "/simulate" },
 };

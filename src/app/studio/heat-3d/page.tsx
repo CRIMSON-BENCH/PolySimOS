@@ -3,7 +3,7 @@ import { Heat3DStudio } from "@/components/studio/Heat3DStudio";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "3D Heat Diffusion Simulator (Browser) | PolySim OS",
+  title: "3D Heat Diffusion Simulator (Browser)",
   description: "Solve the 3D heat equation on a volumetric grid in your browser. Orbit the hot-voxel cloud or scrub through z-slices. Free, no install.",
   alternates: { canonical: "/studio/heat-3d" },
 };

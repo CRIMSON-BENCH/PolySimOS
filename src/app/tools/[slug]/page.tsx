@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const p = getProduct(slug);
   if (!p) return {};
   return {
-    title: `${p.name} — ${priceLabel(p)} | PolySim OS`,
+    title: `${p.name} — ${priceLabel(p)}`,
     description: p.blurb,
     alternates: { canonical: `/tools/${p.slug}` },
   };

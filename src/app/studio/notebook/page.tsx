@@ -3,7 +3,7 @@ import { Notebook } from "@/components/studio/Notebook";
 import { StudioPageShell } from "@/components/studio/StudioPageShell";
 
 export const metadata: Metadata = {
-  title: "Computational Notebook — Symbolic Math & Compute | PolySim OS",
+  title: "Computational Notebook — Symbolic Math & Compute",
   description: "A browser notebook that mixes prose with real computation: differentiate, integrate, solve, and do linear algebra. Import CSV, export your work. Free.",
   alternates: { canonical: "/studio/notebook" },
 };
