@@ -228,6 +228,14 @@ const SIMS = [
   { slug: "bipartite-matching", name: "Bipartite Matching", desc: "Optimal assignment.", tag: "Graph Theory" },
   { slug: "centrality", name: "Network Centrality", desc: "Who matters most.", tag: "Graph Theory" },
   { slug: "graph-traversal", name: "Graph Traversal", desc: "BFS vs DFS.", tag: "Graph Theory" },
+  { slug: "supply-demand", name: "Supply & Demand", desc: "Market equilibrium.", tag: "Economics" },
+  { slug: "elasticity", name: "Price Elasticity", desc: "Demand sensitivity.", tag: "Economics" },
+  { slug: "monopoly", name: "Monopoly Pricing", desc: "Market power & DWL.", tag: "Economics" },
+  { slug: "cobb-douglas", name: "Cobb-Douglas", desc: "Optimal input mix.", tag: "Economics" },
+  { slug: "lorenz-gini", name: "Lorenz & Gini", desc: "Income inequality.", tag: "Economics" },
+  { slug: "laffer-curve", name: "Laffer Curve", desc: "Tax rate vs revenue.", tag: "Economics" },
+  { slug: "comparative-advantage", name: "Comparative Advantage", desc: "Gains from trade.", tag: "Economics" },
+  { slug: "indifference-curves", name: "Consumer Choice", desc: "Utility maximization.", tag: "Economics" },
 ];
 
 export default function StudioIndex() {

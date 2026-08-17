@@ -63,6 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/stress-strain", 0.8), u("/studio/carnot-cycle", 0.8), u("/studio/otto-cycle", 0.8), u("/studio/phase-diagram", 0.8), u("/studio/thermal-expansion", 0.8), u("/studio/fatigue", 0.8), u("/studio/entropy", 0.8), u("/studio/thermal-resistance", 0.8),
     u("/studio/linear-programming", 0.8), u("/studio/knapsack", 0.8), u("/studio/queueing", 0.8), u("/studio/eoq", 0.8), u("/studio/simulated-annealing", 0.8), u("/studio/critical-path", 0.8), u("/studio/game-theory", 0.8), u("/studio/max-flow", 0.8),
     u("/studio/shortest-path", 0.8), u("/studio/spanning-tree", 0.8), u("/studio/graph-coloring", 0.8), u("/studio/small-world", 0.8), u("/studio/pagerank", 0.8), u("/studio/bipartite-matching", 0.8), u("/studio/centrality", 0.8), u("/studio/graph-traversal", 0.8),
+    u("/studio/supply-demand", 0.8), u("/studio/elasticity", 0.8), u("/studio/monopoly", 0.8), u("/studio/cobb-douglas", 0.8), u("/studio/lorenz-gini", 0.8), u("/studio/laffer-curve", 0.8), u("/studio/comparative-advantage", 0.8), u("/studio/indifference-curves", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

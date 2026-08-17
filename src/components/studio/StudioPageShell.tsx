@@ -222,6 +222,14 @@ const OTHER_SIMS = [
   { name: "Bipartite Matching", href: "/studio/bipartite-matching" },
   { name: "Network Centrality", href: "/studio/centrality" },
   { name: "Graph Traversal", href: "/studio/graph-traversal" },
+  { name: "Supply & Demand", href: "/studio/supply-demand" },
+  { name: "Price Elasticity", href: "/studio/elasticity" },
+  { name: "Monopoly Pricing", href: "/studio/monopoly" },
+  { name: "Cobb-Douglas", href: "/studio/cobb-douglas" },
+  { name: "Lorenz Curve & Gini", href: "/studio/lorenz-gini" },
+  { name: "Laffer Curve", href: "/studio/laffer-curve" },
+  { name: "Comparative Advantage", href: "/studio/comparative-advantage" },
+  { name: "Consumer Choice", href: "/studio/indifference-curves" },
 ];
 
 export function StudioPageShell({

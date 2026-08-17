@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SupplyDemandStudio } from "@/components/studio/SupplyDemandStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Supply and Demand Simulator (Browser)", description: "Explore market equilibrium, shifts, taxes, and consumer/producer surplus with interactive supply and demand curves. Free.", alternates: { canonical: "/studio/supply-demand" } };
+export default function Page() { return <StudioPageShell slug="supply-demand" name="Supply & Demand" keyword="supply and demand simulator" lede="The most famous diagram in economics. Where supply meets demand, the market clears — and shifting either curve or adding a tax ripples through price and quantity." about="Equilibrium sits where the downward demand curve crosses the upward supply curve. Shocks shift the curves; consumer and producer surplus measure the gains from trade. A per-unit tax raises the effective supply curve, lifting price and cutting quantity while creating deadweight loss — the standard toolkit of introductory microeconomics."><SupplyDemandStudio /></StudioPageShell>; }

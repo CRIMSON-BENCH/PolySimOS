@@ -212,6 +212,14 @@ import { PageRankStudio } from "./PageRankStudio";
 import { BipartiteMatchingStudio } from "./BipartiteMatchingStudio";
 import { CentralityStudio } from "./CentralityStudio";
 import { GraphTraversalStudio } from "./GraphTraversalStudio";
+import { SupplyDemandStudio } from "./SupplyDemandStudio";
+import { ElasticityStudio } from "./ElasticityStudio";
+import { MonopolyStudio } from "./MonopolyStudio";
+import { CobbDouglasStudio } from "./CobbDouglasStudio";
+import { LorenzGiniStudio } from "./LorenzGiniStudio";
+import { LafferStudio } from "./LafferStudio";
+import { ComparativeAdvantageStudio } from "./ComparativeAdvantageStudio";
+import { IndifferenceCurveStudio } from "./IndifferenceCurveStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -428,6 +436,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "bipartite-matching": BipartiteMatchingStudio,
   centrality: CentralityStudio,
   "graph-traversal": GraphTraversalStudio,
+  "supply-demand": SupplyDemandStudio,
+  elasticity: ElasticityStudio,
+  monopoly: MonopolyStudio,
+  "cobb-douglas": CobbDouglasStudio,
+  "lorenz-gini": LorenzGiniStudio,
+  "laffer-curve": LafferStudio,
+  "comparative-advantage": ComparativeAdvantageStudio,
+  "indifference-curves": IndifferenceCurveStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

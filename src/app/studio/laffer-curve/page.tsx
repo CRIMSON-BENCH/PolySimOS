@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LafferStudio } from "@/components/studio/LafferStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Laffer Curve Simulator (Tax Rate vs Revenue, Browser)", description: "Explore the Laffer curve — how tax revenue rises then falls with the tax rate, and where the revenue-maximizing rate lies. Free.", alternates: { canonical: "/studio/laffer-curve" } };
+export default function Page() { return <StudioPageShell slug="laffer-curve" name="Laffer Curve" keyword="Laffer curve tax revenue" lede="Tax at 0% and collect nothing; tax at 100% and collect nothing either. Between lies a revenue-maximizing rate — the idea at the center of decades of tax debate." about="The Laffer curve captures a simple truth: raising tax rates increases revenue only up to a point, because higher rates shrink the taxable base as people work, invest, or report less. The peak — the revenue-maximizing rate — depends on how strongly behavior responds to taxation. It describes the trade-off; it does not by itself prescribe policy."><LafferStudio /></StudioPageShell>; }
