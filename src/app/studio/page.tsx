@@ -26,6 +26,8 @@ const SIMS = [
   { slug: "gpu-fluid", name: "WebGPU Fluid", desc: "High-res GPU smoke advection you can stir.", tag: "WebGPU" },
   { slug: "gpu-nbody", name: "GPU N-Body", desc: "Thousands of bodies, full O(n²) gravity on the GPU.", tag: "WebGPU" },
   { slug: "gpu-pde", name: "GPU PDE Solver", desc: "Steady heat/Poisson via GPU Jacobi at high res.", tag: "WebGPU" },
+  { slug: "gpu-fluid-3d", name: "GPU 3D Fluid", desc: "3D smoke, simulated + raymarched on the GPU.", tag: "WebGPU" },
+  { slug: "gpu-nbody-pm", name: "Particle-Mesh N-Body", desc: "100k+ bodies via GPU particle-mesh gravity.", tag: "WebGPU" },
   { slug: "cfd-3d", name: "3D CFD", desc: "3D Navier–Stokes plume with z-slices.", tag: "3D Engineering" },
   { slug: "3d", name: "3D N-Body", desc: "Gravitation in 3D with a drag-to-orbit camera.", tag: "3D Physics" },
   { slug: "fea-3d", name: "3D FEA Space Frame", desc: "3D structural analysis; orbit the deformed tower.", tag: "3D Engineering" },
