@@ -182,6 +182,14 @@ const OTHER_SIMS = [
   { name: "RRT Path Planning", href: "/studio/rrt" },
   { name: "DC Motor", href: "/studio/dc-motor" },
   { name: "Kalman Filter", href: "/studio/kalman-filter" },
+  { name: "Particle in a Box", href: "/studio/particle-box" },
+  { name: "Quantum Tunneling", href: "/studio/quantum-tunneling" },
+  { name: "Bloch Sphere", href: "/studio/bloch-sphere" },
+  { name: "Hydrogen Orbitals", href: "/studio/hydrogen-orbitals" },
+  { name: "Special Relativity", href: "/studio/special-relativity" },
+  { name: "Photoelectric Effect", href: "/studio/photoelectric" },
+  { name: "Quantum Harmonic Oscillator", href: "/studio/quantum-harmonic" },
+  { name: "Stern-Gerlach", href: "/studio/stern-gerlach" },
 ];
 
 export function StudioPageShell({

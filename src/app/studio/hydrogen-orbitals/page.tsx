@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HydrogenOrbitalStudio } from "@/components/studio/HydrogenOrbitalStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Hydrogen Atom Orbitals Visualizer (Browser)", description: "See the shapes of hydrogen orbitals — 1s, 2s, 2p, 3p, 3d — as electron probability density cross-sections. Free, interactive.", alternates: { canonical: "/studio/hydrogen-orbitals" } };
+export default function Page() { return <StudioPageShell slug="hydrogen-orbitals" name="Hydrogen Orbitals" keyword="hydrogen atom orbitals" lede="Where does the electron actually live? Solving the Schrödinger equation for hydrogen gives the orbitals — the glowing probability clouds that shape all of chemistry." about="The quantum numbers n, l, and m label hydrogen&apos;s orbitals and set their size, shape, and orientation. s orbitals are spherical, p orbitals form two lobes, d orbitals four — and the number of radial and angular nodes grows with n and l. These cross-sections of |ψ|² show where the electron is most likely to be found."><HydrogenOrbitalStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { QHOStudio } from "@/components/studio/QHOStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Quantum Harmonic Oscillator Simulator (Browser)", description: "Explore the quantum harmonic oscillator — evenly-spaced energy levels, Hermite wavefunctions, and zero-point energy. Free, interactive.", alternates: { canonical: "/studio/quantum-harmonic" } };
+export default function Page() { return <StudioPageShell slug="quantum-harmonic" name="Quantum Harmonic Oscillator" keyword="quantum harmonic oscillator" lede="A quantum ball in a parabolic bowl. Its energy climbs in perfectly even steps and never quite sits still — the most important solvable system in physics." about="The quantum harmonic oscillator has energy levels E_n = (n + ½)ħω, evenly spaced and starting at a nonzero zero-point energy of ½ħω. Its wavefunctions are Hermite polynomials multiplied by a Gaussian envelope. It models molecular vibrations, lattice phonons, and the modes of quantum fields, appearing everywhere in modern physics."><QHOStudio /></StudioPageShell>; }

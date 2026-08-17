@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RelativityStudio } from "@/components/studio/RelativityStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Special Relativity Simulator — Time Dilation (Browser)", description: "See time dilation, length contraction, and the Lorentz factor as you push toward the speed of light. Free, interactive.", alternates: { canonical: "/studio/special-relativity" } };
+export default function Page() { return <StudioPageShell slug="special-relativity" name="Special Relativity" keyword="special relativity time dilation" lede="Approach the speed of light and reality bends: clocks slow, rulers shrink, and energy soars. Einstein&apos;s Lorentz factor governs it all." about="The Lorentz factor γ = 1/√(1−v²/c²) is the engine of special relativity. Moving clocks tick slow by γ, moving objects contract along their motion by 1/γ, and kinetic energy diverges as v approaches c. At everyday speeds γ is essentially 1, which is why these effects stay hidden until you reach a large fraction of light speed."><RelativityStudio /></StudioPageShell>; }

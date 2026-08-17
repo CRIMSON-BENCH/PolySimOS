@@ -188,6 +188,14 @@ const SIMS = [
   { slug: "rrt", name: "RRT Path Planning", desc: "Sampling-based planner.", tag: "Robotics" },
   { slug: "dc-motor", name: "DC Motor", desc: "Speed-torque & step.", tag: "Robotics" },
   { slug: "kalman-filter", name: "Kalman Filter", desc: "Optimal state estimation.", tag: "Robotics" },
+  { slug: "particle-box", name: "Particle in a Box", desc: "Quantized energy levels.", tag: "Quantum" },
+  { slug: "quantum-tunneling", name: "Quantum Tunneling", desc: "Through a forbidden barrier.", tag: "Quantum" },
+  { slug: "bloch-sphere", name: "Bloch Sphere", desc: "The state of a qubit.", tag: "Quantum" },
+  { slug: "hydrogen-orbitals", name: "Hydrogen Orbitals", desc: "Electron probability clouds.", tag: "Quantum" },
+  { slug: "special-relativity", name: "Special Relativity", desc: "Time dilation & contraction.", tag: "Quantum" },
+  { slug: "photoelectric", name: "Photoelectric Effect", desc: "Einstein's photon.", tag: "Quantum" },
+  { slug: "quantum-harmonic", name: "Quantum Harmonic Oscillator", desc: "Evenly-spaced energy ladder.", tag: "Quantum" },
+  { slug: "stern-gerlach", name: "Stern-Gerlach", desc: "Spin measurement.", tag: "Quantum" },
 ];
 
 export default function StudioIndex() {

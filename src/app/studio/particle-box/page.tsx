@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ParticleBoxStudio } from "@/components/studio/ParticleBoxStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Particle in a Box Simulator (Quantum, Browser)", description: "Explore the quantum particle in a 1D infinite well — energy levels, wavefunctions, and probability densities. Free, interactive.", alternates: { canonical: "/studio/particle-box" } };
+export default function Page() { return <StudioPageShell slug="particle-box" name="Particle in a Box" keyword="particle in a box quantum" lede="The simplest quantum system, and the gateway to all of quantum mechanics. Confine a particle and its energy is forced into discrete, quantized levels." about="A particle trapped in a one-dimensional infinite well can only occupy energies E_n = n²h²/8mL². Its wavefunctions are standing waves with n antinodes, and their squares give the probability of finding the particle at each position. Shrinking the box raises the energies sharply — the quantum confinement behind quantum dots and nanomaterials."><ParticleBoxStudio /></StudioPageShell>; }

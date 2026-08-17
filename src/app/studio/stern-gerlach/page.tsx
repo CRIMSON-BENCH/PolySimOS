@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SternGerlachStudio } from "@/components/studio/SternGerlachStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Stern-Gerlach Experiment Simulator (Spin, Browser)", description: "See how a spin-up beam splits when measured along a tilted axis, converging to the cos²(θ/2) Born-rule probability. Free, interactive.", alternates: { canonical: "/studio/stern-gerlach" } };
+export default function Page() { return <StudioPageShell slug="stern-gerlach" name="Stern-Gerlach Experiment" keyword="Stern-Gerlach spin experiment" lede="Measure a spin along a new axis and it snaps to up or down — never in between. The experiment that revealed quantum measurement and spin." about="Atoms prepared spin-up are sent through an analyzer tilted by an angle θ. Each atom emerges up with probability cos²(θ/2) and down otherwise — a discrete, random outcome, not a smooth fraction. At 90° it is a fair coin flip; at 180° every atom flips. Running many atoms, the tally converges to the Born rule, the core of quantum measurement."><SternGerlachStudio /></StudioPageShell>; }

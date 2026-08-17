@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BlochSphereStudio } from "@/components/studio/BlochSphereStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bloch Sphere Visualizer (Qubit State, Browser)", description: "Visualize any single-qubit state on the Bloch sphere and read its measurement probabilities and amplitudes. Free, interactive.", alternates: { canonical: "/studio/bloch-sphere" } };
+export default function Page() { return <StudioPageShell slug="bloch-sphere" name="Bloch Sphere" keyword="Bloch sphere qubit" lede="Every state of a single qubit is a point on a sphere. The Bloch sphere turns abstract quantum amplitudes into a picture you can rotate and reason about." about="A qubit state cos(θ/2)|0⟩ + e^{iφ}sin(θ/2)|1⟩ maps onto a unit sphere: the poles are |0⟩ and |1⟩, the equator holds equal superpositions differing only by phase. Measurement probabilities come straight from the polar angle. Quantum gates are rotations of this arrow — the geometric heart of quantum computing."><BlochSphereStudio /></StudioPageShell>; }

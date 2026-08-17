@@ -172,6 +172,14 @@ import { QuadcopterStudio } from "./QuadcopterStudio";
 import { RRTStudio } from "./RRTStudio";
 import { DCMotorStudio } from "./DCMotorStudio";
 import { KalmanFilterStudio } from "./KalmanFilterStudio";
+import { ParticleBoxStudio } from "./ParticleBoxStudio";
+import { QuantumTunnelingStudio } from "./QuantumTunnelingStudio";
+import { BlochSphereStudio } from "./BlochSphereStudio";
+import { HydrogenOrbitalStudio } from "./HydrogenOrbitalStudio";
+import { RelativityStudio } from "./RelativityStudio";
+import { PhotoelectricStudio } from "./PhotoelectricStudio";
+import { QHOStudio } from "./QHOStudio";
+import { SternGerlachStudio } from "./SternGerlachStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -348,6 +356,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   rrt: RRTStudio,
   "dc-motor": DCMotorStudio,
   "kalman-filter": KalmanFilterStudio,
+  "particle-box": ParticleBoxStudio,
+  "quantum-tunneling": QuantumTunnelingStudio,
+  "bloch-sphere": BlochSphereStudio,
+  "hydrogen-orbitals": HydrogenOrbitalStudio,
+  "special-relativity": RelativityStudio,
+  photoelectric: PhotoelectricStudio,
+  "quantum-harmonic": QHOStudio,
+  "stern-gerlach": SternGerlachStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);
