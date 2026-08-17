@@ -1,0 +1,37 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { StudioChrome, Slider, Stat } from "./StudioChrome";
+
+const SPORT: Record<string, { exp: number; games: number }> = { Baseball: { exp: 1.83, games: 162 }, Basketball: { exp: 13.9, games: 82 }, "Am. Football": { exp: 2.37, games: 17 }, Soccer: { exp: 1.35, games: 38 } };
+
+export function PythagoreanStudio() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [sport, setSport] = useState("Baseball");
+  const [pf, setPf] = useState(750);
+  const [pa, setPa] = useState(700);
+
+  const exp = SPORT[sport].exp; const winPct = Math.pow(pf, exp) / (Math.pow(pf, exp) + Math.pow(pa, exp));
+  const wins = winPct * SPORT[sport].games;
+
+  useEffect(() => {
+    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55;
+    ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
+    ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); for (let i = 0; i <= pw; i++) { const ratio = 0.5 + (i / pw) * 1; const wp = Math.pow(ratio, exp) / (Math.pow(ratio, exp) + 1); const y = oy - wp * ph; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke();
+    const ratio = pf / pa; const px = ox + ((ratio - 0.5) / 1) * pw; const py = oy - winPct * ph; ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(Math.max(ox, Math.min(ox + pw, px)), py, 6, 0, 7); ctx.fill();
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("win % vs scoring ratio", ox + 6, oy - ph + 12); ctx.fillText("points-for / points-against →", ox + pw - 150, oy + 16);
+  }, [sport, pf, pa]);
+
+  return (
+    <StudioChrome title="Pythagorean Expectation" tagline="wins from points"
+      controls={<div>
+        <div className="mb-3 grid grid-cols-2 gap-2">{Object.keys(SPORT).map((s) => <button key={s} onClick={() => setSport(s)} className={`rounded-lg px-2 py-1 text-xs font-semibold ${sport === s ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{s}</button>)}</div>
+        <Slider label="Points/runs scored" value={pf} min={300} max={1200} step={10} onChange={setPf} />
+        <Slider label="Points/runs allowed" value={pa} min={300} max={1200} step={10} onChange={setPa} />
+        <p className="mt-3 text-xs text-slate-500">Bill James discovered that a team&apos;s win percentage tracks the ratio of points scored to points allowed, raised to a sport-specific exponent — the Pythagorean expectation. It predicts records better than actual wins early in a season, exposing teams that are lucky or unlucky and due to regress. The exponent varies from ~1.8 in baseball to ~14 in basketball.</p>
+      </div>}
+      inspector={<div><Stat label="Expected win %" value={`${(winPct * 100).toFixed(1)}%`} /><Stat label="Projected wins" value={`${wins.toFixed(0)} of ${SPORT[sport].games}`} /><Stat label="Exponent" value={exp.toFixed(2)} /></div>}
+    ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
+  );
+}

@@ -300,6 +300,14 @@ const SIMS = [
   { slug: "control-chart", name: "SPC Control Chart", desc: "In control or not.", tag: "Manufacturing" },
   { slug: "learning-curve", name: "Learning Curve", desc: "Cost falls with volume.", tag: "Manufacturing" },
   { slug: "littles-law", name: "Little's Law", desc: "WIP = throughput × time.", tag: "Manufacturing" },
+  { slug: "elo-rating", name: "Elo Rating", desc: "Win probability & updates.", tag: "Sports" },
+  { slug: "pythagorean-expectation", name: "Pythagorean Expectation", desc: "Wins from points.", tag: "Sports" },
+  { slug: "marathon-pacing", name: "Marathon Pacing", desc: "Splits & strategy.", tag: "Sports" },
+  { slug: "magnus-effect", name: "Magnus Effect", desc: "Spinning ball curve.", tag: "Sports" },
+  { slug: "xg-model", name: "Expected Goals (xG)", desc: "Shot quality model.", tag: "Sports" },
+  { slug: "win-probability", name: "Win Probability", desc: "Live game odds.", tag: "Sports" },
+  { slug: "tournament-bracket", name: "Tournament Odds", desc: "Bracket simulation.", tag: "Sports" },
+  { slug: "shot-arc", name: "Basketball Shot Arc", desc: "Optimal release angle.", tag: "Sports" },
 ];
 
 export default function StudioIndex() {

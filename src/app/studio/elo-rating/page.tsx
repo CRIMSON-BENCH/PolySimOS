@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { EloStudio } from "@/components/studio/EloStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Elo Rating Calculator (Win Probability, Browser)", description: "Compute win probability and rating changes with the Elo system, from chess to esports. Free, interactive.", alternates: { canonical: "/studio/elo-rating" } };
+export default function Page() { return <StudioPageShell slug="elo-rating" name="Elo Rating System" keyword="Elo rating calculator" lede="How do you rank players who never all play each other? The Elo system turns a rating gap into a precise win probability — and updates it after every game." about="Elo assigns each competitor a rating; the difference predicts the odds, with every 400 points meaning a tenfold advantage. After a match, ratings shift by the K-factor times the difference between actual and expected result, so upsets move ratings a lot and expected wins barely at all. It rates chess players, tennis pros, and video-game ladders alike."><EloStudio /></StudioPageShell>; }

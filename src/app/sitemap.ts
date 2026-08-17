@@ -72,6 +72,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/rsa", 0.8), u("/studio/diffie-hellman", 0.8), u("/studio/classical-ciphers", 0.8), u("/studio/hash-avalanche", 0.8), u("/studio/shannon-entropy", 0.8), u("/studio/huffman", 0.8), u("/studio/hamming-code", 0.8), u("/studio/elliptic-curve", 0.8),
     u("/studio/haversine", 0.8), u("/studio/map-projection", 0.8), u("/studio/gps-trilateration", 0.8), u("/studio/viewshed", 0.8), u("/studio/spatial-interpolation", 0.8), u("/studio/dead-reckoning", 0.8), u("/studio/rhumb-line", 0.8), u("/studio/point-in-polygon", 0.8),
     u("/studio/tolerance-stackup", 0.8), u("/studio/process-capability", 0.8), u("/studio/oee", 0.8), u("/studio/cnc-feeds-speeds", 0.8), u("/studio/line-balancing", 0.8), u("/studio/control-chart", 0.8), u("/studio/learning-curve", 0.8), u("/studio/littles-law", 0.8),
+    u("/studio/elo-rating", 0.8), u("/studio/pythagorean-expectation", 0.8), u("/studio/marathon-pacing", 0.8), u("/studio/magnus-effect", 0.8), u("/studio/xg-model", 0.8), u("/studio/win-probability", 0.8), u("/studio/tournament-bracket", 0.8), u("/studio/shot-arc", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

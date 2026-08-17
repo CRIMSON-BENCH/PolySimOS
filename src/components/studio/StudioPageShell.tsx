@@ -294,6 +294,14 @@ const OTHER_SIMS = [
   { name: "SPC Control Chart", href: "/studio/control-chart" },
   { name: "Learning Curve", href: "/studio/learning-curve" },
   { name: "Little's Law", href: "/studio/littles-law" },
+  { name: "Elo Rating", href: "/studio/elo-rating" },
+  { name: "Pythagorean Expectation", href: "/studio/pythagorean-expectation" },
+  { name: "Marathon Pacing", href: "/studio/marathon-pacing" },
+  { name: "Magnus Effect", href: "/studio/magnus-effect" },
+  { name: "Expected Goals (xG)", href: "/studio/xg-model" },
+  { name: "Win Probability", href: "/studio/win-probability" },
+  { name: "Tournament Odds", href: "/studio/tournament-bracket" },
+  { name: "Basketball Shot Arc", href: "/studio/shot-arc" },
 ];
 
 export function StudioPageShell({

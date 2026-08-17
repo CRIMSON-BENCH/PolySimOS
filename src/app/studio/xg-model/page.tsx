@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { XGStudio } from "@/components/studio/XGStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Expected Goals (xG) Simulator (Soccer, Browser)", description: "See how expected goals (xG) rate a shot's quality from distance and angle to goal. Click to place shots. Free, interactive.", alternates: { canonical: "/studio/xg-model" } };
+export default function Page() { return <StudioPageShell slug="xg-model" name="Expected Goals (xG)" keyword="expected goals xG soccer" lede="Not all shots are equal. Expected goals rates each chance by the probability an average player would score from that spot — the metric that revolutionized soccer analysis." about="An xG model estimates the scoring probability of a shot from features like distance and angle to goal, trained on thousands of historical attempts. A close-range tap-in may be worth 0.8 xG, a long-range strike just 0.03. Summing xG across a match reveals which team created the better chances, cutting through the noise of a fluky scoreline. Click to place a shot."><XGStudio /></StudioPageShell>; }

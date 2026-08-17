@@ -284,6 +284,14 @@ import { LineBalancingStudio } from "./LineBalancingStudio";
 import { ControlChartStudio } from "./ControlChartStudio";
 import { LearningCurveStudio } from "./LearningCurveStudio";
 import { LittlesLawStudio } from "./LittlesLawStudio";
+import { EloStudio } from "./EloStudio";
+import { PythagoreanStudio } from "./PythagoreanStudio";
+import { MarathonPacingStudio } from "./MarathonPacingStudio";
+import { MagnusStudio } from "./MagnusStudio";
+import { XGStudio } from "./XGStudio";
+import { WinProbabilityStudio } from "./WinProbabilityStudio";
+import { TournamentStudio } from "./TournamentStudio";
+import { ShotArcStudio } from "./ShotArcStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -572,6 +580,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "control-chart": ControlChartStudio,
   "learning-curve": LearningCurveStudio,
   "littles-law": LittlesLawStudio,
+  "elo-rating": EloStudio,
+  "pythagorean-expectation": PythagoreanStudio,
+  "marathon-pacing": MarathonPacingStudio,
+  "magnus-effect": MagnusStudio,
+  "xg-model": XGStudio,
+  "win-probability": WinProbabilityStudio,
+  "tournament-bracket": TournamentStudio,
+  "shot-arc": ShotArcStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);
