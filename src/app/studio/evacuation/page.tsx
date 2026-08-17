@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { EvacuationStudio } from "@/components/studio/EvacuationStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Building Evacuation Simulator (Browser)", description: "Model crowd egress and clearance time as occupants flow to exits, with realistic bottlenecks. Free tool for fire and life-safety planning.", alternates: { canonical: "/studio/evacuation" } };
+export default function Page() { return <StudioPageShell slug="evacuation" name="Building Evacuation / Egress" keyword="building evacuation simulator" lede="How long to clear a room, and where do the jams form? Watch occupants stream toward exits and see bottlenecks build at every doorway." about="Occupants steer toward their nearest exit while a repulsion force keeps them apart, reproducing the congestion and arching that govern real egress times. Add or remove exits to see how clearance time responds. A conceptual planning and education aid — code-compliant egress analysis requires certified modeling."><EvacuationStudio /></StudioPageShell>; }

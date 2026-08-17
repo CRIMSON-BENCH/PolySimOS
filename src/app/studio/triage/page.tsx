@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { TriageStudio } from "@/components/studio/TriageStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "START Triage Calculator (Browser)", description: "Work through the START mass-casualty triage algorithm and get the triage category. Free training tool for EMS and first responders.", alternates: { canonical: "/studio/triage" } };
+export default function Page() { return <StudioPageShell slug="triage" name="START Triage" keyword="START triage calculator" lede="In a mass-casualty incident, every patient is sorted in under a minute. Step through the START algorithm and see how respirations, perfusion, and mental status decide the category." about="Simple Triage And Rapid Treatment (START) is the most widely taught mass-casualty triage method in the US. It walks through ability to walk, breathing, respiratory rate, perfusion, and mental status to assign Green, Yellow, Red, or Black. This is a training reference — always follow your agency protocol and medical direction on scene."><TriageStudio /></StudioPageShell>; }

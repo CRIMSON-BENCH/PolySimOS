@@ -110,6 +110,14 @@ const OTHER_SIMS = [
   { name: "Cellular Automata (Wolfram)", href: "/studio/wolfram-ca" },
   { name: "Genetic Algorithm", href: "/studio/genetic-algorithm" },
   { name: "Ant Colony Optimization", href: "/studio/ant-colony" },
+  { name: "Wildfire Spread", href: "/studio/fire-spread" },
+  { name: "Hazmat Plume", href: "/studio/hazmat-plume" },
+  { name: "Building Evacuation", href: "/studio/evacuation" },
+  { name: "START Triage", href: "/studio/triage" },
+  { name: "Fire Hose Hydraulics", href: "/studio/hose-flow" },
+  { name: "Skid-to-Stop Speed", href: "/studio/skid-to-stop" },
+  { name: "Radio Range", href: "/studio/radio-range" },
+  { name: "Blast Standoff", href: "/studio/blast-standoff" },
 ];
 
 export function StudioPageShell({

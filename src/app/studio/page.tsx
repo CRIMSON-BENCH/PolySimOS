@@ -116,6 +116,14 @@ const SIMS = [
   { slug: "wolfram-ca", name: "Elementary CA", desc: "Wolfram's 256 rules.", tag: "Complex Systems" },
   { slug: "genetic-algorithm", name: "Genetic Algorithm", desc: "Evolve toward the peak.", tag: "Complex Systems" },
   { slug: "ant-colony", name: "Ant Colony Optimization", desc: "Swarm-solved TSP.", tag: "Complex Systems" },
+  { slug: "fire-spread", name: "Wildfire Spread", desc: "Wind + slope fire behavior.", tag: "First Responders" },
+  { slug: "hazmat-plume", name: "Hazmat Plume", desc: "Gaussian dispersion + PAD.", tag: "First Responders" },
+  { slug: "evacuation", name: "Building Evacuation", desc: "Egress flow & clear time.", tag: "First Responders" },
+  { slug: "triage", name: "START Triage", desc: "Mass-casualty triage tool.", tag: "First Responders" },
+  { slug: "hose-flow", name: "Fire Hose Hydraulics", desc: "Friction loss & pump pressure.", tag: "First Responders" },
+  { slug: "skid-to-stop", name: "Skid-to-Stop Speed", desc: "Accident reconstruction.", tag: "First Responders" },
+  { slug: "radio-range", name: "Radio Range", desc: "VHF/UHF link budget.", tag: "First Responders" },
+  { slug: "blast-standoff", name: "Blast Standoff", desc: "Overpressure & safe distance.", tag: "First Responders" },
 ];
 
 export default function StudioIndex() {

@@ -100,6 +100,14 @@ import { ReactionDiffusionStudio } from "./ReactionDiffusionStudio";
 import { WolframCAStudio } from "./WolframCAStudio";
 import { GeneticStudio } from "./GeneticStudio";
 import { AntColonyStudio } from "./AntColonyStudio";
+import { FireSpreadStudio } from "./FireSpreadStudio";
+import { HazmatPlumeStudio } from "./HazmatPlumeStudio";
+import { EvacuationStudio } from "./EvacuationStudio";
+import { TriageStudio } from "./TriageStudio";
+import { HoseFlowStudio } from "./HoseFlowStudio";
+import { SkidToStopStudio } from "./SkidToStopStudio";
+import { RadioRangeStudio } from "./RadioRangeStudio";
+import { BlastStandoffStudio } from "./BlastStandoffStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -204,6 +212,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "wolfram-ca": WolframCAStudio,
   "genetic-algorithm": GeneticStudio,
   "ant-colony": AntColonyStudio,
+  "fire-spread": FireSpreadStudio,
+  "hazmat-plume": HazmatPlumeStudio,
+  evacuation: EvacuationStudio,
+  triage: TriageStudio,
+  "hose-flow": HoseFlowStudio,
+  "skid-to-stop": SkidToStopStudio,
+  "radio-range": RadioRangeStudio,
+  "blast-standoff": BlastStandoffStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

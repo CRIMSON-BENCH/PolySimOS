@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RadioRangeStudio } from "@/components/studio/RadioRangeStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Radio Range & Link Budget Calculator (Browser)", description: "Estimate VHF/UHF radio range from antenna heights, power, frequency, and receiver sensitivity — horizon plus link budget. Free.", alternates: { canonical: "/studio/radio-range" } };
+export default function Page() { return <StudioPageShell slug="radio-range" name="Radio Range / Link Budget" keyword="radio range calculator" lede="Will the portable reach the repeater from here? Combine the radio horizon with a free-space link budget to estimate usable range for public-safety radio." about="Usable range is the smaller of two limits: the line-of-sight radio horizon set by antenna heights (1.23·(√h₁+√h₂) in miles for heights in feet), and the distance at which free-space path loss drops the signal below the receiver&apos;s sensitivity. Real terrain, foliage, and buildings shorten this — treat it as a best-case planning estimate."><RadioRangeStudio /></StudioPageShell>; }

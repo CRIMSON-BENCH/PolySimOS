@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HoseFlowStudio } from "@/components/studio/HoseFlowStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Fire Hose Friction Loss & Pump Pressure Calculator", description: "Calculate friction loss, elevation head, and required pump discharge pressure for any hose lay. Free fireground hydraulics tool.", alternates: { canonical: "/studio/hose-flow" } };
+export default function Page() { return <StudioPageShell slug="hose-flow" name="Fire Hose Hydraulics" keyword="fire hose friction loss calculator" lede="What pump discharge pressure does this line need? Set hose size, flow, length, and elevation to get friction loss and the required PDP instantly." about="Fireground hydraulics uses the friction-loss formula FL = C·(Q/100)²·(L/100), where C is the hose coefficient, Q the flow in GPM, and L the length. Adding nozzle pressure and elevation head gives the required pump discharge pressure. A training and pre-planning aid — verify against your department&apos;s pump charts and SOPs."><HoseFlowStudio /></StudioPageShell>; }

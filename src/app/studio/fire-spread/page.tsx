@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { FireSpreadStudio } from "@/components/studio/FireSpreadStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Wildfire Spread Simulator (Browser)", description: "Model how wind and slope drive wildfire spread with an interactive fire-behavior cellular automaton. Free training tool for firefighters.", alternates: { canonical: "/studio/fire-spread" } };
+export default function Page() { return <StudioPageShell slug="fire-spread" name="Wildfire / Fire Spread" keyword="wildfire spread simulator" lede="Wind and slope are the two forces that turn a spot fire into a running crown fire. Adjust both and watch the fire front elongate and race uphill in real time." about="This fire-behavior model spreads flame from cell to cell with probabilities biased downwind and upslope — the dominant drivers of real rate-of-spread. Built for wildland fire training, tabletop exercises, and public education. It is a qualitative teaching tool, not a certified fire-behavior prediction system."><FireSpreadStudio /></StudioPageShell>; }
