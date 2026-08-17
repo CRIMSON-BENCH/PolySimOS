@@ -5,6 +5,9 @@ import { Footer } from "@/components/Footer";
 import { ChromeGate } from "@/components/ChromeGate";
 import { ChatWidget } from "@/components/ChatWidget";
 import { AuthProvider } from "@/lib/auth";
+import { ClerkProvider } from "@clerk/nextjs";
+
+const clerkConfigured = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.polysimos.com"),
@@ -39,11 +42,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+function Shell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
@@ -56,4 +55,19 @@ export default function RootLayout({
       </body>
     </html>
   );
+}
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
+  if (clerkConfigured) {
+    return (
+      <ClerkProvider
+        appearance={{ variables: { colorPrimary: "#0891b2" } }}
+        signInFallbackRedirectUrl="/dashboard"
+        signUpFallbackRedirectUrl="/dashboard"
+      >
+        <Shell>{children}</Shell>
+      </ClerkProvider>
+    );
+  }
+  return <Shell>{children}</Shell>;
 }

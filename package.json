@@ -12,6 +12,7 @@
     "@capacitor/cli": "^8.5.0",
     "@capacitor/core": "^8.5.0",
     "@capacitor/ios": "^8.5.0",
+    "@clerk/nextjs": "^7.7.6",
     "@google/generative-ai": "^0.24.1",
     "@stripe/stripe-js": "^5.3.0",
     "@supabase/supabase-js": "^2.112.3",
@@ -19,7 +20,8 @@
     "next": "^15.1.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "stripe": "^17.5.0"
+    "stripe": "^17.5.0",
+    "svix": "^1.99.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.0.0",

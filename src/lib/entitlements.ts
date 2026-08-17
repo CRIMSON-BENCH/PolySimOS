@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import type { SupabaseClient } from "@supabase/supabase-js";
 
 // ---------------------------------------------------------------------------
 // Entitlements: what the current user has unlocked.
@@ -73,28 +72,6 @@ export function useEntitlement(key: string): boolean {
     };
   }, [key]);
   return unlocked;
-}
-
-/**
- * Pull the signed-in user's entitlements from Supabase and merge them into the
- * local set (so a purchase made on any device unlocks here too). Safe no-op if
- * the table/columns aren't present yet.
- */
-export async function syncServerEntitlements(sb: SupabaseClient, email: string) {
-  try {
-    const { data, error } = await sb.from("entitlements").select("grant_key,status").eq("email", email);
-    if (error || !data) return;
-    const keys = readKeys();
-    let changed = false;
-    for (const row of data as { grant_key: string; status: string }[]) {
-      if ((row.status === "active" || row.status === "trialing") && !keys.has(row.grant_key)) {
-        keys.add(row.grant_key); changed = true;
-      }
-    }
-    if (changed) writeKeys(keys);
-  } catch {
-    /* offline or table missing — device-local entitlements still work */
-  }
 }
 
 /** On sign-out, drop subscription (plan:*) unlocks; keep one-time purchases. */
