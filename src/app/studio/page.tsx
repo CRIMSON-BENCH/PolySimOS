@@ -108,6 +108,14 @@ const SIMS = [
   { slug: "l-system", name: "L-System Fractals", desc: "Grow plants from grammars.", tag: "CS / AI" },
   { slug: "turing-machine", name: "Turing Machine", desc: "The model of computation.", tag: "CS / AI" },
   { slug: "convolution", name: "Image Convolution", desc: "Kernels behind every CNN.", tag: "CS / AI" },
+  { slug: "forest-fire", name: "Forest Fire Model", desc: "Self-organized criticality.", tag: "Complex Systems" },
+  { slug: "sandpile", name: "Abelian Sandpile", desc: "Avalanches build a fractal.", tag: "Complex Systems" },
+  { slug: "schelling", name: "Schelling Segregation", desc: "Mild bias, sharp segregation.", tag: "Complex Systems" },
+  { slug: "langtons-ant", name: "Langton's Ant", desc: "Two rules, emergent highway.", tag: "Complex Systems" },
+  { slug: "reaction-diffusion", name: "Reaction-Diffusion", desc: "Gray-Scott Turing patterns.", tag: "Complex Systems" },
+  { slug: "wolfram-ca", name: "Elementary CA", desc: "Wolfram's 256 rules.", tag: "Complex Systems" },
+  { slug: "genetic-algorithm", name: "Genetic Algorithm", desc: "Evolve toward the peak.", tag: "Complex Systems" },
+  { slug: "ant-colony", name: "Ant Colony Optimization", desc: "Swarm-solved TSP.", tag: "Complex Systems" },
 ];
 
 export default function StudioIndex() {

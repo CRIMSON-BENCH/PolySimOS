@@ -102,6 +102,14 @@ const OTHER_SIMS = [
   { name: "L-System Fractals", href: "/studio/l-system" },
   { name: "Turing Machine", href: "/studio/turing-machine" },
   { name: "Image Convolution", href: "/studio/convolution" },
+  { name: "Forest Fire Model", href: "/studio/forest-fire" },
+  { name: "Abelian Sandpile", href: "/studio/sandpile" },
+  { name: "Schelling Segregation", href: "/studio/schelling" },
+  { name: "Langton's Ant", href: "/studio/langtons-ant" },
+  { name: "Reaction-Diffusion", href: "/studio/reaction-diffusion" },
+  { name: "Cellular Automata (Wolfram)", href: "/studio/wolfram-ca" },
+  { name: "Genetic Algorithm", href: "/studio/genetic-algorithm" },
+  { name: "Ant Colony Optimization", href: "/studio/ant-colony" },
 ];
 
 export function StudioPageShell({

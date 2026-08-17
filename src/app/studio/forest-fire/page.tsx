@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ForestFireStudio } from "@/components/studio/ForestFireStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Forest Fire Model Simulator (Browser)", description: "Simulate the forest-fire cellular automaton and its self-organized criticality — power-law fire sizes from simple local rules. Free.", alternates: { canonical: "/studio/forest-fire" } };
+export default function Page() { return <StudioPageShell slug="forest-fire" name="Forest Fire Model" keyword="forest fire model" lede="Trees grow, lightning strikes, fire spreads. From three simple rules emerges self-organized criticality — the same statistics behind real wildfires and market crashes." about="The Drossel-Schwabl forest-fire model is a cellular automaton: empty cells grow trees at rate p, trees ignite from burning neighbors or from lightning at rate f, and burning cells become empty. The system self-tunes to a critical state where the distribution of fire sizes follows a power law."><ForestFireStudio /></StudioPageShell>; }

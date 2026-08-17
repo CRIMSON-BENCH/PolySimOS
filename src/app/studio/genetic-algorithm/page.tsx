@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { GeneticStudio } from "@/components/studio/GeneticStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Genetic Algorithm Visualizer (Browser)", description: "Watch a genetic algorithm evolve a population toward the peak of a fitness landscape via selection, crossover, and mutation. Free.", alternates: { canonical: "/studio/genetic-algorithm" } };
+export default function Page() { return <StudioPageShell slug="genetic-algorithm" name="Genetic Algorithm" keyword="genetic algorithm visualizer" lede="Evolution as an optimizer. A population of guesses is selected, bred, and mutated generation after generation, climbing a rugged fitness landscape toward the global peak." about="Genetic algorithms mimic natural selection: candidate solutions are scored by a fitness function, the best are chosen as parents, their traits are combined by crossover, and random mutation maintains diversity. Here the population hunts for the brightest peak while avoiding getting stuck on lesser local optima."><GeneticStudio /></StudioPageShell>; }

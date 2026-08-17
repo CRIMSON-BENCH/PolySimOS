@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SandpileStudio } from "@/components/studio/SandpileStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Abelian Sandpile Simulator (Browser)", description: "Drop grains on a sandpile and watch toppling avalanches build a fractal — the canonical model of self-organized criticality. Free.", alternates: { canonical: "/studio/sandpile" } };
+export default function Page() { return <StudioPageShell slug="sandpile" name="Abelian Sandpile" keyword="abelian sandpile model" lede="Add sand one grain at a time and chaos organizes itself. When a pile gets too steep it topples, triggering avalanches of every size — the birth of self-organized criticality." about="In the Bak-Tang-Wiesenfeld sandpile, each cell topples when it holds four or more grains, distributing one to each neighbor. Toppling can cascade into avalanches whose sizes follow a power law. The final stable configurations form strikingly intricate fractal patterns."><SandpileStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LangtonStudio } from "@/components/studio/LangtonStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Langton's Ant Simulator (Browser)", description: "Run Langton's ant and watch two trivial rules produce chaos, then a spontaneous periodic highway. Free, interactive.", alternates: { canonical: "/studio/langtons-ant" } };
+export default function Page() { return <StudioPageShell slug="langtons-ant" name="Langton's Ant" keyword="Langton's ant" lede="Two rules. One ant. Roughly ten thousand steps of apparent chaos — and then, out of nowhere, it starts building a perfectly periodic highway." about="Langton&apos;s ant moves on a grid of black and white cells: on a white cell it turns right and flips the color; on black it turns left and flips. Despite the utterly simple rules, the long-term behavior is unpredictable, then abruptly settles into an ordered, repeating pattern — a vivid example of emergent complexity."><LangtonStudio /></StudioPageShell>; }

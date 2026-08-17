@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SchellingStudio } from "@/components/studio/SchellingStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Schelling Segregation Model (Browser)", description: "See how mild individual preferences produce sharp global segregation in Schelling's agent-based model. Free, interactive.", alternates: { canonical: "/studio/schelling" } };
+export default function Page() { return <StudioPageShell slug="schelling" name="Schelling Segregation" keyword="Schelling segregation model" lede="A landmark result in social science: even when everyone is happy to live in a mixed neighborhood, a slight preference for similar neighbors tips a whole city into segregation." about="Each agent checks the fraction of neighbors sharing its color. If that fraction falls below its tolerance threshold, it relocates to a random empty cell. Thomas Schelling showed that thresholds as low as one-third still drive the system to near-total segregation — emergent macro-behavior no individual intended."><SchellingStudio /></StudioPageShell>; }

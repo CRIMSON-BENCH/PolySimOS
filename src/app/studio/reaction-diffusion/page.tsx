@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ReactionDiffusionStudio } from "@/components/studio/ReactionDiffusionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Reaction-Diffusion Simulator (Gray-Scott, Browser)", description: "Generate Turing patterns — spots, stripes, mazes, and mitosis — with the Gray-Scott reaction-diffusion model. Free, interactive.", alternates: { canonical: "/studio/reaction-diffusion" } };
+export default function Page() { return <StudioPageShell slug="reaction-diffusion" name="Reaction-Diffusion (Gray-Scott)" keyword="reaction diffusion Gray-Scott" lede="The mechanism Alan Turing proposed for the spots on a leopard and the stripes on a zebra — two chemicals, diffusing and reacting, that spontaneously break symmetry into living patterns." about="The Gray-Scott model couples two reacting chemicals that diffuse at different rates. Tiny changes to the feed and kill rates flip the system between spots, stripes, mazes, and self-replicating blobs. This runs the full nonlinear PDE on a grid in your browser."><ReactionDiffusionStudio /></StudioPageShell>; }

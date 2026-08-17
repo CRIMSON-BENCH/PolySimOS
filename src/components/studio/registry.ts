@@ -92,6 +92,14 @@ import { ConvexHullStudio } from "./ConvexHullStudio";
 import { LSystemStudio } from "./LSystemStudio";
 import { TuringStudio } from "./TuringStudio";
 import { ConvolutionStudio } from "./ConvolutionStudio";
+import { ForestFireStudio } from "./ForestFireStudio";
+import { SandpileStudio } from "./SandpileStudio";
+import { SchellingStudio } from "./SchellingStudio";
+import { LangtonStudio } from "./LangtonStudio";
+import { ReactionDiffusionStudio } from "./ReactionDiffusionStudio";
+import { WolframCAStudio } from "./WolframCAStudio";
+import { GeneticStudio } from "./GeneticStudio";
+import { AntColonyStudio } from "./AntColonyStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -188,6 +196,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "l-system": LSystemStudio,
   "turing-machine": TuringStudio,
   convolution: ConvolutionStudio,
+  "forest-fire": ForestFireStudio,
+  sandpile: SandpileStudio,
+  schelling: SchellingStudio,
+  "langtons-ant": LangtonStudio,
+  "reaction-diffusion": ReactionDiffusionStudio,
+  "wolfram-ca": WolframCAStudio,
+  "genetic-algorithm": GeneticStudio,
+  "ant-colony": AntColonyStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

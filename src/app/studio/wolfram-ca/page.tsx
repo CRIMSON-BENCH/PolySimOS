@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { WolframCAStudio } from "@/components/studio/WolframCAStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Elementary Cellular Automata (Wolfram Rules, Browser)", description: "Explore all 256 elementary cellular automata — Rule 30, Rule 110, Rule 90 and more — from a single starting cell. Free.", alternates: { canonical: "/studio/wolfram-ca" } };
+export default function Page() { return <StudioPageShell slug="wolfram-ca" name="Elementary Cellular Automata" keyword="elementary cellular automata rule 30" lede="One row, one rule, 256 universes. Rule 30 makes chaos, Rule 90 draws a Sierpinski triangle, and Rule 110 is powerful enough to compute anything." about="An elementary cellular automaton updates each cell from its own state and its two neighbors, so a rule is just an 8-bit lookup table — 256 in all. Stephen Wolfram catalogued them into classes from uniform to chaotic to complex; Rule 110 has been proven Turing-complete."><WolframCAStudio /></StudioPageShell>; }
