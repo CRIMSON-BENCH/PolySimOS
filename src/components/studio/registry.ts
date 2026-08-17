@@ -23,6 +23,14 @@ import { GPUNBody } from "./GPUNBody";
 import { GPUPDE } from "./GPUPDE";
 import { GPUFluid3D } from "./GPUFluid3D";
 import { GPUNBodyPM } from "./GPUNBodyPM";
+import { DoublePendulumStudio } from "./DoublePendulumStudio";
+import { FractalStudio } from "./FractalStudio";
+import { FourierStudio } from "./FourierStudio";
+import { Surface3DStudio } from "./Surface3DStudio";
+import { IsingStudio } from "./IsingStudio";
+import { MatrixStudio } from "./MatrixStudio";
+import { GrapherStudio } from "./GrapherStudio";
+import { ProjectileStudio } from "./ProjectileStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -50,6 +58,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "gpu-pde": GPUPDE,
   "gpu-fluid-3d": GPUFluid3D,
   "gpu-nbody-pm": GPUNBodyPM,
+  "double-pendulum": DoublePendulumStudio,
+  fractals: FractalStudio,
+  fourier: FourierStudio,
+  "surface-3d": Surface3DStudio,
+  ising: IsingStudio,
+  matrix: MatrixStudio,
+  grapher: GrapherStudio,
+  projectile: ProjectileStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

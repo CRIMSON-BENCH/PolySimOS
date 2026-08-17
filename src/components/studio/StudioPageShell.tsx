@@ -33,6 +33,14 @@ const OTHER_SIMS = [
   { name: "Vector Fields", href: "/studio/vector-field" },
   { name: "Optimize + UQ", href: "/studio/optimize" },
   { name: "Notebook", href: "/studio/notebook" },
+  { name: "Double Pendulum", href: "/studio/double-pendulum" },
+  { name: "Projectile Motion", href: "/studio/projectile" },
+  { name: "Ising Model", href: "/studio/ising" },
+  { name: "Fractal Explorer", href: "/studio/fractals" },
+  { name: "Fourier Series", href: "/studio/fourier" },
+  { name: "Function Grapher", href: "/studio/grapher" },
+  { name: "3D Surface Plotter", href: "/studio/surface-3d" },
+  { name: "Matrix Calculator", href: "/studio/matrix" },
 ];
 
 export function StudioPageShell({

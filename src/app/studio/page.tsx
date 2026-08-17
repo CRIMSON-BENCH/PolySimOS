@@ -39,6 +39,14 @@ const SIMS = [
   { slug: "vector-field", name: "Vector Fields", desc: "Plot any F(x,y) as a live quiver diagram.", tag: "Math" },
   { slug: "optimize", name: "Optimize + UQ", desc: "Gradient descent and Monte-Carlo uncertainty.", tag: "Data" },
   { slug: "notebook", name: "Notebook", desc: "Cells of prose + symbolic math + compute.", tag: "Math" },
+  { slug: "double-pendulum", name: "Double Pendulum", desc: "The textbook chaotic system, integrated with RK4.", tag: "Physics" },
+  { slug: "projectile", name: "Projectile Motion", desc: "Ballistics with air drag; tune angle and speed.", tag: "Physics" },
+  { slug: "ising", name: "Ising Model", desc: "A live magnetic phase transition via Monte Carlo.", tag: "Physics" },
+  { slug: "fractals", name: "Fractal Explorer", desc: "Zoom into the Mandelbrot and Julia sets.", tag: "Math" },
+  { slug: "fourier", name: "Fourier Series", desc: "Build waves from sine harmonics.", tag: "Math" },
+  { slug: "grapher", name: "Function Grapher", desc: "Plot up to three functions at once.", tag: "Math" },
+  { slug: "surface-3d", name: "3D Surface Plotter", desc: "Orbit any z = f(x, y) surface.", tag: "Math" },
+  { slug: "matrix", name: "Matrix Calculator", desc: "Multiply, invert, determinant, transpose.", tag: "Math" },
 ];
 
 export default function StudioIndex() {
