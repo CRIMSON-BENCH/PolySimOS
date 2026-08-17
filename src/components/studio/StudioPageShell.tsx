@@ -87,6 +87,13 @@ const OTHER_SIMS = [
   { name: "Radioactive Decay", href: "/studio/radioactive-decay" },
   { name: "Maxwell-Boltzmann", href: "/studio/maxwell-boltzmann" },
   { name: "Ideal Gas Law", href: "/studio/ideal-gas" },
+  { name: "Bifurcation Diagram", href: "/studio/bifurcation" },
+  { name: "Direction Field", href: "/studio/direction-field" },
+  { name: "Riemann Sums", href: "/studio/riemann" },
+  { name: "Eigenvectors", href: "/studio/eigenvectors" },
+  { name: "Markov Chains", href: "/studio/markov" },
+  { name: "Parametric Grapher", href: "/studio/parametric" },
+  { name: "Euler vs RK4", href: "/studio/numerical-methods" },
 ];
 
 export function StudioPageShell({

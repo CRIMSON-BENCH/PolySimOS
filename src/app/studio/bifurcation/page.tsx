@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BifurcationStudio } from "@/components/studio/BifurcationStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bifurcation Diagram Simulator (Browser) — Logistic Map", description: "Explore the logistic map bifurcation diagram and its period-doubling route to chaos. Free, interactive.", alternates: { canonical: "/studio/bifurcation" } };
+export default function Page() { return <StudioPageShell slug="bifurcation" name="Bifurcation Diagram" keyword="bifurcation diagram logistic map" lede="One of the most famous pictures in science: as a single parameter grows, a simple map doubles its period again and again, then erupts into chaos." about="The logistic map xₙ₊₁ = r·xₙ(1−xₙ) is iterated for each value of r and its long-term values plotted. The result is the bifurcation diagram — a period-doubling cascade to chaos, with the universal Feigenbaum constant governing the spacing."><BifurcationStudio /></StudioPageShell>; }

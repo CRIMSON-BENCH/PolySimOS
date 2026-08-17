@@ -93,6 +93,13 @@ const SIMS = [
   { slug: "radioactive-decay", name: "Radioactive Decay", desc: "Half-life exponential decay.", tag: "Chemistry" },
   { slug: "maxwell-boltzmann", name: "Maxwell-Boltzmann", desc: "Molecular speed distribution.", tag: "Chemistry" },
   { slug: "ideal-gas", name: "Ideal Gas Law", desc: "PV = nRT with a live piston.", tag: "Chemistry" },
+  { slug: "bifurcation", name: "Bifurcation Diagram", desc: "Logistic map route to chaos.", tag: "Math" },
+  { slug: "direction-field", name: "Direction Field", desc: "Slope fields + solution curves.", tag: "Math" },
+  { slug: "riemann", name: "Riemann Sums", desc: "Integrals as stacked rectangles.", tag: "Math" },
+  { slug: "eigenvectors", name: "Eigenvectors", desc: "2×2 transforms & invariant directions.", tag: "Math" },
+  { slug: "markov", name: "Markov Chains", desc: "Converge to a stationary distribution.", tag: "Math" },
+  { slug: "parametric", name: "Parametric Grapher", desc: "Trace x(t), y(t) curves.", tag: "Math" },
+  { slug: "numerical-methods", name: "Euler vs RK4", desc: "ODE integration accuracy.", tag: "Math" },
 ];
 
 export default function StudioIndex() {

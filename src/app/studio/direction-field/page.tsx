@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DirectionFieldStudio } from "@/components/studio/DirectionFieldStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Direction Field / Slope Field Plotter (Browser)", description: "Plot the slope field for any first-order ODE dy/dx = f(x,y) and click to trace solution curves. Free, interactive.", alternates: { canonical: "/studio/direction-field" } };
+export default function Page() { return <StudioPageShell slug="direction-field" name="Direction Field" keyword="slope field direction field" lede="See the shape of an ODE before you solve it. Type dy/dx = f(x,y) to draw its slope field, then click anywhere to trace a solution curve through that point." about="A direction field draws a short line at each point with slope f(x,y), revealing the family of solutions to a first-order ODE. Clicking seeds a numerically-integrated solution curve, so you can watch how initial conditions pick out one trajectory."><DirectionFieldStudio /></StudioPageShell>; }

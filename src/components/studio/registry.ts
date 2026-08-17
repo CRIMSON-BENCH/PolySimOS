@@ -77,6 +77,13 @@ import { PHStudio } from "./PHStudio";
 import { RadioactiveDecayStudio } from "./RadioactiveDecayStudio";
 import { MaxwellBoltzmannStudio } from "./MaxwellBoltzmannStudio";
 import { IdealGasStudio } from "./IdealGasStudio";
+import { BifurcationStudio } from "./BifurcationStudio";
+import { DirectionFieldStudio } from "./DirectionFieldStudio";
+import { RiemannStudio } from "./RiemannStudio";
+import { EigenStudio } from "./EigenStudio";
+import { MarkovStudio } from "./MarkovStudio";
+import { ParametricStudio } from "./ParametricStudio";
+import { NumericalMethodsStudio } from "./NumericalMethodsStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -158,6 +165,13 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "radioactive-decay": RadioactiveDecayStudio,
   "maxwell-boltzmann": MaxwellBoltzmannStudio,
   "ideal-gas": IdealGasStudio,
+  bifurcation: BifurcationStudio,
+  "direction-field": DirectionFieldStudio,
+  riemann: RiemannStudio,
+  eigenvectors: EigenStudio,
+  markov: MarkovStudio,
+  parametric: ParametricStudio,
+  "numerical-methods": NumericalMethodsStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { EigenStudio } from "@/components/studio/EigenStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Eigenvector Visualizer (Browser) — 2×2 Matrices", description: "See how a 2×2 matrix transforms the plane, and watch its eigenvectors — the invariant directions — emerge. Free, interactive linear algebra.", alternates: { canonical: "/studio/eigenvectors" } };
+export default function Page() { return <StudioPageShell slug="eigenvectors" name="Eigenvector Visualizer" keyword="eigenvectors eigenvalues" lede="A matrix warps space, but some directions only stretch — never turn. Those are its eigenvectors, and how much they stretch are its eigenvalues." about="This visualizes a 2×2 linear transformation by morphing the unit circle into an ellipse, and overlays the eigenvectors — the directions the matrix leaves unrotated — with their eigenvalues computed from the trace and determinant. The heart of linear algebra, PCA, and stability analysis."><EigenStudio /></StudioPageShell>; }

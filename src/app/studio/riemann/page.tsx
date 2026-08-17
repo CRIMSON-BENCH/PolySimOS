@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RiemannStudio } from "@/components/studio/RiemannStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Riemann Sums Visualizer (Browser) — Definite Integrals", description: "Approximate a definite integral with left, right, and midpoint Riemann sums, and watch them converge to the exact value. Free.", alternates: { canonical: "/studio/riemann" } };
+export default function Page() { return <StudioPageShell slug="riemann" name="Riemann Sums" keyword="Riemann sums integral" lede="Integration is just adding up rectangles. Stack more under the curve and the Riemann sum closes in on the true area — the idea behind the definite integral." about="Riemann sums approximate the area under a curve with rectangles evaluated at their left edge, midpoint, or right edge. This tool shows the rectangles and compares the sum to a high-resolution exact value, so you can see convergence and the midpoint rule's superior accuracy."><RiemannStudio /></StudioPageShell>; }

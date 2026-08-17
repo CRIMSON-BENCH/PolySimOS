@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { NumericalMethodsStudio } from "@/components/studio/NumericalMethodsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Euler vs RK4 — Numerical ODE Methods (Browser)", description: "Compare Euler and Runge-Kutta (RK4) integration against the exact solution and see how step size drives error. Free.", alternates: { canonical: "/studio/numerical-methods" } };
+export default function Page() { return <StudioPageShell slug="numerical-methods" name="Numerical Methods (Euler vs RK4)" keyword="Euler vs Runge-Kutta" lede="Why do numerical solvers use Runge-Kutta and not simple Euler? Compare both against the exact answer and watch Euler drift while RK4 stays locked on." about="Both methods step an ODE forward in time, but Euler uses one slope estimate per step (first-order) while RK4 blends four (fourth-order). This tool solves dy/dt = y (whose exact solution is eᵗ) so the error of each method — and the payoff of shrinking the step — is unmistakable."><NumericalMethodsStudio /></StudioPageShell>; }

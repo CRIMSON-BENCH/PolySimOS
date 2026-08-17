@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ParametricStudio } from "@/components/studio/ParametricStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Parametric Curve Grapher (Browser)", description: "Plot parametric curves x(t), y(t) and watch them trace out — Lissajous figures, roses, spirals, and more. Free.", alternates: { canonical: "/studio/parametric" } };
+export default function Page() { return <StudioPageShell slug="parametric" name="Parametric Grapher" keyword="parametric curve grapher" lede="Let a point move by x(t) and y(t) and it draws a curve — roses, spirals, Lissajous figures, even a heart. Type your own and watch it trace." about="Parametric equations describe a curve by the position of a moving point over a parameter t. This grapher parses x(t) and y(t) with PolySim's symbolic engine and animates the trace, making periodic and self-intersecting curves easy to explore."><ParametricStudio /></StudioPageShell>; }

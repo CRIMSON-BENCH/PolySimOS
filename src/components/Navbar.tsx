@@ -15,6 +15,7 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
           { name: "AI Copilot", href: "/product/ai-copilot" },
           { name: "Data Inspector", href: "/product/data-inspector" },
           { name: "Hybrid Compute", href: "/product/hybrid-compute" },
+          { name: "Custom Solver Sets", href: "/custom-solvers" },
         ],
       },
       {

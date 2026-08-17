@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MarkovStudio } from "@/components/studio/MarkovStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Markov Chain Simulator (Browser) — Stationary Distribution", description: "Watch a Markov chain converge from any starting state to its stationary distribution. The math behind PageRank and queues. Free.", alternates: { canonical: "/studio/markov" } };
+export default function Page() { return <StudioPageShell slug="markov" name="Markov Chain" keyword="Markov chain simulation" lede="Systems that hop between states by fixed probabilities forget where they started — they settle into one stationary distribution. Watch it converge." about="A Markov chain moves between states according to a transition matrix. No matter the starting state, an ergodic chain converges to a unique stationary distribution — the principle behind Google PageRank, queueing theory, and Markov-chain Monte Carlo."><MarkovStudio /></StudioPageShell>; }
