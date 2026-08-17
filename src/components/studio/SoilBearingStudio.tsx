@@ -1,0 +1,42 @@
+"use client";
+
+import { useState } from "react";
+import { StudioChrome, Slider, Stat } from "./StudioChrome";
+
+// Terzaghi bearing capacity for a strip footing.
+export function SoilBearingStudio() {
+  const [c, setC] = useState(10); // cohesion kPa
+  const [phi, setPhi] = useState(30); // friction angle deg
+  const [gamma, setGamma] = useState(18); // kN/m^3
+  const [B, setB] = useState(2); // footing width m
+  const [depth, setDepth] = useState(1.5); // embedment m
+  const [FS, setFS] = useState(3);
+
+  const phiR = phi * Math.PI / 180;
+  const Nq = Math.exp(Math.PI * Math.tan(phiR)) * Math.tan(Math.PI / 4 + phiR / 2) ** 2;
+  const Nc = phi === 0 ? 5.14 : (Nq - 1) / Math.tan(phiR);
+  const Ngamma = 2 * (Nq + 1) * Math.tan(phiR);
+  const q = gamma * depth;
+  const qult = c * Nc + q * Nq + 0.5 * gamma * B * Ngamma; // kPa
+  const qallow = qult / FS;
+  const capacity = qallow * B; // kN/m per unit length
+
+  return (
+    <StudioChrome title="Soil Bearing Capacity (Terzaghi)" tagline="foundation design"
+      controls={<div>
+        <Slider label="Cohesion c (kPa)" value={c} min={0} max={100} step={5} onChange={setC} />
+        <Slider label="Friction angle φ (°)" value={phi} min={0} max={40} step={1} onChange={setPhi} />
+        <Slider label="Unit weight γ (kN/m³)" value={gamma} min={14} max={22} step={0.5} onChange={setGamma} />
+        <Slider label="Footing width B (m)" value={B} min={0.5} max={5} step={0.1} onChange={setB} />
+        <Slider label="Embedment depth (m)" value={depth} min={0.5} max={4} step={0.25} onChange={setDepth} />
+        <Slider label="Factor of safety" value={FS} min={2} max={4} step={0.5} onChange={setFS} />
+        <p className="mt-3 text-xs text-slate-500">Terzaghi&apos;s equation predicts the ultimate bearing capacity of a shallow footing as the sum of cohesion, surcharge, and self-weight terms, each with a bearing-capacity factor that grows sharply with the soil friction angle. Dividing by a factor of safety gives the allowable pressure. Educational tool, not a geotechnical design.</p>
+      </div>}
+      inspector={<div><Stat label="Nc" value={Nc.toFixed(1)} /><Stat label="Nq" value={Nq.toFixed(1)} /><Stat label="Nγ" value={Ngamma.toFixed(1)} /><Stat label="Ultimate qult" value={`${qult.toFixed(0)} kPa`} /></div>}
+    ><div className="flex flex-col items-center justify-center py-16">
+        <div className="text-xs uppercase tracking-widest text-slate-500">Allowable bearing pressure</div>
+        <div className="mt-3 text-6xl font-black text-cyan-500">{qallow.toFixed(0)}<span className="ml-2 text-2xl text-slate-400">kPa</span></div>
+        <div className="mt-4 text-sm text-slate-500">Allowable load ≈ {capacity.toFixed(0)} kN per metre of footing</div>
+      </div></StudioChrome>
+  );
+}

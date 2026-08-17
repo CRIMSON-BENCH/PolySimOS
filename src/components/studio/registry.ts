@@ -140,6 +140,14 @@ import { EnzymeKineticsStudio } from "./EnzymeKineticsStudio";
 import { LogisticGrowthStudio } from "./LogisticGrowthStudio";
 import { GeneticDriftStudio } from "./GeneticDriftStudio";
 import { SequenceAlignmentStudio } from "./SequenceAlignmentStudio";
+import { BeamDeflectionStudio } from "./BeamDeflectionStudio";
+import { ColumnBucklingStudio } from "./ColumnBucklingStudio";
+import { MohrsCircleStudio } from "./MohrsCircleStudio";
+import { ShearMomentStudio } from "./ShearMomentStudio";
+import { RetainingWallStudio } from "./RetainingWallStudio";
+import { BaseShearStudio } from "./BaseShearStudio";
+import { SoilBearingStudio } from "./SoilBearingStudio";
+import { ConcreteBeamStudio } from "./ConcreteBeamStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -284,6 +292,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "logistic-growth": LogisticGrowthStudio,
   "genetic-drift": GeneticDriftStudio,
   "sequence-alignment": SequenceAlignmentStudio,
+  "beam-deflection": BeamDeflectionStudio,
+  "column-buckling": ColumnBucklingStudio,
+  "mohrs-circle": MohrsCircleStudio,
+  "shear-moment": ShearMomentStudio,
+  "retaining-wall": RetainingWallStudio,
+  "base-shear": BaseShearStudio,
+  "soil-bearing": SoilBearingStudio,
+  "concrete-beam": ConcreteBeamStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

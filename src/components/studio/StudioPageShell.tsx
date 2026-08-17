@@ -150,6 +150,14 @@ const OTHER_SIMS = [
   { name: "Logistic Growth", href: "/studio/logistic-growth" },
   { name: "Genetic Drift", href: "/studio/genetic-drift" },
   { name: "Sequence Alignment", href: "/studio/sequence-alignment" },
+  { name: "Beam Deflection", href: "/studio/beam-deflection" },
+  { name: "Column Buckling", href: "/studio/column-buckling" },
+  { name: "Mohr's Circle", href: "/studio/mohrs-circle" },
+  { name: "Shear & Moment", href: "/studio/shear-moment" },
+  { name: "Retaining Wall", href: "/studio/retaining-wall" },
+  { name: "Seismic Base Shear", href: "/studio/base-shear" },
+  { name: "Soil Bearing", href: "/studio/soil-bearing" },
+  { name: "Concrete Beam", href: "/studio/concrete-beam" },
 ];
 
 export function StudioPageShell({

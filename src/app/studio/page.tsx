@@ -156,6 +156,14 @@ const SIMS = [
   { slug: "logistic-growth", name: "Logistic Growth", desc: "Population carrying capacity.", tag: "Biology" },
   { slug: "genetic-drift", name: "Genetic Drift", desc: "Wright-Fisher allele drift.", tag: "Biology" },
   { slug: "sequence-alignment", name: "Sequence Alignment", desc: "Needleman-Wunsch DNA.", tag: "Biology" },
+  { slug: "beam-deflection", name: "Beam Deflection", desc: "Sag & bending moment.", tag: "Structural" },
+  { slug: "column-buckling", name: "Column Buckling", desc: "Euler critical load.", tag: "Structural" },
+  { slug: "mohrs-circle", name: "Mohr's Circle", desc: "2D stress transformation.", tag: "Structural" },
+  { slug: "shear-moment", name: "Shear & Moment", desc: "SFD/BMD diagrams.", tag: "Structural" },
+  { slug: "retaining-wall", name: "Retaining Wall", desc: "Rankine earth pressure.", tag: "Structural" },
+  { slug: "base-shear", name: "Seismic Base Shear", desc: "Equivalent lateral force.", tag: "Structural" },
+  { slug: "soil-bearing", name: "Soil Bearing", desc: "Terzaghi capacity.", tag: "Structural" },
+  { slug: "concrete-beam", name: "Concrete Beam", desc: "RC flexural capacity.", tag: "Structural" },
 ];
 
 export default function StudioIndex() {

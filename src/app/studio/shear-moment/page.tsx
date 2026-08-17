@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ShearMomentStudio } from "@/components/studio/ShearMomentStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Shear & Bending Moment Diagram Calculator (Browser)", description: "Generate shear force and bending moment diagrams for a simply-supported beam with point and uniform loads. Free, interactive.", alternates: { canonical: "/studio/shear-moment" } };
+export default function Page() { return <StudioPageShell slug="shear-moment" name="Shear & Moment Diagrams" keyword="shear moment diagram calculator" lede="The two diagrams every structural engineer draws first. Add a point load and a distributed load and watch the shear and bending-moment diagrams redraw instantly." about="Shear and bending-moment diagrams trace the internal forces along a beam. Shear jumps at each concentrated load, and the bending moment is the running integral of shear, peaking where shear passes through zero. Beams are sized for that maximum moment. Educational tool, not a substitute for structural design."><ShearMomentStudio /></StudioPageShell>; }

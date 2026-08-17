@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BeamDeflectionStudio } from "@/components/studio/BeamDeflectionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Beam Deflection Calculator (Browser)", description: "Calculate beam deflection and bending moment for simply-supported and cantilever beams under point and uniform loads. Free, interactive.", alternates: { canonical: "/studio/beam-deflection" } };
+export default function Page() { return <StudioPageShell slug="beam-deflection" name="Beam Deflection & Bending" keyword="beam deflection calculator" lede="How much will this beam sag? Pick a support and load type and see the deflected shape, maximum deflection, and peak bending moment update live." about="Euler-Bernoulli beam theory relates deflection and internal bending moment to the load, span, and flexural rigidity EI. Because deflection scales with the cube or fourth power of the span, small changes in length dominate the result. Educational tool — not a substitute for a stamped structural design."><BeamDeflectionStudio /></StudioPageShell>; }
