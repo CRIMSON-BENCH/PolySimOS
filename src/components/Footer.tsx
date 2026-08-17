@@ -31,6 +31,8 @@ const COLUMNS: { title: string; links: { name: string; href: string }[] }[] = [
       { name: "Materials", href: "/materials" },
       { name: "Courses", href: "/courses" },
       { name: "Curriculum", href: "/curriculum" },
+      { name: "High Schools", href: "/schools" },
+      { name: "Alternatives", href: "/alternatives" },
       { name: "Glossary", href: "/glossary" },
       { name: "Blog", href: "/blog" },
     ],

@@ -194,6 +194,14 @@ export function institutionsByCountry(): Record<string, Institution[]> {
   for (const i of INSTITUTIONS) (out[i.country] ??= []).push(i);
   return out;
 }
+export function countrySlugs(): { country: string; slug: string }[] {
+  const seen = new Set<string>(); const out: { country: string; slug: string }[] = [];
+  for (const i of INSTITUTIONS) { if (!seen.has(i.country)) { seen.add(i.country); out.push({ country: i.country, slug: slugify(i.country) }); } }
+  return out;
+}
+export function getCountryBySlug(slug: string): string | undefined {
+  return countrySlugs().find((c) => c.slug === slug)?.country;
+}
 
 export function departmentSlug(d: string): string { return slugify(d); }
 export function getDepartmentBySlug(slug: string): string | undefined {
