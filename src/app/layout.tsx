@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { ChromeGate } from "@/components/ChromeGate";
+import { ChatWidget } from "@/components/ChatWidget";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.polysimos.com"),
@@ -44,9 +46,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
-        <Navbar />
+        <ChromeGate><Navbar /></ChromeGate>
         <main className="min-h-screen">{children}</main>
-        <Footer />
+        <ChromeGate><Footer /></ChromeGate>
+        <ChromeGate><ChatWidget /></ChromeGate>
       </body>
     </html>
   );

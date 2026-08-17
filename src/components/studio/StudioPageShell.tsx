@@ -6,6 +6,7 @@ import { PremiumCTA } from "@/components/PremiumCTA";
 import { CrossLinks } from "@/components/CrossLinks";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
 import { softwareAppLd, faqLd } from "@/lib/seo";
+import { EmbedButton } from "./EmbedButton";
 
 const OTHER_SIMS = [
   { name: "Visual Node Graph", href: "/studio/graph" },
@@ -63,6 +64,11 @@ export function StudioPageShell({
       <p className="mt-3 max-w-3xl text-lg text-slate-600 dark:text-slate-400">{lede}</p>
 
       <div className="mt-8">{children}</div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        <EmbedButton slug={slug} />
+        <span className="text-xs text-slate-400">Drop this simulation into your own site, docs, or course page.</span>
+      </div>
 
       <section className="mt-12 max-w-3xl">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">How it works</h2>
