@@ -55,6 +55,14 @@ const SIMS = [
   { slug: "taylor", name: "Taylor Series", desc: "Polynomial approximation, live.", tag: "Math" },
   { slug: "newton", name: "Newton's Method", desc: "Root finding, tangent by tangent.", tag: "Math" },
   { slug: "distributions", name: "Distributions", desc: "Normal, Poisson, binomial & more.", tag: "Math" },
+  { slug: "kepler", name: "Kepler Orbits", desc: "Conic-section orbits under gravity.", tag: "Physics" },
+  { slug: "double-slit", name: "Double-Slit", desc: "Quantum interference + diffraction.", tag: "Physics" },
+  { slug: "cloth", name: "Cloth / Spring-Mass", desc: "Verlet cloth you can grab and swing.", tag: "Physics" },
+  { slug: "gravity-well", name: "Gravity Well", desc: "Curved-spacetime rubber sheet + orbit.", tag: "Physics" },
+  { slug: "epidemic-network", name: "Epidemic Network", desc: "Agent-based SIR on a contact graph.", tag: "Bio" },
+  { slug: "gradient-descent", name: "Gradient Descent", desc: "Optimization on loss landscapes.", tag: "Data / ML" },
+  { slug: "complex", name: "Complex Functions", desc: "Domain coloring of f(z).", tag: "Math" },
+  { slug: "sorting", name: "Sorting Visualizer", desc: "Watch algorithms sort in real time.", tag: "CS" },
 ];
 
 export default function StudioIndex() {

@@ -49,6 +49,14 @@ const OTHER_SIMS = [
   { name: "Taylor Series", href: "/studio/taylor" },
   { name: "Newton's Method", href: "/studio/newton" },
   { name: "Distributions", href: "/studio/distributions" },
+  { name: "Kepler Orbits", href: "/studio/kepler" },
+  { name: "Double-Slit", href: "/studio/double-slit" },
+  { name: "Cloth / Spring-Mass", href: "/studio/cloth" },
+  { name: "Gravity Well", href: "/studio/gravity-well" },
+  { name: "Epidemic Network", href: "/studio/epidemic-network" },
+  { name: "Gradient Descent", href: "/studio/gradient-descent" },
+  { name: "Complex Functions", href: "/studio/complex" },
+  { name: "Sorting Visualizer", href: "/studio/sorting" },
 ];
 
 export function StudioPageShell({

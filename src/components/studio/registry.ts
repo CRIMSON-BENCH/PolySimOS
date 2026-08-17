@@ -39,6 +39,14 @@ import { RandomWalkStudio } from "./RandomWalkStudio";
 import { TaylorStudio } from "./TaylorStudio";
 import { NewtonStudio } from "./NewtonStudio";
 import { DistributionsStudio } from "./DistributionsStudio";
+import { KeplerStudio } from "./KeplerStudio";
+import { DoubleSlitStudio } from "./DoubleSlitStudio";
+import { ClothStudio } from "./ClothStudio";
+import { GravityWellStudio } from "./GravityWellStudio";
+import { EpidemicNetworkStudio } from "./EpidemicNetworkStudio";
+import { GradientDescentStudio } from "./GradientDescentStudio";
+import { ComplexStudio } from "./ComplexStudio";
+import { SortingStudio } from "./SortingStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -82,6 +90,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   taylor: TaylorStudio,
   newton: NewtonStudio,
   distributions: DistributionsStudio,
+  kepler: KeplerStudio,
+  "double-slit": DoubleSlitStudio,
+  cloth: ClothStudio,
+  "gravity-well": GravityWellStudio,
+  "epidemic-network": EpidemicNetworkStudio,
+  "gradient-descent": GradientDescentStudio,
+  complex: ComplexStudio,
+  sorting: SortingStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);
