@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DiceProbabilityStudio } from "@/components/studio/DiceProbabilityStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Dice Probability Distribution Simulator (Browser)", description: "See the probability distribution of the sum of dice, and why 7 is the most common roll of two dice. Free, interactive.", alternates: { canonical: "/studio/dice-probability" } };
+export default function Page() { return <StudioPageShell slug="dice-probability" name="Dice Probability" keyword="dice probability distribution" lede="Roll two dice and 7 comes up far more than 2 or 12 — because more combinations add to it. See the bell curve emerge as you add dice." about="A single die is uniform, but summing several dice produces a distribution that bulges in the middle, since central totals can be made many ways and extremes only one. It is the central limit theorem in miniature and explains the odds behind craps, backgammon, and countless board games."><DiceProbabilityStudio /></StudioPageShell>; }

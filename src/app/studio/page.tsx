@@ -308,6 +308,14 @@ const SIMS = [
   { slug: "win-probability", name: "Win Probability", desc: "Live game odds.", tag: "Sports" },
   { slug: "tournament-bracket", name: "Tournament Odds", desc: "Bracket simulation.", tag: "Sports" },
   { slug: "shot-arc", name: "Basketball Shot Arc", desc: "Optimal release angle.", tag: "Sports" },
+  { slug: "dice-probability", name: "Dice Probability", desc: "Sum distributions.", tag: "Probability" },
+  { slug: "poker-odds", name: "Poker Odds", desc: "Five-card hand odds.", tag: "Probability" },
+  { slug: "roulette", name: "Roulette Edge", desc: "House edge & EV.", tag: "Probability" },
+  { slug: "birthday-paradox", name: "Birthday Paradox", desc: "23 people, even odds.", tag: "Probability" },
+  { slug: "gamblers-ruin", name: "Gambler's Ruin", desc: "The house always wins.", tag: "Probability" },
+  { slug: "monty-hall", name: "Monty Hall", desc: "Always switch.", tag: "Probability" },
+  { slug: "law-of-large-numbers", name: "Law of Large Numbers", desc: "Averages converge.", tag: "Probability" },
+  { slug: "lottery-odds", name: "Lottery Odds", desc: "Jackpot combinatorics.", tag: "Probability" },
 ];
 
 export default function StudioIndex() {

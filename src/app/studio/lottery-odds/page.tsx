@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LotteryStudio } from "@/components/studio/LotteryStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Lottery Odds Calculator (Browser)", description: "Compute jackpot odds for any lottery from the number pool and picks, and compare to everyday risks. Free, interactive.", alternates: { canonical: "/studio/lottery-odds" } };
+export default function Page() { return <StudioPageShell slug="lottery-odds" name="Lottery Odds" keyword="lottery odds calculator" lede="One in fourteen million, one in three hundred million — lottery jackpot odds are staggering, and adding just a few numbers to the pool makes them far worse." about="A jackpot requires matching every drawn number, so the odds equal the number of possible combinations, C(pool, picks). Expanding the pool multiplies the combinations explosively — 6-from-49 is about 1 in 14 million, 6-from-59 nearly 1 in 45 million. Comparing to everyday risks like a car crash shows just how remote a win is, which is exactly why lotteries are so lucrative for the operator."><LotteryStudio /></StudioPageShell>; }

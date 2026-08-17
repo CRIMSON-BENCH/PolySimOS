@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { GamblersRuinStudio } from "@/components/studio/GamblersRuinStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Gambler's Ruin Simulator (Browser)", description: "See why a gambler betting against a rich house almost always goes broke, even in a nearly fair game. Free, interactive.", alternates: { canonical: "/studio/gamblers-ruin" } };
+export default function Page() { return <StudioPageShell slug="gamblers-ruin" name="Gambler's Ruin" keyword="gambler's ruin" lede="Play a nearly fair game long enough against a rich opponent and you will almost surely go broke. The unforgiving math of gambler&apos;s ruin." about="Gambler&apos;s ruin analyzes a random walk between zero and a target. Because the casino has effectively unlimited funds and holds a small edge on every bet, the walk drifts toward your ruin far more often than toward your goal. Even at 49% odds the tiny disadvantage compounds relentlessly across many bets — the reason the house always wins in the long run. Educational tool."><GamblersRuinStudio /></StudioPageShell>; }

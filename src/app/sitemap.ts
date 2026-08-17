@@ -73,6 +73,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/haversine", 0.8), u("/studio/map-projection", 0.8), u("/studio/gps-trilateration", 0.8), u("/studio/viewshed", 0.8), u("/studio/spatial-interpolation", 0.8), u("/studio/dead-reckoning", 0.8), u("/studio/rhumb-line", 0.8), u("/studio/point-in-polygon", 0.8),
     u("/studio/tolerance-stackup", 0.8), u("/studio/process-capability", 0.8), u("/studio/oee", 0.8), u("/studio/cnc-feeds-speeds", 0.8), u("/studio/line-balancing", 0.8), u("/studio/control-chart", 0.8), u("/studio/learning-curve", 0.8), u("/studio/littles-law", 0.8),
     u("/studio/elo-rating", 0.8), u("/studio/pythagorean-expectation", 0.8), u("/studio/marathon-pacing", 0.8), u("/studio/magnus-effect", 0.8), u("/studio/xg-model", 0.8), u("/studio/win-probability", 0.8), u("/studio/tournament-bracket", 0.8), u("/studio/shot-arc", 0.8),
+    u("/studio/dice-probability", 0.8), u("/studio/poker-odds", 0.8), u("/studio/roulette", 0.8), u("/studio/birthday-paradox", 0.8), u("/studio/gamblers-ruin", 0.8), u("/studio/monty-hall", 0.8), u("/studio/law-of-large-numbers", 0.8), u("/studio/lottery-odds", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

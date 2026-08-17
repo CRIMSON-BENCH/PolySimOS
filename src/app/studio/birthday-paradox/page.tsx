@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BirthdayParadoxStudio } from "@/components/studio/BirthdayParadoxStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Birthday Paradox Simulator (Browser)", description: "See why just 23 people give a better-than-even chance of a shared birthday — the birthday paradox. Free, interactive.", alternates: { canonical: "/studio/birthday-paradox" } };
+export default function Page() { return <StudioPageShell slug="birthday-paradox" name="Birthday Paradox" keyword="birthday paradox" lede="How many people until two share a birthday? Astonishingly, just 23 for even odds. The classic result that breaks everyone&apos;s intuition." about="The surprise dissolves once you count pairs, not people: 23 people form 253 pairs, each a chance to match. The probability of at least one shared birthday climbs steeply, passing 50% at 23 and 99% by 70. The same quadratic effect drives hash collisions and the birthday attack in cryptography, where security scales with the square root of the key space."><BirthdayParadoxStudio /></StudioPageShell>; }

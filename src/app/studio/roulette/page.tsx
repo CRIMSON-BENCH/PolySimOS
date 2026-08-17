@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RouletteStudio } from "@/components/studio/RouletteStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Roulette House Edge Calculator (Browser)", description: "See why every roulette bet carries the same house edge, and the expected loss on American vs European wheels. Free.", alternates: { canonical: "/studio/roulette" } };
+export default function Page() { return <StudioPageShell slug="roulette" name="Roulette House Edge" keyword="roulette house edge" lede="Straight-up or red/black, every roulette bet loses the same fraction over time. The secret is the zero — where the house edge quietly lives." about="Roulette payouts are calculated as if the wheel had only its numbered slots, but the 0 (and 00 on American wheels) tips every wager against you. The result is a fixed expected loss of 5.26% American or 2.70% European on all bet types. Because spins are independent, no betting system can overcome it — the mathematics is airtight. Educational tool, not gambling advice."><RouletteStudio /></StudioPageShell>; }

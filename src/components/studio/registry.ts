@@ -292,6 +292,14 @@ import { XGStudio } from "./XGStudio";
 import { WinProbabilityStudio } from "./WinProbabilityStudio";
 import { TournamentStudio } from "./TournamentStudio";
 import { ShotArcStudio } from "./ShotArcStudio";
+import { DiceProbabilityStudio } from "./DiceProbabilityStudio";
+import { PokerOddsStudio } from "./PokerOddsStudio";
+import { RouletteStudio } from "./RouletteStudio";
+import { BirthdayParadoxStudio } from "./BirthdayParadoxStudio";
+import { GamblersRuinStudio } from "./GamblersRuinStudio";
+import { MontyHallStudio } from "./MontyHallStudio";
+import { LawLargeNumbersStudio } from "./LawLargeNumbersStudio";
+import { LotteryStudio } from "./LotteryStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -588,6 +596,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "win-probability": WinProbabilityStudio,
   "tournament-bracket": TournamentStudio,
   "shot-arc": ShotArcStudio,
+  "dice-probability": DiceProbabilityStudio,
+  "poker-odds": PokerOddsStudio,
+  roulette: RouletteStudio,
+  "birthday-paradox": BirthdayParadoxStudio,
+  "gamblers-ruin": GamblersRuinStudio,
+  "monty-hall": MontyHallStudio,
+  "law-of-large-numbers": LawLargeNumbersStudio,
+  "lottery-odds": LotteryStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

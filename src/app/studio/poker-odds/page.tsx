@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PokerOddsStudio } from "@/components/studio/PokerOddsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Poker Hand Odds Calculator (Browser)", description: "See the exact probability of every five-card poker hand, from royal flush to high card. Free, interactive combinatorics.", alternates: { canonical: "/studio/poker-odds" } };
+export default function Page() { return <StudioPageShell slug="poker-odds" name="Poker Hand Odds" keyword="poker hand odds" lede="Why does a flush beat a straight? Because it is rarer. The entire poker hierarchy is just combinatorics — counting how many of the 2.6 million hands make each rank." about="There are exactly C(52,5) = 2,598,960 five-card poker hands. Ranking them by how few hands achieve each pattern produces the familiar hierarchy: a royal flush appears once in about 650,000 deals, while nearly half of all hands are a single pair or worse. The rankings are pure counting, not convention."><PokerOddsStudio /></StudioPageShell>; }

@@ -302,6 +302,14 @@ const OTHER_SIMS = [
   { name: "Win Probability", href: "/studio/win-probability" },
   { name: "Tournament Odds", href: "/studio/tournament-bracket" },
   { name: "Basketball Shot Arc", href: "/studio/shot-arc" },
+  { name: "Dice Probability", href: "/studio/dice-probability" },
+  { name: "Poker Odds", href: "/studio/poker-odds" },
+  { name: "Roulette Edge", href: "/studio/roulette" },
+  { name: "Birthday Paradox", href: "/studio/birthday-paradox" },
+  { name: "Gambler's Ruin", href: "/studio/gamblers-ruin" },
+  { name: "Monty Hall", href: "/studio/monty-hall" },
+  { name: "Law of Large Numbers", href: "/studio/law-of-large-numbers" },
+  { name: "Lottery Odds", href: "/studio/lottery-odds" },
 ];
 
 export function StudioPageShell({

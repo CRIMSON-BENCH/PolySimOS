@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MontyHallStudio } from "@/components/studio/MontyHallStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Monty Hall Problem Simulator (Browser)", description: "Settle the Monty Hall debate — simulate thousands of games and watch switching win 2/3 of the time. Free, interactive.", alternates: { canonical: "/studio/monty-hall" } };
+export default function Page() { return <StudioPageShell slug="monty-hall" name="Monty Hall Problem" keyword="Monty Hall problem" lede="Three doors, one car. You pick, the host reveals a goat, and offers a switch. Switching doubles your odds — and the simulation proves it beyond argument." about="Your first pick is right just 1/3 of the time, so 2/3 of the probability sits on the other two doors. When the host — who knows the locations — opens a losing door, that entire 2/3 collapses onto the single remaining door. Switching therefore wins two times in three. The result famously stumped mathematicians until simulations like this one made it undeniable."><MontyHallStudio /></StudioPageShell>; }
