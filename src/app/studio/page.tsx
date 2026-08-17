@@ -79,6 +79,13 @@ const SIMS = [
   { slug: "pendulum-wave", name: "Pendulum Wave", desc: "Phase art from many periods.", tag: "Physics" },
   { slug: "orbital-transfer", name: "Orbital Transfer", desc: "Hohmann transfer Δv.", tag: "Aerospace" },
   { slug: "standing-waves", name: "Standing Waves", desc: "Harmonics, nodes & antinodes.", tag: "Physics" },
+  { slug: "doppler", name: "Doppler Effect", desc: "Moving-source wavefronts & sonic boom.", tag: "Physics" },
+  { slug: "snells-law", name: "Snell's Law", desc: "Refraction & total internal reflection.", tag: "Optics" },
+  { slug: "diffraction-grating", name: "Diffraction Grating", desc: "N-slit interference maxima.", tag: "Optics" },
+  { slug: "beats", name: "Beats", desc: "Two close tones interfere.", tag: "Waves" },
+  { slug: "mirror", name: "Curved Mirrors", desc: "Concave/convex ray tracing.", tag: "Optics" },
+  { slug: "prism", name: "Prism Dispersion", desc: "White light into a spectrum.", tag: "Optics" },
+  { slug: "fft", name: "Fourier Transform", desc: "Signal → frequency spectrum.", tag: "Signals" },
 ];
 
 export default function StudioIndex() {

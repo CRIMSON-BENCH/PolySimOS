@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PrismStudio } from "@/components/studio/PrismStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Prism Dispersion Simulator (Browser)", description: "Watch a prism split white light into a spectrum because refractive index depends on wavelength. Free.", alternates: { canonical: "/studio/prism" } };
+export default function Page() { return <StudioPageShell slug="prism" name="Prism Dispersion" keyword="prism dispersion" lede="A prism turns white light into a rainbow. Because glass bends violet more than red, each color emerges at a slightly different angle — Newton's classic experiment." about="Dispersion arises because a material's refractive index varies with wavelength, so shorter (violet) wavelengths refract more than longer (red) ones. This splits white light into its spectrum and explains rainbows, chromatic aberration, and spectroscopy."><PrismStudio /></StudioPageShell>; }

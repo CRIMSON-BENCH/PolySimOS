@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { FFTStudio } from "@/components/studio/FFTStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Fourier Transform (FFT) Simulator (Browser)", description: "Build a signal from sine tones plus noise and watch the discrete Fourier transform recover its frequency spectrum. Free.", alternates: { canonical: "/studio/fft" } };
+export default function Page() { return <StudioPageShell slug="fft" name="Fourier Transform (FFT)" keyword="Fourier transform FFT" lede="Any signal is a sum of frequencies. Compose one from a few tones and some noise, and the Fourier transform pulls those exact frequencies back out." about="The discrete Fourier transform converts a time-domain signal into its frequency spectrum, revealing which sinusoids it contains. It underpins audio, image, and radio processing, data compression, and nearly all of modern signal analysis."><FFTStudio /></StudioPageShell>; }

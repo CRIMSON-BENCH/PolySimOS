@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DiffractionGratingStudio } from "@/components/studio/DiffractionGratingStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Diffraction Grating Simulator (Browser)", description: "See how N slits sharpen the interference maxima. The physics behind spectrometers and spectral analysis. Free.", alternates: { canonical: "/studio/diffraction-grating" } };
+export default function Page() { return <StudioPageShell slug="diffraction-grating" name="Diffraction Grating" keyword="diffraction grating" lede="Add more slits and the bright fringes get sharper and brighter. This is how a diffraction grating splits light into precise, well-separated spectral lines." about="An N-slit grating produces intensity maxima where d·sinθ = mλ, and the peaks narrow as the number of slits grows (resolution ∝ N). Gratings are the heart of spectrometers used across chemistry, astronomy, and materials analysis."><DiffractionGratingStudio /></StudioPageShell>; }

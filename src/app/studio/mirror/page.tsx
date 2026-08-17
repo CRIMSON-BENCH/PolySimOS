@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MirrorStudio } from "@/components/studio/MirrorStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Curved Mirror Ray Tracer (Browser) — Concave & Convex", description: "Trace principal rays off concave and convex mirrors to locate the image with the mirror equation. Free.", alternates: { canonical: "/studio/mirror" } };
+export default function Page() { return <StudioPageShell slug="mirror" name="Mirror Ray Tracing" keyword="concave convex mirror" lede="Where does a curved mirror form an image? Trace the principal rays off a concave or convex mirror and watch the image move, flip, and resize." about="Using the mirror equation 1/v + 1/u = 1/f, this traces principal rays to find the image. Concave mirrors focus light and can produce real, inverted images; convex mirrors always give a reduced, upright, virtual image — the reason they are used as wide-angle safety mirrors."><MirrorStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SnellStudio } from "@/components/studio/SnellStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Snell's Law Refraction Simulator (Browser)", description: "Trace light refracting between two media with Snell's law, including total internal reflection past the critical angle. Free.", alternates: { canonical: "/studio/snells-law" } };
+export default function Page() { return <StudioPageShell slug="snells-law" name="Snell's Law" keyword="Snell's law refraction" lede="Light bends at a boundary by exactly n₁sinθ₁ = n₂sinθ₂. Change the angle and the indices and watch it refract — or reflect entirely past the critical angle." about="Snell's law governs how light changes direction crossing between media of different refractive index. Going into a denser medium, rays bend toward the normal; going the other way beyond the critical angle produces total internal reflection — the effect that traps light in optical fibers."><SnellStudio /></StudioPageShell>; }

@@ -73,6 +73,13 @@ const OTHER_SIMS = [
   { name: "Pendulum Wave", href: "/studio/pendulum-wave" },
   { name: "Orbital Transfer", href: "/studio/orbital-transfer" },
   { name: "Standing Waves", href: "/studio/standing-waves" },
+  { name: "Doppler Effect", href: "/studio/doppler" },
+  { name: "Snell's Law", href: "/studio/snells-law" },
+  { name: "Diffraction Grating", href: "/studio/diffraction-grating" },
+  { name: "Beats", href: "/studio/beats" },
+  { name: "Curved Mirrors", href: "/studio/mirror" },
+  { name: "Prism Dispersion", href: "/studio/prism" },
+  { name: "Fourier Transform", href: "/studio/fft" },
 ];
 
 export function StudioPageShell({

@@ -63,6 +63,13 @@ import { BlackbodyStudio } from "./BlackbodyStudio";
 import { PendulumWaveStudio } from "./PendulumWaveStudio";
 import { OrbitalTransferStudio } from "./OrbitalTransferStudio";
 import { StandingWaveStudio } from "./StandingWaveStudio";
+import { DopplerStudio } from "./DopplerStudio";
+import { SnellStudio } from "./SnellStudio";
+import { DiffractionGratingStudio } from "./DiffractionGratingStudio";
+import { BeatsStudio } from "./BeatsStudio";
+import { MirrorStudio } from "./MirrorStudio";
+import { PrismStudio } from "./PrismStudio";
+import { FFTStudio } from "./FFTStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -130,6 +137,13 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "pendulum-wave": PendulumWaveStudio,
   "orbital-transfer": OrbitalTransferStudio,
   "standing-waves": StandingWaveStudio,
+  doppler: DopplerStudio,
+  "snells-law": SnellStudio,
+  "diffraction-grating": DiffractionGratingStudio,
+  beats: BeatsStudio,
+  mirror: MirrorStudio,
+  prism: PrismStudio,
+  fft: FFTStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

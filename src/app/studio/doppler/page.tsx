@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DopplerStudio } from "@/components/studio/DopplerStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Doppler Effect Simulator (Browser)", description: "See wavefronts bunch ahead of a moving source and stretch behind it — the Doppler effect, and a sonic boom past the wave speed. Free.", alternates: { canonical: "/studio/doppler" } };
+export default function Page() { return <StudioPageShell slug="doppler" name="Doppler Effect" keyword="Doppler effect simulation" lede="Why does a siren drop in pitch as it passes? A moving source compresses its waves ahead and stretches them behind — raise the speed past the wave speed for a shock cone." about="This visualizes the Doppler effect: circular wavefronts emitted by a moving source bunch up in the direction of motion (higher frequency) and spread out behind (lower frequency). When the source outruns its own waves, they pile into a Mach cone — a sonic boom."><DopplerStudio /></StudioPageShell>; }
