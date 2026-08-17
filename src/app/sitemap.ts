@@ -25,7 +25,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/templates", 0.6), u("/about", 0.5), u("/for-business", 0.6), u("/community", 0.5), u("/developers", 0.6),
     u("/developers/sdk", 0.4), u("/developers/webhooks", 0.4), u("/login", 0.3), u("/signup", 0.4), u("/dashboard", 0.3),
     u("/terms", 0.3), u("/privacy", 0.3), u("/refund", 0.3), u("/acceptable-use", 0.3),
-    u("/studio/particles", 0.8), u("/studio/fluid", 0.8), u("/studio/dynamics", 0.8), u("/studio/cas", 0.8), u("/studio/surrogate", 0.8),
+    u("/studio/graph", 0.9), u("/studio/particles", 0.8), u("/studio/fluid", 0.8), u("/studio/dynamics", 0.8), u("/studio/fields", 0.8), u("/studio/cas", 0.8), u("/studio/surrogate", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

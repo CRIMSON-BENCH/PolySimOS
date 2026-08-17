@@ -217,6 +217,78 @@ export function derivative(n: Node, x: string): Node {
   }
 }
 
+// --- Symbolic integration (indefinite, elementary rules) -----------------
+// Returns the antiderivative Node, or null if no elementary rule applies.
+// The constant of integration is omitted.
+export function integrate(n: Node, x: string): Node | null {
+  switch (n.t) {
+    case "num":
+      return { t: "mul", a: n, b: { t: "var", name: x } };
+    case "var":
+      if (n.name === x) return { t: "div", a: { t: "pow", a: n, b: num(2) }, b: num(2) };
+      return { t: "mul", a: n, b: { t: "var", name: x } }; // treat as constant
+    case "neg": {
+      const a = integrate(n.a, x);
+      return a ? { t: "neg", a } : null;
+    }
+    case "add": {
+      const a = integrate(n.a, x), b = integrate(n.b, x);
+      return a && b ? { t: "add", a, b } : null;
+    }
+    case "sub": {
+      const a = integrate(n.a, x), b = integrate(n.b, x);
+      return a && b ? { t: "sub", a, b } : null;
+    }
+    case "mul": {
+      // constant * f(x)
+      if (isConstIn(n.a, x)) { const i = integrate(n.b, x); return i ? { t: "mul", a: n.a, b: i } : null; }
+      if (isConstIn(n.b, x)) { const i = integrate(n.a, x); return i ? { t: "mul", a: n.b, b: i } : null; }
+      return null;
+    }
+    case "div": {
+      if (isConstIn(n.b, x)) { const i = integrate(n.a, x); return i ? { t: "div", a: i, b: n.b } : null; }
+      // c / x -> c * ln(x)
+      if (isConstIn(n.a, x) && n.b.t === "var" && n.b.name === x)
+        return { t: "mul", a: n.a, b: { t: "call", name: "ln", a: n.b } };
+      return null;
+    }
+    case "pow": {
+      // x^c -> x^(c+1)/(c+1), c != -1
+      if (n.a.t === "var" && n.a.name === x && isNum(n.b)) {
+        if (n.b.v === -1) return { t: "call", name: "ln", a: n.a };
+        return { t: "div", a: { t: "pow", a: n.a, b: num(n.b.v + 1) }, b: num(n.b.v + 1) };
+      }
+      return null;
+    }
+    case "call": {
+      // only handle f(x) with the bare variable as argument
+      if (!(n.a.t === "var" && n.a.name === x)) return null;
+      switch (n.name) {
+        case "sin": return { t: "neg", a: { t: "call", name: "cos", a: n.a } };
+        case "cos": return { t: "call", name: "sin", a: n.a };
+        case "exp": return { t: "call", name: "exp", a: n.a };
+        default: return null;
+      }
+    }
+  }
+}
+
+function isConstIn(n: Node, x: string): boolean {
+  switch (n.t) {
+    case "num": return true;
+    case "var": return n.name !== x;
+    case "neg": return isConstIn(n.a, x);
+    case "call": return isConstIn(n.a, x);
+    default: return isConstIn((n as { a: Node }).a, x) && isConstIn((n as { b: Node }).b, x);
+  }
+}
+
+export function integrateExpr(expr: string, x = "x"): string {
+  const result = integrate(parse(expr), x);
+  if (!result) return "no elementary antiderivative";
+  return `${toString(simplify(result))} + C`;
+}
+
 // --- Simplification -------------------------------------------------------
 export function simplify(n: Node): Node {
   const s = simplifyOnce(n);
@@ -312,6 +384,14 @@ export function differentiateExpr(expr: string, x = "x"): string {
 }
 export function simplifyExpr(expr: string): string {
   return toString(simplify(parse(expr)));
+}
+// Differentiate; return "0" instead of throwing on unsupported input.
+export function derivativeExprSafe(expr: string, x = "x"): string {
+  try {
+    return toString(simplify(derivative(parse(expr), x)));
+  } catch {
+    return "0";
+  }
 }
 export function evalExpr(expr: string, vars: Record<string, number> = {}): number {
   return evaluate(parse(expr), vars);

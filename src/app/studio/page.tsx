@@ -15,9 +15,11 @@ export const metadata: Metadata = {
 };
 
 const SIMS = [
+  { slug: "graph", name: "Visual Node Graph", desc: "Wire blocks into a live dataflow — the real editor. Symbolic calculus built in.", tag: "Flagship" },
   { slug: "particles", name: "Particle / N-Body", desc: "Gravity, orbits, and impulse collisions with a real symplectic integrator.", tag: "Physics" },
   { slug: "fluid", name: "2D Fluid (CFD)", desc: "Interactive incompressible Navier–Stokes via Stam's stable-fluids method.", tag: "Engineering" },
   { slug: "dynamics", name: "Dynamical Systems", desc: "Lorenz, SIR epidemics, pendulums, predator–prey, and reaction–diffusion.", tag: "Math / Bio" },
+  { slug: "fields", name: "Heat & Wave Fields", desc: "2D heat diffusion and the 1D wave equation, solved live.", tag: "PDE" },
   { slug: "cas", name: "Symbolic Math", desc: "Parse, differentiate, simplify, solve, and plot — a real CAS in your browser.", tag: "Math" },
   { slug: "surrogate", name: "AI Surrogate", desc: "Train an ML surrogate on our solver for instant predictions. The PhysicsX play.", tag: "AI" },
 ];

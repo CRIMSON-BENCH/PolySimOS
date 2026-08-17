@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { differentiateExpr, simplifyExpr, sampleExpr, solveRoot } from "@/lib/engines/cas";
+import { differentiateExpr, simplifyExpr, sampleExpr, solveRoot, integrateExpr } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
 
 const W = 760, H = 480;
@@ -16,9 +16,10 @@ export function CasStudio() {
       const deriv = differentiateExpr(expr, xVar);
       const simplified = simplifyExpr(expr);
       const derivSimplified = simplifyExpr(deriv);
-      return { ok: true as const, deriv: derivSimplified, simplified, error: "" };
+      const integral = integrateExpr(expr, xVar);
+      return { ok: true as const, deriv: derivSimplified, simplified, integral, error: "" };
     } catch (e) {
-      return { ok: false as const, deriv: "", simplified: "", error: (e as Error).message };
+      return { ok: false as const, deriv: "", simplified: "", integral: "", error: (e as Error).message };
     }
   }, [expr, xVar]);
 
@@ -114,6 +115,10 @@ export function CasStudio() {
               <div>
                 <span className="text-slate-500">d/dx: </span>
                 <span className="font-mono text-lime-600 dark:text-lime-400">{result.deriv}</span>
+              </div>
+              <div>
+                <span className="text-slate-500">∫ dx: </span>
+                <span className="font-mono text-amber-600 dark:text-amber-400">{result.integral}</span>
               </div>
             </div>
           ) : (

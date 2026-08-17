@@ -20,9 +20,11 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
       {
         title: "Live Studio",
         links: [
+          { name: "Visual Node Graph", href: "/studio/graph" },
           { name: "Particle / N-Body", href: "/studio/particles" },
           { name: "2D Fluid (CFD)", href: "/studio/fluid" },
           { name: "Dynamical Systems", href: "/studio/dynamics" },
+          { name: "Heat & Wave Fields", href: "/studio/fields" },
           { name: "Symbolic Math", href: "/studio/cas" },
           { name: "AI Surrogate", href: "/studio/surrogate" },
         ],
