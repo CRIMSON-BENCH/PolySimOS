@@ -161,3 +161,56 @@ function binaryMath(type: string, title: string, fn: (a: number, b: number) => n
 }
 
 export const NODE_LIST = Object.values(NODE_DEFS);
+
+// A compact catalog of node types for prompting the AI Copilot.
+export function nodeCatalog(): string {
+  return NODE_LIST.map((d) => {
+    const ins = d.inputs.map((p) => p.id).join(",") || "-";
+    const outs = d.outputs.map((p) => p.id).join(",") || "-";
+    const params = d.params.map((p) => p.id).join(",") || "-";
+    return `${d.type}: inputs[${ins}] outputs[${outs}] params[${params}]`;
+  }).join("\n");
+}
+
+interface RawNode { id?: string; type?: string; params?: Record<string, unknown> }
+interface RawEdge { from?: { node?: string; port?: string }; to?: { node?: string; port?: string } }
+interface RawGraph { nodes?: RawNode[]; edges?: RawEdge[] }
+
+// Validate/repair an AI-produced graph against the real node definitions.
+// Drops unknown node types and dangling edges; lays out nodes on a grid;
+// merges params with defaults. Returns null if nothing usable remains.
+export function sanitizeAIGraph(raw: RawGraph): import("./types").Graph | null {
+  if (!raw || !Array.isArray(raw.nodes)) return null;
+  const nodes: import("./types").GraphNode[] = [];
+  const idMap = new Map<string, string>();
+  let col = 0, row = 0;
+  for (const n of raw.nodes) {
+    if (!n || typeof n.type !== "string" || !NODE_DEFS[n.type]) continue;
+    const def = NODE_DEFS[n.type];
+    const id = typeof n.id === "string" && n.id ? n.id : `n${nodes.length + 1}`;
+    idMap.set(id, id);
+    const params: Record<string, number | string> = {};
+    for (const pm of def.params) {
+      const v = n.params?.[pm.id];
+      params[pm.id] = pm.kind === "expr"
+        ? (typeof v === "string" ? v : String(pm.default))
+        : (typeof v === "number" ? v : Number(pm.default));
+    }
+    nodes.push({ id, type: n.type, x: 40 + col * 260, y: 40 + row * 200, params });
+    row++; if (row > 2) { row = 0; col++; }
+  }
+  if (!nodes.length) return null;
+  const nodeSet = new Set(nodes.map((n) => n.id));
+  const edges: import("./types").Edge[] = [];
+  if (Array.isArray(raw.edges)) {
+    raw.edges.forEach((e, i) => {
+      const fn = e?.from?.node, fp = e?.from?.port, tn = e?.to?.node, tp = e?.to?.port;
+      if (!fn || !tn || !fp || !tp || !nodeSet.has(fn) || !nodeSet.has(tn)) return;
+      const fromDef = NODE_DEFS[nodes.find((x) => x.id === fn)!.type];
+      const toDef = NODE_DEFS[nodes.find((x) => x.id === tn)!.type];
+      if (!fromDef.outputs.some((p) => p.id === fp) || !toDef.inputs.some((p) => p.id === tp)) return;
+      edges.push({ id: `e${i}`, from: { node: fn, port: fp }, to: { node: tn, port: tp } });
+    });
+  }
+  return { nodes, edges };
+}
