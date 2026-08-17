@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HarmonicSeriesStudio } from "@/components/studio/HarmonicSeriesStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Harmonic Series & Timbre Visualizer (Browser)", description: "Explore the harmonic series — overtones, timbre, and the musical intervals hidden in every note. Free, interactive.", alternates: { canonical: "/studio/harmonic-series" } };
+export default function Page() { return <StudioPageShell slug="harmonic-series" name="Harmonic Series" keyword="harmonic series overtones" lede="Every note is secretly a chord. The harmonic series stacks overtones above a fundamental, and their balance is what makes a violin sound different from a flute." about="A vibrating string or air column produces a fundamental plus harmonics at integer multiples of its frequency. The relative strength of those overtones — the spectral rolloff — defines timbre. The intervals between the harmonics also outline the octave, perfect fifth, and major third that underpin musical harmony."><HarmonicSeriesStudio /></StudioPageShell>; }

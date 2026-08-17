@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ChladniStudio } from "@/components/studio/ChladniStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Chladni Plate Pattern Simulator (Browser)", description: "Generate Chladni figures — the nodal patterns of a vibrating plate where sand collects. Free, interactive.", alternates: { canonical: "/studio/chladni" } };
+export default function Page() { return <StudioPageShell slug="chladni" name="Chladni Plate Patterns" keyword="Chladni plate patterns" lede="Sprinkle sand on a vibrating plate and hidden geometry appears. Chladni figures are standing waves made visible — the grains gather where the plate holds still." about="When a plate vibrates at a resonant frequency, points on the nodal lines stay motionless while the rest oscillates. Sand bounces off the moving regions and settles on those still lines, tracing a symmetric pattern set by the mode numbers. It is one of the most beautiful demonstrations of two-dimensional standing waves."><ChladniStudio /></StudioPageShell>; }

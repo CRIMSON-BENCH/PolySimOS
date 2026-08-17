@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HelmholtzStudio } from "@/components/studio/HelmholtzStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Helmholtz Resonator Frequency Calculator (Browser)", description: "Calculate the resonant frequency of a Helmholtz resonator from cavity volume and neck dimensions. Free, interactive.", alternates: { canonical: "/studio/helmholtz-resonator" } };
+export default function Page() { return <StudioPageShell slug="helmholtz-resonator" name="Helmholtz Resonator" keyword="Helmholtz resonator frequency" lede="Blow across a bottle and it hums a single note. That is a Helmholtz resonator — a mass of air in the neck bouncing on the springy air in the cavity." about="A Helmholtz resonator behaves like a mass-spring oscillator: the plug of air in the neck is the mass and the compressible air in the cavity is the spring, resonating at f = (c/2π)√(A/VL). Larger cavities and longer necks lower the pitch. The effect drives bass-reflex speaker ports, engine mufflers, and ocarinas."><HelmholtzStudio /></StudioPageShell>; }

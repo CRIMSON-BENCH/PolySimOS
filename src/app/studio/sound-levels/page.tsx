@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SoundLevelsStudio } from "@/components/studio/SoundLevelsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Sound Level (dB SPL) Calculator (Browser)", description: "Add decibel sources logarithmically and see sound pressure level fall off with distance via the inverse-square law. Free.", alternates: { canonical: "/studio/sound-levels" } };
+export default function Page() { return <StudioPageShell slug="sound-levels" name="Sound Levels (dB SPL)" keyword="decibel sound level calculator" lede="Two speakers are not twice as loud. Decibels add logarithmically, and sound spreads with the inverse-square law — see how loudness really combines and fades." about="Because decibels are logarithmic, doubling the number of equal sources adds only 3 dB and tenfold adds 10 dB. A point source loses 6 dB every time you double the distance, the inverse-square law. Sustained exposure above 85 dB risks hearing damage — the dashed line here marks that threshold."><SoundLevelsStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { AdditiveSynthStudio } from "@/components/studio/AdditiveSynthStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Additive Synthesis Simulator (Browser)", description: "Build sawtooth, square, and triangle waves from sine harmonics and see the Gibbs phenomenon. Free, interactive synthesis.", alternates: { canonical: "/studio/additive-synthesis" } };
+export default function Page() { return <StudioPageShell slug="additive-synthesis" name="Additive Synthesis" keyword="additive synthesis" lede="Stack enough sine waves and you can build any tone. Additive synthesis assembles rich waveforms one harmonic at a time — the sound design behind classic synths." about="Every periodic waveform is a sum of sine harmonics with specific amplitudes. A sawtooth uses all harmonics falling as 1/k, a square only odd harmonics, and a triangle odd harmonics falling as 1/k². Adding more harmonics sharpens the shape but produces the Gibbs overshoot — the little ripple that never quite goes away at sharp edges."><AdditiveSynthStudio /></StudioPageShell>; }

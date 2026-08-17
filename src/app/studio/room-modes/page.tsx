@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RoomModesStudio } from "@/components/studio/RoomModesStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Room Acoustic Modes Calculator (Browser)", description: "Compute the axial, tangential, and oblique standing-wave modes of a room from its dimensions. Free, interactive room acoustics.", alternates: { canonical: "/studio/room-modes" } };
+export default function Page() { return <StudioPageShell slug="room-modes" name="Room Acoustic Modes" keyword="room modes calculator" lede="Small rooms fight back at low frequencies. Room modes are standing waves that make bass boom in some spots and vanish in others — see them for your dimensions." about="A room resonates wherever sound waves fit exactly between its surfaces, producing axial modes between two walls, tangential modes among four, and oblique modes among all six. Evenly spread modes sound smooth; clustered modes create boomy, uneven bass. This is why cube-shaped rooms and studios need careful dimensions and bass trapping."><RoomModesStudio /></StudioPageShell>; }

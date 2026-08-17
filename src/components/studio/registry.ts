@@ -180,6 +180,14 @@ import { RelativityStudio } from "./RelativityStudio";
 import { PhotoelectricStudio } from "./PhotoelectricStudio";
 import { QHOStudio } from "./QHOStudio";
 import { SternGerlachStudio } from "./SternGerlachStudio";
+import { HarmonicSeriesStudio } from "./HarmonicSeriesStudio";
+import { EqualTemperamentStudio } from "./EqualTemperamentStudio";
+import { ChladniStudio } from "./ChladniStudio";
+import { HelmholtzStudio } from "./HelmholtzStudio";
+import { RoomModesStudio } from "./RoomModesStudio";
+import { ReverbTimeStudio } from "./ReverbTimeStudio";
+import { SoundLevelsStudio } from "./SoundLevelsStudio";
+import { AdditiveSynthStudio } from "./AdditiveSynthStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -364,6 +372,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   photoelectric: PhotoelectricStudio,
   "quantum-harmonic": QHOStudio,
   "stern-gerlach": SternGerlachStudio,
+  "harmonic-series": HarmonicSeriesStudio,
+  "equal-temperament": EqualTemperamentStudio,
+  chladni: ChladniStudio,
+  "helmholtz-resonator": HelmholtzStudio,
+  "room-modes": RoomModesStudio,
+  "reverb-time": ReverbTimeStudio,
+  "sound-levels": SoundLevelsStudio,
+  "additive-synthesis": AdditiveSynthStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

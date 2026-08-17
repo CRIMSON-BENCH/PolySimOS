@@ -59,6 +59,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/hypothesis-test", 0.8), u("/studio/linear-regression", 0.8), u("/studio/central-limit", 0.8), u("/studio/confidence-interval", 0.8), u("/studio/bayes-inference", 0.8), u("/studio/bootstrap", 0.8), u("/studio/pca", 0.8), u("/studio/ab-test", 0.8),
     u("/studio/forward-kinematics", 0.8), u("/studio/inverse-kinematics", 0.8), u("/studio/differential-drive", 0.8), u("/studio/cart-pole", 0.8), u("/studio/quadcopter", 0.8), u("/studio/rrt", 0.8), u("/studio/dc-motor", 0.8), u("/studio/kalman-filter", 0.8),
     u("/studio/particle-box", 0.8), u("/studio/quantum-tunneling", 0.8), u("/studio/bloch-sphere", 0.8), u("/studio/hydrogen-orbitals", 0.8), u("/studio/special-relativity", 0.8), u("/studio/photoelectric", 0.8), u("/studio/quantum-harmonic", 0.8), u("/studio/stern-gerlach", 0.8),
+    u("/studio/harmonic-series", 0.8), u("/studio/equal-temperament", 0.8), u("/studio/chladni", 0.8), u("/studio/helmholtz-resonator", 0.8), u("/studio/room-modes", 0.8), u("/studio/reverb-time", 0.8), u("/studio/sound-levels", 0.8), u("/studio/additive-synthesis", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

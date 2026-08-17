@@ -190,6 +190,14 @@ const OTHER_SIMS = [
   { name: "Photoelectric Effect", href: "/studio/photoelectric" },
   { name: "Quantum Harmonic Oscillator", href: "/studio/quantum-harmonic" },
   { name: "Stern-Gerlach", href: "/studio/stern-gerlach" },
+  { name: "Harmonic Series", href: "/studio/harmonic-series" },
+  { name: "Equal Temperament", href: "/studio/equal-temperament" },
+  { name: "Chladni Plates", href: "/studio/chladni" },
+  { name: "Helmholtz Resonator", href: "/studio/helmholtz-resonator" },
+  { name: "Room Modes", href: "/studio/room-modes" },
+  { name: "Reverb Time", href: "/studio/reverb-time" },
+  { name: "Sound Levels", href: "/studio/sound-levels" },
+  { name: "Additive Synthesis", href: "/studio/additive-synthesis" },
 ];
 
 export function StudioPageShell({

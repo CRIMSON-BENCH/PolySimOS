@@ -196,6 +196,14 @@ const SIMS = [
   { slug: "photoelectric", name: "Photoelectric Effect", desc: "Einstein's photon.", tag: "Quantum" },
   { slug: "quantum-harmonic", name: "Quantum Harmonic Oscillator", desc: "Evenly-spaced energy ladder.", tag: "Quantum" },
   { slug: "stern-gerlach", name: "Stern-Gerlach", desc: "Spin measurement.", tag: "Quantum" },
+  { slug: "harmonic-series", name: "Harmonic Series", desc: "Overtones & timbre.", tag: "Acoustics" },
+  { slug: "equal-temperament", name: "Equal Temperament", desc: "Tuning & cents.", tag: "Acoustics" },
+  { slug: "chladni", name: "Chladni Plates", desc: "Nodal sand patterns.", tag: "Acoustics" },
+  { slug: "helmholtz-resonator", name: "Helmholtz Resonator", desc: "Cavity resonance.", tag: "Acoustics" },
+  { slug: "room-modes", name: "Room Modes", desc: "Standing waves in a room.", tag: "Acoustics" },
+  { slug: "reverb-time", name: "Reverb Time (Sabine)", desc: "RT60 decay.", tag: "Acoustics" },
+  { slug: "sound-levels", name: "Sound Levels (dB)", desc: "Decibel addition & falloff.", tag: "Acoustics" },
+  { slug: "additive-synthesis", name: "Additive Synthesis", desc: "Tone from sine waves.", tag: "Acoustics" },
 ];
 
 export default function StudioIndex() {
