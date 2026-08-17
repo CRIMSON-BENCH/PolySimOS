@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { FilterDesignerStudio } from "@/components/studio/FilterDesignerStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Analog Filter Designer (RC / RLC, Browser)", description: "Design low-pass, high-pass, and band-pass filters and see their frequency response, cutoff, and Q. Free, interactive.", alternates: { canonical: "/studio/filter-designer" } };
+export default function Page() { return <StudioPageShell slug="filter-designer" name="Analog Filter Designer" keyword="RC RLC filter designer" lede="Pick components, get a filter. Watch the frequency response reshape as you tune R, C, and L for low-pass, high-pass, or resonant band-pass behavior." about="Passive filters use resistors, capacitors, and inductors to pass some frequencies and block others. An RC filter sets its −3 dB cutoff at 1/(2πRC); an RLC band-pass resonates at 1/(2π√(LC)) with selectivity given by its quality factor Q. Fundamental to audio, radio, and signal conditioning."><FilterDesignerStudio /></StudioPageShell>; }

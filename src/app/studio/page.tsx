@@ -164,6 +164,14 @@ const SIMS = [
   { slug: "base-shear", name: "Seismic Base Shear", desc: "Equivalent lateral force.", tag: "Structural" },
   { slug: "soil-bearing", name: "Soil Bearing", desc: "Terzaghi capacity.", tag: "Structural" },
   { slug: "concrete-beam", name: "Concrete Beam", desc: "RC flexural capacity.", tag: "Structural" },
+  { slug: "bode-plot", name: "Bode Plot", desc: "Frequency response.", tag: "Electrical" },
+  { slug: "filter-designer", name: "Filter Designer", desc: "RC/RLC filter response.", tag: "Electrical" },
+  { slug: "pid-control", name: "PID Controller", desc: "Step-response tuning.", tag: "Electrical" },
+  { slug: "transmission-line", name: "Transmission Line", desc: "VSWR & reflections.", tag: "Electrical" },
+  { slug: "op-amp", name: "Op-Amp Circuits", desc: "Amplifier configurations.", tag: "Electrical" },
+  { slug: "three-phase", name: "Three-Phase Power", desc: "Grid power & phasors.", tag: "Electrical" },
+  { slug: "transistor-bias", name: "Transistor Bias", desc: "BJT Q-point load line.", tag: "Electrical" },
+  { slug: "aliasing", name: "Sampling & Aliasing", desc: "The Nyquist theorem.", tag: "Electrical" },
 ];
 
 export default function StudioIndex() {

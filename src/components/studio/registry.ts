@@ -148,6 +148,14 @@ import { RetainingWallStudio } from "./RetainingWallStudio";
 import { BaseShearStudio } from "./BaseShearStudio";
 import { SoilBearingStudio } from "./SoilBearingStudio";
 import { ConcreteBeamStudio } from "./ConcreteBeamStudio";
+import { BodePlotStudio } from "./BodePlotStudio";
+import { FilterDesignerStudio } from "./FilterDesignerStudio";
+import { PIDControlStudio } from "./PIDControlStudio";
+import { TransmissionLineStudio } from "./TransmissionLineStudio";
+import { OpAmpStudio } from "./OpAmpStudio";
+import { ThreePhaseStudio } from "./ThreePhaseStudio";
+import { TransistorBiasStudio } from "./TransistorBiasStudio";
+import { AliasingStudio } from "./AliasingStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -300,6 +308,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "base-shear": BaseShearStudio,
   "soil-bearing": SoilBearingStudio,
   "concrete-beam": ConcreteBeamStudio,
+  "bode-plot": BodePlotStudio,
+  "filter-designer": FilterDesignerStudio,
+  "pid-control": PIDControlStudio,
+  "transmission-line": TransmissionLineStudio,
+  "op-amp": OpAmpStudio,
+  "three-phase": ThreePhaseStudio,
+  "transistor-bias": TransistorBiasStudio,
+  aliasing: AliasingStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

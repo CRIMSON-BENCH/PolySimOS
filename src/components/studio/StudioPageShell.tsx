@@ -158,6 +158,14 @@ const OTHER_SIMS = [
   { name: "Seismic Base Shear", href: "/studio/base-shear" },
   { name: "Soil Bearing", href: "/studio/soil-bearing" },
   { name: "Concrete Beam", href: "/studio/concrete-beam" },
+  { name: "Bode Plot", href: "/studio/bode-plot" },
+  { name: "Filter Designer", href: "/studio/filter-designer" },
+  { name: "PID Controller", href: "/studio/pid-control" },
+  { name: "Transmission Line", href: "/studio/transmission-line" },
+  { name: "Op-Amp Circuits", href: "/studio/op-amp" },
+  { name: "Three-Phase Power", href: "/studio/three-phase" },
+  { name: "Transistor Bias", href: "/studio/transistor-bias" },
+  { name: "Sampling & Aliasing", href: "/studio/aliasing" },
 ];
 
 export function StudioPageShell({

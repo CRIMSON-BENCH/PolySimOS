@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BodePlotStudio } from "@/components/studio/BodePlotStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bode Plot Generator (Frequency Response, Browser)", description: "Plot the magnitude and phase Bode diagram of a second-order system and see resonance and roll-off. Free, interactive.", alternates: { canonical: "/studio/bode-plot" } };
+export default function Page() { return <StudioPageShell slug="bode-plot" name="Bode Plot (2nd-Order System)" keyword="Bode plot generator" lede="How does a circuit or control system respond across frequency? A Bode plot lays it bare — gain on top, phase below — revealing resonance and roll-off at a glance." about="A Bode plot shows a system&apos;s frequency response: magnitude in decibels and phase in degrees against a logarithmic frequency axis. This second-order low-pass rolls off at −40 dB per decade beyond its natural frequency, and a low damping ratio produces a resonant peak. The core diagnostic of control and analog design."><BodePlotStudio /></StudioPageShell>; }

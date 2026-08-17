@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OpAmpStudio } from "@/components/studio/OpAmpStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Op-Amp Circuit Simulator (Browser)", description: "Explore inverting, non-inverting, difference, and integrator op-amp circuits and see the gain and output waveform. Free, interactive.", alternates: { canonical: "/studio/op-amp" } };
+export default function Page() { return <StudioPageShell slug="op-amp" name="Op-Amp Circuits" keyword="op-amp circuit simulator" lede="Two resistors and an op-amp make an amplifier of any gain you like. See how feedback sets the gain, and watch the output clip when it hits the supply rails." about="The operational amplifier is the fundamental analog building block. With negative feedback its gain is set entirely by external resistors: an inverting amp gives −R2/R1, a non-inverting amp 1+R2/R1, and an integrator produces the running integral of its input. Push the input too hard and the output saturates at the supply rails."><OpAmpStudio /></StudioPageShell>; }
