@@ -40,6 +40,7 @@ const COLUMNS: { title: string; links: { name: string; href: string }[] }[] = [
       { name: "SDK", href: "/developers/sdk" },
       { name: "Webhooks", href: "/developers/webhooks" },
       { name: "Templates", href: "/templates" },
+      { name: "Marketplace", href: "/marketplace" },
       { name: "Courses", href: "/education" },
     ],
   },

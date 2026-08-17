@@ -12,6 +12,7 @@ import { MIGRATION_SLUGS } from "@/lib/migrations";
 import { INSTITUTIONS } from "@/lib/institutions";
 import { SIM_TOPICS } from "@/lib/simulate";
 import { ARTICLES } from "@/lib/blog";
+import { LISTINGS } from "@/lib/marketplace";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date("2026-08-16");
@@ -27,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/terms", 0.3), u("/privacy", 0.3), u("/refund", 0.3), u("/acceptable-use", 0.3),
     u("/studio/graph", 0.9), u("/studio/particles", 0.8), u("/studio/fluid", 0.8), u("/studio/dynamics", 0.8), u("/studio/fields", 0.8), u("/studio/cas", 0.8), u("/studio/surrogate", 0.8),
     u("/studio/3d", 0.8), u("/studio/fea", 0.8), u("/studio/electromagnetics", 0.8), u("/studio/molecular-dynamics", 0.8), u("/studio/mesh", 0.8), u("/studio/vector-field", 0.8), u("/studio/optimize", 0.8), u("/studio/notebook", 0.8),
-    u("/studio/gpu", 0.9), u("/studio/fea-3d", 0.8),
+    u("/studio/gpu", 0.9), u("/studio/fea-3d", 0.8), u("/studio/gpu-fluid", 0.9), u("/studio/gpu-nbody", 0.9), u("/studio/heat-3d", 0.8), u("/marketplace", 0.7),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 
@@ -49,6 +50,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...SIM_TOPICS.map((t) => u(`/simulate/${t.slug}`, 0.6)),
     ...SIM_TOPICS.flatMap((t) => INDUSTRIES.slice(0, 12).map((ind) => u(`/simulate/${t.slug}/${ind.slug}`, 0.5))),
     ...ARTICLES.map((a) => u(`/blog/${a.slug}`, 0.6)),
+    ...LISTINGS.map((l) => u(`/marketplace/${l.slug}`, 0.5)),
   ];
 
   return [...staticPages, ...dynamic];

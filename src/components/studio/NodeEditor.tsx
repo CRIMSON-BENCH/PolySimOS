@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { NODE_DEFS, NODE_LIST } from "@/lib/nodegraph/nodes";
 import { Graph, GraphNode, Edge, evaluateGraph, PortValue, Series } from "@/lib/nodegraph/types";
+import { Collab, Peer } from "@/lib/collab";
 
 const NODE_W = 220;
 const HEADER_H = 34;
@@ -78,6 +79,23 @@ export function NodeEditor() {
   const wire = useRef<{ from: { node: string; port: string }; x: number; y: number } | null>(null);
   const [, force] = useState(0);
 
+  // --- real-time collaboration (presence + graph sync) ---
+  const collabRef = useRef<Collab | null>(null);
+  const applyingRemote = useRef(false);
+  const lastCursorPost = useRef(0);
+  const [peers, setPeers] = useState<Peer[]>([]);
+  useEffect(() => {
+    const c = new Collab();
+    collabRef.current = c;
+    c.onPeers = () => setPeers([...c.peers.values()]);
+    c.onGraph = (g) => { applyingRemote.current = true; setGraph(g as Graph); };
+    return () => c.dispose();
+  }, []);
+  useEffect(() => {
+    if (applyingRemote.current) { applyingRemote.current = false; return; }
+    collabRef.current?.broadcastGraph(graph);
+  }, [graph]);
+
   const result = useMemo(() => evaluateGraph(graph, NODE_DEFS), [graph]);
   // Prime the plot cache synchronously so plot node bodies can read their series.
   primePlotCache(result.values, graph);
@@ -103,6 +121,8 @@ export function NodeEditor() {
   const onMove = useCallback((e: React.PointerEvent) => {
     const rect = wrapRef.current!.getBoundingClientRect();
     const mx = e.clientX - rect.left, my = e.clientY - rect.top;
+    const now = Date.now();
+    if (now - lastCursorPost.current > 50) { lastCursorPost.current = now; collabRef.current?.cursor(mx, my); }
     if (drag.current) {
       setNode(drag.current.node, { x: mx - drag.current.dx, y: my - drag.current.dy });
     } else if (wire.current) {
@@ -155,6 +175,12 @@ export function NodeEditor() {
       <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 px-4 py-2.5 dark:border-slate-800">
         <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">Node Graph</span>
         <span className="text-xs text-slate-400">— drag a node header to move · drag an output ● onto an input ○ to wire</span>
+        <div className="flex items-center gap-1" title="Live collaborators (open this page in another tab to test)">
+          {peers.length > 0 && <span className="text-xs text-slate-400">{peers.length} live</span>}
+          {peers.map((p) => (
+            <span key={p.id} className="inline-flex h-5 w-5 items-center justify-center rounded-full text-[9px] font-bold text-slate-950" style={{ background: p.color }} title={p.name}>{p.name[0]}</span>
+          ))}
+        </div>
         <div className="ml-auto flex flex-wrap gap-1">
           {NODE_LIST.map((d) => (
             <button key={d.type} onClick={() => addNode(d.type)}
@@ -202,6 +228,14 @@ export function NodeEditor() {
             onParam={(k, v) => setParam(n.id, k, v)}
             onRemove={() => removeNode(n.id)}
           />
+        ))}
+
+        {/* live collaborator cursors */}
+        {peers.map((p) => (
+          <div key={p.id} className="pointer-events-none absolute z-20 flex items-center gap-1" style={{ left: p.x, top: p.y }}>
+            <svg width="14" height="14" viewBox="0 0 14 14"><path d="M1 1 L1 11 L4 8 L6 12 L8 11 L6 7 L10 7 Z" fill={p.color} /></svg>
+            <span className="rounded px-1 text-[10px] font-semibold text-slate-950" style={{ background: p.color }}>{p.name}</span>
+          </div>
         ))}
       </div>
       {result.error && <p className="px-4 py-2 text-xs text-amber-500">{result.error}</p>}

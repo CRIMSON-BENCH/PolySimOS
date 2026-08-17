@@ -22,6 +22,8 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
         links: [
           { name: "Visual Node Graph", href: "/studio/graph" },
           { name: "GPU Compute (WebGPU)", href: "/studio/gpu" },
+          { name: "WebGPU Fluid", href: "/studio/gpu-fluid" },
+          { name: "GPU N-Body", href: "/studio/gpu-nbody" },
           { name: "Particle / N-Body", href: "/studio/particles" },
           { name: "2D Fluid (CFD)", href: "/studio/fluid" },
           { name: "Dynamical Systems", href: "/studio/dynamics" },
