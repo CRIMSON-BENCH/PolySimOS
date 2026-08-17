@@ -15,6 +15,14 @@ const OTHER_SIMS = [
   { name: "Heat & Wave Fields", href: "/studio/fields" },
   { name: "Symbolic Math", href: "/studio/cas" },
   { name: "AI Surrogate", href: "/studio/surrogate" },
+  { name: "3D N-Body", href: "/studio/3d" },
+  { name: "FEA Truss", href: "/studio/fea" },
+  { name: "Electrostatics", href: "/studio/electromagnetics" },
+  { name: "Molecular Dynamics", href: "/studio/molecular-dynamics" },
+  { name: "Meshing + BCs", href: "/studio/mesh" },
+  { name: "Vector Fields", href: "/studio/vector-field" },
+  { name: "Optimize + UQ", href: "/studio/optimize" },
+  { name: "Notebook", href: "/studio/notebook" },
 ];
 
 export function StudioPageShell({

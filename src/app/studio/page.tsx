@@ -22,6 +22,14 @@ const SIMS = [
   { slug: "fields", name: "Heat & Wave Fields", desc: "2D heat diffusion and the 1D wave equation, solved live.", tag: "PDE" },
   { slug: "cas", name: "Symbolic Math", desc: "Parse, differentiate, simplify, solve, and plot — a real CAS in your browser.", tag: "Math" },
   { slug: "surrogate", name: "AI Surrogate", desc: "Train an ML surrogate on our solver for instant predictions. The PhysicsX play.", tag: "AI" },
+  { slug: "3d", name: "3D N-Body", desc: "Gravitation in 3D with a drag-to-orbit camera.", tag: "3D Physics" },
+  { slug: "fea", name: "FEA Truss", desc: "Finite-element structural analysis: forces & deflection.", tag: "Engineering" },
+  { slug: "electromagnetics", name: "Electrostatics", desc: "Charges, potential heatmaps, and field lines.", tag: "Physics" },
+  { slug: "molecular-dynamics", name: "Molecular Dynamics", desc: "Lennard-Jones atoms; melt a lattice.", tag: "Chemistry" },
+  { slug: "mesh", name: "Meshing + BCs", desc: "Paint boundary conditions; solve steady heat.", tag: "Engineering" },
+  { slug: "vector-field", name: "Vector Fields", desc: "Plot any F(x,y) as a live quiver diagram.", tag: "Math" },
+  { slug: "optimize", name: "Optimize + UQ", desc: "Gradient descent and Monte-Carlo uncertainty.", tag: "Data" },
+  { slug: "notebook", name: "Notebook", desc: "Cells of prose + symbolic math + compute.", tag: "Math" },
 ];
 
 export default function StudioIndex() {
