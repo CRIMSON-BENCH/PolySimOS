@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CentralLimitStudio } from "@/components/studio/CentralLimitStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Central Limit Theorem Simulator (Browser)", description: "Watch the distribution of sample means become normal as sample size grows, from any source distribution. Free, interactive.", alternates: { canonical: "/studio/central-limit" } };
+export default function Page() { return <StudioPageShell slug="central-limit" name="Central Limit Theorem" keyword="central limit theorem simulator" lede="The most important theorem in statistics, made visible. No matter how weird the source distribution, the average of enough samples is always bell-shaped." about="The central limit theorem says the distribution of sample means approaches a normal distribution as the sample size grows, regardless of the underlying distribution. Start with a skewed exponential or a lumpy bimodal source, then raise the sample size and watch the histogram of means converge to the familiar bell curve."><CentralLimitStudio /></StudioPageShell>; }

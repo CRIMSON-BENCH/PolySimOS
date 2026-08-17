@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BootstrapStudio } from "@/components/studio/BootstrapStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bootstrap Resampling Simulator (Browser)", description: "Estimate a confidence interval by resampling data with replacement thousands of times. See the bootstrap distribution. Free, interactive.", alternates: { canonical: "/studio/bootstrap" } };
+export default function Page() { return <StudioPageShell slug="bootstrap" name="Bootstrap Resampling" keyword="bootstrap resampling simulator" lede="Confidence intervals with no formula required. Resample your own data thousands of times and let the computer reveal the uncertainty in a statistic." about="The bootstrap treats your sample as a stand-in for the population, drawing new samples from it with replacement and recomputing the statistic each time. The spread of those bootstrap estimates gives a confidence interval directly — no normality assumption, no closed-form standard error. Invaluable when the underlying math is intractable."><BootstrapStudio /></StudioPageShell>; }

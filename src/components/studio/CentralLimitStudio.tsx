@@ -1,0 +1,52 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { StudioChrome, Slider, Stat } from "./StudioChrome";
+
+type Dist = "uniform" | "exponential" | "bimodal";
+
+export function CentralLimitStudio() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [dist, setDist] = useState<Dist>("exponential");
+  const [n, setN] = useState(10);
+  const [running, setRunning] = useState(true);
+  const means = useRef<number[]>([]);
+  const [count, setCount] = useState(0);
+  const seedRef = useRef(7);
+
+  const reset = () => { means.current = []; setCount(0); seedRef.current = 7; };
+  useEffect(reset, [dist, n]);
+
+  useEffect(() => {
+    if (!running) return; let raf = 0;
+    const draw1 = () => { let s = seedRef.current; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; seedRef.current = s; return s / 4294967296; };
+      if (dist === "uniform") return rnd();
+      if (dist === "exponential") return -Math.log(1 - rnd()) / 2;
+      return rnd() < 0.5 ? rnd() * 0.3 : 0.7 + rnd() * 0.3; };
+    const loop = () => {
+      for (let k = 0; k < 15; k++) { let sum = 0; for (let i = 0; i < Math.round(n); i++) sum += draw1(); means.current.push(sum / Math.round(n)); }
+      setCount(means.current.length);
+      const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const bins = 40; const hist = new Array(bins).fill(0); const lo = 0, hi = dist === "exponential" ? 1.2 : 1;
+      means.current.forEach((m) => { const b = Math.min(bins - 1, Math.max(0, ((m - lo) / (hi - lo) * bins) | 0)); hist[b]++; });
+      const hmax = Math.max(...hist, 1); const ox = 30, oy = H - 30, pw = W - 60, ph = H - 60;
+      for (let b = 0; b < bins; b++) { const x = ox + (b / bins) * pw; const bh = (hist[b] / hmax) * ph; ctx.fillStyle = "#22d3ee"; ctx.fillRect(x, oy - bh, pw / bins - 1, bh); }
+      ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.stroke();
+      ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`distribution of sample means (n=${Math.round(n)})`, ox + 6, 18);
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
+  }, [running, dist, n]);
+
+  return (
+    <StudioChrome title="Central Limit Theorem" tagline="means go normal"
+      controls={<div>
+        <div className="mb-3 grid grid-cols-3 gap-2">{(["uniform", "exponential", "bimodal"] as Dist[]).map((d) => <button key={d} onClick={() => setDist(d)} className={`rounded-lg px-1 py-1 text-xs font-semibold capitalize ${dist === d ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{d}</button>)}</div>
+        <Slider label="Sample size n" value={n} min={1} max={50} step={1} onChange={setN} />
+        <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
+        <p className="mt-3 text-xs text-slate-500">The central limit theorem is why the normal distribution is everywhere: no matter how skewed or lumpy the source distribution, the distribution of sample means becomes bell-shaped as the sample size grows. Try a heavily skewed exponential at n=1, then raise n and watch it turn normal.</p>
+      </div>}
+      inspector={<div><Stat label="Samples drawn" value={count.toLocaleString()} /><Stat label="Sample size" value={String(Math.round(n))} /><Stat label="Source" value={dist} /></div>}
+    ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
+  );
+}

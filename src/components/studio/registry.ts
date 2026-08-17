@@ -156,6 +156,14 @@ import { OpAmpStudio } from "./OpAmpStudio";
 import { ThreePhaseStudio } from "./ThreePhaseStudio";
 import { TransistorBiasStudio } from "./TransistorBiasStudio";
 import { AliasingStudio } from "./AliasingStudio";
+import { HypothesisTestStudio } from "./HypothesisTestStudio";
+import { LinearRegressionStudio } from "./LinearRegressionStudio";
+import { CentralLimitStudio } from "./CentralLimitStudio";
+import { ConfidenceIntervalStudio } from "./ConfidenceIntervalStudio";
+import { BayesInferenceStudio } from "./BayesInferenceStudio";
+import { BootstrapStudio } from "./BootstrapStudio";
+import { PCAStudio } from "./PCAStudio";
+import { ABTestStudio } from "./ABTestStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -316,6 +324,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "three-phase": ThreePhaseStudio,
   "transistor-bias": TransistorBiasStudio,
   aliasing: AliasingStudio,
+  "hypothesis-test": HypothesisTestStudio,
+  "linear-regression": LinearRegressionStudio,
+  "central-limit": CentralLimitStudio,
+  "confidence-interval": ConfidenceIntervalStudio,
+  "bayes-inference": BayesInferenceStudio,
+  bootstrap: BootstrapStudio,
+  pca: PCAStudio,
+  "ab-test": ABTestStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

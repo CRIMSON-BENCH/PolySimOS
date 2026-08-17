@@ -56,6 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/sir-model", 0.8), u("/studio/neuron", 0.8), u("/studio/lotka-volterra", 0.8), u("/studio/hardy-weinberg", 0.8), u("/studio/enzyme-kinetics", 0.8), u("/studio/logistic-growth", 0.8), u("/studio/genetic-drift", 0.8), u("/studio/sequence-alignment", 0.8),
     u("/studio/beam-deflection", 0.8), u("/studio/column-buckling", 0.8), u("/studio/mohrs-circle", 0.8), u("/studio/shear-moment", 0.8), u("/studio/retaining-wall", 0.8), u("/studio/base-shear", 0.8), u("/studio/soil-bearing", 0.8), u("/studio/concrete-beam", 0.8),
     u("/studio/bode-plot", 0.8), u("/studio/filter-designer", 0.8), u("/studio/pid-control", 0.8), u("/studio/transmission-line", 0.8), u("/studio/op-amp", 0.8), u("/studio/three-phase", 0.8), u("/studio/transistor-bias", 0.8), u("/studio/aliasing", 0.8),
+    u("/studio/hypothesis-test", 0.8), u("/studio/linear-regression", 0.8), u("/studio/central-limit", 0.8), u("/studio/confidence-interval", 0.8), u("/studio/bayes-inference", 0.8), u("/studio/bootstrap", 0.8), u("/studio/pca", 0.8), u("/studio/ab-test", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

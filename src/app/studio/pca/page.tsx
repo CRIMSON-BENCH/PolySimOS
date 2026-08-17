@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PCAStudio } from "@/components/studio/PCAStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "PCA Visualizer — Principal Component Analysis (Browser)", description: "See principal component analysis find the axes of maximum variance in 2D data, with variance explained. Free, interactive.", alternates: { canonical: "/studio/pca" } };
+export default function Page() { return <StudioPageShell slug="pca" name="Principal Component Analysis" keyword="PCA principal component analysis" lede="The workhorse of dimensionality reduction. PCA rotates the data to find the directions of greatest variance — the axes that matter most." about="PCA computes the covariance matrix of the data and takes its eigenvectors as principal components. The first component (cyan) points along the direction of maximum variance; the second (green) is orthogonal to it. The eigenvalues give the variance captured by each, and keeping only the top components compresses data with minimal loss."><PCAStudio /></StudioPageShell>; }

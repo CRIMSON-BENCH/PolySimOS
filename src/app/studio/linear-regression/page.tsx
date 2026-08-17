@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LinearRegressionStudio } from "@/components/studio/LinearRegressionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Linear Regression Calculator (Least Squares, Browser)", description: "Fit a least-squares line to data, see residuals, slope, intercept, and R². Adjust noise and sample size. Free, interactive.", alternates: { canonical: "/studio/linear-regression" } };
+export default function Page() { return <StudioPageShell slug="linear-regression" name="Linear Regression" keyword="linear regression calculator" lede="The most-used model in all of data science. Fit a line through a cloud of points and see exactly how least squares balances the residuals — and how R² grades the fit." about="Ordinary least squares chooses the slope and intercept that minimize the sum of squared vertical residuals. R² reports the fraction of the variation the line explains, from 1 (perfect) to 0 (no better than the mean). Add noise or thin out the data to watch the estimate wobble and R² fall."><LinearRegressionStudio /></StudioPageShell>; }

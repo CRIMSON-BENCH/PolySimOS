@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ABTestStudio } from "@/components/studio/ABTestStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "A/B Test Significance Calculator (Browser)", description: "Test whether two conversion rates differ significantly with a two-proportion z-test. See rates, lift, and p-value. Free, interactive.", alternates: { canonical: "/studio/ab-test" } };
+export default function Page() { return <StudioPageShell slug="ab-test" name="A/B Test Significance" keyword="A/B test significance calculator" lede="Did variant B really beat A, or is it noise? An A/B test turns two conversion counts into a clear yes-or-no on statistical significance." about="An A/B test compares the conversion rates of two variants with a two-proportion z-test. It pools the samples to estimate the standard error of the difference, then reports a p-value: below 0.05 means the observed lift is unlikely to be chance. Larger samples separate the two distributions and let you detect smaller true differences."><ABTestStudio /></StudioPageShell>; }

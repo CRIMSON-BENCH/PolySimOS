@@ -166,6 +166,14 @@ const OTHER_SIMS = [
   { name: "Three-Phase Power", href: "/studio/three-phase" },
   { name: "Transistor Bias", href: "/studio/transistor-bias" },
   { name: "Sampling & Aliasing", href: "/studio/aliasing" },
+  { name: "Hypothesis Test", href: "/studio/hypothesis-test" },
+  { name: "Linear Regression", href: "/studio/linear-regression" },
+  { name: "Central Limit Theorem", href: "/studio/central-limit" },
+  { name: "Confidence Intervals", href: "/studio/confidence-interval" },
+  { name: "Bayesian Inference", href: "/studio/bayes-inference" },
+  { name: "Bootstrap", href: "/studio/bootstrap" },
+  { name: "PCA", href: "/studio/pca" },
+  { name: "A/B Test", href: "/studio/ab-test" },
 ];
 
 export function StudioPageShell({

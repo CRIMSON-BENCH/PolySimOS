@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BayesInferenceStudio } from "@/components/studio/BayesInferenceStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bayesian Inference Simulator (Beta-Binomial, Browser)", description: "Update a prior belief with data to form a posterior using the Beta-Binomial model. See prior, likelihood, and posterior. Free.", alternates: { canonical: "/studio/bayes-inference" } };
+export default function Page() { return <StudioPageShell slug="bayes-inference" name="Bayesian Inference" keyword="Bayesian inference simulator" lede="How should evidence change your mind? Bayesian inference combines a prior belief with observed data to produce a sharper posterior — watch it update in real time." about="Bayes&apos; theorem multiplies a prior distribution by the likelihood of the data to get the posterior. For a coin&apos;s bias, a Beta prior and binomial data combine into a Beta posterior via a simple conjugate update: add heads to α and tails to β. As data accumulates, the posterior narrows and overrides the prior."><BayesInferenceStudio /></StudioPageShell>; }

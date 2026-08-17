@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HypothesisTestStudio } from "@/components/studio/HypothesisTestStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Hypothesis Test & p-Value Calculator (z-test, Browser)", description: "Run a one-sample z-test, see the test statistic, rejection region, and p-value on the null distribution. Free, interactive statistics.", alternates: { canonical: "/studio/hypothesis-test" } };
+export default function Page() { return <StudioPageShell slug="hypothesis-test" name="Hypothesis Test (z-test)" keyword="hypothesis test p-value calculator" lede="Is that difference real or just luck? A hypothesis test measures how surprising your sample is under the null, and the p-value puts a number on it." about="A one-sample z-test compares a sample mean to a hypothesized value, measuring the gap in standard errors. If the test statistic lands in the rejection region — a p-value below the significance level — the null hypothesis is rejected. Larger samples shrink the standard error and make smaller effects detectable."><HypothesisTestStudio /></StudioPageShell>; }

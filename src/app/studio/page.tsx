@@ -172,6 +172,14 @@ const SIMS = [
   { slug: "three-phase", name: "Three-Phase Power", desc: "Grid power & phasors.", tag: "Electrical" },
   { slug: "transistor-bias", name: "Transistor Bias", desc: "BJT Q-point load line.", tag: "Electrical" },
   { slug: "aliasing", name: "Sampling & Aliasing", desc: "The Nyquist theorem.", tag: "Electrical" },
+  { slug: "hypothesis-test", name: "Hypothesis Test", desc: "p-values & rejection regions.", tag: "Statistics" },
+  { slug: "linear-regression", name: "Linear Regression", desc: "Least squares & R².", tag: "Statistics" },
+  { slug: "central-limit", name: "Central Limit Theorem", desc: "Means go normal.", tag: "Statistics" },
+  { slug: "confidence-interval", name: "Confidence Intervals", desc: "What 95% really means.", tag: "Statistics" },
+  { slug: "bayes-inference", name: "Bayesian Inference", desc: "Prior × likelihood → posterior.", tag: "Statistics" },
+  { slug: "bootstrap", name: "Bootstrap", desc: "Resampling confidence.", tag: "Statistics" },
+  { slug: "pca", name: "PCA", desc: "Axes of maximum variance.", tag: "Statistics" },
+  { slug: "ab-test", name: "A/B Test", desc: "Two-proportion significance.", tag: "Statistics" },
 ];
 
 export default function StudioIndex() {
