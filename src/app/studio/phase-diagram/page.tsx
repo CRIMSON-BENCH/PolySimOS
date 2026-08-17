@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PhaseDiagramStudio } from "@/components/studio/PhaseDiagramStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Phase Diagram Simulator (Water, Browser)", description: "Explore water's phase diagram — solid, liquid, gas, triple point, and critical point — by setting temperature and pressure. Free.", alternates: { canonical: "/studio/phase-diagram" } };
+export default function Page() { return <StudioPageShell slug="phase-diagram" name="Phase Diagram (Water)" keyword="phase diagram water" lede="Ice, water, or steam? A phase diagram maps how temperature and pressure decide a substance&apos;s state — and where all three can coexist." about="A phase diagram plots the stable phase at each temperature and pressure. Crossing a boundary line triggers melting, boiling, or sublimation. The three boundaries meet at the triple point, where solid, liquid, and gas coexist, and the liquid-gas line ends at the critical point beyond which the distinction disappears into a supercritical fluid."><PhaseDiagramStudio /></StudioPageShell>; }

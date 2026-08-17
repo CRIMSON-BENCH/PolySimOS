@@ -198,6 +198,14 @@ const OTHER_SIMS = [
   { name: "Reverb Time", href: "/studio/reverb-time" },
   { name: "Sound Levels", href: "/studio/sound-levels" },
   { name: "Additive Synthesis", href: "/studio/additive-synthesis" },
+  { name: "Stress-Strain Curve", href: "/studio/stress-strain" },
+  { name: "Carnot Cycle", href: "/studio/carnot-cycle" },
+  { name: "Otto Cycle", href: "/studio/otto-cycle" },
+  { name: "Phase Diagram", href: "/studio/phase-diagram" },
+  { name: "Thermal Expansion", href: "/studio/thermal-expansion" },
+  { name: "Fatigue (S-N)", href: "/studio/fatigue" },
+  { name: "Entropy", href: "/studio/entropy" },
+  { name: "Thermal Resistance", href: "/studio/thermal-resistance" },
 ];
 
 export function StudioPageShell({

@@ -188,6 +188,14 @@ import { RoomModesStudio } from "./RoomModesStudio";
 import { ReverbTimeStudio } from "./ReverbTimeStudio";
 import { SoundLevelsStudio } from "./SoundLevelsStudio";
 import { AdditiveSynthStudio } from "./AdditiveSynthStudio";
+import { StressStrainStudio } from "./StressStrainStudio";
+import { CarnotCycleStudio } from "./CarnotCycleStudio";
+import { OttoCycleStudio } from "./OttoCycleStudio";
+import { PhaseDiagramStudio } from "./PhaseDiagramStudio";
+import { ThermalExpansionStudio } from "./ThermalExpansionStudio";
+import { FatigueStudio } from "./FatigueStudio";
+import { EntropyStudio } from "./EntropyStudio";
+import { ThermalResistanceStudio } from "./ThermalResistanceStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -380,6 +388,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "reverb-time": ReverbTimeStudio,
   "sound-levels": SoundLevelsStudio,
   "additive-synthesis": AdditiveSynthStudio,
+  "stress-strain": StressStrainStudio,
+  "carnot-cycle": CarnotCycleStudio,
+  "otto-cycle": OttoCycleStudio,
+  "phase-diagram": PhaseDiagramStudio,
+  "thermal-expansion": ThermalExpansionStudio,
+  fatigue: FatigueStudio,
+  entropy: EntropyStudio,
+  "thermal-resistance": ThermalResistanceStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

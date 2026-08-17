@@ -204,6 +204,14 @@ const SIMS = [
   { slug: "reverb-time", name: "Reverb Time (Sabine)", desc: "RT60 decay.", tag: "Acoustics" },
   { slug: "sound-levels", name: "Sound Levels (dB)", desc: "Decibel addition & falloff.", tag: "Acoustics" },
   { slug: "additive-synthesis", name: "Additive Synthesis", desc: "Tone from sine waves.", tag: "Acoustics" },
+  { slug: "stress-strain", name: "Stress-Strain Curve", desc: "Tensile test to fracture.", tag: "Materials" },
+  { slug: "carnot-cycle", name: "Carnot Cycle", desc: "Ideal engine efficiency.", tag: "Materials" },
+  { slug: "otto-cycle", name: "Otto Cycle", desc: "Gasoline engine P-V.", tag: "Materials" },
+  { slug: "phase-diagram", name: "Phase Diagram", desc: "Solid, liquid, gas.", tag: "Materials" },
+  { slug: "thermal-expansion", name: "Thermal Expansion", desc: "Growth with temperature.", tag: "Materials" },
+  { slug: "fatigue", name: "Fatigue (S-N)", desc: "Cyclic life to failure.", tag: "Materials" },
+  { slug: "entropy", name: "Entropy", desc: "The second law in action.", tag: "Materials" },
+  { slug: "thermal-resistance", name: "Thermal Resistance", desc: "R-value composite wall.", tag: "Materials" },
 ];
 
 export default function StudioIndex() {

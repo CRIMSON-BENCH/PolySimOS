@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CarnotCycleStudio } from "@/components/studio/CarnotCycleStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Carnot Cycle Simulator (P-V Diagram, Browser)", description: "Explore the Carnot cycle on a P-V diagram and its maximum efficiency between two temperatures. Free, interactive thermodynamics.", alternates: { canonical: "/studio/carnot-cycle" } };
+export default function Page() { return <StudioPageShell slug="carnot-cycle" name="Carnot Cycle" keyword="Carnot cycle efficiency" lede="The most efficient engine allowed by physics. Two isotherms and two adiabats trace the Carnot cycle — and set the ceiling no real engine can exceed." about="The Carnot cycle alternates isothermal and adiabatic steps between a hot and cold reservoir. Its efficiency, η = 1 − Tc/Th, depends only on the temperatures, not the working fluid. It defines the absolute upper limit for converting heat to work, which is why engineers chase higher combustion temperatures and colder exhausts."><CarnotCycleStudio /></StudioPageShell>; }

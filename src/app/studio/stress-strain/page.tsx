@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { StressStrainStudio } from "@/components/studio/StressStrainStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Stress-Strain Curve Simulator (Tensile Test, Browser)", description: "Explore stress-strain curves for steel, aluminum, cast iron, and rubber — elastic region, yield, UTS, and fracture. Free, interactive.", alternates: { canonical: "/studio/stress-strain" } };
+export default function Page() { return <StudioPageShell slug="stress-strain" name="Stress-Strain Curve" keyword="stress strain curve" lede="Pull a material apart and its stress-strain curve reveals everything — stiffness, strength, and whether it stretches or snaps." about="The stress-strain curve from a tensile test shows a linear elastic region whose slope is Young&apos;s modulus, a yield point where permanent deformation starts, a peak at the ultimate tensile strength, and fracture. Ductile metals deform greatly before breaking; brittle materials fail suddenly with little warning."><StressStrainStudio /></StudioPageShell>; }

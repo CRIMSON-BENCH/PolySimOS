@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ThermalExpansionStudio } from "@/components/studio/ThermalExpansionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Thermal Expansion Calculator (Browser)", description: "Calculate linear, area, and volume thermal expansion for steel, aluminum, copper, glass, and more. Free, interactive.", alternates: { canonical: "/studio/thermal-expansion" } };
+export default function Page() { return <StudioPageShell slug="thermal-expansion" name="Thermal Expansion" keyword="thermal expansion calculator" lede="Heat makes things grow. See exactly how much a beam, rail, or pipe lengthens with temperature — and why engineers leave gaps for it." about="Thermal expansion follows ΔL = α·L·ΔT, where α is the coefficient of linear expansion. Area expands at twice that rate and volume at three times. This is why bridges have expansion joints and rails can buckle in heat, and why low-expansion alloys like Invar are used in precision instruments and measurement standards."><ThermalExpansionStudio /></StudioPageShell>; }

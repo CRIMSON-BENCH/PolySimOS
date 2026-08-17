@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { EntropyStudio } from "@/components/studio/EntropyStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Entropy & Free Expansion Simulator (Browser)", description: "Watch a gas fill a box after a partition is removed and see why entropy always increases — the second law of thermodynamics. Free.", alternates: { canonical: "/studio/entropy" } };
+export default function Page() { return <StudioPageShell slug="entropy" name="Entropy & Free Expansion" keyword="entropy second law simulator" lede="Why does time have a direction? Release a gas into an empty space and it spreads out, never gathering back — entropy, and the second law, made visible." about="When a gas confined to half a box is freed, it rushes to fill the whole volume and never spontaneously returns. There are overwhelmingly more arrangements spread out than packed in, so entropy — the measure of that disorder — increases by nR·ln2 for a doubling of volume. This one-way behavior is the second law of thermodynamics and the origin of the arrow of time."><EntropyStudio /></StudioPageShell>; }

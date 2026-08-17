@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document (opensource)
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 6 0 R
+/F1 2 0 R /F2 3 0 R /F3 42 0 R
 >>
 endobj
 2 0 obj
@@ -17,331 +17,1837 @@ endobj
 endobj
 4 0 obj
 <<
-/Contents 23 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/graph)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 598.51 99.448 608.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
 <<
-/Contents 24 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fluid)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 551.51 93.664 561.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 6 0 obj
 <<
-/BaseFont /Symbol /Name /F3 /Subtype /Type1 /Type /Font
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fields)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 506.26 97.664 516.26 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
-/Contents 25 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/surrogate)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 461.01 112.784 471.01 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
 <<
-/Contents 26 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gpu)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 414.01 92.336 424.01 ] /Subtype /Link /Type /Annot
 >>
 endobj
 9 0 obj
 <<
-/Contents 27 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-fluid)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 368.76 109.672 378.76 ] /Subtype /Link /Type /Annot
 >>
 endobj
 10 0 obj
 <<
-/Contents 28 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-nbody)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 325.26 116.792 335.26 ] /Subtype /Link /Type /Annot
 >>
 endobj
 11 0 obj
 <<
-/Contents 29 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-pde)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 281.76 108.344 291.76 ] /Subtype /Link /Type /Annot
 >>
 endobj
 12 0 obj
 <<
-/Contents 30 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-fluid-3d)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 238.26 121.232 248.26 ] /Subtype /Link /Type /Annot
 >>
 endobj
 13 0 obj
 <<
-/Contents 31 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-nbody-pm)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 194.76 130.568 204.76 ] /Subtype /Link /Type /Annot
 >>
 endobj
 14 0 obj
 <<
-/Contents 32 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cfd-3d)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 151.26 101.224 161.26 ] /Subtype /Link /Type /Annot
 >>
 endobj
 15 0 obj
 <<
-/Contents 33 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/3d)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 107.76 87.888 117.76 ] /Subtype /Link /Type /Annot
 >>
 endobj
 16 0 obj
 <<
-/Contents 34 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fea-3d)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 64.26 101.672 74.26 ] /Subtype /Link /Type /Annot
 >>
 endobj
 17 0 obj
 <<
-/Contents 35 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
+/Annots [ 4 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 
+  14 0 R 15 0 R 16 0 R ] /Contents 211 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
+>> /Rotate 0 
+  /Trans <<
 
->> 
-  /Type /Page
+>> /Type /Page
 >>
 endobj
 18 0 obj
 <<
-/Contents 36 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/heat-3d)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 106.12 716.34 ] /Subtype /Link /Type /Annot
 >>
 endobj
 19 0 obj
 <<
-/Contents 37 0 R /MediaBox [ 0 0 612 792 ] /Parent 22 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 /Trans <<
-
->> 
-  /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fea)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 90.112 672.84 ] /Subtype /Link /Type /Annot
 >>
 endobj
 20 0 obj
 <<
-/PageMode /UseNone /Pages 22 0 R /Type /Catalog
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/mesh)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 98.552 629.34 ] /Subtype /Link /Type /Annot
 >>
 endobj
 21 0 obj
 <<
-/Author (PolySim OS) /CreationDate (D:20260817061921-07'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260817061921-07'00') /Producer (ReportLab PDF Library - \(opensource\)) 
-  /Subject (\(unspecified\)) /Title (PolySim OS - The Solver Catalog) /Trapped /False
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/optimize)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 108.776 585.84 ] /Subtype /Link /Type /Annot
 >>
 endobj
 22 0 obj
 <<
-/Count 15 /Kids [ 4 0 R 5 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 14 0 R 
-  15 0 R 16 0 R 17 0 R 18 0 R 19 0 R ] /Type /Pages
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rlc)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 87.432 542.34 ] /Subtype /Link /Type /Annot
 >>
 endobj
 23 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2119
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gradient-descent)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 138.576 498.84 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/jh/D%+&A[2r=5:tW[nTteOsoS"9q&FX5I/sHp>?`iU16*Ejm"(AL]-a)I`PNY.%#e+J,pgL/P>*[na?0.H#Y7Bpd=^i=oc4,_932nPeh/Be0dH(5/<YU6X8ND?3nIYh&qT*:_rg\<&`*+O6&>FN#>RrQHpSgBZscK'a8K6Dm<)PaE;DKn43[*Ab]Fg+XMThb+14/Sf`%.%O:Qr+L1,+]4R"_;TH5Y:qbsre#-53-cl&,+S/Pk;JUhtjc1Eeq<!FX8PbF^)(hgt>2"S@CKTnG;RG]%3Mt*E;'$VITCt5HVEN6"cJs/Ag>E)7nPM,1GnJ7-Qs;e,fb^#=f9(n6cGBRPN35VXHHtqH#>2Ad4qnu8,M4@b1P3et4-]tsT(Y#M7aii[T$EXPn3IdAmo7M3!iBOX-Rq)KRNsP)qPlOH!YtmsZ&;5*KG"(*hs&#%FL<ap:m2@pO*n'`L*"EY,H<#+jILg)(2]X"Z<Z"#0:N\'C6HKG/OUo6)Wm!4YV'odN@*a7l8m252EQJ$,qu7?8ta/!DlOWCLjMC7l^`RRJB'fO,GH2S>r$)1kk<hQ?09<[.H"4?=X?ls#A2=AJsodQ)P_IL04pC+[n?skhrE_GH9=eZ/iO&\J@:hG%b#n^LX=6g*gcr&.d#V7%`$s%)f27bAPLUYd!(`O[SWI/="T.M=0n'*fTp@XMlOFn7Fdl25Q>^`qAuO(2g*6%!8?c;ebS(,^2eO'i;K5e(RUXdJZ5[3UJmMI#nH)W9J5nsVI%@R]NO.5[AZmZ6Adn+iFf[5qAml(@ad4:ZnY0`XQ9n;(+/VZNT\W6`rCo\5>32U_JTE>/Hk?m-<]C2dl)%s1Z\g.)dmlK.J8c?0#f]?S5?Ak",]4ZaYJq3lMsh0j\su8?[=!9rnTQ+>@Dc-^"$>)L#Af^Fa'+,<,'1hY3fV'?#<LI/%C$<CZd(Mc5tVt"S;eR)2gJmOQ%hYLPXj@HHJ>YMZ"etZt)]bf)gLA^Y1D9Ks)H7G,&=0b!B]go//^>.`JfjT-e8*M,XiHjDjPof1GT8-@a+J7BCkd1BEhBZ<7V@)&74noh"4-86n(nSRIadV:Q>-]u\Ch[T:0l+YcV?6b4oAo%q0a=UDu.OiaK%#Y__HU<I0UBp,B2hU\oEA_s'cnqbibnb:4j\-Wmg/9G]9MCoK@6h+baBktM,cTTK?T*-3:!ZCNi?,$/#Uu2h[,FpbOA\7;/$1=Q5R7Sl'>bnGAUmeP$ed5'Akr2?1X]%W>+LZ$rh!V@)UVkoed+rmQXK9J(l`N^6gXD7QjeW`YO&$uN':0b1q*2C,8H)JYnp3hNP[_S#(`3u`_8*#8``e@_HL"F7;8]Gi:V:'\g!Pq@S\mnQapdErZ]"E&5-=fSOM0uIG2sQ#%\$)?[8]p$Ph\i-+isGc.;qWaG;=_`P8(d];!YW]/sWt)'V\`qfncjE@='5X`<-D;,B$!&JJ%U;;]VA(]G^tp9\tZ&_*.X;JiGJHp-V(R_7<I$1V$c!24iAA;1?RA(HmP#AW-?;l=8V+3=TPG[l+;'"P1<&o##DP=<8K6F`_u5=79PN<`OF/1u](FRT52DG_1tuT^EKr&k`sMCo(`H<i.:RD?..UR7q`4NI\$1?*1QC9^=oOP:,+I?mEM]-5[*p#j-j28?ej6=MGn<T3R9XhDia4nSPn`&5T^6Rc=FQX`;sh)k3X<A=DP@Z*^?>AY_@N?=-HiH`JD*<B\37K\*s-nj77#?>M1L+!8-(Y"[O7+NT^)X4%ElUpS]AGq1#ZmY'G).8iHh>I1o'eHi&b:4'm8%FsJnU*H1g%ShlnT2&a[g%HO9_u:-\;.``)eU-!33IIDoeoSjar#+9hadm7VC1!g[>A2t$WY&5-Jr9)lW]O^#ebqHnF`m]'I`:UaYaRHoagSeGrpm(RFcAXak<!7sq]ma0&s<H"\D'@%N$l<$;>W/,%Md]33#:5/P>U34iD+]t9:tZJ\hA&\$sl2aCl>)]=4eA!:a;S24.[iBWhNEQ<mcs=:KOu8IJQgjWrnsiW9`<SYfFH5%]ZS%T,,QdHfc7r2,\1-9$s>Q3?P<``s4'Ke!s^6+)(E@i9R#)]Ieg48"RIjlWg=I_/<f3r_2=`+uqX_!*l]X;u~>endstream
 endobj
 24 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2049
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/particles)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 404.59 108.776 414.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j968iG&:j6G'miNl8RmDR#sOeVm6(6$)^e\@9.i%-91VW@jhn5^rUF/)+>#Za&g\RCBEhsN"A)u;=R:KCJe/(rIq\kMPlN1QGl!R)AMCk#)NXs]YMmHJ7_HO7IK[TI4<DO..-!SpojUtpD*r+O,n+Mh=-%!Id3S@g<m85[%nT$#'^FDcHj3.qhBT9?O-cj58J'n3L^/Tg0JDDK>SZQ4=i-Yd7kjrCo>c9'Hlg;$%j\B:328T07L^&@XW\kH('R9#,'HJsHn!u?("]17e$MgW[Fitt:%&B_:^NS@`?C.!]R)L\*,a+'VTV8aT-`ug'5#Pt\G4M74sf0)F*#nks6N9$'Vi]0@7j#2I7")6$a@Ls7[C%tR4A(a!lr'1`n7!QWWifU/O3@@<a?0$[CU'?]j[<<<BQp"n/:+[QS&EFNS8m,mdr#g'+tQ6FEli^V-'CZ2SCXE\kpsE<lc#EL1>Y=$2)[X4gYHl+ebS^EuO'r7[P:O15F)>!np`CMa!!%rm38'XY;;6D1*h6&1i,pF\dq:Zkg=Afa?ljlhcp_')m+aea.jcnrNX,5n\-o1QE'"-GfMbE=r\.4_?n'RLL#Q:b9E/8j&VRCh@;7[UBS[%^"C9b3NnilNPf(6],#"\2?2$@+n%q6^-.^+%\.=^#34-dLc[W:SA7tN)=Hqlf2b?nt3h'a!W?DDp7QPr4/RV[+[k/F-Ze4mDu"=.2%$0:!50d@2L[pX6`iW?HY6DV5gmAU@&uR/g5q]:)CsQ3`bpM7&-ZVW)L!u7mH%kLJNY4UgqaUU,@*S30uhV0t=!c$8<5^+2&$_j+ge\,<j+g^e'':jcbeG]e<JH*'@+\D1G)b`_f(^q.s`?:D5<r&=UirDDg+bTSRQY=>b`GDT7dciJf>`lD"D2CV0MYW_qbmBZNlgk[4_dDJWln3/&d\SiMbjqtd\M,:!>uilrG['qYhPUMaa\2/]hQ>rT/&nh#MY^?%kF:C#">QS3f<McH2PGZc7/p&QYmg9c!h[9]==OB/@[hqC0p_l":!Md0Md\eI+Al:09`<K:'@ZO2o5$!-S`4'!@IX*tas$d[qb<S(WAZO^%6Y)9@rD(X0'>'Z`;2207BKAam(ZEC%6EKG4&g(dLJ8gY_Cq[QMZ#:Z3<c0MNH^&Up_#W.'E,geHb:mnCq.um%A8l<"NEiSR/o-hk`LH;7]E!h\rN`;$<4-POj;ksb0l:?&BUcK16;H=2#%Sfd6KN@!#8tDjm+a'cq.So@fA?*eK`XtE0orG%409PD_50n8*EerEa;*i,J&]NPjq#M])c)R&*r'qm)IXA])(%bbr<%8\YVN:Qcmn?`KA=]T?TqJGA;7@HSCPO<nW1=O>-5Y&-a=X&,+JR`+5(up<B:Wl5!N:oWXDl,&$I^?Ldj\)9Ptp@SFI?#`N_5=(]2Hb3-C;l'k*F.#O@j"(oA&C]q`p?>f$*gir%1ms5_4`+Z?53DjM:C&@%rk.j"0^i0Pt)c[B$7M#/q<Nm]qJ?oB!QG=n;dA7(,c>/AacA01B0HHsNSF^<jL\\/B42T,AW^5@XQhUWJTRh07U"%[!gTC#-o?L\l2^gUbs3be$@:;P!O'En(nl!bSG\Uja38%%FqFOVZ<Fb>l=2T)h-VMFF)Eb&*nm#i6H8CjI$(Fk\;SO^Tn"(M_LaNM>*4(B.*rBtY&`Y*E`V)3r8j]uFEV.gr[6.>f)P=h-B:0kto%dHOpNeErti6q0=@SK@,XNk6gQEZ^Ck?YX;ohsI7<If_e;.%NFWl_YEYP;.h*\]M/6r=V(d3Df)OWp*4lD@a]0EpC;<+7rJI%er`*HeOX/P3PP$S\3WG5$@X;n9G4T=6Z%QMo*+FBN@I\N`1s:]5hY4,6^TJT>Qn+0bob8eKt.OisDK6D1JRGIkqgf;8]=c$omNJ]V1a+KOqioip5N4<SkdB/g0uI..U<3?f7KS>SQ'4XBup0(t7>R8E+nML86QS3&A%mF;m'fRO2ogj3cNaiPr]nGBea)?icJc+Yn"gl"stdD)aLS\]phLO>0dpS?6'6WHQld9d%7<5F^:FjT~>endstream
 endobj
 25 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2017
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/electromagnetics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 359.34 139.456 369.34 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j95iQE&BF8='Q`L_I=r1YP*QT)8CIfeS"aV51m_H\KsoOsiK`J7?0m@(+XtNnCN&NLA&&(Q`24f#L)SA;-^%:SGkdup43dh4&)lRi"mX!E%$V>._fL&alk,9^2!>&3qAp/7+OoR*Jo];_9j<0#qN2;bK(4a?nS'72X;,b/_OlW]g)%?/Z0t%jb^1UObi<EkoRmN5gZON7!Q,>+/rFa*82BrsGRhWp0RR<?'6"P@!!m?[EM%7`FWMrag-\9H"p^85IK,n"iDdXd88hK7B<mh;0j40<D=7djcj>HB%u&p(E;@4<38@pBCmS:\h\gCLM;K;L0_j2\!@;4.g`DmG5J>N0RaLl@-'US>l[]36#@N:A<K\(3M2TTJ;0`*KW,*HrH!We*gaYj8=;:?>7V-R@WH':?/$:k,KEXPHE@3+@JsG&>p$N>F%7n8gl0uQrOd_r4>)lL7.2:AFVo]?7_m)DF"KO:/V-"@`$=2dN`,e-4"4<>n`9g\L6]toTY0\/Wg@j8W[UY]AeI0HFcW#AbK7BUoh.N,IOb_?)+gbb,AA,6c4W^)u9n(FDj`5aIB9M(h`b-.n]HHS>'B'2OO+<&+;*RIZZ,R(:1od*SCpd9D+KA5-_pPG(W_?0.<@9NFVQs)rQSPb-3[o*Z9dG*;nlfIRQYA`d`oT"*FJo,V^T[[*Y'lkE->@[?P65EP#^H61@2e_CD^W=OpE1T1L1Wj5DU<\34o@:p;'8onES;c`UJ4Z+I+s$i&f<Fjc>@(?Kr&S2Zs4pr_a3cdU']f_^9,-+Tc!/U.W.;=h9Wo'(TQ$8p\IVLs):O8qGaK1W24>c+FU?K[UZ$dL'=Z\J'u=Bdn4>SHeLmc#W;8mVjJb)*'mCDjVf-odA\PX<:oh:o//M0r'HmV,f6IEa4?h`/+U%+oC\<*>JlI"#$Pc_]@.Z+EF"gZ#(`nWIZq-C7<]C%NWqI(01qLZIg)1jJIkhHWq$mp-K!pUK\moiMjiJ<S&^EbkIJ8V"rKOL[>J-:1/8\KQ5-/iLF*\hUg334jGF[_e#8I@CGan#k'$lq&K^r0eZc<8M@sTP/KF;UTsq%Al`P*ZGha.<%>YXeDafm,3CFl/U95b:&H9H_5WMl$NEH,\TcQ?M);Z+K'i#f[N,g\CV<YRVq)9.W$.?,"?ufZ/),+A@%8<;d*LI<I9U@NL_%l1!9Y]rs8[!+ORjTu3$'JF/Tm+"<`oD>u7ug-#8@oLkF1RW-*d:"54<f2M3)_9b;`RJ8?WkH5RRq-\T#AYa#$2J;0RdH%hd@fYV7]OfK`dM@e#m(f;7$d+N'H"XWrpi"Ja#l`a.#45Ue/61/:F,5]UibtXK3?!V3rq">qS'CE`dVnQIsdEDs"UdmfUMV=^'<R3.\n>n*:sCPgs)P9j^kf.NMj_I8S33``4&)QUYR]=5@:l*1n4CG3)X6D;G$uR+qI$5X)ljCFH\jBtBYmgq::"2ojHB`i;ch%.ej'_R3W+<QM5-G(Ji'jNt7iRb639Da/93hZnt7O6mlJ(O5-7FIqlP:[dr@9r9V-<K^E[N'Z1l(>Oem@HdepntW<Ki')3Di!5(7$WY28.Q%e2!Mn0d?Wb67M2OLJ>N0Q#gL9>4=:2M)J()L+Iiff!hOL4Tqm*`4Vu(a<5j%SnaX8dN';c*E70]T:@GstYhqT_UN_;HTM2#4n^i>SZQO]'LQZ<,!B"3f#huq>*?E(VSJ.E5b(h1%STUqIgHnpE*3-S>B<8*a4_:EJld-Z-$+I(a+9!=s7]Is3?#E:nmFsj>^WhNaKEI%+-=K?T3F4"5r2ZU0^<Ri(aG("K&jnJ[nGl?E[b`Q^CP(hZJ&<G2p:I+&"+:Gg&l4SR9m_Ga=?U9r#KH1Cue@78f(0K_7CR]V#=DU*r&&V?+EZIugT]UaabhH)t>5)YuRO7kWl:l>lIJe.89&!QM-6>[J12Xt@!EtN7;EITLXaHSW?-]jtD4]K-n_1@c!bPI`&0,>o'Zg6-D-geCnu=Fm8]KK;fS'fQpQO.m!IFbIcu<o@~>endstream
 endobj
 26 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1857
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/double-pendulum)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 315.84 140.8 325.84 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/i9lJcG&;KZQ'm&'ZmC')EOd(!)RXSYlDR6U!>^E)Tg/0)W/gWS:YWmS,Pl)+Pg=F?bJ?_KRMj?mD24XE76k=tOs/>fg$\5Pq]R!)!L+o%tAV@n`,J5&i8AHDf`B]#7i.D%A)KM-oSb9@*/$MI4KO>NgTD(lI'+nWS!=of*,`L/Re?rT^+XF5fJ.10"nMG)Q_??Hi3?qeEW.=l$a]HB]JBu,G0_u-OkAE6k(BY6M@BC[o;D+,l"U]n96:/UR"qj5]n;`LU[=Y*oQcd/a=ioICG&>W=oRnQ)"C2QK6l:!TI,?.gDUAL0OP'Uu$fHW#Yl0m*n5l)LP_a2Jk*p/cdlWPoS,-GQ>T$GFmmquD!Ts0bbR.:3e.h>0_Y[\+g%`B9F:!6$<01frR>$@"27KEf4.b+[`>KsQ$Mf]B3E*_:C4GR*SRNM"LgeZhL#9mbL1Vnqc4u(1>!\TiF*%l3qWJTob-7+?8J!B:18b4:(QpHbD4*c&4r^4hEicVsZsR,+jtgt)Vf3)HcU%;S;gS"eI8YiHa=uhA!54FlfZZc'ore&/i_*?jJj43u\Xaf\\6oj%q:W=[08SciG8sbHP1L2>Zp&q\>r]A+&OnlVnCWaJ*hXht>(Z`$;^bp'$?uVE.m$s$C,A]:;HB45A7l\W_S:C&J)L@YIgs]5N_UCb#I`$1Yok7)4qnj@4MgoP0W"r.LnFk5s)^%c]jX(W34VU+G1ppSP6%Fqe&Kp4oD>H@FgH#!C$^SY2''2mgTY/Nc-V00+@-]"eb9<5@fNQBgOU/b,At#2eS_#bE?"++>S;WPQ3P]Oq77E*)!eB[1!t0!"ftuOo!T34l_:L&e6Sj\cq_eE`?;us"0mAMCK89j7PiF]1QS`HYf<J[1`8.?8ePBu!k,R!mHCcT@D,e%3lRSK)b'JH(1nk8]"1C4qo\=BmCf7OLjcE)rbJ!0B8)eQ'#'$-%+F"Q$B0Zodl/se_*mNCX&]b]ps2>(;"ZVL?>K)4(!&@C(fH=tlR6EKE#jj@)7gAnFP&M*-un'WH3C2h`%e/K4Q+aUgF!>"@/kTA80?'e?"l7[ennWLpNl-H1'u5faV6"l9W(CX99\52$Jp59\:sr"J/X]@a`#D/]NKflpZc%k=67(X^Ya,>j2GP`j%X*V/ok)4lS7NVFtgpfW!d+*`u\`gLU"0jVDi!@=i$r)A4K#?7?1/d2ioXC^@qO9=..K4nKh;oH7F1i*D.X'Bd]/Im\t;S<4]ja?K@"GY2iJ$Kh'b#<$6#];el^gUgClBg!!,^:F&`36]&aEUl.d&5MB_N-dq#el*DCCQ-<ZIV(SZip?!G+8fu87JdCD3[<_77T1>5<f>6Z[SU9QOn9a@HLot/4od&!BpFoVH!k9<L)qbI1$_t&8Hi_sNqrpmAl7-jdcQpi46^\W7S\+%so=O05aJ<l5TBGu;o6*16q`P.I5+*]Pn7?;L2H=^S.)\&-?.Ea@CKA:(R)6b__s(PgZ-GLPN4f[jmLA)4I)Au%(r9MB>gR\qpC$aYYAdphW-t5*7Hqt^j+!QaeXa\_r@`Thj]SM8RNs5P-uk,0*GUl&:J:I2Di[359;JIZlX(#R&h?nq)/$NY<b&tGBs,na+re\bo`']qYWGc-oU->iLo0c[\q.hI/+GcAG)Y7`5@9_%<]+!J.]YBip(d.F<_/8tO/7K6e=HD#IHJEr@d-S.l;r/H*hKf_CXAQJ<;<,^<OjE=kE+lRTcBf_\IR-P3h.CLhUFP^'DRepC[=oKoZ$)o0%I#Pkb\+c<j(_[(fPf7o0i.;3g<1kW=D,@i=pQZ@C*7io;nH4>9546o]eK<']ds6g:a^.OFZKBatEUX]LUE/3=OXV#3c!fhG3A)~>endstream
 endobj
 27 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2047
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/projectile)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 272.34 111 282.34 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/jhf%7-&BE],=56HX[.@C^qYdXR2Jn<dakG:b$4M2gA3*R8M(U)#ENq`W7uFSmf4sVh1LP_e@Z_FO7ih'qYt-AZ4FC#tSs9<%Vss>;!bF'V!t@d$drTao*>'soW?264@P:Cf+I%RG$L2q:RD':,Lf4LM_#2<10UbHP[Rrk>`BtP?)FqBHZ-OOMjunl0oCt&J,7,Rl1_'U#7PHFQjK0u!PIuQ-PK,BU!7N<-3.;\jOUi_AN^?4Q-s_+kOD#.RM0:jL,8.<f5,L7?-F1,r$;Pla$[KGMMftjC1drc/!gZ5*%cQ6E&IID+"4.K;8FX<G0FA,m[/q]4g>/YP>'KFMVYaGu1e':t=pIC9.+o(U^u#,"XO_YGCQcffHm8(VQV_mG:i03"Ol$Me.p0qp_3L1-[87g)fl.Z1PQX/X2r*q=!T?N6O.us?MNX2L!@AhYG]Y77d7qN^$@sXj238RK!^dW1H]/:(0bHR-7n=jk,@(dnJtFd7r5b0kaD<;uVPu$@,f]P+^EBi%Y^ikKTs."jkk31`D'IG8n?cgIFRPe=;[,2MrWuQ!8"uH#2Js4#&5o$<<"+KakL8]Akf<NUo5W?_=L=`'JC7%QS7Cp:c+*/Y(q/dXYuNI'`,_CPe2*7s2@J*P`Y2%DL^>n0]&Y(blI$'KPY"q1@!W0f:f3urB368%iT(DG+ijMJ.ULYHWQL2<rZ,>V*(SRq`;G^n5U(Q/EIp"R552(*Pid!I5Z$cgP$_;'!9<A/RD3n<P(f#][G;GW8pkGDQ!muPE.1bjOrXXRNIN%aW74pBe`t]18_N:"Y%Xg&BrqH$9]T[r,)?(e)e?lWf`rZ,0`QM5dDVi>c.5'uF`%F$6e:?t6p.+7STHa>`d4E5BX7>B&%s2#L8f=EVtHq:3Zm5$Kk\8A?u>;>DjkiE]F>BSV_"sL!7*"C-E8[bqci%C/8tF7;3);/e=,jgTQBWL%Wq.8^=M>iBKaRKb:;DTlLRsL/^e-F=#*^<Ldk"<PLABU,Fi$.k!kTJag8QSG5GQ*r&'$#J&9k"j$=]/_t9n&mIATt`NnK7Sg!tXbIS9sI0ePu9-pT6A!m2j%`BQ`#ol5oL'7dr/_X)=Q'h)2W_:>U/2,&ZEFP0j=d.$$Ilbd9o<uYr_l^iD^:4X$E!Wq_k\qM'5)r@'jcqCf%.lL6+W0p=X'1HJ@n7`eR[c<=`V%NNaQLVpZc_O:[4#PfaK-5g7T]\hcR.D)*_.qTZ+VS%%,NfFC$[6kHkcG[Y>Qi0b=+-IaIUsfN@%s`iU$-rI_<=@%(o&%R;J@QD6EVIAi[V,goY<3T_8RhOO?E["ec%JnH%o6fn_.-s#L:P:.8%0+Qp6OPdQ%6T^M:=9"`3^H7$g(gB^:r8#EuAjJP@Unl+G.l1i>AVKg\Mg?Rc_0"9>_?]k=H6N&?EM$pj`6?=Ajj]ThrJa9kdXSQ847F%SB:$hrB!4=JQr$3<d<8_rRNtG4^GKku[_a,&^ceH+"_&^9*29Zf0Wm3*q2dDWRatnf!LSasSj:?-u1\\Du;.?N,b\q7c9(BmF@IBW/Y#Dq4F5s&!?G@LK%D2^EASt6*fX*T,f^L[2b]hh#8'!%W"\`)WkEu=0N92g9HD@Y6DH$HHquUrQ0b/MB]^CO6d,`Q\2k'Z\NGt>rNUS/\dfjYhILi?haP&sFWH8D$?*m%a08ej.o'08SAdgJH:b;3q='02/'=/'L4%)(sm>WM4&+56PhsH4A+enVtB?2D'ce:jS]]%auW1=G9>PtRI1s@[6GqY)di[(P3&2j@cVm<nob9(LZcf^<]N_B7jM%+?U-Z1%(#dH5Jb<d7j)dNDI=s_@^(Vggp-1>pR%hQ#bS&_$=P8oe[APtYgoJkS')Nm4@Ugt3C?,F'i<FM,r%HnY2G>hq-)EanDUW6?H^73^lbD`@Yq`nXsDPLecB`*&b*JqBt<d5-p+ds?1qj2p5?<O#*]hMX=4^H18$eK-:el/slNf@_M*SYk)E4tcoah%uOqOG>&hOF9)^e(D=FZf$C-WR]-WN;5I?91/0LThuW_bBI9!2G#D0gQ=f~>endstream
 endobj
 28 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1840
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ising)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 228.84 95.44 238.84 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j9lJcG&;KZQ'm"*JFAo>5Od's)dWRj\gMUh80>9+Im3n5fQ]dncYs3\-Pl-Y#g=?^B^]4tbU1KKT%d/7.O(8Rur_`EY('&9mnFJ^KPehSOPS4Pe$[=`SOFW*CN.;%.+Q=4DAV):;B7nX?Q.R9Q(g%6r<s-<Q+p4n]M]fi'_C:IT;qpuk+E?3B,jr7ae$L&#QZtD$S-TG]!eqdk^)CPdHl/Eip_LlQgi,S'@i5@,SKYhJONGKDKt+CL&G_-57$<A^ZSB2A0J`H%><#Qhb0=bS(2ZQ;BS&_#"Y>rj&odYq5Qol9"54pi(gdX^;@qEmb@1%VbsP+a[X%bq2?2f4,OD:qCQBt`,nD"&n1VQshc<lg.[$7;S^BFs'i_:Wm%UR(c^#KT&lrUQiQ@V$9%tB4m$JEU&frg5@nt9*aIV%W#PXRPL*YgsFSN\1.m66U[CXL<L/;&@RV-\`NPPDS'<K?]P[d8t.\!`:0qMm.KsE3:8CqJl\g5<gRmQl#eS\^rf67Q\nFnF]#;:1ErKVfZKKA-1oLXSia!GQRU5O?LHY`/Z/%<>:\63_$LB]B`=gpS!2rFqHSNi5f'J'8/4$ul(EoUFQFJI7'#l;!o[8dcT:0bU(d[1rM=a?R'ZW!Aa3R_OK=0$J+m&\*3pt#r62uLGhhscSnpiJg5B:BMf)It8ILB>@o,WP]5UH3pe8/f)T82lG`(cBKrbF=0*Vk'ImM)jsl[a&c[5JH?aRto#<`bl&ddt);F%4mN7B.gD6#t!3DIlO)8qsRM=%D91mF/+_qG!eEK\krFl,:VkuW;sVtYDXQ\Yl;3SQX+6+^tR$VmlKEe1:la:dma*9ogE%]$kg3j+;g2TSSksmW$^;uk4uF))Gmk_Mq`J&$!s/(ro!X[,I^]iXLV5c[c:,$k?1g>ltTC1VQ:idejG!QVW,".2eqcY!"Ala[SZcKHo+u+RIV&pZI0GTb2FW\`p0H/r7gbSYOjh]>oVn,ji7P`(f.76Rh4eXD]OX<%D)=J7G'KOaDfsLH2sN)"YhA_4Q*,Wf-dRh@fHtoOZjY)]=Mn)XkS"7+8+20=HZ#C@OXi1QAuJKB;V'Zq?sr?Pj.q:l,e:5F&OKGO4<71iq<Ju'W.)Q5Ecc,,gW:"R1t=&9G/Q?9KG?a?/UH+h3pb9B+)?$#=6f5c9RY[)X\;C49bA&Y,_olWii`].o.KfVL?Q3"RRL6+?Z'PO%aJtl,'<tfdO[^VIijDLOdj-RGkWq/;6F8_4!fpTf/"h.-%l!\[4;^G`q]=M2Q">Z$J#cB6'u>B1&M>REhuH_5'qGjuDPD>Qm>LpAeH5$W=HFo2tQcg)E\t2s8EfTCY65/6ul!:h9s.7<+DBEPIgI`][I2JZ>BC<Vf9o4'/J'Q?t$*..%PA0^6i,LYQOTNt=p%Z^EG43)sH!EZ^<965D;SXX^BNYsegL+Y/o%Au_rkHG+CkFRjP-T2*$XpWX>Cq`[>-rLrR*Z\5Y(Po]!ngmLGFg6p,4WFjW/^e!,nP%jg/JnL9[e%TX-8T4<lEM*1n68j6k<YZOHOMZ@Fju<%+m!QN/F&o+U^.a:SjQ%"Umc^uN*_S_TV6DoS9bX/s5!gg6?0'_VZ@^9Wq&t:\iVY9VJTI5+Qgn**dR^2b:ErZ1I;)+0hOHM>nV0Mo-6]r7"RD:+L#1_6^i7fil^M,":%mONeI"c[VG"S+\tImW^o%.@,;>Vrj2jlr^tLO?`u9u#TYISjVS:GX<l%m>oc^VMo@HX#06@kf<o8'Z0.fYPc\-S*rW#Ld+)14?1`Ra'0!\A*$^\BHdT)!#3!>Hu[&Rl>4ti.CA@e9baZPPFNV7gc@CrRm_1.?,gt2~>endstream
 endobj
 29 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1914
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/attractors)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 185.34 112.336 195.34 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/ihf%7-&BE],=56H(Zp5Ij'(l?T9%%n=QD.YoTJ(S!A3+<m8Zj=#nZY6,7uD>We8";c0OTD:@Smb`7ih'q!@a-tJ:H)JjorQR(f&pbTFAh=TFm#gHi\0+,8*Bf%20jM'(@^]65bh>W,G2&D&ZuC,\'YDR(aIN7^G(i=t't;4Cf&#8Si-Gq[>5q4s6g\O-cj38JL48KL^^90J;;I;l*PsWdp.304Fb^`ij3&66<%E#UFGN328U]efH68`^<5T/Io(R,j^YSnP$f"V3eKBF3t>#h/<(`?1/*Ecj>GWV(kV&>lHc.*:>K\?'h<#Igb0h-d8,q\GFn@+XQYGoBsg\s5B.gBZ<1#5U[Kr:BLpm&&9/\)c]iHafE9bOnei)BY$1QMm<AcQ4d.'X(kML9jQR4ZJLD]L+=<B&qu9_\.c=aP)\1&8!!K]V\r&N9KKiVi^Ve!Ro\<XM(+[uOD?_ocu?(I0qfa;@Y"",1aY%;APQ1:`Wur^=6>UV;FGA%>7=)Tp%ro0m#5?RCR]s"7^*a%eH9;*2dYusi$ri`JaHAG1\gkTb0^T":;5sOMBq0q7iW7r+i3\j3f3^I*jZDJc&'CFMFAqq/AO![B&/9T2N2(h^(jk]$>_78Z@E-[;Tr^g6a6(b1FZc8:!tZi8;=\aU*n*ZCD\`]KLVo=;;N0K`sXjfQXsA/%2Z$@/YI'_=r&'Pr$VJ,EZR<g0ag"bJAgk)P8&idII#S].I8:%OJ'nh#:V>OD_!6:\e(<HnbG9GJ,-8*&u.E63u?VF:F1'k'XsjF&hrq;&9A.t'#qp6,9a'GiZuAt$;!oi47Y#gqYW,u)IXIbQPM:^6In(NVjT9j)pLlS&"_RMG=4F:S=;](2\jg;#hCVEosFm7CV,"![;ussGfVst(hlB_2g%#U4>GQ>&rt9.;h$.Z$0n-DoA(7*0"r^rc<]>YH/'=?a,0#A'0>3%HRhcPN=M%><B4%m=lp?G.pH.0Kl6SbUX(aD6H3BjisVtj:`)0;,^C[&N$OqX%3UM*g`u(QOE;gMZ;I>a+AHEad'O<+IB$:I_fa$5S@&;B[@1+G"K^dMGN"b.f8Rc<el+Z?/81-?B["rLdqi*SnK]'L=VuIR*?`V,Wbl^k2r=kY/nH8b\Q7fDjQhYnkE+lRc5^<8&;R!EH4Cr:LH_9$mXmd&pTf?b$AGuk`M.mZW,X<M+ljfR4+s>]%ml*JGM`W2U!o2](sAf4#DpHEea^;Tk#L6;We<jtQ>3F?%jMU[B>KB5^A8>GBFU_R\OgX)>!]Af&;-U!iTPY9$\\tC(&S+TKR&b(FOS![E8Q)!5AA!^ohg&6E_p+KIj7114$\%>W3jbb>1E%R<Jj-)H[/J<+j3d5PN1Q$&ncB^Xbu6u'N2C_5`<'N*iC'W]Ak^V#Np9SmqXmN4H3?F$Tlm"?e!94]X+6FLLgQHU6-QF'01=Io'8UoKsokpkERN$cR-u8?.m/NG<%@lbMa#cF=BXrdI`2DAc$O)Vl_b#8"MSqL(T/8EV>DkUq6hDnu$UnPGMG>0TinJGq+(hm7aA8N=OHVF>uZ<fqj-M1q^e1McMdE>3ofFk_4]])8\rq=[OuDe(4!#nj(nH89B*[!qgmT%M;7ASiR\A]OP]WH9VeIPPN8n+AA;<\;8>YjOc*J)T8A"YN2Ca4-YIY0)0i&LWH8a0i=3=]e(PC0l*\8E9Y'_dpoMW''0#(.V79_S>Q+YRtoFuTJX<BJYV$C0e%'89%T1_-2c`f'1N;_TT0b62\`]6aC>T@HgF>N2[_ZV\b2bj7iLR].;O+#`rGe,9\eMsXcLdXh>U]9ZM]cHIBG8$ftjO>nN:"`ZO>E3Hl`LX5rpWqSU+Q$FisBs]/8ts,j;Q9$TL*6omt"S+8#*5@@pT>[^:'Eer&_YD!f*.D3&bGP66dC"m4mnVZ~>endstream
 endobj
 30 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1775
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/wave-interference)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 141.84 142.568 151.84 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j_/e9g&;KY"MS5g\GS65@$'7:AOE_BsXmNW\RTt5k.9L$\Ot'"*Ff#],"\?b@,<!pper6ICO%"j-G/;/s+$l!_&E"XQT323aEXY1IVEc#XYCT.gK(1;&)@o@MKf"a>"ED5@":/R$9#41+V/%Tc7@Z+e$EfEoK[Ea%==`>rMOQGs1`!O.Zd0b:jo^cgk&E?IH4gP>)tSl)!TO69(R;]TjTW:;4b`Dr(a$<VKNocH";5j;329`SCC_*llQIQ`Mh=ujR,.?gSgbLVqF2>^QAsDEFOM%CHV\=4:+uf%&M3)6mUSRB/27-AQ_O[J$fHUMepZ"$qUXdP-/u(Qqoq"ulC#Y*`h$sA-lF<A!t"H-^`:,?Gu<*;WsZ=+iVD@th8[8^ar5ANUED5K[TXNX1=`[2Ag9&MY'<?+'JdD]:/2NL)n#\ag`KuDOtabK_ZN];e.g^qnk(E+Tr`f=kAq%@a8-VdX;YM=@n@4]Cmi`TpG'NOd?Q_&X1\p/U9W.Xd!^&EgX![gc<phuNh@@S;<?jHs2:cqM_ODE!2GTBfT&Cep!.mLn[U0ZaWJ%!]Ghq2\7B7.ptUQ(%uBrWM-qK>.1jleMA)4Ye/=rqNER\H>ALWH&@FSp@<bgePqB@":sYDq^a-*&P@#o1]IM%C)#Sr7[KF;'s2Y.5c.M0U9@+^6P^o/E6GD.fR'JinY(rCl!JEkf`'lmp&("]pLDkq+%E1du:1KGTZtnA"\o#00^n$mKcJ-@A$[8`UfCCPn+q-GP8L6n=ZF9VI%V9=g;f((UidSV$etLeko-!JLr/3p/d)T#a7SU(D+c3K'Wa-l2@p$P#G,%,DO]=hO4g69=mncb!EJd>>f*m<6'!9VV,h@hZf8=j$SM:Mo<bb3qY9_(;;\2+%2Jl!e'cOD[.Gc!2[.\++UkTOc_l6mYdFJgEpVhLS"j2%!=Q[j:A4u#E.fB1OrUj.H<V6r1<39h7b)8690U5i/g!T7$Dj>s!noLeXlE>!1<oD,6[KhZX`%S#Egu-SUZ\\_rB`C@XZL;D\VPIF?X1"S>XjPih,f+aZOdK5aBj5IQQ]OrWXAq^X9Fllu<A@i;30b=l\LKB=5J`7:i"C2r"mhl;_!lA8K?L1+!coCEnY8f&4@1,#TqfaeGr^TQH+f;#s*S`cq.LcH+I`f8WMc"IO;9]KF\QAD\&JK_aU@3Ml>aBc::]SZi$$<,SIU]U0<9Iu_eWOhT+Fot+OdAXRAhYT\F,m([DA@'AnD_]IA'[.alLRN1RVqF6n]1P-e%%:l,=6>aC]UdQ]jRpBf*^fP,]IgUYf]<0ldRnWO2to#L^m_6I3>1U9OsOi;r1:ITCE^8nDO3IEP@?el@D62J`0];[\?#dbNKO"S\8bk/pr`5Sr&`O!Kd^h2t*>+-Njn8(-?>l!,g!e8VRZAS"'m@u`B(&p$F+E-?Qt$ti(RPppW:.r"n_]k>d=9F?(!bG<1*B^V;\GYIu+r(P5<L1@oq)eJ_bn+LBs05uMbPLjQ$0j_D>jrPXk0R5A>%&X#J)45o?i=NhI>a785DtnIKoj46*)**ItQ'Y3^T=_eM*1!7u.?p/p4c_^dG3'>%J!5EeIY%@rH$&n1FGnV4!aZh62,`''T[J[rQ8$q=;TV(GRi5EDdeEtlc_TBb'_JPJj3W*!*?LEa$[^J.B/5t<V:s+EdS)r(9pCCt)D_%*Sbs(<EdJl+s*-qWmfGEWquZTno&reVIp$:Mga_]?i3<e<rN8hnF:D:Y+ZS_8.Wg&emZHRmZn%<f]B*lHr!NOGg_T~>endstream
 endobj
 31 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1751
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/random-walk)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 98.34 124.776 108.34 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/ihf%7-&BE],=56H\Zrf;N,&-?tc&uO']4R=Z^@[,FBpjs0Ga'3"`W#WQ,rotoW1A^[J,pjM79S]"alD2)'LN'=IouT9('(P8nB3Zk`aQFY-A[3:)n;>s#Sdr0`^&aTb/jblj&3hRZ;K;`<S1b#F)V=!01U]%=Ac.WOYk'N//T<V?b<_l+`>P'1?m'Df<"Ft;#'E[$6g3Y$TPbtnnhhDGaH'nkpMk4CqC?P2,Oqsd0iOkUl+UU(ehS/9[j^WYp*]WQ,[o[+K=onj5<fo3j5i;/_9TdYS]gU"am'>=Mjse,9gQK%d:JT-MU_o<0HbM/r/NF2NJ\P&'__u[eUG(3^toSX95WdN')8/^u#,B]WH$JeKh8Sp)AYEha6/p_6(m!EdMH7QE[LB%VDlteAgm$Aku#+7RY2VSt+(7`-\ol)LXcf*2d.Od,BU?6PR$P:B=/c!Vp,3]Gog;<5I7!<NL64)3SjmR%f>uE4OIu%B]PV^^^/Rc9@i=+(+C-p.tU3e75>ppH<s`1Dr6NdBhV9d&.>K\R"0)9!")[a<F:uMDHZK,#%g<A/"m$'-=-e/0XCRK!eV5@RS4<J(IGohA@$4[_Ln:&M2@9Fm;\s?3MG"^-_QcgHMI<KF]`0*'H+>r0r.F=prG+7PVr'&hsIbbSIh)T(<5#ThfTf!%nfe0h"lIZd,b&)t)m)f8AIpU9-'jig.t-!kaTK#A<'!mXr)n1mrIM6=QI+.NYj*05>mY[*_4PB^)8R%48R5MhOma3j1Go'9&B[(K<M[49hPV_2Tgu54Pa_(T)X,*R.]iGI,e1K.6Ib@j!BDQCKSjGaUR?CWhZ!d>?cNpX==`1%q^4J^M*>fS,R)nZ4^s=p^S&.`.Q>&4Xe]j<R([#Y>/R;a_=hZk:Xih_#CeW!`/)n%qF()Y%)XIiE`E4/;$gGu3cZ4!>eZgro&YF?ah-%=0\T<kfI7D*;aNXkJWY4b^79'V?QNT2'^%Qp_;K5B98,q6?Oc]&s(Zc$+6U8UN1n41SYO?L^U*4c(62UZ^B%9Elu;*gNlYBBf](/U$/k2)k=cd$0oFEF-1LQhH?*6gAJt;k;ZT)k[n<F>/qm49Qt0U&_%=K@7`_jAqV/i.>NOF)qa:?/4[LQg)rJ0O*:Z%N6-X3lSS4^necA6^]4]G`YLU"X]c]P7g8NT&Y/2,URRZduCKP@t<gGLXF?2qIcang9%#scjsdsBK?u)<">Tna>fjWo[*5"QW[7P5Lj^M2TJ)2FAm`pk6@&Z$KEm?2R'RAEhgM[>ThJ26kV6n,SCQ5h'YahpBKNFE.)d+X'I:-ooW9IYFXOA-Y_*f0O6cT<*SUa0s7S[Pld3\V@jp)l],N.lTRTa?0/S".3%Z_E-ZF3+FU3ZL!p2Xbd^X.MCFW8OQ]LR7:L4g4/-/9qZKL_g6AJ>.9tq:j_V7SN^9G@4+F%1RVJT<\pJ.!Ab9g>;?5.=5iV=lmP^D?GP_MoFAXr8=liYoKm0T;(A>r!p9t^R;/tG6pRB&W\HtM.5WT`Q@W5,4UP]$<I-3#<3Ke7<3P74jS(c:1FL77Z+._e0iP<;Ziq$nrkGH#uh&iNI<:9H.#8[6GqtWq;Ls>"ipJ@-J+g(84(-S6L]ikW'#*L$";DroAJVA^aVoY`GKhFFs_i6Hnh,Neek6fDe@l)9'h;?Ke^@/p.hhAbJ^o.4JVr?)4iUF]UiX(r(]B.KrOS!GHbad(i\5XqYg,8jo!`8ZUmf>oZ7gC-5H8rG8UON8;.p(:~>endstream
 endobj
 32 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1875
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/kepler)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 54.84 100.776 64.84 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/i>Ar7S'Z],0.F-,F["(0!&p8KDek<6XQc6u8dMH%uCpppbPap7@55YmZ8p4+5Xb4H?!Q'Xe8`Vn[iVEL=0o(@9+520V"i,%4q"5@*b$]B#1`uhC-Lc%6,$s2+56Bh5*fjeRPjojs[2bJ!fFUP@#m2L3pA'LuRY2aUMRf)3:D-JBKt;JDT0^nopIK,Fj(W8s,REpV_umkDQkaT1^<3o`=hqZ61RNTDg%4o\Hlg;$%j\B>328T0H4L^!m3*Y3!=)1e,5/gmCaEImj`a&-mqJ!JeT0O`20Vi0Jke!&/.Ph$iVN5'E4EpgQs1&0r%<MTS1o;S_t6HSqilcGiT@'ZrnSr]d#<G)JP\*o*X<>9?[t!Tf!;5hP#Xqt7c<lVTf-meS$IcRh?f8iCo`PI\Z5(5U%T\:kDK-K@3OZXma@rI.GjCiH1^%7_Di]YJ6@XDI[Z0@qJ"B'/hi'd#-qL:0fC$K@o0+bRHS'E3"60'FdphscS<<7d'brF[M@/tCYSJQK`/N&6"l6d"+0@+g`"#+f6-hpM+i94bF\*/^:j6310DB;F!sOCM/r.:IA9C9:3"ER1)L[p:b.d']@Se/ES@Kt[%^ZQg.FJtA/o3Ygl>eOHZl/d5K[bO\P!%i[@1P_%<fS-$V]_S)e]kRllufDdgI3gPP-h@H4I>\;5Dtaf"Vm.\>g=f:U1sID8,(?$ZF!R<TW'gs+R'Mc9pnXA3OW4OO-1&'I-M-Y<?Yc7JfW1'%AtVbSjWLR(&&')k#hbYN7-/P68Q!^qYrf<*lAsBD#n)>]_Ek&%(thZrR5S60MfR+]nS<)e?lW)$cZ7QqfgOC#!<N9ti4jFfGW_%VF-6,bE>n62E:_`]BmJBY*eGIl^)Qo>J6)Z?0G6`eW0XBY4!KXKBD6gTJPQ\*"nj6I?DPn7lcVU52.Cs!Sl,nmd/1l4J&e>4Z>9N/MVrg:6Ig>)ro`oe7O@H@1XBY:o^6UXJs8Bi6g\ddc3ph?]t+;rHlQ&rX,re9J),K@r0+*K(nqT"lOTlOC(Sa5!r`r)e'+Wl9./,@ieNCA@r_3Wtt51Hfu;JV?al4;Sjk>9uIO7%%oNB;k>g]3oYQE_JN[8N]TLRH47*8a"-iQfUHd6GT5!'TL?%;_4$eaD@-!>h7popqe@Ma>W>/XcXTaT"lQd%Ikj&WT2D%nRtfPAW7sef;cE#<[W0$X4Eb&D>0-t<2luNQe5E<R;B;A8e+J667I`c+I&8Jg-.kP]b^###[Sp)gRJ=:2bG](c1mR*=$f2fhVo=)]*"2uda:<hK=fidjE@rW&4fa+T-N8LQcl\Mf;MVEl)bMT>SLm4^=e`n[Xo<60--)nO,i=a*t@XSqe3P#dD=X7]D'FK(2dQbU]`;&lUFlc<Tn;G.B_h;[)q%RR1,EY^r;(epqsF(;4.Im=/U"tm!SW*>3@=ek[::9ZBck(kG2D0[2WDu(q3=tAlUE&5TN+N"Xk<B;dcb%i>eP5284e]10poe3!G=a?"9#"Tt5p^RrsoE\,Yk]F?GA6CD<_J;)h&W9f.LFV1A<*/=Vk$5O_k73aH?W=F`W-=,SZggTA]]>fkJ]a[,/n.+-ut"mUsZc4N\#<JIQ=M(DEnZ?EPeQkscdC8b2@Z'7RP\Ul9NU*m0Y\3Rm\-_)E=Xu:?KfO&B\V"^d5;\NNhBt;T%$(FiL#uq@g,);n&;)DOC^sVTE8E<nd`I29>$bpq9^aNW<XD&tuVP7pBhR&9&3:2:K%J,O`XS%fBNA&lEA&95'MZ4,"1QdSVX4@@/XTp=+O&>7BFc"!/p2u548Ztc#YC:e@F1"r,%B0r#*Sb:4BA@%.8J/.!$>eW]]TWTG1>U(4iP7(HMF1NXNV%fWFq3@qO1'hCC=E6YrrDIn]eB~>endstream
 endobj
 33 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1787
+/Annots [ 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R 23 0 R 24 0 R 25 0 R 26 0 R 27 0 R 
+  28 0 R 29 0 R 30 0 R 31 0 R 32 0 R ] /Contents 212 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
-stream
-Gb"/j9lJcG&;KZQ'm")OFrRS4M3N,;VB<UJ7FToA?@&;V`b%Sp/g\OqYWmS,Pl-Zng=Db5J?ab>Miu1"C,kZ,8n'1Opn@+;0*#==i:f/EBF(AKTJ;:3oF>2g"sf!L)C7Y#,[b<nKSD&'^eP-2CWitOP(d9i>X'<lOCgVj=t'h7ggi.9$#aQ?q]TLqHpH-*4<CA*:L]>S',D8$@8t%qV9u?;.cA56)2u;Fkdg"S`-BEL+E?S#Kp;+Dj+0PNGfU0JiumA-$1IX+bp3^W^6KHd6nPd6meWYpmg77c$&0QrH'g:qH935XQ5G.\bAiEs"Ye4mf^3AirbV1^'#&5>m^_IE4OXGX2!<R+b)he`JHY`e@#hja.SN9O;n+%bc[Q*u)[Eu'/(!Q^Jgt2?()Fp@/1YFY,.$<e70s9GaEH?qW<>h;Wdc&E*Fg"M.)r@++.eGQ'`HNjX<m"*?:1mG*+Qmj4pD1k``UYkie6m"b\2mS64uc#.l58u7mi5l`_)^e\*Ie<hgr,)_[J^lLN;lPQBUe8P:"o!(pcC60`3nbm9k$Mn#Wu>cX"*+rkP)dG(=8aZ9@OYBH%0RJ[agW'?R,<XGJ'rc1[\aiUfH](pPd4D:b7&78_(g$-o\!Nn^:/VM(jDLhWik<A'_gZ82P(n^G#J'E>fECM"nfC:a=*YY>Fg`&qMp9n=2*1-DH?'0:Z"E14AjkF:EJ%%DgfJ^#CQduMh/UbV8*[UF'CmiQF[k.^GqZ0T9XFl6G@;_#dXL+];^$)4Z+I_S61g@#1!FhG5RD8T)HG*>$Z\g7=D-dLsdjZc4/YDWuaYl;4>bWB<:^tR%&G=LR]'4(:(0p+[c2bD4A-4+!6O9l3":,+K\kU"sHjmc=d2N2a/->AsQ,f:!g&Dt)Vm:`_$?ur0]M\Kq9[q\#Eel$9liDNd/Kl;>!F^Nu'_VHa?NSrCk3.%L%>*M%=[ma>UEf/8IB'QsVW47>IbD45(`f"T,R^Mcs7UjT<<d`0]GF>p8_QEfBDR9K3)Jpb02OY^Ris,V/#n8igCYIH0"`^o!0-'e?+h+N:f%moSkAbFIp)o2Jer-=Ho11o*,e^@$0phBre0\8il52o-cDAH%)phL@*)XN"=?Z16ni/ZI7mYX[,F67e*:9:?GOsk!P6+LAqeeMn,f8-=(N?'J+_lk?jO`LqZDK0`=bFoPc&HH;4VsW:5"e+)lW%'AmEeYq:6D9I[*oc&'Y9]I*<W$SXd%qk/1LtslU#;C[VAZ)/W7.eW@-r(,\=?,@Ma)MYrb5s]b7>K\XCu&E--rpPI5(q!D7cgDWPu6J&ro\&#9.HN6lW!N+h3ZFF#WeYE08Rk#U%.$nbSkQIR^goYHPf/Mp]OS#^Q:jr.3ZGFVT7GqO@p*R#g%qm_<]4I8g(9;?6!MF,.U201Kp':,CU!LjCtc1662C2%,049_ct7VH=skE>#VTj3IWf#so1HVs4AoQXWP&9_m4G,B?i+C3)]g0:='N6O:0bX?1V+qLE#6.EYY+nR9#:(]n^c,\Fi\<2<*Q5c?e*!8_"Rmfm@@No00FALIpJ1>>;<iTJO/pT&ib,)=lfg=nh/Y"#OhHI66-ggl].k?o!ZTQC$gF&sXjJJ0dZ_WGJ>?Ou*.CY)\It:MtiWU<*&#Ia-dQ91e,[;LWIKDqK?FKf&?'o@jPI=VUP&%Ck^fXRaUWB4o:_ZdXqd>oQnGfe:<,Yb#Q6JPINseh9WYTaK?R!7,"dNGsE/Nk,WC;8W50R[%=K_qlmN5ct<k1/A^Ho3!lGgRSo^k7n($]r`#D7L+F\_o'~>endstream
 endobj
 34 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1936
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/double-slit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 700.34 115.448 710.34 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j968iG&BF89'ROQ68SWnY#sOAhl9%-$`3hGH`>=tpA0`G:nmPUfI/#<Z:mN+VM:,E\R_`Z2Jg@Q.0)#;Y8AQ!&r(s`E$@n<X]Qd/%170YD"se`P)4\u!`!^tX7mO`.j)GK\1*.];0.3T1)e+^R@8I>64IZmOPL.3N1%u=9,lsi>W,!@L$kd(,,I'+eVlB&T&E;B!#D@jd/)]VXjf>@3i;N9sbW`o1RH]aX_`7:>"P+/tP_[B7",0j(84^805n]?:4n(2<&MR5\Xf12Yg8;DaDYg)Umg2_8$&3uL+cA<b^6oNBG8PkEb<_*A!dMcmZU[#LJ$ca^8U0.*5;LKuH`%IEdJ#[78k-q_5QZ<6W:7$RKka/U$?J\prNDmYj%sr2"1c&Z+A5h9Y(l7Gh)1q`Ls1T(mRMqaN,Q4!QNHblU\\>]#9=34KZ!n'*FAO&=tJ&sRpP7ZF!tfIb@QC4iE.1S6@I'G%g0[_88+sFSAof6&a"kWbTX<hJ=<L8k`Z;<&++tq)T)X-f"9]U_4ikfpU#cNHbmmsXjCuLe#*Uli57?!-bkIXr`-^1,lso'j<tn)#nEmK8hfo1R/&^X<\7KP/3n%u*Y'q`l\F9(@16o]Xk:4MB4?.Y#1PGt@Q"\`K8g\7c4L_'')1'L&eq2Z4H_$sdt$[;e4N/lo%pV-T>AqPWg0T;Mfbd2MiH-_"$[<dL=TkUI*N?ITtS&d7[+$_Hdq`sF"9BoW-((:la.DM'jSC2K=O[BF]pV4Ms'!fn)HA"(2:Tfe_._R6R(as/[uh'Ps@nPqNsiF'0jtN)=^S:!@ImpO\\:^RrPnd2e8OUciA^7qP4CRkHgkE5"r>g_.Y`phKuQ?_%GWgZ#5<Ogsf!c_cs`,e^k;4XmPgVe_Z.li?@OKTnO*:e_&SDl%EaM;)imFO8\=A8#UlOc1b_p]D.\ZHZqh]lZ$^I*i>\9Nc0L?od)hC/35m/SZB%2pm#.J$EfEGS=EqLh$9&pC70q=.W'*c7nm42lV97`6-2E,G:;ELDZiZpjpk"=#Gong6=s,[/\J6K:\)>dq>XrfWnW6MV1Ml/TA[/o.(!8c3[Qj6mE-[q-)40)IE//$A($u`h?c_W\3r=S!04KBB0a_14lac7%PQcILqbGKYF%[uU[aT2\\jQIdEX^\d27mqQoZ3-*f`u0hQVHdP3$^+1boSX^VWU#I#_<tGBKo-fGohiN-9nP&FiU71&"$3!+GLl'p\(RVVdZ@W(#2'j)OHlH&J7$rKOgneQmM(9)n2)b!J';3@aDi,rYU7gQ1-jm/s04R7^+s=l<eRr+m]1qk2@t\m+IWD6%bifQ:DWo[@($\Z(aEd`t\[UX</t5$B##ZupP1kP!+,!iPd&91n.+[B,i5/k&^t@tgj#\C.8XI";Zjj2<#IVrq"6^.gg.Bm]Le9JWg'To:Y0J>90?p`$ssoa<>+3eg!)lj&s)(HP9f'gcfP&%m@Q(usf+jJp($f=nH-9mS<imI9E1\gq+?pi6T$Q89L)P5=Vp\B)9Km"7fHd]R:0c84XhWUPgEYNpKE(GC8Z3-%"4)+W]p)5pc\E/6J7l#;M*b9`\8VHNYg&#'%"Ac:l!(/4mh>i!40N3Z"1HSGc%T7[as?cbRh8qo]ddWG3REX&jRVTZZsOj;FQ3R6'M9Cm<1Xmle$;Jme5_pRm3)ILVE(,?jRNQcah\#R9hC0mfD0!f.3F/7Eqbfmi\j9heW:S@!1$7\2Wl=r7TEb*ml9]N/l384<PQokbRGTBpm_@9io0M9t%HApk\TeJop+&a!VA.H8GRF`D$N2QU:E+<0;#0njbq!VfLTB,p[<QEQh<A:P.f_5;i(X;r\1/Zc^VD@[$=Y$h>fQr)98*aJC2Q4<:Cu]Z`%EA9-mut[/dK0e92]i0Sj%SnFo!%)7=2hV\Z:<E.l0W<S_A[;&PI9!E9`>'9[*@n~>endstream
 endobj
 35 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1734
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cloth)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 656.84 95.888 666.84 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/i9lo&I&;KZM'miO;Au5h7![)cir6\1cRA?/&>]PB=87hpd%S8['Va%m'OSXbX2Gmt"7T58d,"MdIi8WRJ":5DIr_`]r$\7a]SmP<e%&S*=S8ak0K_+Ga6p.>d![LA^OetAl'0Lnn0e.TUM(OmL6#C$/Cd],bA;%?g&S8Jo32MIR[CptmR5Z4MZo=&$C#9RVnRs++&JCrES@kifh'=Z3p#JW1^5(r/hjmlj<5q1Jmmo,^A@D1s+a"h],'Q#f,Y?X$5,Qp9-C)8%24U[IfkReZMfuc]1d`W-!gZHE#e9eD6j.nS!-DN/.K1)*U`cbrZS;4+jtS0&e%FH,c+eS$$(>kc3Y4nQao+I+r!dUt]1lU2%FJ27Nu5P/4(u2beB>,uS)5.*9=V$g2-e\^VoI4jOkFb$ie0#-`0NKm0L4[#l5rNgO"lVcbY`M-ilRHgTV#7j=b@X@/SLX2?u,tsa.Qg?N[9T08Z6`B5uTnc#`E8$(8+`!)90U(V0/KhosMEhaP59b%<%k)3I5/WfbaXEdlQNfqCKMQiturldECBNml^U1bFSJSJ!HK(U6/M=lN_):#!='@lR.k7Jn72XmjLa^hfs'mY*7?q_;IAT>maGQi$FokXE?]_Aa;BaPtbI9FdlGYfa@atpud&)MZ</F<L/KjV&/<dD+^ISb?1i("j0hUf]sC)*'m7D9mtsmH>H%a2p++[=Y.&9$(?s?e%TN4j0&4GZ1_et47=*b/o4c_^?%g[*+R7+Sg9/%elBKB+cZ3mD!a;jHnMhK3`Oi@O-3i.?_!:B5*ksuC3EU98V6V:mC;MB@0(/UNU;^EQOnT<aI1E4OYd@\'LdWJ$NpOZXA9Wbf?"Z/PND=5N&a.H=dF5W,oPR),(B!p[$>3.N\Pa5&tRuFbq@NtYM`<D$aV(a*^$M'G]E9OpD4XeiUR(U/S>I?IW%]*?,6@"3lg!R99iMkEBuPkW67.Zk.TPNb1e24(IXU4IA:rAXc2NI,kbQoo%A^94Ic%&0l82i^D@CYh.588jNcS]D=;IW[!$CZ$8KVq-jq"U4q<RSC0I"3Wgm)\q)=s[(N3?A=`\5C=)d^K*suq$dkj_1nu'j5\Udo??k9UN9F=JIRn6I>`$CK723W4K[T>'Ho)XP,1uEtMM164Gf#j_%:\3>r_Kh!*1T&I@"aK.3B;EG//NA$"P.pg50[mUnZg^e8N%d,hJ29!j`m:%_6.:ZoTH(-hdS>Ha<T)@Y:c)!j?]#1OpghEVGd9Ct(nF]N=d1UHl45l?>9%+<H+pY_#$pD/Y44Da.l@\c$7snt7Hf#Y75P<%3^+=mWikY0)LQ;&[6;V./p7FnlR&%HeuEQK<F)PYG`<__oKU8+V*d5Z<WP^G`mL-s=`J&C4i>X`8^k(E2,9WIq<?<NGVlrjHTln$#.%PdC/m*A6\.W%E[V^V+GV$,$[CUV,CTbPXia<2io[AKp(/4T<98nJ1k>L>Y@7)B50t_)BQ"du01fP[8]!41BO^P0a>JoVA&(;Q*TWd=a(9_#XBT[T<GUCQ'qDC[:P"'gq_O'<02GtaH,<E6WQHfO&OcqNK0;*b?YXSOK2sp'kNuQj:r(H7(`H_CJ3t80FF4odX\)lgei4?Y#FVK\_VCSErG%OHU4B!<MBXMShd'/#rWcXIFmbR.eGcN;;jcX(&drXC8t2]'nAS753PmKpFBm'!]Wp!Q?FO:kk2XmSq@50i\Z*^u9IBp)pKq(7H&RC'5K_C:-3~>endstream
 endobj
 36 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1879
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gravity-well)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 613.34 118.992 623.34 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j9lJcG&;KZQ'm&WV/N0\$M3N*uP&8TacoSV?^%A&?[&lY:Xs>A#YWmSl+sh`WC?'DE^]4tb+sh8a)UA55Or4T:rm9d`c2]JpnFf!Kb$[78l4FQ(2t5F@5TJ+HXq/J@*?G>K.-"V>j^O<1I0K?66O'B?q3qCn1_^G.$Fgc/+nR2UKkfGrB+Qu`*>04\Gab(`GQQ4fg`p(>1kXbc8093N#%&^\@JV"ADjoXp>QhnIiYb7V;(f`2",0!c#`1P!+;Db,4$KN7$'QRHQR,m*Fd*Z"D-p8'T$S%>?jKjWR*T4=@6ce7?i]h\]`:8Qi.;VSC+2iJgYJ\oCqAq9e,>VWlD#5>Y<ARiPjAVfi*V!L<i[Jr.M<P#F%50f5=24,:p0Bsdc=_$P/Ce70&`ra*\(<17:s^XGC@=2j'1rGKu=DRCAq_I1GBDo,k*MRnA;4f\NiB%FI,VDTt#h:9i`)MNpSPLeAY+'0Hckm6A6n1)W3VFQn(ju6Yo@9D43@OQh]4ImH4dc$k(]k*E$AMMb`$^;'oc6"YVs7Jc9b[0u^AMYAYO*]TW*Wagb1o*iD!Z-lIsM:8eb^f8fNU\N"Fq/P8ma6Z%Me:,7"A;f;FcL+V.dXR"t)Z.u,UFW*t/P6RLairu<#U^8jaFS:h.L$<i/d\IlmR$pC=<"pe5L=PeuL@:>5`r*?4<O0\idbtskG2*Gb;_XQE&;W%7k6D8+n#9+E+_tsbo77gHj/]ZLRk'kAc_[^D7:&Q+_"B)QrVfa;q+>]tGUBk%RnKcU1j>b'*%:?1MogW;EJ60hLl;-&3:S\`>U!k.9YJQZ2??g<H5I*go0O#/ASiep%@+3LBKVYu4IJS&Li=CR2f3kY91Jet3YtN^c@N6CfRD:K4)q\k`*+<V)]i;pN(m945l5oed$FG)WMo\"!,BaD3RBC-VJ#;!m;"g*N7Ml1)WnPa3DV<=^;\LqiFqlR)Qnt1/rMPL%?2^B>[=]JJpNt8q80GYZKPs;i?GI\76KLo7H_^cBc6#4Q;gj^jD^=DnejDJ`1.T#*IIXN"iGg:?cVX@hYB:Q+J\,B_T9UX=;Z$Bm"LSf=r<ePN4uAGhIS4I9$2CLeC?!K7d)L"jp=5H`C2sd(@*`]5dEY$)3C6C#:(sq(.dTnV!51Lnm\tbn>U,$4?Vq<mC-.e+3J*u/*.5l81X=<PSQb)7n;U\o6E!LR!k$DN]9oICIqMB-!VeE8_-CuT;HRSYptpLL9ubKOQ&'jV3.V%d55=GYH_Bj^;`>sNLh>l`QU5dqO%N)8YhrKncc0ohPH#Q/=qGalAP,WO$D4:6)^-U-tR"9A9i8JO'KHo<ORgO>94eic#7.0N(j(+O2,^>g_FrE=+@Ycq4M!l`kS3MUs;;j\_ZtBrga]Vr&+tt^$ZW&hD\lP-_05&mX7qr7-/58/Pa.0:X,=\aqq&Dda6fco8R`u0(!if2+qsR`u-@!$XaA#@fagMpGFY:YMgH]p+a=KAL1-rZ"[/iAGm-mIGZ6A-($"2d0/dm%70B!LiXioFb1!i;W`*7V/T]epWqM&n_43D\s+t(C*i!.74YWC<%fi</AI5,([^*F61"l6F6(qQ<7Vk\!q5k=8u"L4$,2j>?S,op_Jl^-Ff)TFW&G`_8X;q<1T>j7L##(8N_$`e8$f^-WW.Q)00i=LUsH>E6rH,6k@q5(es8aj7E;^4J,]XA]>$[p@o*k]O]<_*i*D%6_R<k$BO">%;cLPH$8$:eMUQ`i['@.2PeIP[`oTBnNe,1L7Z-_\$6sq_JIsM?o#'?3*[B@)$58]lC^UpB@4+_hY\nnJPI6O5M5aO:l.i+?CL!dJc4Qu!$7t+m][[6^1Yq8)[ptn.fqGc.7QSM%3sUPfZ#)F$[2`TD+!up#_>~>endstream
 endobj
 37 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1080
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/magnetic-pendulum)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 569.84 149.24 579.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+38 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/percolation)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 526.34 118.12 536.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+39 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/dla)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 482.84 89.664 492.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+40 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ray-optics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 439.34 113.664 449.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+41 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gas)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 395.84 91.888 405.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+42 0 obj
+<<
+/BaseFont /Symbol /Name /F3 /Subtype /Type1 /Type /Font
+>>
+endobj
+43 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/collisions)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 352.34 111.44 362.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+44 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/buoyancy)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 308.84 113.232 318.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+45 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rocket)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 265.34 100.776 275.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+46 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/blackbody)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 221.84 115.008 231.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+47 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pendulum-wave)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 178.34 135.456 188.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+48 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/orbital-transfer)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 134.84 130.56 144.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+49 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/standing-waves)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 91.34 134.568 101.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+50 0 obj
+<<
+/Annots [ 34 0 R 35 0 R 36 0 R 37 0 R 38 0 R 39 0 R 40 0 R 41 0 R 43 0 R 44 0 R 
+  45 0 R 46 0 R 47 0 R 48 0 R 49 0 R ] /Contents 213 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+51 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/doppler)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 105.672 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+52 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/snells-law)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 623.84 114.104 633.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+53 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/diffraction-grating)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 580.34 140.792 590.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+54 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/beats)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 536.84 98.56 546.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+55 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/mirror)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 99.872 503.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+56 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/prism)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 98.544 459.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+57 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fft)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 85.664 416.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+58 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/harmonic-series)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 135.888 372.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+59 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/equal-temperament)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 148.352 329.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+60 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/chladni)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 104.336 285.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+61 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/helmholtz-resonator)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 149.68 242.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+62 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/room-modes)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 123.888 198.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+63 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reverb-time)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 119.44 155.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+64 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sound-levels)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 123.896 111.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+65 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/additive-synthesis)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 58.34 142.568 68.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+66 0 obj
+<<
+/Annots [ 51 0 R 52 0 R 53 0 R 54 0 R 55 0 R 56 0 R 57 0 R 58 0 R 59 0 R 60 0 R 
+  61 0 R 62 0 R 63 0 R 64 0 R 65 0 R ] /Contents 214 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+67 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/dynamics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 680.59 112.776 690.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+68 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cas)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 633.59 91.44 643.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+69 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/vector-field)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 588.34 118.112 598.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+70 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/notebook)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 544.84 111.904 554.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+71 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fractals)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 501.34 104.776 511.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+72 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fourier)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 457.84 101.664 467.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+73 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/grapher)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 414.34 106.56 424.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+74 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/surface-3d)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 370.84 116.784 380.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+75 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/matrix)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 327.34 100.768 337.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+76 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cellular-automata)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 283.84 140.344 293.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+77 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/taylor)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 240.34 98.552 250.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+78 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/newton)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 196.84 104.784 206.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+79 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/distributions)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 153.34 121.672 163.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+80 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/complex)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 109.84 108.776 119.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+81 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lissajous)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 66.34 109.664 76.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+82 0 obj
+<<
+/Annots [ 67 0 R 68 0 R 69 0 R 70 0 R 71 0 R 72 0 R 73 0 R 74 0 R 75 0 R 76 0 R 
+  77 0 R 78 0 R 79 0 R 80 0 R 81 0 R ] /Contents 215 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+83 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bifurcation)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 115.896 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+84 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/direction-field)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 126.56 672.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+85 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/riemann)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 107.888 629.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+86 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/eigenvectors)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 124.344 585.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+87 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/markov)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 105.216 542.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+88 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/parametric)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 116.776 498.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+89 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/numerical-methods)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 445.34 147.008 455.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+90 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hypothesis-test)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 132.792 372.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+91 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/linear-regression)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 138.56 329.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+92 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/central-limit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 119.88 285.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+93 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/confidence-interval)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 146.128 242.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+94 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bayes-inference)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 135.904 198.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+95 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bootstrap)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 112.344 155.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+96 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pca)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 91.888 111.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+97 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ab-test)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 58.34 103.448 68.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+98 0 obj
+<<
+/Annots [ 83 0 R 84 0 R 85 0 R 86 0 R 87 0 R 88 0 R 89 0 R 90 0 R 91 0 R 92 0 R 
+  93 0 R 94 0 R 95 0 R 96 0 R 97 0 R ] /Contents 216 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+99 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/molecular-dynamics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 682.34 150.112 692.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+100 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/titration)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 638.84 105.224 648.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+101 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reaction-kinetics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 595.34 136.784 605.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+102 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/equilibrium)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 551.84 117.664 561.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+103 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ph)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 508.34 87.888 518.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+104 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/radioactive-decay)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 464.84 141.68 474.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+105 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/maxwell-boltzmann)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 421.34 147.448 431.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+106 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ideal-gas)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 377.84 111.448 387.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+107 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sorting)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 295.34 103 305.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+108 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/boids)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 251.84 98.112 261.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+109 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pathfinding)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 208.34 118.128 218.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+110 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/maze)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 164.84 98.552 174.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+111 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/neural-net)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 121.34 115.008 131.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+112 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/kmeans)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 77.84 107 87.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+113 0 obj
+<<
+/Annots [ 99 0 R 100 0 R 101 0 R 102 0 R 103 0 R 104 0 R 105 0 R 106 0 R 107 0 R 108 0 R 
+  109 0 R 110 0 R 111 0 R 112 0 R ] /Contents 217 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+114 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/convex-hull)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 119.448 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+115 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/l-system)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 108.768 672.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+116 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/turing-machine)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 131.896 629.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+117 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/convolution)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 119.456 585.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+118 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/traffic)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 98.552 503.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+119 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/forest-fire)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 112.776 459.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+120 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sandpile)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 108.784 416.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+121 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/schelling)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 110.112 372.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+122 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/langtons-ant)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 123.016 329.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+123 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reaction-diffusion)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 139.904 285.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+124 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/wolfram-ca)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 118.104 242.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+125 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/genetic-algorithm)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 140.344 198.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+126 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ant-colony)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 115.896 155.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+127 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/particle-box)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 62.84 120.336 72.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+128 0 obj
+<<
+/Annots [ 114 0 R 115 0 R 116 0 R 117 0 R 118 0 R 119 0 R 120 0 R 121 0 R 122 0 R 123 0 R 
+  124 0 R 125 0 R 126 0 R 127 0 R ] /Contents 218 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+129 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/quantum-tunneling)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 145.248 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+130 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bloch-sphere)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 125.232 672.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+131 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hydrogen-orbitals)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 140.792 629.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+132 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/special-relativity)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 135.888 585.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+133 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/photoelectric)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 124.344 542.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+134 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/quantum-harmonic)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 145.68 498.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+135 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/stern-gerlach)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 445.34 125.672 455.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+136 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/epidemic-network)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 141.672 372.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+137 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/predator-prey)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 127.008 329.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+138 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sir-model)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 111.88 285.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+139 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/neuron)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 103.896 242.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+140 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lotka-volterra)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 125.224 198.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+141 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hardy-weinberg)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 134.12 155.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+142 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/enzyme-kinetics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 136.336 111.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+143 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/logistic-growth)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 58.34 130.112 68.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+144 0 obj
+<<
+/Annots [ 129 0 R 130 0 R 131 0 R 132 0 R 133 0 R 134 0 R 135 0 R 136 0 R 137 0 R 138 0 R 
+  139 0 R 140 0 R 141 0 R 142 0 R 143 0 R ] /Contents 219 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+145 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/genetic-drift)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 120.784 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+146 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sequence-alignment)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 151.024 672.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+147 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/exoplanet-transit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 580.34 138.128 590.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+148 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hr-diagram)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 536.84 117.664 546.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+149 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lagrange-points)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 134.128 503.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+150 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/roche-limit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 115.88 459.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+151 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hubble-law)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 117.672 416.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+152 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/telescope)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 113.232 372.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+153 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/parallax)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 107 329.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+154 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/escape-velocity)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 134.12 285.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+155 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/energy-balance)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 193.34 134.128 203.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+156 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/daisyworld)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 149.84 116.776 159.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+157 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/milankovitch)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 106.34 123 116.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+158 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/tsunami)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 62.84 107 72.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+159 0 obj
+<<
+/Annots [ 145 0 R 146 0 R 147 0 R 148 0 R 149 0 R 150 0 R 151 0 R 152 0 R 153 0 R 154 0 R 
+  155 0 R 156 0 R 157 0 R 158 0 R ] /Contents 220 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+160 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/carbon-cycle)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 124.336 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+161 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/seismic)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 105.656 672.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+162 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/groundwater)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 123.456 629.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+163 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lapse-rate)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 114.56 585.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+164 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/black-scholes)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 127.448 503.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+165 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/option-payoff)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 125.24 459.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+166 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/monte-carlo)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 121.224 416.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+167 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/efficient-frontier)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 134.12 372.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+168 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/value-at-risk)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 122.552 329.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+169 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bond-pricing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 123.008 285.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+170 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/compound-interest)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 145.24 242.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+171 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/amortization)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 122.56 198.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+172 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fire-spread)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 106.34 117.224 116.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+173 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hazmat-plume)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 62.84 129.672 72.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+174 0 obj
+<<
+/Annots [ 160 0 R 161 0 R 162 0 R 163 0 R 164 0 R 165 0 R 166 0 R 167 0 R 168 0 R 169 0 R 
+  170 0 R 171 0 R 172 0 R 173 0 R ] /Contents 221 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+175 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/evacuation)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 117.68 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+176 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/triage)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 99 672.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+177 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hose-flow)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 113.224 629.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+178 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/skid-to-stop)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 120.336 585.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+179 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/radio-range)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 119.896 542.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+180 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/blast-standoff)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 127.016 498.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+181 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/beam-deflection)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 135.904 416.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+182 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/column-buckling)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 136.784 372.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+183 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/mohrs-circle)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 122.544 329.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+184 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/shear-moment)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 130.56 285.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+185 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/retaining-wall)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 126.112 242.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+186 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/base-shear)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 119.008 198.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+187 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/soil-bearing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 120.336 155.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+188 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/concrete-beam)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 132.344 111.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+189 0 obj
+<<
+/Annots [ 175 0 R 176 0 R 177 0 R 178 0 R 179 0 R 180 0 R 181 0 R 182 0 R 183 0 R 184 0 R 
+  185 0 R 186 0 R 187 0 R 188 0 R ] /Contents 222 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+190 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bode-plot)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 682.34 112.344 692.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+191 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/filter-designer)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 638.84 127.448 648.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+192 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pid-control)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 595.34 116.336 605.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+193 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/transmission-line)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 551.84 139 561.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+194 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/op-amp)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 508.34 106.112 518.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+195 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/three-phase)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 464.84 121.68 474.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+196 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/transistor-bias)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 421.34 129.224 431.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+197 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/aliasing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 377.84 106.112 387.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+198 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/forward-kinematics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 295.34 146.112 305.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+199 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/inverse-kinematics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 251.84 145.224 261.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+200 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/differential-drive)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 208.34 135.896 218.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+201 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cart-pole)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 164.84 110.112 174.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+202 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/quadcopter)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 121.34 119.016 131.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+203 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rrt)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 77.84 86.544 87.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+204 0 obj
+<<
+/Annots [ 190 0 R 191 0 R 192 0 R 193 0 R 194 0 R 195 0 R 196 0 R 197 0 R 198 0 R 199 0 R 
+  200 0 R 201 0 R 202 0 R 203 0 R ] /Contents 223 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+205 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/dc-motor)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 110.552 716.34 ] /Subtype /Link /Type /Annot
+>>
+endobj
+206 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/kalman-filter)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 122.552 672.84 ] /Subtype /Link /Type /Annot
+>>
+endobj
+207 0 obj
+<<
+/Annots [ 205 0 R 206 0 R ] /Contents 224 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+208 0 obj
+<<
+/PageMode /UseNone /Pages 210 0 R /Type /Catalog
+>>
+endobj
+209 0 obj
+<<
+/Author (PolySim OS) /CreationDate (D:20260817063516-07'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260817063516-07'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (\(unspecified\)) /Title (PolySim OS - The Solver Catalog) /Trapped /False
+>>
+endobj
+210 0 obj
+<<
+/Count 14 /Kids [ 17 0 R 33 0 R 50 0 R 66 0 R 82 0 R 98 0 R 113 0 R 128 0 R 144 0 R 159 0 R 
+  174 0 R 189 0 R 204 0 R 207 0 R ] /Type /Pages
+>>
+endobj
+211 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2570
 >>
 stream
-Gb"/%gJ6NX&:NH>Qkq60K^3uJf@!QrV<VV:of3u8&sUS&";"Hq^>hkl@9EqN7AWUi7:J>7F6o<9`\=(\A+#ad!:Nj2GKbSW8C)fX+sB+#O6MU".@>pAd"n\]#/[m5$+.lYm<gd;6j\Y"^tHP_E0b0p<jAA*^(SOiUoh%_cQR;e.>^E:>\7Cl;WDMf,Z,K.$MM4njmB^Zi7n/]U_f+6\EsQu@kE5P!2MSQ3Z/MH`"jL>H4*!48]:(*UuqsE9mLSZ36M*!CmJ!Nk''U'JfpE^*bufGq"\Vn'\m'tr0CoQcO,n;KSN\:o;B/-7eGEjc^am--]Kg=4mN3LjG[n%'&Y^a$E%0,2''f.b,lLCs"/=V&+*BQ6!7G3-u-8/Y$+r7btVj)8S0;G8jn>JXsS,@dK!2Zo?5hC)Da[47+U=P]nKT5:7j+1K,i$\aNJ%H\P[%$8O6:3UCp(c0Q"jf`ONno(HRKijMNIfS<R\D%`6^uq^6NkF#\q^#>ib?9RV3tT3/7;M6'K$VB9U;M\0XkU3jgG2tlU9mZd#=1$[E:6\3g&^^o.kT4fhk:OqX/'ZI"0)1o(iU_X)sCSQ1^0tVB+qt$mmPsrAK>\'BcKiOPk[;!`.q`jR_Tg.Sp`Euac=^!k(51?D67\gf7GZDgcQ/JMCP*pnER`-oJq,j*=g_LccRKu(H;_0,tAAQfofXl&T[0s;Im[`/Lf$MolY3@2de_JPD'.ULNhqV%gnUjr]`iH^FRuaP;&tDFBi:fELc!H;)R'grO$50'2i$WXQL'+fkY;-6C<Y*$:g(=&iRYdhL8.rQfYTI7/$YkfMe;>*No(!.J[Qf)#`La7Y_+TX-NGE5P1+tA"0.>oa#F0]sK!.o+Zs.(KWT\3)*Rm-mpL2aMU0#@)*[97uQ%:m@ok(V4S0)D4F+l7:$FMo4`$Q4]a;uun>O]G9JTbhJ3Au-("fG4>6dY`QW;9XKb=N(Kpb`O9;)9-NDknW8\ZJS+m,80+J@II@>FLXSlG4f8PLh/Rs#$K'=]o;n*#E1)T$iI=rnl_iW\:BR`"nU1##&ZBIF6QJmHCqu4hD_30t&<or;gaZ&^:~>endstream
+Gb"/j>Beg['$&o&.H[I2-++Qki'fbV9&nQ<:RZT2g3"M8!g/RtRMV5*qe4<)p`3TbdBTZ-[4SGWN)(]c,j,[H#!^?t&cigKLjk:=J01ZXk)9;60V&=9*"SngiVdlV\/lkG"NLsWIlmpj:u@2(>RYY$Dh*%b&VX,ur:Rj6DDZN"E5ir**e=tZohSpYn6H:&-.Ef"2@)VSXdN3N#`04@;./.PB?p<t3uZj1,<Q\OCl="-VscH:O#Y?#Y_G89S[U)G&_e@o<]]^OLDg!c"cqo3erXS`Q$?\?\d.Js@=,JkU:]8#@m!j'PY4%XW*N/LC7!CWlZ.BDf\,d$H4iP:eM*j<$nkr'oJ`/Oel*52K+skM,EJed!50G\:&E'iF71%hLW6R]0PV"4l$=O0pgqlSkakPM5a[QJh[)>$ggHm3>mcr5l&@+M*Ns`l/D=:DQnk:bK2/>YO.(`TJ\TaPfQ=M:]s"5E,X=)\6H0VY]G;fSCO%.tP$+">=r)Ae\$B=LW:CYn-5357/%D<1KY5*).dU&ZU5n9@BTa$rQNEqn-jB=s\`4Gi(^J\nO$nPW;sI<@#>qP&@n1m;W+bDYD<SFaE`o40P%X8B>qJ&No8XEi4$c!j+H33(eM4f%31urUs#M6ppan*oXhtE*(,EZH@n`=l$Bm\.L<tl&l50LIC<l99%`&)E<nP>#(R5XMR=;!p/)^4A;OLlZ>sPY-3Rg%P<"D_/6u-2tnFq=NAJiBJ0tn2a>$(_f\Ed1#Z07E3_\4Uh/hhE0d8@K5g[=ikiE=;>eP`R.ID1fRW(u8EMDV<j+)l]!Dg5>oX/6Z*]:piG`aG-7@<aXTdFG9ufDg\WT627-o="PRbQJ9JpL^D?R#Pki9=_obp$m?u;!OcN>b"K[15?#S*rAng7-[SafOH"4H\=&KRmSL]D=@(P222?\[<bHI&Pp$a>ja'TYu8EeY._V5]"1Zl/E-.WjF_A=T%rWjo$?n6L+?-e)oHgi*hqar[mkUQhF:c;PKoH.EuLVmfK7u8Cd/JTZ(RGSNWN\A.9"P7@JCpI2$et573^[&jJukTFJ3_JGV:H5#pUN#*OOsuWbrGP]NOUOUGtUTBkdhG_K%"pJrLrtG6W@BdF5G/Lp&=_RKC!%N<sWNSeed>Me\Ah>)G`!7HqTuS^!$k`g^iUA"L\7g/KbAA6P`WkCF6CK`?PV$`m/:b@6AB4]3$Tp.u"TjD3$%5TDFb5-W,u)*/#i@D(V>^$BoVOuWO\lfb[+^KCYRR1La_5gl?_lOlL#Dt<E=P:0o[U[_`t;mK1<+ihW*0J]+4dU'=N_qdrKbI7Q(f#.4SV+/C?.E#h\Wo]'WA7KBg(N=ou5BDUbr4-.2(ScmU2<HJF[)>/((qIo)<q/Io4bu79Z$63^-=f7O?]Ks7'[G,r-?(hiGBUR\rTi^!3*3\H!of9CHqWUh\u\M$<Dq)o-[m:/M*MIrF`Au_\<.aX2:'"=[N)C@jGn>K/'(,l/<V'.4USqFL!9!PTbi\/qFi<5NkZN`O"rd610"SsKDJCF;'0V9W#P0e2V/dm"t\JgBJA`35CpiDJ^QeNBENiE"M<n)_[h@N=:/;RjFo#kp5q(W8hBC3ZWtH:IME^MS39P8Hj<cR_'X1dD^m;)Z'\1+C.M+Y<fLJahWX7s`"[9L:*lNbIQ$O6_7p!9aVOo\*GtUbibKLo]85>Vb(cR?PeD@OZE<ZWj.KQ2Gefj>Q@qF?V4Tj3#tT:G,t;js6DO@L`u\W^(JtRQqkni4Cb4r%_Cqg@Dh!F3;jPCSfA_<0@J*(6-Vb&I-'ns`nFK0&M?>W<BM,mZV03-hmU9E(ArVY+ok*5"J9lk:@_&XP>l>#1Pcsu.n>2!:(X*:NcgR['lh*)^5oR0jKWg,s@YQNUZrCA5RR7\W6^&l'\Oq9@JQ6Sd@5b&'.pgd^:9cuP4K]D@Q!74iI!IpO\>tj\4:u/T,Hs\r=!NfD/)^<&!r(CA$3+VVn`+n.#\Z++%ojAi!_7`Ra7/=Cit$18*0gdl2:sB/Xp+=U7d0J?&J/DF*338/I4]h/f_^TX_T_bcp&u<?qgH:j6(^K[VpQ#DZ9BQ/o%?4C-O8P9SbJhb<*t]R2e`W6>Rg9T)UPNdYUK=,XOep@<1AU*Ql^lC"s8ah6Fnp;)R;O/4=1JCSA)I>pH'W-=327;#G2KZP?RHdXZmnQF&C#Y6J/8p<t50W*Z$U=]S7`pM)ZI#;Y0V[qciTO#%:RO8=A51J]G\nG5=N?n;&*h#f]a,de@;D2._ocG>RjQ`liU`NB[C.q=f"/UL%%$8&dieruDLI0'n>oURsu_I&V^B[)rm!6/oK-hq;I`RfdOl',bB(%CRJK1"^"*OVf?R[jqn5lESCfEF9?AUN^@KLB:gF5BuI;n%6uJ[)n!sS_\cc<@[%Cm-T)mGi#^0/+&7h53k9Sg`8<'4!a4=FnV]IkR8;>3*&a6%S=bYUUh9Wj\4ZUnP#1[B3ros7ku`,S\L!hq@)hKOE^Et/PK2-(3!=6i]l)a5Qj=H7UKFZESZjA"eKf.49+Sm0\B<.I#44,AL;@GMd+SYl(po.@hIq:gT1nirs,\u)2A~>endstream
+endobj
+212 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2422
+>>
+stream
+Gb"/k?$G$]&r,lR/*<]hDUq,[JmW8r&j,K()`Oq%DJjIsPE:Hb,Zp58=#p6L*<=TEA(+"M$BKKCin,M&!\Z6pGr-XO;t0:7R\+9pn7i"XI\K)UQqW&8,_3uUGWe&2?GItIJU"F9-4(7KLVXhmfhlJ+7T^iUqbRZf5!L78)^eql,RNu60p"-=s7G\J^k]1oh]k]o5JBh'V?Dic?"$"8#UT]p?`8?t,n"sEofYu4^uW%?%h#-X@R'uUN]_,RkgM4(Y8&H2>%(+!LB=14&`tIq)O%^^/!]"L)GYS$F#D_'U&h*1KRFo:#hm'i,!QRro&h51_Augq2E==43sB$0n7]"G\GFY5N07jQgg6E.TC$?Oe`aa@R*qnn;aUWa"]4/h,7E%`<#+P\Q<1lF-02AEJQ@?%6jYH6-C;1C)IoBk]53rn#`6V"E(c/9"Sc2Fs*8^i<REcL/3oiF2nlm>1Pna%3Z%!GBa\W-.l9qUpS10)%kI>")PPI_MZQ!Or=E?-M9hpa4G:('@m1eV?X8?'`tGG99H2/UBMPgk4it=Yb_<MUk1RmTXbaH2h+dU@BA/]h*8Wi6o&r/4Ae4`gnIgKh`u]j<c%@&*6DeOSDW8a-gW8oDNAb9>4VK5m2msYMiYs__js+@VP!2@'57XVU7Mp;G<sr;(\??-,#9Ten@jogH2fR!di89-qE$hL373bgC2/^1hf0.fPlB<t%5d^tjh&d>YdBng*WY]_U*O2\IcGu(<"5SI-)'qHS0c"589f-LW,:e/?WV^7,.D=?^s/LHDLpiU/Cq@Z2ZCO@Hb>^=^qAH7.>./B#`>s6";?+K$%o3COX<Y:aCS.'8CDZD64&<Kbg'UKG,`!;KC4p#M*QB#FSJ-F26Oo&C2!J7[mFN:)f<IT_(gWs/3Xe:9Y6p&65cCi-<I&n4[8H9#.mXg-:g:Jqqeq7f<UnWQk4Z2J=4cL*Rp3"N\##1h@SfQ:A&L@<BgdcBqO\\Gf);RW@3Wt6c<>c/%7]DmH<A!`kt^hIMqrU4NcBNg\;,"]B2@OVG8U,Pl1I]:e;L1A$@>^f^D(sSEGa7q%H%#uLqT"KCrJs+U(ClD9j9:!G#@iNJ]Dm?d/3lB<GMY"K1ns[*'O3*E;XeTgQd7L#O^Om#,+]i%YT>pU7'2F#609VVh6_.5geQ]^'cQUIFi42B"VG:Wle"Mau)E;Gn"4[n8)g%6:X40^0SkDKmf@r(r\-!3u%8!X]elKNrm`'a6uBX:N`DLdI67eB2U+,R:oKHe5P1E<FT-Vb3N<KU.e#3C.9frr>bcZUgFtd^:[6CiUX\bU#4t$;`L%b\rc;Um&T`"3:'qYU-\r@($9eY0JDHTV)-pG4V&3&a#_8P?!0[]^.^1N4I>:Q$L?7ld$[UZL'$55diE"ldG6n_]%iV;BeJ?D>VuuO8AQY7Q"-Frhp1Qrih.sN$h3>:IJ<Z)R0VB,I=.%1A*3<(Dkt5>`I-@[ZoN\YOj86/Vsk*AF&<`'>F)qK0,RbsD_($Y0o+f`a+!g_qq`I&/+MY<[l+n:9V7DkMqZ0JF_,flM2d9*Y6/8nHb62Vp]dfXnqPY=p4%$Bd=JqX<+#.+Pps0="oL9)KqnP[X1*cVJa9>bmXGZ!EB=([9[fqiC47\fjb[8g7Q8q5W[t/=N[\bDnm(JQpr4pcEuZ*i6aJ<nZV%RLV2oWY0(>X5<V<iZ\oG_1W'2Qe2Uqnj"Db#Qcg.*Mjo6:J)Rm)Pm0[^_e5^g>1lj32A&?eJ:Iqk3np;tGM<.r$Z#XWC>K'+7obd7_hN\up\s8_:a^SWCYch'U@TJg*[T"KQC;FPZGZ&bS3UH"#f/%tWXAk,"ZUFTQ'q0_U*@[majI+l/jq?B86Jt'bTk-OYZ46E\ZH^3nn4YEUZS/NfMgSA1`PKd>NiLFImN$q+HZCY9f3TtM"#pZd87B^DRoU4NYY+j^As:0V?NZ'MLVd=okk2+;+D>"LGUOuQW7;,9'uZuAX*2:\gXTJP3"E[^H9SE/cu)#uCWL6Sq[qONWE4=V\R"B4.NpQ;5tAa3.HlQ#X#o%G>s`cY'`=fTX1IID'DYK&P?MudoY%WHKXI8$6T+$9-A=<1)mbY=DC)brHGF@]EU\&=gD,1EGBnt`YtG*."b'OA!]'j1><GJ]<=ee2OFLSVn%[0=7b+72GQO6#=VN_f0'X*p.6mAb%aUf`2fV.mm*,"GnS^qsd?sVRJ!;[Sr#H.EhJl5JI_j7+SdK!qg-6b:1]Hf=GU1$lGlLPBn'n:5M`Si9P#[d*;9R-%R+@Xh\torC^YRl3a*l(efQ4U\Ts4!KQ^K>]*RAX.gVReQ7s@a#mf1C9XmSg'9?cnLCtELc?N%8=LHC:'*H@DK]t:d!Qg#Ltm=#e;l.#4RCm>rsG;i!5^ca?NPj,-OItaTN('ogR_iE(0AjOI!a1JP:*?>"e3tmh"~>endstream
+endobj
+213 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2097
+>>
+stream
+Gb"/kcVrRX'Z]\</)I+.g2;iq>Q/Wp6_Q*&/tE'cPRA;H;%a\u8hDE,B(h;C-ej4A_pI4M4ZNe&fT%8+V5O&O4@]GS/q0#L29>iYL2cpE!22*:!:_'OL8XN\fQ1<T,@1Y9)nISX^`es<0bi)C?I]Lh7Mo&P"AI\G*7'Thf*<\oZ$6[Pm$TM*]FpkK=7*Upe?k9TPGTkEk?qN<G?=j_$kCRI>Rf*i^(&r7n-9BZ<rMPj&-X+75)B@Xqnjgj6%#^u+>O;/'0I%<Y3U<hg=-tb":UN"M?8f`aebGDC([)"0YfE`."X@M;*[JQ(FMA$_$sS@m]mqnE&,4hiN^+[0_j2`*cZeDlLe.WrPanRfSg\`M^^)p*Z>[LDh'iSl82Gn8Q8a(;t;s<Hj):MYG"pgjs#Qn9dA,`!+"8j__.E*opOidP\l6HW;pk3oZuCm$)TG'#Pq]or8Fb#VN+a6qUp3Q'%7OV_+.CrF!W+X17b2b(m[[%;&An11_c^VirqW<1Wo2Ml;0-Ic5@nPR7GY*EdbbDMD`sB4_)OD_<Ma#e0hP9XL`B&e_Ia@`$f(,[jb:k\lJbCR).lgaEt*Y5(5<m$mhMXF:4$XZlBRgM5I-pVMkE<]FHF#ZI.L8'=WiBg._C7&b-&3C\'QkM,oK787S9Z@t5./1p)koi2:249O&3.3tq/.nIuHsW!.@V5EKTi0q%5!AdnpqHHufp,J>Erbt([r:m[)[WXd(WUjc(%i]L)qN5!jP,3glkP0hhoN>\.G@ukcWW+om1mZ$gc_=M]06(4.7R#")iM1Be(:+)6W-Y9;ukD@K3_4Mgq7X/T5]SU]%W_OMRD,)&M)Z8=oF!-JbGj(e$`Z5O'>=9j!bV`-PGYUMu`fY/Pq9HBB":uqMa(Ti0_p5%Cb)H0,0o`=T:O7XT`TFB?F;Rbo/[op"c(M.<gfoW8poQg1f$j"f7;EKZ6QoT&Sr#JRF"6pe3l/$tqTpp=gCG%*._].-Cb=!6Tb;XB)7AD6G,+l/`Qk(u>8/o)H[O$7^9Gu=&*P$,<R0M6#4j%`Vu<f(l`T04)!UImpK\J2R(4pR?E")R4GRXe8!jR@6/UVi/b^gj[cO)V>E_4:fjo#.\9Cj?AQl7p;FoIUn><U*s5l>dSTF7E;(T\rYNJ"[AX_RW/Ogt4qU76O3.(t2(o=&TT-`B\jC<2bQLV51fSj`UaS1rqEs+c1B/kX">\%.!05H7<o9Y,ScG36<_3R_2ELl51e-(#!g4rsl^)`o.Z*pHhOiSktqguO<;'\bS'D5WsDuL--43-0(R*W8XJ;DBkC:"$?/l?nS':,(,e3_JJDd2E;g6V4'Tl9P9I=^71e+[fZW1.E`CYSN^L?.0qmKa\sbgLkGP<-h7GbQt/\&Wa'iUU/Vg0*-H8NT.mg/:&j,<!Nq(YW0a'muM2;l5::3#/t>SZQN=I+;;`FEd?r,4fc:pe!n6/(A#h"'H)e,0qHO>NAZ4QJd$cBG8%,6/Dq"k4+JLOnu,bV$u3(jShj=%kPnl:rNbkiPSIJ_dZ]3"jO_N9u+CQ=tai`Xq&aks,gXsYMNAL>"!7b81u0(=eY$U2CmQ!7"1A*)hK%[.8ue;]Xplj0.T6Ej\nu\&*/aem8SdlY::49%_pU<E`#M3k+b-mMC#at*>X"6^n)@MAqmI(1W+XWhU+ZlGb2"JK&,W:^"ol6'ZhoN`)p]_U,7O[<4i?6J2SAD7k5DaZN=Uf4"U$4KcUG,>HUJ!BQLk8J_l)QY!iX=IkEcfkUe:;%R9d,Uf(O"V7phs,6#s_34spl@QZN[Tt*i4P*`2QKX?EfQB7'4V1fUhc_cDC6HCCnPO">LYMb"ndnV>P>"a&Eatnl'kqs_u)`53[b>dQ;Bor84'$h2/>N32%>>@^UfB.b`6G2tlB=R"qdG<Bg>-reNSETBd=)Ior79T)3aipBfcUEtrZ!A'P`7pT&,k0Q/4@0.>j6[6E^6ub$iY$uX$h3665I:,lTr2Y]Ief/pcFN[Pc&d'.XHih';mGGZjl<dsUi'C+(jS"_g_W'_8tM*gVI>Z"G.&6h)q?D_lu58c1G:MKVhtBnEb3fo?3ANsZoY\?Zcq0eH!tre&jl%/`V*DF~>endstream
+endobj
+214 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2074
+>>
+stream
+Gb"/j968iG&BF89'RNF:A1ErH#`:_kFro,;S(,k[0"sRb,V^SOKr!e>dgt=>83QmDS;oEG*=u!tdNnMs/9ZML(aK7q^Sq)PB)qBjE;kt$AMBPSona3S/,1g`&^TX)%tJm,:P9l&b(Lj&1$dr0D1F2B&VEEdoPKY.0+'ia8Ef+$&Whg<J*(o)^`]rV4VB[Hn]/$$MU)U_&j?m.N&!BiWmgiRP/3LD)]4!Yd9G?I/qPe85^XIR*qi)X.Y;?/5Tqrk&IG$9#gX`cKtA7u\UpMM=/pcY=ijXhG."8Ekodbr7jrsQ?t$hT!cC3pLk%SZ5i$!9`8P6W*Q-5"/;<&d2Wp;-gZJ0sD>rNc#AD,9[DeDiP/iRcp_R=hVe)%UP/KDf5H3]FA:>&'P5buV#/*hn<9Tc-=Xbc$Is1aqlV_($O#+$c->*\`S\'CD*qUq<6Ge/03P=irXC_bga`4=7K&R-s1g-J]"Q#1\@3-?[cl7RV_?1m@"V^Ye7MlZ)@f^Rj`#1T]?(VD>Yf41"2pSE4g-][T+/FlNHfD/sH*sp0.,lgbF&W%nZi,ej%c?,0hKu*iaceGe^A*<>ggfoJHZ7n;att+n?0p>+3cdFLU[?i7cR'!7k'$&Y]Kc_0qab6qP$sZ]aJ\/V^pFIf.s.!6bY3se5"b-sU"k$%_:bYk/5hH*&(<!$HtUn,_QO35CWX6rr^='67Pbl\4"mYr,gke=>.%@jiA<:H%,P__1i.K0D+7o=7?%MK%H@N=ARHL<*Y2!9TmLEkG-+h;53nP]=i:[8j@W,SSQ@,M`o,.+(rf`ljI-#FJcELR:#plIj<gE8[J`"WgDi*`2Z1;oF.gG^3/2*sl%PltM\sI-3QJ*':')=lTsT[>D/bsaTHqD$BVGqLO0`t=_0eS/dC&MS2r#l@+)=.dE0b:MFkH/[AZas/,jan;J]?:4p?euiLps,jYB/$#*Tt?F\F"r7U[56qC>4da1Rheo%^m-dOC1NN;kk+5[r+$pp"70LD:liH[QV;<cjf[i">mUH*7Vf`_rEYB>LO#+^1$f&^VcC,Q,G#$ho0nEg1));RpWJg^H^ZCp5JjWDd!gYmP,G)mm):6TH<5F9n+\P9&=\Zl-`+grH++[d6W25@$YetkSs]:dTDSsP#n[)nXr_-<7u&Ie;i%6P1kg4\37AJ#0[g\Vo$-jA@`r$Va=Ed`cY=YDPd6:(Si.(YT7`0131RXc+*f?QYB@Jn=-FEj]K!(nn4+W#<rI."5tVZTWLm&/9F><WPIu9P#^0Mm`'UmNXiSHS]7YUV8=u@=65`iNc0qrL[pG0[c5RCKe)RdKl7dN@\kDjSJ6c13WiZ"jgl\mL!F2=;Wk=1=6_.InfB9^/$YUdW,nn!&9[spC+JCnT=Rqg<)E=s8BM>nPB*@S&m(<'_/<\']49[+GuC&9_qEhJ>r>0g&][nVFPA;UFpGpFMmg3W]3XOIJ_`i0/.tsuW/u9beO;QMN_I(L[!`J^kc>^M1UA[\CqB/WQZ&8tRVP]f_R*-(Q7@sa*?H4BO+g*\^AH-.mqT[;_;f02AG3!dTgDFr[dK\FZMegYm*Rb7^T:C3s,lb-<(SukJ)bUS3uiEmfNJY\l>".6J_c)'9.Z5q.`6tDbZ*HP6\`_hpT%X45!&1&b<3mZ8@o^M9*[N`]0g#iM71Qe"TqiZSI4^9k,Fm3$%,HYeQlT"f;]iTS>%CPoMX[2/S&E6cZ>1hO?4.s/>-hp*CCLCU,rt.I9(&?f4jmggo+-6ZJ)XQHL)sE>.S(R."2#A>e*J,H`35$fI^PQnd\,1%GU//)LAQh3u-i4BUuuISoe&_'r]d2p*q,56_hMUc7E5F$ZbBd4HNCL(ZQM!%L4!pphdDZ-GHPJ:'PfTV2@!dP"`^Zfhd]m>jZf4nCZ*olMV(?];+6-..CW=@X7E%k;[Z6k;[</kT]H[\Pp?":bT*B=,<?Q7*\N`GK75A8G?%5h;++0V2CJA8jQ3!8b7,m<2QXd:*&sHoF?O\3,!`*eoR\DWA*e3:&U?/iI,%W<LIs;QBdGM^O/oSpog+M*.;/Oo"Dt>[U.WJj>l9AqBWA].J'5,+,M78c2~>endstream
+endobj
+215 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2365
+>>
+stream
+Gb"/j?$"c/&r,lR/,#jBP+s]65k*g.(Tl/.g9K+s896h5`]"G4fgn\$jbI\acAt0tOH^I6N17t%Fb+dHJg.EPYZO"oO;%^;Iu+&ojo@WkiUpCVKYi*?,k(l&T>==p'@.1+@1da5jRY>8O&-lC:gT_-[V^gPU4bi^@J030@t#'f!I/U7eJ%EbB)\4`<e*MGmJC5FfuK.Ff9Ll3BT!*:%q2'IjLrhs1R5jrZPP=q#kOCk5E(A;aM80S')L6&:'hGpXTF(+-mW,D?\&$fa(W,h0u&l*e(M,[iDe;Ne!Kr8,Tn?>EQe`HTFY]UdYPerT2.QZ2s>h$b<_*)aT4JXa7_':fjAUAL_oKJ[qE/FUEbcFN#Cr3.k1#V3YLA#!,F^!<3@`)e[bXS(2FK#"u93V!OW-FQ3Ge%RS7![W2tLBr3Ge>J9sJTHr!F@9&P'(s#g+)Jk:RAJMDorp'gc49QO[@bleA^Ao,?c"d="Y?-Ga>dL*)42SOoO#Et&PV&(fYqY+q+\^SSQo!a&FAg&fBH:'5=M,BkqOCi6ePK0plc5Q@qi',F'Vp&XZJ7VJ9IRZKC_QM*+m7R.Nee_gL_YS\mJ98f8J@3WFl\ktt5AbQ#Qq32D?M:u<m;LnU.>9;Ir?W.*hoK8PYMZjM"&:NsEDbc'iF'9oCunC#?=Bg=c+`km0&DD&(GG18D<Eag5d5IFopD'_;G`l6RKUPK6_(fn1UNWjC*q_22/*/\0QT@/adZ!JEg6u:#+MWYGr7QeW4XMU7JbdQmSI=]Kpo3G\lgN]HJ*$D92_9*)F2edL,!6Z6S1(m7#/coc1?:N,j[r+q/!-F\s113.Em8:!-53-dYL["=5^C+RbSTM\J2G(0.7:7]U@b_?2!*DPZ"<bdY56C<3'"tiJI:omsi=V+28)XaAAj''.%gd-H*NjNQ9`(RO`o56-)$i`8_7HKD%"S@gIH85a0D"8Sj$_Mu.r0QrQJc"QRQm-8%q\qaR([*\kZ\UZom:Vpl`5+cg+]ZnhR]fjD+gL;0"Xe[GUNXbZ;uWi_)lVi\?&e>uC\GqAB"iqa,3rZ-3iQLF,#FtNPMeCK!P$nLioU9nrhgJ79)D`pM%0^,HZrt7B5!V)caibXf3FJ_qiJ+H-_@4Fb,i-S=%EXE"Z&rB^@;<'+f.I0[0OEi_lZ06g_VJAHR73HPYn?9dp%l7&$(5X!dPcuS/9dNG&6:\nr-R">$8B>;r6Tc"gWQ02bi#^]a+Z$ZXCX<h+%rJ!fU-8&DAq"O^)5u21`,a7krrs@9Vo%GCYeRc&[n:8U0BS)<'/K+3MS<73dDt1$U\ZH$RRnI6ULBbIUV4@.geKdE00iKm5J'5YZVb<:]2[dq'_ue]Y7%`?Ql"a?EK>BiSnshH`mcoNG>Z)L;AXL.R(C;Le_D$,55)B7)@MorD<]*g.)"r6-_T@0ph0i?r+e/3o[j9Dj&+/hmf"MKqHTG]j53r/n"$WC6L-kU6=98MhNMI<<+]8:HA.hr>tOf-<.-*`@j[/tWQs*i/KOI'oF?Qro7rLC+CQne3u7%n/O`k'VXLEeg]s.;h3`XlpoR`U7lS@^#J^:RS`@Gmf(NGJ3Gs7VL>1G9DM!@T1*rTVFlh9=fQSJ8JiFZ@pjsW.$/a.7:H,,eXklb2@C.'DW`:&MHp9M=>JcB0Q5-JnKOCV`$!3kFFeM\<49rNOJJYQ,ABtclZ?J.@CC9r\'7MRQqJ*ZRn+%($kIJ@ZXMH61V*pYo,HjA^TSq<:E?4]^VOm5eV0OVf0$QHnlEN9%CW_o5,oA8aj)M8;ARD\S+)UpV/l_^aitHeN/+\,jbQEm.091C>HO"SPnSfo2@jH'IhQ_%g>h#U]Ki=,19kI^W)[h#''cmm2k=o!XFgd]i.^!>c:LP]7o!p5<JL>RhMJB7Da$.PXK@rcI:sOjFlZ0^L@@qhnM9md3LSiYD,;Bu2dSBS&GYIlB"s7;[5F`bcL1(CPhfZ@W71NmmaU5b9;dJ17c$'nmWKgtcA)F!HUL>pBpRuY5hKLO;Ru:"<a*t$c>L=&OnEFafkZirQ`-P_S>@kO\Ul24#M9jSpdI'ibd;UM_,B<'*]jmbl4*acj!jeD<=^UFP)f8CLnt)*eO*;\QY$n/aV(+*;9.Plm=k'\.oL2848%\q\7q+NDhiWH$r9d[CpI8/*W>:JASiISTQ@DKuanN12FIA&'$LbC&.[/[?<1!9+$b7lqU?Ab)0_SU(R-=@a-$mU`]i1K*1O0B,9.Zj305ZE`bOs`U>[XM,)L'\um[5_EX=bil/m^Nk3SGKE]7^]E(Y>L.a25DDb]^oph,J@IPh4sO`QNS`nR+;jdHq=`p''P,i1sqiWaIF&RlZ7M4kVRYi:!DfD1W!?rs'jgG[L~>endstream
+endobj
+216 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2076
+>>
+stream
+Gb"/j>B?8n'Z],0.F(S1ddEPH#r"J"QZb%H1`Le=06pF!Co[Tt("fX$p;??]^mA:sg9I"7K9Ae+)kF`cV"=1DOpUpY9C2[8#<3[=km%9C_Irurn,aG4_<%WYq#M^V!1lFE_`.j]cnJ!U:O@dI)e"Rh69u!H]^'je:LZNg0+RLF"MBDU+*5%/TTE:Q^)&a%nR^-J-"%eJ$3Mr?@$JRN[E;N;RD\4H>8VdBd5tPS(.N;^^^E[Gq,j8NOt]Kd$3Xh5OEf/OJ^F-S7cRd6d7h>PAP8`US6%gOdp4O<&2K'GbmB9#%qls15mTCkHX7!8ci\EUK,C)A"',hkoi246+"bco(N#)^=17n)/KLK%e(,:9;W9i_,f%.pF1a&8Y"C?I\UC=6F5Y"E10NC"V*N9o!>W0mP=kqQp!8Y*G$Q#>T$M)[,K?V_U7JprkrktFPf+UNE6R8[DskPCU(Y5a"HK.^Ji&[4FA.MbUIV8D7Xanu8=@Mm!7+"NibR&=/8EHt8=MD)d373>,4m:L=I3R<=g^PBMIl(:X>+<?r,ja/2O57M]Z"f,WrMt)IOWM!b<%+uDaZ=/dKYYs+=,V6(d."'Cj6UK9gq_jqt@[_*8gU+gUG,1JO5j?h)Z/*+G8Br?=H6a@[,7c+QaMLfL:c7ZAEO83lV:E+n^X7bT*hEj@i;a3ouW+"^FS^eNDaR\\I\/Jack;`@-51gOuA:&PAX\eRC)[l.oCO<K^g@dD1"#er=.]6B$_OnL6LV2XqMGeMXJ0PmM`_hCCIKAL19rEPuY#W.Z&Vl&9++4B%/&naGe%EBGq+gdEqE[^Kf/2Q+e")ucqT!f.X\$qFuad=j/?M`?T(F,`<lb_o$IN24^;hMuFd!lR`NA2JoJj,VN0iK+6b0h0d7e)#&EfGrIo?ASPabH4;5DH,1:r^Oc]^(G$p4`B67>)W/;$L'VD9[GNVg$ro0&Y`/!fJ0f$a,7D:0HV6<$T(8U+tl<Y(0m2D1nXHn_i`ZGNAbHsqA+P@`/]/a6+mY?C2B:36&KL6(%K:Zg&C&$fn34AR,J92=O@b124s%>g\Q#cQbn="JT#JrR@L_iHl.8ah)c8=h+3\"U4D2H0>!sMXu3hdh&f'30TjUPi$FU&:[c9Tp(T0WRDYT5h>XqU_mVZ\N!:o\3u6UWb,HeT=D=Tn_k$Q7bt$!)%W(H#C]W-_7Q@*NN".78RMY'Rl+D[V5Sd"q,qgb#,b>Kp%Y";l08rG+Y%LG<>jk5ApPJ3_[=n,hQUPQZbH5H%\_ak`f'96*`T&;u1R-pGKubbp/ar%IY(N<uhS.>]EEgF!`4jFiNWja\>k;3.jJVKEoD.ahZIStI^A17/48Opn:Bc-\4fN>VrWXm"FH_$2H&#g70F6AF]`<Dr-$i(u]ZW_j1b;;0q((ZdG/YXALcV.#Oa/`?ro$B'rLru]iY!>Mm1c0u`8E'WO/FKu4@d&4M8r/&Q=mW9"j]lo0KWDNePe?X4D(L+>%7t9L?9Yulp3=H1`*ga0MJ;kn:TL+i6<=Bp?b(`EdJGV^24=iH<655E'>=2s1Xr&C*lPU_FTnk=-T:nAGanMZ3R"^SG/@4>6m%%[J8IW[;-b8D@4g3H@J\rp>ooKQCEp?HWRKa>f.$5C8*7dg?<`gn7>Y1Y?r)03;Tc\0.SIN=`A6RGB6D%lBpb%[kI@,f:8gEF$:Z-SVs5j4G,/Pb6g]pTsX$":N]j!pG4&Nh';_C_2Ar'$4<VNSiPLbg?hHng:kX%h'2G&d7tDi3OZ71B%rlra1fjMRa[7>?T-Wo+n*U5=-/)Rd/,rK<fe7'3q,0!m0gZ%KkB<[RZ@]$B7)!taU?&D6tc[rcFu5MP`^3oaW;FIf30X5AtpM[nm5jIVUTiRC!@^VI7qJVH1-S9R&^jNNTM38*AR:6->?ha->o7JLkr$0<T;Kl]JEBu.X5o#hM@?Xo1ToufOh%AEK5&919Q%63ajWi4;Pk@T>0i2]4&jo_qP"VU'*?)S:?n$,)?#A-&uf%CjV?t*jgBa`-8cHZ%26?kujo'=8:TID-/g6:?lbt5M'YQ[,%`[b%W"H13J\"O?:Cp_I/S@617%s5?^S~>endstream
+endobj
+217 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2072
+>>
+stream
+Gb"/k>BALX'Z],,'^)<`1fGAe^0j`L+56A$8Xg0*qpH9h$W&)&e/$DQp;??]C][>jU`HaI*Y]r/K;?8(FS+VWOq;U&6-OD5!PB8cd;&f:_Is"hGC16u^oL>YEIEmm"*!%H)ak8tKEcl6jg:AD]HQDS`"YfRPJa!P\T-^,i']aUO26Z9rM,Pq!=H(\hfYZjI!hD?<Ui3Wb6iVE#[rt6_-%p7LE_A3_^@/7$DTse+"mnpci_<9ETgk[!_S%u^/?'bBnb1GD[HWMlZb8?eelXk$k'W,,oe_[A22ok,!I0&&DJ2"#hjeu+WU])rhei]YX/`I<V@YR:'OfTI')i_%"C.H8"=O^]tQ;Umqq:hMpZBY0dS-kF[H6."#.dM8n:BP,Xl>%;/?^n^B?"V$W%!@F.S"Ndn$b):`9.Hfk&p6Ic.^W%CX4-Pf$lZos`f(*DBr7%eMdZ@&kCd4Ir%1DUXV44PdGhLOt0=):(^Ib"HsfVbHVY0Nis(^@JXS,Jq9`KBULBXc!+3O)(!i#JT4UQ$kLO;h8OhA'*-S'*X4,F6pjGdpr,L(G4QSf*0ZF][4^bJ-PciFf6*7f)[/APt/+RjSC3B.-=XpoQ8F1"e&*.;d[VC0QZ9WZak3eM,qP?DNh#JG"qoJR).rQaErtmT&+,_%W4KRkbpJhYqNB@c1l0+U8up*fC^hANK#iV86dsNC#b!g,N8r=:n,df2*WM_+H:fD?UO2.YUO/D##r3cE<&nK2t?P+#ooHNOs^XZ8pGWLZV2WECZhDZ>4t]8h2lLCTc8ZB8!R8RU,^<Hb5LrrAW"/jI;OmG5)cEVT`5J.A^RlI7RD&m?FR2B!$OS7qLn#l/(=Lp,3K[p<FjW9aLG3b5Vf0(_OXnGo,`CrhMInVAl&RR8kc@p+#fOG]+'8!^`80jLE?;-Lg\#a@Ys<tOhSkb#L<]JeG.RZF)O0H%g_15kU2AUi@+?^3cdQ7LZh(VKdXRm7^75A$T\<3G:g9F"5@=m<cP;g9_']bVQAOq2b@csG=s)^%n&P`4jPk>DCQ6+U%Gp)lE[TDAnJQ`f[sB#iI_`Q)^2WI3d7?EX2SrY*Idh6TY(#^k?\2D1@Td*i(0f0.8f/F]I9,Z.fcTWCj4[(^P-5&@odSWC!+n;^qVJ>P"D5m*+KhJ/'C*!]j81(l(ZqC(IS?Eqs=dcc8eN+pAPad<um$EAL$!F\52l<!H5m2\iC_b[;uu8N,omGnQ$CMDk<<WN9=YI6-9jaBut#0[j1^#LpTTu!C#7oDbnGe<]Ld>i>%)3;N+8RaLZsFrrpOE@)<;l1IRiL]S(#H-E=A]Zaea)GA-EQ5Yj$@>MSTNmVpm(bbSQ];ao@SkN9*'kI!hOO)KU6*h)'C2A'Z\b]54e]Nr[dUt_/VIdFNIG(("V^i!LMGKpa_H?-RWn5<'I3h+Q8K_t#)_@I-k[nKQn;G9(>n+.ad\Iob4g*s-Mhh."DE8+ha+'m75G^Dck;tbXYV<krFV#$4Y]R<l?U%`OGiUOUu%o0j`k&iQE4G?b,>S,qL?<af#Zfp-YII<a[kju[D#(?B#^3;$HJEIBBi.S5D_Of,Kr@.(%eB6Glp]L*Y&ZgYSl'!SXb+0dK/F>"UG,CfHH>S5)LGBB^]WfK>$cPaU-Gl95GRVpUrRUL*inemnOP2k[rF,<%.$_lOn4?Re-H-MPg%o2Y.sHd3cV,X@AN;>7jE"@QXoY3iQ29f<M9IS?>"\6UC"g;=9^N>]rc%<p+jp^(b9FL,$UPBJ]WkN)Nd.`_?;>dK@+)Cq-=r<jR["k>Ca$@FA@BG2R<\+gbg^Mcmgnr[+2SmoZ\ccP%Z*.E"j%#4hJe43*Np/jor!n;C]u=9V8]"Eh6+74m5rS2mPOACmS;FG%W?U;b:X=UA>n5<@Hh9&0(fj:q.!Elo5^Qe8_:eAcB<'Xd^ANp'>(T`5G\1l(F>:7JZDdJ??AWIgo0pfY.BPW7O:Dt@l^'NS3=iI:9Wge"d64?m]]gOm0pZ$rFEO2]Ka'@kaum]=)]],Q2V"*h+_K71+h9%n,CV5"\*W-;=P?IB\hIAAnTcucN8%:56Tj0-q!H1HG4Ln~>endstream
+endobj
+218 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2040
+>>
+stream
+Gb"/khfG8H&BE],=6rS,C$2-[65Ucm>grS4[V>,s^>q`!18Yf'#<7Q%pW)/`i5B>%EZP#o5:Dp:Y`ZZJZMX/!M%Bs^Qe9os!-gY\=/Q0,L$9RJk_CiTK/_8A+,#TW1&/REi,K/hTfc#Ab!t*NNNg>\Thn=J^E!&#8E(`p57[5U"T3q@+*5".TTIh&"$c5=a1"XlP`Y]C(Ctp8_6e`fo2;\<Gl]!604=V[VCue5(m![4JKL%#$Eu[`&fr@.$3Xh5OSI3j!?MA-U[be4F<P'jW[h5gM.hPlZY_9,&i,KOcO#K%%;6a/0o&PC7m;]DZp<C,0ZNMpJ.9D5H_b'??]-`"7sDr,,?t)fSrU&oe(5X>;W<1E8:Z0iQ?ZNp79TM%=kIp:YlpcPTQ9uGRM*c>eBjk&<.6-e[eAC[bI0u0mK\^A/MWAZLpt\/HZZGk;%iaW7%_@-SmBJi7jW/S,^N;@5cXB$)M[;JBFu.jV#abP;s(D7`-kB@^.3UoU2HSjg?gVP##UilmSb[A.ERORg'[4"Q>(PB=.)2W2T:9VZIC;^.7&/Uq\n,\V6GKr00tYj8NhFI#E5"2'>4#U4D5f&GS`,@6VJ.V]AH(Q?u:"0D+S+;Km))AcA;5r)7Sc"',-NCUPpNC1"uuO0'[0p[h2B[Ke^D68F&!`RI(k3SWrtChSAS1V7*PZ8,U%J\C#X[\f^-YTkJb(;Qo@t29X0EWKm)kO%E6^:,Ff@DfqhB16.JN2RZ"``[7k`6XA0A<gf%rrVTooLG-hU2`78GICM8bJ?]U\ie@Db<r@f(?QP3aYmK>@MCGg42'1N>G)eHUfa9SJ5E$G*AqX$84iA8dHXh,U<u@;HOgt"U>;s:fC#f'.:XC=I-c:1=FAnRUcmP^=:$(VQEi7Q,2M+-5leBR!]R;j[>F",I_Oc3,d+.gLqX(8a8?eqPDF2VO)e6VTCYK,TQ.#+1e(4K2@UT?h^s9@i*=8ggj032#2l/U\+'S$FVfkV+*RZ!XKO6UAUYTA*m`_0%lUDY/>)<s.m-C@4VnC^j%gTbV<I#$H,n0;*'n4D?Ppcu:eIHd5GIuk[A@Oe4_jGMeh1=L%\uKeA_)mc3E\3&U?"6mJiX+/K'@2WuMK1$YP]OWkc#V?j-82b/ScdiP^^GBoI`J4gbO5oEG^gFihLc]pQ>0u?J&jA3;j)J4hI!S:;Uo_8&[X?U=0c#IantfBGRes[!fojI0>lg$\-:_P7qK\7M7r4iK9I0cm>il@n#9D=Gm!H$XG5nWZ4LRVepVIT(&-ShKqjR$jPiUH^tIk)0m<rgU%!>2M>980iDc)oK;G?Fk&=Ed?f7Rr#M`ZSd1*c>TkCmGXMe2aN#eK1Sp/+o3)9>@d4cgu+$C=pSX,PB)`Z*I&b!rjF=?@tXfs`SiShR2O_X<L<@2he:!Ol`ng7.db+#e+SjVA;aM[Ur1/d6]PRe"Ea-T]c6GiqISn5&/]B`Q`V71[(*FB+!FLmPn!ak&("p2+o40@R_kA[mTmTBLJ1357oLP*2F`kPD`Q=V8H8nMPR]8lPRHoU?'1SDA(7K"ad$W/LL^?`5FT#9Eff^#/4Ao;5VE3OO5FOl]QQPtm,1Y<n?<j_S=,F\M%<k^2[=t,<HPD-(nW>et#g#?2F@BBXgcG8b<=f-(Kq/ClY8`If$EuaYXHp1of""&<D7X=^'o)GqM:oq?%=uHh3CPe@OBk4'r.RJp)?-u1>kEm]!iGuU66/NW8H&lir=^5u0'_SV%26TF,V..5Q6s<;YC+54tSBkWh@;]/jOgm'^,B;Ws]L0Nj>H)1tVf8`CZHAY*s0EVj7U=RPHf@WU]bBkZQ$KYKRdsW]1]+iJ;MqXfH4G6_6B@)C^>'2Ai,ZFsJ_mYLi1s>K?GhP0P8F&(5pn@>DS4KA&%G48=]]kAOnKYd-g-M5Ncr%_Nfi04chth?]r[P!\ADo^(%C"],c`bl0@k9;rnMPYpo3B'DJo8hi-[.,bR:]7GSL@o/oQK]o!/r&/g&Kr4.*.&gQdDY&6IO'Pe<1%%Da'WG@!@U2lR4\If\K-BX%~>endstream
+endobj
+219 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2080
+>>
+stream
+Gb"/j9lo&I&;KZM'miO;A;1KnIY^*5*B.m%e4ufR0"F4m/0Q>H)Pl`"di[HN8BLE-X`gLZFFZ675`*8a/?k2$>_moc%q;-Z!oUs1hYfck:mbPi$/>NXkAWI&\R+2-IgiJ=p;/cnQd@EW5g;fqW>f9*EC)s2\9^5WI4pGj!8KQLdh?[6?iTB>N<"[N[-tPFf06oC\ul1MMf"0!)b)M5i8deuX,/7_@e'`#hdQB4oZ%K;3:alp8.p4#T9,3i8i@"Z@]ba%d8PVCo3@p-gD\NELPa5n\UpGV_f@cpefk,<is<\qTEs8%`Xs5HnE&]O%H.dKcuqF*EB",0a7-K"b$jjJX8Bhpm]3feVY\T#Nj0HbefIafi]]7G^cqf6*nI'I[@>=U][O(l=Lj#gPh48QO;0FB6.=oSQ:#NUZXoJ?P6R`Hq)$k>@ri.%f%E!W#JH"Xf_#>OF83SP)4q:9@^DTb$;)7.F&AW>69H>A69T/76YhA)GPrr*E_&QFO1Ni%\oJ'j=7RdY,[VXH0#\apR_C[\gRp!)S[OW(NL9le?-R.(9=5t8icQWVc^sB.$4HY*(<Y#T?=m!QJGp17"Qphs#L.l'mp)aUM!h!Ib,siO`^]]D90D5_[%#fs,N8r=gmZP`ZqF<h17A>6^IIF1;:c0.GW=4eURdI-G/Y#"^Ri?bk9VXJAHC7k=`U&2mFD4S*tMo6W\=5D'@kAOols=&?/7%f+lD+__G7F9R,XX`5[0s_O(.C0kS7TE=#=`pI4TcGY"..0'CoPTdtNt.q#VC<8Mq/aL224WPS.63ch-3Ur;Zbj09<LsG90J8l)e:*?*RUEPQ0BF$,d8s+'300*ekoX(3(Y@qA<iaHoE6h\!f3JqL3j.2^!!iX.rm<k^,L!<t8s&'&Dc_nT6Uu=6s8EJo6CNgrca#rjHIJ.c*Y3SA#U!g3UJ]F)!5bD(28rpX>/cqlX)^V@t+28fo"LD>USI@@YQZ_6sCc'o^5Wi+N;G[6)WG/bX.[G'Kc&hO]1L?TYM=hf4bH6S?gk9WA7tHmn4'[&-d:XSDsCLL9!LCH0BcK\jso-5m7Q$bCaPVrQPRd%Rr%&FW.TGIGYYS7@M!J\_h&iRC6BDUAbPEgQ:3Oa!8S,Ulk_V<!T[6nXoCcC%pL[3_FkhnJ1C_S-R7N5dco3u7B].\7!5_\\oN7bf0iL-f8'.Q_CSng!ik#IsGWmQoH#8.>5\_''Iq(]jCM;HYo8V>A9=ca%Ibp4X+CMu%N/2X3@:p0B:],In,56jfhn='-AuIatn#J3feUl\:>gV]&5>/FG(Wp;S,0qa.t=p2$[O/@\pI1!Z.9A;S7:W)Jgg$maBM)3%):K`T#6bKG:pe.kW%#/'#3^4MkdR8%?s"R_8b?l\f-Hi_NGNVJM:JWkhhdeUsacI0[>(V3(X^-hPN`1'`9e-aLdV;_Y3D*#RDDK!bpUc6`NgP1;mma([jmS)-eS&+(Zk2&e8?bshh+`iKIcEH1?cU96T%VFg?2FdB.q14`J-cGoUVUrrD]gOctHose\X[L/:$qC9Tc(.hc6U@,a\k]e'pY];*5=ZPP1KJ!*3r/FVa:alN!Qf<Ck)*.H957,b4\>&8-_>aUGWm2H9e+`XoZO)jRD'747VRP;_3-KPVs@;8M>g<Uo!JA0^D"inmas,#l"A2S^%p9PI\o%%HpmnM!,*AS%X'ufPZ,Y^kJQiX@bJs>B@e!`'bsZ,^)dO.#Ko0O\ij1dqpWg>VONX%F_<J!?]3>m>Q0oZ'jgA^Pq7]B?MUn\i?LIkR0G.o+R4'%>?Bh<L3=>Vqr=hDh+VXrq06k&/t6Y=r$h5l/&d8&>]*MZGGuXRGF.&#dZCW[gqq@RDK"0irkpRsM<3cKh&0/Eb5'1K3TFkY*saNYlJ4)CK5[B2TB@1Akt:K8,qi2fX/jKO7_=0(6LOp$lVB;a^('RlKmBTXhlD@Hn"Sm&8-f%6*&k1Koe+pMLNoFZ\mRW:[IX^.BmC$L;V>l?"lB6oMoWNG(\)=#G:^BgQZH"KEo<^UGKjOM#P1^ARD1;"pe+dn/\>B2V+dkR.-F^2==Tc)Kq="T^7,F]9ooUTIfU.u@m0~>endstream
+endobj
+220 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2014
+>>
+stream
+Gb"/i;01GN&BE]('`6<bg,Zd2A/kEND:3TFEc!E_f9a3"7MrP=7;YE7b^K7jaX3)r%_[F'GYg-r)^PBYea>(@9*>=o-2'2H!8`[neN3hc_KZD5oKsI&_SpcX#9b=.#_"H9U*Kc3cmVS]ap4cF)e4k98tckOI6$e"O=!7!IM-,['`=2`+&gr%:e5I#JY.&Oj2[t]9#uBr.gl5'L2d6,='D^qZ@G`G(GPgqj-R2=/;fXYJKL%3%^8/0,uL2h.1f%/6L)T%"em./),7Os`\RW?Xd5]5\%LZlkM'/c,\.bPQr=\b)pfk-_[*F&&,Z]Nd/n0O_ZY`n!-Se.gH,S6?`hV0+)e0gGII@nOUeW61Y*UG;W@^m8:Z0ik'1+R6J$[`$i<N5kJ57U-s;"O7Y@:j&fNTdP"Ph`[Ek.E[S7\"<5pcK''$O<$/R02I;lAoELQYR7&RpUT&#3-U(k@>!aR3i+B*<@QAMh.RY1mtC4PH&..^R]icRX6r/CK:`SGY>=a.h5>"#K2,+i>(F\QJLeM_(oYtfY>]#O)2Yc\bKNFbQkMZd=Zp,0)Qb?tOH?U?bt-HaG_0jqeM&])T0kX#+(^q5uu3b#\ag$:P<!c+RUjH@;J$LK0a@mp6H$sW?!WJO3(@7J_-R.hHX0()mdG9K`+ba@T=UidQlbki]V]bdMYA-V4^S2OSmp)!_bP?]V%);l#>]4a$26*XL6Z^=;^.W7bhaciG5kDG#6!j-L5:_mJ!%#mEtTSWuXkb5:"=fY9<]s3$hA3OeAGI!fK\9"JL:71F$s%"O:^q['K`ph=XE>Q`]fZkD5m4LKX)ZA7l9-A[#1N^pp%i>cf>=8]kbWS]V0L$mUk<sNc]Q%`IrPVLZ.69]2OCNB<3MN3C9V^pnZb^=MfY+Bjr<Od\Q!6?JG!NJc_4?62IOELMom$ABBIa^3.:hbC1\&JPDdD+@,/Qh6c\?/gr`QM1Ync2)>Cd7g<odt$["@VtS`Z[_]C2[=eS%I\LL9#TS&>?r1k7Lth\W$2"M@bj0+1VuNI#`Fm.$Xh#=mZA+XTeq]_"B@auZ$.q8_(sH4G8u6I4`(4jYFk46YLA;J'0uf^.At-o6n;+(0']\o'!'l='qC@5R-a]%1li()-Xl17WbQ9>8(&%5ZbdBLlDiH7F$Npn?l.@s/.<MO1_5)P"cMfP>X9+.UTB2Cm#f'eZmTE@=42dh>5b8*E)B*Q<#*=rPf,V5:'k^(9'XS4fGT]Jp\tAsG=.Tm1P-RE'.JT7``ha%LQmX4gFr;/Ta`;;.@lL.UIS]2PEYV85lo$b4WjD!GMm:3El!r+Xi:j6g+/g-oV5QiQ_qoOJ-bqa)cX;b?D]kHMECp;17lQe[9<EQR%9@..93R-\)#icseBb"-jD8]ekgYft>"Tq$oWl</hfj%sDp3mp%:m7TJkhiltQ\".n-V#.C+_/B9R_^3&\g,df"HKkgUs(*3$Ia!'tO_##\;D(C<$O8]t\ii@"qR;TTgI=@Id#E_lFf+='50Y%7*Gm7[XEB#XFcQQ?4c0^$qMAl%Z!&^tWCqIG"j]h%Po2OTNd$M-qspn>#FT#I\]!o(GW.tY-sj_)Y;fkd3#:uF]CZT)g7?EuiT>[;[*f-I1<8(JBC:kSUYPra(IW])*K>h,]/pb]?.9b4eF%7KF=*L-d12jP=`:iDp>F.6c%VOPKE"R5V#V"7\l.tkM$)VK^nWXK9CF8:%Wju*Jlg4`GBg0!_&Ir`P`'Q2.rC@"*qlZXELY&t"R/f`q$PttA^[u]1"rXR2`jtLNp-5&&EQS=C9cGZ?51bB@dZ5C35$];8cMO@EBD:?_n:%Cl]k2iNlAWPDT.77m`M->k1'fRTr)-BnqD)p*$+8R6G!/eA@I\K3hZ@K+p5RDV/3FT]No)@*,UV1fTJE>o0-/5ZJc.f]#r6gZCZZlE%.@dG<jkZDdVf&mjbqDjjSe;\6bE4ODn4a3R;Q^F0pAW<r.W5*+rM*II#_[7T=>B*]qq/bn[P1n]pZBht)Gh?"FlN$Z3.\h#~>endstream
+endobj
+221 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2069
+>>
+stream
+Gb"/j>BALZ&BE]('`6<RHGQlI$he(oVE$f'9PIngQb3SK5`KWk[Ra#g+9&?P'?J.gB4)Pt'II4?Uqa:jrNSgI!>cir4=;#^aUjIs&KhdB'-P$L_sd`QL)n>-4lZ.MEI2R77Gn^qpbA#^:2]?O=JH[2-ojuXFr\hf,M*/Jo!*EJ:@.40?/,]^Le[cL'/f1;gSF(kmlB$$i&a41_[MS%10k;V#%%RQ@/'hYDbY_o+H/Vt*1t0CMu<r1$,ZIDJO$"G@OHOQ&@en'd:cfq39)]Skq+RIPUVp@l+.Z#$0d.'jqpP6"uH[$07^+pNYB2K>+k;h+5q/o^lIAhI?qb.Dl\6'$!5[C1K47kOnQ!s4k:BI;W9es,etLP!`(>/ai[1cB&6Cd!1#8\(&8:e$*rJL-o=XJDE1\95&5=E2lVj:):DneN(l;DZ<$m9k<ZSo3-%,'SIRl/2<%Pc;J_S<FJ2)gP)9;m'4?)B$$ELQ(X3Ogcga=DNrp<YHdn`qfGk-X1e/TUMknO[^nFk?=jtjNWZ*dM=Jn>RS&W[/]<(/GN?qa?MmuKTqUmb)94.t]ha61F`UiV`0jqfl!PumukX#+(^mg^*3hj7=290k'\Ah"=aX+*H'\Z7Kb)#fnl.+p;@NCXH_i2T!dB=_5?.cMNmR*N0RF0DP8F81Ne#sR,FNVagbi*Z+UjR%%^>e1(i_j`*Hp83ZJl*$^[>lap*t*@a(sQs(;3U!5;.#C!((MSS"W.Y2D+uj"UdHYW.]gZj9,$l(UfY4gjfK4CN8uY5jHujj1[>#"s,W/5gXEF^">D.!QeGN1_oAMWs0ofaLuX73qIJg"*f^Y57)+`R3R04$:.V,!GO?JrjiuNDM%cX;2"$'[k0[c%JGKc'N@l/G3eN],o<K'P!h@nHDX$?MEEK9OpCa@u]g1&toBi$A[>;GlO=Z#YLRI<c`hQ6U!c4)b2GDs#A&ZZFP`(0r"W@R^Oj08l"dcV9c"AX%cpJb>d0=2Y5Jh?,aE$]&3-WA72>]CH2u%M[@lGU(mYc6'(KDfFrIOC"9lkm>r&sP>Qd`p#&@peG-.KdEcOt/#ip$BLKm4GX2R>IViglEVSr`?-_FpAZ-+b,>]6mu0S$'-ma1^q(9d,WZ#<@>i01oPN6KT&/(4"XYcOJTk]HHRo,k"QkGJT/o_\HWn?_C'"@^k-gpkX";_/),^("CrO#Y,t9-ECUqdF,4<G3"#Z,?Ag-3Qnrb3>[@E/[YsKpRZF:>hChB*7jP9_t/ia[`0(&I1eQ`'CED=k:B\$0r9A11u<TZ"*+3VT5\n#'OAIf%6)a?5723NH72`V8Qg)_*@*G/nnMN>*Z<Aj"jrn(TO/%[.45h+845XqGApl/IT'B->;gEAB"o.kje0=`C^tb>ZtfroB+$_fm#-&8Lj"^$U-#:/5j?L:\q'eM"cNVSQ7TADZ`MoMF]c@(&,#;Kn_p_?;W`kS.4\='f15!OQQ,Md*>:*TdbR;amuM[@9^=Z9<m?_LPq'adY.8>1B9BYTo"=[=AC%D'*tIke-54&!j10b;,pGlr=Q%gdnb?"m4*aDCpY_73R`JH!-q/7\[h[2>R[827`I`#Dn?jnsHZhFFE5;4-V/m,?_%dSj?d-.4U0XY-jX/BGYHWCa=7@.'Y6*mCO.i"Vr3=c>(UU^,)L(RAaj_ph*tI^6,^-k.s,=_%2%.q#(,'@h*-UJ=p,sr0:WH#>n[rDTDO[o4gR`PpI6!^)'/m6[&D!DpXO-k;i,c&GaXad.)aPD$Y'<N_k?#$_o39_foS*4MP]pjH;VqSR6tSC+=Rp<'4qb87GpIEIQ?Ob<]9"S!%iJ^1M;KZGfbaJ:he;HWc4C\\lJ"*&[P6naQ(6[oNT$1KQ?c[iO7`@YCldNGXu6fVQ%CMm'mQk!b6kEF>9*W-?`&&gK*Q%U"+:*'rQ^eAI^@dWKm*"^E7k+pUuR<'qa#cI)t/^?>-_@LQJDG@/HVj7*E9!hd,KAu,<fVH6C&DB(>N,G]7&eo/j(3cmclG^kbn#gDg/\7N+TQOW4@!%S[3TA#u&R`U+5Xo?>l`h#Q5/T/aFtR[bY)r>&8r=IudfMKE~>endstream
+endobj
+222 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1982
+>>
+stream
+Gb"/i99\'h&BF6eMS:>t8JN.:ZAj8@o@VPnVQr:fRnGBN#Z+"!M/=T-Xo7bDP0IJXAp+R)`Bcj#fO3qs[CUjpBN+Ei61&`V!Y!+gISGAK(sda/`/!k1\/P*tkB"cN5eMXa6kL!Q!^DEKhTK`i&6fQP#).``q]=^&*-j`0aN)J6+>Gg)k&Muf+L_5q,\m1r[qRW4T+gQAn4=2.3/+]rF8[dj.=<2MKCLl;^UN7^5o>:qLem'X_smkg#%>/ATF_upR"Wch!m`*]7CsJuKnN=+mpuM9U(TMZmqP^ldQr\1N_opr^nQo"!kA3:7frI:(9!#T7l[%RE+&HET4o/@fB/TdE8/#hZcujJklA=MF)<WXUZABt!WE+%ib>C?]Hg(?g35$O"Hbit<nSKm3TNi$6%u2`l<ZekmB^;h?'G,pPT^EX`5GoT)spo0^%Z2B@2omIUXS0,D^KM-:eFEg6l/HF8@2QpAHKLc9u9$ZeO+B\N"[9/GT<pfhd_?0YW319BoY/?Ms0h*5T$q3\)bP4FbfZ%gXHJ>l-,`DlXjJZ=^i*8'!JjEIeN.'&m2r9pQ5()aDC]h%N$mK5]Q<KHI+i8nKqk:JX@VSm;X.-T!cshEN*RqKf+e#2'RK7#IX@uCgrQ9R'G;Aju()e$_(Jd-H)<T)&%F_eh0>#H2RkY_j/YKQ-J:Q?6h$uWBAp<\NfTR89h8K2p@oY2DJoXKTbM0[@4,n>e[A^E4M?SN*p3=pMFN(DJ!?P7Z@hr&*!]1c+k/;/K^B/6o30JltTkJZ@nXkJ&#8n-RfD$<%>ut6hh,j^[2KiJViA5PSpkr2.##W2U42V^E$oOM'$d1cB*8j#ECsA#=mnr<uEt(C".CT`g+#^D;:bH(qlY`1lOH?er9do'5BR6GFnFr>K,`9/P#qJgKJL^n[fB9X*>QiHhg.(l0II1mA74H\"f%d_p/B)kJ[5**CPFKZDWGVqgPQ4g>MO@ZF)qb""UZ!(q&;5Feec,`?)X*K/M4fmJ09II1nX#SHeURit&V/(`*OoVn,3#[9r;-k1Tk0+p#16gW]1WP\!&kj\"b%!GZcT?I-%>SE&CuS29tX$g04r>\81(S@_h#r\6(rl![bOPu^K0(%2ndgG_])GF@90Tb<P^K$H*eHOJ"s\qHp%p/Zl?mi;$2`h"!RV0>3bE9Z2X?uL.bVYr"5O/dR6USX4(Y+SiSasAN]Qg/ui&iGqWAJQcAb,SQH$p*B.iZ1S&+J`k2T'=*<H7)%l>ClEt>EO';T.Q"4^Xt&^FOL-\nbW10O4X&ce<AF)/h9FP8%Cu98#*N*cAt)Sf:<91L0BfVN%0rao@^2qcqTHKAot5T*dp!Eq-Fj&bq![D9/2Va<G!5-gWV_B*==rZi4#P+5!H0DpW/E+p#<4L@@SCJ527&e\.c2qO]<P]HLQX"<uS4sKW(,h.6(KahV8^i?L3EQY@l87GHJ,Of?detq1MQr71,B%VIe1e4aDXbrTWXR7u-b.bgF<U\7!=[dlbV:\:_/@oRW+dm0.(h$Hf9!]8KptdL:l2j:8Yro<*&!=P<]72;+bn_lm*E(6B61;@.f]lWd+(m2YL'V-SFNRCfcql-SiF?PL8>R*QS*md0\f'Lg2oZ=!4eTOX<b<q_!YWXr;nbDT?0g5;Z]0kf0F9kLPsHn<u7#L%@$[maL_'6.fs0R!f;Kc@Y'l`?7c<;Yp/c(j<:FFAEu]X`]p'(\GcV8Jh@gjti&m3Q<*9$!ooeD88>W6G0cogNQM=VZ4agAeERp#r'\("o/#,TpWuKtBk%iU1BhCTf$_=%b^tgl8*Z;jG-pPS.eif3+(7(&R*!`T-u)pO/n+Kf8Z2C/IQ$O2J*$X!9^a*=P'a?:RHb\GYc*J<qbq6_mJ4ona;=qib)<Nt/e,/H-FVKn;]D7A?de7la)M6Rg&i>?VhaQdqW6j=^!S_(DK?TM)nt_UbH9FR>gChni^89Zs(%jsik^8%Kq-/fJQS3U$DL44Q#u~>endstream
+endobj
+223 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2000
+>>
+stream
+Gb"/k;01GN&BE]('`6;gm@4naZAeb7OJ^K5VPV(5?i&b!!G[V]fI!05gkWY0D86T8\LX2nK:47A+RNOi?2[kq-5::oU#fdo!k=c;`AIhA?oePX&-o'kn93M1[_jO9!3ld;n2qhX$-.g;d>Q2^0(p.W$o/.\f0-ufhm4=GSqG:9+?nEWFRrC\JR@-?M-&HPQYASsLD.$@*$SXTY+S!OU5+S/_5GC*R!s\PlZ,*m\=Ulp37N.h*04K,\GfN[Ju9?2ipI0[gErG99o\C8_Bb!+AHp&F#bkkWe=mGL!uL.eUBp^HGqL$A(r,AK!C+p5eW:d^Vm?FE(d;#6&PW1@G>=",lX$-Ih4L8&!6s`<[^_Jto%9')IflKkR]BGOP;$.)Y7s8062U_FMSDN@5a'8,$?T"<mNpqjIi<cM]%"Pm\kFs!JqX?M)pRht5=_+;Ql_W:pdW/a%:&Y*A__C):p)1tSl*ja)p,>*<#A$m&gh?*j2!-:6CI!d?9gN(D9fQ$'Dc)5hUbhg&V%fm8#(54%cR)Z?eieX63d\'Oi50K$O@uB@QXh&a$;C!I:6Us"lk9J%NZ!)n23ZPGO&`>@=?'3`\H2;#f<gdVC0tMXpgVOfV^cdC1H@^^$0-1`^6e`:$fGgok9]P$Xj?K?:3Lp+lh84*,q<-Jmum^R`DAd`9W[p%n$rU.Z^V6DjNZAV'NIlp!)cdgc5u(TS(C8`7H8C(eWpP<'Ru3>IV&Hb6Op9U!*XC,s(/aq$-\^a\9Q"8rD2eU"i-)+HlHJC4>AlT[6,6XCj#n\4&\64XA*&7a079Y>eegEIle$d!eAQH5Zrr?WGFNd\ZT63F6@hDCso<!Bm!O8XrHEK_PfMs6UqC"r]?VD\t&2WKX\QXE/+H?Ob"?M;rVM7[MaI-\`Bk@6K%!5m:"glIAJ4c.lSClYNK;a!@VT$C;TBS'HUGKPI8$j'cl3;llTLJja!C/%JB+2]#ku@W*R8k$*Djf$j?9VNltn:^B"\9Wp+p8X[`_+9WToNu_0PI]U%/f92,WXT[q.?]#ic6RB8,?#)XgZ)9")T.q)"p>=m'(<Zo$^DV"B.OqYJ\WSt%Wr;SCqnHTX?HQHXk@@?u]CGB"Ho$FJhZ1t&mps5OG2C]`'AgN(FQW_<dJGF2-?5.o;:HWT;Dket9!pb39a[:l)oP%INq$;lONrsU8C@g*[Zu";+&-Hn-D[,C6(G,XSuX,k)\pQ!?ro1<Xltl9,NM#,[EWf:Htrs3o`(A-)8f*hqcs0@#5*$>49N6+JVWZ2/+)s^H4BAh"*gG9lcgo5Tut6[.e9`]Q_[Zd9"QV>E/p'L/%g8KMK5j8lRX`c1Sd)9koASp/+">8RaUV/82jgd;Hfi,JCeq=j@=FGYsg+3C>nT<\p'R26)pi>V4H141'9T?];&d^m'a4F_#uW,h7:<r?V[W682@\S6"ab7Z'D_7&':EU^:X:sL!NegW47@+$"j$G$+!!-G]u"5lp4iqa'IR:GGjEU5%&QQc44aZ<.t5rckgrs!fNU.&X!A0]4,+9SDM@rVf.Ljpi*]3d-CMDP"`"el3us<6lgJs>A;,Tjto"#Ng&4n:gs@DAj6kDm%=&M]aFD4VnFO@R4[Lk.7gY+lpm/^)Stk.[[Bb@qYn.ua[uH)/4bD<&]nm1o>cj)1?$gQm25mEEB0Y$[$/^!hE_'2aKtSgBP-t3cNfg*j*R3Uni,K)<Q`&[Qd[']aPtf:q5o3O"%i[<@mSe^J'H4:p%a./8mu_(agb/5"BV#&n*H(*=[Ul2*E53_.).=0N$(omSGco&R0LXY@+&HR85.J*c#7>T^X!.K_]UJ2;1^%-%&+jS4/6>bKi8]R%ZY,f>f[eY(pA(h?9ruU\`'+<h6FV.huBQcs8.1gpN[e'_Bd[h<uX?p'p944mr#2]*Uu>9>k:^?9kPNH`Nh1n1Sd*uFR;0IB&ic95W9`[@>*6Q0Z(+JmVpoBb<#QB$_-O3lSch,@Ai9<c$kJBgsP"EhX,SUmiQGHIp;~>endstream
+endobj
+224 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1036
+>>
+stream
+Gb"/%gMYJ*&:O:SbY(g4PjR>@I\fjd-n5d$4M1#>FmD]S\4)\XG\/U(S4`qi$1ZA1M0J?X3AY=19Yu>>S,)NY!I0gGnL4R[+hn(*M1kd8hW5';;D=47Tda!]!+B-S%.7b"lYSL_U`"r7$Wfh)&Mu:C!\k=KB0\62?LG<.i/i6aPaLYVDmL:<'Eih58X+tBJ]#f>rA:Vp31mp>r!)^:+-07PBE:N,9N-m?EMdid6ssCB6:UT*J>/86DT3Oh[=r<r5MCHD.Jfe,An*A=)+ujLS08/Y^l@KUK!4VVU>S*g&42ZedqJda_e[oT0`>9u_2)EcLRgC(AYpofEOe8#-"gbP8:Vc^F5/CJVH].fC]'a;Qp]7b6!^n-d!*j]D$rL);cf"q(7q-104RU#Q;Vc]!\7ju)ea?k/m/QTB8-\K9ns5h0'oZ+W8aP[fKs-[AR3QC)2779&l-h)762,!6thEm`>.7iKF8gP$Hfjk*#Y`2N?T>o##!q-$4d"ID8N$-cMWD,Ai)It*?lPunPK"X5/%Z4iS+sOaan:^[rOaM8B%h.W#k")'9AT=J[c7=IN>4O4\)R41?t.A@rYQqiWGJNqFKa*a\cY4PK[;il:si&CajAl.c]%!=D/R!h";'chk%W]Y4'B\rIXJqZiP!H[^X&H&7$31F1g]Y0!"F8ZCEaunMjR*9:**m?2*];DO/+cQC%b?a`*qM.]MGHaYln=aQs<FVfQW,-O>"l@,VhOH93K9cp-IOB!5`DVqEJ'c?tkZ8)lA5de$<U[_R^K!ddcX.PPK,M#D)D*bu+7BP(`"//rf``NIl3afl"Z>G8n:+,gr$KK5r_o.l`:&E@=%,RTGJi.h4PlS"pX-%nLs"Gjd8qtES_#TY(QK?0RqKHS!mI1QaVnkESFmnLa?98R,`!?c.7KBsZj!H>9'Qoc0in'F&4GT:2IO7:c?]ZdkbA%m@BlDA7R[&SKMc\C5W#G#,e#Mkbhcd/hd6Z=p\QFWU5ql2)[*-"Dc_(ONGYIaF=gqAZY^E%Od:Mh(qOSf5kl^BR~>endstream
 endobj
 xref
-0 38
+0 225
 0000000000 65535 f 
 0000000061 00000 n 
-0000000112 00000 n 
-0000000219 00000 n 
-0000000331 00000 n 
-0000000526 00000 n 
-0000000721 00000 n 
-0000000798 00000 n 
-0000000993 00000 n 
-0000001188 00000 n 
-0000001383 00000 n 
+0000000113 00000 n 
+0000000220 00000 n 
+0000000332 00000 n 
+0000000508 00000 n 
+0000000684 00000 n 
+0000000861 00000 n 
+0000001042 00000 n 
+0000001216 00000 n 
+0000001397 00000 n 
 0000001579 00000 n 
-0000001775 00000 n 
-0000001971 00000 n 
-0000002167 00000 n 
-0000002363 00000 n 
-0000002559 00000 n 
-0000002755 00000 n 
-0000002951 00000 n 
-0000003147 00000 n 
-0000003343 00000 n 
-0000003413 00000 n 
-0000003709 00000 n 
-0000003867 00000 n 
-0000006078 00000 n 
-0000008219 00000 n 
-0000010328 00000 n 
-0000012277 00000 n 
-0000014416 00000 n 
-0000016348 00000 n 
-0000018354 00000 n 
-0000020221 00000 n 
-0000022064 00000 n 
-0000024031 00000 n 
-0000025910 00000 n 
-0000027938 00000 n 
-0000029764 00000 n 
-0000031735 00000 n 
+0000001759 00000 n 
+0000001944 00000 n 
+0000002129 00000 n 
+0000002308 00000 n 
+0000002482 00000 n 
+0000002659 00000 n 
+0000002957 00000 n 
+0000003136 00000 n 
+0000003311 00000 n 
+0000003487 00000 n 
+0000003668 00000 n 
+0000003843 00000 n 
+0000004032 00000 n 
+0000004214 00000 n 
+0000004403 00000 n 
+0000004589 00000 n 
+0000004768 00000 n 
+0000004944 00000 n 
+0000005127 00000 n 
+0000005317 00000 n 
+0000005500 00000 n 
+0000005677 00000 n 
+0000005995 00000 n 
+0000006179 00000 n 
+0000006356 00000 n 
+0000006541 00000 n 
+0000006730 00000 n 
+0000006913 00000 n 
+0000007088 00000 n 
+0000007271 00000 n 
+0000007446 00000 n 
+0000007524 00000 n 
+0000007706 00000 n 
+0000007887 00000 n 
+0000008066 00000 n 
+0000008248 00000 n 
+0000008434 00000 n 
+0000008622 00000 n 
+0000008808 00000 n 
+0000009126 00000 n 
+0000009306 00000 n 
+0000009489 00000 n 
+0000009681 00000 n 
+0000009857 00000 n 
+0000010035 00000 n 
+0000010212 00000 n 
+0000010387 00000 n 
+0000010575 00000 n 
+0000010765 00000 n 
+0000010945 00000 n 
+0000011136 00000 n 
+0000011319 00000 n 
+0000011502 00000 n 
+0000011687 00000 n 
+0000011876 00000 n 
+0000012194 00000 n 
+0000012375 00000 n 
+0000012549 00000 n 
+0000012734 00000 n 
+0000012915 00000 n 
+0000013096 00000 n 
+0000013276 00000 n 
+0000013455 00000 n 
+0000013638 00000 n 
+0000013817 00000 n 
+0000014007 00000 n 
+0000014185 00000 n 
+0000014364 00000 n 
+0000014550 00000 n 
+0000014730 00000 n 
+0000014910 00000 n 
+0000015228 00000 n 
+0000015412 00000 n 
+0000015599 00000 n 
+0000015779 00000 n 
+0000015964 00000 n 
+0000016143 00000 n 
+0000016326 00000 n 
+0000016516 00000 n 
+0000016704 00000 n 
+0000016893 00000 n 
+0000017078 00000 n 
+0000017270 00000 n 
+0000017458 00000 n 
+0000017640 00000 n 
+0000017815 00000 n 
+0000017993 00000 n 
+0000018311 00000 n 
+0000018502 00000 n 
+0000018685 00000 n 
+0000018876 00000 n 
+0000019061 00000 n 
+0000019236 00000 n 
+0000019426 00000 n 
+0000019617 00000 n 
+0000019800 00000 n 
+0000019977 00000 n 
+0000020155 00000 n 
+0000020340 00000 n 
+0000020517 00000 n 
+0000020701 00000 n 
+0000020875 00000 n 
+0000021200 00000 n 
+0000021385 00000 n 
+0000021567 00000 n 
+0000021755 00000 n 
+0000021940 00000 n 
+0000022120 00000 n 
+0000022305 00000 n 
+0000022487 00000 n 
+0000022670 00000 n 
+0000022856 00000 n 
+0000023048 00000 n 
+0000023232 00000 n 
+0000023423 00000 n 
+0000023607 00000 n 
+0000023791 00000 n 
+0000024117 00000 n 
+0000024308 00000 n 
+0000024494 00000 n 
+0000024685 00000 n 
+0000024877 00000 n 
+0000025064 00000 n 
+0000025253 00000 n 
+0000025440 00000 n 
+0000025630 00000 n 
+0000025817 00000 n 
+0000025999 00000 n 
+0000026179 00000 n 
+0000026367 00000 n 
+0000026554 00000 n 
+0000026743 00000 n 
+0000026930 00000 n 
+0000027264 00000 n 
+0000027451 00000 n 
+0000027643 00000 n 
+0000027834 00000 n 
+0000028018 00000 n 
+0000028207 00000 n 
+0000028391 00000 n 
+0000028575 00000 n 
+0000028758 00000 n 
+0000028936 00000 n 
+0000029124 00000 n 
+0000029312 00000 n 
+0000029496 00000 n 
+0000029678 00000 n 
+0000029853 00000 n 
+0000030179 00000 n 
+0000030365 00000 n 
+0000030546 00000 n 
+0000030731 00000 n 
+0000030914 00000 n 
+0000031101 00000 n 
+0000031287 00000 n 
+0000031472 00000 n 
+0000031663 00000 n 
+0000031850 00000 n 
+0000032036 00000 n 
+0000032226 00000 n 
+0000032411 00000 n 
+0000032596 00000 n 
+0000032780 00000 n 
+0000033106 00000 n 
+0000033289 00000 n 
+0000033464 00000 n 
+0000033647 00000 n 
+0000033833 00000 n 
+0000034018 00000 n 
+0000034206 00000 n 
+0000034395 00000 n 
+0000034584 00000 n 
+0000034770 00000 n 
+0000034955 00000 n 
+0000035143 00000 n 
+0000035327 00000 n 
+0000035513 00000 n 
+0000035700 00000 n 
+0000036026 00000 n 
+0000036209 00000 n 
+0000036398 00000 n 
+0000036583 00000 n 
+0000036770 00000 n 
+0000036950 00000 n 
+0000037134 00000 n 
+0000037323 00000 n 
+0000037505 00000 n 
+0000037697 00000 n 
+0000037889 00000 n 
+0000038081 00000 n 
+0000038264 00000 n 
+0000038448 00000 n 
+0000038622 00000 n 
+0000038948 00000 n 
+0000039130 00000 n 
+0000039317 00000 n 
+0000039544 00000 n 
+0000039616 00000 n 
+0000039913 00000 n 
+0000040078 00000 n 
+0000042741 00000 n 
+0000045256 00000 n 
+0000047446 00000 n 
+0000049613 00000 n 
+0000052071 00000 n 
+0000054240 00000 n 
+0000056405 00000 n 
+0000058538 00000 n 
+0000060711 00000 n 
+0000062818 00000 n 
+0000064980 00000 n 
+0000067055 00000 n 
+0000069148 00000 n 
 trailer
 <<
 /ID 
-[<ceec5e9867d18dc1a678c0eb35dceda4><ceec5e9867d18dc1a678c0eb35dceda4>]
+[<833e78686b4108ea9bab3caadb0cad83><833e78686b4108ea9bab3caadb0cad83>]
 % ReportLab generated PDF document -- digest (opensource)
 
-/Info 21 0 R
-/Root 20 0 R
-/Size 38
+/Info 209 0 R
+/Root 208 0 R
+/Size 225
 >>
 startxref
-32907
+70277
 %%EOF

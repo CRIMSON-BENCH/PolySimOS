@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OttoCycleStudio } from "@/components/studio/OttoCycleStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Otto Cycle Engine Simulator (P-V Diagram, Browser)", description: "Explore the Otto cycle of a gasoline engine and how compression ratio drives efficiency. Free, interactive thermodynamics.", alternates: { canonical: "/studio/otto-cycle" } };
+export default function Page() { return <StudioPageShell slug="otto-cycle" name="Otto Cycle (Engine)" keyword="Otto cycle engine efficiency" lede="What happens inside a gasoline engine every stroke. The Otto cycle shows why higher compression means more power — right up until the fuel knocks." about="The Otto cycle idealizes a spark-ignition engine: adiabatic compression, constant-volume combustion, adiabatic expansion (the power stroke), and exhaust. Its efficiency, η = 1 − 1/r^(γ−1), rises with the compression ratio r. Push too far and the air-fuel mix pre-ignites and knocks — which is what octane rating resists."><OttoCycleStudio /></StudioPageShell>; }

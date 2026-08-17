@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { FatigueStudio } from "@/components/studio/FatigueStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Fatigue S-N Curve Calculator (Browser)", description: "Estimate cycles to failure from an S-N (Wöhler) fatigue curve, including the endurance limit for steels. Free, interactive.", alternates: { canonical: "/studio/fatigue" } };
+export default function Page() { return <StudioPageShell slug="fatigue" name="Fatigue (S-N Curve)" keyword="fatigue S-N curve calculator" lede="Parts break from repeated loading far below their breaking strength. The S-N curve predicts how many cycles a component survives — the physics of metal fatigue." about="Cyclic stress accumulates microscopic damage until a crack grows and the part fails, even well below the ultimate strength. The S-N curve plots stress amplitude against cycles to failure. Steels have an endurance limit below which life is effectively infinite; aluminum and other non-ferrous metals have none. Fatigue caused many historic aircraft and bridge disasters."><FatigueStudio /></StudioPageShell>; }
