@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SIRStudio } from "@/components/studio/SIRStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "SIR Epidemic Model Simulator (Browser)", description: "Simulate an epidemic with the SIR compartmental model. Adjust R0, infectious period, and vaccination to see the outbreak curve. Free.", alternates: { canonical: "/studio/sir-model" } };
+export default function Page() { return <StudioPageShell slug="sir-model" name="SIR Epidemic Model" keyword="SIR epidemic model" lede="The model that shaped how the world thinks about outbreaks. Watch susceptible, infected, and recovered populations flow through an epidemic, and see how R₀ and vaccination change everything." about="The SIR model divides a population into Susceptible, Infected, and Recovered compartments linked by differential equations. The basic reproduction number R₀ decides whether an outbreak grows or fizzles, and vaccinating above the herd-immunity threshold 1−1/R₀ stops it before it starts. A conceptual epidemiological model for education."><SIRStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LotkaVolterraStudio } from "@/components/studio/LotkaVolterraStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Lotka-Volterra Predator-Prey Model (Browser)", description: "Simulate predator-prey population cycles with the Lotka-Volterra equations, including a phase portrait. Free, interactive.", alternates: { canonical: "/studio/lotka-volterra" } };
+export default function Page() { return <StudioPageShell slug="lotka-volterra" name="Lotka-Volterra Predator-Prey" keyword="Lotka-Volterra predator prey" lede="Foxes and rabbits, forever chasing each other. Two coupled equations produce the endless boom-and-bust cycle at the heart of population ecology." about="The Lotka-Volterra equations model prey that reproduce and predators that eat them. Prey abundance feeds predator growth; predator pressure crashes the prey; predators then starve, and the cycle repeats. The phase portrait reveals closed orbits — the populations never settle to a steady state but circle a shared equilibrium indefinitely."><LotkaVolterraStudio /></StudioPageShell>; }

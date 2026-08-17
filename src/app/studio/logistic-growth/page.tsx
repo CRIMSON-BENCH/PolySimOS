@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LogisticGrowthStudio } from "@/components/studio/LogisticGrowthStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Logistic Population Growth Simulator (Browser)", description: "Compare exponential and logistic population growth with a carrying capacity. Adjust growth rate and K. Free, interactive.", alternates: { canonical: "/studio/logistic-growth" } };
+export default function Page() { return <StudioPageShell slug="logistic-growth" name="Logistic Population Growth" keyword="logistic growth model" lede="No population grows forever. See how a carrying capacity bends runaway exponential growth into the S-shaped curve that describes real populations." about="Exponential growth assumes unlimited resources; logistic growth adds a carrying capacity K where the population levels off. Growth is fastest at K/2 and slows to zero as the population approaches its limit. This single equation underlies ecology, the spread of innovations, and early epidemic growth."><LogisticGrowthStudio /></StudioPageShell>; }

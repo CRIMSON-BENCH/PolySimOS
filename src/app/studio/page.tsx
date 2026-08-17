@@ -148,6 +148,14 @@ const SIMS = [
   { slug: "bond-pricing", name: "Bond Pricing", desc: "Price, yield & duration.", tag: "Finance" },
   { slug: "compound-interest", name: "Compound Interest", desc: "Investment growth over time.", tag: "Finance" },
   { slug: "amortization", name: "Loan Amortization", desc: "Mortgage payment breakdown.", tag: "Finance" },
+  { slug: "sir-model", name: "SIR Epidemic", desc: "Outbreak compartment model.", tag: "Biology" },
+  { slug: "neuron", name: "Hodgkin-Huxley Neuron", desc: "Action potential spikes.", tag: "Biology" },
+  { slug: "lotka-volterra", name: "Lotka-Volterra", desc: "Predator-prey cycles.", tag: "Biology" },
+  { slug: "hardy-weinberg", name: "Hardy-Weinberg", desc: "Allele frequency & selection.", tag: "Biology" },
+  { slug: "enzyme-kinetics", name: "Enzyme Kinetics", desc: "Michaelis-Menten curves.", tag: "Biology" },
+  { slug: "logistic-growth", name: "Logistic Growth", desc: "Population carrying capacity.", tag: "Biology" },
+  { slug: "genetic-drift", name: "Genetic Drift", desc: "Wright-Fisher allele drift.", tag: "Biology" },
+  { slug: "sequence-alignment", name: "Sequence Alignment", desc: "Needleman-Wunsch DNA.", tag: "Biology" },
 ];
 
 export default function StudioIndex() {

@@ -132,6 +132,14 @@ import { VaRStudio } from "./VaRStudio";
 import { BondPricingStudio } from "./BondPricingStudio";
 import { CompoundInterestStudio } from "./CompoundInterestStudio";
 import { AmortizationStudio } from "./AmortizationStudio";
+import { SIRStudio } from "./SIRStudio";
+import { NeuronHHStudio } from "./NeuronHHStudio";
+import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
+import { HardyWeinbergStudio } from "./HardyWeinbergStudio";
+import { EnzymeKineticsStudio } from "./EnzymeKineticsStudio";
+import { LogisticGrowthStudio } from "./LogisticGrowthStudio";
+import { GeneticDriftStudio } from "./GeneticDriftStudio";
+import { SequenceAlignmentStudio } from "./SequenceAlignmentStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -268,6 +276,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "bond-pricing": BondPricingStudio,
   "compound-interest": CompoundInterestStudio,
   amortization: AmortizationStudio,
+  "sir-model": SIRStudio,
+  neuron: NeuronHHStudio,
+  "lotka-volterra": LotkaVolterraStudio,
+  "hardy-weinberg": HardyWeinbergStudio,
+  "enzyme-kinetics": EnzymeKineticsStudio,
+  "logistic-growth": LogisticGrowthStudio,
+  "genetic-drift": GeneticDriftStudio,
+  "sequence-alignment": SequenceAlignmentStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

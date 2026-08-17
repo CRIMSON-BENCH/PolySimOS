@@ -142,6 +142,14 @@ const OTHER_SIMS = [
   { name: "Bond Pricing", href: "/studio/bond-pricing" },
   { name: "Compound Interest", href: "/studio/compound-interest" },
   { name: "Loan Amortization", href: "/studio/amortization" },
+  { name: "SIR Epidemic", href: "/studio/sir-model" },
+  { name: "Hodgkin-Huxley Neuron", href: "/studio/neuron" },
+  { name: "Lotka-Volterra", href: "/studio/lotka-volterra" },
+  { name: "Hardy-Weinberg", href: "/studio/hardy-weinberg" },
+  { name: "Enzyme Kinetics", href: "/studio/enzyme-kinetics" },
+  { name: "Logistic Growth", href: "/studio/logistic-growth" },
+  { name: "Genetic Drift", href: "/studio/genetic-drift" },
+  { name: "Sequence Alignment", href: "/studio/sequence-alignment" },
 ];
 
 export function StudioPageShell({

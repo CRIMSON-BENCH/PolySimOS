@@ -53,6 +53,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/exoplanet-transit", 0.8), u("/studio/hr-diagram", 0.8), u("/studio/lagrange-points", 0.8), u("/studio/roche-limit", 0.8), u("/studio/hubble-law", 0.8), u("/studio/telescope", 0.8), u("/studio/parallax", 0.8), u("/studio/escape-velocity", 0.8),
     u("/studio/energy-balance", 0.8), u("/studio/daisyworld", 0.8), u("/studio/milankovitch", 0.8), u("/studio/tsunami", 0.8), u("/studio/carbon-cycle", 0.8), u("/studio/seismic", 0.8), u("/studio/groundwater", 0.8), u("/studio/lapse-rate", 0.8),
     u("/studio/black-scholes", 0.8), u("/studio/option-payoff", 0.8), u("/studio/monte-carlo", 0.8), u("/studio/efficient-frontier", 0.8), u("/studio/value-at-risk", 0.8), u("/studio/bond-pricing", 0.8), u("/studio/compound-interest", 0.8), u("/studio/amortization", 0.8),
+    u("/studio/sir-model", 0.8), u("/studio/neuron", 0.8), u("/studio/lotka-volterra", 0.8), u("/studio/hardy-weinberg", 0.8), u("/studio/enzyme-kinetics", 0.8), u("/studio/logistic-growth", 0.8), u("/studio/genetic-drift", 0.8), u("/studio/sequence-alignment", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 
