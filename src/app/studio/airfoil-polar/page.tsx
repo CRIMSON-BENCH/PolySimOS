@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { AirfoilPolarStudio } from "@/components/studio/AirfoilPolarStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Airfoil Lift & Drag Simulator (Browser)", description: "Explore an airfoil's lift and drag versus angle of attack, stall, and the lift-to-drag ratio. Free, interactive aerodynamics.", alternates: { canonical: "/studio/airfoil-polar" } };
+export default function Page() { return <StudioPageShell slug="airfoil-polar" name="Airfoil Lift & Drag" keyword="airfoil lift drag angle of attack" lede="Tilt a wing into the wind and lift climbs — until it suddenly stalls. See the lift and drag curves that decide how well any aircraft flies." about="A wing&apos;s lift coefficient rises nearly linearly with angle of attack until the airflow separates and it stalls. Drag combines a baseline with induced drag that grows as lift squared and falls with aspect ratio. The lift-to-drag ratio, peaking at a modest angle, is the master measure of aerodynamic efficiency for airplanes, gliders, and wind turbines."><AirfoilPolarStudio /></StudioPageShell>; }

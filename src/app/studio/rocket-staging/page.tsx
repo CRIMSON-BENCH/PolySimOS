@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RocketStagingStudio } from "@/components/studio/RocketStagingStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Rocket Staging & Delta-V Calculator (Browser)", description: "See why rockets stage — total delta-v from multiple stages via the Tsiolkovsky equation. Reach orbit. Free, interactive.", alternates: { canonical: "/studio/rocket-staging" } };
+export default function Page() { return <StudioPageShell slug="rocket-staging" name="Rocket Staging" keyword="rocket staging delta-v" lede="Why do rockets fall apart on the way up? Because the rocket equation is brutal — and dropping dead weight in stages is the only way to reach orbit." about="The Tsiolkovsky equation gives delta-v as exhaust velocity times the log of the mass ratio, so a single stage carrying empty tanks all the way is hopelessly inefficient. Staging jettisons spent structure, and each stage adds its own ve·ln(mass ratio). Summed, they clear the roughly 9.4 km/s needed for low Earth orbit."><RocketStagingStudio /></StudioPageShell>; }

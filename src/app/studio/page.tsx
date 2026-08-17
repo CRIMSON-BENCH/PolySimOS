@@ -236,6 +236,14 @@ const SIMS = [
   { slug: "laffer-curve", name: "Laffer Curve", desc: "Tax rate vs revenue.", tag: "Economics" },
   { slug: "comparative-advantage", name: "Comparative Advantage", desc: "Gains from trade.", tag: "Economics" },
   { slug: "indifference-curves", name: "Consumer Choice", desc: "Utility maximization.", tag: "Economics" },
+  { slug: "airfoil-polar", name: "Airfoil Lift & Drag", desc: "Wing polar & stall.", tag: "Aerospace" },
+  { slug: "glide", name: "Glide Performance", desc: "Range from altitude.", tag: "Aerospace" },
+  { slug: "rocket-staging", name: "Rocket Staging", desc: "Multi-stage delta-v.", tag: "Aerospace" },
+  { slug: "reentry", name: "Atmospheric Reentry", desc: "Heating & g-load.", tag: "Aerospace" },
+  { slug: "standard-atmosphere", name: "Standard Atmosphere", desc: "ISA T/P/density.", tag: "Aerospace" },
+  { slug: "mach-cone", name: "Mach Cone", desc: "Supersonic shock.", tag: "Aerospace" },
+  { slug: "propeller", name: "Propeller Thrust", desc: "Actuator-disk theory.", tag: "Aerospace" },
+  { slug: "orbital-elements", name: "Orbital Elements", desc: "Shape of an orbit.", tag: "Aerospace" },
 ];
 
 export default function StudioIndex() {

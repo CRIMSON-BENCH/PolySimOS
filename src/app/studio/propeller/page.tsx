@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PropellerStudio } from "@/components/studio/PropellerStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Propeller Thrust Calculator (Actuator Disk, Browser)", description: "Estimate propeller thrust and efficiency with actuator-disk momentum theory from power, diameter, and airspeed. Free.", alternates: { canonical: "/studio/propeller" } };
+export default function Page() { return <StudioPageShell slug="propeller" name="Propeller Thrust" keyword="propeller thrust calculator" lede="How much thrust does a propeller make? Momentum theory reveals why big, slow-turning props and rotors are so much more efficient than small ones." about="Actuator-disk theory models a propeller as a disk that accelerates the air through it; the reaction is thrust. For a fixed power, a larger disk accelerates more air more gently, yielding more thrust at higher propulsive efficiency. This is why efficient propellers and helicopter rotors are large and slow, while jets trade efficiency for compactness and speed."><PropellerStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OrbitalElementsStudio } from "@/components/studio/OrbitalElementsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Orbital Elements Visualizer (Browser)", description: "Visualize a satellite orbit from semi-major axis, eccentricity, and argument of periapsis, with period, apogee, and perigee. Free.", alternates: { canonical: "/studio/orbital-elements" } };
+export default function Page() { return <StudioPageShell slug="orbital-elements" name="Orbital Elements" keyword="orbital elements visualizer" lede="A handful of numbers pin down any orbit in space. Adjust the size and shape and watch the satellite race through perigee and crawl through apogee." about="The Keplerian elements describe an orbit: the semi-major axis fixes its size and period, the eccentricity its elongation, and the argument of periapsis its orientation. Earth sits at one focus of the ellipse, so the satellite moves fastest at its low perigee and slowest at its high apogee — a live demonstration of Kepler&apos;s laws."><OrbitalElementsStudio /></StudioPageShell>; }

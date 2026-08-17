@@ -230,6 +230,14 @@ const OTHER_SIMS = [
   { name: "Laffer Curve", href: "/studio/laffer-curve" },
   { name: "Comparative Advantage", href: "/studio/comparative-advantage" },
   { name: "Consumer Choice", href: "/studio/indifference-curves" },
+  { name: "Airfoil Lift & Drag", href: "/studio/airfoil-polar" },
+  { name: "Glide Performance", href: "/studio/glide" },
+  { name: "Rocket Staging", href: "/studio/rocket-staging" },
+  { name: "Atmospheric Reentry", href: "/studio/reentry" },
+  { name: "Standard Atmosphere", href: "/studio/standard-atmosphere" },
+  { name: "Mach Cone", href: "/studio/mach-cone" },
+  { name: "Propeller Thrust", href: "/studio/propeller" },
+  { name: "Orbital Elements", href: "/studio/orbital-elements" },
 ];
 
 export function StudioPageShell({

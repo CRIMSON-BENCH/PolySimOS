@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ReentryStudio } from "@/components/studio/ReentryStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Atmospheric Reentry Simulator (Browser)", description: "Simulate ballistic reentry — velocity, altitude, and peak g-load versus entry angle and ballistic coefficient. Free, interactive.", alternates: { canonical: "/studio/reentry" } };
+export default function Page() { return <StudioPageShell slug="reentry" name="Atmospheric Reentry" keyword="atmospheric reentry simulator" lede="Coming home is the hardest part. A spacecraft must shed 7.8 km/s as heat without burning up or crushing its crew — a knife-edge of entry angle." about="During reentry, atmospheric drag converts orbital kinetic energy into intense heat and deceleration. Too shallow an entry angle and the vehicle skips off the atmosphere back into space; too steep and the g-load and heating spike to destructive levels. The ballistic coefficient controls how deep the craft plunges before the thickening air arrests it."><ReentryStudio /></StudioPageShell>; }

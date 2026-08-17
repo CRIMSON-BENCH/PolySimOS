@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { GlideStudio } from "@/components/studio/GlideStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Glide Performance Calculator (Browser)", description: "Compute glide range, glide angle, and sink rate from glide ratio and altitude. Free, interactive aviation tool.", alternates: { canonical: "/studio/glide" } };
+export default function Page() { return <StudioPageShell slug="glide" name="Glide Performance" keyword="glide ratio calculator" lede="If the engine quits, how far can you go? An aircraft&apos;s glide ratio turns altitude into distance — the number every pilot has memorized." about="Glide ratio (L/D) is the horizontal distance traveled per unit of altitude lost — 50:1 for a modern sailplane, about 17:1 for an airliner with engines out. The glide angle depends only on L/D, not weight, while sink rate and time aloft scale with airspeed. The same physics governs energy-efficient flight and emergency landings."><GlideStudio /></StudioPageShell>; }

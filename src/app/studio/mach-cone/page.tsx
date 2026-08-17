@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MachConeStudio } from "@/components/studio/MachConeStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Mach Cone & Sonic Boom Simulator (Browser)", description: "See how a supersonic aircraft forms a Mach cone and sonic boom, with the cone angle set by Mach number. Free, interactive.", alternates: { canonical: "/studio/mach-cone" } };
+export default function Page() { return <StudioPageShell slug="mach-cone" name="Mach Cone & Sonic Boom" keyword="Mach cone sonic boom" lede="Break the sound barrier and your own pressure waves can no longer escape ahead of you — they pile into a shock cone that trails as a sonic boom." about="Below Mach 1, sound waves spread ahead of an aircraft. At and beyond the speed of sound the aircraft outruns them, and the waves stack into a conical shock front. The faster the flight, the more sharply swept the cone: its half-angle equals arcsin(1/M). This geometry drives the design of supersonic and hypersonic vehicles and the footprint of the boom on the ground."><MachConeStudio /></StudioPageShell>; }

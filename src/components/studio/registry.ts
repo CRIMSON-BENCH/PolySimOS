@@ -220,6 +220,14 @@ import { LorenzGiniStudio } from "./LorenzGiniStudio";
 import { LafferStudio } from "./LafferStudio";
 import { ComparativeAdvantageStudio } from "./ComparativeAdvantageStudio";
 import { IndifferenceCurveStudio } from "./IndifferenceCurveStudio";
+import { AirfoilPolarStudio } from "./AirfoilPolarStudio";
+import { GlideStudio } from "./GlideStudio";
+import { RocketStagingStudio } from "./RocketStagingStudio";
+import { ReentryStudio } from "./ReentryStudio";
+import { StandardAtmosphereStudio } from "./StandardAtmosphereStudio";
+import { MachConeStudio } from "./MachConeStudio";
+import { PropellerStudio } from "./PropellerStudio";
+import { OrbitalElementsStudio } from "./OrbitalElementsStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -444,6 +452,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "laffer-curve": LafferStudio,
   "comparative-advantage": ComparativeAdvantageStudio,
   "indifference-curves": IndifferenceCurveStudio,
+  "airfoil-polar": AirfoilPolarStudio,
+  glide: GlideStudio,
+  "rocket-staging": RocketStagingStudio,
+  reentry: ReentryStudio,
+  "standard-atmosphere": StandardAtmosphereStudio,
+  "mach-cone": MachConeStudio,
+  propeller: PropellerStudio,
+  "orbital-elements": OrbitalElementsStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);
