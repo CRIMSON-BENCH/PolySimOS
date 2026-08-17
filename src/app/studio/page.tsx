@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/studio" },
 };
 
-const SIMS = [
+export const SIMS = [
   { slug: "graph", name: "Visual Node Graph", desc: "Wire blocks into a live dataflow — the real editor. Symbolic calculus built in.", tag: "Flagship" },
   { slug: "particles", name: "Particle / N-Body", desc: "Gravity, orbits, and impulse collisions with a real symplectic integrator.", tag: "Physics" },
   { slug: "fluid", name: "2D Fluid (CFD)", desc: "Interactive incompressible Navier–Stokes via Stam's stable-fluids method.", tag: "Engineering" },
