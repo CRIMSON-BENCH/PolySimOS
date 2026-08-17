@@ -24,6 +24,8 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
           { name: "GPU Compute (WebGPU)", href: "/studio/gpu" },
           { name: "WebGPU Fluid", href: "/studio/gpu-fluid" },
           { name: "GPU N-Body", href: "/studio/gpu-nbody" },
+          { name: "GPU PDE Solver", href: "/studio/gpu-pde" },
+          { name: "3D CFD", href: "/studio/cfd-3d" },
           { name: "Particle / N-Body", href: "/studio/particles" },
           { name: "2D Fluid (CFD)", href: "/studio/fluid" },
           { name: "Dynamical Systems", href: "/studio/dynamics" },

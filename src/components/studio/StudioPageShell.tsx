@@ -18,6 +18,8 @@ const OTHER_SIMS = [
   { name: "GPU Compute (WebGPU)", href: "/studio/gpu" },
   { name: "WebGPU Fluid", href: "/studio/gpu-fluid" },
   { name: "GPU N-Body", href: "/studio/gpu-nbody" },
+  { name: "GPU PDE Solver", href: "/studio/gpu-pde" },
+  { name: "3D CFD", href: "/studio/cfd-3d" },
   { name: "3D N-Body", href: "/studio/3d" },
   { name: "3D FEA Space Frame", href: "/studio/fea-3d" },
   { name: "3D Heat Diffusion", href: "/studio/heat-3d" },
