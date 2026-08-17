@@ -18,6 +18,7 @@ import { STANDARDS } from "@/lib/curriculum";
 import { SCHOOLS } from "@/lib/schools";
 import { AUDIENCES } from "@/lib/audiences";
 import { CATEGORIES, CONSTANTS, allPairs } from "@/lib/units";
+import { MULTIS } from "@/lib/multi";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date("2026-08-16");
@@ -33,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CONSTANTS.map((c) => u(`/constants/${c.slug}`, 0.5)),
     ...AUDIENCES.map((a) => u(`/guides/${a.slug}`, 0.6)),
     ...countrySlugs().map((c) => u(`/education/country/${c.slug}`, 0.6)),
-    u("/templates", 0.6), u("/about", 0.5), u("/for-business", 0.6), u("/custom-solvers", 0.8), u("/community", 0.5), u("/developers", 0.6),
+    u("/templates", 0.6), u("/about", 0.5), u("/for-business", 0.6), u("/custom-solvers", 0.8), u("/community", 0.5), u("/developers", 0.6), u("/multi", 0.9),
     u("/developers/sdk", 0.4), u("/developers/webhooks", 0.4), u("/login", 0.3), u("/signup", 0.4), u("/dashboard", 0.3),
     u("/terms", 0.3), u("/privacy", 0.3), u("/refund", 0.3), u("/acceptable-use", 0.3),
     u("/studio/graph", 0.9), u("/studio/particles", 0.8), u("/studio/fluid", 0.8), u("/studio/dynamics", 0.8), u("/studio/fields", 0.8), u("/studio/cas", 0.8), u("/studio/surrogate", 0.8),
@@ -103,6 +104,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...SIM_TOPICS.flatMap((t) => INDUSTRIES.slice(0, 12).map((ind) => u(`/simulate/${t.slug}/${ind.slug}`, 0.5))),
     ...ARTICLES.map((a) => u(`/blog/${a.slug}`, 0.6)),
     ...LISTINGS.map((l) => u(`/marketplace/${l.slug}`, 0.5)),
+    ...MULTIS.map((m) => u(`/multi/${m.s}`, 0.7)),
   ];
 
   return [...staticPages, ...dynamic];

@@ -2,7 +2,7 @@
 %“Œ‹ž ReportLab Generated PDF document (opensource)
 1 0 obj
 <<
-/F1 2 0 R /F2 3 0 R /F3 42 0 R
+/F1 2 0 R /F2 3 0 R /F3 42 0 R /F4 249 0 R
 >>
 endobj
 2 0 obj
@@ -19,97 +19,97 @@ endobj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/graph)
->> /Border [ 0 0 0 ] /Rect [ 53.2 598.51 99.448 608.51 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 599.01 111.01 611.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 5 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/fluid)
->> /Border [ 0 0 0 ] /Rect [ 53.2 551.51 93.664 561.51 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 554.01 103.78 566.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 6 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/fields)
->> /Border [ 0 0 0 ] /Rect [ 53.2 506.26 97.664 516.26 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 509.01 108.78 521.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 7 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/surrogate)
->> /Border [ 0 0 0 ] /Rect [ 53.2 461.01 112.784 471.01 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 464.01 127.68 476.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 8 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gpu)
->> /Border [ 0 0 0 ] /Rect [ 53.2 414.01 92.336 424.01 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 419.01 102.12 431.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 9 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-fluid)
->> /Border [ 0 0 0 ] /Rect [ 53.2 368.76 109.672 378.76 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 374.01 123.79 386.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 10 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-nbody)
->> /Border [ 0 0 0 ] /Rect [ 53.2 325.26 116.792 335.26 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 329.01 132.69 341.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 11 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-pde)
->> /Border [ 0 0 0 ] /Rect [ 53.2 281.76 108.344 291.76 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 284.01 122.13 296.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 12 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-fluid-3d)
->> /Border [ 0 0 0 ] /Rect [ 53.2 238.26 121.232 248.26 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 239.01 138.24 251.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 13 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gpu-nbody-pm)
->> /Border [ 0 0 0 ] /Rect [ 53.2 194.76 130.568 204.76 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 194.01 149.91 206.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 14 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/cfd-3d)
->> /Border [ 0 0 0 ] /Rect [ 53.2 151.26 101.224 161.26 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 149.01 113.23 161.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 15 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/3d)
->> /Border [ 0 0 0 ] /Rect [ 53.2 107.76 87.888 117.76 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 104.01 96.56 116.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 16 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/fea-3d)
->> /Border [ 0 0 0 ] /Rect [ 53.2 64.26 101.672 74.26 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 59.01 113.79 71.51 ] /Subtype /Link /Type /Annot
 >>
 endobj
 17 0 obj
 <<
 /Annots [ 4 0 R 5 0 R 6 0 R 7 0 R 8 0 R 9 0 R 10 0 R 11 0 R 12 0 R 13 0 R 
-  14 0 R 15 0 R 16 0 R ] /Contents 211 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+  14 0 R 15 0 R 16 0 R ] /Contents 333 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -121,111 +121,104 @@ endobj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/heat-3d)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 106.12 716.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 119.35 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 19 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/fea)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 90.112 672.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 99.34 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 20 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/mesh)
->> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 98.552 629.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 109.89 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 21 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/optimize)
->> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 108.776 585.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 122.67 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 22 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/rlc)
->> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 87.432 542.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 95.99 537.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 23 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gradient-descent)
->> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 138.576 498.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 159.92 492.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 24 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/particles)
->> /Border [ 0 0 0 ] /Rect [ 53.2 404.59 108.776 414.59 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 122.67 408.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 25 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/electromagnetics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 359.34 139.456 369.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 161.02 363.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 26 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/double-pendulum)
->> /Border [ 0 0 0 ] /Rect [ 53.2 315.84 140.8 325.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 162.7 318.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 27 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/projectile)
->> /Border [ 0 0 0 ] /Rect [ 53.2 272.34 111 282.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 125.45 273.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 28 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/ising)
->> /Border [ 0 0 0 ] /Rect [ 53.2 228.84 95.44 238.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 106 228.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 29 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/attractors)
->> /Border [ 0 0 0 ] /Rect [ 53.2 185.34 112.336 195.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 127.12 183.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 30 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/wave-interference)
->> /Border [ 0 0 0 ] /Rect [ 53.2 141.84 142.568 151.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 164.91 138.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 31 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/random-walk)
->> /Border [ 0 0 0 ] /Rect [ 53.2 98.34 124.776 108.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 81.09 142.67 93.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 32 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/kepler)
->> /Border [ 0 0 0 ] /Rect [ 53.2 54.84 100.776 64.84 ] /Subtype /Link /Type /Annot
->>
-endobj
-33 0 obj
-<<
 /Annots [ 18 0 R 19 0 R 20 0 R 21 0 R 22 0 R 23 0 R 24 0 R 25 0 R 26 0 R 27 0 R 
-  28 0 R 29 0 R 30 0 R 31 0 R 32 0 R ] /Contents 212 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+  28 0 R 29 0 R 30 0 R 31 0 R ] /Contents 334 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -233,60 +226,67 @@ endobj
 >> /Type /Page
 >>
 endobj
+33 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/kepler)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 112.67 717.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
 34 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/double-slit)
->> /Border [ 0 0 0 ] /Rect [ 53.2 700.34 115.448 710.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 131.01 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 35 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/cloth)
->> /Border [ 0 0 0 ] /Rect [ 53.2 656.84 95.888 666.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 106.56 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 36 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gravity-well)
->> /Border [ 0 0 0 ] /Rect [ 53.2 613.34 118.992 623.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 135.44 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 37 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/magnetic-pendulum)
->> /Border [ 0 0 0 ] /Rect [ 53.2 569.84 149.24 579.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 173.25 537.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 38 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/percolation)
->> /Border [ 0 0 0 ] /Rect [ 53.2 526.34 118.12 536.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 134.35 492.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 39 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/dla)
->> /Border [ 0 0 0 ] /Rect [ 53.2 482.84 89.664 492.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 98.78 447.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 40 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/ray-optics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 439.34 113.664 449.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 390.09 128.78 402.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 41 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/gas)
->> /Border [ 0 0 0 ] /Rect [ 53.2 395.84 91.888 405.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 345.09 101.56 357.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 42 0 obj
@@ -298,1197 +298,1219 @@ endobj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/collisions)
->> /Border [ 0 0 0 ] /Rect [ 53.2 352.34 111.44 362.34 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 300.09 126 312.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 44 0 obj
 <<
 /A <<
 /S /URI /Type /Action /URI (https://polysimos.com/studio/buoyancy)
->> /Border [ 0 0 0 ] /Rect [ 53.2 308.84 113.232 318.84 ] /Subtype /Link /Type /Annot
+>> /Border [ 0 0 0 ] /Rect [ 53.2 255.09 128.24 267.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 45 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/rocket)
->> /Border [ 0 0 0 ] /Rect [ 53.2 265.34 100.776 275.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/blackbody)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 210.09 130.46 222.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 46 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/blackbody)
->> /Border [ 0 0 0 ] /Rect [ 53.2 221.84 115.008 231.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pendulum-wave)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 165.09 156.02 177.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 47 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/pendulum-wave)
->> /Border [ 0 0 0 ] /Rect [ 53.2 178.34 135.456 188.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/standing-waves)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 120.09 154.91 132.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 48 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/orbital-transfer)
->> /Border [ 0 0 0 ] /Rect [ 53.2 134.84 130.56 144.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/doppler)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 75.09 118.79 87.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 49 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/standing-waves)
->> /Border [ 0 0 0 ] /Rect [ 53.2 91.34 134.568 101.34 ] /Subtype /Link /Type /Annot
->>
-endobj
-50 0 obj
-<<
-/Annots [ 34 0 R 35 0 R 36 0 R 37 0 R 38 0 R 39 0 R 40 0 R 41 0 R 43 0 R 44 0 R 
-  45 0 R 46 0 R 47 0 R 48 0 R 49 0 R ] /Contents 213 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/Annots [ 33 0 R 34 0 R 35 0 R 36 0 R 37 0 R 38 0 R 39 0 R 40 0 R 41 0 R 43 0 R 
+  44 0 R 45 0 R 46 0 R 47 0 R 48 0 R ] /Contents 335 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
 
 >> /Type /Page
+>>
+endobj
+50 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/snells-law)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 681.09 129.33 693.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 51 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/doppler)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 105.672 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/diffraction-grating)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 636.09 162.69 648.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 52 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/snells-law)
->> /Border [ 0 0 0 ] /Rect [ 53.2 623.84 114.104 633.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/beats)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 591.09 109.9 603.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 53 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/diffraction-grating)
->> /Border [ 0 0 0 ] /Rect [ 53.2 580.34 140.792 590.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/mirror)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 546.09 111.54 558.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 54 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/beats)
->> /Border [ 0 0 0 ] /Rect [ 53.2 536.84 98.56 546.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/prism)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 501.09 109.88 513.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 55 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/mirror)
->> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 99.872 503.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fft)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 456.09 93.78 468.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 56 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/prism)
->> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 98.544 459.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/harmonic-series)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 411.09 156.56 423.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 57 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/fft)
->> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 85.664 416.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/equal-temperament)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 366.09 172.14 378.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 58 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/harmonic-series)
->> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 135.888 372.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/chladni)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 321.09 117.12 333.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 59 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/equal-temperament)
->> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 148.352 329.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/helmholtz-resonator)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 276.09 173.8 288.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 60 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/chladni)
->> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 104.336 285.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/room-modes)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 231.09 141.56 243.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 61 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/helmholtz-resonator)
->> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 149.68 242.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reverb-time)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 186.09 136 198.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 62 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/room-modes)
->> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 123.888 198.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sound-levels)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 141.09 141.57 153.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 63 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/reverb-time)
->> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 119.44 155.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/additive-synthesis)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 96.09 164.91 108.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 64 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/sound-levels)
->> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 123.896 111.84 ] /Subtype /Link /Type /Annot
+/Annots [ 50 0 R 51 0 R 52 0 R 53 0 R 54 0 R 55 0 R 56 0 R 57 0 R 58 0 R 59 0 R 
+  60 0 R 61 0 R 62 0 R 63 0 R ] /Contents 336 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 65 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/additive-synthesis)
->> /Border [ 0 0 0 ] /Rect [ 53.2 58.34 142.568 68.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/laser-cavity)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 681.09 136 693.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 66 0 obj
 <<
-/Annots [ 51 0 R 52 0 R 53 0 R 54 0 R 55 0 R 56 0 R 57 0 R 58 0 R 59 0 R 60 0 R 
-  61 0 R 62 0 R 63 0 R 64 0 R 65 0 R ] /Contents 214 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fiber-optics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 636.09 134.34 648.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 67 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/dynamics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 680.59 112.776 690.59 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gaussian-beam)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 591.09 153.8 603.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 68 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/cas)
->> /Border [ 0 0 0 ] /Rect [ 53.2 633.59 91.44 643.59 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/polarization)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 546.09 136.57 558.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 69 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/vector-field)
->> /Border [ 0 0 0 ] /Rect [ 53.2 588.34 118.112 598.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/thin-film)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 501.09 120.44 513.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 70 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/notebook)
->> /Border [ 0 0 0 ] /Rect [ 53.2 544.84 111.904 554.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/single-slit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 456.09 127.11 468.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 71 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/fractals)
->> /Border [ 0 0 0 ] /Rect [ 53.2 501.34 104.776 511.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bragg-mirror)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 411.09 140.44 423.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 72 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/fourier)
->> /Border [ 0 0 0 ] /Rect [ 53.2 457.84 101.664 467.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/led)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 366.09 98.78 378.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 73 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/grapher)
->> /Border [ 0 0 0 ] /Rect [ 53.2 414.34 106.56 424.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/particle-box)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 282.09 137.12 294.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 74 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/surface-3d)
->> /Border [ 0 0 0 ] /Rect [ 53.2 370.84 116.784 380.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/quantum-tunneling)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 237.09 168.26 249.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 75 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/matrix)
->> /Border [ 0 0 0 ] /Rect [ 53.2 327.34 100.768 337.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bloch-sphere)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 192.09 143.24 204.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 76 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/cellular-automata)
->> /Border [ 0 0 0 ] /Rect [ 53.2 283.84 140.344 293.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hydrogen-orbitals)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 147.09 162.69 159.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 77 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/taylor)
->> /Border [ 0 0 0 ] /Rect [ 53.2 240.34 98.552 250.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/special-relativity)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 102.09 156.56 114.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 78 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/newton)
->> /Border [ 0 0 0 ] /Rect [ 53.2 196.84 104.784 206.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/photoelectric)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 57.09 142.13 69.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 79 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/distributions)
->> /Border [ 0 0 0 ] /Rect [ 53.2 153.34 121.672 163.34 ] /Subtype /Link /Type /Annot
+/Annots [ 65 0 R 66 0 R 67 0 R 68 0 R 69 0 R 70 0 R 71 0 R 72 0 R 73 0 R 74 0 R 
+  75 0 R 76 0 R 77 0 R 78 0 R ] /Contents 337 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 80 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/complex)
->> /Border [ 0 0 0 ] /Rect [ 53.2 109.84 108.776 119.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/quantum-harmonic)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 699.09 168.8 711.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 81 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/lissajous)
->> /Border [ 0 0 0 ] /Rect [ 53.2 66.34 109.664 76.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/stern-gerlach)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 654.09 143.79 666.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 82 0 obj
 <<
-/Annots [ 67 0 R 68 0 R 69 0 R 70 0 R 71 0 R 72 0 R 73 0 R 74 0 R 75 0 R 76 0 R 
-  77 0 R 78 0 R 79 0 R 80 0 R 81 0 R ] /Contents 215 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/binding-energy)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 151.58 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 83 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/bifurcation)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 115.896 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fission-reactor)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 148.23 537.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 84 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/direction-field)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 126.56 672.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fusion-lawson)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 146.57 492.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 85 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/riemann)
->> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 107.888 629.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/radiometric-dating)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 165.46 447.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 86 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/eigenvectors)
->> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 124.344 585.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/radiation-shielding)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 390.09 166.58 402.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 87 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/markov)
->> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 105.216 542.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/radiation-dose)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 345.09 148.8 357.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 88 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/parametric)
->> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 116.776 498.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reactor-kinetics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 300.09 153.23 312.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 89 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/numerical-methods)
->> /Border [ 0 0 0 ] /Rect [ 53.2 445.34 147.008 455.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/neutron-transport)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 255.09 162.14 267.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 90 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/hypothesis-test)
->> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 132.792 372.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/dynamics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 127.67 183.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 91 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/linear-regression)
->> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 138.56 329.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cas)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 101 138.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 92 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/central-limit)
->> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 119.88 285.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/vector-field)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 81.09 134.34 93.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 93 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/confidence-interval)
->> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 146.128 242.34 ] /Subtype /Link /Type /Annot
+/Annots [ 80 0 R 81 0 R 82 0 R 83 0 R 84 0 R 85 0 R 86 0 R 87 0 R 88 0 R 89 0 R 
+  90 0 R 91 0 R 92 0 R ] /Contents 338 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 94 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/bayes-inference)
->> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 135.904 198.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/notebook)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 126.58 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 95 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/bootstrap)
->> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 112.344 155.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fractals)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 117.67 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 96 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/pca)
->> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 91.888 111.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fourier)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 113.78 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 97 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/ab-test)
->> /Border [ 0 0 0 ] /Rect [ 53.2 58.34 103.448 68.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/grapher)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 119.9 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 98 0 obj
 <<
-/Annots [ 83 0 R 84 0 R 85 0 R 86 0 R 87 0 R 88 0 R 89 0 R 90 0 R 91 0 R 92 0 R 
-  93 0 R 94 0 R 95 0 R 96 0 R 97 0 R ] /Contents 216 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/surface-3d)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 132.68 537.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 99 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/molecular-dynamics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 682.34 150.112 692.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/matrix)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 112.66 492.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 100 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/titration)
->> /Border [ 0 0 0 ] /Rect [ 53.2 638.84 105.224 648.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cellular-automata)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 162.13 447.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 101 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/reaction-kinetics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 595.34 136.784 605.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/taylor)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 390.09 109.89 402.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 102 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/equilibrium)
->> /Border [ 0 0 0 ] /Rect [ 53.2 551.84 117.664 561.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/newton)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 345.09 117.68 357.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 103 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/ph)
->> /Border [ 0 0 0 ] /Rect [ 53.2 508.34 87.888 518.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/distributions)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 300.09 138.79 312.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 104 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/radioactive-decay)
->> /Border [ 0 0 0 ] /Rect [ 53.2 464.84 141.68 474.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/complex)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 255.09 122.67 267.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 105 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/maxwell-boltzmann)
->> /Border [ 0 0 0 ] /Rect [ 53.2 421.34 147.448 431.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lissajous)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 210.09 123.78 222.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 106 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/ideal-gas)
->> /Border [ 0 0 0 ] /Rect [ 53.2 377.84 111.448 387.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bifurcation)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 165.09 131.57 177.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 107 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/sorting)
->> /Border [ 0 0 0 ] /Rect [ 53.2 295.34 103 305.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/direction-field)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 120.09 144.9 132.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 108 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/boids)
->> /Border [ 0 0 0 ] /Rect [ 53.2 251.84 98.112 261.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/riemann)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 75.09 121.56 87.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 109 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/pathfinding)
->> /Border [ 0 0 0 ] /Rect [ 53.2 208.34 118.128 218.34 ] /Subtype /Link /Type /Annot
+/Annots [ 94 0 R 95 0 R 96 0 R 97 0 R 98 0 R 99 0 R 100 0 R 101 0 R 102 0 R 103 0 R 
+  104 0 R 105 0 R 106 0 R 107 0 R 108 0 R ] /Contents 339 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 110 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/maze)
->> /Border [ 0 0 0 ] /Rect [ 53.2 164.84 98.552 174.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/eigenvectors)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 142.13 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 111 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/neural-net)
->> /Border [ 0 0 0 ] /Rect [ 53.2 121.34 115.008 131.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/markov)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 118.22 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 112 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/kmeans)
->> /Border [ 0 0 0 ] /Rect [ 53.2 77.84 107 87.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/parametric)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 132.67 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 113 0 obj
 <<
-/Annots [ 99 0 R 100 0 R 101 0 R 102 0 R 103 0 R 104 0 R 105 0 R 106 0 R 107 0 R 108 0 R 
-  109 0 R 110 0 R 111 0 R 112 0 R ] /Contents 217 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/numerical-methods)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 170.46 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 114 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/convex-hull)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 119.448 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hypothesis-test)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 486.09 152.69 498.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 115 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/l-system)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 108.768 672.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/linear-regression)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 441.09 159.9 453.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 116 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/turing-machine)
->> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 131.896 629.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/central-limit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 136.55 408.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 117 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/convolution)
->> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 119.456 585.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/confidence-interval)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 169.36 363.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 118 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/traffic)
->> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 98.552 503.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bayes-inference)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 156.58 318.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 119 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/forest-fire)
->> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 112.776 459.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bootstrap)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 127.13 273.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 120 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/sandpile)
->> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 108.784 416.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pca)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 101.56 228.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 121 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/schelling)
->> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 110.112 372.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ab-test)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 116.01 183.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 122 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/langtons-ant)
->> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 123.016 329.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/dice-probability)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 87.09 152.68 99.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 123 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/reaction-diffusion)
->> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 139.904 285.84 ] /Subtype /Link /Type /Annot
+/Annots [ 110 0 R 111 0 R 112 0 R 113 0 R 114 0 R 115 0 R 116 0 R 117 0 R 118 0 R 119 0 R 
+  120 0 R 121 0 R 122 0 R ] /Contents 340 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 124 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/wolfram-ca)
->> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 118.104 242.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/poker-odds)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 135.46 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 125 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/genetic-algorithm)
->> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 140.344 198.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/roulette)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 118.79 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 126 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/ant-colony)
->> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 115.896 155.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/birthday-paradox)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 160.47 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 127 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/particle-box)
->> /Border [ 0 0 0 ] /Rect [ 53.2 62.84 120.336 72.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gamblers-ruin)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 146.56 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 128 0 obj
 <<
-/Annots [ 114 0 R 115 0 R 116 0 R 117 0 R 118 0 R 119 0 R 120 0 R 121 0 R 122 0 R 123 0 R 
-  124 0 R 125 0 R 126 0 R 127 0 R ] /Contents 218 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/monty-hall)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 131.56 537.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 129 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/quantum-tunneling)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 145.248 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/law-of-large-numbers)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 179.9 492.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 130 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/bloch-sphere)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 125.232 672.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lottery-odds)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 137.68 447.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 131 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/hydrogen-orbitals)
->> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 140.792 629.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/linear-programming)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 172.12 363.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 132 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/special-relativity)
->> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 135.888 585.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/knapsack)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 127.68 318.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 133 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/photoelectric)
->> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 124.344 542.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/queueing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 126.58 273.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 134 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/quantum-harmonic)
->> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 145.68 498.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/eoq)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 102.12 228.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 135 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/stern-gerlach)
->> /Border [ 0 0 0 ] /Rect [ 53.2 445.34 125.672 455.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/simulated-annealing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 174.92 183.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 136 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/epidemic-network)
->> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 141.672 372.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/critical-path)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 136.56 138.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 137 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/predator-prey)
->> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 127.008 329.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/game-theory)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 81.09 141.57 93.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 138 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/sir-model)
->> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 111.88 285.84 ] /Subtype /Link /Type /Annot
+/Annots [ 124 0 R 125 0 R 126 0 R 127 0 R 128 0 R 129 0 R 130 0 R 131 0 R 132 0 R 133 0 R 
+  134 0 R 135 0 R 136 0 R 137 0 R ] /Contents 341 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 139 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/neuron)
->> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 103.896 242.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/max-flow)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 125.44 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 140 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/lotka-volterra)
->> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 125.224 198.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/shortest-path)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 621.09 143.8 633.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 141 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/hardy-weinberg)
->> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 134.12 155.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/spanning-tree)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 576.09 146.58 588.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 142 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/enzyme-kinetics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 136.336 111.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/graph-coloring)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 531.09 149.35 543.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 143 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/logistic-growth)
->> /Border [ 0 0 0 ] /Rect [ 53.2 58.34 130.112 68.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/small-world)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 486.09 135.99 498.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 144 0 obj
 <<
-/Annots [ 129 0 R 130 0 R 131 0 R 132 0 R 133 0 R 134 0 R 135 0 R 136 0 R 137 0 R 138 0 R 
-  139 0 R 140 0 R 141 0 R 142 0 R 143 0 R ] /Contents 219 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pagerank)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 441.09 127.13 453.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 145 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/genetic-drift)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 120.784 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bipartite-matching)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 164.91 408.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 146 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/sequence-alignment)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 151.024 672.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/centrality)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 125.45 363.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 147 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/exoplanet-transit)
->> /Border [ 0 0 0 ] /Rect [ 53.2 580.34 138.128 590.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/graph-traversal)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 152.68 318.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 148 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/hr-diagram)
->> /Border [ 0 0 0 ] /Rect [ 53.2 536.84 117.664 546.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/molecular-dynamics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 222.09 174.34 234.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 149 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/lagrange-points)
->> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 134.128 503.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/titration)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 177.09 118.23 189.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 150 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/roche-limit)
->> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 115.88 459.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reaction-kinetics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 132.09 157.68 144.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 151 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/hubble-law)
->> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 117.672 416.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/equilibrium)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 87.09 133.78 99.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 152 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/telescope)
->> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 113.232 372.84 ] /Subtype /Link /Type /Annot
+/Annots [ 139 0 R 140 0 R 141 0 R 142 0 R 143 0 R 144 0 R 145 0 R 146 0 R 147 0 R 148 0 R 
+  149 0 R 150 0 R 151 0 R ] /Contents 342 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 153 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/parallax)
->> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 107 329.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ph)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 96.56 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 154 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/escape-velocity)
->> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 134.12 285.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/radioactive-decay)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 163.8 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 155 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/energy-balance)
->> /Border [ 0 0 0 ] /Rect [ 53.2 193.34 134.128 203.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/maxwell-boltzmann)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 171.01 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 156 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/daisyworld)
->> /Border [ 0 0 0 ] /Rect [ 53.2 149.84 116.776 159.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ideal-gas)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 126.01 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 157 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/milankovitch)
->> /Border [ 0 0 0 ] /Rect [ 53.2 106.34 123 116.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/stress-strain)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 486.09 139.89 498.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 158 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/tsunami)
->> /Border [ 0 0 0 ] /Rect [ 53.2 62.84 107 72.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/carnot-cycle)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 441.09 139.34 453.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 159 0 obj
 <<
-/Annots [ 145 0 R 146 0 R 147 0 R 148 0 R 149 0 R 150 0 R 151 0 R 152 0 R 153 0 R 154 0 R 
-  155 0 R 156 0 R 157 0 R 158 0 R ] /Contents 220 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/otto-cycle)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 128.23 408.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 160 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/carbon-cycle)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 124.336 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/phase-diagram)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 152.13 363.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 161 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/seismic)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 105.656 672.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/thermal-expansion)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 167.69 318.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 162 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/groundwater)
->> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 123.456 629.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fatigue)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 115.46 273.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 163 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/lapse-rate)
->> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 114.56 585.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/entropy)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 118.79 228.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 164 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/black-scholes)
->> /Border [ 0 0 0 ] /Rect [ 53.2 493.34 127.448 503.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/thermal-resistance)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 167.68 183.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 165 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/option-payoff)
->> /Border [ 0 0 0 ] /Rect [ 53.2 449.84 125.24 459.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sorting)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 87.09 115.45 99.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 166 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/monte-carlo)
->> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 121.224 416.34 ] /Subtype /Link /Type /Annot
+/Annots [ 153 0 R 154 0 R 155 0 R 156 0 R 157 0 R 158 0 R 159 0 R 160 0 R 161 0 R 162 0 R 
+  163 0 R 164 0 R 165 0 R ] /Contents 343 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 167 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/efficient-frontier)
->> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 134.12 372.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/boids)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 109.34 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 168 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/value-at-risk)
->> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 122.552 329.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pathfinding)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 134.36 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 169 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/bond-pricing)
->> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 123.008 285.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/maze)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 109.89 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 170 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/compound-interest)
->> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 145.24 242.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/neural-net)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 130.46 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 171 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/amortization)
->> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 122.56 198.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/kmeans)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 120.45 537.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 172 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/fire-spread)
->> /Border [ 0 0 0 ] /Rect [ 53.2 106.34 117.224 116.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/convex-hull)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 136.01 492.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 173 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/hazmat-plume)
->> /Border [ 0 0 0 ] /Rect [ 53.2 62.84 129.672 72.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/l-system)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 122.66 447.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 174 0 obj
 <<
-/Annots [ 160 0 R 161 0 R 162 0 R 163 0 R 164 0 R 165 0 R 166 0 R 167 0 R 168 0 R 169 0 R 
-  170 0 R 171 0 R 172 0 R 173 0 R ] /Contents 221 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/turing-machine)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 390.09 151.57 402.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 175 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/evacuation)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 117.68 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/convolution)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 345.09 136.02 357.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 176 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/triage)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 99 672.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rsa)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 99.33 273.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 177 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/hose-flow)
->> /Border [ 0 0 0 ] /Rect [ 53.2 619.34 113.224 629.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/diffie-hellman)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 144.9 228.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 178 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/skid-to-stop)
->> /Border [ 0 0 0 ] /Rect [ 53.2 575.84 120.336 585.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/classical-ciphers)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 158.78 183.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 179 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/radio-range)
->> /Border [ 0 0 0 ] /Rect [ 53.2 532.34 119.896 542.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hash-avalanche)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 156.03 138.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 180 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/blast-standoff)
->> /Border [ 0 0 0 ] /Rect [ 53.2 488.84 127.016 498.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/shannon-entropy)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 81.09 160.48 93.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 181 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/beam-deflection)
->> /Border [ 0 0 0 ] /Rect [ 53.2 406.34 135.904 416.34 ] /Subtype /Link /Type /Annot
+/Annots [ 167 0 R 168 0 R 169 0 R 170 0 R 171 0 R 172 0 R 173 0 R 174 0 R 175 0 R 176 0 R 
+  177 0 R 178 0 R 179 0 R 180 0 R ] /Contents 344 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 182 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/column-buckling)
->> /Border [ 0 0 0 ] /Rect [ 53.2 362.84 136.784 372.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/huffman)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 121.57 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 183 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/mohrs-circle)
->> /Border [ 0 0 0 ] /Rect [ 53.2 319.34 122.544 329.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hamming-code)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 151.57 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 184 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/shear-moment)
->> /Border [ 0 0 0 ] /Rect [ 53.2 275.84 130.56 285.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/elliptic-curve)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 141 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 185 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/retaining-wall)
->> /Border [ 0 0 0 ] /Rect [ 53.2 232.34 126.112 242.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/traffic)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 531.09 109.89 543.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 186 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/base-shear)
->> /Border [ 0 0 0 ] /Rect [ 53.2 188.84 119.008 198.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/forest-fire)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 486.09 127.67 498.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 187 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/soil-bearing)
->> /Border [ 0 0 0 ] /Rect [ 53.2 145.34 120.336 155.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sandpile)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 441.09 122.68 453.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 188 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/concrete-beam)
->> /Border [ 0 0 0 ] /Rect [ 53.2 101.84 132.344 111.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/schelling)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 124.34 408.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 189 0 obj
 <<
-/Annots [ 175 0 R 176 0 R 177 0 R 178 0 R 179 0 R 180 0 R 181 0 R 182 0 R 183 0 R 184 0 R 
-  185 0 R 186 0 R 187 0 R 188 0 R ] /Contents 222 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/langtons-ant)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 140.47 363.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 190 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/bode-plot)
->> /Border [ 0 0 0 ] /Rect [ 53.2 682.34 112.344 692.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reaction-diffusion)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 161.58 318.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 191 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/filter-designer)
->> /Border [ 0 0 0 ] /Rect [ 53.2 638.84 127.448 648.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/wolfram-ca)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 134.33 273.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 192 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/pid-control)
->> /Border [ 0 0 0 ] /Rect [ 53.2 595.34 116.336 605.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/genetic-algorithm)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 162.13 228.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 193 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/transmission-line)
->> /Border [ 0 0 0 ] /Rect [ 53.2 551.84 139 561.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ant-colony)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 131.57 183.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 194 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/op-amp)
->> /Border [ 0 0 0 ] /Rect [ 53.2 508.34 106.112 518.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/epidemic-network)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 87.09 163.79 99.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 195 0 obj
 <<
-/A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/three-phase)
->> /Border [ 0 0 0 ] /Rect [ 53.2 464.84 121.68 474.84 ] /Subtype /Link /Type /Annot
+/Annots [ 182 0 R 183 0 R 184 0 R 185 0 R 186 0 R 187 0 R 188 0 R 189 0 R 190 0 R 191 0 R 
+  192 0 R 193 0 R 194 0 R ] /Contents 345 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
 >>
 endobj
 196 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/transistor-bias)
->> /Border [ 0 0 0 ] /Rect [ 53.2 421.34 129.224 431.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/predator-prey)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 145.46 717.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 197 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/aliasing)
->> /Border [ 0 0 0 ] /Rect [ 53.2 377.84 106.112 387.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sir-model)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 126.55 672.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 198 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/forward-kinematics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 295.34 146.112 305.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/neuron)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 116.57 627.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 199 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/inverse-kinematics)
->> /Border [ 0 0 0 ] /Rect [ 53.2 251.84 145.224 261.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lotka-volterra)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 143.23 582.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 200 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/differential-drive)
->> /Border [ 0 0 0 ] /Rect [ 53.2 208.34 135.896 218.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hardy-weinberg)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 154.35 537.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 201 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/cart-pole)
->> /Border [ 0 0 0 ] /Rect [ 53.2 164.84 110.112 174.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/enzyme-kinetics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 157.12 492.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 202 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/quadcopter)
->> /Border [ 0 0 0 ] /Rect [ 53.2 121.34 119.016 131.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/logistic-growth)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 149.34 447.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 203 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/rrt)
->> /Border [ 0 0 0 ] /Rect [ 53.2 77.84 86.544 87.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/genetic-drift)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 390.09 137.68 402.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 204 0 obj
 <<
-/Annots [ 190 0 R 191 0 R 192 0 R 193 0 R 194 0 R 195 0 R 196 0 R 197 0 R 198 0 R 199 0 R 
-  200 0 R 201 0 R 202 0 R 203 0 R ] /Contents 223 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
-/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
->> /Rotate 0 
-  /Trans <<
-
->> /Type /Page
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/sequence-alignment)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 345.09 175.48 357.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 205 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/dc-motor)
->> /Border [ 0 0 0 ] /Rect [ 53.2 706.34 110.552 716.34 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/exoplanet-transit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 159.36 273.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 206 0 obj
 <<
 /A <<
-/S /URI /Type /Action /URI (https://polysimos.com/studio/kalman-filter)
->> /Border [ 0 0 0 ] /Rect [ 53.2 662.84 122.552 672.84 ] /Subtype /Link /Type /Annot
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hr-diagram)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 133.78 228.59 ] /Subtype /Link /Type /Annot
 >>
 endobj
 207 0 obj
 <<
-/Annots [ 205 0 R 206 0 R ] /Contents 224 0 R /MediaBox [ 0 0 612 792 ] /Parent 210 0 R /Resources <<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lagrange-points)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 154.36 183.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+208 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/roche-limit)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 131.55 138.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+209 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hubble-law)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 81.09 133.79 93.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+210 0 obj
+<<
+/Annots [ 196 0 R 197 0 R 198 0 R 199 0 R 200 0 R 201 0 R 202 0 R 203 0 R 204 0 R 205 0 R 
+  206 0 R 207 0 R 208 0 R 209 0 R ] /Contents 346 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
 /Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
 >> /Rotate 0 
   /Trans <<
@@ -1496,358 +1518,1419 @@ endobj
 >> /Type /Page
 >>
 endobj
-208 0 obj
-<<
-/PageMode /UseNone /Pages 210 0 R /Type /Catalog
->>
-endobj
-209 0 obj
-<<
-/Author (PolySim OS) /CreationDate (D:20260817063516-07'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260817063516-07'00') /Producer (ReportLab PDF Library - \(opensource\)) 
-  /Subject (\(unspecified\)) /Title (PolySim OS - The Solver Catalog) /Trapped /False
->>
-endobj
-210 0 obj
-<<
-/Count 14 /Kids [ 17 0 R 33 0 R 50 0 R 66 0 R 82 0 R 98 0 R 113 0 R 128 0 R 144 0 R 159 0 R 
-  174 0 R 189 0 R 204 0 R 207 0 R ] /Type /Pages
->>
-endobj
 211 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2570
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/telescope)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 128.24 717.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j>Beg['$&o&.H[I2-++Qki'fbV9&nQ<:RZT2g3"M8!g/RtRMV5*qe4<)p`3TbdBTZ-[4SGWN)(]c,j,[H#!^?t&cigKLjk:=J01ZXk)9;60V&=9*"SngiVdlV\/lkG"NLsWIlmpj:u@2(>RYY$Dh*%b&VX,ur:Rj6DDZN"E5ir**e=tZohSpYn6H:&-.Ef"2@)VSXdN3N#`04@;./.PB?p<t3uZj1,<Q\OCl="-VscH:O#Y?#Y_G89S[U)G&_e@o<]]^OLDg!c"cqo3erXS`Q$?\?\d.Js@=,JkU:]8#@m!j'PY4%XW*N/LC7!CWlZ.BDf\,d$H4iP:eM*j<$nkr'oJ`/Oel*52K+skM,EJed!50G\:&E'iF71%hLW6R]0PV"4l$=O0pgqlSkakPM5a[QJh[)>$ggHm3>mcr5l&@+M*Ns`l/D=:DQnk:bK2/>YO.(`TJ\TaPfQ=M:]s"5E,X=)\6H0VY]G;fSCO%.tP$+">=r)Ae\$B=LW:CYn-5357/%D<1KY5*).dU&ZU5n9@BTa$rQNEqn-jB=s\`4Gi(^J\nO$nPW;sI<@#>qP&@n1m;W+bDYD<SFaE`o40P%X8B>qJ&No8XEi4$c!j+H33(eM4f%31urUs#M6ppan*oXhtE*(,EZH@n`=l$Bm\.L<tl&l50LIC<l99%`&)E<nP>#(R5XMR=;!p/)^4A;OLlZ>sPY-3Rg%P<"D_/6u-2tnFq=NAJiBJ0tn2a>$(_f\Ed1#Z07E3_\4Uh/hhE0d8@K5g[=ikiE=;>eP`R.ID1fRW(u8EMDV<j+)l]!Dg5>oX/6Z*]:piG`aG-7@<aXTdFG9ufDg\WT627-o="PRbQJ9JpL^D?R#Pki9=_obp$m?u;!OcN>b"K[15?#S*rAng7-[SafOH"4H\=&KRmSL]D=@(P222?\[<bHI&Pp$a>ja'TYu8EeY._V5]"1Zl/E-.WjF_A=T%rWjo$?n6L+?-e)oHgi*hqar[mkUQhF:c;PKoH.EuLVmfK7u8Cd/JTZ(RGSNWN\A.9"P7@JCpI2$et573^[&jJukTFJ3_JGV:H5#pUN#*OOsuWbrGP]NOUOUGtUTBkdhG_K%"pJrLrtG6W@BdF5G/Lp&=_RKC!%N<sWNSeed>Me\Ah>)G`!7HqTuS^!$k`g^iUA"L\7g/KbAA6P`WkCF6CK`?PV$`m/:b@6AB4]3$Tp.u"TjD3$%5TDFb5-W,u)*/#i@D(V>^$BoVOuWO\lfb[+^KCYRR1La_5gl?_lOlL#Dt<E=P:0o[U[_`t;mK1<+ihW*0J]+4dU'=N_qdrKbI7Q(f#.4SV+/C?.E#h\Wo]'WA7KBg(N=ou5BDUbr4-.2(ScmU2<HJF[)>/((qIo)<q/Io4bu79Z$63^-=f7O?]Ks7'[G,r-?(hiGBUR\rTi^!3*3\H!of9CHqWUh\u\M$<Dq)o-[m:/M*MIrF`Au_\<.aX2:'"=[N)C@jGn>K/'(,l/<V'.4USqFL!9!PTbi\/qFi<5NkZN`O"rd610"SsKDJCF;'0V9W#P0e2V/dm"t\JgBJA`35CpiDJ^QeNBENiE"M<n)_[h@N=:/;RjFo#kp5q(W8hBC3ZWtH:IME^MS39P8Hj<cR_'X1dD^m;)Z'\1+C.M+Y<fLJahWX7s`"[9L:*lNbIQ$O6_7p!9aVOo\*GtUbibKLo]85>Vb(cR?PeD@OZE<ZWj.KQ2Gefj>Q@qF?V4Tj3#tT:G,t;js6DO@L`u\W^(JtRQqkni4Cb4r%_Cqg@Dh!F3;jPCSfA_<0@J*(6-Vb&I-'ns`nFK0&M?>W<BM,mZV03-hmU9E(ArVY+ok*5"J9lk:@_&XP>l>#1Pcsu.n>2!:(X*:NcgR['lh*)^5oR0jKWg,s@YQNUZrCA5RR7\W6^&l'\Oq9@JQ6Sd@5b&'.pgd^:9cuP4K]D@Q!74iI!IpO\>tj\4:u/T,Hs\r=!NfD/)^<&!r(CA$3+VVn`+n.#\Z++%ojAi!_7`Ra7/=Cit$18*0gdl2:sB/Xp+=U7d0J?&J/DF*338/I4]h/f_^TX_T_bcp&u<?qgH:j6(^K[VpQ#DZ9BQ/o%?4C-O8P9SbJhb<*t]R2e`W6>Rg9T)UPNdYUK=,XOep@<1AU*Ql^lC"s8ah6Fnp;)R;O/4=1JCSA)I>pH'W-=327;#G2KZP?RHdXZmnQF&C#Y6J/8p<t50W*Z$U=]S7`pM)ZI#;Y0V[qciTO#%:RO8=A51J]G\nG5=N?n;&*h#f]a,de@;D2._ocG>RjQ`liU`NB[C.q=f"/UL%%$8&dieruDLI0'n>oURsu_I&V^B[)rm!6/oK-hq;I`RfdOl',bB(%CRJK1"^"*OVf?R[jqn5lESCfEF9?AUN^@KLB:gF5BuI;n%6uJ[)n!sS_\cc<@[%Cm-T)mGi#^0/+&7h53k9Sg`8<'4!a4=FnV]IkR8;>3*&a6%S=bYUUh9Wj\4ZUnP#1[B3ros7ku`,S\L!hq@)hKOE^Et/PK2-(3!=6i]l)a5Qj=H7UKFZESZjA"eKf.49+Sm0\B<.I#44,AL;@GMd+SYl(po.@hIq:gT1nirs,\u)2A~>endstream
 endobj
 212 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2422
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/parallax)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 120.45 672.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/k?$G$]&r,lR/*<]hDUq,[JmW8r&j,K()`Oq%DJjIsPE:Hb,Zp58=#p6L*<=TEA(+"M$BKKCin,M&!\Z6pGr-XO;t0:7R\+9pn7i"XI\K)UQqW&8,_3uUGWe&2?GItIJU"F9-4(7KLVXhmfhlJ+7T^iUqbRZf5!L78)^eql,RNu60p"-=s7G\J^k]1oh]k]o5JBh'V?Dic?"$"8#UT]p?`8?t,n"sEofYu4^uW%?%h#-X@R'uUN]_,RkgM4(Y8&H2>%(+!LB=14&`tIq)O%^^/!]"L)GYS$F#D_'U&h*1KRFo:#hm'i,!QRro&h51_Augq2E==43sB$0n7]"G\GFY5N07jQgg6E.TC$?Oe`aa@R*qnn;aUWa"]4/h,7E%`<#+P\Q<1lF-02AEJQ@?%6jYH6-C;1C)IoBk]53rn#`6V"E(c/9"Sc2Fs*8^i<REcL/3oiF2nlm>1Pna%3Z%!GBa\W-.l9qUpS10)%kI>")PPI_MZQ!Or=E?-M9hpa4G:('@m1eV?X8?'`tGG99H2/UBMPgk4it=Yb_<MUk1RmTXbaH2h+dU@BA/]h*8Wi6o&r/4Ae4`gnIgKh`u]j<c%@&*6DeOSDW8a-gW8oDNAb9>4VK5m2msYMiYs__js+@VP!2@'57XVU7Mp;G<sr;(\??-,#9Ten@jogH2fR!di89-qE$hL373bgC2/^1hf0.fPlB<t%5d^tjh&d>YdBng*WY]_U*O2\IcGu(<"5SI-)'qHS0c"589f-LW,:e/?WV^7,.D=?^s/LHDLpiU/Cq@Z2ZCO@Hb>^=^qAH7.>./B#`>s6";?+K$%o3COX<Y:aCS.'8CDZD64&<Kbg'UKG,`!;KC4p#M*QB#FSJ-F26Oo&C2!J7[mFN:)f<IT_(gWs/3Xe:9Y6p&65cCi-<I&n4[8H9#.mXg-:g:Jqqeq7f<UnWQk4Z2J=4cL*Rp3"N\##1h@SfQ:A&L@<BgdcBqO\\Gf);RW@3Wt6c<>c/%7]DmH<A!`kt^hIMqrU4NcBNg\;,"]B2@OVG8U,Pl1I]:e;L1A$@>^f^D(sSEGa7q%H%#uLqT"KCrJs+U(ClD9j9:!G#@iNJ]Dm?d/3lB<GMY"K1ns[*'O3*E;XeTgQd7L#O^Om#,+]i%YT>pU7'2F#609VVh6_.5geQ]^'cQUIFi42B"VG:Wle"Mau)E;Gn"4[n8)g%6:X40^0SkDKmf@r(r\-!3u%8!X]elKNrm`'a6uBX:N`DLdI67eB2U+,R:oKHe5P1E<FT-Vb3N<KU.e#3C.9frr>bcZUgFtd^:[6CiUX\bU#4t$;`L%b\rc;Um&T`"3:'qYU-\r@($9eY0JDHTV)-pG4V&3&a#_8P?!0[]^.^1N4I>:Q$L?7ld$[UZL'$55diE"ldG6n_]%iV;BeJ?D>VuuO8AQY7Q"-Frhp1Qrih.sN$h3>:IJ<Z)R0VB,I=.%1A*3<(Dkt5>`I-@[ZoN\YOj86/Vsk*AF&<`'>F)qK0,RbsD_($Y0o+f`a+!g_qq`I&/+MY<[l+n:9V7DkMqZ0JF_,flM2d9*Y6/8nHb62Vp]dfXnqPY=p4%$Bd=JqX<+#.+Pps0="oL9)KqnP[X1*cVJa9>bmXGZ!EB=([9[fqiC47\fjb[8g7Q8q5W[t/=N[\bDnm(JQpr4pcEuZ*i6aJ<nZV%RLV2oWY0(>X5<V<iZ\oG_1W'2Qe2Uqnj"Db#Qcg.*Mjo6:J)Rm)Pm0[^_e5^g>1lj32A&?eJ:Iqk3np;tGM<.r$Z#XWC>K'+7obd7_hN\up\s8_:a^SWCYch'U@TJg*[T"KQC;FPZGZ&bS3UH"#f/%tWXAk,"ZUFTQ'q0_U*@[majI+l/jq?B86Jt'bTk-OYZ46E\ZH^3nn4YEUZS/NfMgSA1`PKd>NiLFImN$q+HZCY9f3TtM"#pZd87B^DRoU4NYY+j^As:0V?NZ'MLVd=okk2+;+D>"LGUOuQW7;,9'uZuAX*2:\gXTJP3"E[^H9SE/cu)#uCWL6Sq[qONWE4=V\R"B4.NpQ;5tAa3.HlQ#X#o%G>s`cY'`=fTX1IID'DYK&P?MudoY%WHKXI8$6T+$9-A=<1)mbY=DC)brHGF@]EU\&=gD,1EGBnt`YtG*."b'OA!]'j1><GJ]<=ee2OFLSVn%[0=7b+72GQO6#=VN_f0'X*p.6mAb%aUf`2fV.mm*,"GnS^qsd?sVRJ!;[Sr#H.EhJl5JI_j7+SdK!qg-6b:1]Hf=GU1$lGlLPBn'n:5M`Si9P#[d*;9R-%R+@Xh\torC^YRl3a*l(efQ4U\Ts4!KQ^K>]*RAX.gVReQ7s@a#mf1C9XmSg'9?cnLCtELc?N%8=LHC:'*H@DK]t:d!Qg#Ltm=#e;l.#4RCm>rsG;i!5^ca?NPj,-OItaTN('ogR_iE(0AjOI!a1JP:*?>"e3tmh"~>endstream
 endobj
 213 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2097
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/escape-velocity)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 154.35 627.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/kcVrRX'Z]\</)I+.g2;iq>Q/Wp6_Q*&/tE'cPRA;H;%a\u8hDE,B(h;C-ej4A_pI4M4ZNe&fT%8+V5O&O4@]GS/q0#L29>iYL2cpE!22*:!:_'OL8XN\fQ1<T,@1Y9)nISX^`es<0bi)C?I]Lh7Mo&P"AI\G*7'Thf*<\oZ$6[Pm$TM*]FpkK=7*Upe?k9TPGTkEk?qN<G?=j_$kCRI>Rf*i^(&r7n-9BZ<rMPj&-X+75)B@Xqnjgj6%#^u+>O;/'0I%<Y3U<hg=-tb":UN"M?8f`aebGDC([)"0YfE`."X@M;*[JQ(FMA$_$sS@m]mqnE&,4hiN^+[0_j2`*cZeDlLe.WrPanRfSg\`M^^)p*Z>[LDh'iSl82Gn8Q8a(;t;s<Hj):MYG"pgjs#Qn9dA,`!+"8j__.E*opOidP\l6HW;pk3oZuCm$)TG'#Pq]or8Fb#VN+a6qUp3Q'%7OV_+.CrF!W+X17b2b(m[[%;&An11_c^VirqW<1Wo2Ml;0-Ic5@nPR7GY*EdbbDMD`sB4_)OD_<Ma#e0hP9XL`B&e_Ia@`$f(,[jb:k\lJbCR).lgaEt*Y5(5<m$mhMXF:4$XZlBRgM5I-pVMkE<]FHF#ZI.L8'=WiBg._C7&b-&3C\'QkM,oK787S9Z@t5./1p)koi2:249O&3.3tq/.nIuHsW!.@V5EKTi0q%5!AdnpqHHufp,J>Erbt([r:m[)[WXd(WUjc(%i]L)qN5!jP,3glkP0hhoN>\.G@ukcWW+om1mZ$gc_=M]06(4.7R#")iM1Be(:+)6W-Y9;ukD@K3_4Mgq7X/T5]SU]%W_OMRD,)&M)Z8=oF!-JbGj(e$`Z5O'>=9j!bV`-PGYUMu`fY/Pq9HBB":uqMa(Ti0_p5%Cb)H0,0o`=T:O7XT`TFB?F;Rbo/[op"c(M.<gfoW8poQg1f$j"f7;EKZ6QoT&Sr#JRF"6pe3l/$tqTpp=gCG%*._].-Cb=!6Tb;XB)7AD6G,+l/`Qk(u>8/o)H[O$7^9Gu=&*P$,<R0M6#4j%`Vu<f(l`T04)!UImpK\J2R(4pR?E")R4GRXe8!jR@6/UVi/b^gj[cO)V>E_4:fjo#.\9Cj?AQl7p;FoIUn><U*s5l>dSTF7E;(T\rYNJ"[AX_RW/Ogt4qU76O3.(t2(o=&TT-`B\jC<2bQLV51fSj`UaS1rqEs+c1B/kX">\%.!05H7<o9Y,ScG36<_3R_2ELl51e-(#!g4rsl^)`o.Z*pHhOiSktqguO<;'\bS'D5WsDuL--43-0(R*W8XJ;DBkC:"$?/l?nS':,(,e3_JJDd2E;g6V4'Tl9P9I=^71e+[fZW1.E`CYSN^L?.0qmKa\sbgLkGP<-h7GbQt/\&Wa'iUU/Vg0*-H8NT.mg/:&j,<!Nq(YW0a'muM2;l5::3#/t>SZQN=I+;;`FEd?r,4fc:pe!n6/(A#h"'H)e,0qHO>NAZ4QJd$cBG8%,6/Dq"k4+JLOnu,bV$u3(jShj=%kPnl:rNbkiPSIJ_dZ]3"jO_N9u+CQ=tai`Xq&aks,gXsYMNAL>"!7b81u0(=eY$U2CmQ!7"1A*)hK%[.8ue;]Xplj0.T6Ej\nu\&*/aem8SdlY::49%_pU<E`#M3k+b-mMC#at*>X"6^n)@MAqmI(1W+XWhU+ZlGb2"JK&,W:^"ol6'ZhoN`)p]_U,7O[<4i?6J2SAD7k5DaZN=Uf4"U$4KcUG,>HUJ!BQLk8J_l)QY!iX=IkEcfkUe:;%R9d,Uf(O"V7phs,6#s_34spl@QZN[Tt*i4P*`2QKX?EfQB7'4V1fUhc_cDC6HCCnPO">LYMb"ndnV>P>"a&Eatnl'kqs_u)`53[b>dQ;Bor84'$h2/>N32%>>@^UfB.b`6G2tlB=R"qdG<Bg>-reNSETBd=)Ior79T)3aipBfcUEtrZ!A'P`7pT&,k0Q/4@0.>j6[6E^6ub$iY$uX$h3665I:,lTr2Y]Ief/pcFN[Pc&d'.XHih';mGGZjl<dsUi'C+(jS"_g_W'_8tM*gVI>Z"G.&6h)q?D_lu58c1G:MKVhtBnEb3fo?3ANsZoY\?Zcq0eH!tre&jl%/`V*DF~>endstream
 endobj
 214 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2074
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rocket)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 531.09 112.67 543.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j968iG&BF89'RNF:A1ErH#`:_kFro,;S(,k[0"sRb,V^SOKr!e>dgt=>83QmDS;oEG*=u!tdNnMs/9ZML(aK7q^Sq)PB)qBjE;kt$AMBPSona3S/,1g`&^TX)%tJm,:P9l&b(Lj&1$dr0D1F2B&VEEdoPKY.0+'ia8Ef+$&Whg<J*(o)^`]rV4VB[Hn]/$$MU)U_&j?m.N&!BiWmgiRP/3LD)]4!Yd9G?I/qPe85^XIR*qi)X.Y;?/5Tqrk&IG$9#gX`cKtA7u\UpMM=/pcY=ijXhG."8Ekodbr7jrsQ?t$hT!cC3pLk%SZ5i$!9`8P6W*Q-5"/;<&d2Wp;-gZJ0sD>rNc#AD,9[DeDiP/iRcp_R=hVe)%UP/KDf5H3]FA:>&'P5buV#/*hn<9Tc-=Xbc$Is1aqlV_($O#+$c->*\`S\'CD*qUq<6Ge/03P=irXC_bga`4=7K&R-s1g-J]"Q#1\@3-?[cl7RV_?1m@"V^Ye7MlZ)@f^Rj`#1T]?(VD>Yf41"2pSE4g-][T+/FlNHfD/sH*sp0.,lgbF&W%nZi,ej%c?,0hKu*iaceGe^A*<>ggfoJHZ7n;att+n?0p>+3cdFLU[?i7cR'!7k'$&Y]Kc_0qab6qP$sZ]aJ\/V^pFIf.s.!6bY3se5"b-sU"k$%_:bYk/5hH*&(<!$HtUn,_QO35CWX6rr^='67Pbl\4"mYr,gke=>.%@jiA<:H%,P__1i.K0D+7o=7?%MK%H@N=ARHL<*Y2!9TmLEkG-+h;53nP]=i:[8j@W,SSQ@,M`o,.+(rf`ljI-#FJcELR:#plIj<gE8[J`"WgDi*`2Z1;oF.gG^3/2*sl%PltM\sI-3QJ*':')=lTsT[>D/bsaTHqD$BVGqLO0`t=_0eS/dC&MS2r#l@+)=.dE0b:MFkH/[AZas/,jan;J]?:4p?euiLps,jYB/$#*Tt?F\F"r7U[56qC>4da1Rheo%^m-dOC1NN;kk+5[r+$pp"70LD:liH[QV;<cjf[i">mUH*7Vf`_rEYB>LO#+^1$f&^VcC,Q,G#$ho0nEg1));RpWJg^H^ZCp5JjWDd!gYmP,G)mm):6TH<5F9n+\P9&=\Zl-`+grH++[d6W25@$YetkSs]:dTDSsP#n[)nXr_-<7u&Ie;i%6P1kg4\37AJ#0[g\Vo$-jA@`r$Va=Ed`cY=YDPd6:(Si.(YT7`0131RXc+*f?QYB@Jn=-FEj]K!(nn4+W#<rI."5tVZTWLm&/9F><WPIu9P#^0Mm`'UmNXiSHS]7YUV8=u@=65`iNc0qrL[pG0[c5RCKe)RdKl7dN@\kDjSJ6c13WiZ"jgl\mL!F2=;Wk=1=6_.InfB9^/$YUdW,nn!&9[spC+JCnT=Rqg<)E=s8BM>nPB*@S&m(<'_/<\']49[+GuC&9_qEhJ>r>0g&][nVFPA;UFpGpFMmg3W]3XOIJ_`i0/.tsuW/u9beO;QMN_I(L[!`J^kc>^M1UA[\CqB/WQZ&8tRVP]f_R*-(Q7@sa*?H4BO+g*\^AH-.mqT[;_;f02AG3!dTgDFr[dK\FZMegYm*Rb7^T:C3s,lb-<(SukJ)bUS3uiEmfNJY\l>".6J_c)'9.Z5q.`6tDbZ*HP6\`_hpT%X45!&1&b<3mZ8@o^M9*[N`]0g#iM71Qe"TqiZSI4^9k,Fm3$%,HYeQlT"f;]iTS>%CPoMX[2/S&E6cZ>1hO?4.s/>-hp*CCLCU,rt.I9(&?f4jmggo+-6ZJ)XQHL)sE>.S(R."2#A>e*J,H`35$fI^PQnd\,1%GU//)LAQh3u-i4BUuuISoe&_'r]d2p*q,56_hMUc7E5F$ZbBd4HNCL(ZQM!%L4!pphdDZ-GHPJ:'PfTV2@!dP"`^Zfhd]m>jZf4nCZ*olMV(?];+6-..CW=@X7E%k;[Z6k;[</kT]H[\Pp?":bT*B=,<?Q7*\N`GK75A8G?%5h;++0V2CJA8jQ3!8b7,m<2QXd:*&sHoF?O\3,!`*eoR\DWA*e3:&U?/iI,%W<LIs;QBdGM^O/oSpog+M*.;/Oo"Dt>[U.WJj>l9AqBWA].J'5,+,M78c2~>endstream
 endobj
 215 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2365
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/orbital-transfer)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 486.09 149.9 498.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j?$"c/&r,lR/,#jBP+s]65k*g.(Tl/.g9K+s896h5`]"G4fgn\$jbI\acAt0tOH^I6N17t%Fb+dHJg.EPYZO"oO;%^;Iu+&ojo@WkiUpCVKYi*?,k(l&T>==p'@.1+@1da5jRY>8O&-lC:gT_-[V^gPU4bi^@J030@t#'f!I/U7eJ%EbB)\4`<e*MGmJC5FfuK.Ff9Ll3BT!*:%q2'IjLrhs1R5jrZPP=q#kOCk5E(A;aM80S')L6&:'hGpXTF(+-mW,D?\&$fa(W,h0u&l*e(M,[iDe;Ne!Kr8,Tn?>EQe`HTFY]UdYPerT2.QZ2s>h$b<_*)aT4JXa7_':fjAUAL_oKJ[qE/FUEbcFN#Cr3.k1#V3YLA#!,F^!<3@`)e[bXS(2FK#"u93V!OW-FQ3Ge%RS7![W2tLBr3Ge>J9sJTHr!F@9&P'(s#g+)Jk:RAJMDorp'gc49QO[@bleA^Ao,?c"d="Y?-Ga>dL*)42SOoO#Et&PV&(fYqY+q+\^SSQo!a&FAg&fBH:'5=M,BkqOCi6ePK0plc5Q@qi',F'Vp&XZJ7VJ9IRZKC_QM*+m7R.Nee_gL_YS\mJ98f8J@3WFl\ktt5AbQ#Qq32D?M:u<m;LnU.>9;Ir?W.*hoK8PYMZjM"&:NsEDbc'iF'9oCunC#?=Bg=c+`km0&DD&(GG18D<Eag5d5IFopD'_;G`l6RKUPK6_(fn1UNWjC*q_22/*/\0QT@/adZ!JEg6u:#+MWYGr7QeW4XMU7JbdQmSI=]Kpo3G\lgN]HJ*$D92_9*)F2edL,!6Z6S1(m7#/coc1?:N,j[r+q/!-F\s113.Em8:!-53-dYL["=5^C+RbSTM\J2G(0.7:7]U@b_?2!*DPZ"<bdY56C<3'"tiJI:omsi=V+28)XaAAj''.%gd-H*NjNQ9`(RO`o56-)$i`8_7HKD%"S@gIH85a0D"8Sj$_Mu.r0QrQJc"QRQm-8%q\qaR([*\kZ\UZom:Vpl`5+cg+]ZnhR]fjD+gL;0"Xe[GUNXbZ;uWi_)lVi\?&e>uC\GqAB"iqa,3rZ-3iQLF,#FtNPMeCK!P$nLioU9nrhgJ79)D`pM%0^,HZrt7B5!V)caibXf3FJ_qiJ+H-_@4Fb,i-S=%EXE"Z&rB^@;<'+f.I0[0OEi_lZ06g_VJAHR73HPYn?9dp%l7&$(5X!dPcuS/9dNG&6:\nr-R">$8B>;r6Tc"gWQ02bi#^]a+Z$ZXCX<h+%rJ!fU-8&DAq"O^)5u21`,a7krrs@9Vo%GCYeRc&[n:8U0BS)<'/K+3MS<73dDt1$U\ZH$RRnI6ULBbIUV4@.geKdE00iKm5J'5YZVb<:]2[dq'_ue]Y7%`?Ql"a?EK>BiSnshH`mcoNG>Z)L;AXL.R(C;Le_D$,55)B7)@MorD<]*g.)"r6-_T@0ph0i?r+e/3o[j9Dj&+/hmf"MKqHTG]j53r/n"$WC6L-kU6=98MhNMI<<+]8:HA.hr>tOf-<.-*`@j[/tWQs*i/KOI'oF?Qro7rLC+CQne3u7%n/O`k'VXLEeg]s.;h3`XlpoR`U7lS@^#J^:RS`@Gmf(NGJ3Gs7VL>1G9DM!@T1*rTVFlh9=fQSJ8JiFZ@pjsW.$/a.7:H,,eXklb2@C.'DW`:&MHp9M=>JcB0Q5-JnKOCV`$!3kFFeM\<49rNOJJYQ,ABtclZ?J.@CC9r\'7MRQqJ*ZRn+%($kIJ@ZXMH61V*pYo,HjA^TSq<:E?4]^VOm5eV0OVf0$QHnlEN9%CW_o5,oA8aj)M8;ARD\S+)UpV/l_^aitHeN/+\,jbQEm.091C>HO"SPnSfo2@jH'IhQ_%g>h#U]Ki=,19kI^W)[h#''cmm2k=o!XFgd]i.^!>c:LP]7o!p5<JL>RhMJB7Da$.PXK@rcI:sOjFlZ0^L@@qhnM9md3LSiYD,;Bu2dSBS&GYIlB"s7;[5F`bcL1(CPhfZ@W71NmmaU5b9;dJ17c$'nmWKgtcA)F!HUL>pBpRuY5hKLO;Ru:"<a*t$c>L=&OnEFafkZirQ`-P_S>@kO\Ul24#M9jSpdI'ibd;UM_,B<'*]jmbl4*acj!jeD<=^UFP)f8CLnt)*eO*;\QY$n/aV(+*;9.Plm=k'\.oL2848%\q\7q+NDhiWH$r9d[CpI8/*W>:JASiISTQ@DKuanN12FIA&'$LbC&.[/[?<1!9+$b7lqU?Ab)0_SU(R-=@a-$mU`]i1K*1O0B,9.Zj305ZE`bOs`U>[XM,)L'\um[5_EX=bil/m^Nk3SGKE]7^]E(Y>L.a25DDb]^oph,J@IPh4sO`QNS`nR+;jdHq=`p''P,i1sqiWaIF&RlZ7M4kVRYi:!DfD1W!?rs'jgG[L~>endstream
 endobj
 216 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2076
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/airfoil-polar)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 441.09 134.89 453.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j>B?8n'Z],0.F(S1ddEPH#r"J"QZb%H1`Le=06pF!Co[Tt("fX$p;??]^mA:sg9I"7K9Ae+)kF`cV"=1DOpUpY9C2[8#<3[=km%9C_Irurn,aG4_<%WYq#M^V!1lFE_`.j]cnJ!U:O@dI)e"Rh69u!H]^'je:LZNg0+RLF"MBDU+*5%/TTE:Q^)&a%nR^-J-"%eJ$3Mr?@$JRN[E;N;RD\4H>8VdBd5tPS(.N;^^^E[Gq,j8NOt]Kd$3Xh5OEf/OJ^F-S7cRd6d7h>PAP8`US6%gOdp4O<&2K'GbmB9#%qls15mTCkHX7!8ci\EUK,C)A"',hkoi246+"bco(N#)^=17n)/KLK%e(,:9;W9i_,f%.pF1a&8Y"C?I\UC=6F5Y"E10NC"V*N9o!>W0mP=kqQp!8Y*G$Q#>T$M)[,K?V_U7JprkrktFPf+UNE6R8[DskPCU(Y5a"HK.^Ji&[4FA.MbUIV8D7Xanu8=@Mm!7+"NibR&=/8EHt8=MD)d373>,4m:L=I3R<=g^PBMIl(:X>+<?r,ja/2O57M]Z"f,WrMt)IOWM!b<%+uDaZ=/dKYYs+=,V6(d."'Cj6UK9gq_jqt@[_*8gU+gUG,1JO5j?h)Z/*+G8Br?=H6a@[,7c+QaMLfL:c7ZAEO83lV:E+n^X7bT*hEj@i;a3ouW+"^FS^eNDaR\\I\/Jack;`@-51gOuA:&PAX\eRC)[l.oCO<K^g@dD1"#er=.]6B$_OnL6LV2XqMGeMXJ0PmM`_hCCIKAL19rEPuY#W.Z&Vl&9++4B%/&naGe%EBGq+gdEqE[^Kf/2Q+e")ucqT!f.X\$qFuad=j/?M`?T(F,`<lb_o$IN24^;hMuFd!lR`NA2JoJj,VN0iK+6b0h0d7e)#&EfGrIo?ASPabH4;5DH,1:r^Oc]^(G$p4`B67>)W/;$L'VD9[GNVg$ro0&Y`/!fJ0f$a,7D:0HV6<$T(8U+tl<Y(0m2D1nXHn_i`ZGNAbHsqA+P@`/]/a6+mY?C2B:36&KL6(%K:Zg&C&$fn34AR,J92=O@b124s%>g\Q#cQbn="JT#JrR@L_iHl.8ah)c8=h+3\"U4D2H0>!sMXu3hdh&f'30TjUPi$FU&:[c9Tp(T0WRDYT5h>XqU_mVZ\N!:o\3u6UWb,HeT=D=Tn_k$Q7bt$!)%W(H#C]W-_7Q@*NN".78RMY'Rl+D[V5Sd"q,qgb#,b>Kp%Y";l08rG+Y%LG<>jk5ApPJ3_[=n,hQUPQZbH5H%\_ak`f'96*`T&;u1R-pGKubbp/ar%IY(N<uhS.>]EEgF!`4jFiNWja\>k;3.jJVKEoD.ahZIStI^A17/48Opn:Bc-\4fN>VrWXm"FH_$2H&#g70F6AF]`<Dr-$i(u]ZW_j1b;;0q((ZdG/YXALcV.#Oa/`?ro$B'rLru]iY!>Mm1c0u`8E'WO/FKu4@d&4M8r/&Q=mW9"j]lo0KWDNePe?X4D(L+>%7t9L?9Yulp3=H1`*ga0MJ;kn:TL+i6<=Bp?b(`EdJGV^24=iH<655E'>=2s1Xr&C*lPU_FTnk=-T:nAGanMZ3R"^SG/@4>6m%%[J8IW[;-b8D@4g3H@J\rp>ooKQCEp?HWRKa>f.$5C8*7dg?<`gn7>Y1Y?r)03;Tc\0.SIN=`A6RGB6D%lBpb%[kI@,f:8gEF$:Z-SVs5j4G,/Pb6g]pTsX$":N]j!pG4&Nh';_C_2Ar'$4<VNSiPLbg?hHng:kX%h'2G&d7tDi3OZ71B%rlra1fjMRa[7>?T-Wo+n*U5=-/)Rd/,rK<fe7'3q,0!m0gZ%KkB<[RZ@]$B7)!taU?&D6tc[rcFu5MP`^3oaW;FIf30X5AtpM[nm5jIVUTiRC!@^VI7qJVH1-S9R&^jNNTM38*AR:6->?ha->o7JLkr$0<T;Kl]JEBu.X5o#hM@?Xo1ToufOh%AEK5&919Q%63ajWi4;Pk@T>0i2]4&jo_qP"VU'*?)S:?n$,)?#A-&uf%CjV?t*jgBa`-8cHZ%26?kujo'=8:TID-/g6:?lbt5M'YQ[,%`[b%W"H13J\"O?:Cp_I/S@617%s5?^S~>endstream
 endobj
 217 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2072
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/glide)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 106.56 408.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/k>BALX'Z],,'^)<`1fGAe^0j`L+56A$8Xg0*qpH9h$W&)&e/$DQp;??]C][>jU`HaI*Y]r/K;?8(FS+VWOq;U&6-OD5!PB8cd;&f:_Is"hGC16u^oL>YEIEmm"*!%H)ak8tKEcl6jg:AD]HQDS`"YfRPJa!P\T-^,i']aUO26Z9rM,Pq!=H(\hfYZjI!hD?<Ui3Wb6iVE#[rt6_-%p7LE_A3_^@/7$DTse+"mnpci_<9ETgk[!_S%u^/?'bBnb1GD[HWMlZb8?eelXk$k'W,,oe_[A22ok,!I0&&DJ2"#hjeu+WU])rhei]YX/`I<V@YR:'OfTI')i_%"C.H8"=O^]tQ;Umqq:hMpZBY0dS-kF[H6."#.dM8n:BP,Xl>%;/?^n^B?"V$W%!@F.S"Ndn$b):`9.Hfk&p6Ic.^W%CX4-Pf$lZos`f(*DBr7%eMdZ@&kCd4Ir%1DUXV44PdGhLOt0=):(^Ib"HsfVbHVY0Nis(^@JXS,Jq9`KBULBXc!+3O)(!i#JT4UQ$kLO;h8OhA'*-S'*X4,F6pjGdpr,L(G4QSf*0ZF][4^bJ-PciFf6*7f)[/APt/+RjSC3B.-=XpoQ8F1"e&*.;d[VC0QZ9WZak3eM,qP?DNh#JG"qoJR).rQaErtmT&+,_%W4KRkbpJhYqNB@c1l0+U8up*fC^hANK#iV86dsNC#b!g,N8r=:n,df2*WM_+H:fD?UO2.YUO/D##r3cE<&nK2t?P+#ooHNOs^XZ8pGWLZV2WECZhDZ>4t]8h2lLCTc8ZB8!R8RU,^<Hb5LrrAW"/jI;OmG5)cEVT`5J.A^RlI7RD&m?FR2B!$OS7qLn#l/(=Lp,3K[p<FjW9aLG3b5Vf0(_OXnGo,`CrhMInVAl&RR8kc@p+#fOG]+'8!^`80jLE?;-Lg\#a@Ys<tOhSkb#L<]JeG.RZF)O0H%g_15kU2AUi@+?^3cdQ7LZh(VKdXRm7^75A$T\<3G:g9F"5@=m<cP;g9_']bVQAOq2b@csG=s)^%n&P`4jPk>DCQ6+U%Gp)lE[TDAnJQ`f[sB#iI_`Q)^2WI3d7?EX2SrY*Idh6TY(#^k?\2D1@Td*i(0f0.8f/F]I9,Z.fcTWCj4[(^P-5&@odSWC!+n;^qVJ>P"D5m*+KhJ/'C*!]j81(l(ZqC(IS?Eqs=dcc8eN+pAPad<um$EAL$!F\52l<!H5m2\iC_b[;uu8N,omGnQ$CMDk<<WN9=YI6-9jaBut#0[j1^#LpTTu!C#7oDbnGe<]Ld>i>%)3;N+8RaLZsFrrpOE@)<;l1IRiL]S(#H-E=A]Zaea)GA-EQ5Yj$@>MSTNmVpm(bbSQ];ao@SkN9*'kI!hOO)KU6*h)'C2A'Z\b]54e]Nr[dUt_/VIdFNIG(("V^i!LMGKpa_H?-RWn5<'I3h+Q8K_t#)_@I-k[nKQn;G9(>n+.ad\Iob4g*s-Mhh."DE8+ha+'m75G^Dck;tbXYV<krFV#$4Y]R<l?U%`OGiUOUu%o0j`k&iQE4G?b,>S,qL?<af#Zfp-YII<a[kju[D#(?B#^3;$HJEIBBi.S5D_Of,Kr@.(%eB6Glp]L*Y&ZgYSl'!SXb+0dK/F>"UG,CfHH>S5)LGBB^]WfK>$cPaU-Gl95GRVpUrRUL*inemnOP2k[rF,<%.$_lOn4?Re-H-MPg%o2Y.sHd3cV,X@AN;>7jE"@QXoY3iQ29f<M9IS?>"\6UC"g;=9^N>]rc%<p+jp^(b9FL,$UPBJ]WkN)Nd.`_?;>dK@+)Cq-=r<jR["k>Ca$@FA@BG2R<\+gbg^Mcmgnr[+2SmoZ\ccP%Z*.E"j%#4hJe43*Np/jor!n;C]u=9V8]"Eh6+74m5rS2mPOACmS;FG%W?U;b:X=UA>n5<@Hh9&0(fj:q.!Elo5^Qe8_:eAcB<'Xd^ANp'>(T`5G\1l(F>:7JZDdJ??AWIgo0pfY.BPW7O:Dt@l^'NS3=iI:9Wge"d64?m]]gOm0pZ$rFEO2]Ka'@kaum]=)]],Q2V"*h+_K71+h9%n,CV5"\*W-;=P?IB\hIAAnTcucN8%:56Tj0-q!H1HG4Ln~>endstream
 endobj
 218 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2040
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rocket-staging)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 148.24 363.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/khfG8H&BE],=6rS,C$2-[65Ucm>grS4[V>,s^>q`!18Yf'#<7Q%pW)/`i5B>%EZP#o5:Dp:Y`ZZJZMX/!M%Bs^Qe9os!-gY\=/Q0,L$9RJk_CiTK/_8A+,#TW1&/REi,K/hTfc#Ab!t*NNNg>\Thn=J^E!&#8E(`p57[5U"T3q@+*5".TTIh&"$c5=a1"XlP`Y]C(Ctp8_6e`fo2;\<Gl]!604=V[VCue5(m![4JKL%#$Eu[`&fr@.$3Xh5OSI3j!?MA-U[be4F<P'jW[h5gM.hPlZY_9,&i,KOcO#K%%;6a/0o&PC7m;]DZp<C,0ZNMpJ.9D5H_b'??]-`"7sDr,,?t)fSrU&oe(5X>;W<1E8:Z0iQ?ZNp79TM%=kIp:YlpcPTQ9uGRM*c>eBjk&<.6-e[eAC[bI0u0mK\^A/MWAZLpt\/HZZGk;%iaW7%_@-SmBJi7jW/S,^N;@5cXB$)M[;JBFu.jV#abP;s(D7`-kB@^.3UoU2HSjg?gVP##UilmSb[A.ERORg'[4"Q>(PB=.)2W2T:9VZIC;^.7&/Uq\n,\V6GKr00tYj8NhFI#E5"2'>4#U4D5f&GS`,@6VJ.V]AH(Q?u:"0D+S+;Km))AcA;5r)7Sc"',-NCUPpNC1"uuO0'[0p[h2B[Ke^D68F&!`RI(k3SWrtChSAS1V7*PZ8,U%J\C#X[\f^-YTkJb(;Qo@t29X0EWKm)kO%E6^:,Ff@DfqhB16.JN2RZ"``[7k`6XA0A<gf%rrVTooLG-hU2`78GICM8bJ?]U\ie@Db<r@f(?QP3aYmK>@MCGg42'1N>G)eHUfa9SJ5E$G*AqX$84iA8dHXh,U<u@;HOgt"U>;s:fC#f'.:XC=I-c:1=FAnRUcmP^=:$(VQEi7Q,2M+-5leBR!]R;j[>F",I_Oc3,d+.gLqX(8a8?eqPDF2VO)e6VTCYK,TQ.#+1e(4K2@UT?h^s9@i*=8ggj032#2l/U\+'S$FVfkV+*RZ!XKO6UAUYTA*m`_0%lUDY/>)<s.m-C@4VnC^j%gTbV<I#$H,n0;*'n4D?Ppcu:eIHd5GIuk[A@Oe4_jGMeh1=L%\uKeA_)mc3E\3&U?"6mJiX+/K'@2WuMK1$YP]OWkc#V?j-82b/ScdiP^^GBoI`J4gbO5oEG^gFihLc]pQ>0u?J&jA3;j)J4hI!S:;Uo_8&[X?U=0c#IantfBGRes[!fojI0>lg$\-:_P7qK\7M7r4iK9I0cm>il@n#9D=Gm!H$XG5nWZ4LRVepVIT(&-ShKqjR$jPiUH^tIk)0m<rgU%!>2M>980iDc)oK;G?Fk&=Ed?f7Rr#M`ZSd1*c>TkCmGXMe2aN#eK1Sp/+o3)9>@d4cgu+$C=pSX,PB)`Z*I&b!rjF=?@tXfs`SiShR2O_X<L<@2he:!Ol`ng7.db+#e+SjVA;aM[Ur1/d6]PRe"Ea-T]c6GiqISn5&/]B`Q`V71[(*FB+!FLmPn!ak&("p2+o40@R_kA[mTmTBLJ1357oLP*2F`kPD`Q=V8H8nMPR]8lPRHoU?'1SDA(7K"ad$W/LL^?`5FT#9Eff^#/4Ao;5VE3OO5FOl]QQPtm,1Y<n?<j_S=,F\M%<k^2[=t,<HPD-(nW>et#g#?2F@BBXgcG8b<=f-(Kq/ClY8`If$EuaYXHp1of""&<D7X=^'o)GqM:oq?%=uHh3CPe@OBk4'r.RJp)?-u1>kEm]!iGuU66/NW8H&lir=^5u0'_SV%26TF,V..5Q6s<;YC+54tSBkWh@;]/jOgm'^,B;Ws]L0Nj>H)1tVf8`CZHAY*s0EVj7U=RPHf@WU]bBkZQ$KYKRdsW]1]+iJ;MqXfH4G6_6B@)C^>'2Ai,ZFsJ_mYLi1s>K?GhP0P8F&(5pn@>DS4KA&%G48=]]kAOnKYd-g-M5Ncr%_Nfi04chth?]r[P!\ADo^(%C"],c`bl0@k9;rnMPYpo3B'DJo8hi-[.,bR:]7GSL@o/oQK]o!/r&/g&Kr4.*.&gQdDY&6IO'Pe<1%%Da'WG@!@U2lR4\If\K-BX%~>endstream
 endobj
 219 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2080
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/reentry)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 116.56 318.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j9lo&I&;KZM'miO;A;1KnIY^*5*B.m%e4ufR0"F4m/0Q>H)Pl`"di[HN8BLE-X`gLZFFZ675`*8a/?k2$>_moc%q;-Z!oUs1hYfck:mbPi$/>NXkAWI&\R+2-IgiJ=p;/cnQd@EW5g;fqW>f9*EC)s2\9^5WI4pGj!8KQLdh?[6?iTB>N<"[N[-tPFf06oC\ul1MMf"0!)b)M5i8deuX,/7_@e'`#hdQB4oZ%K;3:alp8.p4#T9,3i8i@"Z@]ba%d8PVCo3@p-gD\NELPa5n\UpGV_f@cpefk,<is<\qTEs8%`Xs5HnE&]O%H.dKcuqF*EB",0a7-K"b$jjJX8Bhpm]3feVY\T#Nj0HbefIafi]]7G^cqf6*nI'I[@>=U][O(l=Lj#gPh48QO;0FB6.=oSQ:#NUZXoJ?P6R`Hq)$k>@ri.%f%E!W#JH"Xf_#>OF83SP)4q:9@^DTb$;)7.F&AW>69H>A69T/76YhA)GPrr*E_&QFO1Ni%\oJ'j=7RdY,[VXH0#\apR_C[\gRp!)S[OW(NL9le?-R.(9=5t8icQWVc^sB.$4HY*(<Y#T?=m!QJGp17"Qphs#L.l'mp)aUM!h!Ib,siO`^]]D90D5_[%#fs,N8r=gmZP`ZqF<h17A>6^IIF1;:c0.GW=4eURdI-G/Y#"^Ri?bk9VXJAHC7k=`U&2mFD4S*tMo6W\=5D'@kAOols=&?/7%f+lD+__G7F9R,XX`5[0s_O(.C0kS7TE=#=`pI4TcGY"..0'CoPTdtNt.q#VC<8Mq/aL224WPS.63ch-3Ur;Zbj09<LsG90J8l)e:*?*RUEPQ0BF$,d8s+'300*ekoX(3(Y@qA<iaHoE6h\!f3JqL3j.2^!!iX.rm<k^,L!<t8s&'&Dc_nT6Uu=6s8EJo6CNgrca#rjHIJ.c*Y3SA#U!g3UJ]F)!5bD(28rpX>/cqlX)^V@t+28fo"LD>USI@@YQZ_6sCc'o^5Wi+N;G[6)WG/bX.[G'Kc&hO]1L?TYM=hf4bH6S?gk9WA7tHmn4'[&-d:XSDsCLL9!LCH0BcK\jso-5m7Q$bCaPVrQPRd%Rr%&FW.TGIGYYS7@M!J\_h&iRC6BDUAbPEgQ:3Oa!8S,Ulk_V<!T[6nXoCcC%pL[3_FkhnJ1C_S-R7N5dco3u7B].\7!5_\\oN7bf0iL-f8'.Q_CSng!ik#IsGWmQoH#8.>5\_''Iq(]jCM;HYo8V>A9=ca%Ibp4X+CMu%N/2X3@:p0B:],In,56jfhn='-AuIatn#J3feUl\:>gV]&5>/FG(Wp;S,0qa.t=p2$[O/@\pI1!Z.9A;S7:W)Jgg$maBM)3%):K`T#6bKG:pe.kW%#/'#3^4MkdR8%?s"R_8b?l\f-Hi_NGNVJM:JWkhhdeUsacI0[>(V3(X^-hPN`1'`9e-aLdV;_Y3D*#RDDK!bpUc6`NgP1;mma([jmS)-eS&+(Zk2&e8?bshh+`iKIcEH1?cU96T%VFg?2FdB.q14`J-cGoUVUrrD]gOctHose\X[L/:$qC9Tc(.hc6U@,a\k]e'pY];*5=ZPP1KJ!*3r/FVa:alN!Qf<Ck)*.H957,b4\>&8-_>aUGWm2H9e+`XoZO)jRD'747VRP;_3-KPVs@;8M>g<Uo!JA0^D"inmas,#l"A2S^%p9PI\o%%HpmnM!,*AS%X'ufPZ,Y^kJQiX@bJs>B@e!`'bsZ,^)dO.#Ko0O\ij1dqpWg>VONX%F_<J!?]3>m>Q0oZ'jgA^Pq7]B?MUn\i?LIkR0G.o+R4'%>?Bh<L3=>Vqr=hDh+VXrq06k&/t6Y=r$h5l/&d8&>]*MZGGuXRGF.&#dZCW[gqq@RDK"0irkpRsM<3cKh&0/Eb5'1K3TFkY*saNYlJ4)CK5[B2TB@1Akt:K8,qi2fX/jKO7_=0(6LOp$lVB;a^('RlKmBTXhlD@Hn"Sm&8-f%6*&k1Koe+pMLNoFZ\mRW:[IX^.BmC$L;V>l?"lB6oMoWNG(\)=#G:^BgQZH"KEo<^UGKjOM#P1^ARD1;"pe+dn/\>B2V+dkR.-F^2==Tc)Kq="T^7,F]9ooUTIfU.u@m0~>endstream
 endobj
 220 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2014
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/standard-atmosphere)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 180.48 273.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/i;01GN&BE]('`6<bg,Zd2A/kEND:3TFEc!E_f9a3"7MrP=7;YE7b^K7jaX3)r%_[F'GYg-r)^PBYea>(@9*>=o-2'2H!8`[neN3hc_KZD5oKsI&_SpcX#9b=.#_"H9U*Kc3cmVS]ap4cF)e4k98tckOI6$e"O=!7!IM-,['`=2`+&gr%:e5I#JY.&Oj2[t]9#uBr.gl5'L2d6,='D^qZ@G`G(GPgqj-R2=/;fXYJKL%3%^8/0,uL2h.1f%/6L)T%"em./),7Os`\RW?Xd5]5\%LZlkM'/c,\.bPQr=\b)pfk-_[*F&&,Z]Nd/n0O_ZY`n!-Se.gH,S6?`hV0+)e0gGII@nOUeW61Y*UG;W@^m8:Z0ik'1+R6J$[`$i<N5kJ57U-s;"O7Y@:j&fNTdP"Ph`[Ek.E[S7\"<5pcK''$O<$/R02I;lAoELQYR7&RpUT&#3-U(k@>!aR3i+B*<@QAMh.RY1mtC4PH&..^R]icRX6r/CK:`SGY>=a.h5>"#K2,+i>(F\QJLeM_(oYtfY>]#O)2Yc\bKNFbQkMZd=Zp,0)Qb?tOH?U?bt-HaG_0jqeM&])T0kX#+(^q5uu3b#\ag$:P<!c+RUjH@;J$LK0a@mp6H$sW?!WJO3(@7J_-R.hHX0()mdG9K`+ba@T=UidQlbki]V]bdMYA-V4^S2OSmp)!_bP?]V%);l#>]4a$26*XL6Z^=;^.W7bhaciG5kDG#6!j-L5:_mJ!%#mEtTSWuXkb5:"=fY9<]s3$hA3OeAGI!fK\9"JL:71F$s%"O:^q['K`ph=XE>Q`]fZkD5m4LKX)ZA7l9-A[#1N^pp%i>cf>=8]kbWS]V0L$mUk<sNc]Q%`IrPVLZ.69]2OCNB<3MN3C9V^pnZb^=MfY+Bjr<Od\Q!6?JG!NJc_4?62IOELMom$ABBIa^3.:hbC1\&JPDdD+@,/Qh6c\?/gr`QM1Ync2)>Cd7g<odt$["@VtS`Z[_]C2[=eS%I\LL9#TS&>?r1k7Lth\W$2"M@bj0+1VuNI#`Fm.$Xh#=mZA+XTeq]_"B@auZ$.q8_(sH4G8u6I4`(4jYFk46YLA;J'0uf^.At-o6n;+(0']\o'!'l='qC@5R-a]%1li()-Xl17WbQ9>8(&%5ZbdBLlDiH7F$Npn?l.@s/.<MO1_5)P"cMfP>X9+.UTB2Cm#f'eZmTE@=42dh>5b8*E)B*Q<#*=rPf,V5:'k^(9'XS4fGT]Jp\tAsG=.Tm1P-RE'.JT7``ha%LQmX4gFr;/Ta`;;.@lL.UIS]2PEYV85lo$b4WjD!GMm:3El!r+Xi:j6g+/g-oV5QiQ_qoOJ-bqa)cX;b?D]kHMECp;17lQe[9<EQR%9@..93R-\)#icseBb"-jD8]ekgYft>"Tq$oWl</hfj%sDp3mp%:m7TJkhiltQ\".n-V#.C+_/B9R_^3&\g,df"HKkgUs(*3$Ia!'tO_##\;D(C<$O8]t\ii@"qR;TTgI=@Id#E_lFf+='50Y%7*Gm7[XEB#XFcQQ?4c0^$qMAl%Z!&^tWCqIG"j]h%Po2OTNd$M-qspn>#FT#I\]!o(GW.tY-sj_)Y;fkd3#:uF]CZT)g7?EuiT>[;[*f-I1<8(JBC:kSUYPra(IW])*K>h,]/pb]?.9b4eF%7KF=*L-d12jP=`:iDp>F.6c%VOPKE"R5V#V"7\l.tkM$)VK^nWXK9CF8:%Wju*Jlg4`GBg0!_&Ir`P`'Q2.rC@"*qlZXELY&t"R/f`q$PttA^[u]1"rXR2`jtLNp-5&&EQS=C9cGZ?51bB@dZ5C35$];8cMO@EBD:?_n:%Cl]k2iNlAWPDT.77m`M->k1'fRTr)-BnqD)p*$+8R6G!/eA@I\K3hZ@K+p5RDV/3FT]No)@*,UV1fTJE>o0-/5ZJc.f]#r6gZCZZlE%.@dG<jkZDdVf&mjbqDjjSe;\6bE4ODn4a3R;Q^F0pAW<r.W5*+rM*II#_[7T=>B*]qq/bn[P1n]pZBht)Gh?"FlN$Z3.\h#~>endstream
 endobj
 221 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2069
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/mach-cone)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 134.9 228.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/j>BALZ&BE]('`6<RHGQlI$he(oVE$f'9PIngQb3SK5`KWk[Ra#g+9&?P'?J.gB4)Pt'II4?Uqa:jrNSgI!>cir4=;#^aUjIs&KhdB'-P$L_sd`QL)n>-4lZ.MEI2R77Gn^qpbA#^:2]?O=JH[2-ojuXFr\hf,M*/Jo!*EJ:@.40?/,]^Le[cL'/f1;gSF(kmlB$$i&a41_[MS%10k;V#%%RQ@/'hYDbY_o+H/Vt*1t0CMu<r1$,ZIDJO$"G@OHOQ&@en'd:cfq39)]Skq+RIPUVp@l+.Z#$0d.'jqpP6"uH[$07^+pNYB2K>+k;h+5q/o^lIAhI?qb.Dl\6'$!5[C1K47kOnQ!s4k:BI;W9es,etLP!`(>/ai[1cB&6Cd!1#8\(&8:e$*rJL-o=XJDE1\95&5=E2lVj:):DneN(l;DZ<$m9k<ZSo3-%,'SIRl/2<%Pc;J_S<FJ2)gP)9;m'4?)B$$ELQ(X3Ogcga=DNrp<YHdn`qfGk-X1e/TUMknO[^nFk?=jtjNWZ*dM=Jn>RS&W[/]<(/GN?qa?MmuKTqUmb)94.t]ha61F`UiV`0jqfl!PumukX#+(^mg^*3hj7=290k'\Ah"=aX+*H'\Z7Kb)#fnl.+p;@NCXH_i2T!dB=_5?.cMNmR*N0RF0DP8F81Ne#sR,FNVagbi*Z+UjR%%^>e1(i_j`*Hp83ZJl*$^[>lap*t*@a(sQs(;3U!5;.#C!((MSS"W.Y2D+uj"UdHYW.]gZj9,$l(UfY4gjfK4CN8uY5jHujj1[>#"s,W/5gXEF^">D.!QeGN1_oAMWs0ofaLuX73qIJg"*f^Y57)+`R3R04$:.V,!GO?JrjiuNDM%cX;2"$'[k0[c%JGKc'N@l/G3eN],o<K'P!h@nHDX$?MEEK9OpCa@u]g1&toBi$A[>;GlO=Z#YLRI<c`hQ6U!c4)b2GDs#A&ZZFP`(0r"W@R^Oj08l"dcV9c"AX%cpJb>d0=2Y5Jh?,aE$]&3-WA72>]CH2u%M[@lGU(mYc6'(KDfFrIOC"9lkm>r&sP>Qd`p#&@peG-.KdEcOt/#ip$BLKm4GX2R>IViglEVSr`?-_FpAZ-+b,>]6mu0S$'-ma1^q(9d,WZ#<@>i01oPN6KT&/(4"XYcOJTk]HHRo,k"QkGJT/o_\HWn?_C'"@^k-gpkX";_/),^("CrO#Y,t9-ECUqdF,4<G3"#Z,?Ag-3Qnrb3>[@E/[YsKpRZF:>hChB*7jP9_t/ia[`0(&I1eQ`'CED=k:B\$0r9A11u<TZ"*+3VT5\n#'OAIf%6)a?5723NH72`V8Qg)_*@*G/nnMN>*Z<Aj"jrn(TO/%[.45h+845XqGApl/IT'B->;gEAB"o.kje0=`C^tb>ZtfroB+$_fm#-&8Lj"^$U-#:/5j?L:\q'eM"cNVSQ7TADZ`MoMF]c@(&,#;Kn_p_?;W`kS.4\='f15!OQQ,Md*>:*TdbR;amuM[@9^=Z9<m?_LPq'adY.8>1B9BYTo"=[=AC%D'*tIke-54&!j10b;,pGlr=Q%gdnb?"m4*aDCpY_73R`JH!-q/7\[h[2>R[827`I`#Dn?jnsHZhFFE5;4-V/m,?_%dSj?d-.4U0XY-jX/BGYHWCa=7@.'Y6*mCO.i"Vr3=c>(UU^,)L(RAaj_ph*tI^6,^-k.s,=_%2%.q#(,'@h*-UJ=p,sr0:WH#>n[rDTDO[o4gR`PpI6!^)'/m6[&D!DpXO-k;i,c&GaXad.)aPD$Y'<N_k?#$_o39_foS*4MP]pjH;VqSR6tSC+=Rp<'4qb87GpIEIQ?Ob<]9"S!%iJ^1M;KZGfbaJ:he;HWc4C\\lJ"*&[P6naQ(6[oNT$1KQ?c[iO7`@YCldNGXu6fVQ%CMm'mQk!b6kEF>9*W-?`&&gK*Q%U"+:*'rQ^eAI^@dWKm*"^E7k+pUuR<'qa#cI)t/^?>-_@LQJDG@/HVj7*E9!hd,KAu,<fVH6C&DB(>N,G]7&eo/j(3cmclG^kbn#gDg/\7N+TQOW4@!%S[3TA#u&R`U+5Xo?>l`h#Q5/T/aFtR[bY)r>&8r=IudfMKE~>endstream
 endobj
 222 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1982
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/propeller)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 124.34 183.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/i99\'h&BF6eMS:>t8JN.:ZAj8@o@VPnVQr:fRnGBN#Z+"!M/=T-Xo7bDP0IJXAp+R)`Bcj#fO3qs[CUjpBN+Ei61&`V!Y!+gISGAK(sda/`/!k1\/P*tkB"cN5eMXa6kL!Q!^DEKhTK`i&6fQP#).``q]=^&*-j`0aN)J6+>Gg)k&Muf+L_5q,\m1r[qRW4T+gQAn4=2.3/+]rF8[dj.=<2MKCLl;^UN7^5o>:qLem'X_smkg#%>/ATF_upR"Wch!m`*]7CsJuKnN=+mpuM9U(TMZmqP^ldQr\1N_opr^nQo"!kA3:7frI:(9!#T7l[%RE+&HET4o/@fB/TdE8/#hZcujJklA=MF)<WXUZABt!WE+%ib>C?]Hg(?g35$O"Hbit<nSKm3TNi$6%u2`l<ZekmB^;h?'G,pPT^EX`5GoT)spo0^%Z2B@2omIUXS0,D^KM-:eFEg6l/HF8@2QpAHKLc9u9$ZeO+B\N"[9/GT<pfhd_?0YW319BoY/?Ms0h*5T$q3\)bP4FbfZ%gXHJ>l-,`DlXjJZ=^i*8'!JjEIeN.'&m2r9pQ5()aDC]h%N$mK5]Q<KHI+i8nKqk:JX@VSm;X.-T!cshEN*RqKf+e#2'RK7#IX@uCgrQ9R'G;Aju()e$_(Jd-H)<T)&%F_eh0>#H2RkY_j/YKQ-J:Q?6h$uWBAp<\NfTR89h8K2p@oY2DJoXKTbM0[@4,n>e[A^E4M?SN*p3=pMFN(DJ!?P7Z@hr&*!]1c+k/;/K^B/6o30JltTkJZ@nXkJ&#8n-RfD$<%>ut6hh,j^[2KiJViA5PSpkr2.##W2U42V^E$oOM'$d1cB*8j#ECsA#=mnr<uEt(C".CT`g+#^D;:bH(qlY`1lOH?er9do'5BR6GFnFr>K,`9/P#qJgKJL^n[fB9X*>QiHhg.(l0II1mA74H\"f%d_p/B)kJ[5**CPFKZDWGVqgPQ4g>MO@ZF)qb""UZ!(q&;5Feec,`?)X*K/M4fmJ09II1nX#SHeURit&V/(`*OoVn,3#[9r;-k1Tk0+p#16gW]1WP\!&kj\"b%!GZcT?I-%>SE&CuS29tX$g04r>\81(S@_h#r\6(rl![bOPu^K0(%2ndgG_])GF@90Tb<P^K$H*eHOJ"s\qHp%p/Zl?mi;$2`h"!RV0>3bE9Z2X?uL.bVYr"5O/dR6USX4(Y+SiSasAN]Qg/ui&iGqWAJQcAb,SQH$p*B.iZ1S&+J`k2T'=*<H7)%l>ClEt>EO';T.Q"4^Xt&^FOL-\nbW10O4X&ce<AF)/h9FP8%Cu98#*N*cAt)Sf:<91L0BfVN%0rao@^2qcqTHKAot5T*dp!Eq-Fj&bq![D9/2Va<G!5-gWV_B*==rZi4#P+5!H0DpW/E+p#<4L@@SCJ527&e\.c2qO]<P]HLQX"<uS4sKW(,h.6(KahV8^i?L3EQY@l87GHJ,Of?detq1MQr71,B%VIe1e4aDXbrTWXR7u-b.bgF<U\7!=[dlbV:\:_/@oRW+dm0.(h$Hf9!]8KptdL:l2j:8Yro<*&!=P<]72;+bn_lm*E(6B61;@.f]lWd+(m2YL'V-SFNRCfcql-SiF?PL8>R*QS*md0\f'Lg2oZ=!4eTOX<b<q_!YWXr;nbDT?0g5;Z]0kf0F9kLPsHn<u7#L%@$[maL_'6.fs0R!f;Kc@Y'l`?7c<;Yp/c(j<:FFAEu]X`]p'(\GcV8Jh@gjti&m3Q<*9$!ooeD88>W6G0cogNQM=VZ4agAeERp#r'\("o/#,TpWuKtBk%iU1BhCTf$_=%b^tgl8*Z;jG-pPS.eif3+(7(&R*!`T-u)pO/n+Kf8Z2C/IQ$O2J*$X!9^a*=P'a?:RHb\GYc*J<qbq6_mJ4ona;=qib)<Nt/e,/H-FVKn;]D7A?de7la)M6Rg&i>?VhaQdqW6j=^!S_(DK?TM)nt_UbH9FR>gChni^89Zs(%jsik^8%Kq-/fJQS3U$DL44Q#u~>endstream
 endobj
 223 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 2000
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/orbital-elements)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 156.57 138.59 ] /Subtype /Link /Type /Annot
 >>
-stream
-Gb"/k;01GN&BE]('`6;gm@4naZAeb7OJ^K5VPV(5?i&b!!G[V]fI!05gkWY0D86T8\LX2nK:47A+RNOi?2[kq-5::oU#fdo!k=c;`AIhA?oePX&-o'kn93M1[_jO9!3ld;n2qhX$-.g;d>Q2^0(p.W$o/.\f0-ufhm4=GSqG:9+?nEWFRrC\JR@-?M-&HPQYASsLD.$@*$SXTY+S!OU5+S/_5GC*R!s\PlZ,*m\=Ulp37N.h*04K,\GfN[Ju9?2ipI0[gErG99o\C8_Bb!+AHp&F#bkkWe=mGL!uL.eUBp^HGqL$A(r,AK!C+p5eW:d^Vm?FE(d;#6&PW1@G>=",lX$-Ih4L8&!6s`<[^_Jto%9')IflKkR]BGOP;$.)Y7s8062U_FMSDN@5a'8,$?T"<mNpqjIi<cM]%"Pm\kFs!JqX?M)pRht5=_+;Ql_W:pdW/a%:&Y*A__C):p)1tSl*ja)p,>*<#A$m&gh?*j2!-:6CI!d?9gN(D9fQ$'Dc)5hUbhg&V%fm8#(54%cR)Z?eieX63d\'Oi50K$O@uB@QXh&a$;C!I:6Us"lk9J%NZ!)n23ZPGO&`>@=?'3`\H2;#f<gdVC0tMXpgVOfV^cdC1H@^^$0-1`^6e`:$fGgok9]P$Xj?K?:3Lp+lh84*,q<-Jmum^R`DAd`9W[p%n$rU.Z^V6DjNZAV'NIlp!)cdgc5u(TS(C8`7H8C(eWpP<'Ru3>IV&Hb6Op9U!*XC,s(/aq$-\^a\9Q"8rD2eU"i-)+HlHJC4>AlT[6,6XCj#n\4&\64XA*&7a079Y>eegEIle$d!eAQH5Zrr?WGFNd\ZT63F6@hDCso<!Bm!O8XrHEK_PfMs6UqC"r]?VD\t&2WKX\QXE/+H?Ob"?M;rVM7[MaI-\`Bk@6K%!5m:"glIAJ4c.lSClYNK;a!@VT$C;TBS'HUGKPI8$j'cl3;llTLJja!C/%JB+2]#ku@W*R8k$*Djf$j?9VNltn:^B"\9Wp+p8X[`_+9WToNu_0PI]U%/f92,WXT[q.?]#ic6RB8,?#)XgZ)9")T.q)"p>=m'(<Zo$^DV"B.OqYJ\WSt%Wr;SCqnHTX?HQHXk@@?u]CGB"Ho$FJhZ1t&mps5OG2C]`'AgN(FQW_<dJGF2-?5.o;:HWT;Dket9!pb39a[:l)oP%INq$;lONrsU8C@g*[Zu";+&-Hn-D[,C6(G,XSuX,k)\pQ!?ro1<Xltl9,NM#,[EWf:Htrs3o`(A-)8f*hqcs0@#5*$>49N6+JVWZ2/+)s^H4BAh"*gG9lcgo5Tut6[.e9`]Q_[Zd9"QV>E/p'L/%g8KMK5j8lRX`c1Sd)9koASp/+">8RaUV/82jgd;Hfi,JCeq=j@=FGYsg+3C>nT<\p'R26)pi>V4H141'9T?];&d^m'a4F_#uW,h7:<r?V[W682@\S6"ab7Z'D_7&':EU^:X:sL!NegW47@+$"j$G$+!!-G]u"5lp4iqa'IR:GGjEU5%&QQc44aZ<.t5rckgrs!fNU.&X!A0]4,+9SDM@rVf.Ljpi*]3d-CMDP"`"el3us<6lgJs>A;,Tjto"#Ng&4n:gs@DAj6kDm%=&M]aFD4VnFO@R4[Lk.7gY+lpm/^)Stk.[[Bb@qYn.ua[uH)/4bD<&]nm1o>cj)1?$gQm25mEEB0Y$[$/^!hE_'2aKtSgBP-t3cNfg*j*R3Uni,K)<Q`&[Qd[']aPtf:q5o3O"%i[<@mSe^J'H4:p%a./8mu_(agb/5"BV#&n*H(*=[Ul2*E53_.).=0N$(omSGco&R0LXY@+&HR85.J*c#7>T^X!.K_]UJ2;1^%-%&+jS4/6>bKi8]R%ZY,f>f[eY(pA(h?9ruU\`'+<h6FV.huBQcs8.1gpN[e'_Bd[h<uX?p'p944mr#2]*Uu>9>k:^?9kPNH`Nh1n1Sd*uFR;0IB&ic95W9`[@>*6Q0Z(+JmVpoBb<#QB$_-O3lSch,@Ai9<c$kJBgsP"EhX,SUmiQGHIp;~>endstream
 endobj
 224 0 obj
 <<
-/Filter [ /ASCII85Decode /FlateDecode ] /Length 1036
+/Annots [ 211 0 R 212 0 R 213 0 R 214 0 R 215 0 R 216 0 R 217 0 R 218 0 R 219 0 R 220 0 R 
+  221 0 R 222 0 R 223 0 R ] /Contents 347 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+225 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/energy-balance)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 681.09 154.36 693.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+226 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/daisyworld)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 636.09 132.67 648.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+227 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/milankovitch)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 591.09 140.45 603.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+228 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/tsunami)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 546.09 120.45 558.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+229 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/carbon-cycle)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 501.09 142.12 513.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+230 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/seismic)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 456.09 118.77 468.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+231 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/groundwater)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 411.09 141.02 423.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+232 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lapse-rate)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 366.09 129.9 378.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+233 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/atmospheric-stability)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 282.09 176.57 294.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+234 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/coriolis)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 237.09 116.55 249.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+235 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hurricane)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 192.09 127.12 204.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+236 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/wind-chill)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 147.09 126.55 159.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+237 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/psychrometrics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 102.09 152.67 114.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+238 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/geostrophic-wind)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 57.09 161.02 69.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+239 0 obj
+<<
+/Annots [ 225 0 R 226 0 R 227 0 R 228 0 R 229 0 R 230 0 R 231 0 R 232 0 R 233 0 R 234 0 R 
+  235 0 R 236 0 R 237 0 R 238 0 R ] /Contents 348 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+240 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rossby-waves)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 699.09 146.56 711.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+241 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rankine-vortex)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 654.09 148.79 666.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+242 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/solar-panel)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 134.9 582.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+243 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/wind-power)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 136.56 537.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+244 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hydro-power)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 141.01 492.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+245 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/heat-pump)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 133.24 447.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+246 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/ev-efficiency)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 390.09 141.01 402.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+247 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/battery-storage)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 345.09 152.69 357.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+248 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/carbon-footprint)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 300.09 155.47 312.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+249 0 obj
+<<
+/BaseFont /ZapfDingbats /Name /F4 /Subtype /Type1 /Type /Font
+>>
+endobj
+250 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lcoe)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 255.09 103.78 267.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+251 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/black-scholes)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 146.01 183.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+252 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/option-payoff)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 143.25 138.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+253 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/monte-carlo)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 81.09 138.23 93.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+254 0 obj
+<<
+/Annots [ 240 0 R 241 0 R 242 0 R 243 0 R 244 0 R 245 0 R 246 0 R 247 0 R 248 0 R 250 0 R 
+  251 0 R 252 0 R 253 0 R ] /Contents 349 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+255 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/efficient-frontier)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 154.35 717.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+256 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/value-at-risk)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 139.89 672.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+257 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bond-pricing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 140.46 627.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+258 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/compound-interest)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 168.25 582.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+259 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/amortization)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 139.9 537.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+260 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/supply-demand)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 441.09 153.8 453.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+261 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/elasticity)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 123.78 408.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+262 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/monopoly)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 128.79 363.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+263 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cobb-douglas)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 145.47 318.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+264 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/lorenz-gini)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 131.56 273.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+265 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/laffer-curve)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 135.45 228.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+266 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/comparative-advantage)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 189.93 183.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+267 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/indifference-curves)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 169.91 138.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+268 0 obj
+<<
+/Annots [ 255 0 R 256 0 R 257 0 R 258 0 R 259 0 R 260 0 R 261 0 R 262 0 R 263 0 R 264 0 R 
+  265 0 R 266 0 R 267 0 R ] /Contents 350 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+269 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/beam-deflection)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 681.09 156.58 693.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+270 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/column-buckling)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 636.09 157.68 648.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+271 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/mohrs-circle)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 591.09 139.88 603.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+272 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/shear-moment)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 546.09 149.9 558.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+273 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/retaining-wall)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 501.09 144.34 513.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+274 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/base-shear)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 456.09 135.46 468.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+275 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/soil-bearing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 411.09 137.12 423.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+276 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/concrete-beam)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 366.09 152.13 378.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+277 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/bode-plot)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 282.09 127.13 294.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+278 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/filter-designer)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 237.09 146.01 249.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+279 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pid-control)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 192.09 132.12 204.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+280 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/transmission-line)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 147.09 160.45 159.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+281 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/op-amp)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 102.09 119.34 114.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+282 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/three-phase)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 57.09 138.8 69.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+283 0 obj
+<<
+/Annots [ 269 0 R 270 0 R 271 0 R 272 0 R 273 0 R 274 0 R 275 0 R 276 0 R 277 0 R 278 0 R 
+  279 0 R 280 0 R 281 0 R 282 0 R ] /Contents 351 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+284 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/transistor-bias)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 699.09 148.23 711.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+285 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/aliasing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 654.09 119.34 666.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+286 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/forward-kinematics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 169.34 582.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+287 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/inverse-kinematics)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 168.23 537.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+288 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/differential-drive)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 480.09 156.57 492.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+289 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cart-pole)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 435.09 124.34 447.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+290 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/quadcopter)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 390.09 135.47 402.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+291 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rrt)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 345.09 94.88 357.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+292 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/dc-motor)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 300.09 124.89 312.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+293 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/kalman-filter)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 255.09 139.89 267.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+294 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/tolerance-stackup)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 164.36 183.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+295 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/process-capability)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 165.46 138.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+296 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/oee)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 81.09 102.12 93.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+297 0 obj
+<<
+/Annots [ 284 0 R 285 0 R 286 0 R 287 0 R 288 0 R 289 0 R 290 0 R 291 0 R 292 0 R 293 0 R 
+  294 0 R 295 0 R 296 0 R ] /Contents 352 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+298 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/cnc-feeds-speeds)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 705.09 164.36 717.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+299 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/line-balancing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 660.09 147.13 672.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+300 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/control-chart)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 615.09 141.01 627.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+301 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/learning-curve)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 570.09 148.79 582.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+302 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/littles-law)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 525.09 126.55 537.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+303 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/haversine)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 441.09 128.79 453.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+304 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/map-projection)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 396.09 151.57 408.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+305 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/gps-trilateration)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 351.09 154.35 363.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+306 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/viewshed)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 306.09 127.12 318.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+307 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/spatial-interpolation)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 261.09 172.14 273.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+308 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/dead-reckoning)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 216.09 154.36 228.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+309 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/rhumb-line)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 171.09 132.67 183.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+310 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/point-in-polygon)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 126.09 156.58 138.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+311 0 obj
+<<
+/Annots [ 298 0 R 299 0 R 300 0 R 301 0 R 302 0 R 303 0 R 304 0 R 305 0 R 306 0 R 307 0 R 
+  308 0 R 309 0 R 310 0 R ] /Contents 353 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+312 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/fire-spread)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 681.09 133.23 693.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+313 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hazmat-plume)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 636.09 148.79 648.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+314 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/evacuation)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 591.09 133.8 603.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+315 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/triage)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 546.09 110.45 558.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+316 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/hose-flow)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 501.09 128.23 513.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+317 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/skid-to-stop)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 456.09 137.12 468.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+318 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/radio-range)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 411.09 136.57 423.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+319 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/blast-standoff)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 366.09 145.47 378.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+320 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/elo-rating)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 282.09 127.12 294.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+321 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/pythagorean-expectation)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 237.09 195.5 249.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+322 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/marathon-pacing)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 192.09 160.47 204.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+323 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/magnus-effect)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 147.09 148.8 159.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+324 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/xg-model)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 102.09 126.56 114.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+325 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/win-probability)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 57.09 149.34 69.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+326 0 obj
+<<
+/Annots [ 312 0 R 313 0 R 314 0 R 315 0 R 316 0 R 317 0 R 318 0 R 319 0 R 320 0 R 321 0 R 
+  322 0 R 323 0 R 324 0 R 325 0 R ] /Contents 354 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+327 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/tournament-bracket)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 699.09 172.14 711.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+328 0 obj
+<<
+/A <<
+/S /URI /Type /Action /URI (https://polysimos.com/studio/shot-arc)
+>> /Border [ 0 0 0 ] /Rect [ 53.2 654.09 121.56 666.59 ] /Subtype /Link /Type /Annot
+>>
+endobj
+329 0 obj
+<<
+/Annots [ 327 0 R 328 0 R ] /Contents 355 0 R /MediaBox [ 0 0 612 792 ] /Parent 332 0 R /Resources <<
+/Font 1 0 R /ProcSet [ /PDF /Text /ImageB /ImageC /ImageI ]
+>> /Rotate 0 
+  /Trans <<
+
+>> /Type /Page
+>>
+endobj
+330 0 obj
+<<
+/PageMode /UseNone /Pages 332 0 R /Type /Catalog
+>>
+endobj
+331 0 obj
+<<
+/Author (PolySim OS) /CreationDate (D:20260817093933-07'00') /Creator (\(unspecified\)) /Keywords () /ModDate (D:20260817093933-07'00') /Producer (ReportLab PDF Library - \(opensource\)) 
+  /Subject (\(unspecified\)) /Title (PolySim OS - The Solver Catalog) /Trapped /False
+>>
+endobj
+332 0 obj
+<<
+/Count 23 /Kids [ 17 0 R 32 0 R 49 0 R 64 0 R 79 0 R 93 0 R 109 0 R 123 0 R 138 0 R 152 0 R 
+  166 0 R 181 0 R 195 0 R 210 0 R 224 0 R 239 0 R 254 0 R 268 0 R 283 0 R 297 0 R 
+  311 0 R 326 0 R 329 0 R ] /Type /Pages
+>>
+endobj
+333 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2377
 >>
 stream
-Gb"/%gMYJ*&:O:SbY(g4PjR>@I\fjd-n5d$4M1#>FmD]S\4)\XG\/U(S4`qi$1ZA1M0J?X3AY=19Yu>>S,)NY!I0gGnL4R[+hn(*M1kd8hW5';;D=47Tda!]!+B-S%.7b"lYSL_U`"r7$Wfh)&Mu:C!\k=KB0\62?LG<.i/i6aPaLYVDmL:<'Eih58X+tBJ]#f>rA:Vp31mp>r!)^:+-07PBE:N,9N-m?EMdid6ssCB6:UT*J>/86DT3Oh[=r<r5MCHD.Jfe,An*A=)+ujLS08/Y^l@KUK!4VVU>S*g&42ZedqJda_e[oT0`>9u_2)EcLRgC(AYpofEOe8#-"gbP8:Vc^F5/CJVH].fC]'a;Qp]7b6!^n-d!*j]D$rL);cf"q(7q-104RU#Q;Vc]!\7ju)ea?k/m/QTB8-\K9ns5h0'oZ+W8aP[fKs-[AR3QC)2779&l-h)762,!6thEm`>.7iKF8gP$Hfjk*#Y`2N?T>o##!q-$4d"ID8N$-cMWD,Ai)It*?lPunPK"X5/%Z4iS+sOaan:^[rOaM8B%h.W#k")'9AT=J[c7=IN>4O4\)R41?t.A@rYQqiWGJNqFKa*a\cY4PK[;il:si&CajAl.c]%!=D/R!h";'chk%W]Y4'B\rIXJqZiP!H[^X&H&7$31F1g]Y0!"F8ZCEaunMjR*9:**m?2*];DO/+cQC%b?a`*qM.]MGHaYln=aQs<FVfQW,-O>"l@,VhOH93K9cp-IOB!5`DVqEJ'c?tkZ8)lA5de$<U[_R^K!ddcX.PPK,M#D)D*bu+7BP(`"//rf``NIl3afl"Z>G8n:+,gr$KK5r_o.l`:&E@=%,RTGJi.h4PlS"pX-%nLs"Gjd8qtES_#TY(QK?0RqKHS!mI1QaVnkESFmnLa?98R,`!?c.7KBsZj!H>9'Qoc0in'F&4GT:2IO7:c?]ZdkbA%m@BlDA7R[&SKMc\C5W#G#,e#Mkbhcd/hd6Z=p\QFWU5ql2)[*-"Dc_(ONGYIaF=gqAZY^E%Od:Mh(qOSf5kl^BR~>endstream
+Gb"/j>Bei3&]`f%.HY2G-#56RKqrtiP`90cpLLUJV:L(a$Ud;of">[AZ&a5-iB%#fR>FZ*.a:R=LefQg"Qg4'#!WQ)ML^aP`;EANJ03qCk)'/40OFn?*f'P]GX!9q5%fO;i;&KW9W-e\)XnTDeYk0=6Ym@R'IjF4f-?@Pn^Qa[9fZ78_2F`\B<%!oho!$YH;hmT@H=+>>KTDInKK$0>rgp<?@^;JfWH(OX^oqH=QFJNdM=k5Qo35.i`tC0<,<`BH=0D!Lkd%Xp<=PHR@B`j>I#a#aHfL1Z<a0ih;4%RH>ebaBKacr)0DNk3<a/&:;acgnU8j1:-d0i&5fH_1!a9Uo*XWp_Ygg0RTLN)k[YTQU0g:[HIt.sB[b1TDKm(&_q\bO)D8A`9]bceXKO<?SXfgj-=-a,*7XJqS]6%/@9-tNZ@[:p&Qu[0CP>^0!X9],SH]+0&e]o7?418l2d5jaP*qFD`O$!D$)jS\Pt2hd+JDh]Ru'V"71G<X=_"Cf%#Qs0PtGf$UGRRs`$R?b.D*sY8QN:a"Y;0\;-d38HgH1CQ6;]PfMt]+d)RRE-jdc#f@?j54AU&U%.lIKqeiqrZXkG'GaiR$!m9W?#l:)7>WW5O.7SH=000PV'Ylr97k"@mbL>Z/JrYO)Yf@TE[ZnVp%u_[;@u(?o5`)*(cQWVP^Ao3(@Y`.\9?Q&&dteHh@LJSRm\))'grKO8*->csB*+edY^ZB=_"/F5nWT>B8Kb_#^PtF$/$;ur8s84oSfo2CDGEli5/lo.I)G_/'<?G]2XnF_WC#/PE2@*2f'jKc^A0.h/+ZKi82+>s(1V-!aK%#/)jC'b<Nk_<a.G#r+2n/mqqitN$D[>2RDbIe)@T9H_0HKo5#*O!d3h+QAjDd)6B9XueI.LcP_Iq9!(hCR\>a3q6PSMVFtE'?i<@f`03Moj0E#1!?^jTn$JtKg$MLrIqNSc6DI5acqG%gjZ[O/!GX*rfM-f'VY.N!k,Hn^:_(5C;iZ"KuY5BZFi=1H\?laEXLJOU/F^XAj$p)<&SW>K(Q`=8#_l#8TE*\=FH>p<s@FV7tAE4,uj@e#^Fjm4fI'Yl489'M8hl@fojc_/3'"q</l:"`#pU+U-$,S=8'Z%H+b"'WD]h/_dAZD3)nmJoN(M0J,>rTf\aHAGsCKRqnCXA=?_?bV-s1]U#<htl.EJkGc;B=iSV2<:HZ/uB9*Y0+m1nor&F3ks44Ap.`EDD%0+dneglQUhf#kU/$?AtRg@M9P)P.GECi(#-A`cah8dHjH(HeA^N!="4Bfe&?cZF(VM?G]\!$Zrg`[Vr0L&\k6*fN"s'-OW$pm;1bh%ak7lm]`"leB?*OoPph\I"r+TEJQ&EDV)<qI*l.OEGru]mQJ==T)fFYB1!lVKWD1S.GTp??!SNHr;&4*\CA[!,3"ZsN(XnQ]PK'#f1Jil-h3j?KgZ>^9mJC-GYeHRNQD-'6Z$FX@_,b3Z'`^H?)EX9NePN[OMui'oNce<eLZ*)4hJ]5"MS;R_YA`t%As07!XW9o"/i!S@EB"7"9Tr0%Z/*O8H6(=FK1YM[`/b)DWF]Z'p;47e:*Lo[:X&t@5i5+aW_c"*;>KU*fgPI5T[ETn;KBcgE0kT<`Q[CNBAZ[lJGV?`];ti&kXqiIf9V"EBrlUD:P1VklX4u=BID1.:T:iF11;KI(f"3ph%4A<Dri92OW2Y*',&\O$c*u#'/_O^bauSJ,FXP^6K(Rj2;nseYYJE&jN`lMNk17+!kl%gX__mR_hNnNCkt]%3lt()N`Z-H=qVP4o;`:@D*GUXD5d@a2$^QkRXPDfZGr<HjmC3ZU]YG-K!kp*=I>FIIIKL>#-V9SK;mDQhM+\qB/MpVqD:]k)=GX.Yg$>\YCn"K#(EI;4$R=3S"!`q4UKk-\ks332HC`5]5H)mSI3RLE;auQGG4uj5Q)Ro^3Hq.e01#Xj6b70d&Nu+jV>#GiY"'bRUQ#+n*(b]=E=H4fERFltt2.4m`'Cd$lmjUg*FlN]/nnWbVa,hSX(er$7GGTg1H=`r$A1`U.+Tl],Tu%0t?Db$97:B%F61F7*Kbm'I^7*3Io.?L/^_Q771lQ.Y5n9%I*`H(AI$s2-lYR+IJ"bNmHp\sr,tIe'hHf4Wph:,_o>R7DZ)rqgS#]?fkfJ%_61g)]"Pefi?_mqCdEBJ@+Egnf4-6lm[:n#e9=$Fs\mNg/tbo?!K'c)(BIgOCPmV@p@\F_ppn[^!Yj/p>q'H-pei'^inM]/Ef[H+XtJ^2V;NBEHUSX<pY%.BA0>8JAY9K]AQ^gX1D<*r)ah_qS>aG4khdbVgZ-E)kiu5OCB]Uc?E2>Z8%%doIXp;$d+PqYG,<&Z:]N;Rn?Z>iLF&O4$1)ic+WLcP5hf#G_;"/`cb.~>endstream
+endobj
+334 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2179
+>>
+stream
+Gb"/k9ip(/'ScA[MS!R5m1<c1[UW*7I'fHi^m(#+FOQ5RPsiU"4L.=$4nI^s8p3Oo(n.%KZV`0i8`]d6lTVte*!j(L7Ej('#<3dBiB%+ZKCK)#n+\S#K=Bl(a7UmT6ZChS)ak8t`!cJ[e9%lJkD"6$0_RbOR(V9sW#J70%o21qnJId`l@6CT&b$o$nQdMWj5\=YXbompN"u+_&AgD^r<o#F7j<_LUK9/K$KKa84u<P?OFlMV3-;DhJOb;G?7QSCZpO,4h[9RilVK7ge/6LkN+@+L'qDLsATGA]7=7FV+gsC#&aTTQ$GBjJQga[=!#F2h9pPY_S!*qT$m1sO)2s%:F@r(mp@RL83W7'c%P`o[CI_HP`4=cf!<3(app:[EXIM]@k*;C#^ksFKU:>q]Jh20J20M\@DE(UmIl@.7ZV184EN'ajLp8B6DklqhHZs3>`Z`V;S9+JFM^pt+W5PhoN\`)_+j!-/*>;h+lk.R_TJ#q-i),8a4rsr8J?O6Y8&P$[J>>?&^+!e,6YD5:=6Iu@%>G*i>!HP7&3P&9`EaK.d44q"gD4IO\u&4/bi&)../%!:,5n\$Qm7&FE4do6YY24*D42;e?*+,K24<Hm5.M\,igRgTg9J<X1jjqo37+P?S6./4LO&"#51,E7-<f'A+mYZloZYBN_Q<n*=3b3GT#,E9eSlubPBeHbYq].KnEZ,(YZ6*.Wuk.apJha)HCbIh3()p29fk3q*$ii8JeM_Gi\9q:J6=SUI>XR6l'r*hd/I6]o:4E)i8Ejc017sU.ME,lE71X,eWm)l7du-'5eVWen#qeLnkeLiS'W32p",D:4Z"s3Zu*;SLuX7)-S"7<`TCVlSB-MAaROZ[e-S]WVH#^Q=-Hk7J)\C+7Eh:>I\bicUqlRBU4]S"-@;LlV=n=Dj9.HhNQc/&Dl.$>iN=J#n[1V$lf%W9BHuMS-mVO\l+EdB6_cOdAnHkhmr_,6q7^0QZHU:b2W7jS(l?:8dE&H8D&"/ZXh1pIjdFlom/+6n@SsTre@g3U"Cj<mWa68riG8n74VW8YnlDP*K%N[mLmej!`cGJ9:t9<Pe8rSaKH&CTkc8'!,*f%]91\k(__FRG>Lls.D9k7bHX3^oXf^>$lcsc5'?(Z7J`DrCH'b:HYC>nk$09m,S/3VQ91WTU$;Inm9s[_`"EKe\NS1Y&Z]s49Ec.eM$UX1CG"B0)AM%rmN?dTbqU@%WA?4K9l/!qV$>o'+?7#GF03?J2JTgL8WD(1A8@YZW&!rT(Q?6>p/dON:>X5B_gEGf6cVECdW+7OG?9+phUfYKoC0k@N=!d]%DYTO'][T\WiLE8RBt7id[QW55Vh=Srf"pa8CMQRag/seMiAPPl#O)o]cU#.n]/%'!"oP"7We(Y9=!arTS?na_$-r?TVgn<;^ZO=B)+r."k-2D3N/aUp!cr"7_>_Di=c&q8J9.=+=Fl7s'#l`1Eg\NfQKo@2jBZ]mGOJeSrg/%oIX0J3H-M@o1pi4u*MY9TW^VNi5(l-*a#M/R6Fq!`]<>\PF<5<iB(F"mqaT)YK4Z>FkIGc0+tr*s3mpE.RF'^L<O6VfE,8V\eM8f&7`sF:n)GU^j"Hd'.Z8>*nuYba,LV9dl?a;%]>NT3S`i[H2-RJbhn9c]8EXemn41Hi_m#`VR$r'V@4>tKb6"rH[o@BK[Z$^^Su):T1$`-tnpUdg2!dQ#(L%-S6faf\\ZYQ.epj:9o3RiO)XTidPkK/@:YuUdo7-'V.B`ag3te6F?E^ASIK1mNa4&$8?N/nflri[lNBJr_FF%8$S_bt8^.Nk)M`Rs7\ZG\B2nE7ppWC-YVH::]?+)7gTcd?Oq?H51TsnR0=gKh]Q(4b<Ga<U/'@6,*HEK,O4!`[<8oM,/bEQYQZ;,)h?86ZRI$SKSP_O4u.PuL0'pZ=V&8hVdm]?M2DiFpk"l8mFF$$KE$*CVi+m;BVe#+1GC-5%%WVX;ia.ATFNmEHM8]?U+#B9KmL1+(n>TLVBpr4'X?:'Zjih@4PWF_W3h:AYP6)U^"0t+1<*U>mF1cc`*af#Ndr(joUPL"fk"f`*OO/P:d'tf5?<-#,S*&LNY)'@A0\;#i,^M1/+/EhNeFJRC8%BZP_jZV%n87`:'=a&Wi4jlfDY]rk9=g$7'\L7S2d(,PZX1;G\ok,6qg+:sds.nDOKnI)=!OH$<S,~>endstream
+endobj
+335 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2036
+>>
+stream
+Gb"/k5uZMt'Z]\<'^sI&gMVrr>E4-a6Xea;D!@1I9Y#+>*$oU0-*QFGAnF:*504;1J>$BekFs^XMClTXoVD5N-d.6pO$CS^:()TI#onC:5U]=g5XI,WaU,VP$p6`_82(+k+8IIJ_'>1u#ulh6[+@cl`@.EV$(/IFG_)L*IL'7"@eBl:,V]6lFXo^#Z1`T!DXHImdP`B[4LE'oO$t`Oi8@SrlZ#t@Qgq75q$rTI[QOYLi[=d[,Y@',HPe%[8o>=K`'tp?UAG#9pUu*sgDZ9PJ?d8#6j:WDk.+Z3CQX^?;1s?m:]u23j+r^4S:)B%%'It[9p<I3]2J\f$pU5"3K/I]npku4mH)SOHhijg*MFA"f+(k[in\`&^qTjqIaqSp[$Rf0*iXDk>co6rj<`:_<%0*BkaFWG&tl@V[f!GudZAa'5hVG??O-qGCB$HlTiFr&iU"??LF6D&`?IYq50X8VTX9G1cUr9f_trR/lD%2u]tnC?"]:(e7N!8B*Y"jPbTLaq6"m=Q@cWNQroUd7BoQO%CR^Bt21e8H;r'AZ;PSiArO,&agUD#l@0u+85Rq*,3P3m\N0026*,c6&F:!-!%2171RPi#]'.LZgamE1ChZa:%a7@eqG_.2#d+2W3@Y0\N>gXfBjtjk>Mcr4'-Dmc1)2/O0NF?nh":dVP1<7N9V4)#(hAW5oq"'.%W)\4%U*!2WG81X2]p`NtnBre18l?WN)?R`8ZKZ0>dstj,N/TjGT<S\M[Y+4WP$'iq3'`mpTPU6/-"lFl7E)I9HL3lBT"jdppID!&AAYg8@7k@Jc$XAdG&iRd2(*s"@2.YT`39`URqN>q/eT?$_N7%@73o;tWL^tsq.uojnIh?,G+,-)!kPpudEj,XfZ%Sc(uHgN*ucAaiV5;dS(YLrJW5D6,@RY1#dh#][Vr3),6!lpg'!oP[=ENggtK\SN6qPEG;PWSl4l4]I-bTX^5[RlnJE;c\]qOaie-+aEL+$=o36n(5K/GRg]$F1LK\,]LZ:LtHY(s5dFF<B^'*B.Y.1Q7"_=nSeQc'?V?5Vk/=Xs9DQ2e!k5_tQi%V4t!hA`-[ljf\3*5bc%UiUCR9U.bF5:aIQQ#g/&bf"!\M,7=3keWF8@^S1gD!^?1XOb;#0/^D\D8%cG:%;\E_5%-)>CC=R_cPUo3UD,XpKm8NsWSB3d"G.M:k^l4;E!>i..r,;d?-`V*O[dD-!g"EfP0%;i\-.9TB^OamG42TD:f_YbuGt4]pgHU0#hZXno8L9)U&\pVACUGn*cU1T<[bJ_.;6YWBuk)fqf2R0uM;RG/tK:.:GJS=@Uf'l`81ke72RhEe^5=odPUlHJZXi/C<oP\(`KD)jSk4UZ4;e="@2eE(]Igi>B"#9PI=rQ&i\(YNfLH*:I76Ct$s9J0`0,]=S/WW5.D_iJT)?YW(h8%.6q7QXPX+Eja=*m&TFfC5WT7A>N(3"]&HIeOa1^)ec)h^dq<a>Y(g^=H+6/%&P3+h+"dG]S,a)/m?i1N<d(QalF(Rt5@]1uiPNronWrJbKPZ:K_b6Z!Ic;Xhe`oIL,@B]:^]iceUAXAL4]iiIG2RS::?@SkUhdFZ=J&g`;/9B=:;DQgO/PL[T;e%4.$7SnC)_ZKDHcSsI(9`eQB/Q>a1B#mpp0<?^]BFK[u$;(^A]<h1#V'mG!:%WTf]*0!$94rV"kDi]]9>,aBGl+0s#9qN&HO^3bm?"SeX#n7]8NaSG/?A#7CRl>_lCR>F745olW*8mCh\?J&Mo3Dj8:Vc'S]pu+U)UA+/l[RB+]$]s]G,I@kob(0o&08E;o1[542!"SgdEU'UB=a5$1OULlV/L^/Pb`S(%F4d7kkSYM7X97WR.?0>bs"h<X1Hu$/^.GQV5Q.,F5%:eDU4splce/jEOjgFkr,]TS=/Oj%,LcnpSM//Mmn0(^\u9T_Ru\JIfl[oEqM;/=_G20!9X?k45g&)='&]$[b"UP9Db&GhTtB;m[i=]06d?C,QGg(_Nc:E<i[\b@).X+S?*1XZiM4APq!d4*9!LZip%!2@.57;r<en~>endstream
+endobj
+336 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1945
+>>
+stream
+Gb"/j968iG&BF89'RNF:A1ErH#X48oG</K_>+3RP(PmYgUjOR9,tFMTpb"hS;Jf?mdLgUf4L$"@f`,Ecpru,^.<tVTmI);&GWgf)pCo$.nI2?lHl-5,]CCDr5,ULGie<t[+s<*V5DF2BaR.U[7t`UL;Sh_]J8d0%4<I,TA+pg2bfrB$h$PilXaQ6uXaU,7[]]CqTIo+9&\pAYMpFi')<hPnNF'Eq.u[h=J%,cYJ-5=U*-g\.?rR:!SH=Md.)[BU-m1X5E#.hVN#)gj7ClMG]TKTqMtt(&odL=PS9'W5(]tNW//3(%@6atN@K[U9r<T<b!BPt=c+=ZZ5<><5''t?3n*KNkB,[K^1Y7X`1.ps>'&Xj^-,-L'<`C=n1AaWpQQYl/UcSM`l2lj>b+Zi%UjB/9ZLQV+bC3!15s3H2SsZ#unFq6Y)uOo2BoL_r3JSFE%!fY5E,(`a,RWXFDVYU&(LQ6,<PQDKAZ_.'T#7V)=B2eHeaKfG4-4E$F$]bo(OP$<M*L_s%RP@%n["(@CQ+7CU^D0,W?Fk+&slL(Ip>A'@2M+35J]><JWFZa"Fe>rj$DE8OL-V-gTIt&O:_;-a76YsL(3Kd?IIC12SEsOc^77^$=<G[%aAq<qNSbs^:],Hn4_rm#Cb^9p'&DD`@[+.Lm)[7[Zrdh%C+IMD9p44Q[RAi>FDnP[gO*\^blm%^dr:G_/S@8lr3Koi(=3US_`QePKR+8nuZ?laVA'>Eg<N:<,a.%44adoKWX)s!^38Jn*=7[okLLbbKB$L_t8I1_\HWEVCH$6Oc408[[),@\A]=%R$"'K42sE=TFa"+YLT_=8Zdmj;n=TC8YGZYPrU`p2+s4J7NV*aGPqL6+E^#'SX)Et>2N'*[S<6#ULVR15`$S%bYZ4ia%;peb[;]!7!tU.-NT3C5..B&c"`I;Pf/q.2VBd=S8AK;jqDKgD2flpd8$Zhfa8=BleKQtF+/T\2B(GCK^F49d+Wg$^?sX1G^BchZgGtkj+?d![>A*C5l:;md9+,dQeCcfiD^cf/H`)m+\4G1gTdm?UX=ArA3nRom,96+3l[_OEGtO:DV'@dAZbQLYH45]oS<#coH-E')eVD#`ui2KeTCu*R4;4..*1InSOj&I#J/q]LU$%CSVUN*G=Krm<jJlS7GHmri[J7n^+F:iMFq=QQE+aj29.JmZD1PL_TnlME*'E;O_&H3j]YC;UFs`alkaE)ea/Q9Di-Z>CNZ$Zq-&3%;Jr/IOqB35LGajpj0?Tc9/JkV-/'6Ap:8[Q#&eXl<+Uag_Ht'e1uc2hmE7iJk)8['_O`t"OFT,_l>i.MYW8p.%5pH9XOhjWeSAe#g\YG[C/r-\P^,,:b&5LpJo%brh(.)HH>[U<[(!pIrQ@,n"RWT%6Xa#qD_%)#)i$b8_Z,0R^UqMW>`Eqs'`KH&XN5Mc,DA\Tp[#J)[>3:@m8MeFrNoU:o;15`W-("<hoRm_r<1btgf`ZWiG-"]K'hC''c&rBQ/U\%Ah*8P\P@]6A^lM.&#c*%DW=a"o/Vsc6067?c%58,Y_gY_NDio`Sb$I2,*gV^_rk"M4Vqp+,Mhf1KG7AGGU7@;QEiDuroSanJG'XAo/\BZ(:[!(S4?D@Ar@k8s+Y;h'tLCVgs8+)0m'H\/>(EVao,2Lf(B4cnN:dr;2;X@n]$1+HAsX\YFQ8Df0th<a(!bDX]D1_0KU\0P+)n<<bgddH#'"n!R*D-`YA_9#IWTc7QYBD)S2C)S5<."<DHr'1Bf]R,<=/^3q2ds8H<C/(tRn;YCsM/#9HQ=+ubNrNbM!>NJ=!X)We+u46PY#`<ncC6EHst6>cS1B:r6oJ!aF<?>gXm<Jd<G']aA9gW*$$1/3\[bRr,4mWcURcDiI:7GA[\pWDpm[=ZdQY8=4erLQPk.mL,,PX!:-=@J7t0C^`&@BnOV:EA=4hi?i'Zn('Bn1VUY$m5~>endstream
+endobj
+337 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1935
+>>
+stream
+Gb"/khfIL2&BE](/,&)YZu`13AGO:+V+kuOdnYD.9OIW?Mu`O07;^L[3qp\P8iD5n@M1H8]I91u0[bF%X4;t/Mbj]KQb(pf$#i(_=-jULKCK@`84"0.Ko>JO"<j[*"qnk*8.m&0M(jX(4t,4=#Y2f^K2TPPjachC9nEpI&n:SL8BU=\mHt)oUs=ESP1Df<VQD?l-YQ/+6pr_8_V#0X?]XglhN)!Ypa_;13e+YqP)'2HBc70=O'kpTl&>au`%%Q.\gnnTJ8gh@C5`r97OJ/<8pDq'R@F#T((D^P,<Y-'75+osM-)=ee(&sSpjj#j>RhE0SL'q=Gi(X+@J&42S<@PI]QrRm5Bs%[R^)&0&P>O7m6CaN$a@L'Q!To:A7k(de8b_u\;"6)Im\(gXAf3XL*kO0'iZeL4)rp_BdcNfRFi+8Es6$NpUA!=-^^cu*LLpC`/^Mk\/e?#[+Rj@gn%_o6D;iEe>CSq"jc+tRB!QCpT*"3G3V$>ef@:@qf8!MH*QDr8,U'^E"oVtLOYel\]3";8Zjc/ZPp,SYAbflp;\Um!Ce6JknB!h*ei5^9].Wp(m!CZJ?3VXcujKULr@qq1QJB80l169H^D32YSh8g#M):T<Uf7GmEjVmcDM'dnG+@EKATW_^#M%(l;1;N:gDs=LNp,l\p!YqXWb-AV&d(5Cm0naDC)VIq6iT,-ZFr3'/5SQC+u/:QA3oG7lZW.CM,a)bbjs:RJ>@;4n9B6hTEtmcL8?Ym[P[F'=WR?$$;4N]e0#ZWn10d?KG44R-b]%3(Y[>A0jq)PLHYV`qEFB(HLLWF#(1da3Z1L'uK(nQ.3eAOIOB>G.f;([4qE@guH:Zq"JnaB4;7;Q8X[_?YuOG9p\kT6d6?28JlG@8d#\qVpQP4/[?lM@7Ys5LaFa.g?dW@ZH[Ma;G7=^?PkTE2M2,?$+7c27^KpEX46!CKS[F3D.GP=^:X"UNSm:CFh\N%D;B-fF_sNu*JLRtBm,JU6$Ui3`)RYJrEJ5o/Do#_\ePt<WA`nnAa^o<EM8NLN,9<uNRiOEMP?DBGFr?La4fd^G,ZjF[H@.^=00ZJnBgM<^5KC:?p3(lZ,-8DFA_'+2)\&abAkP/.6Q9Gfa]AK`hJ*%,4Pik$-@?:f2\YY!U!'-HUZ]%<?=p/.3G<qq^ckiA$n56pIjUQ'q+Vho2%LcC*N'sf*(j0g'OJH_;qoO5GbJ`H=bgq0uCsZfA=Vs>s5A6QTmUU4Ne4I)=K-'_UKB8-Y1nTTo7m+cBn%S+BOGGY<].jq@(o$V:cqZXbYZ?SB]g8R4<Wak4/-j]S/piW>:6&<')8[7S'mk%7dt3iJjGR8t#?Y[8i1s(&H9-jt9<;/f"Z-"tNj2:YIqd4PUF%>M*5n"ho.A+l(@93M42N?'_ASQ"Ug]4C%:j4pKHlBP!+1;J2Il#,_#ho2%LcC-:mbfXUDcgF9UV>eGW/M9]JM<PMa#e?i;CiV>d9lH8Lrb"V4pk"57\P)7KTN+9YPc0i0(CK]0Qj`YRuLW+E/b;\%XR!\Cqn?Rd"CRq0R(j?;Lk+@++D7&TGaWBDNE7j9\ri)cf$<>BT+]mQ$??mB7(`s/r(<'Q5Ah<Ik4!!*7Y@-C5;5h.rlQ"e#ojRflqGB0*/P<@@0+dD);blt,WX>-7ZII$`S=XasTH%HIPbX'giD03*?uE7RN)g<dWd[/E[)0^q^[Q6qVP'r#Xh`-lE8T4[?$iMqW#Z:()L%KbPl&nrKM_R;H<Qateh$9pGc>92moLbMXnpC,Uj``b?+A&uVLVZ\-?>i%?!lX9RJ#(E61pIh!p+Z>l'D1gm?APi<[uQRLJKCd[I4"jX]6T1/0C0B``FM,HDt;PF18InSj?tG]%sCH1$:980]nPD=t]HDgaOm2f`0B=Z\@FK2T&S1<uH0%kdQ`(79(jD4KlO\iPFZmp'@n=i'1/<,j>~>endstream
+endobj
+338 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2024
+>>
+stream
+Gb"/k968iG&BF89'RND@a]JfLn9I]t3(`Eo[\ZPK^;)!>,N_??.D+m;_fl,ZO#X"9ALaYafOG43_>T"Eh4Kud;fM5mRb'M$GW145B+ubHd28fT>Ss$LLJa*l/uLf3iWP8XL-R0Yg^)%o0/qY^\4$r`-magZpBYu;cuFVi/p<;+6sTcUmRD^mAF)B'D!g7lg()*`"DrE:nU)0bd(_!Wq+tYlAbZU%hdH*1N/)b/k]7k!NI1uOj"]ipd8GN^W"gN9s!Zec%cJsDf,3=9(`)@g/E'RX+tY/->1BB*n8Y'F'L<hFct@n7=!)e-K1GQ!1LrG_h8oX%L@<Bb'ScX2F&%S,g:[5l2W)*D!LhF5g>PXna\t\2r!b@!O-RkFMSqqqQIK@N,+h6&niNcX.&JbT)I8Q,#76[cc^J4l?0ZaSiQPL>',(]O>4;@FpCkapN"1fWhW<3dIcRl:mX$U)j@%rL`(_^9\DeFd<)(bQ*qi*:0aI@kFHjg*iP(4eO*S6o&]XdXm6TO9\8/[EVG@9[^Y"Q:XYFX"DuH!17^2,.\i\V6XAs5IdroD2*AaQ0DW-Z.OS<)&4S`F@Qp.ZC0bc=.cs+#dD$Cl'4fe[mRNup4:KGq<*Kr:\S`Z3dE!;4T#)pGjV"9dYb-B$aqVB13oNOD!RI3`R9kJEc@9>0CL]6C/jRk'V:SQ'j>fH3/MH-+&\lbU&bO=R&9a%Tt`mfK-T0CeT;q83B'lWN0E=?a>EHI'oS2]R3`Rn<Q_%.FX0P:ISB(U/C1XOlb&0Ds(T$@Sk<5^NmREKW&Gp/>=QK4Hbr.9FU2J.9.;n^G"7a6I+!4PZ9D8TZ(jZn[gEsu);!6>%*HPjstO-$k("\sF`Ra>fEH4f'r#:PE_9MF68j#C7Zj=uutD/<W;mL<5imFss`GW<[%bTcu:;mOeiQ4g(l;P:Gj]RA8:&TQA9i[+bMmW"<WYdK>@l(e2)mV".9e]UX`3Ol,Lq%a3)@M:C5\])"Zij7LQI"l@/gPJ"&Vo@K>E&Xk0R1DL(1)9?H5lk%)jiJ;"IF)gj`?<@"W+MmMA6rK9=etGF1u;NS3T1Tbhh<?-!D-![DGlV_YjBX`kl3i);^k=`$!/<JU/j\m-<QT>&`*+7oWS/NorHB^1.1_^C?^(-qC^q)S]VV2:Z-l)ZjquPRmq]H2bWUl_e6;J#P:@e@o_cj"gJ7$c62gCY7&8ioe#![8%5fOX5W\OT]`MSM"MS:60ZsPAPd.3%7fpb^tWS&C))Y+eT2QHH+:26Z\7)(E7F+rS/^,Wm?iQB.[]Q$\Tk35Hpb<T(Ut@U6#*b;MRHB]VDq`-Z:JRe?YYb)g=C2.DEgKIfC,fu>\<<2,LT;YF!reHQR[aaU;itHKAs"<aUaQZo(uhMkGkJ=WPn$Ni]@\b=]rC?]^:_<elfZUck^Oi``mLVFa0rtRN-ru7Xn6Oec-5#c\X5!<heCeK`9`;QMIWP^e=Ipp"],_nni$RnY!49j4or=rsQQS0.M5mZmD3;pMsrI13iqXWbR[:fNPT2d`p3WGIm=ilA\6@H93J0RPXg0X3,"Uip*aqCW$I%gVih`[l"t"*qX#tQS=]$.MBo_bI3tp`kp$DNOcK<46CB'E`SN/[uF"B=4<nF%goeY;'4:leb;BhOXER%O!;8)]OaMU94>"U=N(.XinWtmc&)FpS+M.CorZGkXoijY3KLF^GNVhq=UZA__scd!aRgJm0Uu4PbRRie-B7lQg+q=JaI.59Sen6Is#P_ik:;WmPt3KUJd#bXbgKXkS#&gNF"l4)q:M:2!4$o*]RJPjhkSdMC><'a[a_b8hO3*=a=_5f**XU.nS+,2G#P1d#5t*::`@@5?m*)nAS"U[NlMcp==[87o8"lcVJ;(:1J`T@p;&R;C-^\\+E1r^MrOBr&25Ho`GBh'@K32U*\7-GS42D_TTISS'F)!(4<b*H8os^r9OD$aCgHgDPQt^#I*aAo(E.Jn!Vs(frgtS0lW52YjIUWXrdLa:Ih,)7R$8f$W3`GWrIMO[d0I@7!3pfX])~>endstream
+endobj
+339 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 2019
+>>
+stream
+Gb"/jhfG8H&BE],=6rS,BeQ.c&;Gse\0c(U3_A),4k#gg]Z=2ue-_&m7hU%6O2"+Kiqspu1D>"14>F\gq\?0f%grRC0#!-e:Ju_PF*R;J!:aI2!YRHnb`C`=I,_Ye:])Y$maS(1":js8&4=1'.'mcH>>/N;EXo/%'?>=Wa:5qA!pgt\'DqH0h;&?]&0(ML'=IQ(A'ti5n/\l)",DUb:LW^MQCF:5iUcCNbeM'n[2G$$_^P/n#tQ&I3$.>s)TGhc"JT'CG/Cime9)ehMmbM*B,kMeT(<p3=imIGDekJcOD0OJ*2<f9^l(Nt9&])kM*p5'4jXTtLi@Q9^k(IM=d(Q:e]iO%K\)\PCM*0.pN2:)l@&&>V+7'1NWf+f+N)_rUq1LXSXN>HQ2so'O@&nr;M39)JeD?6`Ar^jph.c'gF`r6j8'hQ&n>\ee#hL,:2Z"?N'iO6N&ggq`Ib8s.^=]g(dU_"M%gggL15Z)M!(L0(VN*thsnSagXN"nRHJgDfX<4SD9EG`=47SK.JE5=oAeC=2R%D=OKB+2\m9Nh2NcK=ppJk"B\m#NV?G3&gM9WL(L/Q\N#Qg`TEOEs'*_`o456WhOfsO_J?:.s>iV%6\Kn=L%'Q5FCT$,-,fY[!%WgVj#sHK_0+LOd$o-/Hedf75Bs3PUe0J:3\GkP+p-.`(0=:_`2*l`Pl\=9''mhX&mh$eR`SM;?[1rIsH;)i+amfET(a.Y+L6:XtN;dPY96=cFk7ZT:r/aQSJ6kO-l[m%C:i+R6Q6LmEQ"RUed@XDbGO?@!8,WDd?ij-i$uXPH,A-RjaL4eV?aF%_.3M@sqA>fkffngTg;EDK-q$fA&Fc6P6me;T3:9,ENdB^'(`4UJd#5WiD+)(Q+gnT#BJPu]/%(:1aItT>ND(/XgI^%2\5s<?qisE^l[J`.CEqhV.3qX5e_0(`a,aDnR#`EE^ZCKqnnl(ijHb_9g6cdZ?mHd;6mL<#gFD(GXdcTL;Tru,G5!LZ/E"MMh#!TfGT_ccQ^QA!NT8U]K5T4q(P@>-+,u%qU%#Qt+0n\0>&q0pFbtnG-%)ei?r6?uYai%igRWCfht;!7[>!D'SC:Ijn?ccHER>;eB;&QT4XfCJ<^JFtJt;K7<]L5b&;n@Cb>YN2@c:qXp&qn9]gWnMD%S]Rga\SR67_hmZg;Md,&[@8k&]JJMo9qDb.n^23Ci8A*[lQ(TN,Gs;_?sO-QJtrjVoMSHlJ2erXmASI)Q^.FmbRu1TkDu&,bO^R/<C,6tn82s+EUEFh2e-&"D$Lcjn)Oc8'9]`f]+-/st?BDFDL8YVI#]E6)Qf8QP+b&XOF/61K+ra\lYiZO]Bno=Wk6,tG8=68=0EA^48;l,%JdEc-*H"^u=$(O3BS)j,4709$7I*<*$3NS%ZlE\;(V&(kCWGEI*A<$uW:fagR)qkiI)B.;o,j9<2L6`hunk-kDP`QE5HEpa7(o6T^_5I0t;Ln's@NRXa$i_UQT@B[ad\PYC&9ENDC>[IhKX3bV=g_=>AB$%J;g&,Q&"m>ckJfF<a3.=_>KiQ;&0@+b?26gf)3R2:Kb-nKWQ`q*;.F]839:8t)<Pi4o2(dW8h0,]chcmR8Z)ubMUt_"[b$6JIo6]JiCg6n%noL=fIaWMaj?@t=U+#<,D'@VJmNnYi[fr9jh!U!iU>>ss$Z#i&js<!XAs-LfGN6cKQqJ@j6#3tTSMCVZ7,s+YQ>uSM%]e'lT;SkDfdtg"-X4r)]XbIq)j+sW=MM*/\glXBb0L=,mNt$c6.%U*d*:skk'#X1^o<O1-m3$mI58t%ltZp:45i`c>ItJ^CUXl^pK"Aq4>@Z(iCL1qcI,!%\%(!2'Q_<@NMjhZH.37C?'W(:rAQ`Hg(M[DmKnQA]epcQ[Y>ao!aInFRW%WuQc&g8YjA_-<Y&q0#N98mBB]+o\#:Caf@!n1KZ$iq(3112]0jm2Ij!9BE?d7,X5GF*$>*:!loAh;#S.9N^Jr=[:6c!e!fE-e5PW[N(K5*`a_&ZgUo.(n^]p#&!I36"o`~>endstream
+endobj
+340 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1944
+>>
+stream
+Gb"/j95iQE&BF8='Q[uN(2H>a76QZJg?h(%1`ICt,o9`nCpoMj;R0L/qr)`iac>sh;J-sG_?>^/MjcjfSG@HK0Ea`?-LQ(a!k]Pkna?SdL%,n>.#;8Y$Lc#f+H..G#m=ZLnhc&N:`a1UVM!#s)rhZ)7_qX*H9DO9R&+3o5oO2+%"aGk0AG:h:ro1*0M";&pbqAk'!VFRnL3<MN(Z,ke&?'t9)(5h"lh6iIdP.mGaub^Jr!rWLu[HYn2T/N&4ioi(;tD#GSgXDVV<$LR=p\TQI<R*BLJPlgKGjH,`2&_1DE+scnqU+L[u%/JAZU'5We$T`S2gB#DU:m<<8ke]pt3-^:q7.jXu&T:(oHon$U3$PQ\H9$1KU`*+.9se9-l=d_4+c3J_DRKrVjRUI!4;"V&&?:eM,&o?W_0[TsgA+Cp^TM2A3bFK>/F_2V=2=cCaZ0o%,_9]T0HP*cpr,:IIQ0@Us^_m)FPKSF.s6uR%e!Z";Yk*4nQ1nZDfg)T[d`?Npa2<,gqrp/lPeeu@0p9oaN1P3kjh*&+lEiXei_lcB(4*4uT@0W?26T'*3X33Tb`Z0gp_>2*(6'pNSG%ossmBD>tC,7/X5.R7X'"Z#Sh-=8J%8W&o-e^R3aD;JebU],N`#`D^[(*G02E=KKA<\_*eqWQRVf;979kC`N+_t"p:!u9$I7#gT"<U>$HN_H-_;i+0>Uk.QIn#gb,gcl'#"j*[pSk62?`RV\:rY4k''jgbI;1R!j"TGJ?8.gEBT/nT.rEEI?@o2C_C/8=E2i4%.:(K?4eqi]J%e%4aGJ1&/tFG2UUQrO2-l`3Fu<>%$)3eqQste+]FD6'@>o.rK.%qZJs`>dW4I4[LUN1k&nDh%0&k69N34hn1^]$r[PjQb7b:8g@4`14SEj3f*VeC2fP6'Y$.jSMd+Q"f^?aL1KNee/RsR'Z(_9a&fu1O^dJb_A[$GXrPqL*D][bS\#6H:C&1LenosL@M^#$=<Wu]I%Nb3K2ET09.37*'fk,Vh*a\8XJ^SEBNnd^WEVq96eT4gWn_%0lMn.nhZ_@fS1(#l?5N1)<aCC`B8\D71@"^W;/6=7hT&9):!Lf.]*kO?<Dq<US-rqr"MDrgXb]!2jXKHD"#c,Ha@@-*E10?d>j!m^E)$%*,-$TK4)!q).GWf'1^=OqHjGI1GW<Jsa!ejM5\^<Q<3/s!(5+)mk/]uS1B7S\pni]uQq2j(:+h)sM:VAn^3eXJG$VV@*WA8[5MDAQFEk*T@\l-1h?)VN/j\l$"D=a;A5!M`oA$9tCnaDP%,q\M*Jki+#(Gh&9rDST,4GT7e8a+(2Q\s^ZDeM*;3ZWA?s2VQ(2+mnGp5+E.MU0'r*gI?X+f*\c?oh1%2a\QAdP`S'U7uVc4*=d(eWfk673S%NBXtdce$G"$Q&'a/"c[iW*.I%-&D[Ttnlcq.s9Kh8qhfe0%NViLj;I@9]ODcMPC5aS!<0aJ7nP![BbIoY`DauK4lj3=]=T)*SWeRL-8t/]mSnt!74-PZ#]p0OpI-#NBZK^XH?+MnK5H@6lHt;"#hgG%?!/@Km^g?R)GpXHNp^<Ss;%tN//aba^4QL[@*:#36B]dLI"%)FX=NOa'$5%J.NFg@@&N?uc8@QXHT*'"E7VMsJ,9IWbX";aolc\tl1:uB>K(?E5GK1??FcCc<F.SD`N]Y^PB"]K5jh:j[,TX:1C4*O]mh^kBW]gXtcXe]NH(h5e>Sj!'B:`bJo.911p-N-R*HHMaad`7skKChN)><3JX?g2Z.=S49;*t-j)'39/@o'pCfNXZ(fU$.S`7UR>\,5&9+ssqi'DVeNPJ?GBguu:,DMLcbVNn_j\OW)Yg67UfG].._./u_?pWe_hLl!T\Z\"P56'UbLo#XT'o'Lcql7mZG%)5_#T3JY8<ubSA\7O]qim5I&&_<9&rrqTc.cP0T4,jobJM@T4"##Bk'E~>endstream
+endobj
+341 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1919
+>>
+stream
+Gb"/jhc&8h&BE]"=6rS,Pdq&mZ5ibHmEtWR[/A)%^$m3cOgs&0YoRLqmZ5,Jlp.4'1nBKpU,"#e,4B``gAS79*=<ke;#<?"!8`^ohua/*@!i.--U*KMi,Ce$T$Ji-!V&XN#X]`!#sX#^3lp]n!?NtQ(mGB1p'67t;<[g@66E*q5U(+FRH[b&6"KA0,])l.bHuE2k6,W.T83Ke)=3pXFE*m_E.%Wh`nt1:DuJW=#QkRTVbuBG5Cu`E7/%$&6DG*Si(!h,H%`MC<F\-iE3@Yo<Pj)cb>_8=[AZmc.)7]1."X0]@DG>6c9;_oJ3/]Tj0BcdE\]o#n?I8)_YMM!c7'&@%W@rl_d?[5#gJaEG(c#UnhcF.rrEi/Zq<)ZO]Z8iQ!+qGo*(p]ILW[h?)S`X$r*2G.]@02<oUD';I9ur1U/,NV[B/`ff+OR?3O2Vfmu/=DnNY\dfbrsAZ@G:iYpf5.53FWk@6oILIOFcL1$P@^rN]f!afGjnXpm1Lt`O9m8Q.Ua9^r^O5j)Q$jScH4J](k*.#fmShUfr'n"bO-T&S$lVe3Jph(]>_(1dHIde:l`"s-^)[cj;Jr=Kh`6'%.L,`ot`Nq:EfLtM__I2b;4p2>PTFl(K%2apq&MgF<(AZHB#$>P)CPUcu1c(P^fn*EH2Qn*g>e%dY5FtQKPq>&9T1=d6<c2b759i[jarOISI$3]G_T35[3a%1V`-e5F,g4^B+l`VS?tA8R!=_adM%/N1@/^XG=\`?OEPm`!H,bE]q#B+&H6&E*D6&t"l_qqPG%f@hHrG)H:uV^"ZOmS5j1<SYAh,VZ,ed'*PCSBGGM9E0B!=jI8g;I]RogL]cB\\AjqDKg/WIc&o*;,c@4=SIDJCE&bjX)NCG`\N#s8)lTXFI*I64hKnQ$@`VSl/JEC"j%g;NOid/K5J1mXd!A[[gc>\[c_X`l;#%LA'Lo%7"5fk<NDb8+8f$`tN.'%HGfG<@t9o2O8JK#>]0onp,^<Sd^hcRCF44t(P`&,&3OH)3db>2_=Yrp=+U@(&)>Y\39RRHL$F*Q%/K;V&12>el1Ij[=UeQ"QGcpoo!/HlJ%`j%q.0V!</#[s7K&3]./O?\=j"fr9hDF_X!kgII[*e)bK_SB[81=0t[@l"X>';r.`1bi_VTgU##o:+e$+96(7q#I_mn-:DLu-E-7aFpPN03j0@h8Z$4*:s4gaE4/Mb)ao&-E3-WDl?MG^k")p@a_5=Fk)Wc*[R62uaZIjNE$WW+K!4e4&ppK^R?l"-TtVGB`dqRtJcf5NgT;se<)jLq*/@JS#j2K&1#`&'ZWHadld^/M3*k.9>kELH1i7pC^BFC9`n,pa/^i<`P07$q8aO_f*S#UiC94a[j'd%*[7>Mam3Sp.\\NoWj7WOUB2ue)ED\)dnuo,.S\o5&0(A>7)-:dS.OE8_"u^\omj7859a:;Dp;2_HS^l;9mPDoD*V)23EDthleC.<-=cuSXV6Z@.(-`tW%5t];Y!AHqd'2W5l;AsSmJ-&C]K)TE&%_P[U625+mO76=;"uQ-7>8EWYC*s28TYnNqr7fsANEnSam\tRb8ntMd5E<iMeFKcK^7B9H-PC-$Sq*kY3,]>FE_4/qejkX>>]H7]Ik!1AI`:@UWi1Ec90^Km1<iaGi#:',_k?"JnJMiF.(WO^$$2H9&K85Zp4.dQ.O)44R&q^d,mH4SiO#8Y\ak.YHp`oJa:^,#e"fUku?5K!cR[8agCLIf;b\H:qimC%EKPjYq-Tb3gM4*8Y0J@&^Cu+A&;*jft-,`42UBFE::uG:/#f&aEe%,HgabEXL[2o%E?Ah#K$U+k`p$5V>b'bX,:P)1,j/pE-$!Q*,`-iI2f`bD7<l=:b]="3$Hthb%fK`g8=)LYkc5<hlhW;E&M0uDWXNZ>aC4^g)S^niHnrC4W=h/#D39Q8,~>endstream
+endobj
+342 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1894
+>>
+stream
+Gb"/j99\'h&BF6eMS:>n8JR+/^FQ2ka^d>k9m30ZQWu@:"3UC)A2/b>rUAR)%Dt::+Viq0Ta$0%oj;TZs(Gn0_8?MccWL;<C'638.8U5D/"cnL@.XKVN-`DMI-Sa;]\!UU":/RIOFiqn8inrJ&TPrY$+P<<,JKKk?2u5WY^6^&p!',nD?UlQf"OY;eimuKm8O.ZTWKmj@0E>,c9>>*E[V=j1jfM&D_QKTkMq=p')=coRRS@D-Y,&md^9.1`$hE,H70>N*q<C=WA0hK(fpHl:b^grkLF*AM[#Ec&KZ"N,3T,p6nAi,ibaa0YWr^U;[sF&S-!Y=ptEC(@JI1HI7g6giQXGGI-6X3BZ;$-LFX5gpDjS0+2A<Bf!;5hP#[4lUA54B\V+4Rf:XXmAtfEfY0#dbJD0j4__7K3%<*a@(2eruM80;Okl/8>B3J.N@<c2,iJo:P@Nn[,?fhDW.+=:>Ee^.lYs5gQH"b_qGD+0fIM?0OA0Gi#K_\L"%O#UlIUKeAAjg+p^Dc:5XYFX"DtB.$7^2-Z\pMFbAlN`Yf61i!4ZfPMVXW\-PeAH=*']fL-:nbH>]@n(oEcRTRjV7n9WO5V-<31oPM='PT$7\p0'9:bE!K*WV6.X+C9iq0@^.b_ju("LMcr2aS^bl:7U\)jA_:hp!,!DL%p@*a37"YE`ZkA6O#reM/%@I3*tb=C"^fc*5*j`WK)b%AD%gKj5V)nm6.-hA@gX`u[n<#AbRZF*@cMTQHXbDU`$rRVha/tGFU^eWSjJ"EQH_:4A.J(ts4c+pND7j0REMP"WsR4_Bd7B&YIP8o#pLGn&sM"h8Y\EW=QD_6Jq/GK,+@0RBd7g:`$WbY8MLoqCn]1&[MfjcJ5B`lAMi]^DjB%CPn47A<?%?+Li9.rUZ&=$D"k>&C[6!;[VI,ID(&phQC7[A6fKJq:!CBYmGDtTA,3iF@C+(n6Z(&V.;pN@0qj_6NGTCPp"%s?Cq8Z8gj6I\9\2hI'=5E4fVjX.4?26<CM-8Aj0cm/IB3-Z$MXX%W?p2I?%7<HIl+sof<aQ(Zd'P+VMdIq#^eB/&#Y]@U=Sh%lfh7Y>dqlSff%rI*:>0?cd(IVr,u@]`F0qNA?*Tc-76AGL`M<G#I,(fJN/Tt8%'(oD8sasQ4k)a+c]4(<k5EC.3F.Xn(#(bjuIf/NZ?:`c1\#;(su*I0it9DOCh2f5,e$E+^'h_1KtjlZX)"7i7VM<We,#S5rgSNKlU"2:tm(,['N..@TT:pZ:$3fT(g!!.N_%TA]&Kq264JGqFANY(Tqo:+)4eM\Gd9\@3H(`*Sh^kp82%*GF!&rmn1#%d`l$E]&;[iOZ#R([8$9)4Su1H<D)j<'6)W0\>pXn*6\%g)=+BRr5;TM-Y1m\3TE_)/`7l*g%<ppTU.2)I^)QF&:F@3dh5;Bi,pV!AKaZidFR8nJ%YSKB;t"uY#IJ+hH"i4$o#((c_Xqh'lVcCfn5fL:+JT$C8#AjWnKb`61#J]k',Bm/9Ni)aY+Nj'YhHekP5Fe)<dXFLVVWEo-)o=nG7OrJEDBj2pb[\=f&CEqb=QN%Aok][8oqFC<ic2P!#ptmu;GuPKM;IFLO/0\]Enn=7CN=nj6s]EGof&anNifj:B)b&#(Vc)Y`,hV5St2Wi08k+`\#3E\'4^-6/NrSG.fF(O*]`R\-Z@hOTOJ,DjsBQ;n6D\[jfh%<m,pI8n52r\S3K-*ILAnQ:`WK(qNr2`qo=6HH6kmV>/0\6iV`NE@RgR&fIHaLDVo1Q/d;Z5!/f-(Sf$qq&I0&+S\f$Tq(udVWEA%J5ER;c1\_%:bOjV5'QUh#<P5SX!IH$Fpg:c@.X5nJpCn23Z3V-0N6E3@B8BpFtd30UO'GE[_^P;gG4q>qD"Pqi`VG/`35q5B.SdN;~>endstream
+endobj
+343 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1909
+>>
+stream
+Gb"/j968iG&BF89'RNEka]'qp&pt[FBUjk,E>mHW,aVbD$BgMA'b[h49L!n@+D&`VBigm`l2fI<UaU3^i*uHD,m[H=n3u_kRKL3k_Vn]+PehGO1`ufm:Z0K>7(g=5IK[TI4<DO..-!SpojUnQF$i&78f6%jjtB6CpQF/:JA_IH:Oj_)q(^-r!/&5DpIO)ma2>:M9&LAi`<3tER-&@,>%UhLQ,CYa$^cBsktBbQT8.FM!srWRHIs=b-kDMW"U_M384`N^!;AV8ZZoDY\s+ltZO9pROjG:&(RnSbTJR#GRM-B$+0[_8&Vm]:,JrCP4j\@4M",M+^lIB^rKP.Zhk'77'&K/8I^5k9HDM4B1"Y.>8k-p.7frSt:uTGaj^gg-1:Kc\W'D%uOK%4mcm=pA/3otG13Fb6Z2WGGbGIo7*6OB5%5G,L5j:c0DkgOm$Bl%="+q)uG]k\U$Dk[d-8C0O%;D[hoF/e6kS!$O<=dp%R8<`7^jXKf*b0m!@COQ+mIpIn2RU.?M6QsT4?r(hi=<:SS#eDt]AC-0B2#*j"i'cB#49$8qinr15/2b[oLp%,TDFO=&o`^1NZ!I5_2I^O`6+QeNH)-r(!la;Ah^2s1P9h&H/gaZJgNJ*emTgY=i`;%=;"H:%5H>Kc47N_C1]dW[i)Y5ClY%$6$8-KSu&J]k]1`@s2<M@dATuk0W"58Uj!Oa)nh]>nuu<katXkT(')>K=C5_Y1S81L8&ghXbLkkgha4b45--ph@pI>r.#V'L`oj)4GYU[SaZY(J*IkgfR'r.!gFdah[='rQg?mUeRVZcB!(qjia-aemp@/dC*l]b*+=9B>_'^CcD$5!t]8gA7lBEP2%5tlGG<T6'`*#@(0t'!/N[?\Wh.A6,30%c)Z]=V$b\K)KCC/bn>+i3E^O=kD(%F0rdPfKHMYWe;EG#rK0LYe^gsK<>X-_Roo'fO]o3KpOM2/=^b,s"W'^t_Gm0N++j`Te`q(#2\eb2M@1P(2kWA]70?HZ;Q%8+)*7X[CG:jj.Q3u6LsS>j%%q7S6c=_K*:Yl/O*F-PFNEWPX*SEFXr4]:^#pjOZuD#C<WoT*5k`LrI=48&28eTX<i%qR(^eQP==8NDEkC36T'='ClC_jnX"p6bGtM`Dii@W%6oHU!]r^q:<iS;>?S&Z:TYGTiMAd<>?mIYHct$C=@<6+!sN(%TV3c&qB"AE1>3J28P'A@iSI^55R!-V\GIqBeQ+'?elL>1RqndD0gj/nLT?Z`?FR.W)u@m.Fn-s#_VJHo["t]]dTtgZ'E6*/jR3ieagLdu88kd.9c.qEbZajJLIGXT"klT$!d)3*ocHg.[CMCV7PleSaNr+aJD[#8->jEo8_Y\GZHr8CU)-iTMc9L*^&=Ku`G1_RfeP>@,JS,>Ec[cW-uUOh/(ia0d:6NJ2dco4(k3m?)0+2:a=r;lrI@4YZ8oBZeQiXMroXplja+j4W!GoAe[gbn"'M[RZp[0$W+0f1IT/OUo*B"dR-78!J3`[0\U*p'YErgWF=KU2a"N:tm%+IW(@g&m(mr&ScLK'Q;"JI'5rcW,gMq]"1l`b=C*,;R4j7V-^UV4LE<_=UR1%jp:],_QfoGCh)7cD0mP`>G9SV-/m%`AGjIMc['cN[s>#;.+QN^[n=Iha"n58KZY:a*7UP_[@k9No3BtW8#X*MFBqqbXtc6'B^XpnkYa_ldh7Eb':45HAemD=<@JDj:ViIN>GKTmeS+u8]?i@eW()[h*VPW3qDP^0>^dKN3u_O_$nKi7bcA$H>/I,W15@iE\?-?5H#LYk)?5a5hAp$pY-b9=@\;CJGRhL%heLCVoc@=Z(WDETHX(VnelidrpnX@DaOC_\m/Q<.Xo+h'r[`0&"Hb:Y>3TVTJE__93,>j$7B>5"69?<.&*/OPo,'ss!+9gq=o~>endstream
+endobj
+344 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1970
+>>
+stream
+Gb"/jhfG8H&BE],=6rRABr@h!+:O<J0)]dVUq,3'IE@D!AO@[F-ZDu@g`M"rJJ0C?8Y$aR08_,8#-hNL[JS&Q#QZ#S`4i,Q_#"GNrBPm0R*:)6?3la)31:7<57C(:!m_ta/<7OkP_BG-q*<VS,<TJ#:s]8UY6SCl-a=bF(PgX*!A=c'O(iJ8-m[BXn&:iGgeGA_KRnoe=Qm!q-3YBZQ#\n1$huK+"dAC/H#<ElYUGM5n3W:+55'b/_P6*\JO"#c&hj)aJGHnqd!/i+OpMtlnk*RTj:.I;HsMY`KT%)pF+PV"!ua[O`8Kt%J]H[e4j\@4N,^f\@)qcCr?btNX/?3@Mf)=/^Y.).*9daRR'H@pOqR5t,6@cGW:4Sn(M3!1ARY<i]E57%+EMZ39aPAW'K#"lR9p9!Xaeq"ZL6-PV_Xu_9oRC%L='2rIg1,.'dXHH#6l1iG]=nh3D/fL.56G'##^jjkS]-Bd3[:4X$4+IdD--a&@WNg\;tqmLq7F-Bt"h1[]/)A]FhSZSJNQB1#0Rqk!O;]E78/OpPk$ZW8M+!CXBfm[SJ>_nEi*3_$cs65P5tZ,\.$**&@eIJqNI]`6+Qe%<8FC(#SlKFu"nm1P9k7H0[:L5SBT$lS'tH=\(9PBG(sL).BC2SK2a7eC9.@@5De4f^(VQKD/q@Xl4m`e&u!u8,JqR\t_=O,Tk:q#:.E>agZE!R-*Mb$R=K.89')l#R"XJ2:s=S!Q,<_)0_f>A!9])"6H:EkdaM!be!>]9Ol:*R2.c#$RoiZJc>S-^Y^,-hiZ%</r;$^rAO3"D;*ndDe`#Jn\Q]ifYkE4E0t;L@i(7=HXTGfn0/M"8EteO(!e5fM3hULfJ#\m"a"l"US12:Z'E^Y0YUQP5#suk_s)#L<meXQJZXZV,@R)!#^!Kr[VqYD,6"#tg*W=][=ENggtBVVN6qPeGI3\)lP2=_HlQm:^<:sUnJE<N\^e6]ie-+!)l4Rlr!m."+(E19D1?YSpDV>%PKe,*h)4#g?dRU5j2P6$)c8P%3q*?NRU<riQdVSPU$W_2$X#.:HrmiF&T&on?ND7&&t1bUhC7.cPhpq)%p<8m]N+2D*ul8@N=1f6mEu(dTk@u;9K*sA*7^WH28?V.A!&:op.2SiZ-ZamWG&G-ICW:V.4[P\U=j7o2UNLSN%6kJ5'qpI>*EQ[2]r:Ub/)?=D.C(1em#F7i_$XB_X2Ag,.OZ3:bM$&kZtA_0+4Ph;n2e&l33Jh=*ZBp3)?S`^Tgk'*Sh^k2Q%MY/`":+/)Bni\&2*LM')5$+luJ(Q<N*Qp6b8+f_/&2$E>j_9aqqS?d9/raDqdUr08Lr,MU4K$_uRi/YoOegEYC3LZ9[]/d6XL4DhUpYG&D@2`[tAqG-#C;4#m28T*HumubmQ0++l<oeqT6B:t7X(2ZA(MRG[BD6bk]0f\-+QE1"CqV0q3A#4t"'@L*qk*?<%b,LJ!c6+]sC=2Mt0AZ:Z#Iht:(6!S*[NKO3gE,>I\M+O9RWW<n(FHn@^+Oh+G8kMu6YIcV%2T)V3X'LLoF_X0:EA41gbsplcs+'.,e8K\S^7f3%K<<>]oRdRm-Xc.]Rkc']r[Y8<u=rGKU;12bt;9o5KI5Bp?"[2rb%n_i;=]]J(:$%D3#QW38Pa;^Q.3fO\3l/n!_5,ju[/Dg#>?\l0qS%_2c!Hn9+6V(qqhcHK"1N*6Ru1ZJY6+//Q3"6HXoK(1krq3dX2>4-(.u/Z-EhUfoStI\[i_F*ASTU$W_2o1:%X8E?eXIGVu/]WUjj9/t.r9^(<hlpt4C_t49.m6##4C9DO_nom86l9&IgG'J(QgDk.A.db1oEL#9"nb.gk)8*T@P,gFom1#*bV2+t?l"sC;?^-)!*2gnZCc-/\*S2:_2Wl"C/_`atC>0uaE+u1KWSg<)\u_2Zj]^JT&&f49gSicK[:65h.]aPl90J!?d6c*IbgF\_D=`5b].M`En3;qG!E&~>endstream
+endobj
+345 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1924
+>>
+stream
+Gb"/j9lo&I&;KZM'miO;A4hLT^Q4BnVsPa()JLOb>TaB:(mCU"6?\XYO7*.GCtUQ1.T91\=CVr+^jX&<mP>4WUu:9cg?6*MGWga^(DJ9MklPNh6C>K>2q&B/_ghpt&3o][1^-3K'P=#(,AGJ`nVe`'TEHfPN_&)@W?2156gUBFaTD'H\m#1>RC2LI['Pg3dr$RB5gWOGOsl'!"_SqCE]Y^"pb6soe#tHRBu^lTE>f'I6CPkWN[J9mMR+6*$E6nD8Gp.djSL31l+Y/Z-"'W;=$j`jCL5T8I4Z@8R`'Hq)2b't=;nLkJkp;T,_Bh(5We$\`QP4\#DU:m<=+lhH?qhJI!^2:b+AUnPpU1a>\fBN)(#"t$1JJ@)IGBk<Au2,/,P@hCZ'4@AK`]mf2/Z)"HBQ5M^ngfp!94:p0ATr<5pKC'B;^d1t_-nfBCMai[i+=^nARUT$>3Z5UelI"bojV+YSa2H7$N.kS!$Q<?L$/Z%)ssM!^!ep`:Y2Lq@g5H.NBigXS2lP$n=GGsU"!_ZofmLU&^f9n1dN2^WR?JfjkqL\BE1A'/3`T3m0i4VMl8h7,12_MI3)A&b0;n7'!lZ1;L/*k'd%nZ>T)-^4Bb1KZT([nagOBSJ<[*C_fJKa\WQAK`qO(c*c3m*M5tAgT>aRrLO-k+-^8p?Q=qW47M#4YPlF[/YuD4/tk"q.NMf+A)#p^2!:P?IZ/ZX`U`n_\lo,"qP.SbDfF97$n(5E@?,i2&R,LT`&<$Mi*jOTtXR%Bo6)W#6sZZrdT>Q@hY'3?/@>O#AQT4CYF$%*,84M-".d$3+=?BG[4tn_\FV^Ot`[COI2n'Ge1E@Ks6DS8hpeX)d2C/JF-*h=@fAF[POA5-FZV'@4+GeSC(AL(Z>0^f4t(>'"7[s5\KCkqmL8jipS>WD2t%N$6g+YSP@>C)"$4%7r.q7?=e3"a%L9oG6r16*[=!%[l_&tI*c)A_m6&'hbi_:O!<k>G!_klW^;jdTS[)sed?d"A&?8og&tDKi<c>qKj[hk^)Y`Ef7&Nk@FWIXh\BlRjP$(98#hIe`Z'%X/D3E=mH'C$++nEK`a`8H'N,%*cO5LcLUA5ARbq>Pi>VOsCNk@c0Hj$TpBEMr!u%(#8Hia:>Z6mHDjY>[/ZK#H_g'/d#&M*3I+co^NeaqoBA&Uf^%p1gQSD"hdnt@ipgSdc^*r=55oHb.iBcH"EQ+cW/,77ARMQ<8MT\"$Ar9r)dHOKo:jasS,9$<M3(st*[aVMKU/n#9E)GOIhW#fg*#*?"X6qQ9IG!)V-l63lQ<Y3_`#NfO<G'P"6>mn$*8V1F>F<cD]EPH[4!EJ+B;-reKF-3`l_5AB$/I]iH470O?h'<&HmK\uD2N?D*32&jCL0'/3OBfe2V)*C"f\QX:5H=bk'1$t?Tf`FWPjsh0?T%2gMR.H!q*aQg8s5Wcd8c'>!m@Xq$qBSE<d^@8:.DH+EZ/g#ncolbGDB':CWge4Xf%,<k7bq,JqKog[r&][4):-9iOG2L"*=VQE+fhQDP.056/0c[shhTX5?YX[nhV1/K<P"`F?)dL+_?4:4E2<r%U2*<q3:Na_S"e\l#>^?$!-%P)[AL_q`(q@p*^Za!+U&STG5IehL'D[>"/HTS0q[bD"r@Qh*Mbp:6I-U6S/e>K]%&3M[[U['7;co3LI$6DV:0;OC1(kN0!MKjIc3@VseuHi-J.U[67;13WeNY-5C)g\ZWSJmURS3PZXF35;q7UTplQ:ALrie1e&K>&M154&pYIrl50p[?oW&%(e:u\Q4"LG/lU:-QaA^*8(fK)i]/:2p.lpC$5$P!jcCIL$.r3b_s,qih0#de:25bEKW?eT5`W!0'8nF.e=1EYA88@m*-WC\0mm[5KXHOo:q("iscWGo%POj-#gq@WB&8];XsG&6.nR"?mmDhL<2.G(S//hUA~>endstream
+endobj
+346 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1970
+>>
+stream
+Gb"/j968iG&BF89'ROQ[A;1?j&eoV5Ro`fAE@jn5aTWks$8Glg.6Hhe_flDb[eudtGt-3cn\g#-E<!^_pZD]O;/l&\Rbr)pnEUeF]Ve"49Ws!C`/!Rp]UOq;l[.,#"*)@6%mqJ(EBaMqNXBiFJ7jfc#$SmolOi[B.!0k[To\"S+Hb:TCV(Md#*H1ZP-DEVLM8seh]lfmqh,2.c/I`rba&p-_jAIqR!s\PCGR#m#@ZNknS&]I3$-?n&#),h$=TtHOl32=G?s45E*Zs7QS9kp)l_dTd>4ktf<qPQkr?I=7jrsQ?t$jj*%jF6#_uXV5W<4<`9H?5"2iaY>m?MmHb)^=E.<3.cCDUkVIMI3c?6pfN0;5A"S`e+_RHqqbF6@\DN6QJ!`:Kl;oLUN-'XZGTL%1?l:+*Wr3POPFdMs7PQBf[@Nq'S5\o2jNue][L]Rtq$p+=EVjU3n8r6[t0neNji_3A9)34[C--SfY0"QZkO*H5:D9b*^@t]+nhrYLE/^H@]9f!o%m(YU-MgAmc^u"HOef2H&]B\gm-K8&05Bco6h/Co(.>Bif^4p+hP:VkEj2NA73Q20BN'X)oAG\JDo'NY$Ciu`:)P>e<-?W$pY^S=qSVA65#Zo_>N'qLu1/'57q6YPZ0[kX1%_YMMeqQY312^[54`U`SP=dZ(A8n\_,+;DZALtXjEc&Yl_Oh)0j'I+CG!@3H+,dn5Rmj'o2cVO!<1B*iXr-b]@aqKV+,%kuQkSN2_<Bj^bqQlL#Yn<$1sSeE1'&8ZR.*bY<QuM$`Jpt@1Lp4_s*rdjbi:UNqik^BN4Fr)^1foNZE(M;..IBM,8IQ?_^V<CN+<&Z8:7%]7fjTt\EZG-(#<^.:_I2qR%Qh(H#.U9B0N#kZ'E^]1q?]Q?WKLHit?PkX4Ue*a%jOcP;(h]"F=:ugG`D"&U-qmmaA:54HC./ltp3H#&+%!4$(QGol?7./l&f1hm:*hCk>)'[lV!"I+DL4,I@]EgB6j-8"<c6*KbKZ?bj9G,r/Ql62=P3mGqh&Z\,RNbG(D=.BW^OY#dqK3MI#-0J(g,f66>GcNh#Cg)BC8>l.VMl*W"2O,G*J>f(-act.2n^_N=bpJSQ@N@G=k]ekPQ[XtV3F_sc0MmetFboJ@gG[O1Q,GOS,Cp&K`GF:<dCN31JAOcN.S+JnsG.t[4L3OSK(2Ob&0)usSK/FUG[UqU5bpIP<F=sC>Al>N3"l%g'henX,$F],><n?a4L@L$f>F%icW[f[904YYJiFf+ZJ19S2i%3f0#94bch#+FZgl;ZMGJuei>f*,5OH#.`K+^otD<H57p-*6#:F_qDRAnp9KH!im5ePJ;<e@1&9BbLCKB8TKD#&8(I;,]rA.*e3j_Ze<nA_iaG1+XhHeFgQeKP[hb$-F(?E,3g7O;No/1oj4ic[g3)_Bp[ck^Rj7,/#]W[E%leQ$Ze^nmU-PAF4T#Mq)@9';3*?Ia+r6$0_=1COXM$b)\ck)BW32p\i'gG'cRkq54m36bE+Zqj.2p48<3h@WuRpOTm$;C7gU7H%K(ME7?HgWuc5E#*E)"3qjehH1KJ!U`6UHKMMQcs8KJaa*$CnR-+Ja_BSpZ7,><C@MG9)A5`BhE=%dr+%XSHp%eN^)G4tDP3M&&g-X)iK(:e";ZA=eY9"m@6lGGl;"ZSI30Fm1Y&A55R>%ejKb2?M5@JRn]it'IP=<&GAJFH`4N_."h[hZeKR6EX^:B?>@dKE[J"B8\Yu1611)!#)klX.&50AH&C%%=7&,;bgQ$O]Unp\G8iSJ(d2_lRDUrSbeRn2sT^>)*DFDI'9Yb^]A[2Hob,\4\Zk=-o(3)D\%_&HjLnhCl4!NZ:ar$&'1R0&,:T@W)-ekT3Q^])gp1rM7OYtX0NIV\(QhIsP9=:*_N=H_A@p?D_F!nPdiLk\"iCr#JFt7<\SSWrF^:'d,7jX%gI8jcTW#M^OBpiS$[emPPmL(lhr<K4f&B=~>endstream
+endobj
+347 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1879
+>>
+stream
+Gb"/jhfIL2&BE](/,#g1Znj+rA/Y8!f;@rk[*r8fXtP3#MuYfB7;\/F1\\rI>.+b5iD=h&]I91u^s[\nea=e8Ca]G]9AO*H"8jm)druKSK?4O884&\kK_*<9"<j[j"=+ff,*%4N-Gfo.q4M\:,9/F1(mGA>Y6T^c8K<CKiXi^L5S@E'eD6YqK>cFR8DMq>[qRphO;"uI66[V@jD]-Jo^+W]iUcgZ9YS@([@7[C;&jQu+\e[2k9CfY;6j5q&D%6qM&m%\+<[2nRi7KEK!E]^We<=Z8o<^[=u<$s']D&"."XWjEPt<J0&I1qJ04!+B$+P@Viq3X%%j"j)TKNQS5U'V%<#R`iEOWMKP'Ljm;XGIjIme!rWQE`b::\078f>]GH>&$/8dad`ALa"AuQ-AkSg#J.&`Yc2Z0lFdL_a#@U_\uc4s0\dJ`t#hR'"&_XP@6_ZMQpe3$)IH)271:hh0(fb-FmYWo^P"_]bYG6l1pO$[Xj-La/f(m!CZJ@'1`cujKULlAQf2i]8f0l17dqFS.cYShQ=KA&^sX5Ms0mEds"DGDW3i6,ma"trq1I5Gk9P#+t[E6K0k$(bt&-VhCIedu%[WW^TpGDf#pQPll1bWD`]!Lhq=4,8roc9d8B`KH>6cOjbmeCpV^Uh4a_j=]IR_t?)51#eI!<Ji:8T9hH/X,Vi0)h7>@N`shCZhau*qG?gkZE%\O:2MB8X3,CH=9oTcV*3q<,W`he;OB>#$d=o6m<\DQ>j%]o3Prn7_@U&,bS9OZE]GeY=dI5,20iXPJ)T:oB9RO=B5a9VN4Si9dFpKaBT73n<raOT`%a#%X#Wopm:#'"&7Q9,'KCq_m,FrQi@^SbJ>X[/QuG?GIcILK,ZmTND6,O^%`W]bm8GB#">4O9e&D/qr\YV1>/GDh$ad@6[dUdc,/K"#g8%rDBNu)i[l,rU,IIKd*KB09HFZ\L!)L!Whr_Y:GRb4C>W9)kI*u6nUU(,+ciWS(+[J9GNlSR_njU_7/n?E9naiDi>Ab+&N4+1KrMoYIXKo-&dH`+X0:0Wtf;r.d1[E0FagO:a6IAH7^fPAC,hmU08hAZp;;.h6]fddrPg^]1Ct%5Gho8<cVY-6C.u@IB#sV+_V]K^sDS*e<kUkP.>J5dG]ti]HZOo'!%6QZ=[MliI"Xdr_1t>L`5NJ1#:1s0P"W+6*O$<Daol0KpKEbdjp#]=3<Q7.VO2p3PP?oaIkMK?Ys*.?MQVRFNpmkBPdF[NX]"[RkQp3&dgB3K@hn[cW3_++b;Pu#sXXQEC4h,\?\"HS?\AQ_8e*qT=r*3Q><be"dZD_C04sSoK%S\03[+iOn!QGX^Oimg$XVLjF3dMQf(@KD`E(#%UaF.XpgFRaO,!uULIUZdJT9V3rC&"(?//J8(90#3b%V;D">T,2<@H%7$]^d@!k29e?]IQCUp1X&2gDt.4\'3m;0Ct3+k.TC"<5F8T^m'+m[GdcdS(Hp1/ab6&1%29DBUds;PUDnIg<N+HEGr,%6XQo8s'r^HQ0A%]enNC,Gf+9SoKKeYBn\BbapP"<><2>F:sZQ,i#;'de6(]\[3K_ZbiYd+/l\78E2cfFbJRX90"5N^A,H'f8R(XK?c%2hNV"$B4jnLD)G>BL2(!^MG1:m8A20A2'\7(^m.Rc#onRS"r]Z4J5K@Cj3P@DCWhRZ&Xf%Ydg[9.kq[9jJ(MlU;gF&CAi/K/qbHr6hLZrl[Hb#J][8^^K$EQt&"n$t*aumgi7p42CW6r[&C.C\F7;8&[CK85^;6Hqu)qFZQjbln3TL:k7mAdn&D)fe?lhV!QVXt%\VqUQ<US>4___q-e48pgLk??uIY_W1gCj1f,g*XP#Ec"['j2B/,(>pP!al^^R45&h']`s,h!!#%`_Z~>endstream
+endobj
+348 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1986
+>>
+stream
+Gb"/jhfIL2&BE](/,&'cBrAJ,jI_KMRVVAhRH=i4IHcYD$E0(=.N9clpW)162M"M1;DO5W;4)k7Btp_!l8'sF&Ff3UlK9]'GW1@9IhEk<`n*HW07`R?\/5`=5@B/`i;'W"-4+pML-Z/Y2CRk)&b_#Z$:_i(X+A=h2":\;OoUuLi2+Zsg#f[BKs\;WHV%up5:3K_!V=Z=(jKHliuH@I[+^IL%\H6E@Jh.cYA/Ph(aTar0-FuiUH]nJ@?fUu&4ilhl:(FN6JqMS:%gHaErdMf<l2X4YIN#eI4Z'C&k=qD'La\[1l5lc_Ntc808)2PTQ)t_E&]kNA,+cj;_\'umYlD<Y']cCmf)E@@l.]9g(?qL]Xr^tp_R=hDbHMad`Z`=Io>e?n6uJl(,o'(cjN]9KqV@a-(q@"ZPSu,O9R\0&InKQpe1[Ep6u!ur-sGmMWo[`LL9CNnq#KnUn0N7.>6BjF_;DY?#W`e?c0F;3NiRuJ;[k_N@o6K<)>YqRrR9#KX5T0ag[U`rr.P24$H.h^%M2^M3pjC&"b8$BqJCe.Cm7I%'_rj,P<c(5#,NWRE)$%O$aiFB@N\-C6(a'g*7B_:$]^<Mm<5h+%ogJG^up`Me\70TtbI4>8*E)_6<gG61aHp5%QF'YHOT9r#ps^4hkuF#9go/`DqriLkBQrFtIXg)WFW#]_sl<]*'C.]p`Z)J@hK5(HBTH'/2)IjIeJT1_#7hNGpMFf$814WD2QgRJYR>rT"VeF<SkE"7NbZ74('n$@Baoj?X8=+A(un^+$,E<9cE:Q6&dBOet*81r,XSk]YHQ6<T*^(YcH/?kWp#n-Bgo(a4dI?BtZ2O/5fr@cT;"9&pBK!D!./s6g2d'3jb/kb4eqfOerH=Jsd7=E=WW08LHW-dmh0ps:'o07kbFJq*jm,*LHde>DaoUM\Em0?(T&'+G&akdFD\"-6Po>GKkZZr:^H[R+;V'AUZFo6l)t2B)Rs7,@cATXFHsrOQ\fipS=,c'#DkNJ/EH>+<#A,IDqJ*0''lH?m32HlQm2^0UcH`$%B&Ene=1ie,X)#\$Z\6L=\Q1j47.*T,^p=`2gEW+iGORm&J%**g*BP_t?f%?s1b%ulr.'sFDc*7Z%ZNi*f8U4[2hii9F#;XIBA6GLnu=_2Y6hdf?D^#CX$e*e#jT?Td`?4sEKa^d+.I17qFJ/b93+jM8!BZ,UEBAjU]=1Fe4ET;(Bn6Ehqd0i.=MjRf_=#KifdVUi(9'Q"fbq!41c0ZCC\`O5jkNM'lG!+S_B)rgEY(/SWh9NR!kb9N^HGs&g$P0Rr_U$',0;9.mV58a"rX$-,$K[Z;R!(=8Ju#_^$NaD7Sao[1]k6nHa_q;i+`i9)9<VkVKe.;5oa8*"4t@o$Mq?<\c$0]'W'jM*C?+O?k]T)EK'nN@G88j=l1VsWAMJ%FB($19:\D<V%I%]l5d-.D.[5NY(W)b[Ru2n3Aa-?G34qBXD_19,hH9!![hIcg'46t*^*$^-Kpo<Q6ZYfl51:S$fNR-GFd!?]hH%0>(NX$OX\G53b:-,0.3-eVduJ'EfNGL7%+t$Z+7E*,66!'!CkEW&<U^?Zp\3O#7q:Z]Ho_8b,"ZB#_?!2]HcTMrb]b*:b==^?%P46e]t1F5f#8!Zc4u`WaA2glNT)Q5;jo\cSa`Y72Gu&._Su1*3o9=ZO&imM^%6URCKX>(aHgH"l:Zo=-fBs3/tA'BQ#%hdfuKr*>)=$s0(%cE??%m\CA3()Ys%ol1h&F%E[?TtD2r@kC.D3^`19=8@BN.J1=ZkQ_R9a9AfoST\>J54/sX;UfLNb.poBd>T=r[tEb1V@+*to\gVna`q[5pk6SMqnKrB'7F*'L8DQL0V93oY__NO;dggkK$F&?B=eF.<&(;D3p*9Yl/M`!&m7'O@T[A[K=<"m;0a0h\QQ?3mZJZII!H#nkiAS(LC/i0a)>JE+om)4\F6fQF4L<Wc">j5]%ZIBP*gih1um2*PBKDtrNM(5M~>endstream
+endobj
+349 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1957
+>>
+stream
+Gb"/jhfIL2&BE](/,%qJ6[OGqahJoNRC&NSA4cpT]];Ku6/:*.Pm&V-qr;T@RtU\n3H>:0PYA<sdXL<.mUoS=-K*l:0s>9lE'/fKNs#`Bi<4u*pb4g_dp^::I?/Ub3,[d]E=<>NJY.I_G"OPK`">j56#r??kW#0'`3'VGlsobmSA`l@]"8QIO;Rkt'0#XTA("&ipDgOTpeDC;Y^gUujNBhi^mDla(k.+r#;[GT#ij86a!XIBid:f"JhX`:+:r=B`!N%D"Kq'81g\cNhJa<fI).,!0ZA&e?.U8a+]4'IS=g/aJAral!kA0XE<<X;&(FPOA%\<5E+4'nhrQQeYJWN_KFbudG@pWN<uRbMIB>*(Ur7QD8:Z0iB)&gW$;ig_.*O&rc%)'PaKtFQPQ3Gu,q*k0Sh2p$`]n6f=a-j+9,Z/c9oMe,OD(cnpWhe6V?qt^#$pEOl)?@VRoA3+mm_\ni@NV0k87L(Ji(eckd1?eUUR1[JhD@!TUt1t5.1P3i+LQ5?J)Ue8=Pq.S$&V+3YD'mNUr=Q(cJV-53.\8Cq?\8Xu;DW'g1kA*U6_XbUJ5b\G?2:k8c4rcfU5_is,]s!L!iGKbrL>OHJ/Dl=$a=,1lVN@@`6jP(km\r89Co5nXS-j"Mk.#tcr8B]9\R$o&(+`X]Q*GH.F80Zgg[X?S^tm\Qk^d1WV7JlcaRGO]@?E(naeDG9a?"NaTYUIreOR5g@!\9GDZR,T;e*s`(nlAEKHH3%VKUj\+qNHMr=>>3tFZZ=9$<_hTm=&:?f=lI"IKtm-GgW#24F@nK;9o5:<Nmjk>JnhNl\Is_YLE=G\VRhOaLA!<5OV4qZqZK#/,dE3!-?rU3X@&O<#tBOR06EUP=+^S>4%(#l),32F#GpRe&on%YfNMl%jm/=9CUj*OVYe%lA*[_'VJ@dCXsp/hU?NB`!lp3<S!\jPg4/+Bg@A1U_BbA(QWfksZJJ,g_Eoi`)VZ[SkcKaZckZG[<:^2b[DPjY-tLH>!ko#@plGAoNKptUaa8rjd^pXVAM"@8)(sZ;MFj+T$T8C$mD7qmQYUJd&%4u:l04idV?/[_l06Q2:FkY#QA\FoZJ[%[i:&guQ<[1O@,gj.f?dh86he/2?b^MR0JhH+,Sn:Q__CMaR"YH?(b@2VMnO/@db;AP.s\j1#kt`9V0>nJ=YB-0;S=#(Q^%`Z"nC.d%YC>__uU/rg(&nH.pZWokAm@+Y.hDmoOZ/4l)%+dhJAtR0&Uose^%Qn'q+&`@;:'YkAk"39FJ<g^l>j@E:Y;Y[iH#tT9j%:G`Hj2=aC(Zh.Z`hi9`=5A%;5G";<?BlIJq?7AcB:E0bHI'@%+mb;Z'Io'MNlj%Mag?Hh?g97O]m6fm/5Q1n!2"bg&dfs[i0f3bprV59WWg@eL@X`^*LgUcds<-p'Z<seeTY]f_+p[ft@Z?"+\\#GQ_Q=dd'Q[>PJ?hF-Zb.AeO@)cul8aQNd2@Hsq_<+1gjdPAcEp\D=g+cN`b9[R]ODN)6MR66_h5al0IL`d15[Oi+UCXqc=(\^82Ie1R6BURYQJTo"(2jt,gZ-OoXkRMula?oTm=`TD.,gp4C*p8bm?MUh&arG#(#MI1p1IOR=cT!@k261;dgfr1in6j>8^;4oim)FN/I]+D+cT]A4mLd*msm)SisVGk5B/K'+t<b*dbG_I="*41fV[*oru`<(3JZLPcED+:c7I8La-kgkgUYEZ\mt2=<jFL2h_&3Y=fF0qP^ZZoQenu;6>GJ+^l<Mtqodh=]b1(3T*H5Ojm!TB?(gr89P%=SA+?&RLI1uj:Qk<RHc)H:nFdhke?s95f@Z8RE+Eai][)mQ1>+22KMh0^2Cn7WIj.K?`MZAm+.^5-@oLJVb;IJN2fOb<2QfKW?ooL^c:+]lS1p?=\F+f,52T1EmfIB\f'fG=J%q%I@("":WTj](<[jGrk*iTADO,0YGi%h]BS4UFn>e,U~>endstream
+endobj
+350 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1865
+>>
+stream
+Gb"/j>BALX'Z],,'^);SBkL9ofeW82057:Fag>:)m7Uf>&O_Uq;-ulBfakhfZ3fT$.%(*B'II3Q5(Dh\SDP;hL4Y0kC7g[ui8"Z65>n-_7T5r\$".iUB;6O<!h];k+Psoo;$;P-*lLn!HFZ0t`%qTPK0mHI9oo'U*-hRH.)=t"OOuLAVR[FL&6o#QM-BfO0l=N8p]PI(JFF+>)4Z*%l.o0In9OdI7R(;Q`qII9@2/Q'!ZHh8p4kHH_t[Ph6=^d>&j@&gSk"/DX_Wlu,Reh,O9N95Pt:Ra?&JoO%RM.VN$@Hf(56S?iTkcME4A1E1gLS8*)6^j0mmipV(hi'dsXj*e`k=?Hhu<U%a^.PCPODX-''&Qn/oFchj,b@,tW2j5H2R@7",B?b-.MeT]\(c$=/jqKnRnNB?`*q/e)bL6cR`r`(U5lescX*4m5o`LDV'LFSNhUZ(*8-'&ur##UL32WLBSp34;>D0Ft:3kRPmcieIOUF2m`+7[P:+`uL99a:E)cHPhnH[U5Wha/q'Y^t.WoD2mJI[qtIM'8]T&YJ%A1oBb-o-#a%FhE]qE-1f6BIUeNDSDo33`h6+HY\ft6H./lZ*]9qV=eDcBPBo,C=?Dp$Vr8FK`gO7F,I,?WL5En/J=>($1G*G1d/0VN-8[KIED+43P7'?1RnctXA7!*m6KaV[0XH8hj+6coQ/.hZccFPTZDV86:R"&.9DSR/RlnRp@f]C7RcWbNM"r#h@UT+l%ZX57nK#4272OKRVb0=Mb%k+D3#bk'jQ)_8r.Y/82J2KpUiDmIN8!-WY\anfN"'tgQNJO"k[TEXHM]Z]["ff`A;Ebf;".%I,9'Hr/2+op6p;nO#)A0roU=*l-ZKn5C5aa(-GAA1WI7nV&WS[&a=Msm4V8VBmp<jh^DCR#4`B49D+)#oKqugPPArc6Iam)iS.*gE,Bku1+7!Jr^H<KNA%mYIQ.SK]7W*KhX8&d**l_eb19W"We#t`RO?4NErY9-!5ud=gZi$JD>8ZJ9W;=I[jeld=:1e3f-.`Sk1Zkn1#KYX[cBOhaH"Bf"daXu8Tl#"\"hYLcSu^b/LphLG48u(l+tB3*P\ahDma&?JmfRB<YjtT";_jmdi?i[j.]$Fmk.(*dY'HQa)\65rG!rLHf@aE\f_J<g,n!jV#DHC1WqY%%omNo65NN9;bflf/<p6%<$FI>f<N/YQauRW39KCB[X#EdZol`aG?"fA<gC0E\lBeV^%SAbO42Ujpga272b_>#d\?hPA(K+L6oSop2*8b)<2qhER"bZTAD\%HK[gS8$=a&`]I(Sb/9J&4a96@<mQ'Af@\.loiX@f_5HG>Hi]gDlLhbU!8Y<-g,l)N&LMI28#c-+6UGIrD8-c:6o:[`7C5KHOZPCnIs[+bK#B'$^ffL@X;T=%;A\57>1#j_i01P#WDFqNAf"qGFhX"`qk1,qoq=fFehGDG#1h(H;MW&4^5;WagUe,n_Pe/Zt]L7043:8e?!<]_MT0!Q*L[k/V3j!/?Y&%_#QenK2R,7@GFI_0PiF%G%+Bms]c`aW#I*Hf,,4RR^GoaFKj")i=Tn77IH5,u!9o1ER<"dRF"$8QbiLusN%1XT=[=eme?MR4U7:qP).b^X'+EisG*:o'pg\NeiE]:XN+6t[-`-@aSjFj!NMZkj<+kcW;q=/-dW[oQ2#k*JAVZ&j_ERMG6<)hn#P[#qkP6<(8dA]-pt[CZO[1$o-<o/`p/)S.EcaS4?oEsM)!_V<1!jHZ)Q(2h6o#CWkb#Q(1L\PRPXdm@\D'k6/6k7G*ai[F7HgMi/nif8l*]W<nf\6Wg6*#<EAT.!XMaZP\[rH?hOD#[JW/4:Wp[jl03olGA!GhX6WFB-.CmsiB3rJg~>endstream
+endobj
+351 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1955
+>>
+stream
+Gb"/j>BALX'Z],,'^)=KZnk`6an"P5F6i0f3m@k@qpH9j"K;!q[RlpYrU>.ZRtOLF;DQ5(-qlmVFT0_9d>oM'.(FMsk!$le:*sq-6%LeYb^k)YK?5F0:I`:q39:/P2fM2&!hi;4&QFZcDVFs>,)@(8''AXQKY(+FH9ae-X%,E!Y5`Td,JYEWp0A;Sp@2_JFiEADD$c7/+!qjF>nuV[=Cpu9r!k&\@Ii:ILC6?=3=q6@^5Mq%N!_e\=.g+>Ko#M""bc1ScGE;8a\p!c88i#BVf<BJ`F;c(HB\UtN]BE<oDo>J('qGL0HpR9d0"6P]b#s_!HnkngLhsoJ$qA8`.)IW4u:Gj*,0q8oN6HFaXDH$8:Z0j8pjgCXJe]gAEK.(/g8O/+BA4rBF6.[R6uV08_&fRgA#<u0:OTeE%68_2T4U/"<),Vs$$;Z%+>L""+q*@fWaE<fBoQ*2]X?3lbW6a'HE+%C6^WV.SeqSS>mNn_Kijl\WiB%(LXgn+*7DKKVL1jiKna-4oPh-O*^0um(V(iV@lnUCXZ6li$SsZW@DmO"kL_NA1m_q`CUc&'CL3L(/3Y%N%j[DAH>A(ih!,aMEV?Nrjj,23b):-gA2u[N*t%==*M'/7'#8#DHEOFG>4\B=Mj7qOH88>I.jAn\?nCb0hcSXj%SH?]@CcZFgi>A[0tbI5'[E"lC.Ci\e'7.)SUdo/6[gk8@*s-jKZe$qU*@:oK,,F&\rKRBC5&0L@m'`E-*;a%*mor`EoShn!ttF(3H!L;=oeoIB7^!2li>rNi/iCb[/k43*"2?\0Xg2'Af;,gAHRG/pPA>7V8=lNtW(>Ckt!fis!Hr'W4YqFB2p-Doa^tp_3\BDC&&NOje<*;:AGaXBj4Aep(8;3De`2*!6jO`3IL!%g*Us()"rg^kkiS'1Q71YCfuu4!bJnKS_GU(h`/(JpE#a@r%j]B`+OQ4fj?n^o;0^etKggr)sR(?G][V([,ZuDr4N27GJ?+Ug7h`ST-r?f\+3.kbJ)HmV"1:f#u:;EcJ%[q/5F9M/@'Bjjn91`FlmW*5?m9j4Dbh=CBO"34,4lkpjm8A<hP[cel^7BM4;m1OVjl.GFWlos9'+?_s-4-'`4EJtLt8&^N#]/D51o)u?:aCa-5XgB#FiYuk&AeX2b+8Lau,>)(2-PAD&l#LqBDe4h7T)O`/$lZl?=Ytc2hfdtg"-CY9eF#LjOcLu"YD;UY]1"OZ8gm0O'>iE]hUY1_<MRH\]45"f9I@tG)EHZa#nI0"Z?;toF>GPDtm>a$[S#gmt:"BfAXBj!r<k83ql#WAlK-IF$909W;V"XntlT"pAEXBh:AdP<ZgfB]IBX;C,)/W^4S#pt-c.3A\[]reSV@kkFCC)>1)ts+/au]2rftDdJp3icTiY9j08E32)X(8^\9e>'Ngg1"?Y<QrHD;KG,\.pKI'84QUf+)O0G,?numfRA>=oB!eQ3rebN"aas=e]&nm7]>XoqlM0fQ?MR(I[it[tIXX/K=J*BWJ5>euu`QIHW-(;u+>$A[5FE=F33^6uSg>d:'fPi8(q-$<<M;p2=B@(-*/5WZmRJrQ>`.Z%-$q+7S2o0p?RA(;jJ>R%gTZDH#?rKJ+hNI3nLG%XhZM7:+`^Z:49N#\JP4LLA+g$a[aelp@P.XPce'pmEF`r>'?i[%5lCgAAuEO0:2k_eb*HiF_'BHFP]\#<*RT9^R@L]DCOrE9l:Y7@F_1[SkA?Um3"p84k+"B8n]\<r*`?V4+77c;^Q)DotP[:"^"I[>@(:S#Nu"71PY6+8-[oZ_?f_gXPufj0-5<T<I3*:;H_(BD0Q?L"e-9`d:XmaC]5nAD=$1q)p7Qmitl5W<X_R;*&\t%[sNY=Aq(YqF=m]5$*YB'jIV>W4`[U@;j$FfmN1Kq:`-;d^`QHUNT_XmD'[g`i,5-IF([T6`"BklJZ3dVWE`Y@a/BL-a3fMrrC`$)J/~>endstream
+endobj
+352 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1912
+>>
+stream
+Gb"/j92jk1&BF88'ReX`AniQlQX_,(%'qg0+PE4,>_JjT%t7qK9Mr2>ITs)u14[8sRNr\85nmPg^YJ,R\K*aG4T)&LJ!:#)9]>ae"j146#:bO[kpJH]%YuJljWbo)aHJmiKJFuC-l7N[NqID1-tH.hR(jLMmY-3>J-5qcLHn1DIS=r9^`^#X4VG-qEAMI0+uhkm;@r*11kh^24Lps".=@]!L?T59^9R:gdLU^87*s<TE'BF^l%^bm$@u%[M>p[CH62#r=P&pHBpdu'XY+%`C6dk<FY,'k*Vjs(+c;p'=Q$NJKT!SM7)Dal5Vls`i8LJ^'>rGa>lp5i4.K7/h[aY^g#:6ukm5P$A*n7^UZA*n!WE6Nn8/o<Gt"Gi[9IBGJBI:&M6gurF3"`[6&i$=i`ckWp!9(6em0bE.=EPp`7.*Uo@CM1%";Jj(1MMrcje8Bmd``Kh/tOKj&.O>S;"OJ1e(PG6^5Lm3_a(5oG7$pcpLT#`X2AC[O%-IN=j2/[OiY;>?og`[crtfp@$#kYVh.Eltp'led+1IY.J=?6q.?(HYnQ#^Lu^D_%h?E"52TCS]r5#)tQQjMQq]RK^Q^0D,\NuRqW>:eRXeTI<**Je?_`ag3(,R)Xa7A#(^n6#u-",bW-FGC0l<^6GKoq=8C-8e>+u?42Y[R-VT7mAQ<!cGmPk'Wn*L*r0Oh.@A?kEA%k1$8KV[g=7pSLkK!6fH[*(mS)I7"!>NGJ4)R8j>[j:`N+^PGJ]Ts``>hW:9]:A$jDe3fP,k"m"&5AS_?^#9Yq`FP-F)=lB%0T+6u1PaTf(NS>R$DuT4;D@_K.gp["jd%X9aUn'KGVs@,n0pi@^Qn^f(kT9\:ITQZ:RcP"ZF%N-.Ub_;nq%IHcE@`3jGm\l`=c^IH+F8_EG]J_&E$p2/DN`*6/rRWL?B`[0S0CD0Xo8,EhPd9(jrQeJh;n5((qD=1Vb9lOe,]!8BsPMS?M!apTCAXedAD(fJT;i0;+mlebg#ma$7Pnob<$[;i),mY?(mZh_U3RM,_bu?W/mV\?3<HC4I9:\,F3NR(Y2;V]GH,0i'^I0BW3U3e'PhQW6bpPK^a=m-GNiG<PS7cu4-^^nUnO/lsZP@<3Y-&oDMdnaCIM@0Zh4&&#f$^H+`eQ'$hrWrq<R00]GHWQh2tFlPkN-nRjU\fH<7rJCX0C^s4+1biDtcCM!+t'[I#`!6QO`3hkZ\-p9%aGk8UZB6_kHUKG,reY*t"!I,C_*u:0"jOouj$'@h#IKM@PNu6]l\C:_Y-U0-1[^Ddt>A8tFM;9&OP(hs.mAEOI2YS8FMJ"Ve^WBq7LhBK^]N]i_60as#.UEGHg,^UHrPbghOT7,h=6p$aNQH(V$'A^Ps`(`DuJeb9D;>8u1?"pM0`10LIc24kRC[Q1d5cSj?Ymd\)XHO"*9q,5J3]Vs(B),5_O'lGr\q7Y5DMlmKCcJH<iGnMd5C.C-O[B6FJ8%fWVkH88U+Or(sVJq8+@W7(p>.3nscXg8JQ"JkNp>MjJ9Z:V(=hC.<%V[R])Xf9-=Qg+"6[gXHL<k.9pX_tuq(s]BVAhrGj)">I6_.+>oFPZte$gL#hCLOs!j'lYa"k]@X]`YqhXZU3=.UFoAKOp8WXRb'aefH\>la9G.M(^3Q$6*$I4a_D<=.YYeJdrR1H+uTo?<oQTl#.`M>f9T$\-VmJtH&OS?&SpQHcbKB4W.Kl8LpJ8:BVkI))qZjG>M6/Ie)s._6]#;sa7J.%U:?1@iV;opsn)c-*+.7X3;h[hW.A-B?'*`ETYcC"LC7>[n#J_niH:@?"9\0&n4[n+I*tU6.s]4=e1)bNNpHa"T-Kn]X/Fk4rT_Un5KY$h-W"+5TJiF?:W$^7Lqa'kb)6mh7+I2p8^%F]PtY^PHfNL,a;eEtI+*96KtT)@ZTI7f5]9~>endstream
+endobj
+353 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1869
+>>
+stream
+Gb"/j9lo&I&;KZM'miO;A;2c=&/9ER,taAuj.r]OBeI-8'I5El=%Pq(cfE,j!E-@BLN;Gn8Jg#h'9^.Z(CTTi"\DY^nXJ7i8Ik6-$KiKZ:^5B/d!u6Q]mr>E"6'QUnf\Qok_ghj6CA*gW#(*'Sf?Z,_jE`l@/b=7\0"4i!$hoUHOM1^k0%kU!XrORh^;96+5`rd.fh#29*@Y90[8Qm>\:I/1l&gnDd`DNVJiS$>_GtqJHRe>IIp#`.`1sUJO3l]@M1j>&ACq"MmbL?9*LM7>H8Z3;Tl.HChqFKdU@rAN_oph^nQo""^HKr&-4^,J_&p*_VsR+No@6kQ,2N_:ZmsqpSYL(m-2iVFGOPQ=F3BV.!Ze'J0+b+^2261Ce.Idp)P_8OMre^C%33c$"]q?ckr3&>q9T)I(&%?*RXqc11Xie9J.$ng?S[pi.5*@*9-P)7>Dtt\lO_'V;ucrE![g/Ot<^h1'7>_8=5H=I11m=SFA5J[U90o@taBVCC<\E((Y4_gC218qesd?EG#\!f\7COc3Q?,9m>K^8;mn)lusK(hnJb4JL,\l$cV%h.V;KS`Ztin`<jSD_3j.g]0*@h`[q^*D6!@h-MN]qI@D+US':c&i<M3ZRC3.N$GCFTR#k6n]WgYN=s:/m<JF!Z#Lj_\bf::Fi,&$s"<Wks2=MM2Q"b&/eN`j-5^D#)m`t,G*c6t9p$M+YdApDRSgQtdc&JaTlkX4n>q>u59;WXi-3iK3'4PXLMrBXhHAOeT(p1/?MZm(cQFYGDDTGWGs2(CH40s-Ed^RD.7]i:p\TU]Z[O1m?.tEd*jL@$$XZ6k!mGZJ^,"*[^-u]gIa=a9+%<%Q==n.`p38JbC@D"SSS0V3%W%k_8RLCP;9&3o#6j1eO/$iCFgBlMIpid@Zqjfublf[tYf2fiI;FoMh1RZ5diDF5$F"p)[O2B:JI]Smj]^g'@XnaUFXi)hQZuVXW42mg]lf"l1#j-=6Hhrkt%W3qR><fQB&tD*[n;FYMn4mT$82/AN$9%h:WP%P0V4V462psX2rU@]K7Xis^dp+'E)_H29((P-jCbGcm+F:ld];k7O@%3*F0IdH9QPkaJZI[&Jg0/&@fr9@TMX==CSN)ik'W#tXF'RIlCOU3<-:1e<S[)X%Z7a@eCp^4olF7"%-g`3AV%9jB/K5.?R:Qi_Uj<@510`k_U!99JDmThu>I"S#9"'rO7CCFjD[fsmRj7AiNH!oh4*2!![BH4Bn2oiF?*4sdC8KmHZ_?3A3jLcOm8#Xo>I4ROpl9/$(+6R-:Vs`EiS7a#l-1b=ql%Z7OuejG]S8([SM'9j'<hl<mXA19XVa%03fC/to]B<B/nY[4VZZJ0>"S+@dQ0\GhkuI"7<70]F",_@DUROS<T]nm<PSbiTrF?XFsqM^hB0];$i<cEUS22Pl.G]4<\U]"Ds0%WffCV4E`m\<o?rC:gLjM6;O98bOQL+koGuO'fCn>FO(^2u!`u_!Z=Y%O?s9Ire>eg)8)'bQ4T.q<LS3D3Cf7kORFc"f&SDGOG=U6smKJ:(]p0Op?0-5r_Yot(RqAX37g7ZD3RL4`bWM-MQ#j-#(J>5'Zq7IM/Ch3>BF\^&"-(:5,o[N#A38lt.c#6s:Bacn<LFlBD!S7bHKd).E0/+?hLC5k<R56Ng?Pf&H'Pqoc(XPOW!iH;2rE/'-Ucd;-"h1rP4)t%m)P&t..,R28fn+P>IVZ>;_,18S\+(T*8+X`2SZ_WUS03t:.Vh:jXS$"Md<eA%mdVWaElOEmuX[k=I>SqOP$&?Nb+5^HaAZghC8utfWjdb//sqc&HiNRq>]WsOnYT8&]^H@=$7dW#d.IU>;)+urEn01.d*g&*8DOh?2up1?`:g!J)4o:f)~>endstream
+endobj
+354 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1996
+>>
+stream
+Gb"/k9lo&I&;KZM'mjZ78OkT<nFPkN[POIbigOV1nHC*[R0gVpOA=<iO7*.G/CcWn.hbbrfOKc4J:/5l`T%+jRt-LU6pJ[O^tT`s?4\4nAd]`AjhU4GSBiOJm4cD)Y\`3?K)dGh>pk;O3@T&W%t"'pKj):Oc,=(7(t]=#JV237YX55$<-'WV+k64&/*QB\C!sWQ0FMa.NobR@bMhN^bZ7T0_oLsubW`l0NV8.<?JmQB*"mQUqVtK5HJsJXJNtZ;QM4@o[;CiL?s@,a-QjnFHVq\!]]!#(gt!YZ+hi_A%T*@=5Qd)D/mMaY//Q$0"?Mm?!/Ha?3eku:Wsk_hG%\ba2VkuH])-\AlD#4Seq$Xq@Qb2H^qTja^6E><8h2N8IAYs<n6uQ(>'u(%KX)3o1`2Z4]b_f6I(&%?*E!-?d\H5r(gdWCFK>5(ao?"@KU<gJFSNkA,o`6::\;<!9Hd(=DE+ELj<C^;"4ok?AW_dP_Q>jFE'u\F1fakE+!Q)[a8a8,F8Hl_<tB")*+:h;4UH"5D[k]%r-gI6c_h9Uq.21E.E7=m1P'<bDBR6Q$E)Oqp,KP2`phV?Y:aB%o,Kl9WJfr<7@DaL]+F^,bgB/XTkF2RIbg'=]eMXbf'4^MNSpMDDJgs<Yu8EImCkm\BPX5L\:^80:eZ<M7InB8>j[PE0QV6uj5f3-qZX1bQ!70LlINVMA$X3K@d>=8qlJQU%H"t#GIrB.Tu%,Tq4s]Oe?aoDm.GN[8O6@:k?UFHL=M^dE,q.Sa[/^G<7QRJK6)b&r*FFlSY"4SO#9^EdjAdSWcY.Z[k>X6U(4'*7Fu&C!m4cl2d\ug_\spe\9mGsUc;MlK$81fJfahph!t9KXK?.5p]H"0mDP*i37Pj%'()kpfD\V0<j]'@!f5r_$r[i8`,Ks7%oX:l(0HSaJ6<p"F<^B<]M<+)n\bbh.<Lkag_a=@EiEO\ASc3?SjXNorb3rp\N%-jbW=Fd(LX.L5=k##%g'GHkO%T4SVXtU&9mG7XYf0D/Egs1>4g2@UMt=@+7&$7?.h3ec@!D%[DX[YFE6]]^#HBGHB)C)f+[N8>LYTN4!*1ghcOi_[CI->Cj0'->4!"f"PPJR.qQj285`UL0CuP%OE=Q:^DjHrZL(FGN5YeMgq].k7jQjD(@/E9=MjksO'CK!3Zf)Uiqp#Wnb/Kmg@@^K(kQ^I^9!$QYfOtjn-Wf$n/@`P(PZg^DL9jWo`se@Q^PGPLiePeB@er,eL=jc>IQK%,nEkXIGe!u@kLuW2(Rl1J>OkR__f9<rL(Y0.lJb3(#'=gVQZu5.j[B\P+&j_)U!-pUo6FVQ.)ZHgI7[QW_A)I`5:mV<,Gr-V5h&62J&@Dh#<+NK#+b;ED5&/bd-VWRS92k)Du(0;'j/j+",-9?D@@r-/;WCVhlf?2-jc:S%@.k1NYEpgRiB/DujU@!q(kd]B0A:\E:cOHdZ*^:@"I^LS3AYmk.B8H?[cmc7j1#V.^:b%+4bq)@Hf92<L?Rm?et>A6_#(27uK&`F;fFc':+dC>Y.;`/aKM]r9O%:u%.)^(BSY;KO3C)c?dJ*rqfm=L'Xif[%*$0<31+;&<%]GqLA4'g,\XBe4c%c$7`N#0=genp.)>bU+p-j*mAbWVUY5lleWAK@s8TjdaZG/8\FTgMN5F7S#mT6fG^-9Kdl]_NY7ZC<*+'eZ-1?bH_nrJFd[oqEFoW.b2OoWH`t)#J0;)_P/Z(W62J\%-@u\IK4GR%UkA#VKb0Hk!!acU$g&)Y'<'P"deu;dqZAc+j.<n_Wjk_9OrcNLulcuc#@N<Xq?/fHm?k"Db&pCZ=kPS0,EdFaAc*\;mBR&&>`Q0V+%(qYFb>:K=J&Pc)!]n[3)%[)m%UW;lh#28t4Z>M?GP)SuFr"rcYj4g?9^<p2)h7b=#n$Ep^#Gi(M8doenC?Y\(,J2qESs>0Sdug/7m;+*X?H/*`o#lt_KjcPL7:!c.8T5M0*/>X4]&k.7!Ig'`uHPQ(VB:+LM~>endstream
+endobj
+355 0 obj
+<<
+/Filter [ /ASCII85Decode /FlateDecode ] /Length 1021
+>>
+stream
+Gb"/%9i'M/&A@sBbQXt7@bG[HO/6SA<L"t,Un3QcK>AWQ0s-Q6j84#5:.tr#*84^!&[1SipL`=.RimOI=+nno+Zc%?nU!Pgdek$jbr![0dCX\@\5kqm`-BF!Q4XeYBLf*ldY;"bN7:F&Q1XGt@>_[UCLW]$\0L.#s7,'!5`uNMS7N9SO$tTg.g@Q"RB\Sekgek!^7/+3S^(Qjr/0WlTcRc]Aed$PSE6]i87AUS0F5f`K4FTuJ`3+JR8#^(QR0nfqKocI[s=Uth."MQZk04USfL@pJ]t2h%=S&60LJ't^eh>^YapMF(p:b^9s[&Y=+]+BqJ[8!J%O/D0Rg3d81=_s'p@c.d1WqSWp/*9kaM":c^0m*G>qZ22>%u4bHdrcdaZhAP1DpkM(V^u23-*W1EjpX,tTs#^IdjcY]OOh1gP.1qoUr@?elt4kN/F)(&<,\U:Z;SMRltX1kU%O,rl5kPVQ,kAMr%.)Ea3W.N?uoMRZPFKSH=7.H8B1jWYNWM"[/rJmc^@E:+kVc[sb2"q7+de5Xd@I6FAa3@NX?#BdpKg'I<PbQPJ\fk@'En&mc/C2aaqRV^;Qn6d.PcZq#Z?3l<5#_Feo%4^<sl*Tq]$PV6M,;t";^2'0F`Y$ifq#iKq\#VE*b-n4sMi78h#g_q0("1OOq4upBE/IrHj)oiu;0BqXLAU1^Po&%`s!YS!Bh;##*A_ThAl9LK-2$7ah96ha4JRk!JWo#MgH+f(Y%;tT5N;.s8RJCPf[8MQKK=Oj`arhcflQ+U&klM`c@k-k[KSd8/nRPlZkfI)'j9aqfYV,Wqh>p2TdN0j5qaP),U5/[*c(s2P1c-M?:H,NE4,knf]uK9%30a_&]-I0&SjU[#TZJ2KV97Lk)H5H;d%%l'eSp!j;<u&q3k\ANi`f\dJJLSWSoPXNOb0kY?GRc#$@`ESSd)nbdRO1gJ7;sr-b0g0]6Noe!jA-:ZpINUdt4oUjlmSSM'f>a_OFSQhe52GPn0f?O#9.@!hl\;qlfU./=#b6_6%~>endstream
 endobj
 xref
-0 225
+0 356
 0000000000 65535 f 
 0000000061 00000 n 
-0000000113 00000 n 
-0000000220 00000 n 
-0000000332 00000 n 
-0000000508 00000 n 
-0000000684 00000 n 
-0000000861 00000 n 
-0000001042 00000 n 
-0000001216 00000 n 
-0000001397 00000 n 
-0000001579 00000 n 
-0000001759 00000 n 
-0000001944 00000 n 
-0000002129 00000 n 
-0000002308 00000 n 
-0000002482 00000 n 
-0000002659 00000 n 
-0000002957 00000 n 
-0000003136 00000 n 
-0000003311 00000 n 
-0000003487 00000 n 
-0000003668 00000 n 
+0000000125 00000 n 
+0000000232 00000 n 
+0000000344 00000 n 
+0000000520 00000 n 
+0000000696 00000 n 
+0000000873 00000 n 
+0000001053 00000 n 
+0000001227 00000 n 
+0000001407 00000 n 
+0000001588 00000 n 
+0000001767 00000 n 
+0000001951 00000 n 
+0000002135 00000 n 
+0000002313 00000 n 
+0000002486 00000 n 
+0000002662 00000 n 
+0000002960 00000 n 
+0000003139 00000 n 
+0000003313 00000 n 
+0000003489 00000 n 
+0000003669 00000 n 
 0000003843 00000 n 
-0000004032 00000 n 
-0000004214 00000 n 
-0000004403 00000 n 
-0000004589 00000 n 
+0000004031 00000 n 
+0000004212 00000 n 
+0000004400 00000 n 
+0000004586 00000 n 
 0000004768 00000 n 
-0000004944 00000 n 
-0000005127 00000 n 
-0000005317 00000 n 
-0000005500 00000 n 
-0000005677 00000 n 
-0000005995 00000 n 
-0000006179 00000 n 
-0000006356 00000 n 
-0000006541 00000 n 
-0000006730 00000 n 
-0000006913 00000 n 
-0000007088 00000 n 
-0000007271 00000 n 
-0000007446 00000 n 
-0000007524 00000 n 
-0000007706 00000 n 
-0000007887 00000 n 
-0000008066 00000 n 
-0000008248 00000 n 
-0000008434 00000 n 
-0000008622 00000 n 
-0000008808 00000 n 
-0000009126 00000 n 
-0000009306 00000 n 
-0000009489 00000 n 
-0000009681 00000 n 
-0000009857 00000 n 
-0000010035 00000 n 
-0000010212 00000 n 
-0000010387 00000 n 
-0000010575 00000 n 
-0000010765 00000 n 
-0000010945 00000 n 
-0000011136 00000 n 
-0000011319 00000 n 
-0000011502 00000 n 
-0000011687 00000 n 
-0000011876 00000 n 
-0000012194 00000 n 
-0000012375 00000 n 
-0000012549 00000 n 
-0000012734 00000 n 
-0000012915 00000 n 
-0000013096 00000 n 
-0000013276 00000 n 
-0000013455 00000 n 
-0000013638 00000 n 
-0000013817 00000 n 
-0000014007 00000 n 
-0000014185 00000 n 
-0000014364 00000 n 
-0000014550 00000 n 
-0000014730 00000 n 
-0000014910 00000 n 
-0000015228 00000 n 
-0000015412 00000 n 
-0000015599 00000 n 
-0000015779 00000 n 
-0000015964 00000 n 
-0000016143 00000 n 
-0000016326 00000 n 
-0000016516 00000 n 
-0000016704 00000 n 
+0000004942 00000 n 
+0000005124 00000 n 
+0000005313 00000 n 
+0000005494 00000 n 
+0000005805 00000 n 
+0000005983 00000 n 
+0000006166 00000 n 
+0000006343 00000 n 
+0000006527 00000 n 
+0000006716 00000 n 
+0000006899 00000 n 
+0000007073 00000 n 
+0000007255 00000 n 
+0000007430 00000 n 
+0000007508 00000 n 
+0000007687 00000 n 
+0000007867 00000 n 
+0000008048 00000 n 
+0000008233 00000 n 
+0000008419 00000 n 
+0000008596 00000 n 
+0000008914 00000 n 
+0000009096 00000 n 
+0000009287 00000 n 
+0000009463 00000 n 
+0000009641 00000 n 
+0000009818 00000 n 
+0000009992 00000 n 
+0000010179 00000 n 
+0000010368 00000 n 
+0000010547 00000 n 
+0000010737 00000 n 
+0000010919 00000 n 
+0000011099 00000 n 
+0000011283 00000 n 
+0000011472 00000 n 
+0000011783 00000 n 
+0000011964 00000 n 
+0000012148 00000 n 
+0000012332 00000 n 
+0000012516 00000 n 
+0000012697 00000 n 
+0000012880 00000 n 
+0000013064 00000 n 
+0000013238 00000 n 
+0000013422 00000 n 
+0000013611 00000 n 
+0000013795 00000 n 
+0000013984 00000 n 
+0000014174 00000 n 
+0000014357 00000 n 
+0000014668 00000 n 
+0000014855 00000 n 
+0000015040 00000 n 
+0000015226 00000 n 
+0000015413 00000 n 
+0000015598 00000 n 
+0000015788 00000 n 
+0000015979 00000 n 
+0000016164 00000 n 
+0000016352 00000 n 
+0000016541 00000 n 
+0000016721 00000 n 
 0000016893 00000 n 
-0000017078 00000 n 
-0000017270 00000 n 
-0000017458 00000 n 
-0000017640 00000 n 
-0000017815 00000 n 
-0000017993 00000 n 
-0000018311 00000 n 
-0000018502 00000 n 
-0000018685 00000 n 
-0000018876 00000 n 
-0000019061 00000 n 
-0000019236 00000 n 
-0000019426 00000 n 
-0000019617 00000 n 
-0000019800 00000 n 
-0000019977 00000 n 
-0000020155 00000 n 
-0000020340 00000 n 
-0000020517 00000 n 
-0000020701 00000 n 
-0000020875 00000 n 
-0000021200 00000 n 
-0000021385 00000 n 
-0000021567 00000 n 
-0000021755 00000 n 
-0000021940 00000 n 
-0000022120 00000 n 
-0000022305 00000 n 
-0000022487 00000 n 
-0000022670 00000 n 
-0000022856 00000 n 
-0000023048 00000 n 
-0000023232 00000 n 
-0000023423 00000 n 
-0000023607 00000 n 
-0000023791 00000 n 
-0000024117 00000 n 
-0000024308 00000 n 
-0000024494 00000 n 
-0000024685 00000 n 
-0000024877 00000 n 
-0000025064 00000 n 
-0000025253 00000 n 
-0000025440 00000 n 
-0000025630 00000 n 
-0000025817 00000 n 
-0000025999 00000 n 
-0000026179 00000 n 
-0000026367 00000 n 
-0000026554 00000 n 
-0000026743 00000 n 
-0000026930 00000 n 
-0000027264 00000 n 
-0000027451 00000 n 
-0000027643 00000 n 
-0000027834 00000 n 
-0000028018 00000 n 
-0000028207 00000 n 
-0000028391 00000 n 
-0000028575 00000 n 
-0000028758 00000 n 
-0000028936 00000 n 
-0000029124 00000 n 
-0000029312 00000 n 
-0000029496 00000 n 
-0000029678 00000 n 
-0000029853 00000 n 
-0000030179 00000 n 
-0000030365 00000 n 
-0000030546 00000 n 
-0000030731 00000 n 
-0000030914 00000 n 
-0000031101 00000 n 
-0000031287 00000 n 
-0000031472 00000 n 
-0000031663 00000 n 
-0000031850 00000 n 
-0000032036 00000 n 
-0000032226 00000 n 
-0000032411 00000 n 
-0000032596 00000 n 
-0000032780 00000 n 
-0000033106 00000 n 
-0000033289 00000 n 
-0000033464 00000 n 
-0000033647 00000 n 
-0000033833 00000 n 
-0000034018 00000 n 
-0000034206 00000 n 
-0000034395 00000 n 
-0000034584 00000 n 
-0000034770 00000 n 
-0000034955 00000 n 
-0000035143 00000 n 
-0000035327 00000 n 
-0000035513 00000 n 
-0000035700 00000 n 
-0000036026 00000 n 
-0000036209 00000 n 
-0000036398 00000 n 
-0000036583 00000 n 
-0000036770 00000 n 
-0000036950 00000 n 
-0000037134 00000 n 
-0000037323 00000 n 
-0000037505 00000 n 
-0000037697 00000 n 
-0000037889 00000 n 
-0000038081 00000 n 
-0000038264 00000 n 
-0000038448 00000 n 
-0000038622 00000 n 
-0000038948 00000 n 
-0000039130 00000 n 
-0000039317 00000 n 
-0000039544 00000 n 
-0000039616 00000 n 
-0000039913 00000 n 
-0000040078 00000 n 
-0000042741 00000 n 
-0000045256 00000 n 
-0000047446 00000 n 
-0000049613 00000 n 
-0000052071 00000 n 
-0000054240 00000 n 
-0000056405 00000 n 
-0000058538 00000 n 
-0000060711 00000 n 
-0000062818 00000 n 
-0000064980 00000 n 
-0000067055 00000 n 
-0000069148 00000 n 
+0000017075 00000 n 
+0000017379 00000 n 
+0000017559 00000 n 
+0000017739 00000 n 
+0000017918 00000 n 
+0000018096 00000 n 
+0000018278 00000 n 
+0000018456 00000 n 
+0000018646 00000 n 
+0000018825 00000 n 
+0000019004 00000 n 
+0000019190 00000 n 
+0000019370 00000 n 
+0000019552 00000 n 
+0000019736 00000 n 
+0000019923 00000 n 
+0000020101 00000 n 
+0000020429 00000 n 
+0000020614 00000 n 
+0000020793 00000 n 
+0000020976 00000 n 
+0000021166 00000 n 
+0000021354 00000 n 
+0000021543 00000 n 
+0000021729 00000 n 
+0000021921 00000 n 
+0000022109 00000 n 
+0000022291 00000 n 
+0000022467 00000 n 
+0000022647 00000 n 
+0000022834 00000 n 
+0000023152 00000 n 
+0000023335 00000 n 
+0000023516 00000 n 
+0000023705 00000 n 
+0000023891 00000 n 
+0000024074 00000 n 
+0000024266 00000 n 
+0000024451 00000 n 
+0000024642 00000 n 
+0000024823 00000 n 
+0000025004 00000 n 
+0000025180 00000 n 
+0000025372 00000 n 
+0000025558 00000 n 
+0000025740 00000 n 
+0000026066 00000 n 
+0000026247 00000 n 
+0000026432 00000 n 
+0000026618 00000 n 
+0000026805 00000 n 
+0000026989 00000 n 
+0000027170 00000 n 
+0000027361 00000 n 
+0000027544 00000 n 
+0000027732 00000 n 
+0000027923 00000 n 
+0000028105 00000 n 
+0000028295 00000 n 
+0000028477 00000 n 
+0000028795 00000 n 
+0000028969 00000 n 
+0000029158 00000 n 
+0000029348 00000 n 
+0000029530 00000 n 
+0000029716 00000 n 
+0000029901 00000 n 
+0000030084 00000 n 
+0000030270 00000 n 
+0000030460 00000 n 
+0000030640 00000 n 
+0000030820 00000 n 
+0000031011 00000 n 
+0000031189 00000 n 
+0000031507 00000 n 
+0000031685 00000 n 
+0000031869 00000 n 
+0000032046 00000 n 
+0000032229 00000 n 
+0000032408 00000 n 
+0000032592 00000 n 
+0000032773 00000 n 
+0000032960 00000 n 
+0000033144 00000 n 
+0000033319 00000 n 
+0000033505 00000 n 
+0000033695 00000 n 
+0000033882 00000 n 
+0000034068 00000 n 
+0000034394 00000 n 
+0000034574 00000 n 
+0000034759 00000 n 
+0000034943 00000 n 
+0000035123 00000 n 
+0000035307 00000 n 
+0000035488 00000 n 
+0000035670 00000 n 
+0000035855 00000 n 
+0000036046 00000 n 
+0000036229 00000 n 
+0000036419 00000 n 
+0000036602 00000 n 
+0000036789 00000 n 
+0000037107 00000 n 
+0000037293 00000 n 
+0000037475 00000 n 
+0000037654 00000 n 
+0000037841 00000 n 
+0000038028 00000 n 
+0000038216 00000 n 
+0000038404 00000 n 
+0000038590 00000 n 
+0000038781 00000 n 
+0000038971 00000 n 
+0000039154 00000 n 
+0000039342 00000 n 
+0000039526 00000 n 
+0000039707 00000 n 
+0000040033 00000 n 
+0000040215 00000 n 
+0000040396 00000 n 
+0000040584 00000 n 
+0000040763 00000 n 
+0000040951 00000 n 
+0000041137 00000 n 
+0000041315 00000 n 
+0000041502 00000 n 
+0000041682 00000 n 
+0000041874 00000 n 
+0000042055 00000 n 
+0000042237 00000 n 
+0000042426 00000 n 
+0000042744 00000 n 
+0000042931 00000 n 
+0000043114 00000 n 
+0000043299 00000 n 
+0000043479 00000 n 
+0000043664 00000 n 
+0000043844 00000 n 
+0000044028 00000 n 
+0000044210 00000 n 
+0000044404 00000 n 
+0000044585 00000 n 
+0000044767 00000 n 
+0000044950 00000 n 
+0000045137 00000 n 
+0000045324 00000 n 
+0000045650 00000 n 
+0000045835 00000 n 
+0000046022 00000 n 
+0000046205 00000 n 
+0000046388 00000 n 
+0000046572 00000 n 
+0000046754 00000 n 
+0000046940 00000 n 
+0000047128 00000 n 
+0000047317 00000 n 
+0000047402 00000 n 
+0000047579 00000 n 
+0000047765 00000 n 
+0000047951 00000 n 
+0000048133 00000 n 
+0000048451 00000 n 
+0000048642 00000 n 
+0000048828 00000 n 
+0000049013 00000 n 
+0000049203 00000 n 
+0000049387 00000 n 
+0000049572 00000 n 
+0000049755 00000 n 
+0000049936 00000 n 
+0000050121 00000 n 
+0000050305 00000 n 
+0000050490 00000 n 
+0000050684 00000 n 
+0000050876 00000 n 
+0000051194 00000 n 
+0000051382 00000 n 
+0000051570 00000 n 
+0000051755 00000 n 
+0000051939 00000 n 
+0000052126 00000 n 
+0000052309 00000 n 
+0000052494 00000 n 
+0000052680 00000 n 
+0000052862 00000 n 
+0000053050 00000 n 
+0000053234 00000 n 
+0000053424 00000 n 
+0000053603 00000 n 
+0000053784 00000 n 
+0000054110 00000 n 
+0000054298 00000 n 
+0000054479 00000 n 
+0000054670 00000 n 
+0000054861 00000 n 
+0000055052 00000 n 
+0000055234 00000 n 
+0000055417 00000 n 
+0000055592 00000 n 
+0000055773 00000 n 
+0000055959 00000 n 
+0000056149 00000 n 
+0000056340 00000 n 
+0000056514 00000 n 
+0000056832 00000 n 
+0000057021 00000 n 
+0000057208 00000 n 
+0000057394 00000 n 
+0000057581 00000 n 
+0000057765 00000 n 
+0000057947 00000 n 
+0000058134 00000 n 
+0000058324 00000 n 
+0000058505 00000 n 
+0000058699 00000 n 
+0000058886 00000 n 
+0000059069 00000 n 
+0000059258 00000 n 
+0000059576 00000 n 
+0000059760 00000 n 
+0000059945 00000 n 
+0000060127 00000 n 
+0000060306 00000 n 
+0000060488 00000 n 
+0000060673 00000 n 
+0000060857 00000 n 
+0000061044 00000 n 
+0000061227 00000 n 
+0000061422 00000 n 
+0000061610 00000 n 
+0000061795 00000 n 
+0000061976 00000 n 
+0000062162 00000 n 
+0000062488 00000 n 
+0000062679 00000 n 
+0000062860 00000 n 
+0000063087 00000 n 
+0000063159 00000 n 
+0000063456 00000 n 
+0000063696 00000 n 
+0000066166 00000 n 
+0000068438 00000 n 
+0000070567 00000 n 
+0000072605 00000 n 
+0000074633 00000 n 
+0000076750 00000 n 
+0000078862 00000 n 
+0000080899 00000 n 
+0000082911 00000 n 
+0000084898 00000 n 
+0000086900 00000 n 
+0000088963 00000 n 
+0000090980 00000 n 
+0000093043 00000 n 
+0000095015 00000 n 
+0000097094 00000 n 
+0000099144 00000 n 
+0000101102 00000 n 
+0000103150 00000 n 
+0000105155 00000 n 
+0000107117 00000 n 
+0000109206 00000 n 
 trailer
 <<
 /ID 
-[<833e78686b4108ea9bab3caadb0cad83><833e78686b4108ea9bab3caadb0cad83>]
+[<6f2b23d7e433f0b8b759c5c8fdb86f1b><6f2b23d7e433f0b8b759c5c8fdb86f1b>]
 % ReportLab generated PDF document -- digest (opensource)
 
-/Info 209 0 R
-/Root 208 0 R
-/Size 225
+/Info 331 0 R
+/Root 330 0 R
+/Size 356
 >>
 startxref
-70277
+110320
 %%EOF
