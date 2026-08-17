@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RossbyWaveStudio } from "@/components/studio/RossbyWaveStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Rossby Waves & Jet Stream Simulator (Browser)", description: "Visualize planetary Rossby waves meandering in the jet stream and how they steer weather. Free, interactive meteorology.", alternates: { canonical: "/studio/rossby-waves" } };
+export default function Page() { return <StudioPageShell slug="rossby-waves" name="Rossby Waves" keyword="Rossby waves jet stream" lede="The jet stream snakes around the globe in giant planetary waves. When those waves stall, they lock in heat waves, cold snaps, and floods." about="Rossby waves are large-scale meanders in the jet stream, arising because the Coriolis effect changes with latitude. They propagate slowly westward relative to the flow and carry weather systems around the hemisphere. A few long waves span the globe; when they grow large and become stationary, they trap persistent extreme weather beneath their ridges and troughs."><RossbyWaveStudio /></StudioPageShell>; }

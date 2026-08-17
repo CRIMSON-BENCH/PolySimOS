@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HurricaneStudio } from "@/components/studio/HurricaneStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Hurricane Wind Model Simulator (Browser)", description: "See how a hurricane's central pressure drives its maximum winds and Saffir-Simpson category. Free, interactive.", alternates: { canonical: "/studio/hurricane" } };
+export default function Page() { return <StudioPageShell slug="hurricane" name="Hurricane Wind Model" keyword="hurricane wind pressure model" lede="A hurricane is a heat engine spun up by a deep low-pressure center. The deeper the pressure drop, the fiercer the winds — see the relationship live." about="The winds of a tropical cyclone are driven by the pressure deficit at its center, rising roughly as the square root of that deficit. A calm eye sits at the core, ringed by the eyewall of peak wind. Central pressure is the single best gauge of intensity, mapping to the Saffir-Simpson categories. Educational model, not an operational forecast."><HurricaneStudio /></StudioPageShell>; }

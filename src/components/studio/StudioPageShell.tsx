@@ -238,6 +238,14 @@ const OTHER_SIMS = [
   { name: "Mach Cone", href: "/studio/mach-cone" },
   { name: "Propeller Thrust", href: "/studio/propeller" },
   { name: "Orbital Elements", href: "/studio/orbital-elements" },
+  { name: "Atmospheric Stability", href: "/studio/atmospheric-stability" },
+  { name: "Coriolis Effect", href: "/studio/coriolis" },
+  { name: "Hurricane Model", href: "/studio/hurricane" },
+  { name: "Wind Chill & Heat Index", href: "/studio/wind-chill" },
+  { name: "Psychrometrics", href: "/studio/psychrometrics" },
+  { name: "Geostrophic Wind", href: "/studio/geostrophic-wind" },
+  { name: "Rossby Waves", href: "/studio/rossby-waves" },
+  { name: "Tornado Vortex", href: "/studio/rankine-vortex" },
 ];
 
 export function StudioPageShell({

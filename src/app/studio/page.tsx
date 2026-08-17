@@ -244,6 +244,14 @@ const SIMS = [
   { slug: "mach-cone", name: "Mach Cone", desc: "Supersonic shock.", tag: "Aerospace" },
   { slug: "propeller", name: "Propeller Thrust", desc: "Actuator-disk theory.", tag: "Aerospace" },
   { slug: "orbital-elements", name: "Orbital Elements", desc: "Shape of an orbit.", tag: "Aerospace" },
+  { slug: "atmospheric-stability", name: "Atmospheric Stability", desc: "CAPE & convection.", tag: "Weather" },
+  { slug: "coriolis", name: "Coriolis Effect", desc: "Why winds curve.", tag: "Weather" },
+  { slug: "hurricane", name: "Hurricane Model", desc: "Pressure-driven winds.", tag: "Weather" },
+  { slug: "wind-chill", name: "Wind Chill & Heat Index", desc: "Apparent temperature.", tag: "Weather" },
+  { slug: "psychrometrics", name: "Psychrometrics", desc: "Dew point & wet bulb.", tag: "Weather" },
+  { slug: "geostrophic-wind", name: "Geostrophic Wind", desc: "Wind along isobars.", tag: "Weather" },
+  { slug: "rossby-waves", name: "Rossby Waves", desc: "Meandering jet stream.", tag: "Weather" },
+  { slug: "rankine-vortex", name: "Tornado Vortex", desc: "Rankine wind profile.", tag: "Weather" },
 ];
 
 export default function StudioIndex() {

@@ -228,6 +228,14 @@ import { StandardAtmosphereStudio } from "./StandardAtmosphereStudio";
 import { MachConeStudio } from "./MachConeStudio";
 import { PropellerStudio } from "./PropellerStudio";
 import { OrbitalElementsStudio } from "./OrbitalElementsStudio";
+import { AtmosphericStabilityStudio } from "./AtmosphericStabilityStudio";
+import { CoriolisStudio } from "./CoriolisStudio";
+import { HurricaneStudio } from "./HurricaneStudio";
+import { WindChillStudio } from "./WindChillStudio";
+import { PsychrometricsStudio } from "./PsychrometricsStudio";
+import { GeostrophicWindStudio } from "./GeostrophicWindStudio";
+import { RossbyWaveStudio } from "./RossbyWaveStudio";
+import { RankineVortexStudio } from "./RankineVortexStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -460,6 +468,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "mach-cone": MachConeStudio,
   propeller: PropellerStudio,
   "orbital-elements": OrbitalElementsStudio,
+  "atmospheric-stability": AtmosphericStabilityStudio,
+  coriolis: CoriolisStudio,
+  hurricane: HurricaneStudio,
+  "wind-chill": WindChillStudio,
+  psychrometrics: PsychrometricsStudio,
+  "geostrophic-wind": GeostrophicWindStudio,
+  "rossby-waves": RossbyWaveStudio,
+  "rankine-vortex": RankineVortexStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

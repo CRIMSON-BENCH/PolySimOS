@@ -1,0 +1,44 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { StudioChrome, Slider, Stat } from "./StudioChrome";
+
+// Rossby (planetary) waves in the jet stream.
+export function RossbyWaveStudio() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [waveNum, setWaveNum] = useState(4);
+  const [amplitude, setAmplitude] = useState(50);
+  const [running, setRunning] = useState(true);
+  const phase = useRef(0);
+
+  // Rossby: waves propagate westward relative to flow; longer waves faster westward
+  const westward = 20 / (waveNum * waveNum);
+
+  useEffect(() => {
+    if (!running) return; let raf = 0;
+    const loop = () => {
+      phase.current += 0.02 * (1 - westward / 10); const t = phase.current; const W = 540, H = 300;
+      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const cy = H / 2;
+      // cold north / warm south shading
+      ctx.fillStyle = "rgba(96,165,250,0.08)"; ctx.fillRect(0, 0, W, cy); ctx.fillStyle = "rgba(249,115,22,0.06)"; ctx.fillRect(0, cy, W, cy);
+      // jet stream wave
+      ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 3; ctx.beginPath(); for (let x = 0; x <= W; x += 3) { const y = cy - amplitude * Math.sin(waveNum * x / W * 6.283 - t); x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); } ctx.stroke();
+      ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("cold polar air", 12, 20); ctx.fillText("warm tropical air", 12, H - 10); ctx.fillStyle = "#bef264"; ctx.fillText("jet stream (Rossby wave)", W - 170, 20);
+      raf = requestAnimationFrame(loop);
+    };
+    raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
+  }, [waveNum, amplitude, running]);
+
+  return (
+    <StudioChrome title="Rossby Waves" tagline="the meandering jet stream"
+      controls={<div>
+        <Slider label="Wave number" value={waveNum} min={2} max={8} step={1} onChange={setWaveNum} />
+        <Slider label="Amplitude" value={amplitude} min={10} max={90} step={5} onChange={setAmplitude} />
+        <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
+        <p className="mt-3 text-xs text-slate-500">The jet stream does not flow straight — it meanders in giant planetary Rossby waves, driven by the Earth&apos;s rotation varying with latitude. These waves carry weather systems around the globe and, when they grow large and stall, lock in heat waves, cold snaps, and floods. A few long waves circle the whole hemisphere.</p>
+      </div>}
+      inspector={<div><Stat label="Wave number" value={String(waveNum)} /><Stat label="Wavelength" value={`${(40000 / waveNum).toFixed(0)} km`} /><Stat label="Drift" value="westward vs flow" /></div>}
+    ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
+  );
+}

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CoriolisStudio } from "@/components/studio/CoriolisStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Coriolis Effect Simulator (Browser)", description: "See how the Coriolis effect deflects moving objects on a rotating planet, varying with latitude and hemisphere. Free, interactive.", alternates: { canonical: "/studio/coriolis" } };
+export default function Page() { return <StudioPageShell slug="coriolis" name="Coriolis Effect" keyword="Coriolis effect simulator" lede="Why do hurricanes spin, and winds curve? On a rotating planet, anything moving freely is deflected — the Coriolis effect, and it shapes all weather." about="Because the Earth rotates, an object moving over its surface appears to curve — to the right in the Northern Hemisphere, to the left in the Southern. The deflection is zero at the equator and maximal at the poles. It governs the rotation of cyclones, the paths of ocean currents and trade winds, and even long-range artillery."><CoriolisStudio /></StudioPageShell>; }

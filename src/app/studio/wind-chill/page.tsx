@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { WindChillStudio } from "@/components/studio/WindChillStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Wind Chill & Heat Index Calculator (Browser)", description: "Compute apparent temperature from wind chill in the cold and heat index in the heat. Free, interactive weather tool.", alternates: { canonical: "/studio/wind-chill" } };
+export default function Page() { return <StudioPageShell slug="wind-chill" name="Wind Chill & Heat Index" keyword="wind chill heat index calculator" lede="The thermometer lies about how it feels. Wind makes the cold bite harder and humidity makes the heat smother — apparent temperature tells the real story." about="In the cold, wind sweeps away the thin insulating layer of warm air at your skin, so it feels far colder — the wind chill. In the heat, high humidity stops sweat from evaporating, so it feels hotter — the heat index. Both combine temperature with wind or humidity into the apparent temperature your body actually experiences, and both carry real health risks."><WindChillStudio /></StudioPageShell>; }
