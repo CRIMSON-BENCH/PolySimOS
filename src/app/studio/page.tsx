@@ -284,6 +284,14 @@ const SIMS = [
   { slug: "huffman", name: "Huffman Coding", desc: "Optimal compression.", tag: "Cryptography" },
   { slug: "hamming-code", name: "Hamming Code", desc: "Single-error correction.", tag: "Cryptography" },
   { slug: "elliptic-curve", name: "Elliptic Curve", desc: "ECC point addition.", tag: "Cryptography" },
+  { slug: "haversine", name: "Great-Circle Distance", desc: "Haversine on a sphere.", tag: "Geospatial" },
+  { slug: "map-projection", name: "Map Projection", desc: "Mercator distortion.", tag: "Geospatial" },
+  { slug: "gps-trilateration", name: "GPS Trilateration", desc: "Position from distances.", tag: "Geospatial" },
+  { slug: "viewshed", name: "Viewshed", desc: "Line-of-sight visibility.", tag: "Geospatial" },
+  { slug: "spatial-interpolation", name: "Spatial Interpolation", desc: "IDW surface from samples.", tag: "Geospatial" },
+  { slug: "dead-reckoning", name: "Dead Reckoning", desc: "Navigation with drift.", tag: "Geospatial" },
+  { slug: "rhumb-line", name: "Rhumb Line", desc: "vs great circle.", tag: "Geospatial" },
+  { slug: "point-in-polygon", name: "Point in Polygon", desc: "Ray-casting geofence.", tag: "Geospatial" },
 ];
 
 export default function StudioIndex() {

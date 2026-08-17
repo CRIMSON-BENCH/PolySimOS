@@ -278,6 +278,14 @@ const OTHER_SIMS = [
   { name: "Huffman Coding", href: "/studio/huffman" },
   { name: "Hamming Code", href: "/studio/hamming-code" },
   { name: "Elliptic Curve", href: "/studio/elliptic-curve" },
+  { name: "Great-Circle Distance", href: "/studio/haversine" },
+  { name: "Map Projection", href: "/studio/map-projection" },
+  { name: "GPS Trilateration", href: "/studio/gps-trilateration" },
+  { name: "Viewshed", href: "/studio/viewshed" },
+  { name: "Spatial Interpolation", href: "/studio/spatial-interpolation" },
+  { name: "Dead Reckoning", href: "/studio/dead-reckoning" },
+  { name: "Rhumb Line", href: "/studio/rhumb-line" },
+  { name: "Point in Polygon", href: "/studio/point-in-polygon" },
 ];
 
 export function StudioPageShell({

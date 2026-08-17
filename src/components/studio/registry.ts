@@ -268,6 +268,14 @@ import { ShannonEntropyStudio } from "./ShannonEntropyStudio";
 import { HuffmanStudio } from "./HuffmanStudio";
 import { HammingStudio } from "./HammingStudio";
 import { EllipticCurveStudio } from "./EllipticCurveStudio";
+import { HaversineStudio } from "./HaversineStudio";
+import { MapProjectionStudio } from "./MapProjectionStudio";
+import { GPSTrilaterationStudio } from "./GPSTrilaterationStudio";
+import { ViewshedStudio } from "./ViewshedStudio";
+import { SpatialInterpolationStudio } from "./SpatialInterpolationStudio";
+import { DeadReckoningStudio } from "./DeadReckoningStudio";
+import { RhumbLineStudio } from "./RhumbLineStudio";
+import { PointInPolygonStudio } from "./PointInPolygonStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -540,6 +548,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   huffman: HuffmanStudio,
   "hamming-code": HammingStudio,
   "elliptic-curve": EllipticCurveStudio,
+  haversine: HaversineStudio,
+  "map-projection": MapProjectionStudio,
+  "gps-trilateration": GPSTrilaterationStudio,
+  viewshed: ViewshedStudio,
+  "spatial-interpolation": SpatialInterpolationStudio,
+  "dead-reckoning": DeadReckoningStudio,
+  "rhumb-line": RhumbLineStudio,
+  "point-in-polygon": PointInPolygonStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

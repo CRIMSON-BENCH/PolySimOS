@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ViewshedStudio } from "@/components/studio/ViewshedStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Viewshed / Line-of-Sight Simulator (Browser)", description: "Compute which terrain is visible from an observer, accounting for intervening ridges. Free, interactive GIS tool.", alternates: { canonical: "/studio/viewshed" } };
+export default function Page() { return <StudioPageShell slug="viewshed" name="Viewshed / Line of Sight" keyword="viewshed line of sight" lede="Standing on a hill, what can you actually see? A viewshed maps every point in view and every one hidden behind a ridge — and how much raising your vantage helps." about="A viewshed marks the terrain visible from an observer. Scanning outward, a point is seen only if its angle above horizontal beats every closer obstacle, so ridges cast shadows behind them. Raising the observer height uncovers far more ground. Viewshed analysis sites cell towers, wind turbines, scenic overlooks, and defensive positions."><ViewshedStudio /></StudioPageShell>; }
