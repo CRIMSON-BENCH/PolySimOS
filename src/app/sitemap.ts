@@ -34,7 +34,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...CONSTANTS.map((c) => u(`/constants/${c.slug}`, 0.5)),
     ...AUDIENCES.map((a) => u(`/guides/${a.slug}`, 0.6)),
     ...countrySlugs().map((c) => u(`/education/country/${c.slug}`, 0.6)),
-    u("/templates", 0.6), u("/about", 0.5), u("/for-business", 0.6), u("/custom-solvers", 0.8), u("/community", 0.5), u("/developers", 0.6), u("/multi", 0.9),
+    u("/templates", 0.6), u("/about", 0.5), u("/for-business", 0.6), u("/custom-solvers", 0.8), u("/developers", 0.6), u("/multi", 0.9),
     u("/developers/sdk", 0.4), u("/developers/webhooks", 0.4), u("/login", 0.3), u("/signup", 0.4), u("/dashboard", 0.3),
     u("/terms", 0.3), u("/privacy", 0.3), u("/refund", 0.3), u("/acceptable-use", 0.3),
     u("/studio/graph", 0.9), u("/studio/particles", 0.8), u("/studio/fluid", 0.8), u("/studio/dynamics", 0.8), u("/studio/fields", 0.8), u("/studio/cas", 0.8), u("/studio/surrogate", 0.8),

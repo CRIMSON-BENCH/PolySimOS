@@ -6,8 +6,12 @@
 
 **Cross-cutting rules.**
 - Simulations run client-side (near-zero marginal cost) → gate *convenience, scale, data, AI, collaboration, branding, and support*, never basic learning.
+- **Free account** is the on-ramp: creating an account unlocks saves (limited), basic exports, and cross-device sync — no card required. Everything paid sits above it.
+- **Annual = 20% off the monthly rate**, everywhere a plan has both cadences (annual price = monthly × 12 × 0.8).
+- **Micro-unlocks (one-time):** any single premium solver = **$2**; any single multi-solver workflow = **$5**. Impulse-priced, no subscription needed; credited toward a Pro upgrade within 30 days.
 - Three platforms: **Web** (subscriptions + usage), **Desktop** (license keys + Pro), **Mobile** (App/Play Store IAP + subscriptions). Keep entitlements synced across all three via one account.
 - Every solver, multi-solver, and SEO page carries: (1) an inline upgrade slot, (2) a "run in cloud / bigger" slot, (3) a "save/export/share" slot, (4) a "build me a custom version" slot.
+- **No social/community management.** We do not host forums, feeds, or a UGC community. Sharing is outbound only — users share to their own social networks and embed elsewhere.
 
 ---
 
@@ -16,7 +20,7 @@
 2. **Student** — Pro features, .edu verified, discounted ($4/mo)
 3. **Hobby/Maker** — Pro-lite, personal use ($8/mo)
 4. **Pro (monthly)** — full solver access, saves, exports, AI-lite ($19/mo)
-5. **Pro (annual)** — 2 months free ($190/yr)
+5. **Pro (annual)** — 20% off vs monthly ($182/yr ≈ $15.20/mo)
 6. **Pro+ / Power** — GPU cloud runs, priority AI, large data ($49/mo)
 7. **Team (per seat, monthly)** — shared projects, roles ($29/seat/mo)
 8. **Team (per seat, annual)** ($290/seat/yr)
@@ -95,7 +99,7 @@
 77. Spot/off-peak compute discount tier
 
 ## 4. Per-Solver & Per-Domain Unlocks (à la carte) (78–102)
-78. Single premium solver unlock (one-time)
+78. Single premium solver unlock (one-time, **$2**)
 79. Single premium solver (monthly rental)
 80. Domain pack: Structural & Civil
 81. Domain pack: Fluids & Aero
@@ -122,7 +126,7 @@
 102. Solver-of-the-month subscription (rotating premium)
 
 ## 5. Multi-Solver Workflow Packs (103–127)
-103. Single multi-solver unlock (one-time)
+103. Single multi-solver unlock (one-time, **$5**)
 104. Single multi-solver (monthly)
 105. Structural & Geotechnical pack
 106. Fluids & Energy pack
@@ -202,7 +206,7 @@
 176. Shareable dataset links (paid)
 177. Dataset marketplace (buy/sell datasets)
 
-## 8. AI Features (Gemini-powered) (178–202)
+## 8. AI Features (178–202)
 178. AI Copilot subscription (chat over solvers)
 179. AI "explain this result" (per call)
 180. AI "explain the physics/math" tutor

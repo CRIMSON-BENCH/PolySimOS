@@ -68,7 +68,7 @@ export function NodeEditor() {
       } else {
         // No Gemini key configured — use the reliable local builder.
         setGraph(buildGraphFromPrompt(prompt));
-        setAiMsg("Graph built from your description. (Add a Gemini key to enable full AI generation.)");
+        setAiMsg("Graph built from your description. (Add an AI key to enable full AI generation.)");
       }
     } catch {
       setGraph(buildGraphFromPrompt(prompt));

@@ -58,7 +58,6 @@ const COLUMNS: { title: string; links: { name: string; href: string }[] }[] = [
       { name: "Custom Solvers", href: "/custom-solvers" },
       { name: "Pricing", href: "/pricing" },
       { name: "Compare", href: "/compare/simscale" },
-      { name: "Community", href: "/community" },
     ],
   },
   {

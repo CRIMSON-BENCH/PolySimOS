@@ -30,7 +30,7 @@ const FEATURES: Record<string, { name: string; lede: string; body: string[]; cta
     lede: "Describe a system in plain English and get a runnable node graph, grounded in the literature.",
     body: [
       "The Copilot is tuned for scientific reasoning and can turn a sentence like 'model a damped driven pendulum' into a configured, runnable graph.",
-      "It also recommends solvers, catches common setup errors, and can summarize relevant arXiv and PubMed literature for your topic — all powered by Google Gemini, server-side.",
+      "It also recommends solvers, catches common setup errors, and can summarize relevant arXiv and PubMed literature for your topic — all AI-powered, server-side.",
     ],
     cta: "Try the Copilot",
   },

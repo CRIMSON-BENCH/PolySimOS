@@ -118,9 +118,9 @@ export default function Home() {
         </div>
         <div className="mt-8 grid gap-4 sm:grid-cols-3">
           {[
-            ["The “Cite Us” loop", "Mint a DOI for any simulation. Every citation is a link back — research that compounds.", "/community"],
+            ["The “Cite Us” loop", "Mint a DOI for any simulation. Every citation is a link back — research that compounds.", "/studio"],
             ["Programmatic SEO", "Live, runnable pages for every topic, method, material, and equation people search.", "/simulate"],
-            ["Academic bounties", "Post a modeling problem; the community solves it. Great work rises to the top.", "/community"],
+            ["Share & embed", "Share any simulation to your socials or embed it in a page — every view links back.", "/developers"],
           ].map(([t, d, href]) => (
             <Link key={t} href={href} className="rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-cyan-400 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-cyan-500">
               <h3 className="font-bold text-slate-900 dark:text-slate-100">{t}</h3>

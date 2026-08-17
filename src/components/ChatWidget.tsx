@@ -20,7 +20,7 @@ export function ChatWidget() {
     try {
       const res = await fetch("/api/chatbot", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ message: q }) });
       const data = await res.json();
-      const text = res.ok ? (data?.data?.text ?? "…") : "The assistant isn't configured yet (add a Gemini API key). Meanwhile, explore the Studio — every simulator runs free in your browser.";
+      const text = res.ok ? (data?.data?.text ?? "…") : "The assistant isn't configured yet (add an AI API key). Meanwhile, explore the Studio — every simulator runs free in your browser.";
       setMsgs((m) => [...m, { role: "bot", text }]);
     } catch {
       setMsgs((m) => [...m, { role: "bot", text: "Something went wrong. Please try again." }]);
@@ -40,7 +40,7 @@ export function ChatWidget() {
         <div className="fixed bottom-24 right-5 z-50 flex h-[30rem] w-[22rem] max-w-[calc(100vw-2.5rem)] flex-col rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900">
           <div className="border-b border-slate-200 px-4 py-3 dark:border-slate-800">
             <p className="font-bold text-slate-900 dark:text-slate-100">PolySim Assistant</p>
-            <p className="text-xs text-slate-400">Powered by Gemini</p>
+            <p className="text-xs text-slate-400">AI assistant</p>
           </div>
           <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto p-4">
             {msgs.map((m, i) => (
