@@ -276,6 +276,14 @@ const SIMS = [
   { slug: "battery-storage", name: "Battery Storage", desc: "Usable capacity & backup.", tag: "Energy" },
   { slug: "carbon-footprint", name: "Carbon Footprint", desc: "Annual CO₂ breakdown.", tag: "Energy" },
   { slug: "lcoe", name: "Levelized Cost of Energy", desc: "True $/MWh.", tag: "Energy" },
+  { slug: "rsa", name: "RSA Encryption", desc: "Public-key crypto.", tag: "Cryptography" },
+  { slug: "diffie-hellman", name: "Diffie-Hellman", desc: "Shared-secret exchange.", tag: "Cryptography" },
+  { slug: "classical-ciphers", name: "Classical Ciphers", desc: "Caesar & Vigenère.", tag: "Cryptography" },
+  { slug: "hash-avalanche", name: "Hash Avalanche", desc: "One bit changes all.", tag: "Cryptography" },
+  { slug: "shannon-entropy", name: "Shannon Entropy", desc: "Info & password strength.", tag: "Cryptography" },
+  { slug: "huffman", name: "Huffman Coding", desc: "Optimal compression.", tag: "Cryptography" },
+  { slug: "hamming-code", name: "Hamming Code", desc: "Single-error correction.", tag: "Cryptography" },
+  { slug: "elliptic-curve", name: "Elliptic Curve", desc: "ECC point addition.", tag: "Cryptography" },
 ];
 
 export default function StudioIndex() {

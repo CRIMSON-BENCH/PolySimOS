@@ -69,6 +69,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/laser-cavity", 0.8), u("/studio/fiber-optics", 0.8), u("/studio/gaussian-beam", 0.8), u("/studio/polarization", 0.8), u("/studio/thin-film", 0.8), u("/studio/single-slit", 0.8), u("/studio/bragg-mirror", 0.8), u("/studio/led", 0.8),
     u("/studio/binding-energy", 0.8), u("/studio/fission-reactor", 0.8), u("/studio/fusion-lawson", 0.8), u("/studio/radiometric-dating", 0.8), u("/studio/radiation-shielding", 0.8), u("/studio/radiation-dose", 0.8), u("/studio/reactor-kinetics", 0.8), u("/studio/neutron-transport", 0.8),
     u("/studio/solar-panel", 0.8), u("/studio/wind-power", 0.8), u("/studio/hydro-power", 0.8), u("/studio/heat-pump", 0.8), u("/studio/ev-efficiency", 0.8), u("/studio/battery-storage", 0.8), u("/studio/carbon-footprint", 0.8), u("/studio/lcoe", 0.8),
+    u("/studio/rsa", 0.8), u("/studio/diffie-hellman", 0.8), u("/studio/classical-ciphers", 0.8), u("/studio/hash-avalanche", 0.8), u("/studio/shannon-entropy", 0.8), u("/studio/huffman", 0.8), u("/studio/hamming-code", 0.8), u("/studio/elliptic-curve", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RSAStudio } from "@/components/studio/RSAStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "RSA Encryption Simulator (Browser)", description: "See how RSA public-key encryption works — key generation from primes, encrypt, and decrypt with modular exponentiation. Free.", alternates: { canonical: "/studio/rsa" } };
+export default function Page() { return <StudioPageShell slug="rsa" name="RSA Public-Key Encryption" keyword="RSA encryption simulator" lede="The algorithm that secures the internet, laid bare. Pick two primes, generate a key pair, and watch a message get encrypted and decrypted step by step." about="RSA relies on a mathematical one-way street: multiplying two large primes is trivial, but factoring the product is infeasible. The public key encrypts by modular exponentiation; only the private key, derived from the secret primes, can reverse it. This demo uses tiny primes to reveal the machinery — real RSA uses numbers hundreds of digits long."><RSAStudio /></StudioPageShell>; }

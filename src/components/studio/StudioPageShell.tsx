@@ -270,6 +270,14 @@ const OTHER_SIMS = [
   { name: "Battery Storage", href: "/studio/battery-storage" },
   { name: "Carbon Footprint", href: "/studio/carbon-footprint" },
   { name: "Levelized Cost of Energy", href: "/studio/lcoe" },
+  { name: "RSA Encryption", href: "/studio/rsa" },
+  { name: "Diffie-Hellman", href: "/studio/diffie-hellman" },
+  { name: "Classical Ciphers", href: "/studio/classical-ciphers" },
+  { name: "Hash Avalanche", href: "/studio/hash-avalanche" },
+  { name: "Shannon Entropy", href: "/studio/shannon-entropy" },
+  { name: "Huffman Coding", href: "/studio/huffman" },
+  { name: "Hamming Code", href: "/studio/hamming-code" },
+  { name: "Elliptic Curve", href: "/studio/elliptic-curve" },
 ];
 
 export function StudioPageShell({

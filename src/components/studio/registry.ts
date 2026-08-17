@@ -260,6 +260,14 @@ import { EVEfficiencyStudio } from "./EVEfficiencyStudio";
 import { BatteryStorageStudio } from "./BatteryStorageStudio";
 import { CarbonFootprintStudio } from "./CarbonFootprintStudio";
 import { LCOEStudio } from "./LCOEStudio";
+import { RSAStudio } from "./RSAStudio";
+import { DiffieHellmanStudio } from "./DiffieHellmanStudio";
+import { ClassicalCiphersStudio } from "./ClassicalCiphersStudio";
+import { HashAvalancheStudio } from "./HashAvalancheStudio";
+import { ShannonEntropyStudio } from "./ShannonEntropyStudio";
+import { HuffmanStudio } from "./HuffmanStudio";
+import { HammingStudio } from "./HammingStudio";
+import { EllipticCurveStudio } from "./EllipticCurveStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -524,6 +532,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "battery-storage": BatteryStorageStudio,
   "carbon-footprint": CarbonFootprintStudio,
   lcoe: LCOEStudio,
+  rsa: RSAStudio,
+  "diffie-hellman": DiffieHellmanStudio,
+  "classical-ciphers": ClassicalCiphersStudio,
+  "hash-avalanche": HashAvalancheStudio,
+  "shannon-entropy": ShannonEntropyStudio,
+  huffman: HuffmanStudio,
+  "hamming-code": HammingStudio,
+  "elliptic-curve": EllipticCurveStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

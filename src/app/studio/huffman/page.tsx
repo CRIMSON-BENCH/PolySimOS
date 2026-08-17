@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HuffmanStudio } from "@/components/studio/HuffmanStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Huffman Coding Simulator (Compression, Browser)", description: "Build a Huffman code from text and see optimal lossless compression — shorter codes for frequent symbols. Free, interactive.", alternates: { canonical: "/studio/huffman" } };
+export default function Page() { return <StudioPageShell slug="huffman" name="Huffman Coding" keyword="Huffman coding compression" lede="Give common letters short codes and rare ones long codes, and you compress data optimally. Huffman coding is the trick inside ZIP, JPEG, and MP3." about="Huffman coding builds an optimal prefix code by repeatedly merging the two least-frequent symbols into a tree. Frequent symbols end up near the root with short codes, rare ones deeper with long codes, and no code is a prefix of another so decoding is unambiguous. It achieves the best possible compression for symbol-by-symbol encoding and underlies countless file formats."><HuffmanStudio /></StudioPageShell>; }
