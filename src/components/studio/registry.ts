@@ -204,6 +204,14 @@ import { SimulatedAnnealingStudio } from "./SimulatedAnnealingStudio";
 import { CriticalPathStudio } from "./CriticalPathStudio";
 import { GameTheoryStudio } from "./GameTheoryStudio";
 import { MaxFlowStudio } from "./MaxFlowStudio";
+import { GraphShortestPathStudio } from "./GraphShortestPathStudio";
+import { MSTStudio } from "./MSTStudio";
+import { GraphColoringStudio } from "./GraphColoringStudio";
+import { SmallWorldStudio } from "./SmallWorldStudio";
+import { PageRankStudio } from "./PageRankStudio";
+import { BipartiteMatchingStudio } from "./BipartiteMatchingStudio";
+import { CentralityStudio } from "./CentralityStudio";
+import { GraphTraversalStudio } from "./GraphTraversalStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -412,6 +420,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "critical-path": CriticalPathStudio,
   "game-theory": GameTheoryStudio,
   "max-flow": MaxFlowStudio,
+  "shortest-path": GraphShortestPathStudio,
+  "spanning-tree": MSTStudio,
+  "graph-coloring": GraphColoringStudio,
+  "small-world": SmallWorldStudio,
+  pagerank: PageRankStudio,
+  "bipartite-matching": BipartiteMatchingStudio,
+  centrality: CentralityStudio,
+  "graph-traversal": GraphTraversalStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

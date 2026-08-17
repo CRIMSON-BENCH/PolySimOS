@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MSTStudio } from "@/components/studio/MSTStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Minimum Spanning Tree Visualizer (Kruskal, Browser)", description: "Build a minimum spanning tree with Kruskal's algorithm — connect every node at the lowest total cost. Free, interactive.", alternates: { canonical: "/studio/spanning-tree" } };
+export default function Page() { return <StudioPageShell slug="spanning-tree" name="Minimum Spanning Tree" keyword="minimum spanning tree Kruskal" lede="Connect everything for the least cost. A minimum spanning tree links every node with no wasted edges and no loops — the cheapest possible backbone." about="Kruskal&apos;s algorithm sorts every edge by weight and greedily adds the cheapest that does not create a cycle, using a union-find structure to detect cycles instantly. The result spans all nodes at minimum total cost. It designs efficient road, pipeline, power, and telecom networks, and underlies clustering algorithms."><MSTStudio /></StudioPageShell>; }

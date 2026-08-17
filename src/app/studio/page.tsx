@@ -220,6 +220,14 @@ const SIMS = [
   { slug: "critical-path", name: "Critical Path (CPM)", desc: "Project scheduling.", tag: "Optimization" },
   { slug: "game-theory", name: "Game Theory (Nash)", desc: "2×2 equilibria.", tag: "Optimization" },
   { slug: "max-flow", name: "Maximum Flow", desc: "Network flow & min cut.", tag: "Optimization" },
+  { slug: "shortest-path", name: "Shortest Path", desc: "Dijkstra weighted graph.", tag: "Graph Theory" },
+  { slug: "spanning-tree", name: "Spanning Tree", desc: "Kruskal MST.", tag: "Graph Theory" },
+  { slug: "graph-coloring", name: "Graph Coloring", desc: "Chromatic number.", tag: "Graph Theory" },
+  { slug: "small-world", name: "Small-World Network", desc: "Watts-Strogatz rewiring.", tag: "Graph Theory" },
+  { slug: "pagerank", name: "PageRank", desc: "Importance by links.", tag: "Graph Theory" },
+  { slug: "bipartite-matching", name: "Bipartite Matching", desc: "Optimal assignment.", tag: "Graph Theory" },
+  { slug: "centrality", name: "Network Centrality", desc: "Who matters most.", tag: "Graph Theory" },
+  { slug: "graph-traversal", name: "Graph Traversal", desc: "BFS vs DFS.", tag: "Graph Theory" },
 ];
 
 export default function StudioIndex() {

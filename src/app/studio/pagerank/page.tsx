@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PageRankStudio } from "@/components/studio/PageRankStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "PageRank Visualizer (Browser)", description: "See how PageRank ranks nodes by importance using the random-surfer model and damping factor. The algorithm behind Google. Free.", alternates: { canonical: "/studio/pagerank" } };
+export default function Page() { return <StudioPageShell slug="pagerank" name="PageRank" keyword="PageRank algorithm" lede="The algorithm that built Google. A node is important if important nodes point to it — a beautifully circular definition that a little linear algebra makes concrete." about="PageRank models a random surfer who follows a link with probability d (the damping factor) and jumps to a random node otherwise. The long-run fraction of time spent at each node is its rank — the dominant eigenvector of the link matrix, found by power iteration. Beyond web search, it ranks proteins, citations, roads, and social influence."><PageRankStudio /></StudioPageShell>; }

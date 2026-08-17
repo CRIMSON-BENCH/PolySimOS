@@ -214,6 +214,14 @@ const OTHER_SIMS = [
   { name: "Critical Path", href: "/studio/critical-path" },
   { name: "Game Theory (Nash)", href: "/studio/game-theory" },
   { name: "Maximum Flow", href: "/studio/max-flow" },
+  { name: "Shortest Path", href: "/studio/shortest-path" },
+  { name: "Spanning Tree", href: "/studio/spanning-tree" },
+  { name: "Graph Coloring", href: "/studio/graph-coloring" },
+  { name: "Small-World Network", href: "/studio/small-world" },
+  { name: "PageRank", href: "/studio/pagerank" },
+  { name: "Bipartite Matching", href: "/studio/bipartite-matching" },
+  { name: "Network Centrality", href: "/studio/centrality" },
+  { name: "Graph Traversal", href: "/studio/graph-traversal" },
 ];
 
 export function StudioPageShell({
