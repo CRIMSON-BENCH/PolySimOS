@@ -132,6 +132,14 @@ const SIMS = [
   { slug: "telescope", name: "Telescope Optics", desc: "Resolution & magnification.", tag: "Astronomy" },
   { slug: "parallax", name: "Stellar Parallax", desc: "Distance from angle shift.", tag: "Astronomy" },
   { slug: "escape-velocity", name: "Escape Velocity", desc: "Speed to leave a world.", tag: "Astronomy" },
+  { slug: "energy-balance", name: "Energy Balance", desc: "Greenhouse equilibrium temp.", tag: "Earth & Climate" },
+  { slug: "daisyworld", name: "Daisyworld", desc: "Planetary self-regulation.", tag: "Earth & Climate" },
+  { slug: "milankovitch", name: "Milankovitch Cycles", desc: "Orbital forcing of ice ages.", tag: "Earth & Climate" },
+  { slug: "tsunami", name: "Tsunami Propagation", desc: "Shallow-water wave shoaling.", tag: "Earth & Climate" },
+  { slug: "carbon-cycle", name: "Carbon Cycle", desc: "Reservoir box model.", tag: "Earth & Climate" },
+  { slug: "seismic", name: "Earthquake Shaking", desc: "Magnitude, energy, intensity.", tag: "Earth & Climate" },
+  { slug: "groundwater", name: "Groundwater Drawdown", desc: "Well cone of depression.", tag: "Earth & Climate" },
+  { slug: "lapse-rate", name: "Lapse Rate", desc: "Atmosphere & cloud base.", tag: "Earth & Climate" },
 ];
 
 export default function StudioIndex() {

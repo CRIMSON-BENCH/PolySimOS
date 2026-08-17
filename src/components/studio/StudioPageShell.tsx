@@ -126,6 +126,14 @@ const OTHER_SIMS = [
   { name: "Telescope Optics", href: "/studio/telescope" },
   { name: "Stellar Parallax", href: "/studio/parallax" },
   { name: "Escape Velocity", href: "/studio/escape-velocity" },
+  { name: "Energy Balance", href: "/studio/energy-balance" },
+  { name: "Daisyworld", href: "/studio/daisyworld" },
+  { name: "Milankovitch Cycles", href: "/studio/milankovitch" },
+  { name: "Tsunami Propagation", href: "/studio/tsunami" },
+  { name: "Carbon Cycle", href: "/studio/carbon-cycle" },
+  { name: "Earthquake Shaking", href: "/studio/seismic" },
+  { name: "Groundwater Drawdown", href: "/studio/groundwater" },
+  { name: "Lapse Rate", href: "/studio/lapse-rate" },
 ];
 
 export function StudioPageShell({

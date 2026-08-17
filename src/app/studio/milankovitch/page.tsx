@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MilankovitchStudio } from "@/components/studio/MilankovitchStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Milankovitch Cycles Simulator (Browser)", description: "See how eccentricity, obliquity, and precession combine to drive summer insolation and the ice ages. Free, interactive climate tool.", alternates: { canonical: "/studio/milankovitch" } };
+export default function Page() { return <StudioPageShell slug="milankovitch" name="Milankovitch Cycles" keyword="Milankovitch cycles" lede="The ice ages keep a beat set by Earth&apos;s orbit. Three slow astronomical cycles combine into the summer sunlight that grows and melts the great ice sheets." about="Milankovitch cycles are three periodic changes in Earth&apos;s orbit and spin: eccentricity (~100,000 years), axial tilt or obliquity (~41,000 years), and precession (~23,000 years). Their combination modulates high-latitude summer insolation, which paces the glacial-interglacial cycles seen in ice cores and deep-sea sediments."><MilankovitchStudio /></StudioPageShell>; }

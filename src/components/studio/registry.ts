@@ -116,6 +116,14 @@ import { HubbleStudio } from "./HubbleStudio";
 import { TelescopeStudio } from "./TelescopeStudio";
 import { ParallaxStudio } from "./ParallaxStudio";
 import { EscapeVelocityStudio } from "./EscapeVelocityStudio";
+import { EnergyBalanceStudio } from "./EnergyBalanceStudio";
+import { DaisyworldStudio } from "./DaisyworldStudio";
+import { MilankovitchStudio } from "./MilankovitchStudio";
+import { TsunamiStudio } from "./TsunamiStudio";
+import { CarbonCycleStudio } from "./CarbonCycleStudio";
+import { SeismicStudio } from "./SeismicStudio";
+import { GroundwaterStudio } from "./GroundwaterStudio";
+import { LapseRateStudio } from "./LapseRateStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -236,6 +244,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   telescope: TelescopeStudio,
   parallax: ParallaxStudio,
   "escape-velocity": EscapeVelocityStudio,
+  "energy-balance": EnergyBalanceStudio,
+  daisyworld: DaisyworldStudio,
+  milankovitch: MilankovitchStudio,
+  tsunami: TsunamiStudio,
+  "carbon-cycle": CarbonCycleStudio,
+  seismic: SeismicStudio,
+  groundwater: GroundwaterStudio,
+  "lapse-rate": LapseRateStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { TsunamiStudio } from "@/components/studio/TsunamiStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Tsunami Propagation Simulator (Shallow Water, Browser)", description: "See how a tsunami travels at jet speed in deep water and grows in amplitude as it shoals toward shore. Free, interactive.", alternates: { canonical: "/studio/tsunami" } };
+export default function Page() { return <StudioPageShell slug="tsunami" name="Tsunami Propagation" keyword="tsunami propagation simulator" lede="In the open ocean a tsunami is barely a ripple travelling at 700 km/h. Near shore it slows, steepens, and rears up — the physics of shallow-water waves." about="A tsunami&apos;s wavelength dwarfs the ocean depth, so it behaves as a shallow-water wave with speed √(g·h). As it reaches shallower coast it slows, and conservation of energy forces its amplitude to grow as h^(−1/4), Green&apos;s law. This shoaling is why a low deep-ocean swell becomes a towering coastal wave. Educational model only."><TsunamiStudio /></StudioPageShell>; }
