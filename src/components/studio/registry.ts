@@ -47,6 +47,14 @@ import { EpidemicNetworkStudio } from "./EpidemicNetworkStudio";
 import { GradientDescentStudio } from "./GradientDescentStudio";
 import { ComplexStudio } from "./ComplexStudio";
 import { SortingStudio } from "./SortingStudio";
+import { BoidsStudio } from "./BoidsStudio";
+import { TrafficStudio } from "./TrafficStudio";
+import { PredatorPreyStudio } from "./PredatorPreyStudio";
+import { LissajousStudio } from "./LissajousStudio";
+import { MagneticPendulumStudio } from "./MagneticPendulumStudio";
+import { PercolationStudio } from "./PercolationStudio";
+import { DLAStudio } from "./DLAStudio";
+import { RayOpticsStudio } from "./RayOpticsStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -98,6 +106,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "gradient-descent": GradientDescentStudio,
   complex: ComplexStudio,
   sorting: SortingStudio,
+  boids: BoidsStudio,
+  traffic: TrafficStudio,
+  "predator-prey": PredatorPreyStudio,
+  lissajous: LissajousStudio,
+  "magnetic-pendulum": MagneticPendulumStudio,
+  percolation: PercolationStudio,
+  dla: DLAStudio,
+  "ray-optics": RayOpticsStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

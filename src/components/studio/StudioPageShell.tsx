@@ -57,6 +57,14 @@ const OTHER_SIMS = [
   { name: "Gradient Descent", href: "/studio/gradient-descent" },
   { name: "Complex Functions", href: "/studio/complex" },
   { name: "Sorting Visualizer", href: "/studio/sorting" },
+  { name: "Boids Flocking", href: "/studio/boids" },
+  { name: "Traffic Flow", href: "/studio/traffic" },
+  { name: "Spatial Predator–Prey", href: "/studio/predator-prey" },
+  { name: "Lissajous Curves", href: "/studio/lissajous" },
+  { name: "Magnetic Pendulum", href: "/studio/magnetic-pendulum" },
+  { name: "Percolation", href: "/studio/percolation" },
+  { name: "DLA Growth", href: "/studio/dla" },
+  { name: "Ray Optics / Lenses", href: "/studio/ray-optics" },
 ];
 
 export function StudioPageShell({

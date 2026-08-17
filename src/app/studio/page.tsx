@@ -63,6 +63,14 @@ const SIMS = [
   { slug: "gradient-descent", name: "Gradient Descent", desc: "Optimization on loss landscapes.", tag: "Data / ML" },
   { slug: "complex", name: "Complex Functions", desc: "Domain coloring of f(z).", tag: "Math" },
   { slug: "sorting", name: "Sorting Visualizer", desc: "Watch algorithms sort in real time.", tag: "CS" },
+  { slug: "boids", name: "Boids Flocking", desc: "Emergent flocking from three rules.", tag: "Emergence" },
+  { slug: "traffic", name: "Traffic Flow", desc: "Phantom jams from random braking.", tag: "Complex Systems" },
+  { slug: "predator-prey", name: "Spatial Predator–Prey", desc: "Agent-based ecology with waves.", tag: "Bio" },
+  { slug: "lissajous", name: "Lissajous Curves", desc: "Two sine waves, endless patterns.", tag: "Math" },
+  { slug: "magnetic-pendulum", name: "Magnetic Pendulum", desc: "Fractal basins of attraction.", tag: "Physics" },
+  { slug: "percolation", name: "Percolation", desc: "A phase transition in connectivity.", tag: "Physics" },
+  { slug: "dla", name: "DLA Growth", desc: "Branching fractals from random walks.", tag: "Physics" },
+  { slug: "ray-optics", name: "Ray Optics / Lenses", desc: "Trace rays through lenses.", tag: "Physics" },
 ];
 
 export default function StudioIndex() {

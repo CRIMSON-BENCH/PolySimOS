@@ -42,6 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/double-pendulum", 0.8), u("/studio/projectile", 0.8), u("/studio/ising", 0.8), u("/studio/fractals", 0.8), u("/studio/fourier", 0.8), u("/studio/grapher", 0.8), u("/studio/surface-3d", 0.8), u("/studio/matrix", 0.8),
     u("/studio/attractors", 0.8), u("/studio/rlc", 0.8), u("/studio/wave-interference", 0.8), u("/studio/cellular-automata", 0.8), u("/studio/random-walk", 0.8), u("/studio/taylor", 0.8), u("/studio/newton", 0.8), u("/studio/distributions", 0.8),
     u("/studio/kepler", 0.8), u("/studio/double-slit", 0.8), u("/studio/cloth", 0.8), u("/studio/gravity-well", 0.8), u("/studio/epidemic-network", 0.8), u("/studio/gradient-descent", 0.8), u("/studio/complex", 0.8), u("/studio/sorting", 0.8),
+    u("/studio/boids", 0.8), u("/studio/traffic", 0.8), u("/studio/predator-prey", 0.8), u("/studio/lissajous", 0.8), u("/studio/magnetic-pendulum", 0.8), u("/studio/percolation", 0.8), u("/studio/dla", 0.8), u("/studio/ray-optics", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 
