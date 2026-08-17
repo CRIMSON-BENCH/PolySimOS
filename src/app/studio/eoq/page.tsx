@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { EOQStudio } from "@/components/studio/EOQStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Economic Order Quantity (EOQ) Calculator (Browser)", description: "Find the order size that minimizes total inventory cost with the EOQ model, balancing ordering and holding costs. Free, interactive.", alternates: { canonical: "/studio/eoq" } };
+export default function Page() { return <StudioPageShell slug="eoq" name="Economic Order Quantity" keyword="EOQ calculator" lede="How much should you order at once? Too little and ordering costs pile up; too much and storage eats you alive. The EOQ finds the exact sweet spot." about="The Economic Order Quantity, EOQ = √(2DS/H), minimizes the total of ordering and holding costs from annual demand D, order cost S, and holding cost H. At the optimum those two costs are exactly equal — the crossing point of the two curves. It is the foundational model of inventory management and supply-chain planning."><EOQStudio /></StudioPageShell>; }

@@ -206,6 +206,14 @@ const OTHER_SIMS = [
   { name: "Fatigue (S-N)", href: "/studio/fatigue" },
   { name: "Entropy", href: "/studio/entropy" },
   { name: "Thermal Resistance", href: "/studio/thermal-resistance" },
+  { name: "Linear Programming", href: "/studio/linear-programming" },
+  { name: "0/1 Knapsack", href: "/studio/knapsack" },
+  { name: "M/M/1 Queue", href: "/studio/queueing" },
+  { name: "Economic Order Quantity", href: "/studio/eoq" },
+  { name: "Simulated Annealing", href: "/studio/simulated-annealing" },
+  { name: "Critical Path", href: "/studio/critical-path" },
+  { name: "Game Theory (Nash)", href: "/studio/game-theory" },
+  { name: "Maximum Flow", href: "/studio/max-flow" },
 ];
 
 export function StudioPageShell({

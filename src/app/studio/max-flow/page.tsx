@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MaxFlowStudio } from "@/components/studio/MaxFlowStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Maximum Flow Visualizer (Edmonds-Karp, Browser)", description: "Compute maximum flow through a capacitated network and see the min-cut bottleneck. Free, interactive graph algorithms.", alternates: { canonical: "/studio/max-flow" } };
+export default function Page() { return <StudioPageShell slug="max-flow" name="Maximum Flow" keyword="maximum flow min cut" lede="How much can you push through a network of pipes, roads, or wires? The max-flow problem finds the answer — and reveals the bottleneck that limits it." about="Given a network of edges with capacities, the maximum-flow problem finds the greatest total flow from source to sink. The Edmonds-Karp algorithm repeatedly finds a shortest augmenting path and saturates it. By the celebrated max-flow min-cut theorem, the maximum flow equals the capacity of the smallest set of edges whose removal disconnects source from sink — the true bottleneck."><MaxFlowStudio /></StudioPageShell>; }

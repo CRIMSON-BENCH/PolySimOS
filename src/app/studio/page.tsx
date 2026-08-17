@@ -212,6 +212,14 @@ const SIMS = [
   { slug: "fatigue", name: "Fatigue (S-N)", desc: "Cyclic life to failure.", tag: "Materials" },
   { slug: "entropy", name: "Entropy", desc: "The second law in action.", tag: "Materials" },
   { slug: "thermal-resistance", name: "Thermal Resistance", desc: "R-value composite wall.", tag: "Materials" },
+  { slug: "linear-programming", name: "Linear Programming", desc: "Optimize over constraints.", tag: "Optimization" },
+  { slug: "knapsack", name: "0/1 Knapsack", desc: "DP value maximization.", tag: "Optimization" },
+  { slug: "queueing", name: "M/M/1 Queue", desc: "Queueing theory.", tag: "Optimization" },
+  { slug: "eoq", name: "Economic Order Quantity", desc: "Inventory cost optimum.", tag: "Optimization" },
+  { slug: "simulated-annealing", name: "Simulated Annealing", desc: "Escape local minima.", tag: "Optimization" },
+  { slug: "critical-path", name: "Critical Path (CPM)", desc: "Project scheduling.", tag: "Optimization" },
+  { slug: "game-theory", name: "Game Theory (Nash)", desc: "2×2 equilibria.", tag: "Optimization" },
+  { slug: "max-flow", name: "Maximum Flow", desc: "Network flow & min cut.", tag: "Optimization" },
 ];
 
 export default function StudioIndex() {

@@ -61,6 +61,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/particle-box", 0.8), u("/studio/quantum-tunneling", 0.8), u("/studio/bloch-sphere", 0.8), u("/studio/hydrogen-orbitals", 0.8), u("/studio/special-relativity", 0.8), u("/studio/photoelectric", 0.8), u("/studio/quantum-harmonic", 0.8), u("/studio/stern-gerlach", 0.8),
     u("/studio/harmonic-series", 0.8), u("/studio/equal-temperament", 0.8), u("/studio/chladni", 0.8), u("/studio/helmholtz-resonator", 0.8), u("/studio/room-modes", 0.8), u("/studio/reverb-time", 0.8), u("/studio/sound-levels", 0.8), u("/studio/additive-synthesis", 0.8),
     u("/studio/stress-strain", 0.8), u("/studio/carnot-cycle", 0.8), u("/studio/otto-cycle", 0.8), u("/studio/phase-diagram", 0.8), u("/studio/thermal-expansion", 0.8), u("/studio/fatigue", 0.8), u("/studio/entropy", 0.8), u("/studio/thermal-resistance", 0.8),
+    u("/studio/linear-programming", 0.8), u("/studio/knapsack", 0.8), u("/studio/queueing", 0.8), u("/studio/eoq", 0.8), u("/studio/simulated-annealing", 0.8), u("/studio/critical-path", 0.8), u("/studio/game-theory", 0.8), u("/studio/max-flow", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

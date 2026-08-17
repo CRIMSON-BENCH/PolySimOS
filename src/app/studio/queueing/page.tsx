@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { QueueingStudio } from "@/components/studio/QueueingStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "M/M/1 Queue Simulator (Queueing Theory, Browser)", description: "Simulate an M/M/1 queue and see how utilization drives wait time and queue length toward infinity. Free, interactive.", alternates: { canonical: "/studio/queueing" } };
+export default function Page() { return <StudioPageShell slug="queueing" name="M/M/1 Queue" keyword="M/M/1 queueing theory" lede="Why does a line that is 95% busy feel infinitely long? Queueing theory explains it — and the M/M/1 queue is where it all starts." about="The M/M/1 queue models a single server with random (Poisson) arrivals and exponential service times. Its utilization ρ = λ/μ governs everything: average queue length and waiting time both blow up as ρ approaches 1. This nonlinear explosion is why call centers, networks, and checkouts are engineered to run below full capacity."><QueueingStudio /></StudioPageShell>; }

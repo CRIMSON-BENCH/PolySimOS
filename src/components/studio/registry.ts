@@ -196,6 +196,14 @@ import { ThermalExpansionStudio } from "./ThermalExpansionStudio";
 import { FatigueStudio } from "./FatigueStudio";
 import { EntropyStudio } from "./EntropyStudio";
 import { ThermalResistanceStudio } from "./ThermalResistanceStudio";
+import { LinearProgrammingStudio } from "./LinearProgrammingStudio";
+import { KnapsackStudio } from "./KnapsackStudio";
+import { QueueingStudio } from "./QueueingStudio";
+import { EOQStudio } from "./EOQStudio";
+import { SimulatedAnnealingStudio } from "./SimulatedAnnealingStudio";
+import { CriticalPathStudio } from "./CriticalPathStudio";
+import { GameTheoryStudio } from "./GameTheoryStudio";
+import { MaxFlowStudio } from "./MaxFlowStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -396,6 +404,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   fatigue: FatigueStudio,
   entropy: EntropyStudio,
   "thermal-resistance": ThermalResistanceStudio,
+  "linear-programming": LinearProgrammingStudio,
+  knapsack: KnapsackStudio,
+  queueing: QueueingStudio,
+  eoq: EOQStudio,
+  "simulated-annealing": SimulatedAnnealingStudio,
+  "critical-path": CriticalPathStudio,
+  "game-theory": GameTheoryStudio,
+  "max-flow": MaxFlowStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);
