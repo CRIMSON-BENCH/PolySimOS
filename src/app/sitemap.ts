@@ -47,6 +47,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/studio/doppler", 0.8), u("/studio/snells-law", 0.8), u("/studio/diffraction-grating", 0.8), u("/studio/beats", 0.8), u("/studio/mirror", 0.8), u("/studio/prism", 0.8), u("/studio/fft", 0.8),
     u("/studio/titration", 0.8), u("/studio/reaction-kinetics", 0.8), u("/studio/equilibrium", 0.8), u("/studio/ph", 0.8), u("/studio/radioactive-decay", 0.8), u("/studio/maxwell-boltzmann", 0.8), u("/studio/ideal-gas", 0.8),
     u("/studio/bifurcation", 0.8), u("/studio/direction-field", 0.8), u("/studio/riemann", 0.8), u("/studio/eigenvectors", 0.8), u("/studio/markov", 0.8), u("/studio/parametric", 0.8), u("/studio/numerical-methods", 0.8),
+    u("/studio/pathfinding", 0.8), u("/studio/maze", 0.8), u("/studio/neural-net", 0.8), u("/studio/kmeans", 0.8), u("/studio/convex-hull", 0.8), u("/studio/l-system", 0.8), u("/studio/turing-machine", 0.8), u("/studio/convolution", 0.8),
     u("/product/node-graph", 0.5), u("/product/live-render", 0.5), u("/product/ai-copilot", 0.6), u("/product/data-inspector", 0.5), u("/product/hybrid-compute", 0.5),
   ];
 

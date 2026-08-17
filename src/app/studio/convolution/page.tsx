@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ConvolutionStudio } from "@/components/studio/ConvolutionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Image Convolution & Kernel Visualizer (Browser)", description: "Apply blur, sharpen, edge-detect, Sobel, and emboss kernels to an image and see the convolution behind every CNN. Free.", alternates: { canonical: "/studio/convolution" } };
+export default function Page() { return <StudioPageShell slug="convolution" name="Image Convolution / Kernels" keyword="image convolution kernel" lede="Blur, sharpen, and edge detection all come from one operation: sliding a small matrix over an image. It is also the exact operation a CNN learns." about="Convolution replaces each pixel with a weighted sum of its neighbors, where the weights form a small kernel matrix. Different kernels produce blurring, sharpening, embossing, or edge maps. Convolutional neural networks work by learning these kernels from data instead of hand-picking them."><ConvolutionStudio /></StudioPageShell>; }

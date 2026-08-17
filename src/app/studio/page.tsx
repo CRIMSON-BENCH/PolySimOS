@@ -100,6 +100,14 @@ const SIMS = [
   { slug: "markov", name: "Markov Chains", desc: "Converge to a stationary distribution.", tag: "Math" },
   { slug: "parametric", name: "Parametric Grapher", desc: "Trace x(t), y(t) curves.", tag: "Math" },
   { slug: "numerical-methods", name: "Euler vs RK4", desc: "ODE integration accuracy.", tag: "Math" },
+  { slug: "pathfinding", name: "A* Pathfinding", desc: "Shortest path, draw walls.", tag: "CS / AI" },
+  { slug: "maze", name: "Maze Generator", desc: "Carve & solve perfect mazes.", tag: "CS / AI" },
+  { slug: "neural-net", name: "Neural Network", desc: "Train an MLP, watch it learn.", tag: "CS / AI" },
+  { slug: "kmeans", name: "k-Means Clustering", desc: "Unsupervised clustering, live.", tag: "CS / AI" },
+  { slug: "convex-hull", name: "Convex Hull", desc: "Wrap points in O(n log n).", tag: "CS / AI" },
+  { slug: "l-system", name: "L-System Fractals", desc: "Grow plants from grammars.", tag: "CS / AI" },
+  { slug: "turing-machine", name: "Turing Machine", desc: "The model of computation.", tag: "CS / AI" },
+  { slug: "convolution", name: "Image Convolution", desc: "Kernels behind every CNN.", tag: "CS / AI" },
 ];
 
 export default function StudioIndex() {

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { TuringStudio } from "@/components/studio/TuringStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Turing Machine Simulator (Browser)", description: "Run a Turing machine step by step — busy beaver and binary increment — and watch the tape, head, and state evolve. Free.", alternates: { canonical: "/studio/turing-machine" } };
+export default function Page() { return <StudioPageShell slug="turing-machine" name="Turing Machine" keyword="Turing machine simulator" lede="The abstract machine that defines computation itself. Watch a read-write head crawl an infinite tape, following a tiny rule table to compute — or to run the famous busy beaver." about="A Turing machine has a finite set of states, an infinite tape of symbols, and a rule table: given the current state and the symbol under the head, it writes a symbol, moves left or right, and switches state. This minimal model captures everything any computer can compute — the foundation of theoretical computer science."><TuringStudio /></StudioPageShell>; }

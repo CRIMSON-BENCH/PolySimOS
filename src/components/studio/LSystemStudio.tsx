@@ -1,0 +1,48 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { StudioChrome, Slider, Stat } from "./StudioChrome";
+
+const PRESETS: Record<string, { axiom: string; rules: Record<string, string>; angle: number; iter: number }> = {
+  "Fractal plant": { axiom: "X", rules: { X: "F+[[X]-X]-F[-FX]+X", F: "FF" }, angle: 25, iter: 5 },
+  "Koch curve": { axiom: "F", rules: { F: "F+F-F-F+F" }, angle: 90, iter: 4 },
+  "Sierpinski": { axiom: "F-G-G", rules: { F: "F-G+F+G-F", G: "GG" }, angle: 120, iter: 5 },
+  "Dragon curve": { axiom: "F", rules: { F: "F+G", G: "F-G" }, angle: 90, iter: 11 },
+};
+
+export function LSystemStudio() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [preset, setPreset] = useState("Fractal plant");
+  const [iter, setIter] = useState(5);
+  const [len, setLen] = useState(0);
+
+  useEffect(() => { setIter(PRESETS[preset].iter); }, [preset]);
+
+  useEffect(() => {
+    const p = PRESETS[preset]; let str = p.axiom; const N = Math.round(iter);
+    for (let i = 0; i < N; i++) { let next = ""; for (const ch of str) next += p.rules[ch] ?? ch; str = next; if (str.length > 400000) break; }
+    setLen(str.length);
+    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // measure bounds first
+    const rad = (p.angle * Math.PI) / 180; let x = 0, y = 0, a = -Math.PI / 2; const stack: [number, number, number][] = [];
+    let minX = 0, maxX = 0, minY = 0, maxY = 0;
+    for (const ch of str) { if (ch === "F" || ch === "G") { x += Math.cos(a); y += Math.sin(a); minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y); } else if (ch === "+") a += rad; else if (ch === "-") a -= rad; else if (ch === "[") stack.push([x, y, a]); else if (ch === "]") { [x, y, a] = stack.pop()!; } }
+    const scale = Math.min((canvas.width - 40) / (maxX - minX || 1), (canvas.height - 40) / (maxY - minY || 1));
+    const ox = 20 - minX * scale, oy = 20 - minY * scale;
+    x = 0; y = 0; a = -Math.PI / 2; ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 1; ctx.beginPath();
+    let px = ox, py = oy;
+    for (const ch of str) { if (ch === "F" || ch === "G") { x += Math.cos(a); y += Math.sin(a); const nx = ox + x * scale, ny = oy + y * scale; ctx.moveTo(px, py); ctx.lineTo(nx, ny); px = nx; py = ny; } else if (ch === "+") a += rad; else if (ch === "-") a -= rad; else if (ch === "[") stack.push([x, y, a]); else if (ch === "]") { [x, y, a] = stack.pop()!; px = ox + x * scale; py = oy + y * scale; } }
+    ctx.stroke();
+  }, [preset, iter]);
+
+  return (
+    <StudioChrome title="L-System Fractals" tagline="turtle graphics · rewriting rules"
+      controls={<div>
+        <div className="mb-3 grid grid-cols-2 gap-2">{Object.keys(PRESETS).map((k) => <button key={k} onClick={() => setPreset(k)} className={`rounded-lg px-2 py-1 text-xs font-semibold ${preset === k ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{k}</button>)}</div>
+        <Slider label="Iterations" value={iter} min={1} max={preset === "Dragon curve" ? 14 : 6} step={1} onChange={setIter} />
+        <p className="mt-3 text-xs text-slate-500">A Lindenmayer system grows a string by rewriting each symbol with a rule, then reads it as turtle commands: F draw, +/− turn, [ ] push/pop. Simple rules, botanical complexity.</p>
+      </div>}
+      inspector={<div><Stat label="Angle" value={`${PRESETS[preset].angle}°`} /><Stat label="Symbols" value={len.toLocaleString()} /><Stat label="Axiom" value={PRESETS[preset].axiom} /></div>}
+    ><canvas ref={canvasRef} width={560} height={480} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
+  );
+}

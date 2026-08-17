@@ -94,6 +94,14 @@ const OTHER_SIMS = [
   { name: "Markov Chains", href: "/studio/markov" },
   { name: "Parametric Grapher", href: "/studio/parametric" },
   { name: "Euler vs RK4", href: "/studio/numerical-methods" },
+  { name: "A* Pathfinding", href: "/studio/pathfinding" },
+  { name: "Maze Generator", href: "/studio/maze" },
+  { name: "Neural Network", href: "/studio/neural-net" },
+  { name: "k-Means Clustering", href: "/studio/kmeans" },
+  { name: "Convex Hull", href: "/studio/convex-hull" },
+  { name: "L-System Fractals", href: "/studio/l-system" },
+  { name: "Turing Machine", href: "/studio/turing-machine" },
+  { name: "Image Convolution", href: "/studio/convolution" },
 ];
 
 export function StudioPageShell({

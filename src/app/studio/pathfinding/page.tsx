@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PathfindingStudio } from "@/components/studio/PathfindingStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "A* Pathfinding Visualizer (Browser)", description: "Watch A* and Dijkstra find the shortest path across a grid. Draw walls and compare how each algorithm searches. Free, interactive.", alternates: { canonical: "/studio/pathfinding" } };
+export default function Page() { return <StudioPageShell slug="pathfinding" name="A* Pathfinding" keyword="A* pathfinding visualizer" lede="The algorithm behind game AI, GPS routing, and robotics. Draw walls and watch A* head straight for the goal while Dijkstra searches blindly outward." about="Both algorithms find the shortest path on a weighted graph. Dijkstra expands the closest unvisited node in every direction; A* adds a heuristic estimate of the remaining distance, so it prioritizes nodes that lead toward the goal — usually reaching it far faster while still guaranteeing the shortest path."><PathfindingStudio /></StudioPageShell>; }

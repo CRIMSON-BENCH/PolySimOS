@@ -84,6 +84,14 @@ import { EigenStudio } from "./EigenStudio";
 import { MarkovStudio } from "./MarkovStudio";
 import { ParametricStudio } from "./ParametricStudio";
 import { NumericalMethodsStudio } from "./NumericalMethodsStudio";
+import { PathfindingStudio } from "./PathfindingStudio";
+import { MazeStudio } from "./MazeStudio";
+import { NeuralNetStudio } from "./NeuralNetStudio";
+import { KMeansStudio } from "./KMeansStudio";
+import { ConvexHullStudio } from "./ConvexHullStudio";
+import { LSystemStudio } from "./LSystemStudio";
+import { TuringStudio } from "./TuringStudio";
+import { ConvolutionStudio } from "./ConvolutionStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -172,6 +180,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   markov: MarkovStudio,
   parametric: ParametricStudio,
   "numerical-methods": NumericalMethodsStudio,
+  pathfinding: PathfindingStudio,
+  maze: MazeStudio,
+  "neural-net": NeuralNetStudio,
+  kmeans: KMeansStudio,
+  "convex-hull": ConvexHullStudio,
+  "l-system": LSystemStudio,
+  "turing-machine": TuringStudio,
+  convolution: ConvolutionStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

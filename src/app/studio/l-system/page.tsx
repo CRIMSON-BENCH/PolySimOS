@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LSystemStudio } from "@/components/studio/LSystemStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "L-System Fractal Generator (Browser)", description: "Generate fractal plants, Koch curves, dragon curves, and Sierpinski shapes from Lindenmayer-system rewriting rules. Free.", alternates: { canonical: "/studio/l-system" } };
+export default function Page() { return <StudioPageShell slug="l-system" name="L-System Fractals" keyword="L-system fractal generator" lede="A handful of rewriting rules grow into ferns, snowflakes, and dragon curves. This is how nature — and computer graphics — build organic complexity." about="A Lindenmayer system starts from an axiom string and repeatedly replaces each symbol using production rules. The final string is read as turtle-graphics commands (draw, turn, branch), turning a compact recursive grammar into an intricate fractal — the classic model of plant growth."><LSystemStudio /></StudioPageShell>; }

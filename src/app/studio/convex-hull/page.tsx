@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ConvexHullStudio } from "@/components/studio/ConvexHullStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Convex Hull Visualizer (Browser)", description: "Compute the convex hull of a set of points with Andrew's monotone chain algorithm. Free, interactive computational geometry.", alternates: { canonical: "/studio/convex-hull" } };
+export default function Page() { return <StudioPageShell slug="convex-hull" name="Convex Hull" keyword="convex hull algorithm" lede="The smallest convex shape wrapping a cloud of points — the rubber-band boundary. A cornerstone of computational geometry, collision detection, and GIS." about="Andrew&apos;s monotone-chain algorithm sorts the points, then sweeps once to build the lower boundary and once for the upper, discarding any point that would make a concave turn. The result is the convex hull in O(n log n) time, dominated by the sort."><ConvexHullStudio /></StudioPageShell>; }

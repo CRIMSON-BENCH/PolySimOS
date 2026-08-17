@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { KMeansStudio } from "@/components/studio/KMeansStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "k-Means Clustering Visualizer (Browser)", description: "Watch k-means clustering group data points and move centroids to convergence. Free, interactive machine learning.", alternates: { canonical: "/studio/kmeans" } };
+export default function Page() { return <StudioPageShell slug="kmeans" name="k-Means Clustering" keyword="k-means clustering" lede="The workhorse of unsupervised learning. Watch centroids drift into place as k-means discovers the clusters hidden in unlabeled data." about="k-means alternates two steps: assign every point to its nearest centroid, then move each centroid to the average of its assigned points. Repeating drives down the within-cluster variance (inertia) until it converges. Try setting k different from the true number of clusters to see how the choice matters."><KMeansStudio /></StudioPageShell>; }

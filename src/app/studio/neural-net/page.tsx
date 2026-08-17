@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { NeuralNetStudio } from "@/components/studio/NeuralNetStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Neural Network Playground (Browser)", description: "Train a small neural network in your browser and watch its decision boundary form via real backpropagation. Free, interactive.", alternates: { canonical: "/studio/neural-net" } };
+export default function Page() { return <StudioPageShell slug="neural-net" name="Neural Network Playground" keyword="neural network playground" lede="Watch a neural network learn in real time. As backpropagation adjusts its weights, the decision boundary bends to separate the two classes." about="This is a genuine two-layer perceptron trained by gradient descent and backpropagation, right in your browser. The colored background is the network output at every point; the dots are training data. Change the dataset, hidden-layer size, and learning rate to see how each shapes learning."><NeuralNetStudio /></StudioPageShell>; }
