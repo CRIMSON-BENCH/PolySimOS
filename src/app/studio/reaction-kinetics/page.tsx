@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { KineticsStudio } from "@/components/studio/KineticsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Reaction Kinetics Simulator (Browser) — Rate Laws", description: "Watch reactant concentration decay for zero-, first-, and second-order reactions, with an Arrhenius temperature effect. Free.", alternates: { canonical: "/studio/reaction-kinetics" } };
+export default function Page() { return <StudioPageShell slug="reaction-kinetics" name="Reaction Kinetics" keyword="reaction kinetics" lede="How fast does a reaction go? Pick the order and watch the reactant deplete — and heat it up to see the Arrhenius speed-up." about="Reaction rate depends on concentration through the rate law and on temperature through the Arrhenius equation. This tool integrates zero-, first-, and second-order kinetics so you can compare their characteristic decay shapes and half-lives."><KineticsStudio /></StudioPageShell>; }

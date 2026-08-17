@@ -86,6 +86,13 @@ const SIMS = [
   { slug: "mirror", name: "Curved Mirrors", desc: "Concave/convex ray tracing.", tag: "Optics" },
   { slug: "prism", name: "Prism Dispersion", desc: "White light into a spectrum.", tag: "Optics" },
   { slug: "fft", name: "Fourier Transform", desc: "Signal → frequency spectrum.", tag: "Signals" },
+  { slug: "titration", name: "Titration Curve", desc: "pH vs base added; equivalence point.", tag: "Chemistry" },
+  { slug: "reaction-kinetics", name: "Reaction Kinetics", desc: "Rate laws & Arrhenius decay.", tag: "Chemistry" },
+  { slug: "equilibrium", name: "Chemical Equilibrium", desc: "Le Chatelier shifts.", tag: "Chemistry" },
+  { slug: "ph", name: "pH Calculator", desc: "pH/pOH and the acid-base scale.", tag: "Chemistry" },
+  { slug: "radioactive-decay", name: "Radioactive Decay", desc: "Half-life exponential decay.", tag: "Chemistry" },
+  { slug: "maxwell-boltzmann", name: "Maxwell-Boltzmann", desc: "Molecular speed distribution.", tag: "Chemistry" },
+  { slug: "ideal-gas", name: "Ideal Gas Law", desc: "PV = nRT with a live piston.", tag: "Chemistry" },
 ];
 
 export default function StudioIndex() {

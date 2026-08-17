@@ -70,6 +70,13 @@ import { BeatsStudio } from "./BeatsStudio";
 import { MirrorStudio } from "./MirrorStudio";
 import { PrismStudio } from "./PrismStudio";
 import { FFTStudio } from "./FFTStudio";
+import { TitrationStudio } from "./TitrationStudio";
+import { KineticsStudio } from "./KineticsStudio";
+import { EquilibriumStudio } from "./EquilibriumStudio";
+import { PHStudio } from "./PHStudio";
+import { RadioactiveDecayStudio } from "./RadioactiveDecayStudio";
+import { MaxwellBoltzmannStudio } from "./MaxwellBoltzmannStudio";
+import { IdealGasStudio } from "./IdealGasStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -144,6 +151,13 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   mirror: MirrorStudio,
   prism: PrismStudio,
   fft: FFTStudio,
+  titration: TitrationStudio,
+  "reaction-kinetics": KineticsStudio,
+  equilibrium: EquilibriumStudio,
+  ph: PHStudio,
+  "radioactive-decay": RadioactiveDecayStudio,
+  "maxwell-boltzmann": MaxwellBoltzmannStudio,
+  "ideal-gas": IdealGasStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

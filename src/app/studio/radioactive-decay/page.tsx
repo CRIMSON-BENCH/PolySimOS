@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RadioactiveDecayStudio } from "@/components/studio/RadioactiveDecayStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Radioactive Decay & Half-Life Simulator (Browser)", description: "Watch exponential radioactive decay and half-lives. The physics behind carbon dating and nuclear science. Free.", alternates: { canonical: "/studio/radioactive-decay" } };
+export default function Page() { return <StudioPageShell slug="radioactive-decay" name="Radioactive Decay" keyword="radioactive decay half-life" lede="Every half-life, half of what remains decays. Set the half-life and watch the exponential curve — and count how much is left after each interval." about="Radioactive decay is a first-order process: the number of remaining nuclei falls by half each half-life, giving N = N0 (1/2)^(t/T). This is the clock behind carbon-14 dating, medical isotopes, and nuclear energy."><RadioactiveDecayStudio /></StudioPageShell>; }

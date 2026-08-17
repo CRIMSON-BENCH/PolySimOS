@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { TitrationStudio } from "@/components/studio/TitrationStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Titration Curve Simulator (Browser)", description: "Simulate an acid-base titration and see the pH curve and equivalence point as you add base. Free, interactive chemistry.", alternates: { canonical: "/studio/titration" } };
+export default function Page() { return <StudioPageShell slug="titration" name="Acid-Base Titration" keyword="titration curve" lede="Add base to an acid drop by drop and watch the pH curve rise, then leap through the equivalence point where the two exactly neutralize." about="This models a strong-acid, strong-base titration by tracking moles of H+ and OH- as titrant is added. The steep vertical jump marks the equivalence point; its volume follows directly from the concentrations, the core calculation of quantitative chemistry."><TitrationStudio /></StudioPageShell>; }

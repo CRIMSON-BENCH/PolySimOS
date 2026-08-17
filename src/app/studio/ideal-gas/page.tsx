@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { IdealGasStudio } from "@/components/studio/IdealGasStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Ideal Gas Law Calculator (PV = nRT) — Browser", description: "Interactive PV = nRT calculator: set moles, temperature, and volume and see the resulting pressure, with a live piston. Free.", alternates: { canonical: "/studio/ideal-gas" } };
+export default function Page() { return <StudioPageShell slug="ideal-gas" name="Ideal Gas Law" keyword="ideal gas law calculator" lede="The single most useful equation in chemistry: PV = nRT. Adjust moles, temperature, and volume and watch pressure respond in real time." about="The ideal gas law ties together pressure, volume, temperature, and amount of gas. Compress the volume or raise the temperature and pressure climbs; this calculator solves for pressure with a live piston so the relationships become intuitive."><IdealGasStudio /></StudioPageShell>; }

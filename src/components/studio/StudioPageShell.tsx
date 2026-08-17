@@ -80,6 +80,13 @@ const OTHER_SIMS = [
   { name: "Curved Mirrors", href: "/studio/mirror" },
   { name: "Prism Dispersion", href: "/studio/prism" },
   { name: "Fourier Transform", href: "/studio/fft" },
+  { name: "Titration Curve", href: "/studio/titration" },
+  { name: "Reaction Kinetics", href: "/studio/reaction-kinetics" },
+  { name: "Chemical Equilibrium", href: "/studio/equilibrium" },
+  { name: "pH Calculator", href: "/studio/ph" },
+  { name: "Radioactive Decay", href: "/studio/radioactive-decay" },
+  { name: "Maxwell-Boltzmann", href: "/studio/maxwell-boltzmann" },
+  { name: "Ideal Gas Law", href: "/studio/ideal-gas" },
 ];
 
 export function StudioPageShell({

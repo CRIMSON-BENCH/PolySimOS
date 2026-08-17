@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { EquilibriumStudio } from "@/components/studio/EquilibriumStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Chemical Equilibrium Simulator (Le Chatelier) — Browser", description: "Explore Le Chatelier's principle: shift a reversible reaction by adding reactant or changing temperature. Free, interactive.", alternates: { canonical: "/studio/equilibrium" } };
+export default function Page() { return <StudioPageShell slug="equilibrium" name="Chemical Equilibrium" keyword="chemical equilibrium Le Chatelier" lede="A reversible reaction settles where forward and reverse rates match. Stress it — add reactant, change temperature — and watch it shift to restore balance." about="Le Chatelier's principle says a system at equilibrium responds to a stress by shifting to relieve it. This tool solves the A to B equilibrium for the balance of reactants and products as you change the equilibrium constant, added amount, and temperature."><EquilibriumStudio /></StudioPageShell>; }

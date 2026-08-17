@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MaxwellBoltzmannStudio } from "@/components/studio/MaxwellBoltzmannStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Maxwell-Boltzmann Distribution Simulator (Browser)", description: "Plot the distribution of molecular speeds in a gas as a function of temperature and molar mass. Free, interactive.", alternates: { canonical: "/studio/maxwell-boltzmann" } };
+export default function Page() { return <StudioPageShell slug="maxwell-boltzmann" name="Maxwell-Boltzmann Distribution" keyword="Maxwell-Boltzmann distribution" lede="Molecules in a gas share a spread of speeds, not one. Heat the gas or lighten the molecule and the whole distribution shifts faster and flatter." about="The Maxwell-Boltzmann distribution gives the probability of molecular speeds in an ideal gas. Its most-probable, average, and root-mean-square speeds all scale with the square root of temperature over mass, connecting the microscopic and thermodynamic pictures of a gas."><MaxwellBoltzmannStudio /></StudioPageShell>; }
