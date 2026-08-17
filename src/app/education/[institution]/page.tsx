@@ -7,7 +7,7 @@ import { getProduct } from "@/lib/products";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { ProductGrid } from "@/components/ProductCard";
 import { contextualProducts } from "@/lib/products";
-import { faqLd } from "@/lib/seo";
+import { faqLd, slugify } from "@/lib/seo";
 
 export function generateStaticParams() {
   return getAllInstitutionSlugs().map((institution) => ({ institution }));
@@ -55,9 +55,9 @@ export default async function InstitutionPage({ params }: { params: Promise<{ in
       <H2>Popular by department at {i.name}</H2>
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
         {DEPARTMENTS.map((d) => (
-          <div key={d} className="rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
-            <span className="font-semibold text-slate-900 dark:text-slate-100">{d}:</span> coursework labs, problem sets, and research prototyping
-          </div>
+          <Link key={d} href={`/education/${i.slug}/${slugify(d)}`} className="rounded-xl border border-slate-200 bg-white p-3 text-sm text-slate-700 transition hover:border-cyan-400 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-300">
+            <span className="font-semibold text-slate-900 dark:text-slate-100">{d}:</span> coursework labs, problem sets, and research prototyping →
+          </Link>
         ))}
       </div>
 

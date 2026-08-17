@@ -75,6 +75,8 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
         title: "Learn",
         links: [
           { name: "Simulation Guides", href: "/simulate" },
+          { name: "Courses", href: "/courses" },
+          { name: "Curriculum (AP/IB/A-Level)", href: "/curriculum" },
           { name: "Methods", href: "/methods" },
           { name: "Models & Equations", href: "/models" },
           { name: "Glossary", href: "/glossary" },

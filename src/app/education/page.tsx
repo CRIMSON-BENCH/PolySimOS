@@ -21,6 +21,11 @@ export default function EducationIndex() {
       lede="No installs, no lab licenses, no per-seat shock. Real simulation your students can run on any laptop — free to start, with classroom tools for educators."
     >
       {kit && <PremiumCTA product={kit} heading="Set up your classroom" />}
+
+      <div className="mt-8 flex flex-wrap gap-3">
+        <Link href="/courses" className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-300">Browse by course →</Link>
+        <Link href="/curriculum" className="rounded-lg border border-slate-300 px-4 py-2 text-sm font-semibold text-slate-700 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-300">Browse by curriculum (AP/IB/A-Level) →</Link>
+      </div>
       {Object.entries(byCountry).map(([country, list]) => (
         <div key={country} className="mt-10">
           <h2 className="mb-3 text-lg font-bold text-slate-900 dark:text-slate-100">{country}</h2>

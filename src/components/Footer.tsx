@@ -29,6 +29,8 @@ const COLUMNS: { title: string; links: { name: string; href: string }[] }[] = [
       { name: "Methods", href: "/methods" },
       { name: "Models & Equations", href: "/models" },
       { name: "Materials", href: "/materials" },
+      { name: "Courses", href: "/courses" },
+      { name: "Curriculum", href: "/curriculum" },
       { name: "Glossary", href: "/glossary" },
       { name: "Blog", href: "/blog" },
     ],

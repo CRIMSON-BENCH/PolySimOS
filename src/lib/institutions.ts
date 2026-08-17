@@ -108,6 +108,54 @@ const RAW: [name: string, location: string, country: string, kind?: Institution[
   ["Stevens Institute of Technology", "Hoboken, NJ", "USA", "Institute"],
   ["University of California, Davis", "Davis, CA", "USA"],
   ["University of California, Santa Barbara", "Santa Barbara, CA", "USA"],
+  // More US research universities
+  ["University of Michigan State", "East Lansing, MI", "USA"],
+  ["University of Notre Dame", "Notre Dame, IN", "USA"],
+  ["Brown University", "Providence, RI", "USA"],
+  ["Yale University", "New Haven, CT", "USA"],
+  ["University of Chicago", "Chicago, IL", "USA"],
+  ["University of Rochester", "Rochester, NY", "USA"],
+  ["Lehigh University", "Bethlehem, PA", "USA"],
+  ["Clarkson University", "Potsdam, NY", "USA"],
+  ["Rochester Institute of Technology", "Rochester, NY", "USA", "Institute"],
+  ["New Jersey Institute of Technology", "Newark, NJ", "USA", "Institute"],
+  ["Missouri University of Science and Technology", "Rolla, MO", "USA"],
+  ["Michigan Technological University", "Houghton, MI", "USA"],
+  ["Oregon State University", "Corvallis, OR", "USA"],
+  ["University of Utah", "Salt Lake City, UT", "USA"],
+  ["University of Arizona", "Tucson, AZ", "USA"],
+  ["Iowa State University", "Ames, IA", "USA"],
+  ["University of Tennessee", "Knoxville, TN", "USA"],
+  ["Auburn University", "Auburn, AL", "USA"],
+  ["Clemson University", "Clemson, SC", "USA"],
+  ["University of Central Florida", "Orlando, FL", "USA"],
+  // Colleges
+  ["Harvey Mudd College", "Claremont, CA", "USA", "College"],
+  ["Olin College of Engineering", "Needham, MA", "USA", "College"],
+  ["Cooper Union", "New York, NY", "USA", "College"],
+  ["Rose-Hulman Institute of Technology", "Terre Haute, IN", "USA", "Institute"],
+  ["Dartmouth College", "Hanover, NH", "USA", "College"],
+  ["Swarthmore College", "Swarthmore, PA", "USA", "College"],
+  ["Williams College", "Williamstown, MA", "USA", "College"],
+  // International
+  ["University of Waterloo Engineering", "Waterloo", "Canada"],
+  ["University of Alberta", "Edmonton", "Canada"],
+  ["Monash University", "Melbourne", "Australia"],
+  ["University of Queensland", "Brisbane", "Australia"],
+  ["Peking University HSBC", "Shenzhen", "China"],
+  ["Zhejiang University", "Hangzhou", "China"],
+  ["Fudan University", "Shanghai", "China"],
+  ["Osaka University", "Osaka", "Japan"],
+  ["Tohoku University", "Sendai", "Japan"],
+  ["Pohang University of Science and Technology", "Pohang", "South Korea", "Institute"],
+  ["Indian Institute of Technology Kanpur", "Kanpur", "India", "Institute"],
+  ["Indian Institute of Technology Kharagpur", "Kharagpur", "India", "Institute"],
+  ["Technical University of Berlin", "Berlin", "Germany", "Institute"],
+  ["University of Stuttgart", "Stuttgart", "Germany"],
+  ["Politecnico di Torino", "Turin", "Italy", "Institute"],
+  ["Universidad Politécnica de Madrid", "Madrid", "Spain"],
+  ["Lund University", "Lund", "Sweden"],
+  ["University of Twente", "Enschede", "Netherlands"],
 ];
 
 export const DEPARTMENTS = [
@@ -144,5 +192,16 @@ export function getAllInstitutionSlugs(): string[] {
 export function institutionsByCountry(): Record<string, Institution[]> {
   const out: Record<string, Institution[]> = {};
   for (const i of INSTITUTIONS) (out[i.country] ??= []).push(i);
+  return out;
+}
+
+export function departmentSlug(d: string): string { return slugify(d); }
+export function getDepartmentBySlug(slug: string): string | undefined {
+  return DEPARTMENTS.find((d) => slugify(d) === slug);
+}
+// institution × department pairs for the SEO factory.
+export function institutionDepartmentPairs(): { institution: string; department: string }[] {
+  const out: { institution: string; department: string }[] = [];
+  for (const i of INSTITUTIONS) for (const d of DEPARTMENTS) out.push({ institution: i.slug, department: slugify(d) });
   return out;
 }
