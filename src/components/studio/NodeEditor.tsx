@@ -31,7 +31,49 @@ const STARTER: Graph = {
 
 export function NodeEditor() {
   const [graph, setGraph] = useState<Graph>(STARTER);
+  const [prompt, setPrompt] = useState("");
+  const [aiMsg, setAiMsg] = useState("");
+  const [aiBusy, setAiBusy] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
+
+  // Load a shared graph from the URL hash on mount.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const h = window.location.hash.slice(1);
+    if (h.startsWith("g=")) {
+      const g = decodeGraph(h.slice(2));
+      if (g) setGraph(g);
+    }
+  }, []);
+
+  const runCopilot = async () => {
+    if (!prompt.trim()) return;
+    setAiBusy(true); setAiMsg("");
+    try {
+      const res = await fetch("/api/copilot", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ description: prompt }),
+      });
+      // We build the graph locally (reliable) regardless; the API adds an explanation.
+      const g = buildGraphFromPrompt(prompt);
+      setGraph(g);
+      if (res.ok) {
+        const data = await res.json();
+        setAiMsg(data?.data?.explanation ? String(data.data.explanation).slice(0, 160) : "Graph built from your description.");
+      } else {
+        setAiMsg("Graph built from your description. (Connect a Gemini key for richer AI explanations.)");
+      }
+    } catch {
+      setGraph(buildGraphFromPrompt(prompt));
+      setAiMsg("Graph built locally from your description.");
+    } finally {
+      setAiBusy(false);
+    }
+  };
+
+  const saveLocal = () => { if (typeof window !== "undefined") { localStorage.setItem("polysim-graph", JSON.stringify(graph)); setAiMsg("Saved to this browser."); } };
+  const loadLocal = () => { if (typeof window !== "undefined") { const s = localStorage.getItem("polysim-graph"); if (s) { try { setGraph(JSON.parse(s)); setAiMsg("Loaded your saved graph."); } catch { setAiMsg("No valid saved graph."); } } else setAiMsg("Nothing saved yet."); } };
+  const share = () => { if (typeof window !== "undefined") { const url = `${window.location.origin}${window.location.pathname}#g=${encodeGraph(graph)}`; navigator.clipboard?.writeText(url); window.location.hash = `g=${encodeGraph(graph)}`; setAiMsg("Shareable link copied to clipboard."); } };
   const drag = useRef<{ node: string; dx: number; dy: number } | null>(null);
   const wire = useRef<{ from: { node: string; port: string }; x: number; y: number } | null>(null);
   const [, force] = useState(0);
@@ -91,6 +133,25 @@ export function NodeEditor() {
 
   return (
     <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+      {/* AI Copilot + project toolbar */}
+      <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 px-4 py-2.5 dark:border-slate-800">
+        <span className="text-sm">🤖</span>
+        <input
+          value={prompt}
+          onChange={(e) => setPrompt(e.target.value)}
+          onKeyDown={(e) => e.key === "Enter" && runCopilot()}
+          placeholder="Describe a system — e.g. “plot sin(x) and its derivative” or “decaying oscillation ODE”"
+          className="min-w-[240px] flex-1 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-sm text-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
+        />
+        <button onClick={runCopilot} disabled={aiBusy} className="rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700 disabled:opacity-60">
+          {aiBusy ? "Building…" : "AI Copilot"}
+        </button>
+        <button onClick={saveLocal} className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-600 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-400">Save</button>
+        <button onClick={loadLocal} className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-600 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-400">Load</button>
+        <button onClick={share} className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium text-slate-600 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-400">Share link</button>
+      </div>
+      {aiMsg && <p className="border-b border-slate-200 px-4 py-1.5 text-xs text-cyan-600 dark:border-slate-800 dark:text-cyan-400">{aiMsg}</p>}
+
       <div className="flex flex-wrap items-center gap-2 border-b border-slate-200 px-4 py-2.5 dark:border-slate-800">
         <span className="text-sm font-semibold text-slate-700 dark:text-slate-300">Node Graph</span>
         <span className="text-xs text-slate-400">— drag a node header to move · drag an output ● onto an input ○ to wire</span>
@@ -236,6 +297,61 @@ const LAST_PLOT: Record<string, { a?: Series; b?: Series }> = {};
 function curve(x1: number, y1: number, x2: number, y2: number) {
   const dx = Math.max(40, Math.abs(x2 - x1) / 2);
   return `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2} ${y2}`;
+}
+
+// --- share encoding ---
+function encodeGraph(g: Graph): string {
+  try { return btoa(encodeURIComponent(JSON.stringify(g))); } catch { return ""; }
+}
+function decodeGraph(s: string): Graph | null {
+  try { const g = JSON.parse(decodeURIComponent(atob(s))); if (g && Array.isArray(g.nodes)) return g; } catch { /* ignore */ }
+  return null;
+}
+
+// --- local "AI" prompt → graph builder (works offline; Gemini adds explanations) ---
+function buildGraphFromPrompt(text: string): Graph {
+  const t = text.toLowerCase();
+  // try to extract an explicit expression
+  let expr = "sin(x)";
+  const m = text.match(/(?:f\s*\(\s*x\s*\)\s*=|plot|graph|of)\s*([0-9a-zA-Z_^*/+\-.()\s]+)/i);
+  if (m && m[1] && /[x0-9]/.test(m[1])) expr = m[1].trim().replace(/\s+/g, "");
+  else if (t.includes("parabola")) expr = "x^2";
+  else if (t.includes("cubic")) expr = "x^3 - 2*x";
+  else if (t.includes("gaussian") || t.includes("bell")) expr = "exp(-x^2/8)";
+  else if (t.includes("cos")) expr = "cos(x)";
+  else if (t.includes("sigmoid") || t.includes("logistic")) expr = "1/(1+exp(-x))";
+
+  const wantsODE = /(ode|dy\/dt|decay|oscillat|pendulum|differential|dynamic)/.test(t);
+  const wantsDeriv = /(deriv|differentiate|slope|rate of change)/.test(t);
+
+  if (wantsODE) {
+    let f = "-0.3*y + sin(t)";
+    if (t.includes("decay")) f = "-0.5*y";
+    if (t.includes("growth")) f = "0.3*y";
+    return {
+      nodes: [
+        { id: "o1", type: "ode", x: 60, y: 120, params: { f, y0: 1, tmax: 30, dt: 0.05 } },
+        { id: "p1", type: "plot", x: 420, y: 120, params: {} },
+      ],
+      edges: [{ id: "e1", from: { node: "o1", port: "y" }, to: { node: "p1", port: "a" } }],
+    };
+  }
+
+  const nodes: GraphNode[] = [
+    { id: "r1", type: "range", x: 40, y: 80, params: { min: -10, max: 10, steps: 300 } },
+    { id: "e1", type: "expression", x: 320, y: 60, params: { expr } },
+    { id: "p1", type: "plot", x: 620, y: 120, params: {} },
+  ];
+  const edges: Edge[] = [
+    { id: "ea", from: { node: "r1", port: "x" }, to: { node: "e1", port: "x" } },
+    { id: "eb", from: { node: "e1", port: "y" }, to: { node: "p1", port: "a" } },
+  ];
+  if (wantsDeriv) {
+    nodes.push({ id: "d1", type: "derivative", x: 320, y: 260, params: { expr } });
+    edges.push({ id: "ec", from: { node: "r1", port: "x" }, to: { node: "d1", port: "x" } });
+    edges.push({ id: "ed", from: { node: "d1", port: "y" }, to: { node: "p1", port: "b" } });
+  }
+  return { nodes, edges };
 }
 
 function defaultParams(type: string): Record<string, number | string> {

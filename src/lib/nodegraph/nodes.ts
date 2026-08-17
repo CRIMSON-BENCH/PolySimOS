@@ -1,5 +1,6 @@
 import { NodeDef, Series, PortValue } from "./types";
 import { parse, evaluate, derivativeExprSafe } from "../engines/cas";
+import { rk4Step } from "../engines/dynamics";
 
 const asNum = (v: PortValue, d = 0): number => (typeof v === "number" ? v : d);
 const asSeries = (v: PortValue): Series | undefined => (v && typeof v === "object" && "xs" in v ? v : undefined);
@@ -92,6 +93,40 @@ export const NODE_DEFS: Record<string, NodeDef> = {
       if (!a || !b) return {};
       const n = Math.min(a.ys.length, b.ys.length);
       return { out: { xs: a.xs.slice(0, n), ys: a.ys.slice(0, n).map((y, k) => y + b.ys[k]) } };
+    },
+  },
+  ode: {
+    type: "ode", title: "ODE Integrator", category: "Signal",
+    inputs: [],
+    outputs: [{ id: "y", label: "y(t)", type: "series" }],
+    params: [
+      { id: "f", label: "dy/dt =", kind: "expr", default: "-0.3*y + sin(t)" },
+      { id: "y0", label: "y(0)", kind: "number", default: 1, min: -5, max: 5, step: 0.1 },
+      { id: "tmax", label: "t max", kind: "number", default: 30, min: 5, max: 100, step: 1 },
+      { id: "dt", label: "Δt", kind: "number", default: 0.05, min: 0.005, max: 0.2, step: 0.005 },
+    ],
+    compute: (_i, p) => {
+      const tree = parse(String(p.f));
+      const f = (t: number, y: number[]) => [evaluate(tree, { t, y: y[0] })];
+      const dt = Number(p.dt), tmax = Number(p.tmax);
+      const xs: number[] = [], ys: number[] = [];
+      let y = [Number(p.y0)], t = 0;
+      const steps = Math.min(5000, Math.floor(tmax / dt));
+      for (let i = 0; i <= steps; i++) { xs.push(t); ys.push(y[0]); y = rk4Step(f, t, y, dt); t += dt; }
+      return { y: { xs, ys } };
+    },
+  },
+  statistics: {
+    type: "statistics", title: "Statistics", category: "Math",
+    inputs: [{ id: "s", label: "series", type: "series" }],
+    outputs: [{ id: "mean", label: "mean", type: "number" }, { id: "max", label: "max", type: "number" }, { id: "min", label: "min", type: "number" }],
+    params: [],
+    compute: (i) => {
+      const s = asSeries(i.s); if (!s) return {};
+      const vals = s.ys.filter((v) => isFinite(v));
+      if (!vals.length) return {};
+      const mean = vals.reduce((a, b) => a + b, 0) / vals.length;
+      return { mean, max: Math.max(...vals), min: Math.min(...vals) };
     },
   },
   plot: {
