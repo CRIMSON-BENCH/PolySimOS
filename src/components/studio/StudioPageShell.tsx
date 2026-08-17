@@ -254,6 +254,14 @@ const OTHER_SIMS = [
   { name: "Single-Slit Diffraction", href: "/studio/single-slit" },
   { name: "Bragg Mirror", href: "/studio/bragg-mirror" },
   { name: "LED Band Gap", href: "/studio/led" },
+  { name: "Nuclear Binding Energy", href: "/studio/binding-energy" },
+  { name: "Fission Chain Reaction", href: "/studio/fission-reactor" },
+  { name: "Fusion (Lawson)", href: "/studio/fusion-lawson" },
+  { name: "Radiometric Dating", href: "/studio/radiometric-dating" },
+  { name: "Radiation Shielding", href: "/studio/radiation-shielding" },
+  { name: "Radiation Dose", href: "/studio/radiation-dose" },
+  { name: "Reactor Kinetics", href: "/studio/reactor-kinetics" },
+  { name: "Neutron Transport", href: "/studio/neutron-transport" },
 ];
 
 export function StudioPageShell({

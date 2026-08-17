@@ -244,6 +244,14 @@ import { ThinFilmStudio } from "./ThinFilmStudio";
 import { SingleSlitStudio } from "./SingleSlitStudio";
 import { BraggMirrorStudio } from "./BraggMirrorStudio";
 import { LEDStudio } from "./LEDStudio";
+import { BindingEnergyStudio } from "./BindingEnergyStudio";
+import { FissionReactorStudio } from "./FissionReactorStudio";
+import { FusionLawsonStudio } from "./FusionLawsonStudio";
+import { RadiometricDatingStudio } from "./RadiometricDatingStudio";
+import { RadiationShieldingStudio } from "./RadiationShieldingStudio";
+import { RadiationDoseStudio } from "./RadiationDoseStudio";
+import { ReactorKineticsStudio } from "./ReactorKineticsStudio";
+import { NeutronTransportStudio } from "./NeutronTransportStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -492,6 +500,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "single-slit": SingleSlitStudio,
   "bragg-mirror": BraggMirrorStudio,
   led: LEDStudio,
+  "binding-energy": BindingEnergyStudio,
+  "fission-reactor": FissionReactorStudio,
+  "fusion-lawson": FusionLawsonStudio,
+  "radiometric-dating": RadiometricDatingStudio,
+  "radiation-shielding": RadiationShieldingStudio,
+  "radiation-dose": RadiationDoseStudio,
+  "reactor-kinetics": ReactorKineticsStudio,
+  "neutron-transport": NeutronTransportStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

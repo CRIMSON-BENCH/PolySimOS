@@ -260,6 +260,14 @@ const SIMS = [
   { slug: "single-slit", name: "Single-Slit Diffraction", desc: "Fraunhofer pattern.", tag: "Photonics" },
   { slug: "bragg-mirror", name: "Bragg Mirror", desc: "Dielectric reflector.", tag: "Photonics" },
   { slug: "led", name: "LED Band Gap", desc: "Gap sets the color.", tag: "Photonics" },
+  { slug: "binding-energy", name: "Nuclear Binding Energy", desc: "Fusion vs fission.", tag: "Nuclear" },
+  { slug: "fission-reactor", name: "Fission Chain Reaction", desc: "Criticality factor k.", tag: "Nuclear" },
+  { slug: "fusion-lawson", name: "Fusion (Lawson)", desc: "Triple product ignition.", tag: "Nuclear" },
+  { slug: "radiometric-dating", name: "Radiometric Dating", desc: "Isotope clock ages.", tag: "Nuclear" },
+  { slug: "radiation-shielding", name: "Radiation Shielding", desc: "Attenuation & HVL.", tag: "Nuclear" },
+  { slug: "radiation-dose", name: "Radiation Dose", desc: "Time, distance, shielding.", tag: "Nuclear" },
+  { slug: "reactor-kinetics", name: "Reactor Kinetics", desc: "Reactivity & period.", tag: "Nuclear" },
+  { slug: "neutron-transport", name: "Neutron Transport", desc: "Random walk & moderation.", tag: "Nuclear" },
 ];
 
 export default function StudioIndex() {
