@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OEEStudio } from "@/components/studio/OEEStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "OEE Calculator — Overall Equipment Effectiveness (Browser)", description: "Compute OEE from availability, performance, and quality, and compare to the world-class benchmark. Free, interactive.", alternates: { canonical: "/studio/oee" } };
+export default function Page() { return <StudioPageShell slug="oee" name="Overall Equipment Effectiveness" keyword="OEE calculator" lede="One number tells a factory how well a machine really runs. OEE multiplies uptime, speed, and quality — and shows why &quot;pretty good&quot; on each still adds up to mediocre." about="Overall Equipment Effectiveness is the product of three factors: availability (uptime versus planned time), performance (actual versus ideal speed), and quality (good parts versus total). Because they multiply, small losses compound — 90% × 95% × 99% is only 85%, which happens to be the world-class benchmark. OEE pinpoints exactly which loss to attack first."><OEEStudio /></StudioPageShell>; }

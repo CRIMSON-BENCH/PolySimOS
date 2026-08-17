@@ -286,6 +286,14 @@ const OTHER_SIMS = [
   { name: "Dead Reckoning", href: "/studio/dead-reckoning" },
   { name: "Rhumb Line", href: "/studio/rhumb-line" },
   { name: "Point in Polygon", href: "/studio/point-in-polygon" },
+  { name: "Tolerance Stack-Up", href: "/studio/tolerance-stackup" },
+  { name: "Process Capability", href: "/studio/process-capability" },
+  { name: "OEE", href: "/studio/oee" },
+  { name: "CNC Feeds & Speeds", href: "/studio/cnc-feeds-speeds" },
+  { name: "Line Balancing", href: "/studio/line-balancing" },
+  { name: "SPC Control Chart", href: "/studio/control-chart" },
+  { name: "Learning Curve", href: "/studio/learning-curve" },
+  { name: "Little's Law", href: "/studio/littles-law" },
 ];
 
 export function StudioPageShell({

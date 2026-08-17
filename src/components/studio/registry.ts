@@ -276,6 +276,14 @@ import { SpatialInterpolationStudio } from "./SpatialInterpolationStudio";
 import { DeadReckoningStudio } from "./DeadReckoningStudio";
 import { RhumbLineStudio } from "./RhumbLineStudio";
 import { PointInPolygonStudio } from "./PointInPolygonStudio";
+import { ToleranceStackupStudio } from "./ToleranceStackupStudio";
+import { ProcessCapabilityStudio } from "./ProcessCapabilityStudio";
+import { OEEStudio } from "./OEEStudio";
+import { CNCStudio } from "./CNCStudio";
+import { LineBalancingStudio } from "./LineBalancingStudio";
+import { ControlChartStudio } from "./ControlChartStudio";
+import { LearningCurveStudio } from "./LearningCurveStudio";
+import { LittlesLawStudio } from "./LittlesLawStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -556,6 +564,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "dead-reckoning": DeadReckoningStudio,
   "rhumb-line": RhumbLineStudio,
   "point-in-polygon": PointInPolygonStudio,
+  "tolerance-stackup": ToleranceStackupStudio,
+  "process-capability": ProcessCapabilityStudio,
+  oee: OEEStudio,
+  "cnc-feeds-speeds": CNCStudio,
+  "line-balancing": LineBalancingStudio,
+  "control-chart": ControlChartStudio,
+  "learning-curve": LearningCurveStudio,
+  "littles-law": LittlesLawStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CNCStudio } from "@/components/studio/CNCStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "CNC Feeds & Speeds Calculator (Browser)", description: "Calculate spindle RPM, feed rate, and material removal rate for CNC machining from material, tool, and cut parameters. Free.", alternates: { canonical: "/studio/cnc-feeds-speeds" } };
+export default function Page() { return <StudioPageShell slug="cnc-feeds-speeds" name="CNC Feeds & Speeds" keyword="CNC feeds and speeds calculator" lede="Dial in a cut and you either make chips or make scrap. Feeds and speeds match spindle RPM and feed rate to the material so the tool cuts clean and lasts." about="Cutting speed — the surface meters per minute a material tolerates — sets the spindle RPM for a given tool diameter. Feed rate is RPM times the chip load per tooth times the number of teeth. Too fast overheats and dulls the tool; too slow rubs and work-hardens the part. The material removal rate measures how quickly you turn stock into a finished part."><CNCStudio /></StudioPageShell>; }

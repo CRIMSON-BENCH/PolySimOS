@@ -292,6 +292,14 @@ const SIMS = [
   { slug: "dead-reckoning", name: "Dead Reckoning", desc: "Navigation with drift.", tag: "Geospatial" },
   { slug: "rhumb-line", name: "Rhumb Line", desc: "vs great circle.", tag: "Geospatial" },
   { slug: "point-in-polygon", name: "Point in Polygon", desc: "Ray-casting geofence.", tag: "Geospatial" },
+  { slug: "tolerance-stackup", name: "Tolerance Stack-Up", desc: "Worst-case vs RSS.", tag: "Manufacturing" },
+  { slug: "process-capability", name: "Process Capability", desc: "Cp / Cpk & defects.", tag: "Manufacturing" },
+  { slug: "oee", name: "OEE", desc: "Equipment effectiveness.", tag: "Manufacturing" },
+  { slug: "cnc-feeds-speeds", name: "CNC Feeds & Speeds", desc: "Cutting parameters.", tag: "Manufacturing" },
+  { slug: "line-balancing", name: "Line Balancing", desc: "Takt time & stations.", tag: "Manufacturing" },
+  { slug: "control-chart", name: "SPC Control Chart", desc: "In control or not.", tag: "Manufacturing" },
+  { slug: "learning-curve", name: "Learning Curve", desc: "Cost falls with volume.", tag: "Manufacturing" },
+  { slug: "littles-law", name: "Little's Law", desc: "WIP = throughput × time.", tag: "Manufacturing" },
 ];
 
 export default function StudioIndex() {
