@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { TelescopeStudio } from "@/components/studio/TelescopeStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Telescope Optics Calculator — Resolution & Magnification", description: "Calculate telescope resolving power, magnification, light-gathering, and limiting magnitude from aperture and focal lengths. Free.", alternates: { canonical: "/studio/telescope" } };
+export default function Page() { return <StudioPageShell slug="telescope" name="Telescope Optics" keyword="telescope resolution calculator" lede="Aperture is king. See how a telescope&apos;s resolving power, light grasp, and faintest visible star all follow from the diameter of its main mirror or lens." about="Resolving power follows the Rayleigh criterion θ = 1.22·λ/D, so larger apertures split closer double stars. Light-gathering grows as the square of the diameter, setting how faint a star you can see. Magnification is objective focal length divided by eyepiece focal length — but useful magnification is capped by what the aperture can resolve."><TelescopeStudio /></StudioPageShell>; }

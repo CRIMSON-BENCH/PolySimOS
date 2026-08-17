@@ -124,6 +124,14 @@ const SIMS = [
   { slug: "skid-to-stop", name: "Skid-to-Stop Speed", desc: "Accident reconstruction.", tag: "First Responders" },
   { slug: "radio-range", name: "Radio Range", desc: "VHF/UHF link budget.", tag: "First Responders" },
   { slug: "blast-standoff", name: "Blast Standoff", desc: "Overpressure & safe distance.", tag: "First Responders" },
+  { slug: "exoplanet-transit", name: "Exoplanet Transit", desc: "Light-curve transit method.", tag: "Astronomy" },
+  { slug: "hr-diagram", name: "H-R Diagram", desc: "The map of the stars.", tag: "Astronomy" },
+  { slug: "lagrange-points", name: "Lagrange Points", desc: "Restricted 3-body equilibria.", tag: "Astronomy" },
+  { slug: "roche-limit", name: "Roche Limit", desc: "When tides shred a moon.", tag: "Astronomy" },
+  { slug: "hubble-law", name: "Hubble's Law", desc: "The expanding universe.", tag: "Astronomy" },
+  { slug: "telescope", name: "Telescope Optics", desc: "Resolution & magnification.", tag: "Astronomy" },
+  { slug: "parallax", name: "Stellar Parallax", desc: "Distance from angle shift.", tag: "Astronomy" },
+  { slug: "escape-velocity", name: "Escape Velocity", desc: "Speed to leave a world.", tag: "Astronomy" },
 ];
 
 export default function StudioIndex() {

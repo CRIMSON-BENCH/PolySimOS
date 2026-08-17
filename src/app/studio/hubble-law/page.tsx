@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HubbleStudio } from "@/components/studio/HubbleStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Hubble's Law & the Expanding Universe (Browser)", description: "Plot recession velocity against distance to see Hubble's law, adjust H₀, and estimate the age of the universe. Free, interactive.", alternates: { canonical: "/studio/hubble-law" } };
+export default function Page() { return <StudioPageShell slug="hubble-law" name="Hubble's Law & Redshift" keyword="Hubble's law expanding universe" lede="The discovery that rewrote cosmology: distant galaxies rush away faster the farther they are. That simple line, v = H₀·d, is the expanding universe." about="Hubble&apos;s law states recession velocity is proportional to distance, with the Hubble constant H₀ as the slope. The expansion looks the same from every galaxy, so there is no center. The reciprocal of H₀ is the Hubble time, a first estimate of the age of the universe."><HubbleStudio /></StudioPageShell>; }

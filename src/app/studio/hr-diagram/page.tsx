@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HRDiagramStudio } from "@/components/studio/HRDiagramStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Hertzsprung-Russell Diagram (Interactive, Browser)", description: "Explore the H-R diagram — main sequence, giants, supergiants, and white dwarfs — and place a star by temperature. Free, interactive.", alternates: { canonical: "/studio/hr-diagram" } };
+export default function Page() { return <StudioPageShell slug="hr-diagram" name="Hertzsprung-Russell Diagram" keyword="Hertzsprung-Russell diagram" lede="The single most important diagram in stellar astronomy. Plot temperature against luminosity and stars sort themselves into the main sequence, giants, and white dwarfs." about="The H-R diagram reveals the life stages of stars. Most spend their lives on the main sequence, a diagonal band where hotter stars are more luminous. Red giants and supergiants sit above it, white dwarfs below. Set a temperature to see the spectral class (OBAFGKM) and where that star lands."><HRDiagramStudio /></StudioPageShell>; }

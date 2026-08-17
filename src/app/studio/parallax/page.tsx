@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ParallaxStudio } from "@/components/studio/ParallaxStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Stellar Parallax Distance Calculator (Browser)", description: "See how stellar parallax measures distance — distance in parsecs is 1/parallax. Interactive with real star presets. Free.", alternates: { canonical: "/studio/parallax" } };
+export default function Page() { return <StudioPageShell slug="parallax" name="Stellar Parallax" keyword="stellar parallax distance" lede="The first rung of the cosmic distance ladder. As Earth orbits, nearby stars appear to shift — and that tiny angle gives their distance directly." about="Stellar parallax is the apparent shift of a nearby star against distant background stars as Earth moves across its orbit. The distance in parsecs is simply 1/parallax, with the parallax angle measured in arcseconds. This is the only direct geometric distance measurement in astronomy, and it calibrates everything beyond."><ParallaxStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LagrangeStudio } from "@/components/studio/LagrangeStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Lagrange Points Visualizer (Browser)", description: "See the five Lagrange points and the effective potential of the restricted three-body problem. Where JWST and Trojan asteroids live. Free.", alternates: { canonical: "/studio/lagrange-points" } };
+export default function Page() { return <StudioPageShell slug="lagrange-points" name="Lagrange Points" keyword="Lagrange points three body" lede="Five special points where a small object can ride along with two orbiting bodies. JWST parks at Sun-Earth L2; Jupiter&apos;s Trojans swarm L4 and L5." about="In the restricted three-body problem, the combined gravity and rotation create an effective potential with five equilibrium points. L1-L3 lie on the line joining the two masses and are unstable; the triangular points L4 and L5 are stable when the mass ratio is below 0.0385. Toggle the potential to see the contours that define them."><LagrangeStudio /></StudioPageShell>; }

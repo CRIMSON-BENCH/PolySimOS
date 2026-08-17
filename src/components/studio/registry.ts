@@ -108,6 +108,14 @@ import { HoseFlowStudio } from "./HoseFlowStudio";
 import { SkidToStopStudio } from "./SkidToStopStudio";
 import { RadioRangeStudio } from "./RadioRangeStudio";
 import { BlastStandoffStudio } from "./BlastStandoffStudio";
+import { ExoplanetTransitStudio } from "./ExoplanetTransitStudio";
+import { HRDiagramStudio } from "./HRDiagramStudio";
+import { LagrangeStudio } from "./LagrangeStudio";
+import { RocheLimitStudio } from "./RocheLimitStudio";
+import { HubbleStudio } from "./HubbleStudio";
+import { TelescopeStudio } from "./TelescopeStudio";
+import { ParallaxStudio } from "./ParallaxStudio";
+import { EscapeVelocityStudio } from "./EscapeVelocityStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -220,6 +228,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "skid-to-stop": SkidToStopStudio,
   "radio-range": RadioRangeStudio,
   "blast-standoff": BlastStandoffStudio,
+  "exoplanet-transit": ExoplanetTransitStudio,
+  "hr-diagram": HRDiagramStudio,
+  "lagrange-points": LagrangeStudio,
+  "roche-limit": RocheLimitStudio,
+  "hubble-law": HubbleStudio,
+  telescope: TelescopeStudio,
+  parallax: ParallaxStudio,
+  "escape-velocity": EscapeVelocityStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

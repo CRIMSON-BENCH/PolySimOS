@@ -118,6 +118,14 @@ const OTHER_SIMS = [
   { name: "Skid-to-Stop Speed", href: "/studio/skid-to-stop" },
   { name: "Radio Range", href: "/studio/radio-range" },
   { name: "Blast Standoff", href: "/studio/blast-standoff" },
+  { name: "Exoplanet Transit", href: "/studio/exoplanet-transit" },
+  { name: "H-R Diagram", href: "/studio/hr-diagram" },
+  { name: "Lagrange Points", href: "/studio/lagrange-points" },
+  { name: "Roche Limit", href: "/studio/roche-limit" },
+  { name: "Hubble's Law", href: "/studio/hubble-law" },
+  { name: "Telescope Optics", href: "/studio/telescope" },
+  { name: "Stellar Parallax", href: "/studio/parallax" },
+  { name: "Escape Velocity", href: "/studio/escape-velocity" },
 ];
 
 export function StudioPageShell({

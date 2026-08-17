@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { EscapeVelocityStudio } from "@/components/studio/EscapeVelocityStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Escape Velocity & Orbital Velocity Calculator (Browser)", description: "Calculate escape velocity, orbital velocity, and surface gravity for the planets or any custom body. Free, interactive.", alternates: { canonical: "/studio/escape-velocity" } };
+export default function Page() { return <StudioPageShell slug="escape-velocity" name="Escape & Orbital Velocity" keyword="escape velocity calculator" lede="How fast must you go to leave a world behind? Escape velocity depends only on a body&apos;s mass and radius — 11.2 km/s for Earth, 618 km/s for the Sun." about="Escape velocity is v = √(2GM/R), the speed at which kinetic energy equals gravitational binding energy from the surface. Circular orbital velocity is √(GM/R), smaller by a factor of √2. Neither depends on the mass of the escaping object. Pick a planet or define a custom mass and radius."><EscapeVelocityStudio /></StudioPageShell>; }

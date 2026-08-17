@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RocheLimitStudio } from "@/components/studio/RocheLimitStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Roche Limit Calculator & Visualizer (Browser)", description: "Find the Roche limit where tidal forces tear a moon apart into a ring, from the density ratio. Free, interactive astronomy tool.", alternates: { canonical: "/studio/roche-limit" } };
+export default function Page() { return <StudioPageShell slug="roche-limit" name="Roche Limit" keyword="Roche limit calculator" lede="Bring a moon too close and its planet&apos;s tides win — the moon shatters into a ring. That boundary is the Roche limit, and it is why Saturn has rings." about="The Roche limit is the orbital distance inside which tidal forces from the primary exceed the satellite&apos;s self-gravity. For a rigid body it is d = R·(2·ρ_primary/ρ_satellite)^(1/3). Drag the moon inside the limit to watch it disrupt into a debris ring."><RocheLimitStudio /></StudioPageShell>; }
