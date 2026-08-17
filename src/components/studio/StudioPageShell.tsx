@@ -174,6 +174,14 @@ const OTHER_SIMS = [
   { name: "Bootstrap", href: "/studio/bootstrap" },
   { name: "PCA", href: "/studio/pca" },
   { name: "A/B Test", href: "/studio/ab-test" },
+  { name: "Forward Kinematics", href: "/studio/forward-kinematics" },
+  { name: "Inverse Kinematics", href: "/studio/inverse-kinematics" },
+  { name: "Differential Drive", href: "/studio/differential-drive" },
+  { name: "Cart-Pole Balance", href: "/studio/cart-pole" },
+  { name: "Quadcopter Control", href: "/studio/quadcopter" },
+  { name: "RRT Path Planning", href: "/studio/rrt" },
+  { name: "DC Motor", href: "/studio/dc-motor" },
+  { name: "Kalman Filter", href: "/studio/kalman-filter" },
 ];
 
 export function StudioPageShell({

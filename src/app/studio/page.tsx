@@ -180,6 +180,14 @@ const SIMS = [
   { slug: "bootstrap", name: "Bootstrap", desc: "Resampling confidence.", tag: "Statistics" },
   { slug: "pca", name: "PCA", desc: "Axes of maximum variance.", tag: "Statistics" },
   { slug: "ab-test", name: "A/B Test", desc: "Two-proportion significance.", tag: "Statistics" },
+  { slug: "forward-kinematics", name: "Forward Kinematics", desc: "Joint angles → end effector.", tag: "Robotics" },
+  { slug: "inverse-kinematics", name: "Inverse Kinematics", desc: "Target → joint angles.", tag: "Robotics" },
+  { slug: "differential-drive", name: "Differential Drive", desc: "Wheel speeds → path.", tag: "Robotics" },
+  { slug: "cart-pole", name: "Cart-Pole Balance", desc: "Inverted pendulum control.", tag: "Robotics" },
+  { slug: "quadcopter", name: "Quadcopter Control", desc: "Nested PID flight.", tag: "Robotics" },
+  { slug: "rrt", name: "RRT Path Planning", desc: "Sampling-based planner.", tag: "Robotics" },
+  { slug: "dc-motor", name: "DC Motor", desc: "Speed-torque & step.", tag: "Robotics" },
+  { slug: "kalman-filter", name: "Kalman Filter", desc: "Optimal state estimation.", tag: "Robotics" },
 ];
 
 export default function StudioIndex() {

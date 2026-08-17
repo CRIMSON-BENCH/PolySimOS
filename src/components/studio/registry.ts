@@ -164,6 +164,14 @@ import { BayesInferenceStudio } from "./BayesInferenceStudio";
 import { BootstrapStudio } from "./BootstrapStudio";
 import { PCAStudio } from "./PCAStudio";
 import { ABTestStudio } from "./ABTestStudio";
+import { ForwardKinematicsStudio } from "./ForwardKinematicsStudio";
+import { InverseKinematicsStudio } from "./InverseKinematicsStudio";
+import { DifferentialDriveStudio } from "./DifferentialDriveStudio";
+import { CartPoleStudio } from "./CartPoleStudio";
+import { QuadcopterStudio } from "./QuadcopterStudio";
+import { RRTStudio } from "./RRTStudio";
+import { DCMotorStudio } from "./DCMotorStudio";
+import { KalmanFilterStudio } from "./KalmanFilterStudio";
 
 // Slug → studio component. Used by the /embed/[slug] chromeless route.
 export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
@@ -332,6 +340,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   bootstrap: BootstrapStudio,
   pca: PCAStudio,
   "ab-test": ABTestStudio,
+  "forward-kinematics": ForwardKinematicsStudio,
+  "inverse-kinematics": InverseKinematicsStudio,
+  "differential-drive": DifferentialDriveStudio,
+  "cart-pole": CartPoleStudio,
+  quadcopter: QuadcopterStudio,
+  rrt: RRTStudio,
+  "dc-motor": DCMotorStudio,
+  "kalman-filter": KalmanFilterStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

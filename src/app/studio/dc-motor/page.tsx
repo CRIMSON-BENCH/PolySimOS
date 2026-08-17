@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DCMotorStudio } from "@/components/studio/DCMotorStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "DC Motor Simulator — Speed, Torque & Step Response", description: "Explore a DC motor's step response and speed-torque curve as you vary voltage, resistance, and load. Free, interactive.", alternates: { canonical: "/studio/dc-motor" } };
+export default function Page() { return <StudioPageShell slug="dc-motor" name="DC Motor" keyword="DC motor speed torque simulator" lede="Every robot and gadget has one. See how a DC motor spins up to speed and how its steady speed trades off against load along the speed-torque line." about="A DC motor accelerates until its back-EMF balances the applied voltage, following a first-order step response set by its mechanical time constant. Its steady speed falls linearly as load torque rises — full speed at no load, maximum stall torque at zero speed. The operating point is where the motor and load torque curves meet."><DCMotorStudio /></StudioPageShell>; }

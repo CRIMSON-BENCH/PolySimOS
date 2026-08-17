@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ForwardKinematicsStudio } from "@/components/studio/ForwardKinematicsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Forward Kinematics Simulator (Robot Arm, Browser)", description: "Set joint angles of a 3-link robot arm and see the end-effector position update via forward kinematics. Free, interactive.", alternates: { canonical: "/studio/forward-kinematics" } };
+export default function Page() { return <StudioPageShell slug="forward-kinematics" name="Forward Kinematics" keyword="forward kinematics robot arm" lede="Turn the joints, and the hand follows. Forward kinematics maps a robot arm&apos;s joint angles to exactly where its tip ends up in space." about="Forward kinematics chains together the rotation of each link to compute the end-effector position from the joint angles. It is fast and always has a single answer, which is why robot controllers evaluate it thousands of times per second to know where the tool is."><ForwardKinematicsStudio /></StudioPageShell>; }

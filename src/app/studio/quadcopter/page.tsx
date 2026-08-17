@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { QuadcopterStudio } from "@/components/studio/QuadcopterStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Quadcopter Flight Control Simulator (PID, Browser)", description: "Fly a 2D quadcopter to waypoints with nested PID position and attitude control, against wind gusts. Free, interactive.", alternates: { canonical: "/studio/quadcopter" } };
+export default function Page() { return <StudioPageShell slug="quadcopter" name="Quadcopter Flight Control" keyword="quadcopter PID flight control" lede="How does a drone hold still in the wind? Nested PID loops turn position error into tilt into thrust — tune the gains and click waypoints to fly." about="A quadcopter stabilizes with cascaded control: an outer position loop computes the tilt and thrust needed to reach a target, and an inner attitude loop drives the craft to that tilt. Tuning the PID gains trades responsiveness against stability, and wind gusts test the controller. Click anywhere to send a new waypoint."><QuadcopterStudio /></StudioPageShell>; }

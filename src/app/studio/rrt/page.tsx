@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RRTStudio } from "@/components/studio/RRTStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "RRT Path Planning Visualizer (Browser)", description: "Watch a Rapidly-exploring Random Tree grow around obstacles to connect start and goal. Free, interactive motion planning.", alternates: { canonical: "/studio/rrt" } };
+export default function Page() { return <StudioPageShell slug="rrt" name="RRT Path Planning" keyword="RRT path planning" lede="How does a robot find its way through a cluttered room? A Rapidly-exploring Random Tree branches outward, quickly filling free space and snaking around obstacles to the goal." about="RRT grows a tree from the start by repeatedly sampling a random point, extending toward it by a fixed step, and rejecting moves that hit an obstacle. It rapidly explores open space and biases occasionally toward the goal. Fast and effective even in high dimensions, it powers motion planning for robot arms, self-driving cars, and drones."><RRTStudio /></StudioPageShell>; }

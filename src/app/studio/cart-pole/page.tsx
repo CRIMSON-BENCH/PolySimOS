@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CartPoleStudio } from "@/components/studio/CartPoleStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Cart-Pole Balance Simulator (Inverted Pendulum, Browser)", description: "Balance an inverted pendulum on a cart with a state-feedback controller. Add disturbances and tune the gain. Free, interactive.", alternates: { canonical: "/studio/cart-pole" } };
+export default function Page() { return <StudioPageShell slug="cart-pole" name="Cart-Pole Balance" keyword="cart pole inverted pendulum" lede="The hello-world of control theory. A controller nudges a cart back and forth to keep a pole balanced upright — switch it off and gravity wins instantly." about="The cart-pole, or inverted pendulum, is an unstable system stabilized by feedback. A state-feedback controller measures the pole angle and cart position and applies a force to keep the pole vertical. It is the standard benchmark for control and reinforcement learning. Turn the controller off, or crank up the disturbance, to watch it fail."><CartPoleStudio /></StudioPageShell>; }
