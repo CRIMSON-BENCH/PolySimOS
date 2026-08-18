@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Explosive overpressure via cube-root (Hopkinson-Cranz) scaling. Z = R / W^(1/3).
 // Simplified Kingery-Bulmash style fit for incident overpressure (kPa) vs scaled distance (m/kg^1/3).
@@ -21,10 +22,16 @@ const ZONES = [
   { p: 3.5, label: "Window breakage", color: "#22d3ee" },
 ];
 
+const PRESETS: Record<string, { charge: number; distance: number }> = {
+  "Grenade-class": { charge: 0.5, distance: 10 },
+  "Pipe bomb": { charge: 2, distance: 20 },
+  "Car bomb": { charge: 100, distance: 60 },
+  "Truck bomb": { charge: 500, distance: 120 },
+};
+
 export function BlastStandoffStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [charge, setCharge] = useState(10); // kg TNT
-  const [distance, setDistance] = useState(30); // m
+  const [{ charge, distance }, update] = useShareableNumbers({ charge: 10, distance: 30 });
 
   const W13 = Math.cbrt(charge);
   const Z = distance / W13;
@@ -52,15 +59,32 @@ export function BlastStandoffStudio() {
 
   const zone = ZONES.find((z) => P >= z.p);
 
+  const explain = `At ${distance} m from ${charge} kg the scaled distance is Z ≈ ${Z.toFixed(1)} m/kg^1/3, giving about ${P.toFixed(0)} kPa (${zone ? zone.label.toLowerCase() : "below the window-breakage threshold"}) — since Z = R/W^(1/3), the same pressure ring scales with the cube root of charge, so 8× the explosive only doubles every safe radius.`;
+
+  const code = `charge_kg, distance_m = ${charge}, ${distance}
+Z = distance_m / charge_kg ** (1/3)         # Hopkinson-Cranz scaled distance
+P = 1772/Z**3 - 114/Z**2 + 108/Z            # incident overpressure, kPa
+print("Z", round(Z, 2), "  P", round(max(P, 0), 1), "kPa")`;
+
   return (
     <StudioChrome title="Blast Standoff / Overpressure" tagline="cube-root scaling"
       controls={<div>
-        <Slider label="Charge (kg TNT eq.)" value={charge} min={0.5} max={500} step={0.5} onChange={setCharge} />
-        <Slider label="Distance (m)" value={distance} min={1} max={300} step={1} onChange={setDistance} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Charge (kg TNT eq.)" value={charge} min={0.5} max={500} step={0.5} onChange={(v) => update({ charge: v })} />
+        <Slider label="Distance (m)" value={distance} min={1} max={300} step={1} onChange={(v) => update({ distance: v })} />
         <div className="mt-3 space-y-1">{ZONES.map((z) => <div key={z.p} className="flex items-center gap-2 text-xs"><span className="inline-block h-3 w-3 rounded" style={{ backgroundColor: z.color }} /><span className="text-slate-500">{z.p} kPa — {z.label}</span></div>)}</div>
         <p className="mt-3 text-xs text-slate-500">Peak incident overpressure follows Hopkinson-Cranz cube-root scaling: the scaled distance Z = R/W^(1/3) sets the blast pressure. Rings show injury and damage thresholds. Screening estimate for standoff planning only — consult EOD and published safe-distance tables on scene.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Overpressure" value={`${P.toFixed(1)} kPa`} /><Stat label="In psi" value={psi.toFixed(2)} /><Stat label="Window-safe standoff" value={`${safeDist.toFixed(0)} m`} /></div>}
+      inspector={<div>
+        <Stat label="Overpressure" value={`${P.toFixed(1)} kPa`} />
+        <Stat label="In psi" value={psi.toFixed(2)} />
+        <Stat label="Window-safe standoff" value={`${safeDist.toFixed(0)} m`} />
+        <ExplainResult text={explain} />
+      </div>}
     ><div>
         <canvas ref={canvasRef} width={340} height={340} className="mx-auto h-auto max-w-full rounded-lg" />
         <div className="mt-4 flex flex-col items-center"><div className="text-xs uppercase tracking-widest text-slate-500">At {distance} m from {charge} kg</div>

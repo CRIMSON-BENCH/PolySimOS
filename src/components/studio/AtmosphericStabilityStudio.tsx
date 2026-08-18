@@ -1,15 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { surfaceT: number; envLapse: number; moist: number }> = {
+  "Calm & stable": { surfaceT: 18, envLapse: 5, moist: 5 },
+  "Summer storms": { surfaceT: 30, envLapse: 8, moist: 5 },
+  "Severe / supercell": { surfaceT: 35, envLapse: 9.5, moist: 4 },
+  "Marginal": { surfaceT: 24, envLapse: 7, moist: 5.5 },
+};
 
 // Parcel vs environment: CAPE and stability.
 export function AtmosphericStabilityStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [surfaceT, setSurfaceT] = useState(28);
-  const [envLapse, setEnvLapse] = useState(7.5); // C/km
-  const [moist, setMoist] = useState(5); // moist adiabat lapse C/km
+  const [{ surfaceT, envLapse, moist }, update] = useShareableNumbers({ surfaceT: 28, envLapse: 7.5, moist: 5 });
 
   // parcel rises dry (9.8) to LCL then moist; simplify: parcel follows moist lapse from surface
   const envT = (z: number) => surfaceT - envLapse * z; const parcelT = (z: number) => surfaceT - moist * z;
@@ -30,15 +36,38 @@ export function AtmosphericStabilityStudio() {
   }, [surfaceT, envLapse, moist]);
 
   const verdict = cape > 2500 ? "severe storms" : cape > 1000 ? "thunderstorms likely" : cape > 300 ? "marginal" : "stable";
+  const explain =
+    envLapse <= moist
+      ? "The environment cools slower than the rising parcel, so the parcel is always colder and sinks back — an absolutely stable profile with no CAPE, and no storms."
+      : cape > 2500
+      ? `Steep environmental lapse (${envLapse.toFixed(1)} °C/km) keeps the parcel far warmer than its surroundings all the way up — huge CAPE fuels tall, violent updrafts.`
+      : cape > 300
+      ? `The parcel stays warmer than the environment over part of the climb, so it accelerates upward — that positive-buoyancy area is the ${cape.toFixed(0)} J/kg of CAPE driving convection.`
+      : "Only a thin sliver of positive buoyancy exists here, so any updraft is weak — the atmosphere is close to stable and storms struggle to fire.";
+
+  const code = `import numpy as np
+surfaceT, envLapse, moist = ${surfaceT}, ${envLapse}, ${moist}  # C, C/km, C/km
+envT = lambda z: surfaceT - envLapse*z
+parcelT = lambda z: surfaceT - moist*z
+cape = sum(max(parcelT(z) - envT(z), 0)*0.1 for z in np.arange(0, 12, 0.1)) * 100
+print("CAPE (J/kg)", cape)`;
+
   return (
     <StudioChrome title="Atmospheric Stability (CAPE)" tagline="will storms fire?"
       controls={<div>
-        <Slider label="Surface temperature (°C)" value={surfaceT} min={10} max={40} step={1} onChange={setSurfaceT} />
-        <Slider label="Environmental lapse (°C/km)" value={envLapse} min={4} max={10} step={0.1} onChange={setEnvLapse} />
-        <Slider label="Parcel lapse (°C/km)" value={moist} min={3} max={7} step={0.1} onChange={setMoist} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Surface temperature (°C)" value={surfaceT} min={10} max={40} step={1} onChange={(v) => update({ surfaceT: v })} />
+        <Slider label="Environmental lapse (°C/km)" value={envLapse} min={4} max={10} step={0.1} onChange={(v) => update({ envLapse: v })} />
+        <Slider label="Parcel lapse (°C/km)" value={moist} min={3} max={7} step={0.1} onChange={(v) => update({ moist: v })} />
         <p className="mt-3 text-xs text-slate-500">When a rising air parcel stays warmer than its surroundings, it keeps accelerating upward — the fuel for thunderstorms. The pink area between the parcel and environment curves is CAPE, the convective available potential energy. Large CAPE means tall, violent storms; a stable profile suppresses them. This is the core of severe-weather forecasting.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="CAPE (approx)" value={`${cape.toFixed(0)} J/kg`} /><Stat label="Forecast" value={verdict} /><Stat label="Lapse rate" value={`${envLapse.toFixed(1)} °C/km`} /></div>}
+      inspector={<div>
+        <Stat label="CAPE (approx)" value={`${cape.toFixed(0)} J/kg`} />
+        <Stat label="Forecast" value={verdict} />
+        <Stat label="Lapse rate" value={`${envLapse.toFixed(1)} °C/km`} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={460} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

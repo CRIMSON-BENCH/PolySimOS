@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { theta: number; phi: number }> = {
+  "|0⟩ north pole": { theta: 0, phi: 0 },
+  "|1⟩ south pole": { theta: 180, phi: 0 },
+  "|+⟩ equator": { theta: 90, phi: 0 },
+  "|i⟩ +y axis": { theta: 90, phi: 90 },
+};
 
 // Qubit on the Bloch sphere.
 export function BlochSphereStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [theta, setTheta] = useState(60); // polar
-  const [phi, setPhi] = useState(45); // azimuth
+  const [{ theta, phi }, update] = useShareableNumbers({ theta: 60, phi: 45 });
 
   const th = theta * Math.PI / 180, ph = phi * Math.PI / 180;
   const a = Math.cos(th / 2); const bRe = Math.sin(th / 2) * Math.cos(ph), bIm = Math.sin(th / 2) * Math.sin(ph);
@@ -30,15 +37,37 @@ export function BlochSphereStudio() {
     ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(px, py, 7, 0, 7); ctx.fill();
   }, [theta, phi]);
 
+  const explain =
+    theta < 10
+      ? "Almost exactly |0⟩ at the north pole — a classical bit with ~100% chance of measuring 0; the phase φ has no effect here."
+      : theta > 170
+      ? "Almost exactly |1⟩ at the south pole — a classical bit with ~100% chance of measuring 1; the phase φ is irrelevant at the poles."
+      : Math.abs(theta - 90) < 8
+      ? "On the equator: a balanced 50/50 superposition where only the phase φ distinguishes states like |+⟩, |−⟩, and |i⟩ — invisible until you rotate the measurement basis."
+      : `Polar angle θ sets the measurement odds: P(|0⟩)=cos²(θ/2)=${p0.toFixed(2)}, so tilting toward a pole biases the qubit while φ only twists its phase.`;
+
+  const code = `import numpy as np
+theta, phi = np.radians(${theta}), np.radians(${phi})
+alpha = np.cos(theta / 2)
+beta = np.sin(theta / 2) * np.exp(1j * phi)
+print("P(0)", abs(alpha) ** 2, "P(1)", abs(beta) ** 2)`;
+
   return (
     <StudioChrome title="Bloch Sphere" tagline="the state of a qubit"
       controls={<div>
-        <Slider label="Polar angle θ (°)" value={theta} min={0} max={180} step={1} onChange={setTheta} />
-        <Slider label="Azimuth φ (°)" value={phi} min={0} max={360} step={1} onChange={setPhi} />
-        <div className="mt-3 flex flex-wrap gap-1">{[["|0⟩", 0, 0], ["|1⟩", 180, 0], ["|+⟩", 90, 0], ["|i⟩", 90, 90]].map(([n, t, p]) => <button key={n as string} onClick={() => { setTheta(t as number); setPhi(p as number); }} className="rounded-lg border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">{n}</button>)}</div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Polar angle θ (°)" value={theta} min={0} max={180} step={1} onChange={(v) => update({ theta: v })} />
+        <Slider label="Azimuth φ (°)" value={phi} min={0} max={360} step={1} onChange={(v) => update({ phi: v })} />
         <p className="mt-3 text-xs text-slate-500">Every pure state of a single qubit is a point on the Bloch sphere. The north pole is |0⟩, the south |1⟩, and the equator holds equal superpositions differing only in phase φ. Quantum gates rotate this arrow — the geometric picture behind all single-qubit quantum computing.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="P(|0⟩)" value={p0.toFixed(3)} /><Stat label="P(|1⟩)" value={p1.toFixed(3)} /><Stat label="Amplitude α" value={a.toFixed(3)} /><Stat label="Amplitude β" value={`${Math.hypot(bRe, bIm).toFixed(2)}∠${phi}°`} /></div>}
+      inspector={<div>
+        <Stat label="P(|0⟩)" value={p0.toFixed(3)} />
+        <Stat label="P(|1⟩)" value={p1.toFixed(3)} />
+        <Stat label="Amplitude α" value={a.toFixed(3)} />
+        <Stat label="Amplitude β" value={`${Math.hypot(bRe, bIm).toFixed(2)}∠${phi}°`} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={400} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

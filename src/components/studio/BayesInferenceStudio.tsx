@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { priorA: number; priorB: number; heads: number; tails: number }> = {
+  "Uniform prior, few flips": { priorA: 1, priorB: 1, heads: 7, tails: 3 },
+  "Skeptical fair prior": { priorA: 10, priorB: 10, heads: 14, tails: 6 },
+  "Strong data": { priorA: 2, priorB: 2, heads: 80, tails: 20 },
+  "Biased-coin evidence": { priorA: 1, priorB: 1, heads: 30, tails: 5 },
+};
 
 // Beta-Binomial Bayesian updating for a coin's bias.
 function betaPDF(x: number, a: number, b: number) { if (x <= 0 || x >= 1) return 0;
@@ -12,10 +20,7 @@ function lgamma(z: number): number { const g = 7, c = [0.99999999999980993, 676.
 
 export function BayesInferenceStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [priorA, setPriorA] = useState(2);
-  const [priorB, setPriorB] = useState(2);
-  const [heads, setHeads] = useState(14);
-  const [tails, setTails] = useState(6);
+  const [{ priorA, priorB, heads, tails }, update] = useShareableNumbers({ priorA: 2, priorB: 2, heads: 14, tails: 6 });
 
   const postA = priorA + heads, postB = priorB + tails;
   const postMean = postA / (postA + postB);
@@ -34,16 +39,30 @@ export function BayesInferenceStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.fillText("P(bias) — 0 to 1", ox + pw - 100, oy + 18);
   }, [priorA, priorB, heads, tails]);
 
+  const nData = heads + tails; const priorStrength = priorA + priorB;
+  const dataRate = nData ? heads / nData : 0.5; const priorMean = priorA / (priorA + priorB);
+  const explain = `The posterior mean ${postMean.toFixed(3)} sits between the prior mean ${priorMean.toFixed(3)} and the observed rate ${dataRate.toFixed(3)}; with ${nData} flips versus ${priorStrength.toFixed(1)} pseudo-counts, ${nData > priorStrength ? "the data dominates and pulls the estimate toward the evidence" : "the prior still carries real weight"}.`;
+
+  const code = `from scipy.stats import beta
+prior_a, prior_b = ${priorA}, ${priorB}
+heads, tails = ${heads}, ${tails}
+post_a, post_b = prior_a + heads, prior_b + tails
+mean = post_a / (post_a + post_b)
+sd = beta(post_a, post_b).std()
+print("posterior mean", mean, "sd", sd)`;
+
   return (
     <StudioChrome title="Bayesian Inference" tagline="prior × likelihood → posterior"
       controls={<div>
-        <Slider label="Prior α (pseudo-heads)" value={priorA} min={0.5} max={20} step={0.5} onChange={setPriorA} />
-        <Slider label="Prior β (pseudo-tails)" value={priorB} min={0.5} max={20} step={0.5} onChange={setPriorB} />
-        <Slider label="Observed heads" value={heads} min={0} max={100} step={1} onChange={setHeads} />
-        <Slider label="Observed tails" value={tails} min={0} max={100} step={1} onChange={setTails} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Prior α (pseudo-heads)" value={priorA} min={0.5} max={20} step={0.5} onChange={(v) => update({ priorA: v })} />
+        <Slider label="Prior β (pseudo-tails)" value={priorB} min={0.5} max={20} step={0.5} onChange={(v) => update({ priorB: v })} />
+        <Slider label="Observed heads" value={heads} min={0} max={100} step={1} onChange={(v) => update({ heads: v })} />
+        <Slider label="Observed tails" value={tails} min={0} max={100} step={1} onChange={(v) => update({ tails: v })} />
         <p className="mt-3 text-xs text-slate-500">Bayesian inference updates a prior belief with data to form a posterior. For a coin, a Beta prior combined with binomial coin flips gives a Beta posterior — the conjugate update is just adding heads to α and tails to β. Watch the posterior sharpen and shift as evidence accumulates.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Posterior mean" value={postMean.toFixed(3)} /><Stat label="Posterior SD" value={postSd.toFixed(3)} /><Stat label="Posterior α, β" value={`${postA.toFixed(1)}, ${postB.toFixed(1)}`} /></div>}
+      inspector={<div><Stat label="Posterior mean" value={postMean.toFixed(3)} /><Stat label="Posterior SD" value={postSd.toFixed(3)} /><Stat label="Posterior α, β" value={`${postA.toFixed(1)}, ${postB.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

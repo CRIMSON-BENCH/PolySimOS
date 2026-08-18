@@ -2,14 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { nCities: number; nAnts: number; evap: number }> = {
+  "Quick & small": { nCities: 8, nAnts: 20, evap: 0.1 },
+  "Big map": { nCities: 28, nAnts: 40, evap: 0.1 },
+  "Fast forgetting": { nCities: 15, nAnts: 20, evap: 0.4 },
+  "Slow & thorough": { nCities: 20, nAnts: 60, evap: 0.04 },
+};
 
 // Ant Colony Optimization for the Traveling Salesman Problem.
 export function AntColonyStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [nCities, setNCities] = useState(15);
-  const [nAnts, setNAnts] = useState(20);
-  const [evap, setEvap] = useState(0.1);
+  const [{ nCities, nAnts, evap }, update] = useShareableNumbers({ nCities: 15, nAnts: 20, evap: 0.1 });
   const [running, setRunning] = useState(true);
   const [seed, setSeed] = useState(1);
   const [iter, setIter] = useState(0);
@@ -55,16 +61,34 @@ export function AntColonyStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, nAnts, evap]);
 
+  const evapPct = Math.round(evap * 100);
+  const explain = evap >= 0.35
+    ? `High evaporation (${evapPct}% per round) erases pheromone fast, so the colony keeps exploring and rarely locks onto one route — robust against dead ends, but slower to settle.`
+    : evap <= 0.06
+    ? `Low evaporation (${evapPct}% per round) makes trails persist, so the ${Math.round(nAnts)} ants exploit the first good tour quickly but risk converging on a suboptimal loop.`
+    : `With ${Math.round(nCities)} cities and ${Math.round(nAnts)} ants, ${evapPct}% evaporation balances exploring new edges against reinforcing the best tour found so far.`;
+
+  const code = `import numpy as np
+n_cities, n_ants, evap = ${Math.round(nCities)}, ${Math.round(nAnts)}, ${evap}
+alpha, beta = 1, 3
+# choosing next city j from i (unvisited):
+#   p_ij  ~  pheromone[i, j] ** alpha  *  (1 / dist[i, j]) ** beta
+# after every round of ants:
+#   pheromone = pheromone * (1 - evap) + deposit   # deposit += 1 / tour_len on used edges
+print("evaporation per round:", evap)`;
+
   return (
     <StudioChrome title="Ant Colony Optimization" tagline="swarm intelligence · TSP"
       controls={<div>
-        <Slider label="Cities" value={nCities} min={6} max={30} step={1} onChange={setNCities} />
-        <Slider label="Ants" value={nAnts} min={5} max={60} step={5} onChange={setNAnts} />
-        <Slider label="Evaporation" value={evap} min={0.02} max={0.5} step={0.02} onChange={setEvap} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Cities" value={nCities} min={6} max={30} step={1} onChange={(v) => update({ nCities: v })} />
+        <Slider label="Ants" value={nAnts} min={5} max={60} step={5} onChange={(v) => update({ nAnts: v })} />
+        <Slider label="Evaporation" value={evap} min={0.02} max={0.5} step={0.02} onChange={(v) => update({ evap: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={init} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">New map</button></div>
         <p className="mt-3 text-xs text-slate-500">Simulated ants lay pheromone (cyan) on short routes; trails evaporate over time so good paths reinforce and bad ones fade. The colony collectively finds near-optimal tours of the Traveling Salesman Problem — the green loop is the best so far.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Iteration" value={String(iter)} /><Stat label="Best tour" value={bestLen.toFixed(0)} /><Stat label="Cities" value={String(Math.round(nCities))} /></div>}
+      inspector={<div><Stat label="Iteration" value={String(iter)} /><Stat label="Best tour" value={bestLen.toFixed(0)} /><Stat label="Cities" value={String(Math.round(nCities))} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

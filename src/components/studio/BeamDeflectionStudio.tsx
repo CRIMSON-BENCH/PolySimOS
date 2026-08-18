@@ -2,16 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type Beam = "ss-point" | "ss-udl" | "cant-point" | "cant-udl";
+
+const PRESETS: Record<string, { L: number; load: number; EI: number }> = {
+  "Stiff steel span": { L: 6, load: 20, EI: 60000 },
+  "Slender timber": { L: 10, load: 8, EI: 8000 },
+  "Heavy point load": { L: 5, load: 80, EI: 40000 },
+  "Long flexible": { L: 12, load: 15, EI: 20000 },
+};
 
 export function BeamDeflectionStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [type, setType] = useState<Beam>("ss-point");
-  const [L, setL] = useState(5); // m
-  const [load, setLoad] = useState(10); // kN or kN/m
-  const [EI, setEI] = useState(20000); // kN·m^2
+  const [{ L, load, EI }, update] = useShareableNumbers({ L: 5, load: 10, EI: 20000 }); // m, kN or kN/m, kN·m^2
 
   // max deflection (m) and max moment (kN·m)
   let defl = 0, mmax = 0;
@@ -44,16 +50,34 @@ export function BeamDeflectionStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("deflected shape (exaggerated)", ox, H - 20);
   }, [type, L, load, EI]);
 
+  const ratio = defl > 0 ? L / defl : Infinity;
+  const explain = type.startsWith("cant")
+    ? `A cantilever hangs off one support, so it deflects far more than the same simply-supported span — here to ${(defl * 1000).toFixed(1)} mm. Deflection scales with span to the ${type.endsWith("udl") ? "fourth" : "third"} power, so shortening the span beats trimming the load.`
+    : ratio >= 360
+    ? `At L/${ratio.toFixed(0)} this beam clears the usual L/360 serviceability limit, so strength (not deflection) is likely to govern the design.`
+    : `At only L/${ratio.toFixed(0)} the beam is too flexible for a typical L/360 limit; since deflection scales with span to the ${type.endsWith("udl") ? "fourth" : "third"} power, a stiffer section (higher EI) or shorter span helps far more than reducing load.`;
+
+  const code = `L, load, EI = ${L}, ${load}, ${EI}  # m, kN(/m), kN*m^2
+kind = "${type}"
+P = w = load
+if kind == "ss-point":     defl, mmax = P*L**3/(48*EI), P*L/4
+elif kind == "ss-udl":     defl, mmax = 5*w*L**4/(384*EI), w*L**2/8
+elif kind == "cant-point": defl, mmax = P*L**3/(3*EI), P*L
+else:                      defl, mmax = w*L**4/(8*EI), w*L**2/2
+print("max deflection mm", defl*1000, "| max moment kN*m", mmax)`;
+
   return (
     <StudioChrome title="Beam Deflection & Bending" tagline="Euler-Bernoulli beam theory"
       controls={<div>
         <div className="mb-3 grid grid-cols-2 gap-2">{([["ss-point", "SS + point"], ["ss-udl", "SS + UDL"], ["cant-point", "Cantilever + point"], ["cant-udl", "Cantilever + UDL"]] as [Beam, string][]).map(([t, l]) => <button key={t} onClick={() => setType(t)} className={`rounded-lg px-2 py-1 text-xs font-semibold ${type === t ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{l}</button>)}</div>
-        <Slider label="Span L (m)" value={L} min={1} max={12} step={0.5} onChange={setL} />
-        <Slider label={type.endsWith("udl") ? "Load w (kN/m)" : "Load P (kN)"} value={load} min={1} max={100} step={1} onChange={setLoad} />
-        <Slider label="Flexural rigidity EI (kN·m²)" value={EI} min={2000} max={80000} step={1000} onChange={setEI} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Span L (m)" value={L} min={1} max={12} step={0.5} onChange={(v) => update({ L: v })} />
+        <Slider label={type.endsWith("udl") ? "Load w (kN/m)" : "Load P (kN)"} value={load} min={1} max={100} step={1} onChange={(v) => update({ load: v })} />
+        <Slider label="Flexural rigidity EI (kN·m²)" value={EI} min={2000} max={80000} step={1000} onChange={(v) => update({ EI: v })} />
         <p className="mt-3 text-xs text-slate-500">Euler-Bernoulli theory relates a beam&apos;s deflection and internal moment to its load, span, and flexural rigidity EI. Deflection grows with the cube or fourth power of span, which is why doubling a span is far worse than doubling the load. Educational tool — not a substitute for a stamped structural design.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Max deflection" value={`${(defl * 1000).toFixed(2)} mm`} /><Stat label="Max moment" value={`${mmax.toFixed(1)} kN·m`} /><Stat label="Span/deflection" value={`L/${(L / defl).toFixed(0)}`} /></div>}
+      inspector={<div><Stat label="Max deflection" value={`${(defl * 1000).toFixed(2)} mm`} /><Stat label="Max moment" value={`${mmax.toFixed(1)} kN·m`} /><Stat label="Span/deflection" value={`L/${(L / defl).toFixed(0)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

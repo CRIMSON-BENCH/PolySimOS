@@ -1,14 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 460;
 
+const PRESETS: Record<string, { T: number }> = {
+  "Ember (1000 K)": { T: 1000 },
+  "Incandescent bulb": { T: 3000 },
+  "Sun (5778 K)": { T: 5778 },
+  "Sirius (9940 K)": { T: 9940 },
+};
+
 export function BlackbodyStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [T, setT] = useState(5778); // Kelvin (Sun)
+  const [{ T }, update] = useShareableNumbers({ T: 5778 }); // Kelvin (Sun)
 
   const planck = (lambdaNm: number, temp: number) => { const h = 6.626e-34, c = 3e8, k = 1.381e-23; const l = lambdaNm * 1e-9; return (2 * h * c * c) / (Math.pow(l, 5) * (Math.exp((h * c) / (l * k * temp)) - 1)); };
   const peakNm = 2.898e6 / T; // Wien's law (nm)
@@ -26,14 +34,34 @@ export function BlackbodyStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`peak ${peakNm.toFixed(0)} nm (Wien)`, sx(peakNm) + 6, pad + 16); ctx.fillText("wavelength (nm) →", W - 150, H - 16); ctx.fillText("visible band shaded", pad, pad - 12);
   }, [T]);
 
+  const band = peakNm < 380 ? "in the ultraviolet" : peakNm <= 750 ? "inside the visible band" : "in the infrared";
+  const explain = `At ${T} K the Planck curve peaks at ${peakNm.toFixed(0)} nm, ${band} — Wien's law makes peak wavelength ∝ 1/T, so doubling the temperature halves the peak wavelength and shifts the glow toward blue.`;
+
+  const code = `import numpy as np
+T = ${T}
+h, c, k = 6.626e-34, 3e8, 1.381e-23
+lam = np.linspace(100e-9, 2500e-9, 2000)       # wavelength in m
+B = 2*h*c**2 / (lam**5 * (np.exp(h*c/(lam*k*T)) - 1))
+peak_nm = 2.898e6 / T                           # Wien's displacement law
+print("peak", round(peak_nm), "nm")`;
+
   return (
     <StudioChrome title="Blackbody Radiation" tagline="Planck's law · Wien's displacement"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">Every warm object glows with a Planck spectrum. Heat it up and the peak shifts to shorter (bluer) wavelengths — that&apos;s why stars range from red to blue-white.</p>
-        <Slider label="Temperature (K)" value={T} min={1000} max={12000} step={100} onChange={setT} />
-        <div className="mt-2 flex flex-wrap gap-1">{[["Ember", 1000], ["Bulb", 3000], ["Sun", 5778], ["Sirius", 9940]].map(([n, t]) => <button key={n as string} onClick={() => setT(t as number)} className="rounded-md border border-slate-300 px-2 py-0.5 text-[11px] text-slate-600 dark:border-slate-700 dark:text-slate-400">{n}</button>)}</div>
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Temperature (K)" value={T} min={1000} max={12000} step={100} onChange={(v) => update({ T: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Temperature" value={`${T} K`} /><Stat label="Peak wavelength" value={`${peakNm.toFixed(0)} nm`} /><Stat label="Color" value={peakNm < 450 ? "blue-white" : peakNm < 600 ? "white/yellow" : peakNm < 750 ? "red" : "infrared"} /></div>}
+      inspector={<div>
+        <Stat label="Temperature" value={`${T} K`} />
+        <Stat label="Peak wavelength" value={`${peakNm.toFixed(0)} nm`} />
+        <Stat label="Color" value={peakNm < 450 ? "blue-white" : peakNm < 600 ? "white/yellow" : peakNm < 750 ? "red" : "infrared"} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

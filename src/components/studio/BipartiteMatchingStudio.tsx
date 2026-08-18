@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { density: number; seed: number }> = {
+  "Sparse (few options)": { density: 0.2, seed: 3 },
+  "Balanced": { density: 0.4, seed: 1 },
+  "Dense (many options)": { density: 0.6, seed: 2 },
+  "Near-complete": { density: 0.8, seed: 4 },
+};
 
 // Maximum bipartite matching (Hungarian augmenting-path).
 export function BipartiteMatchingStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [density, setDensity] = useState(0.4);
-  const [seed, setSeed] = useState(1);
+  const [{ density, seed }, update] = useShareableNumbers({ density: 0.4, seed: 1 });
   const [matched, setMatched] = useState(0);
 
   useEffect(() => {
@@ -28,14 +35,41 @@ export function BipartiteMatchingStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("workers", lx - 24, 30); ctx.fillText("jobs", rx - 12, 30);
   }, [density, seed]);
 
+  const explain =
+    matched === 6
+      ? `Perfect matching: all 6 workers get a distinct job. At ${Math.round(density * 100)}% edge density there are enough options that no worker is left as a bottleneck.`
+      : matched >= 4
+      ? `${matched} of 6 paired. The unmatched ones sit behind a bottleneck — by König's theorem, a small set of jobs is shared by too many workers, capping the matching below full.`
+      : `Only ${matched} of 6 paired: at ${Math.round(density * 100)}% density the graph is too sparse, so many workers have no eligible job and augmenting paths run out early.`;
+
+  const code = `density, seed = ${density}, ${seed}
+L = R = 6
+s = (seed*7043) & 0xffffffff
+def rnd():
+    global s
+    s = (s*1664525 + 1013904223) & 0xffffffff
+    return s/4294967296
+adj = [[j for j in range(R) if rnd() < density] for _ in range(L)]
+matchR = [-1]*R
+def kuhn(u, seen):
+    for v in adj[u]:
+        if not seen[v]:
+            seen[v] = True
+            if matchR[v] < 0 or kuhn(matchR[v], seen):
+                matchR[v] = u; return True
+    return False
+print("matched", sum(kuhn(u, [False]*R) for u in range(L)))`;
+
   return (
     <StudioChrome title="Bipartite Matching" tagline="assignment problem"
       controls={<div>
-        <Slider label="Edge density" value={density} min={0.2} max={0.8} step={0.05} onChange={setDensity} />
-        <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New graph</button>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Edge density" value={density} min={0.2} max={0.8} step={0.05} onChange={(v) => update({ density: v })} />
+        <button onClick={() => update({ seed: seed + 1 })} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New graph</button>
         <p className="mt-3 text-xs text-slate-500">Maximum bipartite matching pairs items from two groups — workers to jobs, students to schools, organs to recipients — so that as many valid pairings as possible are made, with no one assigned twice. Kuhn&apos;s algorithm repeatedly finds augmenting paths that improve the matching. The green edges are the optimal assignment.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Matched pairs" value={String(matched)} /><Stat label="Max possible" value="6" /><Stat label="Method" value="augmenting paths" /></div>}
+      inspector={<div><Stat label="Matched pairs" value={String(matched)} /><Stat label="Max possible" value="6" /><Stat label="Method" value="augmenting paths" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

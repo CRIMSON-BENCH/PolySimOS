@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { Ea: number; logA: number; T: number }> = {
+  "Room temp": { Ea: 50, logA: 11, T: 298 },
+  "Body-temp enzyme": { Ea: 25, logA: 11, T: 310 },
+  "High barrier": { Ea: 150, logA: 13, T: 298 },
+  "Combustion (hot)": { Ea: 100, logA: 13, T: 400 },
+};
 
 export function ArrheniusRateStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [Ea, setEa] = useState(50), [logA, setLogA] = useState(11), [T, setT] = useState(298);
+  const [{ Ea, logA, T }, update] = useShareableNumbers({ Ea: 50, logA: 11, T: 298 });
   const A = Math.pow(10, logA);
   const k = (temp: number) => A * Math.exp(-Ea * 1000 / (8.314 * temp));
   const kNow = k(T), kUp = k(T + 10);
@@ -24,18 +32,35 @@ export function ArrheniusRateStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("Arrhenius plot: ln k vs 1/T (slope = −Ea/R)", ox + 6, oy - ph + 12); ctx.fillText("1/T →", ox + pw - 40, oy + 18);
   }, [Ea, logA, T, kNow]);
 
+  const speedup = kUp / kNow;
+  const explain =
+    Ea < 40
+      ? `A low barrier (${Ea} kJ/mol) means most collisions already succeed, so warming +10 K only speeds things ${speedup.toFixed(1)}× — the reaction is relatively temperature-insensitive.`
+      : Ea > 120
+      ? `A steep barrier (${Ea} kJ/mol) makes the rate hypersensitive to heat: +10 K here multiplies it ${speedup.toFixed(1)}×, because the exp(−Ea/RT) term dominates.`
+      : `At ${T} K the +10 K speed-up is ${speedup.toFixed(1)}× — the barrier Ea sets the slope −Ea/R of the straight Arrhenius line, so higher Ea tilts it steeper and heat matters more.`;
+
+  const code = `import numpy as np
+Ea, logA, T = ${Ea}, ${logA}, ${T}  # kJ/mol, log10(A), K
+A = 10**logA; R = 8.314
+k = lambda temp: A * np.exp(-Ea*1000 / (R*temp))
+print("k", k(T), "  speed-up per +10 K", k(T+10)/k(T))`;
+
   return (
     <StudioChrome title="Arrhenius Reaction Rate" tagline="why heat speeds up reactions"
       controls={<div>
-        <Slider label="Activation energy Ea (kJ/mol)" value={Ea} min={10} max={200} step={5} onChange={setEa} />
-        <Slider label="log₁₀ pre-factor A" value={logA} min={6} max={15} step={0.5} onChange={setLogA} />
-        <Slider label="Temperature (K)" value={T} min={250} max={400} step={1} onChange={setT} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Activation energy Ea (kJ/mol)" value={Ea} min={10} max={200} step={5} onChange={(v) => update({ Ea: v })} />
+        <Slider label="log₁₀ pre-factor A" value={logA} min={6} max={15} step={0.5} onChange={(v) => update({ logA: v })} />
+        <Slider label="Temperature (K)" value={T} min={250} max={400} step={1} onChange={(v) => update({ T: v })} />
         <p className="mt-3 text-xs text-slate-500">Reactions speed up with temperature because more molecules clear the activation-energy barrier. The Arrhenius law k = A·exp(−Ea/RT) captures this — plotting ln k against 1/T gives a straight line whose slope reveals Ea. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Rate constant k" value={kNow.toExponential(2)} />
         <Stat label="k at T + 10 K" value={kUp.toExponential(2)} />
-        <Stat label="Speed-up per +10 K" value={`${(kUp / kNow).toFixed(1)}×`} />
+        <Stat label="Speed-up per +10 K" value={`${speedup.toFixed(1)}×`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

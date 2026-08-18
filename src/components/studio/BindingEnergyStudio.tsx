@@ -1,8 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { massNum: number }> = {
+  "Deuterium (H-2)": { massNum: 2 },
+  "Helium-4": { massNum: 4 },
+  "Iron-56 (peak)": { massNum: 56 },
+  "Uranium-235": { massNum: 235 },
+};
 
 // Semi-empirical mass formula: binding energy per nucleon.
 function bePerA(A: number): number {
@@ -15,7 +23,7 @@ function bePerA(A: number): number {
 
 export function BindingEnergyStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [massNum, setMassNum] = useState(56);
+  const [{ massNum }, update] = useShareableNumbers({ massNum: 56 });
   const be = bePerA(massNum);
 
   useEffect(() => {
@@ -31,14 +39,39 @@ export function BindingEnergyStudio() {
   }, [massNum]);
 
   const process = massNum < 56 ? "fusion releases energy" : "fission releases energy";
+
+  const explain = massNum <= 4
+    ? "Very light nuclei are only loosely bound; fusing them upward toward iron unleashes enormous energy — the reaction that powers the Sun."
+    : massNum < 56
+    ? "Below iron-56 a nucleus gains binding energy by fusing toward the peak, so fusion is the energy-releasing direction at this mass."
+    : massNum === 56
+    ? "Iron-56 sits at the very peak — the most tightly bound nucleus, where neither fusion nor fission can extract any more energy."
+    : "Past the iron-56 peak, a heavy nucleus releases energy by splitting back toward it — the principle behind fission reactors and bombs.";
+
+  const code = `import numpy as np
+A = ${massNum}
+Z = round(A / (1.98 + 0.015 * A ** (2 / 3)))
+aV, aS, aC, aA = 15.8, 18.3, 0.714, 23.2
+if Z % 2 == 0 and (A - Z) % 2 == 0: d = 12 / np.sqrt(A)
+elif Z % 2 and (A - Z) % 2:         d = -12 / np.sqrt(A)
+else:                                d = 0
+BE = aV*A - aS*A**(2/3) - aC*Z*(Z-1)/A**(1/3) - aA*(A-2*Z)**2/A + d
+print("BE per nucleon", BE / A, "MeV")`;
+
   return (
     <StudioChrome title="Nuclear Binding Energy" tagline="why stars shine and bombs work"
       controls={<div>
-        <Slider label="Mass number A" value={massNum} min={2} max={240} step={1} onChange={setMassNum} />
-        <div className="mt-3 flex flex-wrap gap-1">{[["He-4", 4], ["Fe-56", 56], ["U-235", 235]].map(([n, a]) => <button key={n as string} onClick={() => setMassNum(a as number)} className="rounded-lg border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">{n}</button>)}</div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Mass number A" value={massNum} min={2} max={240} step={1} onChange={(v) => update({ massNum: v })} />
         <p className="mt-3 text-xs text-slate-500">The binding energy per nucleon measures how tightly a nucleus is held together, peaking at iron-56. Light nuclei release energy by fusing toward that peak — the power source of stars; heavy nuclei release energy by splitting toward it — the basis of fission reactors and bombs. Iron is the ash where both paths end.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="BE per nucleon" value={`${be.toFixed(2)} MeV`} /><Stat label="Total BE" value={`${(be * massNum).toFixed(0)} MeV`} /><Stat label="Energy path" value={process} /></div>}
+      inspector={<div>
+        <Stat label="BE per nucleon" value={`${be.toFixed(2)} MeV`} />
+        <Stat label="Total BE" value={`${(be * massNum).toFixed(0)} MeV`} />
+        <Stat label="Energy path" value={process} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
