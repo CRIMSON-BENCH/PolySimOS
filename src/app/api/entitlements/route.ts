@@ -17,21 +17,31 @@ export async function GET(req: Request) {
   // confirmed without making a purchase. It exposes no keys, no schema, and no rows.
   if (new URL(req.url).searchParams.get("check") === "1") {
     if (!configured) return NextResponse.json({ configured: false, table: "not-checked" });
+    // Hit PostgREST directly: the raw HTTP status is unambiguous where the client
+    // library can swallow the cause (401 = bad key, 404 = table missing, 200 = fine).
+    const raw = key!;
+    const k = raw.trim().replace(/^["']|["']$/g, ""); // tolerate stray quotes/whitespace from copy-paste
+    const shape = {
+      len: raw.length,
+      hadWhitespace: raw !== raw.trim(),
+      hadQuotes: /^["']|["']$/.test(raw.trim()),
+      kind: k.startsWith("sb_secret_") ? "secret" : k.startsWith("sb_publishable_") ? "PUBLISHABLE (wrong key — need the secret one)" : k.startsWith("eyJ") ? "legacy-jwt" : "unrecognized",
+      urlLooksRight: /^https:\/\/[a-z0-9]+\.supabase\.co\/?$/.test((url ?? "").trim()),
+    };
     try {
-      const { createClient } = await import("@supabase/supabase-js");
-      const db = createClient(url!, key!);
-      const { error } = await db.from("entitlements").select("grant_key", { count: "exact", head: true });
-      // Surface the provider's own error text so setup problems are self-diagnosing.
-      // These messages describe schema/permission state ("relation does not exist",
-      // "Invalid API key", "permission denied") and never echo the key itself.
+      const res = await fetch(`${(url ?? "").trim().replace(/\/$/, "")}/rest/v1/entitlements?select=grant_key&limit=1`, {
+        headers: { apikey: k, Authorization: `Bearer ${k}` },
+      });
+      const body = (await res.text()).slice(0, 300);
       return NextResponse.json({
         configured: true,
-        table: error ? "unreachable" : "ok",
-        ...(error ? { reason: error.message, code: error.code ?? null } : {}),
-        keyKind: key!.startsWith("sb_secret_") ? "secret" : key!.startsWith("sb_publishable_") ? "PUBLISHABLE (wrong key!)" : key!.startsWith("eyJ") ? "legacy-jwt" : "unrecognized",
+        table: res.ok ? "ok" : "unreachable",
+        httpStatus: res.status,
+        ...(res.ok ? {} : { reason: body }),
+        ...shape,
       });
     } catch (e) {
-      return NextResponse.json({ configured: true, table: "unreachable", reason: (e as Error).message });
+      return NextResponse.json({ configured: true, table: "unreachable", reason: (e as Error).message, ...shape });
     }
   }
 
@@ -50,7 +60,9 @@ export async function GET(req: Request) {
 
   try {
     const { createClient } = await import("@supabase/supabase-js");
-    const db = createClient(url, key);
+    // Normalize: dashboard copy-paste can carry a trailing newline or wrapping quotes,
+    // which otherwise fails auth with an unhelpful empty error.
+    const db = createClient(url.trim().replace(/\/$/, ""), key.trim().replace(/^["']|["']$/g, ""));
     const { data } = await db
       .from("entitlements")
       .select("grant_key,status")
