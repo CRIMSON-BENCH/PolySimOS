@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { differentiateExpr, simplifyExpr, sampleExpr, solveRoot, integrateExpr } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -87,6 +88,20 @@ export function CasStudio() {
 
   const examples = ["x^3 - 2*x", "sin(x)*exp(-x/6)", "cos(x^2)", "ln(x^2+1)", "1/(1+exp(-x))", "x*sin(x)"];
 
+  const explain = !result.ok
+    ? "The parser rejected this input — check for balanced parentheses and that every function is one of the supported names."
+    : root !== null
+    ? `f crosses zero near x = ${root.toFixed(2)}: that root is exactly where the cyan f(x) curve meets the x-axis, and where its slope f'(x) tells you how sharply it passes through.`
+    : "No sign change was found in [-10, 10], so f either has no real root on that interval or only grazes the axis without crossing it.";
+
+  const code = `import sympy as sp
+x = sp.symbols("x")
+f = sp.sympify("${expr.replace(/\^/g, "**")}")  # ^ -> ** for Python power
+print("simplified:", sp.simplify(f))
+print("d/dx      :", sp.diff(f, x))
+print("integral  :", sp.integrate(f, x))
+print("root ~    :", sp.nsolve(f, x, 0))  # numeric root near x=0`;
+
   return (
     <StudioChrome
       title="Symbolic Math (CAS) Studio"
@@ -125,6 +140,7 @@ export function CasStudio() {
           ) : (
             <p className="text-xs text-red-500">{result.error}</p>
           )}
+          <ShareBar code={code} />
         </div>
       }
       inspector={
@@ -132,6 +148,7 @@ export function CasStudio() {
           <Stat label="Parsed" value={result.ok ? "✓ valid" : "✗ error"} />
           <Stat label="Root in [-10,10]" value={root !== null ? root.toFixed(4) : "none found"} />
           <Stat label="Functions" value="sin cos tan exp ln √ …" />
+          <ExplainResult text={explain} />
         </div>
       }
     >

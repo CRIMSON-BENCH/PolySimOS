@@ -1,16 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { alpha: number; budget: number; r: number; w: number }> = {
+  "Balanced": { alpha: 0.5, budget: 100, r: 4, w: 3 },
+  "Capital-heavy": { alpha: 0.7, budget: 150, r: 3, w: 5 },
+  "Labor-heavy": { alpha: 0.3, budget: 120, r: 6, w: 2 },
+  "Tight budget": { alpha: 0.5, budget: 50, r: 5, w: 5 },
+};
 
 // Cobb-Douglas production Q = A K^a L^(1-a); isoquants + cost-min.
 export function CobbDouglasStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [alpha, setAlpha] = useState(0.5);
-  const [budget, setBudget] = useState(100);
-  const [r, setR] = useState(4); // rental of K
-  const [w, setW] = useState(3); // wage of L
+  const [{ alpha, budget, r, w }, update] = useShareableNumbers({ alpha: 0.5, budget: 100, r: 4, w: 3 });
 
   // cost-min: K = alpha/r * C/(alpha/r ... ) ; optimal K = alpha*C/r, L=(1-alpha)*C/w
   const K = alpha * budget / r, L = (1 - alpha) * budget / w; const A = 1; const Q = A * Math.pow(K, alpha) * Math.pow(L, 1 - alpha);
@@ -28,16 +33,27 @@ export function CobbDouglasStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("isoquants (cyan) + budget line (pink)", ox + 6, oy - ph + 14); ctx.fillText("labor L →", ox + pw - 60, oy + 16); ctx.save(); ctx.translate(16, oy - ph / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("capital K", -30, 0); ctx.restore();
   }, [alpha, budget, r, w]);
 
+  const explain = `Cost-minimizing plan spends ${(alpha * 100).toFixed(0)}% of the budget on capital and ${((1 - alpha) * 100).toFixed(0)}% on labor — the exponents fix these shares no matter what r and w are; prices only change how many units of each that money buys.`;
+
+  const code = `alpha, budget, r, w = ${alpha}, ${budget}, ${r}, ${w}
+A = 1.0
+K = alpha * budget / r
+L = (1 - alpha) * budget / w
+Q = A * K ** alpha * L ** (1 - alpha)
+print("K", K, "L", L, "Q", Q)`;
+
   return (
     <StudioChrome title="Cobb-Douglas Production" tagline="optimal input mix"
       controls={<div>
-        <Slider label="Capital share α" value={alpha} min={0.1} max={0.9} step={0.05} onChange={setAlpha} />
-        <Slider label="Budget" value={budget} min={40} max={300} step={10} onChange={setBudget} />
-        <Slider label="Capital rental r" value={r} min={1} max={10} step={0.5} onChange={setR} />
-        <Slider label="Wage w" value={w} min={1} max={10} step={0.5} onChange={setW} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Capital share α" value={alpha} min={0.1} max={0.9} step={0.05} onChange={(v) => update({ alpha: v })} />
+        <Slider label="Budget" value={budget} min={40} max={300} step={10} onChange={(v) => update({ budget: v })} />
+        <Slider label="Capital rental r" value={r} min={1} max={10} step={0.5} onChange={(v) => update({ r: v })} />
+        <Slider label="Wage w" value={w} min={1} max={10} step={0.5} onChange={(v) => update({ w: v })} />
         <p className="mt-3 text-xs text-slate-500">The Cobb-Douglas function Q = A·Kᵅ·L¹⁻ᵅ describes how capital and labor combine to make output. Isoquants show input mixes yielding the same output; the budget line shows what you can afford. Production is maximized where the budget line just touches the highest isoquant — the cost-minimizing input mix, splitting spending by the exponents.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Optimal capital K" value={K.toFixed(1)} /><Stat label="Optimal labor L" value={L.toFixed(1)} /><Stat label="Output Q" value={Q.toFixed(1)} /></div>}
+      inspector={<div><Stat label="Optimal capital K" value={K.toFixed(1)} /><Stat label="Optimal labor L" value={L.toFixed(1)} /><Stat label="Output Q" value={Q.toFixed(1)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

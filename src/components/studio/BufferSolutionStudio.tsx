@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { pKa: number; ratio: number; addAcid: number }> = {
+  "Acetate 1:1": { pKa: 4.76, ratio: 1, addAcid: 0 },
+  "Blood ~7.4": { pKa: 6.1, ratio: 10, addAcid: 0 },
+  "Phosphate 7.2": { pKa: 7.2, ratio: 1, addAcid: 0 },
+  "Acid shock": { pKa: 4.76, ratio: 1, addAcid: 4 },
+};
 
 export function BufferSolutionStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [pKa, setPKa] = useState(4.76), [ratio, setRatio] = useState(1), [addAcid, setAddAcid] = useState(0);
+  const [{ pKa, ratio, addAcid }, update] = useShareableNumbers({ pKa: 4.76, ratio: 1, addAcid: 0 });
   // ratio = [A-]/[HA]. Adding strong acid shifts base to acid.
   const base = ratio / (1 + ratio), acid = 1 / (1 + ratio);
   const nb = base - addAcid * 0.1, na = acid + addAcid * 0.1;
@@ -24,18 +32,36 @@ export function BufferSolutionStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("a buffer resists pH change", bx - 20, y0 - 14);
   }, [pKa, ratio, addAcid, pH, pHUnbuffered]);
 
+  const resisted = Math.max(0, pHUnbuffered - pH);
+  const explain =
+    ratio >= 0.5 && ratio <= 2
+      ? `Base and acid are near equimolar (ratio ${ratio}), so pH sits right at pKa where buffering capacity peaks — the added acid moves it only ${resisted.toFixed(1)} pH units instead of crashing the solution.`
+      : ratio > 2
+      ? `Base far outweighs acid, so pH runs above pKa and the reserve against added acid is large — it holds the shift to just ${resisted.toFixed(1)} pH units, but it would resist added base far more weakly.`
+      : `Acid far outweighs base, so pH runs below pKa and capacity against more acid is nearly spent — yet it still limits the change to ${resisted.toFixed(1)} pH units versus unbuffered water.`;
+
+  const code = `import numpy as np
+pKa, ratio, add_acid = ${pKa}, ${ratio}, ${addAcid}
+base = ratio/(1+ratio); acid = 1/(1+ratio)
+nb = base - add_acid*0.1; na = acid + add_acid*0.1
+pH = pKa + np.log10(max(1e-6, nb)/max(1e-6, na))
+print("buffered pH", round(pH, 2))`;
+
   return (
     <StudioChrome title="Buffer Solution (Henderson–Hasselbalch)" tagline="resisting pH change"
       controls={<div>
-        <Slider label="pKa of weak acid" value={pKa} min={2} max={10} step={0.1} onChange={setPKa} />
-        <Slider label="[base]/[acid] ratio" value={ratio} min={0.1} max={10} step={0.1} onChange={setRatio} />
-        <Slider label="Strong acid added (units)" value={addAcid} min={0} max={5} step={0.5} onChange={setAddAcid} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="pKa of weak acid" value={pKa} min={2} max={10} step={0.1} onChange={(v) => update({ pKa: v })} />
+        <Slider label="[base]/[acid] ratio" value={ratio} min={0.1} max={10} step={0.1} onChange={(v) => update({ ratio: v })} />
+        <Slider label="Strong acid added (units)" value={addAcid} min={0} max={5} step={0.5} onChange={(v) => update({ addAcid: v })} />
         <p className="mt-3 text-xs text-slate-500">A buffer is a weak acid plus its conjugate base. Its pH follows Henderson–Hasselbalch, pH = pKa + log([base]/[acid]). Add strong acid and the buffer neutralizes most of it, so the pH barely moves — unlike pure water. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Buffer pH" value={pH.toFixed(2)} />
         <Stat label="Same acid, no buffer" value={pHUnbuffered.toFixed(1)} />
         <Stat label="pH change resisted" value={`${Math.max(0, pHUnbuffered - pH).toFixed(1)} units`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

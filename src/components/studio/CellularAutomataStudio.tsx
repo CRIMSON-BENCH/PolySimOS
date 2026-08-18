@@ -2,6 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { useShareableNumbers } from "@/lib/studioKit";
+
+const RULE_PRESETS: Record<string, { rule: number }> = {
+  "Rule 30 (chaos)": { rule: 30 },
+  "Rule 90 (Sierpiński)": { rule: 90 },
+  "Rule 110 (Turing)": { rule: 110 },
+  "Rule 184 (traffic)": { rule: 184 },
+};
 
 export function CellularAutomataStudio() {
   const [mode, setMode] = useState<"elementary" | "life">("elementary");
@@ -17,7 +26,7 @@ export function CellularAutomataStudio() {
 
 function Elementary() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [rule, setRule] = useState(30);
+  const [{ rule }, update] = useShareableNumbers({ rule: 30 });
   const N = 201, ROWS = 200;
   useEffect(() => {
     const ctx = canvasRef.current!.getContext("2d")!;
@@ -32,14 +41,41 @@ function Elementary() {
     }
     ctx.putImageData(img, 0, 0);
   }, [rule]);
+  const explain =
+    rule === 30
+      ? "Rule 30 is chaotic: from a single seed it produces patterns random enough that Wolfram used its center column as a random-number generator."
+      : rule === 90
+      ? "Rule 90 is the XOR of its two neighbors, so from one black cell it draws a Sierpiński triangle — a fractal built by a one-line rule."
+      : rule === 110
+      ? "Rule 110 lives on the boundary between order and chaos and is proven Turing-complete: it can, in principle, emulate any computer."
+      : rule === 184
+      ? "Rule 184 is a traffic model — each cell acts like a car that advances only when the cell ahead is empty, reproducing jams and flow."
+      : [45, 54, 60, 105, 106, 150].includes(rule)
+      ? "This rule falls in Wolfram's complex class: expect nested or aperiodic structure rather than a simple repeating pattern."
+      : "Most of the 256 rules settle into uniform or simply periodic output; only a handful sustain lasting complexity.";
+
+  const code = `import numpy as np
+rule = ${rule}
+N, ROWS = 201, 200
+row = np.zeros(N, dtype=int); row[N // 2] = 1
+grid = [row.copy()]
+for _ in range(ROWS - 1):
+    nxt = np.zeros(N, dtype=int)
+    for x in range(N):
+        idx = (row[(x-1) % N] << 2) | (row[x] << 1) | row[(x+1) % N]
+        nxt[x] = (rule >> idx) & 1
+    row = nxt; grid.append(row.copy())
+print(np.array(grid))  # ROWS x N evolution`;
+
   return (
     <StudioChrome title="Elementary Cellular Automaton" tagline={`Wolfram rule ${rule}`}
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">One rule, 256 possibilities. Rule 30 makes chaos; Rule 90 makes a Sierpiński triangle; Rule 110 is Turing-complete.</p>
-        <Slider label="Rule number" value={rule} min={0} max={255} step={1} onChange={setRule} />
-        <div className="mt-2 flex flex-wrap gap-1">{[30, 90, 110, 54, 150, 184].map((r) => <button key={r} onClick={() => setRule(r)} className="rounded-md border border-slate-300 px-2 py-0.5 text-xs text-slate-600 dark:border-slate-700 dark:text-slate-400">Rule {r}</button>)}</div>
+        <Presets presets={Object.keys(RULE_PRESETS).map((label) => ({ label }))} onApply={(label) => update(RULE_PRESETS[label])} />
+        <Slider label="Rule number" value={rule} min={0} max={255} step={1} onChange={(v) => update({ rule: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Rule" value={String(rule)} /><Stat label="Cells" value={String(N)} /><Stat label="Class" value={rule === 30 || rule === 110 ? "chaotic/complex" : "structured"} /></div>}
+      inspector={<div><Stat label="Rule" value={String(rule)} /><Stat label="Cells" value={String(N)} /><Stat label="Class" value={rule === 30 || rule === 110 ? "chaotic/complex" : "structured"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N} height={ROWS} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} /></StudioChrome>
   );
 }
@@ -68,13 +104,29 @@ function Life() {
     };
     rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
   }, [running]);
+  const explain = gen === 0
+    ? "Starting from a random 28%-density soup — watch most cells die off in the first few generations before stable still-lifes and oscillators survive."
+    : "Birth on exactly 3 neighbors, survival on 2 or 3: these two rules alone yield gliders, oscillators, and even Turing-complete computation.";
+
+  const code = `import numpy as np
+N = 120
+g = (np.random.rand(N, N) < 0.28).astype(int)
+def step(g):
+    nb = sum(np.roll(np.roll(g, dy, 0), dx, 1)
+             for dy in (-1, 0, 1) for dx in (-1, 0, 1) if (dx or dy))
+    return ((g & ((nb == 2) | (nb == 3))) | (~g.astype(bool) & (nb == 3))).astype(int)
+for _ in range(100):
+    g = step(g)
+print(g.sum(), "live cells after 100 generations")`;
+
   return (
     <StudioChrome title="Conway's Game of Life" tagline="cellular automaton · emergent complexity"
       controls={<div>
         <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button><button onClick={seed} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Randomize</button></div>
         <p className="text-xs text-slate-500">Four simple rules produce gliders, oscillators, and endless emergent structure.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Generation" value={String(gen)} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Generation" value={String(gen)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} /></StudioChrome>
   );
 }

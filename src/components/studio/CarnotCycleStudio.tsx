@@ -1,14 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { Th: number; Tc: number; ratio: number }> = {
+  "Steam turbine": { Th: 800, Tc: 320, ratio: 4 },
+  "Car engine": { Th: 1000, Tc: 330, ratio: 3 },
+  "Low-grade heat": { Th: 400, Tc: 300, ratio: 2 },
+  "High efficiency": { Th: 1200, Tc: 200, ratio: 5 },
+};
 
 export function CarnotCycleStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [Th, setTh] = useState(600); // K
-  const [Tc, setTc] = useState(300); // K
-  const [ratio, setRatio] = useState(3); // expansion ratio
+  const [{ Th, Tc, ratio }, update] = useShareableNumbers({ Th: 600, Tc: 300, ratio: 3 });
 
   const eff = 1 - Tc / Th; const gamma = 1.4;
 
@@ -34,15 +40,31 @@ export function CarnotCycleStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("Carnot cycle (P-V)", ox + 6, oy - ph + 12); ctx.fillText("volume →", ox + pw - 60, oy + 18);
   }, [Th, Tc, ratio]);
 
+  const explain = `Efficiency here is ${(eff * 100).toFixed(1)}% and is fixed by the temperature ratio alone — widening the expansion ratio enlarges the enclosed work loop but can never push past the ${(eff * 100).toFixed(1)}% Carnot ceiling, and each kelvin removed from the cold side buys a bit more than each kelvin added to the hot side.`;
+
+  const code = `# Carnot cycle efficiency and P-V corner volumes
+Th, Tc, ratio = ${Th}, ${Tc}, ${ratio}
+eff = 1 - Tc / Th          # depends only on reservoir temps
+gamma = 1.4
+V1, V2 = 1.0, ratio
+V3 = V2 * (Th / Tc) ** (1 / (gamma - 1))
+V4 = V1 * (Th / Tc) ** (1 / (gamma - 1))
+print("efficiency", round(eff * 100, 1), "%")`;
+
   return (
     <StudioChrome title="Carnot Cycle" tagline="the ideal heat engine"
       controls={<div>
-        <Slider label="Hot reservoir Tₕ (K)" value={Th} min={350} max={1200} step={10} onChange={setTh} />
-        <Slider label="Cold reservoir Tc (K)" value={Tc} min={200} max={340} step={10} onChange={setTc} />
-        <Slider label="Expansion ratio" value={ratio} min={1.5} max={6} step={0.1} onChange={setRatio} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Hot reservoir Tₕ (K)" value={Th} min={350} max={1200} step={10} onChange={(v) => update({ Th: v })} />
+        <Slider label="Cold reservoir Tc (K)" value={Tc} min={200} max={340} step={10} onChange={(v) => update({ Tc: v })} />
+        <Slider label="Expansion ratio" value={ratio} min={1.5} max={6} step={0.1} onChange={(v) => update({ ratio: v })} />
         <p className="mt-3 text-xs text-slate-500">The Carnot cycle — two isothermal and two adiabatic steps — is the most efficient possible heat engine between two temperatures. Its efficiency depends only on the reservoir temperatures: η = 1 − Tc/Th. No real engine can beat it, which is why raising the hot temperature or lowering the cold one is the only path to higher efficiency.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Efficiency" value={`${(eff * 100).toFixed(1)}%`} /><Stat label="Tₕ / Tc" value={(Th / Tc).toFixed(2)} /><Stat label="Carnot limit" value={`${(eff * 100).toFixed(1)}%`} /></div>}
+      inspector={<div><Stat label="Efficiency" value={`${(eff * 100).toFixed(1)}%`} /><Stat label="Tₕ / Tc" value={(Th / Tc).toFixed(2)} /><Stat label="Carnot limit" value={`${(eff * 100).toFixed(1)}%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { gain: number; disturb: number }> = {
+  "Gentle hold": { gain: 1.0, disturb: 0.2 },
+  "Windy day": { gain: 1.8, disturb: 1.2 },
+  "Tight controller": { gain: 2.5, disturb: 0.5 },
+  "Barely stable": { gain: 0.5, disturb: 0.4 },
+};
 
 // Inverted pendulum on a cart, stabilized by state feedback.
 export function CartPoleStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [gain, setGain] = useState(1.0);
-  const [disturb, setDisturb] = useState(0.4);
+  const [{ gain, disturb }, update] = useShareableNumbers({ gain: 1.0, disturb: 0.4 });
   const [control, setControl] = useState(true);
   const [running, setRunning] = useState(true);
   const st = useRef({ x: 0, xd: 0, th: 0.15, thd: 0 });
@@ -44,16 +51,39 @@ export function CartPoleStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, gain, disturb, control]);
 
+  const explain = !control
+    ? "Controller off: with no feedback force to fight gravity, the pole topples within a fraction of a second."
+    : disturb > gain
+    ? "The disturbance outmuscles the controller here — random kicks exceed the restoring force, so expect the pole to eventually lose balance."
+    : gain >= 2
+    ? "High gain snaps the pole upright fast, but such aggressive feedback tends to overshoot and set the cart oscillating."
+    : "The state-feedback law F = -K·state pushes the cart under the falling pole; with gain above the disturbance it recovers from each nudge.";
+
+  const code = `import numpy as np
+gain, disturb, control = ${gain}, ${disturb}, ${control ? "True" : "False"}
+M, m, l, g, dt = 1.0, 0.2, 1.0, 9.8, 0.02
+x, xd, th, thd = 0.0, 0.0, 0.15, 0.0
+for step in range(500):
+    F = (55*th + 12*thd + 1.5*x + 3*xd)*gain if control else 0.0
+    F += (np.random.rand() - 0.5)*disturb*20
+    s, c = np.sin(th), np.cos(th)
+    thdd = (g*s + c*((-F - m*l*thd*thd*s)/(M+m))) / (l*(4/3 - m*c*c/(M+m)))
+    xdd = (F + m*l*(thd*thd*s - thdd*c))/(M+m)
+    thd += thdd*dt; th += thd*dt; xd += xdd*dt; x += xd*dt
+print("final pole angle (deg)", np.degrees(th))`;
+
   return (
     <StudioChrome title="Cart-Pole Balance" tagline="inverted pendulum control"
       controls={<div>
-        <Slider label="Controller gain" value={gain} min={0.3} max={2.5} step={0.1} onChange={setGain} />
-        <Slider label="Disturbance" value={disturb} min={0} max={2} step={0.1} onChange={setDisturb} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Controller gain" value={gain} min={0.3} max={2.5} step={0.1} onChange={(v) => update({ gain: v })} />
+        <Slider label="Disturbance" value={disturb} min={0} max={2} step={0.1} onChange={(v) => update({ disturb: v })} />
         <label className="mt-3 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400"><input type="checkbox" checked={control} onChange={(e) => setControl(e.target.checked)} /> Controller on</label>
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">Balancing a pole on a moving cart is the classic control benchmark. A state-feedback controller senses the pole angle and cart position and pushes the cart to keep the pole upright. Turn the controller off and it topples instantly; add disturbance to test how hard it can fight back.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Pole angle" value={`${(st.current.th * 180 / Math.PI).toFixed(1)}°`} /><Stat label="Cart position" value={st.current.x.toFixed(2)} /><Stat label="Status" value={balanced ? "balanced" : "fallen"} /></div>}
+      inspector={<div><Stat label="Pole angle" value={`${(st.current.th * 180 / Math.PI).toFixed(1)}°`} /><Stat label="Cart position" value={st.current.x.toFixed(2)} /><Stat label="Status" value={balanced ? "balanced" : "fallen"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

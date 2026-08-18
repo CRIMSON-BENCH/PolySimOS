@@ -2,14 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type Dist = "uniform" | "exponential" | "bimodal";
+
+const PRESETS: Record<string, { n: number }> = {
+  "Single draw (n=1)": { n: 1 },
+  "Small (n=5)": { n: 5 },
+  "Medium (n=15)": { n: 15 },
+  "Large (n=50)": { n: 50 },
+};
 
 export function CentralLimitStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [dist, setDist] = useState<Dist>("exponential");
-  const [n, setN] = useState(10);
+  const [{ n }, update] = useShareableNumbers({ n: 10 });
   const [running, setRunning] = useState(true);
   const means = useRef<number[]>([]);
   const [count, setCount] = useState(0);
@@ -39,15 +47,37 @@ export function CentralLimitStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, dist, n]);
 
+  const nn = Math.round(n);
+  const explain =
+    nn <= 2
+      ? `At n=${nn} each “mean” is barely an average, so the histogram still mirrors the raw ${dist} shape — skew and lumps and all.`
+      : nn < 15
+      ? `At n=${nn} the sample means are already piling into a bell even though the ${dist} source is not normal — the central limit theorem kicking in.`
+      : `At n=${nn} the distribution of means is tightly, symmetrically normal and about √${nn}× narrower than the ${dist} source — the textbook central limit theorem.`;
+
+  const code = `import numpy as np
+rng = np.random.default_rng(7)
+n, dist = ${nn}, "${dist}"
+def sample_mean():
+    u = rng.random(n)
+    if dist == "uniform":      x = u
+    elif dist == "exponential": x = -np.log(1 - u) / 2
+    else:                      x = np.where(u < 0.5, rng.random(n)*0.3, 0.7 + rng.random(n)*0.3)
+    return x.mean()
+means = np.array([sample_mean() for _ in range(5000)])
+print("mean of means", means.mean(), "std", means.std())`;
+
   return (
     <StudioChrome title="Central Limit Theorem" tagline="means go normal"
       controls={<div>
         <div className="mb-3 grid grid-cols-3 gap-2">{(["uniform", "exponential", "bimodal"] as Dist[]).map((d) => <button key={d} onClick={() => setDist(d)} className={`rounded-lg px-1 py-1 text-xs font-semibold capitalize ${dist === d ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{d}</button>)}</div>
-        <Slider label="Sample size n" value={n} min={1} max={50} step={1} onChange={setN} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Sample size n" value={n} min={1} max={50} step={1} onChange={(v) => update({ n: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">The central limit theorem is why the normal distribution is everywhere: no matter how skewed or lumpy the source distribution, the distribution of sample means becomes bell-shaped as the sample size grows. Try a heavily skewed exponential at n=1, then raise n and watch it turn normal.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Samples drawn" value={count.toLocaleString()} /><Stat label="Sample size" value={String(Math.round(n))} /><Stat label="Source" value={dist} /></div>}
+      inspector={<div><Stat label="Samples drawn" value={count.toLocaleString()} /><Stat label="Sample size" value={String(Math.round(n))} /><Stat label="Source" value={dist} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
