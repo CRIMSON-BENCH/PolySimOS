@@ -196,6 +196,14 @@ import { AmFmModulationStudio } from "./AmFmModulationStudio";
 import { MatchedFilterStudio } from "./MatchedFilterStudio";
 import { SamplingTheoremStudio } from "./SamplingTheoremStudio";
 import { PoleZeroStudio } from "./PoleZeroStudio";
+import { PerceptronStudio } from "./PerceptronStudio";
+import { KmeansClusterStudio } from "./KmeansClusterStudio";
+import { DecisionTreeStudio } from "./DecisionTreeStudio";
+import { KnnClassifierStudio } from "./KnnClassifierStudio";
+import { LogisticRegressionStudio } from "./LogisticRegressionStudio";
+import { SvmMarginStudio } from "./SvmMarginStudio";
+import { NaiveBayesStudio } from "./NaiveBayesStudio";
+import { QLearningStudio } from "./QLearningStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -732,6 +740,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "matched-filter": MatchedFilterStudio,
   "sampling-theorem": SamplingTheoremStudio,
   "pole-zero": PoleZeroStudio,
+  perceptron: PerceptronStudio,
+  "kmeans-cluster": KmeansClusterStudio,
+  "decision-tree": DecisionTreeStudio,
+  "knn-classifier": KnnClassifierStudio,
+  "logistic-regression": LogisticRegressionStudio,
+  "svm-margin": SvmMarginStudio,
+  "naive-bayes": NaiveBayesStudio,
+  "q-learning": QLearningStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

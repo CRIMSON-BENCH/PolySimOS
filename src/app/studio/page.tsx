@@ -380,6 +380,14 @@ export const SIMS = [
   { slug: "matched-filter", name: "Matched Filter", desc: "Pull signal out of noise.", tag: "Signals" },
   { slug: "sampling-theorem", name: "Sampling & Nyquist", desc: "Aliasing and the Nyquist rate.", tag: "Signals" },
   { slug: "pole-zero", name: "Pole–Zero Response", desc: "Poles peak, zeros notch.", tag: "Signals" },
+  { slug: "perceptron", name: "Perceptron", desc: "The simplest learning machine.", tag: "CS / AI" },
+  { slug: "kmeans-cluster", name: "k-Means Clustering", desc: "Find groups in data.", tag: "CS / AI" },
+  { slug: "decision-tree", name: "Decision Tree", desc: "Carve space into boxes.", tag: "CS / AI" },
+  { slug: "knn-classifier", name: "k-Nearest Neighbors", desc: "Classify by your neighbors.", tag: "CS / AI" },
+  { slug: "logistic-regression", name: "Logistic Regression", desc: "Probability from a line.", tag: "CS / AI" },
+  { slug: "svm-margin", name: "SVM Maximum Margin", desc: "The widest separating street.", tag: "CS / AI" },
+  { slug: "naive-bayes", name: "Naive Bayes", desc: "Classification by probability.", tag: "CS / AI" },
+  { slug: "q-learning", name: "Q-Learning Gridworld", desc: "Learning to reach a goal.", tag: "CS / AI" },
 ];
 
 export default function StudioIndex() {

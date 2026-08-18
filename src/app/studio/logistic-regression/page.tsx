@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LogisticRegressionStudio } from "@/components/studio/LogisticRegressionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Logistic Regression Simulator (Browser)", description: "See how logistic regression turns a linear score into a probability with the sigmoid, and where the decision boundary falls. Free, interactive.", alternates: { canonical: "/studio/logistic-regression" } };
+export default function Page() { return <StudioPageShell slug="logistic-regression" name="Logistic Regression" keyword="logistic regression simulator" lede="Logistic regression is the workhorse of classification. Watch it bend a straight line into an S-curve that outputs a clean probability." about="Logistic regression computes a weighted score and passes it through the sigmoid to produce a probability between 0 and 1. A threshold turns that probability into a class. Despite the name it is a classifier, and it underpins everything from credit scoring to medical risk models. Educational tool."><LogisticRegressionStudio /></StudioPageShell>; }

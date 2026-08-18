@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DecisionTreeStudio } from "@/components/studio/DecisionTreeStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Decision Tree Boundary Simulator (Browser)", description: "See how axis-aligned splits carve a feature space into rectangular class regions, and how depth changes the boundary. Free, interactive.", alternates: { canonical: "/studio/decision-tree" } };
+export default function Page() { return <StudioPageShell slug="decision-tree" name="Decision Tree Splits" keyword="decision tree simulator" lede="A decision tree asks yes/no questions to slice data into boxes. Move the split lines and watch the class regions rearrange." about="Decision trees split the feature space one axis at a time, each branch a threshold test, until leaves hold mostly one class. Shallow trees underfit; deep trees carve intricate boundaries that can memorize noise. They are the building block of random forests and gradient boosting. Educational tool."><DecisionTreeStudio /></StudioPageShell>; }

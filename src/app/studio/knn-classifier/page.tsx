@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { KnnClassifierStudio } from "@/components/studio/KnnClassifierStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "k-Nearest Neighbors Classifier Simulator", description: "Visualize k-NN decision regions and see how the number of neighbors k trades jagged overfitting for smooth generalization. Free, interactive.", alternates: { canonical: "/studio/knn-classifier" } };
+export default function Page() { return <StudioPageShell slug="knn-classifier" name="k-Nearest Neighbors" keyword="knn classifier simulator" lede="The laziest classifier that works: to label a point, just ask its nearest neighbors to vote. Watch the decision regions shift as you change k." about="k-NN stores the training data and classifies a new point by majority vote of its k closest examples. A small k hugs every point (low bias, high variance); a large k smooths the boundary (higher bias, lower variance). It needs no training but grows costly at prediction time. Educational tool."><KnnClassifierStudio /></StudioPageShell>; }

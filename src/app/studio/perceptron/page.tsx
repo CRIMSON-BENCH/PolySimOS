@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PerceptronStudio } from "@/components/studio/PerceptronStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Perceptron Learning Simulator (Browser)", description: "Watch a perceptron learn a linear decision boundary between two classes in real time. Free, interactive machine-learning demo.", alternates: { canonical: "/studio/perceptron" } };
+export default function Page() { return <StudioPageShell slug="perceptron" name="Perceptron" keyword="perceptron simulator" lede="The perceptron is where machine learning began. Watch it nudge a line into place, point by point, until it separates the two classes." about="A perceptron adjusts its weights whenever it misclassifies a training point, rotating and shifting a linear boundary. For linearly separable data it provably converges; for overlapping classes it oscillates forever — the limitation that motivated multi-layer networks. Educational tool."><PerceptronStudio /></StudioPageShell>; }

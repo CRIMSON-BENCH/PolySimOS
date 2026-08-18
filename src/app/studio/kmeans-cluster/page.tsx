@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { KmeansClusterStudio } from "@/components/studio/KmeansClusterStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "k-Means Clustering Simulator (Browser)", description: "Run k-means clustering step by step and watch centroids migrate to the center of their groups. Free, interactive machine-learning demo.", alternates: { canonical: "/studio/kmeans-cluster" } };
+export default function Page() { return <StudioPageShell slug="kmeans-cluster" name="k-Means Clustering" keyword="k-means clustering simulator" lede="Hand a computer a cloud of points and k-means finds the natural groups. Step through the iterations and watch the clusters crystallize." about="k-means is unsupervised learning: it assigns each point to the nearest centroid, then recomputes each centroid as the mean of its points, repeating until stable. The choice of k and the initial centroids both shape the result — a simple algorithm with surprising subtlety. Educational tool."><KmeansClusterStudio /></StudioPageShell>; }

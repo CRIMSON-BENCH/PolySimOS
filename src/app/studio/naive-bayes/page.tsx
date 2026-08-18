@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { NaiveBayesStudio } from "@/components/studio/NaiveBayesStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Naive Bayes Classifier Simulator (Browser)", description: "See how a Gaussian naive Bayes classifier weighs two class distributions by their priors and sets a decision boundary where they cross. Free.", alternates: { canonical: "/studio/naive-bayes" } };
+export default function Page() { return <StudioPageShell slug="naive-bayes" name="Naive Bayes Classifier" keyword="naive bayes simulator" lede="Naive Bayes classifies by asking which class most plausibly produced a data point. Watch the decision boundary move as the distributions and priors change." about="Naive Bayes models each class as a probability distribution and applies Bayes' theorem, assigning a point to the class with the highest posterior. Despite its naive independence assumption it is fast, robust, and remarkably effective for text and spam filtering. Educational tool."><NaiveBayesStudio /></StudioPageShell>; }

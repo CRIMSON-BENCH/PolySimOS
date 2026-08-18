@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SvmMarginStudio } from "@/components/studio/SvmMarginStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Support Vector Machine Margin Simulator", description: "Adjust a separating line and see how a support vector machine maximizes the margin between two classes. Free, interactive ML demo.", alternates: { canonical: "/studio/svm-margin" } };
+export default function Page() { return <StudioPageShell slug="svm-margin" name="SVM Maximum Margin" keyword="svm margin simulator" lede="Many lines separate two classes, but only one is best. A support vector machine finds the boundary with the widest safety margin." about="An SVM chooses the separating hyperplane that maximizes the distance to the nearest points of each class — the support vectors. A wider margin generalizes better to unseen data. Try tilting and shifting the line to open the widest possible gap. Educational tool."><SvmMarginStudio /></StudioPageShell>; }

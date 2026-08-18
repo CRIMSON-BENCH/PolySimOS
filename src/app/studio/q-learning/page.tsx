@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { QLearningStudio } from "@/components/studio/QLearningStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Q-Learning Gridworld Simulator (Reinforcement Learning)", description: "Watch reinforcement learning solve a gridworld — a policy arrow in every cell that reaches the goal and avoids the trap. Free, interactive.", alternates: { canonical: "/studio/q-learning" } };
+export default function Page() { return <StudioPageShell slug="q-learning" name="Q-Learning Gridworld" keyword="q-learning gridworld simulator" lede="Reinforcement learning learns by reward. Watch an agent discover the best route through a gridworld — toward the goal, around the trap." about="Q-learning estimates the long-term value of each action and derives a policy that maximizes cumulative reward. The discount factor sets how much the agent values the distant goal, and the per-step cost pushes it toward efficient paths. The arrows show the learned optimal policy. Educational tool."><QLearningStudio /></StudioPageShell>; }
