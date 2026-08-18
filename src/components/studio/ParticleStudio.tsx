@@ -11,9 +11,17 @@ import {
   particleMetrics,
 } from "@/lib/engines/particles";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { count: number; pairwiseG: number; gravityY: number; restitution: number }> = {
+  "Cluster": { count: 120, pairwiseG: 200, gravityY: 0, restitution: 0.9 },
+  "Gas cloud": { count: 200, pairwiseG: 0, gravityY: 0, restitution: 1 },
+  "Rainfall": { count: 150, pairwiseG: 0, gravityY: 300, restitution: 0.3 },
+  "Tight orbit": { count: 80, pairwiseG: 120, gravityY: 0, restitution: 0.95 },
+};
 
 export function ParticleStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -23,10 +31,12 @@ export function ParticleStudio() {
 
   const [running, setRunning] = useState(true);
   const [scene, setScene] = useState<"orbit" | "gas">("orbit");
-  const [count, setCount] = useState(120);
-  const [gravityY, setGravityY] = useState(0);
-  const [pairwiseG, setPairwiseG] = useState(60);
-  const [restitution, setRestitution] = useState(0.9);
+  const [{ count, pairwiseG, gravityY, restitution }, update] = useShareableNumbers({
+    count: 120,
+    pairwiseG: 60,
+    gravityY: 0,
+    restitution: 0.9,
+  });
   const [metrics, setMetrics] = useState({ kineticEnergy: 0, meanSpeed: 0, maxSpeed: 0 });
 
   // reset scene
@@ -84,6 +94,23 @@ export function ParticleStudio() {
     partsRef.current = scene === "orbit" ? seedOrbit(count, p) : seedParticles(count, p);
   };
 
+  const explain =
+    gravityY > 0
+      ? `Downward gravity dominates: the ${count} bodies fall and settle, and at restitution ${restitution} each bounce ${restitution < 0.5 ? "loses most of" : "keeps most of"} its energy.`
+      : pairwiseG >= 150
+      ? `Strong pairwise gravity (G=${pairwiseG}) pulls the ${count} bodies into tight clumps — kinetic energy spikes as they collapse and slingshot past each other.`
+      : pairwiseG === 0
+      ? `With no mutual gravity the ${count} bodies act like an ideal gas, spreading out and colliding at roughly constant total energy.`
+      : `Moderate mutual gravity (G=${pairwiseG}) lets the ${count} bodies form loose orbiting structures instead of collapsing outright.`;
+
+  const code = `# 2D N-body: symplectic Euler + pairwise gravity, impulse collisions
+import numpy as np
+count, G, gy, e = ${count}, ${pairwiseG}, ${gravityY}, ${restitution}
+pos = np.random.rand(count, 2) * np.array([${W}, ${H}])
+vel = np.zeros((count, 2))
+# each step: sum pairwise gravity G, add downward gy, integrate, bounce walls with restitution e
+print(count, "bodies; G", G, "gy", gy, "restitution", e)`;
+
   return (
     <StudioChrome
       title="Particle / N-Body Studio"
@@ -119,10 +146,15 @@ export function ParticleStudio() {
               </button>
             ))}
           </div>
-          <Slider label="Particles" value={count} min={20} max={400} step={10} onChange={setCount} />
-          <Slider label="Pairwise gravity G" value={pairwiseG} min={0} max={200} step={5} onChange={setPairwiseG} />
-          <Slider label="Downward gravity" value={gravityY} min={0} max={400} step={10} onChange={setGravityY} />
-          <Slider label="Restitution" value={restitution} min={0} max={1} step={0.05} onChange={setRestitution} />
+          <Presets
+            presets={Object.keys(PRESETS).map((label) => ({ label }))}
+            onApply={(label) => update(PRESETS[label])}
+          />
+          <Slider label="Particles" value={count} min={20} max={400} step={10} onChange={(v) => update({ count: v })} />
+          <Slider label="Pairwise gravity G" value={pairwiseG} min={0} max={200} step={5} onChange={(v) => update({ pairwiseG: v })} />
+          <Slider label="Downward gravity" value={gravityY} min={0} max={400} step={10} onChange={(v) => update({ gravityY: v })} />
+          <Slider label="Restitution" value={restitution} min={0} max={1} step={0.05} onChange={(v) => update({ restitution: v })} />
+          <ShareBar code={code} />
         </div>
       }
       inspector={
@@ -131,6 +163,7 @@ export function ParticleStudio() {
           <Stat label="Kinetic energy" value={metrics.kineticEnergy.toExponential(2)} />
           <Stat label="Mean speed" value={metrics.meanSpeed.toFixed(1)} />
           <Stat label="Max speed" value={metrics.maxSpeed.toFixed(1)} />
+          <ExplainResult text={explain} />
         </div>
       }
     >

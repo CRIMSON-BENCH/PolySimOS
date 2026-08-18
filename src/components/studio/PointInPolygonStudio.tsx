@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const POLY = [[100, 60], [360, 40], [440, 200], [300, 320], [120, 280], [60, 160]];
@@ -24,12 +25,29 @@ export function PointInPolygonStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`ray crosses edges ${cross} times → ${cross % 2 ? "inside" : "outside"}`, 10, 20); ctx.fillText("click to move the point", 10, 350);
   }, [pt, inside]);
 
+  const explain = inside
+    ? "A ray fired from this point crosses the polygon boundary an odd number of times, so the point lies inside the region — a geofence here would fire."
+    : "A ray fired from this point crosses the boundary an even number of times (or misses it entirely), so the point lies outside the region.";
+
+  const code = `def inside(poly, px, py):
+    c = False; n = len(poly); j = n - 1
+    for i in range(n):
+        xi, yi = poly[i]; xj, yj = poly[j]
+        if ((yi > py) != (yj > py)) and (px < (xj - xi) * (py - yi) / (yj - yi) + xi):
+            c = not c
+        j = i
+    return c
+
+poly = [(100, 60), (360, 40), (440, 200), (300, 320), (120, 280), (60, 160)]
+print(inside(poly, ${pt[0].toFixed(0)}, ${pt[1].toFixed(0)}))`;
+
   return (
     <StudioChrome title="Point in Polygon (Geofence)" tagline="ray-casting containment"
       controls={<div>
         <p className="mt-1 text-xs text-slate-500">Is a point inside a shape? The ray-casting algorithm shoots a ray from the point in any direction and counts how many polygon edges it crosses: an odd number means inside, an even number means outside. It is the math behind geofencing — triggering an alert when a phone or vehicle enters or leaves a region — and behind hit-testing in graphics. Click anywhere to test a point.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Location" value={inside ? "INSIDE" : "outside"} /><Stat label="Polygon vertices" value={String(POLY.length)} /><Stat label="Algorithm" value="ray casting" /></div>}
+      inspector={<div><Stat label="Location" value={inside ? "INSIDE" : "outside"} /><Stat label="Polygon vertices" value={String(POLY.length)} /><Stat label="Algorithm" value="ray casting" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); setPt([(e.clientX - r.left) * 500 / r.width, (e.clientY - r.top) * 360 / r.height]); }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }

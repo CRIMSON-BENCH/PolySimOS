@@ -1,15 +1,23 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Photoelectric effect: KEmax = h f - phi.
 const H_EV = 4.1357e-15; // eV·s
+
+const PRESETS: Record<string, { freq: number; work: number }> = {
+  "Sodium, green light": { freq: 6, work: 2.3 },
+  "Zinc, UV": { freq: 12, work: 4.3 },
+  "Below threshold": { freq: 4, work: 2.3 },
+  "High-energy UV": { freq: 18, work: 4.5 },
+};
+
 export function PhotoelectricStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [freq, setFreq] = useState(8); // 10^14 Hz
-  const [work, setWork] = useState(2.3); // eV work function
+  const [{ freq, work }, update] = useShareableNumbers({ freq: 8, work: 2.3 });
 
   const f = freq * 1e14; const photonE = H_EV * f; const KE = photonE - work; const emits = KE > 0;
   const f0 = work / H_EV / 1e14; // threshold in 10^14 Hz
@@ -28,14 +36,27 @@ export function PhotoelectricStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("max kinetic energy vs frequency", ox + 6, oy - ph + 12); ctx.fillText(`threshold f₀ = ${f0.toFixed(1)}×10¹⁴ Hz`, ox + pw - 150, oy - 6);
   }, [freq, work]);
 
+  const explain = emits
+    ? `Each photon carries ${photonE.toFixed(2)} eV, above the ${work} eV work function, so electrons escape with up to ${KE.toFixed(2)} eV — a brighter beam adds more electrons, not more energy per electron.`
+    : `Each photon carries only ${photonE.toFixed(2)} eV, below the ${work} eV work function, so no electrons are ejected no matter how intense the light.`;
+
+  const code = `h = 4.1357e-15  # eV*s
+freq, work = ${freq}, ${work}
+E = h * freq * 1e14
+KE = E - work
+print('photon', round(E, 3), 'eV')
+print('KEmax', round(KE, 3) if KE > 0 else 'no emission')`;
+
   return (
     <StudioChrome title="Photoelectric Effect" tagline="Einstein's photon"
       controls={<div>
-        <Slider label="Light frequency (10¹⁴ Hz)" value={freq} min={1} max={20} step={0.1} onChange={setFreq} />
-        <Slider label="Work function φ (eV)" value={work} min={1} max={6} step={0.1} onChange={setWork} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Light frequency (10¹⁴ Hz)" value={freq} min={1} max={20} step={0.1} onChange={(v) => update({ freq: v })} />
+        <Slider label="Work function φ (eV)" value={work} min={1} max={6} step={0.1} onChange={(v) => update({ work: v })} />
         <p className="mt-3 text-xs text-slate-500">Light ejects electrons from a metal only if each photon carries enough energy — no matter how bright a below-threshold beam is. Einstein explained it with KEmax = hf − φ: energy comes in photon packets of hf, and the work function φ is the escape cost. Below the threshold frequency, nothing happens. This won him the Nobel Prize.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Photon energy" value={`${photonE.toFixed(2)} eV`} /><Stat label="Max KE" value={emits ? `${KE.toFixed(2)} eV` : "no emission"} /><Stat label="Stopping voltage" value={emits ? `${KE.toFixed(2)} V` : "—"} /><Stat label="Emission" value={emits ? "yes" : "below threshold"} /></div>}
+      inspector={<div><Stat label="Photon energy" value={`${photonE.toFixed(2)} eV`} /><Stat label="Max KE" value={emits ? `${KE.toFixed(2)} eV` : "no emission"} /><Stat label="Stopping voltage" value={emits ? `${KE.toFixed(2)} V` : "—"} /><Stat label="Emission" value={emits ? "yes" : "below threshold"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

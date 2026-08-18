@@ -1,15 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 720, H = 440;
 
+const PRESETS: Record<string, { dispersion: number; angle: number }> = {
+  "Faint spread": { dispersion: 0.5, angle: 35 },
+  "Newton spectrum": { dispersion: 1.5, angle: 35 },
+  "Wide fan": { dispersion: 3, angle: 25 },
+  "Steep exit": { dispersion: 1, angle: 55 },
+};
+
 export function PrismStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [dispersion, setDispersion] = useState(1);
-  const [angle, setAngle] = useState(35);
+  const [{ dispersion, angle }, update] = useShareableNumbers({ dispersion: 1, angle: 35 });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
@@ -25,14 +32,30 @@ export function PrismStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("white light disperses into a spectrum — each color refracts by a different amount", 14, H - 14);
   }, [dispersion, angle]);
 
+  const explain =
+    dispersion >= 2.5
+      ? `Strong dispersion (${dispersion}×) fans the colors far apart — violet bends well beyond red, giving a broad, vivid spectrum.`
+      : dispersion <= 0.5
+      ? `Weak dispersion (${dispersion}×) barely separates the colors, so the exiting light stays close to white with only a faint rainbow fringe.`
+      : `At ${dispersion}× dispersion and a ${angle}° exit angle, each wavelength refracts by a slightly different amount, splitting white light into an ordered ROYGBIV band.`;
+
+  const code = `import numpy as np
+dispersion, angle = ${dispersion}, ${angle}
+ai = np.radians(angle)
+# 7 wavelengths (violet..red) fan out around the base exit angle
+bends = ai + (np.arange(7) - 3) * 0.03 * dispersion
+print("exit angles (deg):", np.degrees(bends).round(2))`;
+
   return (
     <StudioChrome title="Prism Dispersion" tagline="refraction varies with wavelength"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">A prism bends violet light more than red because the refractive index depends on wavelength — splitting white light into a rainbow, exactly as Newton showed.</p>
-        <Slider label="Dispersion strength" value={dispersion} min={0.2} max={3} step={0.1} onChange={setDispersion} />
-        <Slider label="Exit angle" value={angle} min={10} max={60} step={1} onChange={setAngle} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Dispersion strength" value={dispersion} min={0.2} max={3} step={0.1} onChange={(v) => update({ dispersion: v })} />
+        <Slider label="Exit angle" value={angle} min={10} max={60} step={1} onChange={(v) => update({ angle: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Colors" value="7 (ROYGBIV)" /><Stat label="Cause" value="n(λ) dispersion" /><Stat label="Most bent" value="violet" /></div>}
+      inspector={<div><Stat label="Colors" value="7 (ROYGBIV)" /><Stat label="Cause" value="n(λ) dispersion" /><Stat label="Most bent" value="violet" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

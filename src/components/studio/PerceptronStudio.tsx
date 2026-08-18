@@ -1,14 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
 
+const PRESETS: Record<string, { sep: number; lr: number }> = {
+  "Separable": { sep: 2.0, lr: 0.1 },
+  "Overlapping": { sep: 0.6, lr: 0.1 },
+  "Fast learner": { sep: 1.5, lr: 0.4 },
+  "Slow & steady": { sep: 1.5, lr: 0.02 },
+};
+
 export function PerceptronStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [sep, setSep] = useState(1.4), [lr, setLr] = useState(0.1);
+  const [{ sep, lr }, update] = useShareableNumbers({ sep: 1.4, lr: 0.1 });
   const pts: { x: number; y: number; c: number }[] = [];
   for (let i = 0; i < 40; i++) { const cls = i % 2; pts.push({ x: rnd(i * 3 + 1) * 2 - 1 + (cls ? sep : -sep) * 0.5, y: rnd(i * 7 + 2) * 2 - 1 + (cls ? sep : -sep) * 0.5, c: cls }); }
   const st = useRef({ w: [0.3, -0.2], b: 0, i: 0, acc: 0 });
@@ -30,16 +38,45 @@ export function PerceptronStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [sep, lr]);
 
+  const explain =
+    sep < 0.8
+      ? "The two clusters overlap heavily, so no straight line can cleanly separate them — the boundary keeps twitching and accuracy plateaus below 100%."
+      : sep > 1.6
+      ? "The classes are well separated, so the perceptron is guaranteed to find a dividing line and settle at 100% accuracy."
+      : lr > 0.3
+      ? "A high learning rate makes the boundary lurch on every mistake — it moves fast but overshoots and wobbles before settling."
+      : "Moderate separation with a gentle learning rate: the boundary drifts steadily toward a clean split over many passes.";
+
+  const code = `import numpy as np
+rng = np.random.default_rng(0)
+sep, lr = ${sep}, ${lr}
+X, y = [], []
+for i in range(40):
+    cls = i % 2
+    off = (sep if cls else -sep) * 0.5
+    X.append([rng.random()*2-1 + off, rng.random()*2-1 + off]); y.append(cls)
+w, b = np.array([0.3, -0.2]), 0.0
+for _ in range(50):
+    for xi, yi in zip(X, y):
+        pred = 1 if np.dot(w, xi) + b > 0 else 0
+        err = yi - pred
+        w = w + lr*err*np.array(xi); b += lr*err
+acc = np.mean([(1 if np.dot(w, xi) + b > 0 else 0) == yi for xi, yi in zip(X, y)])
+print("weights", w, "bias", b, "accuracy", acc)`;
+
   return (
     <StudioChrome title="Perceptron" tagline="the simplest learning machine"
       controls={<div>
-        <Slider label="Class separation" value={sep} min={0.4} max={2.5} step={0.1} onChange={setSep} />
-        <Slider label="Learning rate" value={lr} min={0.01} max={0.5} step={0.01} onChange={setLr} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Class separation" value={sep} min={0.4} max={2.5} step={0.1} onChange={(v) => update({ sep: v })} />
+        <Slider label="Learning rate" value={lr} min={0.01} max={0.5} step={0.01} onChange={(v) => update({ lr: v })} />
         <p className="mt-3 text-xs text-slate-500">The perceptron — the ancestor of every neural network — nudges a straight boundary each time it misclassifies a point. If the two classes are linearly separable it is guaranteed to find a dividing line; if they overlap, it never quite settles. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Model" value="linear classifier" />
         <Stat label="Converges?" value={sep > 1 ? "yes (separable)" : "struggles (overlap)"} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

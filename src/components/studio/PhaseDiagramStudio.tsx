@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { T: number; logP: number }> = {
+  "Ice (−20 °C)": { T: -20, logP: 2 },
+  "Liquid water (25 °C)": { T: 25, logP: 2 },
+  "Boiling (100 °C)": { T: 100, logP: 2 },
+  "Low-pressure vapor": { T: 20, logP: -0.5 },
+};
 
 // Water phase diagram (schematic, log-P vs T).
 export function PhaseDiagramStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [T, setT] = useState(25); // C
-  const [logP, setLogP] = useState(2); // log10(kPa), 101 kPa ~ 2.005
+  const [{ T, logP }, update] = useShareableNumbers({ T: 25, logP: 2 });
 
   // schematic boundaries
   const phaseOf = (Tc: number, lp: number) => {
@@ -40,14 +47,35 @@ export function PhaseDiagramStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("solid / liquid / gas", ox + 6, oy - ph + 12); ctx.fillText("temperature (°C) →", ox + pw - 120, oy + 18);
   }, [T, logP]);
 
+  const explain =
+    phase === "solid"
+      ? "Solid (ice): this temperature–pressure point sits left of the melting line, so water stays frozen."
+      : phase === "liquid"
+      ? "Liquid: warm enough to melt yet below the boiling line at this pressure, so the stable state is liquid water."
+      : logP < Math.log10(0.6)
+      ? "Gas: the pressure is below the triple-point line, so water exists as vapor rather than a liquid at any temperature."
+      : "Gas (vapor): above the boiling line for this pressure, so water has fully evaporated.";
+
+  const code = `import math
+T, logP = ${T}, ${logP}
+P = 10**logP  # kPa
+vapT = 100 + 28*(logP - 2.005)
+if T < 0 and P < 0.6: phase = 'gas'
+elif T < 0: phase = 'solid'
+elif T < vapT and P > 0.6: phase = 'liquid'
+else: phase = 'gas'
+print(phase, round(P), 'kPa')`;
+
   return (
     <StudioChrome title="Phase Diagram (Water)" tagline="solid, liquid, gas"
       controls={<div>
-        <Slider label="Temperature (°C)" value={T} min={-50} max={400} step={1} onChange={setT} />
-        <Slider label="Pressure log₁₀(kPa)" value={logP} min={-1} max={5} step={0.05} onChange={setLogP} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Temperature (°C)" value={T} min={-50} max={400} step={1} onChange={(v) => update({ T: v })} />
+        <Slider label="Pressure log₁₀(kPa)" value={logP} min={-1} max={5} step={0.05} onChange={(v) => update({ logP: v })} />
         <p className="mt-3 text-xs text-slate-500">A phase diagram maps which state — solid, liquid, or gas — a substance takes at each temperature and pressure. The lines are phase boundaries; cross one and the material transforms. All three meet at the triple point, and the liquid-gas line ends at the critical point beyond which liquid and gas become indistinguishable.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Phase" value={phase} /><Stat label="Temperature" value={`${T} °C`} /><Stat label="Pressure" value={`${Math.pow(10, logP).toFixed(0)} kPa`} /></div>}
+      inspector={<div><Stat label="Phase" value={phase} /><Stat label="Temperature" value={`${T} °C`} /><Stat label="Pressure" value={`${Math.pow(10, logP).toFixed(0)} kPa`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

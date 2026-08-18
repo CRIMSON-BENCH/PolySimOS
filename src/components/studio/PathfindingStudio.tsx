@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const COLS = 48, ROWS = 30, CELL = 15;
@@ -42,14 +43,53 @@ export function PathfindingStudio() {
     return () => { canvas.removeEventListener("pointerdown", down); canvas.removeEventListener("pointermove", move); window.removeEventListener("pointerup", up); };
   }, []);
 
+  const explain = algo === "astar"
+    ? "A* adds the Manhattan-distance heuristic to Dijkstra, so it aims straight at the goal and expands far fewer cells while still returning a shortest path."
+    : "Dijkstra ignores where the goal is and expands outward uniformly — it finds the same shortest path as A*, but explores many more cells to get there.";
+
+  const code = `import heapq
+COLS, ROWS = ${COLS}, ${ROWS}
+algo = ${JSON.stringify(algo)}
+walls = set()            # add wall indices here
+start, goal = 0, COLS*ROWS - 1
+
+def h(i):
+    x, y = i % COLS, i // COLS
+    gx, gy = goal % COLS, goal // COLS
+    return abs(x - gx) + abs(y - gy) if algo == "astar" else 0
+
+open_pq = [(h(start), start)]
+g = {start: 0}; came = {}
+while open_pq:
+    _, cur = heapq.heappop(open_pq)
+    if cur == goal:
+        break
+    x, y = cur % COLS, cur // COLS
+    for nx, ny in ((x+1, y), (x-1, y), (x, y+1), (x, y-1)):
+        if not (0 <= nx < COLS and 0 <= ny < ROWS):
+            continue
+        ni = ny*COLS + nx
+        if ni in walls:
+            continue
+        ng = g[cur] + 1
+        if ng < g.get(ni, 1e9):
+            g[ni] = ng; came[ni] = cur
+            heapq.heappush(open_pq, (ng + h(ni), ni))
+
+path, c = [], goal
+while c in came:
+    path.append(c); c = came[c]
+print("path length", len(path))`;
+
   return (
     <StudioChrome title="Pathfinding (A* / Dijkstra)" tagline="grid search · draw walls"
       controls={<div>
         <div className="mb-3 flex gap-2">{(["astar", "dijkstra"] as const).map((a) => <button key={a} onClick={() => setAlgo(a)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold ${algo === a ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{a === "astar" ? "A*" : "Dijkstra"}</button>)}</div>
         <p className="mb-3 text-xs text-slate-500">Drag on the grid to draw walls. A* uses a distance heuristic to head straight for the goal; Dijkstra explores blindly in all directions. Blue = start, pink = goal, green = shortest path.</p>
         <button onClick={() => { walls.current.clear(); setTick((t) => t + 1); }} className="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Clear walls</button>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Algorithm" value={algo === "astar" ? "A*" : "Dijkstra"} /><Stat label="Grid" value={`${COLS}×${ROWS}`} /><Stat label="Heuristic" value={algo === "astar" ? "Manhattan" : "none"} /></div>}
+      inspector={<div><Stat label="Algorithm" value={algo === "astar" ? "A*" : "Dijkstra"} /><Stat label="Grid" value={`${COLS}×${ROWS}`} /><Stat label="Heuristic" value={algo === "astar" ? "Manhattan" : "none"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={COLS * CELL} height={ROWS * CELL} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }

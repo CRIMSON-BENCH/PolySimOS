@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 560, H = 480;
@@ -33,6 +34,21 @@ export function ParametricStudio() {
   }, [xt, yt, tMax]);
 
   const presets: [string, string, string][] = [["Lissajous", "cos(3*t)", "sin(4*t)"], ["Rose", "cos(5*t)*cos(t)", "cos(5*t)*sin(t)"], ["Spiral", "t*cos(t)/6", "t*sin(t)/6"], ["Heart", "16*sin(t)^3/16", "(13*cos(t)-5*cos(2*t))/16"], ["Circle", "cos(t)", "sin(t)"]];
+
+  const explain = err
+    ? `The current x(t) or y(t) has a parse error, so nothing is traced — fix the expression to continue.`
+    : tMax >= 6.2
+    ? `x(t)=${xt}, y(t)=${yt} are swept over t from 0 to ${tMax.toFixed(1)} — a full 2π range, so periodic curves close into a complete loop.`
+    : `x(t)=${xt}, y(t)=${yt} are swept over t from 0 to ${tMax.toFixed(1)}; under a full 2π cycle a periodic shape may appear as an open arc rather than a closed loop.`;
+
+  const code = `import numpy as np
+import matplotlib.pyplot as plt
+from numpy import sin, cos, tan, pi, exp, sqrt
+t = np.linspace(0, ${tMax}, 800)
+x = ${xt.replace(/\^/g, "**")}
+y = ${yt.replace(/\^/g, "**")}
+plt.plot(x, y); plt.gca().set_aspect("equal"); plt.show()`;
+
   return (
     <StudioChrome title="Parametric Curve Grapher" tagline="x(t), y(t) traced over time"
       controls={<div>
@@ -42,8 +58,9 @@ export function ParametricStudio() {
         <input value={yt} onChange={(e) => setYt(e.target.value)} className="mb-2 w-full rounded border border-slate-300 bg-white px-2 py-1 font-mono text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100" />
         <div className="flex flex-wrap gap-1">{presets.map(([n, x, y]) => <button key={n} onClick={() => { setXt(x); setYt(y); }} className="rounded-md border border-slate-300 px-2 py-0.5 text-[10px] text-slate-600 dark:border-slate-700 dark:text-slate-400">{n}</button>)}</div>
         {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="x(t)" value="param" /><Stat label="y(t)" value="param" /><Stat label="t range" value={`0…${tMax.toFixed(1)}`} /></div>}
+      inspector={<div><Stat label="x(t)" value="param" /><Stat label="y(t)" value="param" /><Stat label="t range" value={`0…${tMax.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

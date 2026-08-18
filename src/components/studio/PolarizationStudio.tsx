@@ -2,7 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
+
+const PRESETS: Record<string, number[]> = {
+  "Aligned (0/0/0)": [0, 0, 0],
+  "45° cascade": [0, 45, 90],
+  "Crossed pair": [0, 90, 90],
+  "Gentle steps": [0, 30, 60],
+};
 
 // Malus's law through a chain of polarizers.
 export function PolarizationStudio() {
@@ -24,13 +32,28 @@ export function PolarizationStudio() {
   }, [angles]);
 
   const setA = (i: number, v: number) => setAngles((arr) => arr.map((x, j) => j === i ? v : x));
+  const explain =
+    intensity < 0.01
+      ? "Successive axes are nearly perpendicular, so almost nothing gets through — each ~90° step multiplies the beam by cos²(90°) ≈ 0."
+      : intensity > 0.4
+      ? "The axes are closely aligned, so most of the polarized light survives — little is lost when cos²θ stays near 1."
+      : `Each filter projects the beam onto its axis, multiplying intensity by cos² of the step angle; after this chain about ${(intensity * 100).toFixed(0)}% remains.`;
+  const code = `import numpy as np
+angles = [${angles.join(", ")}]  # polarizer axes in degrees
+I = 0.5  # unpolarized light -> 50% after the first polarizer
+for i in range(1, len(angles)):
+    d = np.radians(angles[i] - angles[i - 1])
+    I *= np.cos(d) ** 2
+print("final intensity", I)`;
   return (
     <StudioChrome title="Polarization (Malus's Law)" tagline="filtering light waves"
       controls={<div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => setAngles(PRESETS[label])} />
         {angles.map((a, i) => <Slider key={i} label={`Polarizer ${i + 1} angle (°)`} value={a} min={0} max={180} step={5} onChange={(v) => setA(i, v)} />)}
         <p className="mt-3 text-xs text-slate-500">A polarizer only passes the light-wave component aligned with its axis. Malus&apos;s law says the transmitted intensity is I₀·cos²θ, where θ is the angle between successive filters. Two crossed polarizers block everything — but slip a third at 45° between them and light reappears, a striking quantum-like result of projection.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Final intensity" value={`${(intensity * 100).toFixed(1)}%`} /><Stat label="Polarizers" value={String(angles.length)} /><Stat label="Crossed?" value={Math.abs(angles[angles.length - 1] - angles[0]) === 90 && angles.length === 2 ? "yes (dark)" : "no"} /></div>}
+      inspector={<div><Stat label="Final intensity" value={`${(intensity * 100).toFixed(1)}%`} /><Stat label="Polarizers" value={String(angles.length)} /><Stat label="Crossed?" value={Math.abs(angles[angles.length - 1] - angles[0]) === 90 && angles.length === 2 ? "yes (dark)" : "no"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={220} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
