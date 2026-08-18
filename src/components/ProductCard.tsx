@@ -18,10 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
       <p className="mb-3 flex-1 text-sm text-slate-600 dark:text-slate-400">{product.blurb}</p>
       <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-500">
         <span>{product.categoryLabel}</span>
-        <span className="flex items-center gap-1">
-          <span className="text-amber-500">★</span>
-          {product.rating} ({product.reviewCount})
-        </span>
+        <span className="font-medium text-cyan-600 opacity-0 transition group-hover:opacity-100 dark:text-cyan-400">View →</span>
       </div>
     </Link>
   );

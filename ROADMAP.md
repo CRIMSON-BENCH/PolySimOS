@@ -216,3 +216,98 @@ Turn the existing Notebook into a **curated library of ready-to-run notebooks** 
 **Qiskit concretely:** a visual **Quantum Circuit Studio** that (a) simulates small circuits locally, (b) exports Qiskit code, (c) optionally submits to IBM Quantum with the user's own token (BYOC). Builds on existing quantum solvers.
 
 **Build order:** Phase 1 first (Pyodide compute cell + export-to-code) — biggest "feels like a real tool" jump for the least infra, and it unlocks D2.
+
+---
+
+# PART E — Competing with MATLAB (be the free, browser-native alternative)
+
+**Reality check:** MATLAB itself is proprietary/paid — there is no fully-free MATLAB API to embed. So we don't "integrate MATLAB," we **become the free browser-native MATLAB alternative** using open tools, and interop via files + code export. MATLAB's moat is (a) the language + workspace, (b) plotting, (c) toolboxes, (d) Simulink. We already have a node-graph editor (= Simulink), 373 solvers (= toolboxes pre-built), a CAS, and a notebook. We close the rest with Octave/Pyodide.
+
+## E1. Core numerical environment (the MATLAB heart)
+1. In-browser **compute console / REPL** (Pyodide: NumPy/SciPy/SymPy)
+2. **GNU Octave (WASM)** console — ~95% MATLAB-syntax compatible, runs `.m` code free in the browser
+3. **Workspace / variable inspector** (MATLAB-style)
+4. **Matrix / array editor** (spreadsheet-like)
+5. **Live scripts / notebooks** (prose + code + output) — enhance existing Notebook
+6. Command **history + recall**
+7. Built-in **function-library browser** with docs
+8. Unit-aware calculations (math.js units)
+9. **LaTeX rendering (KaTeX)** + **MathLive** equation input
+10. Vectorized-array operations helper UI
+
+## E2. Plotting & visualization (MATLAB figures)
+11. 2D plots: plot / scatter / bar / hist / stem
+12. **3D surface & mesh** plots (WebGPU viewport we already have)
+13. Interactive zoom / pan / **data cursor**
+14. **Subplots / tiled layouts**
+15. Colormaps, colorbars, legends, annotations
+16. **Publication export** (SVG / PDF / PNG)
+17. **Animation / movie** export
+18. Quiver / streamlines / vector fields (have viz)
+
+## E3. Toolbox equivalents (map our 373 solvers into "toolboxes")
+19. **Control Systems** toolbox → PID, root locus, Bode, state-space (built)
+20. **Signal Processing** → FIR/IIR, DFT, windows, filters (built)
+21. **Optimization** → LP, routing, knapsack, etc. (built)
+22. **Statistics & ML** → regression, clustering, SVM, trees (built)
+23. **Symbolic Math** → our CAS (built)
+24. **PDE** → heat/wave/FEA field solvers (built)
+25. **Curve fitting** toolbox (new)
+26. **Image processing** basics (new)
+27. **Deep learning** → neural-net playground (expand perceptron)
+28. Package each domain as a browser "toolbox" workspace
+
+## E4. Simulink-style modeling (our flagship node graph, expanded)
+29. Rich **block library** (transfer function, state-space, integrator, gain, sum, sat)
+30. **Continuous + discrete solvers** (RK45/ODE on the graph)
+31. **Scope blocks** (live plots inside the model)
+32. **Subsystems / hierarchy** + signal mux/demux
+33. Save / load / **share models** (have share links)
+34. **Code generation** from a model → Python / C
+
+## E5. Interop & migration (win MATLAB users over)
+35. **`.m` and `.mat` file import/export** (data + scripts)
+36. **Export any solver** as runnable `.m` / `.py` / Julia
+37. **MATLAB → Python cheat-sheet** + auto-translate common snippets
+38. **CSV / Excel / HDF5 / NetCDF** data import
+39. **REST API + SDK + MCP** so MATLAB/Python/agents call our solvers
+40. **BYOC**: connect your own MATLAB (MATLAB Engine) at enterprise tier
+41. "**App**" packaging — turn a solver into a shareable mini-app (like App Designer)
+42. One-click **"open in Octave console"** from any solver
+
+## E6. Where PolySim already WINS over MATLAB (lead with these)
+43. **$0**, runs in browser — MATLAB needs a paid license + install
+44. **373 ready-made interactive solvers** — MATLAB is a blank canvas
+45. **22k use-case pages + SEO** discovery — MATLAB has none
+46. **Instant shareable links + embeds** — MATLAB Online is clunky
+47. **AI copilot**: describe a system → get a running model
+48. **Mobile-friendly**; **no install, no license servers**
+49. **Micro-priced** ($2 unlocks) vs MATLAB's $$$ toolbox bundles
+50. **Free forever locally** — the whole compute layer costs us near-zero
+
+**Build order:** the single highest-leverage move is E1 #1–2 (Pyodide + Octave console) — that alone reframes PolySim from "a set of calculators" to "a free MATLAB in your browser." Then E4 (Simulink on the node graph we already own), then E5 interop.
+
+---
+
+# PART F — UI/UX & Product Polish (Tableau-inspired: curated, not dumps)
+
+**Core problem the user identified:** the site has grown to show too many raw options everywhere ("total dump"). Fix = **curation, search, and dashboard-style UI** (Tableau vibes: clean, dropdown-driven, guided, elegant).
+
+## F1. Kill the dumps
+- **`/studio` index** → add a prominent **search / type-ahead** over all 373 solvers + a "**What do you want to calculate?**" guided finder (modal) that routes to solvers/use-cases from a plain-English answer. Domain **filter chips / dropdowns** instead of one long wall.
+- **`/pricing`** → streamline to **4 clear tiers** (Free · Pro · Team · Enterprise) with a monthly/annual toggle; drop the confusing Family/Hobbyist/Independent/Creator sprawl (fold into Pro). One comparison table, not many boxes.
+- **Solver-page bottom** → replace the "More live simulations" dump with **same-domain** related solvers (compact, relevant), and remove the big product-grid clutter.
+
+## F2. Tableau-style UI system
+- Consistent **top bar with dropdown menus** (Product / Solutions / Resources), cleaner nav.
+- **Dashboard feel**: cards, filters, dropdowns, whitespace, restrained color — less "wall of buttons."
+- A guided **"finder" pattern** reused across studio, home, and dashboard.
+- Optional **30s-idle prompt** on the home page: "Tell me what you want to do →" routes to the finder.
+
+## F3. Solver page cleanup (global — one shared-component pass)
+- **Modernize the embed** (`StudioChrome`): remove the macOS traffic-light dots / "old screen" look → clean header with a live indicator.
+- **Remove ALL fake reviews / star ratings** site-wide (products, tools, marketplace, schema.org) — "a math site; real people don't trust fake 4.7s."
+- **Pro users never get nagged**: gate PremiumCTA + all upsells behind `!hasPlan` (contextual $2 unlock still fine for non-Pro).
+- **Expand "How it works"** into a real explainer: equations, algorithm, assumptions, references per solver (content fill = the retroactive-polish pass across all 373).
+
+**Priority:** F3 (shared-component fixes hit all 373 pages at once) → F1 pricing + studio finder → F2 system polish. This is the "retroactive polish" pass.

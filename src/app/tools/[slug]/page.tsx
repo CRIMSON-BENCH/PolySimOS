@@ -38,7 +38,7 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
     <PageShell
       crumbs={[{ name: "Home", path: "/" }, { name: "Tools", path: "/tools" }, { name: p.name, path: `/tools/${p.slug}` }]}
       jsonLd={[
-        productLd({ name: p.name, description: p.blurb, price: p.price, path: `/tools/${p.slug}`, recurring: p.billing === "subscription", rating: p.rating, reviewCount: p.reviewCount }),
+        productLd({ name: p.name, description: p.blurb, price: p.price, path: `/tools/${p.slug}`, recurring: p.billing === "subscription" }),
         faqLd(faqs),
       ]}
       eyebrow={p.categoryLabel}
@@ -62,16 +62,6 @@ export default async function ToolPage({ params }: { params: Promise<{ slug: str
             </div>
           )}
 
-          <div className="mt-6 rounded-xl border border-slate-200 bg-white p-4 dark:border-slate-800 dark:bg-slate-900">
-            <div className="flex items-center gap-2 text-sm">
-              <span className="text-amber-500">★★★★★</span>
-              <span className="font-semibold text-slate-800 dark:text-slate-200">{p.rating}</span>
-              <span className="text-slate-500">from {p.reviewCount} researchers &amp; engineers</span>
-            </div>
-            <p className="mt-2 text-sm italic text-slate-600 dark:text-slate-400">
-              &ldquo;PolySim turned something I could only sketch on paper into a running model in minutes. This is what the field needed.&rdquo;
-            </p>
-          </div>
         </div>
 
         {/* Purchase card */}

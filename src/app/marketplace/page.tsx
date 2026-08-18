@@ -30,7 +30,7 @@ export default function MarketplaceIndex() {
             <p className="mb-3 mt-1 flex-1 text-sm text-slate-600 dark:text-slate-400">{l.blurb}</p>
             <div className="flex items-center justify-between text-xs text-slate-500">
               <span>@{l.author}</span>
-              <span>★ {l.rating.toFixed(1)} · {l.downloads.toLocaleString()} uses</span>
+              <span>{l.downloads.toLocaleString()} uses</span>
             </div>
           </Link>
         ))}

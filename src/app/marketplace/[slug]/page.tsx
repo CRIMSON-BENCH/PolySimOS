@@ -24,13 +24,13 @@ export default async function ListingPage({ params }: { params: Promise<{ slug: 
   return (
     <PageShell
       crumbs={[{ name: "Home", path: "/" }, { name: "Marketplace", path: "/marketplace" }, { name: l.title, path: `/marketplace/${l.slug}` }]}
-      jsonLd={l.price > 0 ? productLd({ name: l.title, description: l.blurb, price: l.price, path: `/marketplace/${l.slug}`, rating: l.rating, reviewCount: Math.floor(l.downloads / 20) }) : undefined}
+      jsonLd={l.price > 0 ? productLd({ name: l.title, description: l.blurb, price: l.price, path: `/marketplace/${l.slug}` }) : undefined}
       eyebrow={`${l.kind} · @${l.author}`}
       title={l.title}
       lede={l.blurb}
     >
       <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-slate-500">
-        <span>★ {l.rating.toFixed(1)}</span><span>{l.downloads.toLocaleString()} uses</span><span className="font-bold text-cyan-700 dark:text-cyan-300">{l.price === 0 ? "Free to fork" : `$${l.price}`}</span>
+        <span>{l.downloads.toLocaleString()} uses</span><span className="font-bold text-cyan-700 dark:text-cyan-300">{l.price === 0 ? "Free to fork" : `$${l.price}`}</span>
       </div>
       <div className="mt-6 flex flex-wrap gap-3">
         {l.studio && <Link href={l.studio} className="rounded-lg bg-lime-500 px-5 py-2.5 font-semibold text-slate-950 hover:bg-lime-400">▶ Open &amp; fork</Link>}

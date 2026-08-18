@@ -28,8 +28,6 @@ export interface Product {
   includes: string[];
   stripeType: "payment" | "subscription" | "none";
   competitorNote?: string;
-  rating: number;
-  reviewCount: number;
 }
 
 const CATEGORY_LABELS: Record<ProductCategory, string> = {
@@ -59,14 +57,6 @@ type Seed = [
   competitorNote?: string,
 ];
 
-// Deterministic pseudo-rating so pages are stable across builds (no Math.random).
-function ratingFor(slug: string): { rating: number; reviewCount: number } {
-  let h = 0;
-  for (let i = 0; i < slug.length; i++) h = (h * 31 + slug.charCodeAt(i)) >>> 0;
-  const rating = 4.6 + (h % 4) / 10; // 4.6–4.9
-  const reviewCount = 40 + (h % 460); // 40–499
-  return { rating: Math.round(rating * 10) / 10, reviewCount };
-}
 
 const SEEDS: Seed[] = [
   // A. Core — Compute Token Packs & per-run credits ($1–$5)
@@ -203,7 +193,6 @@ const SEEDS: Seed[] = [
 export const PRODUCTS: Product[] = SEEDS.map((s) => {
   const [name, price, billing, category, blurb, includes, interval, competitorNote] = s;
   const slug = slugify(name);
-  const { rating, reviewCount } = ratingFor(slug);
   return {
     slug,
     name,
@@ -217,8 +206,6 @@ export const PRODUCTS: Product[] = SEEDS.map((s) => {
     stripeType:
       price === 0 ? "none" : billing === "subscription" ? "subscription" : "payment",
     competitorNote,
-    rating,
-    reviewCount,
   };
 });
 
