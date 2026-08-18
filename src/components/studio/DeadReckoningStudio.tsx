@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { heading: number; speed: number; currentDir: number; currentSpeed: number; hours: number }> = {
@@ -65,7 +66,7 @@ print("made good", round(math.hypot(ax, ay), 1), "drift", round(drift, 1))`;
         <p className="mt-3 text-xs text-slate-500">Before GPS, navigators tracked position by dead reckoning: from a known start, add up each leg&apos;s heading and speed over time. But wind and current push you off your intended track, so the actual path drifts. The gap between where you meant to go and where you ended up is why sailors and pilots learn to correct for set and drift.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Distance made good" value={`${Math.hypot(actualX, actualY).toFixed(1)} nm`} /><Stat label="Drift" value={`${drift.toFixed(1)} nm`} /><Stat label="Effective speed" value={`${(Math.hypot(actualX, actualY) / hours).toFixed(1)} kn`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Distance made good" value={`${Math.hypot(actualX, actualY).toFixed(1)} nm`} /><Stat label="Drift" value={`${drift.toFixed(1)} nm`} /><Stat label="Effective speed" value={`${(Math.hypot(actualX, actualY) / hours).toFixed(1)} kn`} /><Equation tex={`x_{k+1}=x_k+v\\,\\Delta t\\cos\\theta,\\quad y_{k+1}=y_k+v\\,\\Delta t\\sin\\theta\\quad(v=${speed}\\text{ kn},\\ \\theta=${heading}°)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

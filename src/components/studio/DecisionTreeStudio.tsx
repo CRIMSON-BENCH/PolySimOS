@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
 
@@ -66,6 +67,7 @@ print("accuracy", acc)`;
       inspector={<div>
         <Stat label="Accuracy" value={`${(acc * 100).toFixed(0)}%`} />
         <Stat label="Regions" value={depth === 1 ? "2" : "4"} />
+        <Equation tex={`\\text{Gini}=1-\\sum_i p_i^2\\quad\\Rightarrow\\quad \\text{accuracy}=${(acc * 100).toFixed(0)}\\%`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

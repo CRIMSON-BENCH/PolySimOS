@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { rA: number; rB: number; sA: number; sB: number; corr: number }> = {
@@ -67,7 +68,7 @@ print("min-var weight A", w[i], "ret", ret[i], "vol", vol[i])`;
         <p className="mt-3 text-xs text-slate-500">Combining two assets traces a curved frontier of risk versus return. Because they are not perfectly correlated, some mixes have lower risk than either asset alone — the power of diversification. The pink point is the minimum-variance portfolio. Educational tool, not investment advice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Min-var weight A" value={`${(minVar.w * 100).toFixed(0)}%`} /><Stat label="Min-var return" value={`${(minVar.ret * 100).toFixed(1)}%`} /><Stat label="Min-var volatility" value={`${(minVar.vol * 100).toFixed(1)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Min-var weight A" value={`${(minVar.w * 100).toFixed(0)}%`} /><Stat label="Min-var return" value={`${(minVar.ret * 100).toFixed(1)}%`} /><Stat label="Min-var volatility" value={`${(minVar.vol * 100).toFixed(1)}%`} /><Equation tex={`\\sigma_p^2 = w^2\\sigma_A^2 + (1-w)^2\\sigma_B^2 + 2w(1-w)\\rho\\,\\sigma_A\\sigma_B,\\quad \\rho=${corr.toFixed(2)},\\ w^*=${(minVar.w * 100).toFixed(0)}\\%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

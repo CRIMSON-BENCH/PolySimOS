@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = 200;
@@ -77,7 +78,7 @@ print("cluster size", int(grid.sum()))`;
         <Slider label="Speed (walkers/frame)" value={perFrame} min={10} max={200} step={10} onChange={(v) => update({ perFrame: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cluster size" value={count.toLocaleString()} /><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Fractal dim." value="≈ 1.71" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cluster size" value={count.toLocaleString()} /><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Fractal dim." value="≈ 1.71" /><Equation tex={`R \\approx N^{1/D_f} = ${count}^{\\,1/1.71} \\approx ${Math.round(Math.pow(count, 1 / 1.71))}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} /></StudioChrome>
   );
 }

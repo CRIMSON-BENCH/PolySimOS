@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -48,6 +49,16 @@ export function DistributionsStudio() {
       ? `Poisson's fingerprint is mean = variance = λ = ${mean.toFixed(2)} — the spread grows lockstep with the average count, so rarer events cluster tighter.`
       : `Binomial variance np(1−p) = ${variance.toFixed(2)} peaks at p = 0.5 and shrinks toward the extremes, where outcomes become near-certain.`;
 
+  const sig = Math.max(0.1, p2), lamE = Math.max(0.1, p2), lamP = Math.max(0.1, p2 * 3), pp = Math.min(0.99, Math.max(0.01, p2 / 4));
+  const distTex =
+    dist === "normal"
+      ? `f(x) = \\frac{1}{\\sqrt{2\\pi\\,${(sig * sig).toFixed(2)}}}\\,e^{-\\frac{(x-${p1})^2}{2\\cdot ${(sig * sig).toFixed(2)}}}`
+      : dist === "exponential"
+      ? `f(x) = ${lamE.toFixed(1)}\\,e^{-${lamE.toFixed(1)}x}`
+      : dist === "poisson"
+      ? `P(k) = \\frac{${lamP.toFixed(1)}^{k}\\,e^{-${lamP.toFixed(1)}}}{k!}`
+      : `P(k) = \\binom{20}{k}\\,${pp.toFixed(2)}^{k}\\,(1-${pp.toFixed(2)})^{20-k}`;
+
   const code = (() => {
     if (dist === "normal") return `import numpy as np
 from scipy import stats
@@ -85,7 +96,7 @@ print("mean", d.mean(), "var", d.var())`;
         <Slider label={dist === "normal" ? "Std dev σ" : dist === "exponential" ? "Rate λ" : dist === "poisson" ? "λ (×3)" : "p (×4)"} value={p2} min={0.2} max={4} step={0.1} onChange={(v) => update({ p2: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Distribution" value={dist} /><Stat label="Mean" value={mean.toFixed(3)} /><Stat label="Variance" value={variance.toFixed(3)} /><Stat label="Std dev" value={Math.sqrt(variance).toFixed(3)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Distribution" value={dist} /><Stat label="Mean" value={mean.toFixed(3)} /><Stat label="Variance" value={variance.toFixed(3)} /><Stat label="Std dev" value={Math.sqrt(variance).toFixed(3)} /><Equation tex={distTex} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

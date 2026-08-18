@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 // Watson-Lovelock Daisyworld: self-regulating planetary temperature.
@@ -81,7 +82,7 @@ print("T", round(Te - 273.15, 1), "white", round(w, 2), "black", round(b, 2))`;
         <p className="mt-3 text-xs text-slate-500">Watson and Lovelock&apos;s Daisyworld shows how life can regulate a planet. Black daisies warm a cold world by absorbing sunlight; white daisies cool a hot one by reflecting it. As the sun brightens, the daisy mix shifts to hold the temperature nearly constant — biological homeostasis with no foresight.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Luminosity" value={lum.toFixed(2)} /><Stat label="Temperature" value={`${temp.toFixed(1)} °C`} /><Stat label="White / black" value={`${(white * 100).toFixed(0)}% / ${(black * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Luminosity" value={lum.toFixed(2)} /><Stat label="Temperature" value={`${temp.toFixed(1)} °C`} /><Stat label="White / black" value={`${(white * 100).toFixed(0)}% / ${(black * 100).toFixed(0)}%`} /><Equation tex={`\\frac{dA_w}{dt}=A_w\\left(x\\,\\beta(T)-\\gamma\\right),\\quad \\beta(T)=1-0.003265\\,(295.5-T)^2,\\quad L=${lum.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

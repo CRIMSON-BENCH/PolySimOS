@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -70,7 +71,7 @@ print("forward", v, "omega", w, "radius", R)`;
         <p className="mt-3 text-xs text-slate-500">A differential-drive robot steers by spinning its two wheels at different speeds — like a tank. Equal speeds go straight, a difference curves the path, and opposite speeds spin in place. Its forward speed is the average of the wheels and its turn rate is their difference over the wheelbase.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Forward v" value={((vR + vL) / 2).toFixed(2)} /><Stat label="Turn rate ω" value={((vR - vL) / 20).toFixed(3)} /><Stat label="Turn radius" value={isFinite(R) ? R.toFixed(0) : "straight"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Forward v" value={((vR + vL) / 2).toFixed(2)} /><Stat label="Turn rate ω" value={((vR - vL) / 20).toFixed(3)} /><Stat label="Turn radius" value={isFinite(R) ? R.toFixed(0) : "straight"} /><Equation tex={`v = \\frac{v_r+v_l}{2} = ${((vR + vL) / 2).toFixed(2)},\\quad \\omega = \\frac{v_r-v_l}{L} = ${((vR - vL) / 20).toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

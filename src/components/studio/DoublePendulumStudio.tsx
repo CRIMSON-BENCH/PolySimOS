@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -121,6 +122,7 @@ print("theta1, theta2, w1, w2 =", s)`;
         <Stat label="DOF" value="2" />
         <Stat label="Lower bob mass" value={String(m2)} />
         <Stat label="Gravity g" value={String(g)} />
+        <Equation tex={`\\begin{aligned}\\ddot\\theta_1 &= \\frac{-g(2m_1+m_2)\\sin\\theta_1 - m_2 g\\sin(\\theta_1-2\\theta_2) - 2m_2\\sin(\\theta_1-\\theta_2)\\left(\\dot\\theta_2^2 L_2 + \\dot\\theta_1^2 L_1\\cos(\\theta_1-\\theta_2)\\right)}{L_1\\left(2m_1+m_2-m_2\\cos(2\\theta_1-2\\theta_2)\\right)}\\\\[4pt]\\ddot\\theta_2 &= \\frac{2\\sin(\\theta_1-\\theta_2)\\left(\\dot\\theta_1^2 L_1(m_1+m_2)+g(m_1+m_2)\\cos\\theta_1+\\dot\\theta_2^2 L_2 m_2\\cos(\\theta_1-\\theta_2)\\right)}{L_2\\left(2m_1+m_2-m_2\\cos(2\\theta_1-2\\theta_2)\\right)}\\\\[4pt]&\\quad m_1=10,\\ m_2=${m2.toFixed(0)},\\ L_1=L_2=1.2,\\ g=${g.toFixed(1)}\\end{aligned}`} />
         <ExplainResult text={explain} />
       </div>}
     >

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { d1: number; g: number; r: number }> = {
@@ -55,6 +56,7 @@ else:
       inspector={<div>
         <Stat label="Fair value" value={isFinite(value) ? `$${value.toFixed(2)}` : "undefined (g ≥ r)"} />
         <Stat label="Implied dividend yield" value={`${yieldPct.toFixed(2)}%`} />
+        <Equation tex={`P = \\frac{D_1}{r - g} = \\frac{${d1.toFixed(2)}}{${(r / 100).toFixed(4)} - ${(g / 100).toFixed(4)}} = ${isFinite(value) ? `\\$${value.toFixed(2)}` : "\\infty"}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

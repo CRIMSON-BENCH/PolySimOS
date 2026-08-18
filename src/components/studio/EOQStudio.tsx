@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { D: number; S: number; Hc: number }> = {
@@ -56,7 +57,7 @@ print("min total cost", round((D/eoq)*S + (eoq/2)*H))`;
         <p className="mt-3 text-xs text-slate-500">Order too often and ordering costs pile up; order too much and holding costs balloon. The Economic Order Quantity, EOQ = √(2DS/H), is the order size that minimizes their sum. At the optimum the ordering and holding costs are exactly equal — the crossing point of the two curves. The foundation of inventory management.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="EOQ" value={`${eoq.toFixed(0)} units`} /><Stat label="Orders / year" value={orders.toFixed(1)} /><Stat label="Min total cost" value={`$${optCost.toFixed(0)}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="EOQ" value={`${eoq.toFixed(0)} units`} /><Stat label="Orders / year" value={orders.toFixed(1)} /><Stat label="Min total cost" value={`$${optCost.toFixed(0)}`} /><Equation tex={`Q^* = \\sqrt{\\frac{2DS}{H}} = \\sqrt{\\frac{2\\cdot${D}\\cdot${S}}{${Hc}}} = ${eoq.toFixed(0)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

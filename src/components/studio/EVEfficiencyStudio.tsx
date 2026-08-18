@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { battery: number; speed: number; mass: number }> = {
@@ -54,7 +55,7 @@ print("range km", round(battery / cons))`;
         <p className="mt-3 text-xs text-slate-500">An electric car&apos;s range is its battery divided by its energy use per kilometer. At low speed rolling resistance dominates; at highway speed aerodynamic drag — which grows with the square of speed — takes over, so consumption climbs steeply. That is why an EV goes much farther in the city than on the motorway, the opposite of a gasoline car.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Consumption" value={`${(cons * 100).toFixed(1)} kWh/100km`} /><Stat label="Range" value={`${range.toFixed(0)} km`} /><Stat label="Efficiency" value={`${(1 / cons).toFixed(1)} km/kWh`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Consumption" value={`${(cons * 100).toFixed(1)} kWh/100km`} /><Stat label="Range" value={`${range.toFixed(0)} km`} /><Stat label="Efficiency" value={`${(1 / cons).toFixed(1)} km/kWh`} /><Equation tex={`R = \\frac{E_{\\text{batt}}}{c} = \\frac{${battery}\\ \\text{kWh}}{${cons.toFixed(3)}\\ \\text{kWh/km}} = ${range.toFixed(0)}\\ \\text{km}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

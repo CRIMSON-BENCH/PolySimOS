@@ -11,6 +11,7 @@ import {
 } from "@/lib/engines/dynamics";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -128,6 +129,18 @@ function OdePlot({ systemId }: { systemId: string }) {
 
   const last = traj[traj.length - 1];
 
+  const r = (n: number) => (Math.round(n * 100) / 100).toString();
+  const eqTex =
+    systemId === "lorenz"
+      ? `\\dot x=${r(params.sigma)}(y-x),\\ \\dot y=x(${r(params.rho)}-z)-y,\\ \\dot z=xy-${r(params.beta)}z`
+      : systemId === "sir"
+      ? `\\dot S=-${r(params.beta)}SI,\\ \\dot I=${r(params.beta)}SI-${r(params.gamma)}I,\\ \\dot R=${r(params.gamma)}I`
+      : systemId === "pendulum"
+      ? `\\dot\\theta=\\omega,\\ \\dot\\omega=-${r(params.damp)}\\,\\omega-\\sin\\theta+${r(params.drive)}\\cos(${r(params.driveFreq)}\\,t)`
+      : systemId === "lotka"
+      ? `\\dot x=${r(params.a)}x-${r(params.b)}xy,\\ \\dot y=${r(params.d)}xy-${r(params.c)}y`
+      : `\\dot x=y,\\ \\dot y=${r(params.mu)}(1-x^2)y-x`;
+
   return (
     <StudioChrome
       title={`Dynamics — ${sys.name}`}
@@ -161,6 +174,7 @@ function OdePlot({ systemId }: { systemId: string }) {
           {sys.vars.map((name, i) => (
             <Stat key={name} label={`final ${name}`} value={last.y[i].toFixed(3)} />
           ))}
+          <Equation tex={eqTex} />
         </div>
       }
     >

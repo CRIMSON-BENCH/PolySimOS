@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -86,6 +87,7 @@ print("receding", f * c / (c + v_s))          # away from you -> lower pitch`;
         <Stat label="Source freq" value={`${freq} Hz`} />
         <Stat label="Approaching f'" value={mach >= 1 ? "shock (boom)" : `${fUp.toFixed(0)} Hz`} />
         <Stat label="Receding f'" value={`${fDown.toFixed(0)} Hz`} />
+        <Equation tex={`f' = f\\,\\frac{c \\pm v_o}{c \\mp v_s} = ${freq}\\cdot\\frac{${C}}{${C} \\mp ${speed.toFixed(1)}} = ${fUp.toFixed(0)}\\,/\\,${fDown.toFixed(0)}\\ \\text{Hz}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>

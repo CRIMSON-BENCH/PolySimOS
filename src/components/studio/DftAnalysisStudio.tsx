@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { f1: number; f2: number; a2: number; noise: number }> = {
   "Two clean tones": { f1: 5, f2: 12, a2: 0.6, noise: 0 },
@@ -62,6 +63,7 @@ print("peak bins", np.argsort(spec)[-2:])`;
         <Stat label="Peak 1" value={`${f1} cycles`} />
         <Stat label="Peak 2" value={`${f2} cycles`} />
         <Stat label="Resolution" value={`${(1 / N).toFixed(3)} cyc/sample`} />
+        <Equation tex={`X_k=\\sum_{n=0}^{N-1} x_n\\,e^{-2\\pi i k n/N}\\quad(N=${N})`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

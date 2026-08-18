@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
@@ -28,6 +29,9 @@ export function DiffractionGratingStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`${slits} slits — sharper, brighter maxima as slit count grows`, 14, 150);
   }, [slits, spacing, lambda]);
 
+  const ratio = lambda / spacing;
+  const theta1 = ratio <= 1 ? `${((Math.asin(ratio) * 180) / Math.PI).toFixed(1)}^\\circ` : "\\text{none}";
+
   const explain = `The bright maxima stay locked where d·sinθ = mλ — fixed by spacing and wavelength, not slit count — but with ${slits} slits each principal peak is about ${slits}× narrower and far more intense, which is how a grating resolves fine spectral lines.`;
 
   const code = `import numpy as np
@@ -47,7 +51,7 @@ print("peak intensity", np.nanmax(I))`;
         <Slider label="Wavelength" value={lambda} min={10} max={40} step={1} onChange={(v) => update({ lambda: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Slits" value={String(slits)} /><Stat label="Resolution" value="∝ N" /><Stat label="Maxima at" value="d·sinθ = mλ" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Slits" value={String(slits)} /><Stat label="Resolution" value="∝ N" /><Stat label="Maxima at" value="d·sinθ = mλ" /><Equation tex={`d\\sin\\theta = m\\lambda:\\quad ${spacing}\\,\\sin\\theta = m\\cdot ${lambda},\\quad \\theta_1 = ${theta1}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

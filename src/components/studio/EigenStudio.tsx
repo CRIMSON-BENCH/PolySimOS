@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 520, H = 480;
@@ -70,7 +71,7 @@ print("eigenvectors (columns)", v)`;
         </div>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="det" value={(a * d - b * c).toFixed(2)} /><Stat label="trace" value={(a + d).toFixed(2)} /><Stat label="λ₁" value={eig.real ? eig.l1.toFixed(2) : "complex"} /><Stat label="λ₂" value={eig.real ? eig.l2.toFixed(2) : "complex"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="det" value={(a * d - b * c).toFixed(2)} /><Stat label="trace" value={(a + d).toFixed(2)} /><Stat label="λ₁" value={eig.real ? eig.l1.toFixed(2) : "complex"} /><Stat label="λ₂" value={eig.real ? eig.l2.toFixed(2) : "complex"} /><Equation tex={`A=\\begin{bmatrix}${a.toFixed(1)} & ${b.toFixed(1)}\\\\ ${c.toFixed(1)} & ${d.toFixed(1)}\\end{bmatrix},\\quad Av=\\lambda v,\\quad \\det(A-\\lambda I)=0,\\quad \\lambda=${eig.real ? `${eig.l1.toFixed(2)},\\ ${eig.l2.toFixed(2)}` : "\\text{complex}"}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

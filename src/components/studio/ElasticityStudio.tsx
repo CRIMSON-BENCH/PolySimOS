@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { price: number }> = {
@@ -58,7 +59,7 @@ print("Q", Q, "elasticity", elasticity, "revenue", revenue)`;
         <p className="mt-3 text-xs text-slate-500">Elasticity measures how much quantity demanded responds to price. Where demand is elastic (|E| &gt; 1), a price cut raises total revenue; where it is inelastic, a price cut lowers revenue. On a straight-line demand curve the top half is elastic, the bottom half inelastic, and revenue peaks exactly at the midpoint where elasticity equals one.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Quantity" value={Q.toFixed(1)} /><Stat label="Elasticity" value={isFinite(elasticity) ? elasticity.toFixed(2) : "−∞"} /><Stat label="Type" value={kind} /><Stat label="Revenue" value={`$${revenue.toFixed(0)}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Quantity" value={Q.toFixed(1)} /><Stat label="Elasticity" value={isFinite(elasticity) ? elasticity.toFixed(2) : "−∞"} /><Stat label="Type" value={kind} /><Stat label="Revenue" value={`$${revenue.toFixed(0)}`} /><Equation tex={`E_d=\\frac{dQ}{dP}\\cdot\\frac{P}{Q}=-\\frac{1}{b}\\cdot\\frac{${price.toFixed(0)}}{${Q.toFixed(1)}}=${isFinite(elasticity) ? elasticity.toFixed(2) : "-\\infty"}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -74,6 +75,7 @@ print("peak intensity", I.max())`;
         <Stat label="Fringe spacing" value={`∝ λ/d`} />
         <Stat label="Envelope" value={`∝ λ/a`} />
         <Stat label="Regime" value={d > a ? "interference-dominated" : "diffraction-dominated"} />
+        <Equation tex={`I=I_0\\cos^2\\!\\frac{\\pi d\\sin\\theta}{\\lambda}\\,\\mathrm{sinc}^2\\!\\frac{\\pi a\\sin\\theta}{\\lambda},\\quad \\Delta y=\\frac{\\lambda L}{d}=\\frac{${lambda}\\cdot 800}{${d}}=${((lambda * 800) / d).toFixed(0)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>

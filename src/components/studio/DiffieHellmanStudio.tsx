@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 function modpow(b: number, e: number, m: number): number { let r = 1; b %= m; while (e > 0) { if (e & 1) r = (r * b) % m; e = Math.floor(e / 2); b = (b * b) % m; } return r; }
@@ -45,7 +46,7 @@ print("A", A, "B", B, "shared", modpow(B, a, p), modpow(A, b, p))`;
         <p className="mt-3 text-xs text-slate-500">Diffie-Hellman lets two strangers agree on a secret key while an eavesdropper hears everything. Both share public numbers g and p, each picks a private exponent, and they exchange g raised to it. Raising the other&apos;s public value to your own secret yields the same shared key — yet recovering it from the public traffic requires solving the discrete logarithm, which is infeasible.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Alice sends A" value={String(A)} /><Stat label="Bob sends B" value={String(B)} /><Stat label="Shared secret" value={String(secretA)} /><Stat label="Match?" value={secretA === secretB ? "yes ✓" : "no"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Alice sends A" value={String(A)} /><Stat label="Bob sends B" value={String(B)} /><Stat label="Shared secret" value={String(secretA)} /><Stat label="Match?" value={secretA === secretB ? "yes ✓" : "no"} /><Equation tex={`K = g^{ab} \\bmod ${prime} = ${secretA},\\quad A = g^{a} \\bmod ${prime} = ${A}`} /><ExplainResult text={explain} /></div>}
     ><div className="grid grid-cols-2 gap-4 p-6 font-mono text-sm">
         <div className="rounded-lg border border-cyan-800 bg-cyan-950/20 p-4"><div className="mb-2 font-bold text-cyan-300">Alice</div><div className="text-slate-400">secret a = {a}</div><div className="text-slate-400">sends A = g^a = <span className="text-cyan-300">{A}</span></div><div className="mt-2 text-slate-400">key = B^a = <span className="font-bold text-lime-300">{secretA}</span></div></div>
         <div className="rounded-lg border border-pink-800 bg-pink-950/20 p-4"><div className="mb-2 font-bold text-pink-300">Bob</div><div className="text-slate-400">secret b = {b}</div><div className="text-slate-400">sends B = g^b = <span className="text-pink-300">{B}</span></div><div className="mt-2 text-slate-400">key = A^b = <span className="font-bold text-lime-300">{secretB}</span></div></div>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { f0: number; damp: number; drive: number }> = {
@@ -66,6 +67,7 @@ print("amplitude", amp(drive), "Q", 1/(2*zeta))`;
         <Stat label="Response amplitude" value={A.toExponential(2)} />
         <Stat label="Quality factor Q" value={Q.toFixed(1)} />
         <Stat label="At resonance?" value={onResonance ? "yes ≈ peak" : "no"} />
+        <Equation tex={`A(\\omega)=\\frac{F_0}{\\sqrt{(\\omega_0^2-\\omega^2)^2+(\\gamma\\omega)^2}},\\quad \\omega=2\\pi(${drive.toFixed(2)}),\\ \\zeta=${damp.toFixed(2)},\\ A=${A.toExponential(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

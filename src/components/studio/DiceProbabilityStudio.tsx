@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { dice: number; sides: number; target: number }> = {
   "Two d6 (craps)": { dice: 2, sides: 6, target: 7 },
@@ -57,7 +58,7 @@ print("P(sum=target)", dist[target-N]/total)`;
         <p className="mt-3 text-xs text-slate-500">Roll one die and every outcome is equally likely — a flat distribution. Roll several and sum them, and the shape becomes a bell: middle sums have many combinations, extremes have few. This is the central limit theorem in miniature, and why 7 is the most common roll of two dice and the heart of the game of craps.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="P(sum = target)" value={`${(pTarget * 100).toFixed(2)}%`} /><Stat label="Most likely sum" value={String(mostLikely)} /><Stat label="Combinations" value={total.toLocaleString()} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="P(sum = target)" value={`${(pTarget * 100).toFixed(2)}%`} /><Stat label="Most likely sum" value={String(mostLikely)} /><Stat label="Combinations" value={total.toLocaleString()} /><Equation tex={`E[\\text{sum}] = \\frac{n(d+1)}{2} = \\frac{${N}(${S}+1)}{2} = ${(N * (S + 1) / 2).toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

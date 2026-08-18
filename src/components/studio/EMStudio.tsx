@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Charge, potentialAt, traceFieldLine } from "@/lib/engines/em";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -76,7 +77,7 @@ print("potential range:", V.min(), V.max())`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Charges" value={String(charges.length)} /><Stat label="Net charge" value={String(charges.reduce((a, c) => a + c.q, 0))} /><Stat label="Method" value="Superposition" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Charges" value={String(charges.length)} /><Stat label="Net charge" value={String(charges.reduce((a, c) => a + c.q, 0))} /><Stat label="Method" value="Superposition" /><Equation tex={`V(\\mathbf{r}) = k\\sum_i \\frac{q_i}{r_i},\\quad k=5000,\\ \\sum q_i = ${charges.reduce((a, c) => a + c.q, 0)}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} onClick={addCharge} className="mx-auto h-auto max-h-[460px] cursor-crosshair rounded-lg" />
     </StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { cf0: number; growth: number; discount: number; tg: number; nyears: number }> = {
@@ -60,6 +61,7 @@ print("PV", round(pv), "terminal", round(tv), "total", round(pv+tv))`;
         <Stat label="PV of forecast" value={`$${pv.toFixed(0)}`} />
         <Stat label="Terminal value (PV)" value={`$${terminal.toFixed(0)}`} />
         <Stat label="Total valuation" value={`$${total.toFixed(0)}`} />
+        <Equation tex={`V=\\sum_{t=1}^{${nyears}}\\frac{FCF_t}{(1+r)^t}+\\frac{TV}{(1+r)^{${nyears}}},\\quad r=${r.toFixed(2)},\\ TV=\\$${Math.round(terminal)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

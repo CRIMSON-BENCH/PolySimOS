@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -59,7 +60,7 @@ print(xs[-1], ys[-1])`;
         {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equation" value="dy/dx = f(x,y)" /><Stat label="Curves" value={String(seeds.current.length)} /><Stat label="Integrator" value="RK2" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Equation" value="dy/dx = f(x,y)" /><Stat label="Curves" value={String(seeds.current.length)} /><Stat label="Integrator" value="RK2" /><Equation tex={`\\frac{dy}{dx} = f(x,y) = ${expr}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} onClick={onClick} className="mx-auto h-auto max-h-[460px] cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }
