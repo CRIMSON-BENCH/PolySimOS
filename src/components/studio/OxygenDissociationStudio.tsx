@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { p50: number; hill: number; po2: number }> = {
@@ -58,6 +59,7 @@ for p in (${po2}, 40, 100):
         <Stat label="Saturation here" value={`${s.toFixed(1)}%`} />
         <Stat label="At lungs (100 mmHg)" value={`${sat(100).toFixed(0)}%`} />
         <Stat label="At tissue (40 mmHg)" value={`${sat(40).toFixed(0)}%`} />
+        <Equation tex={`S = \\frac{(pO_2)^{${hill.toFixed(1)}}}{${p50.toFixed(1)}^{${hill.toFixed(1)}} + (pO_2)^{${hill.toFixed(1)}}} = ${(s / 100).toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

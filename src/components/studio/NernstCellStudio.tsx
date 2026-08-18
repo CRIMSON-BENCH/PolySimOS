@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { E0: number; n: number; Q: number; T: number }> = {
@@ -56,6 +57,7 @@ print("cell voltage", round(E, 3), "V")`;
         <Stat label="Cell voltage E" value={`${E.toFixed(3)} V`} />
         <Stat label="Thermal term RT/nF" value={`${(8.314 * T / (n * 96485)).toFixed(4)} V`} />
         <Stat label="Spontaneous?" value={E > 0 ? "yes (E > 0)" : "no"} />
+        <Equation tex={`E = E^\\circ - \\frac{RT}{nF}\\ln Q = ${E0} - \\frac{(8.314)(${T})}{(${n})(96485)}\\ln(${Q}) = ${E.toFixed(3)}\\;\\text{V}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

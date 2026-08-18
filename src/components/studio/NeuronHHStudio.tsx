@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -86,7 +87,7 @@ print("V", round(V, 1))`;
         <p className="mt-3 text-xs text-slate-500">The Hodgkin-Huxley model — the Nobel-winning description of the nerve impulse — tracks voltage and the opening of sodium and potassium channels. Below a threshold current the neuron is silent; above it, it fires a train of action potentials whose rate climbs with the stimulus.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Firing rate" value={`${rate.toFixed(1)} Hz`} /><Stat label="Regime" value={current < 6 ? "subthreshold" : "spiking"} /><Stat label="Channels" value="Na⁺ / K⁺" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Firing rate" value={`${rate.toFixed(1)} Hz`} /><Stat label="Regime" value={current < 6 ? "subthreshold" : "spiking"} /><Stat label="Channels" value="Na⁺ / K⁺" /><Equation tex={`C_m\\frac{dV}{dt} = ${current} - \\bar g_{Na}\\,m^3h(V-E_{Na}) - \\bar g_K\\,n^4(V-E_K) - \\bar g_L(V-E_L)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

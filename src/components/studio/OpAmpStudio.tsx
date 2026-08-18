@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type Cfg = "inverting" | "noninverting" | "difference" | "integrator";
@@ -45,6 +46,14 @@ export function OpAmpStudio() {
     ? `Non-inverting gain is 1 + R2/R1 = ${gain.toFixed(2)}×, always at least 1 and in phase with the input.`
     : `Difference gain is R2/R1 = ${gain.toFixed(2)}×, amplifying only the difference between the two inputs and rejecting what they share.`;
 
+  const gainTex = cfg === "inverting"
+    ? `A = -\\frac{R_2}{R_1} = -\\frac{${R2}}{${R1}} = ${gain.toFixed(2)}\\times`
+    : cfg === "noninverting"
+    ? `A = 1 + \\frac{R_2}{R_1} = 1 + \\frac{${R2}}{${R1}} = ${gain.toFixed(2)}\\times`
+    : cfg === "difference"
+    ? `A = \\frac{R_2}{R_1} = \\frac{${R2}}{${R1}} = ${gain.toFixed(2)}\\times`
+    : `V_{out} = -\\frac{1}{R_1 C}\\int v_{in}\\,dt`;
+
   const code = `# Ideal op-amp gain
 cfg = "${cfg}"
 R1, R2, vin = ${R1}, ${R2}, ${vin}  # kOhm, kOhm, V
@@ -63,7 +72,7 @@ print("gain", gain, "vout", vout)`;
         <p className="mt-3 text-xs text-slate-500">The op-amp is the fundamental building block of analog electronics. With negative feedback, its gain is set entirely by external resistors: an inverting amp gives −R2/R1, a non-inverting amp 1+R2/R1. An integrator uses a feedback capacitor to output the running integral of its input.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Configuration" value={cfg} /><Stat label="Gain" value={cfg === "integrator" ? "∫ dt" : `${gain.toFixed(2)}×`} /><Stat label="Output" value={cfg === "integrator" ? "integral" : `${vout.toFixed(2)} V`} /><Stat label="Status" value={clipped ? "clipping" : "linear"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Configuration" value={cfg} /><Stat label="Gain" value={cfg === "integrator" ? "∫ dt" : `${gain.toFixed(2)}×`} /><Stat label="Output" value={cfg === "integrator" ? "integral" : `${vout.toFixed(2)} V`} /><Stat label="Status" value={clipped ? "clipping" : "linear"} /><Equation tex={gainTex} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -5,6 +5,7 @@ import { minimize1D, monteCarloUQ } from "@/lib/engines/fieldmath";
 import { sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 720, H = 460;
@@ -80,6 +81,7 @@ print("out mean", f(s).mean(), "out sd", f(s).std())`;
             <Stat label="Output σ" value={uq.sd.toFixed(3)} />
             <Stat label="5–95%" value={`${uq.p05.toFixed(2)} … ${uq.p95.toFixed(2)}`} />
           </>}
+          <Equation tex={`\\min_x f(x),\\quad x_{n+1} = x_n - \\eta\\,\\nabla f(x_n),\\ \\eta = 0.01,\\quad x_0 = ${x0},\\ x^\\star \\approx ${opt ? opt.x.toFixed(3) : "\\text{—}"}`} />
           <ExplainResult text={explain} />
         </div>
       }

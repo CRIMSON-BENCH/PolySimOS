@@ -4,6 +4,7 @@ import { useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -80,7 +81,7 @@ print("dv1", dv1, "dv2", dv2, "total", dv1 + dv2, "tof", tof)`;
         <Slider label="Outer orbit radius" value={r2} min={120} max={230} step={10} onChange={(v) => update({ r2: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Δv burn 1" value={dv1.toFixed(2)} /><Stat label="Δv burn 2" value={dv2.toFixed(2)} /><Stat label="Total Δv" value={total.toFixed(2)} /><Stat label="Transfer time" value={tof.toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Δv burn 1" value={dv1.toFixed(2)} /><Stat label="Δv burn 2" value={dv2.toFixed(2)} /><Stat label="Total Δv" value={total.toFixed(2)} /><Stat label="Transfer time" value={tof.toFixed(1)} /><Equation tex={`\\Delta v = \\sqrt{\\tfrac{\\mu}{${r1}}}\\!\\left(\\sqrt{\\tfrac{2\\cdot${r2}}{${r1}+${r2}}}-1\\right)+\\sqrt{\\tfrac{\\mu}{${r2}}}\\!\\left(1-\\sqrt{\\tfrac{2\\cdot${r1}}{${r1}+${r2}}}\\right)=${total.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

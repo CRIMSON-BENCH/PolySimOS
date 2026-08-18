@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { mfp: number }> = {
@@ -69,7 +70,7 @@ print("leakage %", esc / 40 * 100)`;
         <p className="mt-3 text-xs text-slate-500">Neutrons do not travel straight — they random-walk through matter, scattering every mean free path and losing energy at each collision. This moderation slows fast neutrons to thermal speeds where they fission efficiently. A short mean free path (dense material) keeps them inside; a long one lets them leak out, which is why reactor size and geometry set criticality.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mean free path" value={`${mfp} px`} /><Stat label="Escaped" value={`${escaped} / 40`} /><Stat label="Leakage" value={`${leakage.toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Mean free path" value={`${mfp} px`} /><Stat label="Escaped" value={`${escaped} / 40`} /><Stat label="Leakage" value={`${leakage.toFixed(0)}%`} /><Equation tex={`\\lambda = \\frac{1}{\\Sigma} = ${mfp}\\ \\text{px}, \\quad \\Sigma = ${(1 / mfp).toFixed(4)}\\ \\text{px}^{-1}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={400} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

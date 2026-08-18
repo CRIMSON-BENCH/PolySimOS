@@ -5,6 +5,7 @@ import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 export function MontyHallStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -50,7 +51,7 @@ print("switch", switch_wins / N, "stay", stay_wins / N)`;
         <p className="mt-3 text-xs text-slate-500">Pick one of three doors; the host, who knows where the car is, opens a losing door and offers a switch. Should you? Yes — switching wins two times out of three. Your first pick is right only 1/3 of the time, so the other 2/3 of the probability collapses onto the remaining door. The simulation converges to exactly that, however stubborn intuition is.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Games" value={stats.current.games.toLocaleString()} /><Stat label="Switch win rate" value={`${(stats.current.switchWins / g * 100).toFixed(1)}%`} /><Stat label="Stay win rate" value={`${(stats.current.stayWins / g * 100).toFixed(1)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Games" value={stats.current.games.toLocaleString()} /><Stat label="Switch win rate" value={`${(stats.current.switchWins / g * 100).toFixed(1)}%`} /><Stat label="Stay win rate" value={`${(stats.current.stayWins / g * 100).toFixed(1)}%`} /><Equation tex={`P(\\text{win}\\mid\\text{switch})=\\tfrac{2}{3},\\quad P(\\text{win}\\mid\\text{stay})=\\tfrac{1}{3}\\;\\Rightarrow\\;\\hat p_{\\text{switch}}=${swRate.toFixed(1)}\\%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

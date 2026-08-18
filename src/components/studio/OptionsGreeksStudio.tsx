@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const ncdf = (x: number) => { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.3989423 * Math.exp(-x * x / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x > 0 ? 1 - p : p; };
@@ -74,6 +75,7 @@ print(price, delta, gamma, vega, theta)`;
         <Stat label="Gamma" value={g.gamma.toFixed(4)} />
         <Stat label="Vega (per 1% vol)" value={g.vega.toFixed(3)} />
         <Stat label="Theta (per day)" value={g.theta.toFixed(3)} />
+        <Equation tex={`\\Delta = N(d_1),\\quad d_1 = \\frac{\\ln(${S}/${K})+(${rf}+${vol}^2/2)\\,${T}}{${vol}\\sqrt{${T}}} = ${((Math.log(S / K) + (rf + vol * vol / 2) * T) / (vol * Math.sqrt(T))).toFixed(3)} \\;\\Rightarrow\\; \\Delta = ${g.delta.toFixed(3)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

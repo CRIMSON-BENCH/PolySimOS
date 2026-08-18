@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { s: number; mu: number; p0: number }> = {
@@ -62,6 +63,7 @@ print("equilibrium frequency", p)`;
       inspector={<div>
         <Stat label="Equilibrium frequency" value={eq.toFixed(3)} />
         <Stat label="Direction" value={eq > p0 + 0.01 ? "rising (selected)" : eq < p0 - 0.01 ? "falling" : "at balance"} />
+        <Equation tex={`\\hat q = \\sqrt{\\dfrac{\\mu}{s}} = \\sqrt{\\dfrac{${mu}}{${s}}} = ${s > 0 ? Math.sqrt(mu / s).toFixed(3) : "\\infty"}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

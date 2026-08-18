@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { b: number; y: number; S: number; n: number }> = {
@@ -58,6 +59,7 @@ print("V", V, "Q", Q, "Fr", Fr)`;
         <Stat label="Flow rate Q" value={`${Q.toFixed(2)} m³/s`} />
         <Stat label="Hydraulic radius" value={`${R.toFixed(3)} m`} />
         <Stat label="Froude number" value={Fr.toFixed(2)} />
+        <Equation tex={`Q = \\frac{1}{n} A R^{2/3} S^{1/2} = \\frac{1}{${n}} \\times ${A.toFixed(2)} \\times ${R.toFixed(3)}^{2/3} \\times ${S}^{1/2} = ${Q.toFixed(2)}\\ \\text{m}^3/\\text{s}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

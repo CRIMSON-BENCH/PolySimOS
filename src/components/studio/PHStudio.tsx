@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { conc: number; acid: boolean }> = {
@@ -50,7 +51,7 @@ print("pH", round(ph, 2), "pOH", round(poh, 2), "[H+]", h)`;
         <Slider label="Concentration 10⁻ⁿ M (n)" value={conc} min={0} max={7} step={0.1} onChange={(v) => update({ conc: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="pH" value={ph.toFixed(2)} /><Stat label="pOH" value={poh.toFixed(2)} /><Stat label="[H⁺]" value={h.toExponential(1)} /><Stat label="[OH⁻]" value={oh.toExponential(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="pH" value={ph.toFixed(2)} /><Stat label="pOH" value={poh.toFixed(2)} /><Stat label="[H⁺]" value={h.toExponential(1)} /><Stat label="[OH⁻]" value={oh.toExponential(1)} /><Equation tex={`\\text{pH} = -\\log_{10}[\\text{H}^+] = -\\log_{10}(${h.toExponential(1)}) = ${ph.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     >
       <div className="flex h-full min-h-[360px] flex-col items-center justify-center gap-6 p-8">
         <div className="text-center"><div className="text-sm text-slate-400">pH</div><div className="text-6xl font-black" style={{ color }}>{ph.toFixed(1)}</div><div className="mt-1 text-sm text-slate-400">{ph < 6.5 ? "acidic" : ph > 7.5 ? "basic" : "neutral"}</div></div>

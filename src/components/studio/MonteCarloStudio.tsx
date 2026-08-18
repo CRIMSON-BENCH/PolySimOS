@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { S0: number; mu: number; sigma: number; years: number }> = {
   "Blue chip": { S0: 100, mu: 0.07, sigma: 0.15, years: 5 },
@@ -68,7 +69,7 @@ print("median", np.median(S), "p5", np.percentile(S,5), "p95", np.percentile(S,9
         <p className="mt-3 text-xs text-slate-500">Geometric Brownian motion models a price with constant drift and random volatility — the assumption behind Black-Scholes. Running hundreds of simulated paths reveals the full distribution of outcomes, not just an average. Educational tool, not investment advice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Median outcome" value={`$${median.toFixed(0)}`} /><Stat label="5th percentile" value={`$${p5.toFixed(0)}`} /><Stat label="95th percentile" value={`$${p95.toFixed(0)}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Median outcome" value={`$${median.toFixed(0)}`} /><Stat label="5th percentile" value={`$${p5.toFixed(0)}`} /><Stat label="95th percentile" value={`$${p95.toFixed(0)}`} /><Equation tex={`S_{t+\\Delta t}=S_t\\,e^{(${mu}-\\frac{${sigma}^2}{2})\\Delta t+${sigma}\\sqrt{\\Delta t}\\,Z},\\quad \\tilde S_{${years}}\\approx \\$${median.toFixed(0)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

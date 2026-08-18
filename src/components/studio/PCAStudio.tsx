@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { corr: number; spread: number }> = {
@@ -68,6 +69,7 @@ print("variance ratio PC1:", vals[0] / vals.sum())`;
         <Stat label="Variance PC2" value={ev.l2.toFixed(2)} />
         <Stat label="PC1 explains" value={`${pc1pct.toFixed(0)}%`} />
         <Stat label="PC1 angle" value={`${ev.angle.toFixed(0)}°`} />
+        <Equation tex={`Cv = \\lambda v,\\quad \\frac{\\lambda_1}{\\lambda_1+\\lambda_2} = \\frac{${ev.l1.toFixed(2)}}{${totalVar.toFixed(2)}} = ${(pc1pct / 100).toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={460} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

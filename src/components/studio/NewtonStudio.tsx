@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, evaluate, derivativeExprSafe, sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -84,7 +85,7 @@ print("root", x)`;
         {err && <p className="text-xs text-red-500">{err}</p>}
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Root" value={isFinite(root) ? root.toFixed(6) : "—"} /><Stat label="Iterations" value={String(iters.length - 1)} /><Stat label="Convergence" value="quadratic" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Root" value={isFinite(root) ? root.toFixed(6) : "—"} /><Stat label="Iterations" value={String(iters.length - 1)} /><Stat label="Convergence" value="quadratic" /><Equation tex={`x_{n+1} = x_n - \\frac{f(x_n)}{f'(x_n)}, \\quad x_0 = ${x0},\\ x_\\star \\approx ${isFinite(root) ? root.toFixed(4) : "?"}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

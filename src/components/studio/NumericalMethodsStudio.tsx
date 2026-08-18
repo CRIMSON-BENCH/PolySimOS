@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
@@ -76,7 +77,7 @@ print("Euler err", abs(ye - np.exp(T)), "RK4 err", abs(yr - np.exp(T)))`;
         <Slider label="Step size h" value={h} min={0.1} max={1} step={0.05} onChange={(v) => update({ h: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Step h" value={h.toFixed(2)} /><Stat label="Euler error" value={errE.toFixed(3)} /><Stat label="RK4 error" value={errR.toExponential(2)} /><Stat label="RK4 order" value="4th" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Step h" value={h.toFixed(2)} /><Stat label="Euler error" value={errE.toFixed(3)} /><Stat label="RK4 error" value={errR.toExponential(2)} /><Stat label="RK4 order" value="4th" /><Equation tex={`y_{n+1} = y_n + h\\,f(t_n, y_n), \\quad h = ${h.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

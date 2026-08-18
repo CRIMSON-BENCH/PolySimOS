@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type Leg = { type: "call" | "put"; qty: number; strike: number; premium: number };
@@ -82,7 +83,7 @@ print("max profit", p.max(), "max loss", p.min())`;
         <p className="mt-3 text-xs text-slate-500">An option strategy&apos;s payoff diagram plots profit or loss against the underlying price at expiration. Combining calls and puts at different strikes shapes the curve — capping risk, capturing volatility, or generating income. Educational tool, not investment advice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Max profit" value={maxProfit > 900 ? "unlimited" : `$${maxProfit.toFixed(2)}`} /><Stat label="Max loss" value={maxLoss < -900 ? "unlimited" : `$${maxLoss.toFixed(2)}`} /><Stat label="Net debit/credit" value={`$${netDebit.toFixed(2)}`} /><Stat label="Legs" value={String(legs.length)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Max profit" value={maxProfit > 900 ? "unlimited" : `$${maxProfit.toFixed(2)}`} /><Stat label="Max loss" value={maxLoss < -900 ? "unlimited" : `$${maxLoss.toFixed(2)}`} /><Stat label="Net debit/credit" value={`$${netDebit.toFixed(2)}`} /><Stat label="Legs" value={String(legs.length)} /><Equation tex={`\\Pi(S)=\\sum_i q_i\\big[\\max(S-K_i,0)_{\\text{call}},\\ \\max(K_i-S,0)_{\\text{put}} - p_i\\big],\\quad K=${K}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

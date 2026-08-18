@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { mu1: number; mu2: number; sig: number; prior: number }> = {
@@ -62,6 +63,7 @@ print("decision boundary", bd)`;
       inspector={<div>
         <Stat label="Decision boundary" value={bd.toFixed(2)} />
         <Stat label="Class overlap" value={Math.abs(mu2 - mu1) < 2 * sig ? "high (hard)" : "low (easy)"} />
+        <Equation tex={`P(C\\mid x) \\propto P(C)\\,\\mathcal{N}(x;\\mu_C,${sig}),\\quad P(C_1)=${prior},\\ \\hat C=\\arg\\max_C`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

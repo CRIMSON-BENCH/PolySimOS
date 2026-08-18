@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { ratio: number; gamma: number }> = {
@@ -58,6 +59,7 @@ print(f"compression {ratio}:1  ->  efficiency {eff*100:.1f}%")`;
         <Stat label="Efficiency" value={`${(eff * 100).toFixed(1)}%`} />
         <Stat label="Compression ratio" value={`${ratio}:1`} />
         <Stat label="γ" value={gamma.toFixed(2)} />
+        <Equation tex={`\\eta = 1 - \\frac{1}{r^{\\gamma-1}} = 1 - \\frac{1}{${ratio}^{${gamma.toFixed(2)}-1}} = ${(eff * 100).toFixed(1)}\\%`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={500} height={330} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

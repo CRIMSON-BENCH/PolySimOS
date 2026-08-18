@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { tstall: number; wfree: number; load: number }> = {
@@ -67,6 +68,7 @@ print("op speed", max(0, wop), "peak power", power(wfree/2), "@", wfree/2)`;
         <Stat label="Operating speed" value={`${Math.max(0, wop).toFixed(0)} rpm`} />
         <Stat label="Output power" value={`${pOp.toFixed(1)} W`} />
         <Stat label="Peak power" value={`${pPeak.toFixed(1)} W @ ${wPeak.toFixed(0)} rpm`} />
+        <Equation tex={`\\tau = ${tstall}\\left(1 - \\dfrac{\\omega}{${wfree}}\\right),\\quad \\omega_{op} = ${Math.max(0, wop).toFixed(0)}\\ \\text{rpm}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

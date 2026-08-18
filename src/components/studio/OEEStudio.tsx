@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { availability: number; performance: number; quality: number }> = {
@@ -49,7 +50,7 @@ print(f"OEE = {oee:.1f}%  (world-class benchmark = 85%)")`;
         <p className="mt-3 text-xs text-slate-500">OEE is the single number factories use to judge a machine, multiplying three losses: availability (uptime vs planned), performance (actual vs ideal speed), and quality (good parts vs total). Because they multiply, a chain of &quot;pretty good&quot; factors yields a mediocre result — 90% × 95% × 99% is only 85%. That 85% is the world-class benchmark.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="OEE" value={`${oee.toFixed(1)}%`} /><Stat label="Rating" value={rating} /><Stat label="World-class" value="85%" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="OEE" value={`${oee.toFixed(1)}%`} /><Stat label="Rating" value={rating} /><Stat label="World-class" value="85%" /><Equation tex={`\\text{OEE} = A \\times P \\times Q = ${(availability / 100).toFixed(2)} \\times ${(performance / 100).toFixed(2)} \\times ${(quality / 100).toFixed(2)} = ${oee.toFixed(1)}\\%`} /><ExplainResult text={explain} /></div>}
     ><div className="p-6">
         <div className="mb-6 text-center"><div className="text-xs uppercase tracking-widest text-slate-500">Overall Equipment Effectiveness</div><div className="mt-2 text-6xl font-black" style={{ color: oee >= 85 ? "#a3e635" : oee >= 60 ? "#fbbf24" : "#ef4444" }}>{oee.toFixed(0)}%</div></div>
         <Bar label="Availability" v={availability} color="#22d3ee" />

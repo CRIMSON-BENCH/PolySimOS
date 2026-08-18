@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { start: number; contrib: number; ret: number; vol: number; years: number }> = {
   "Young saver": { start: 50, contrib: 15, ret: 8, vol: 16, years: 40 },
@@ -62,6 +63,7 @@ print("median", np.median(V), "p10", np.percentile(V,10), "p90", np.percentile(V
         <Stat label="Median outcome" value={`$${median.toFixed(0)}k`} />
         <Stat label="10th percentile" value={`$${p10.toFixed(0)}k`} />
         <Stat label="90th percentile" value={`$${p90.toFixed(0)}k`} />
+        <Equation tex={`W_{t+1}=W_t\\,(1+${r.toFixed(3)})+${contrib},\\quad \\tilde W_{${years}}\\approx \\$${median.toFixed(0)}\\text{k}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { sma: number; ecc: number; argp: number }> = {
@@ -75,7 +76,7 @@ print("period (min)", period / 60, "apogee", apogee, "perigee", perigee)`;
         <p className="mt-3 text-xs text-slate-500">An orbit&apos;s size and shape come from two numbers: the semi-major axis sets the period (and average altitude), and the eccentricity sets how elongated the ellipse is. Earth sits at one focus, so the satellite races through its low perigee and crawls at its high apogee — Kepler&apos;s second law in motion. The argument of periapsis rotates the ellipse.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Period" value={`${(period / 60).toFixed(0)} min`} /><Stat label="Apogee alt." value={`${apo.toFixed(0)} km`} /><Stat label="Perigee alt." value={`${peri.toFixed(0)} km`} /><Stat label="Eccentricity" value={ecc.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Period" value={`${(period / 60).toFixed(0)} min`} /><Stat label="Apogee alt." value={`${apo.toFixed(0)} km`} /><Stat label="Perigee alt." value={`${peri.toFixed(0)} km`} /><Stat label="Eccentricity" value={ecc.toFixed(2)} /><Equation tex={`r = \\frac{a(1-e^2)}{1+e\\cos\\nu} = \\frac{${sma.toFixed(0)}\\,(1-${ecc.toFixed(2)}^2)}{1+${ecc.toFixed(2)}\\cos\\nu}\\ \\text{km}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

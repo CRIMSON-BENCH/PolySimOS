@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { useShareableNumbers } from "@/lib/studioKit";
 
@@ -115,7 +116,7 @@ for epoch in range(500):
         <p className="mt-3 text-xs text-slate-500">A tiny multilayer perceptron trained by real backpropagation. The background shows its learned decision boundary; dots are the training data, colored by true class.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Epoch" value={String(epoch)} /><Stat label="Loss" value={loss.toFixed(4)} /><Stat label="Architecture" value={`2→${Math.round(hidden)}→1`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Epoch" value={String(epoch)} /><Stat label="Loss" value={loss.toFixed(4)} /><Stat label="Architecture" value={`2→${Math.round(hidden)}→1`} /><Equation tex={`a = \\tanh(W_1 x + b_1),\\quad \\hat y = \\sigma(W_2 a + b_2),\\quad L = ${loss.toFixed(4)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={420} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
