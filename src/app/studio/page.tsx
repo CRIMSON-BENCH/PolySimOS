@@ -316,6 +316,14 @@ export const SIMS = [
   { slug: "monty-hall", name: "Monty Hall", desc: "Always switch.", tag: "Probability" },
   { slug: "law-of-large-numbers", name: "Law of Large Numbers", desc: "Averages converge.", tag: "Probability" },
   { slug: "lottery-odds", name: "Lottery Odds", desc: "Jackpot combinatorics.", tag: "Probability" },
+  { slug: "gyroscope", name: "Gyroscope & Precession", desc: "Why a spinning top doesn't fall.", tag: "Physics" },
+  { slug: "coupled-oscillators", name: "Coupled Oscillators", desc: "Normal modes and beating.", tag: "Physics" },
+  { slug: "driven-resonance", name: "Driven Resonance", desc: "Amplitude near the natural frequency.", tag: "Physics" },
+  { slug: "gear-train", name: "Gear Train Ratios", desc: "Trade speed for torque.", tag: "Engineering" },
+  { slug: "rolling-motion", name: "Rolling Without Slipping", desc: "Race shapes down a ramp.", tag: "Physics" },
+  { slug: "rocket-equation", name: "Rocket Equation", desc: "Tsiolkovsky Δv and staging.", tag: "Aerospace" },
+  { slug: "collision-lab", name: "Collision Lab", desc: "Elastic vs inelastic 1D collisions.", tag: "Physics" },
+  { slug: "moment-of-inertia", name: "Moment of Inertia", desc: "Rotational mass & parallel-axis.", tag: "Physics" },
 ];
 
 export default function StudioIndex() {

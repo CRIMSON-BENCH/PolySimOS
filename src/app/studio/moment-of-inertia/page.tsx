@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MomentOfInertiaStudio } from "@/components/studio/MomentOfInertiaStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Moment of Inertia Calculator (Browser)", description: "Compute the moment of inertia of disks, rings, spheres, and rods, and apply the parallel-axis theorem for offset axes. Free, interactive.", alternates: { canonical: "/studio/moment-of-inertia" } };
+export default function Page() { return <StudioPageShell slug="moment-of-inertia" name="Moment of Inertia" keyword="moment of inertia calculator" lede="Moment of inertia is rotational mass — how hard something is to spin. Pick a shape, move the axis, and watch the parallel-axis theorem add its md² term." about="Moment of inertia I = ∫r²dm depends on how mass is distributed relative to the rotation axis; standard shapes give I = c·mR² with c from 0.4 (sphere) to 1 (ring). The parallel-axis theorem, I = I_cm + md², handles rotation about any axis parallel to the one through the center of mass. Educational tool."><MomentOfInertiaStudio /></StudioPageShell>; }

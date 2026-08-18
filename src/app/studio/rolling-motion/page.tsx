@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RollingMotionStudio } from "@/components/studio/RollingMotionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Rolling Without Slipping Simulator (Browser)", description: "Race a hoop, disk, sphere, and shell down a ramp and see why the solid sphere always wins — independent of mass and radius. Free.", alternates: { canonical: "/studio/rolling-motion" } };
+export default function Page() { return <StudioPageShell slug="rolling-motion" name="Rolling Without Slipping" keyword="rolling without slipping ramp" lede="Release a hoop, disk, sphere, and spherical shell together down a ramp. They finish in a fixed order every time — and it has nothing to do with their mass or size." about="For an object rolling without slipping, a = g·sinθ / (1 + I/mR²). The bracket depends only on how mass is distributed: a solid sphere (I = 0.4mR²) accelerates fastest, a hoop (I = mR²) slowest. Mass and radius cancel out entirely. Educational tool."><RollingMotionStudio /></StudioPageShell>; }

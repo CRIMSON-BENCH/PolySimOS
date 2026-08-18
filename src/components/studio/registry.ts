@@ -132,6 +132,14 @@ import { VaRStudio } from "./VaRStudio";
 import { BondPricingStudio } from "./BondPricingStudio";
 import { CompoundInterestStudio } from "./CompoundInterestStudio";
 import { AmortizationStudio } from "./AmortizationStudio";
+import { GyroscopeStudio } from "./GyroscopeStudio";
+import { CoupledOscillatorsStudio } from "./CoupledOscillatorsStudio";
+import { DrivenResonanceStudio } from "./DrivenResonanceStudio";
+import { GearTrainStudio } from "./GearTrainStudio";
+import { RollingMotionStudio } from "./RollingMotionStudio";
+import { RocketEquationStudio } from "./RocketEquationStudio";
+import { CollisionLabStudio } from "./CollisionLabStudio";
+import { MomentOfInertiaStudio } from "./MomentOfInertiaStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -604,6 +612,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "monty-hall": MontyHallStudio,
   "law-of-large-numbers": LawLargeNumbersStudio,
   "lottery-odds": LotteryStudio,
+  gyroscope: GyroscopeStudio,
+  "coupled-oscillators": CoupledOscillatorsStudio,
+  "driven-resonance": DrivenResonanceStudio,
+  "gear-train": GearTrainStudio,
+  "rolling-motion": RollingMotionStudio,
+  "rocket-equation": RocketEquationStudio,
+  "collision-lab": CollisionLabStudio,
+  "moment-of-inertia": MomentOfInertiaStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

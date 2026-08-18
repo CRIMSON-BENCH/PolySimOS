@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CollisionLabStudio } from "@/components/studio/CollisionLabStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "1D Collision Simulator — Elastic & Inelastic", description: "Collide two carts and see momentum conserved every time, with kinetic energy conserved only when the collision is elastic. Free, interactive.", alternates: { canonical: "/studio/collision-lab" } };
+export default function Page() { return <StudioPageShell slug="collision-lab" name="Collision Lab (1D)" keyword="elastic inelastic collision simulator" lede="Set two carts moving and watch them collide. Momentum is always conserved — but dial the restitution from elastic to perfectly inelastic and watch kinetic energy vanish into heat." about="One-dimensional collisions conserve momentum: m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂. The coefficient of restitution e sets how much relative speed survives: e=1 conserves kinetic energy (elastic), e=0 makes the carts stick (perfectly inelastic). Real collisions fall in between. Educational tool."><CollisionLabStudio /></StudioPageShell>; }

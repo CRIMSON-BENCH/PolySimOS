@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CoupledOscillatorsStudio } from "@/components/studio/CoupledOscillatorsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Coupled Oscillators & Normal Modes Simulator", description: "Two masses on springs exchange energy through their normal modes. See in-phase and out-of-phase modes and the beating between them. Free.", alternates: { canonical: "/studio/coupled-oscillators" } };
+export default function Page() { return <StudioPageShell slug="coupled-oscillators" name="Coupled Oscillators" keyword="coupled oscillators normal modes" lede="Link two oscillators with a spring and energy sloshes back and forth between them. That motion is just two hidden normal modes beating against each other." about="Two masses joined by springs have two normal modes: an in-phase mode at √(k/m) and an out-of-phase mode at √((k+2k_c)/m). Any starting motion is a superposition of the two, and their slightly different frequencies produce the characteristic energy-exchange beat. Educational tool."><CoupledOscillatorsStudio /></StudioPageShell>; }

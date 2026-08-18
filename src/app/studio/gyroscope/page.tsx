@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { GyroscopeStudio } from "@/components/studio/GyroscopeStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Gyroscope & Precession Simulator (Browser)", description: "Watch a spinning gyroscope precess instead of falling, and see how spin rate sets the precession rate. Free, interactive.", alternates: { canonical: "/studio/gyroscope" } };
+export default function Page() { return <StudioPageShell slug="gyroscope" name="Gyroscope & Precession" keyword="gyroscope precession simulator" lede="A spinning top defies gravity — instead of toppling, it slowly circles. See exactly why, and how spinning faster makes it precess slower." about="Gravity exerts a torque on a tilted spinning disk. Because angular momentum points along the spin axis, that torque changes its direction rather than knocking it over, producing steady precession at rate Ω = mgr/(Iω). Faster spin means larger angular momentum and slower precession. Educational tool."><GyroscopeStudio /></StudioPageShell>; }

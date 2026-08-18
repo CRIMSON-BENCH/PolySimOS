@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RocketEquationStudio } from "@/components/studio/RocketEquationStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Tsiolkovsky Rocket Equation Calculator", description: "Compute rocket Δv from specific impulse and mass ratio, and see why staging is essential to reach orbit. Free, interactive.", alternates: { canonical: "/studio/rocket-equation" } };
+export default function Page() { return <StudioPageShell slug="rocket-equation" name="Rocket Equation (Tsiolkovsky)" keyword="tsiolkovsky rocket equation calculator" lede="How much velocity can a rocket gain? The answer grows only with the logarithm of its mass ratio — the brutal math that forces every orbital rocket to shed stages." about="The Tsiolkovsky rocket equation gives Δv = Isp·g·ln(m₀/mf). Because the mass ratio enters logarithmically, single-stage vehicles struggle to reach the ~9.4 km/s needed for low Earth orbit. Staging discards empty tanks so later stages push less dead mass. Educational tool."><RocketEquationStudio /></StudioPageShell>; }

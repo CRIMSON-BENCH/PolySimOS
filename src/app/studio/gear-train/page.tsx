@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { GearTrainStudio } from "@/components/studio/GearTrainStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Gear Ratio Calculator & Simulator (Browser)", description: "Mesh two gears and see how tooth counts set the gear ratio, output speed, and torque. Free, interactive gear train tool.", alternates: { canonical: "/studio/gear-train" } };
+export default function Page() { return <StudioPageShell slug="gear-train" name="Gear Train Ratios" keyword="gear ratio calculator" lede="A small gear driving a big one trades speed for torque. Watch two gears mesh and see the ratio, output rpm, and output torque update live." about="For meshing gears the ratio equals the driven-to-driver tooth-count ratio. Output speed divides by the ratio while output torque multiplies by it (ignoring friction), because power is conserved. This is the basis of every gearbox, from bicycles to wind turbines. Educational tool."><GearTrainStudio /></StudioPageShell>; }
