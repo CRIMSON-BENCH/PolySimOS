@@ -1,13 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { alt: number }> = {
+  "Sea level": { alt: 0 },
+  "Everest": { alt: 8849 },
+  "Airliner": { alt: 11000 },
+  "U2 spyplane": { alt: 21000 },
+};
 
 // International Standard Atmosphere.
 export function StandardAtmosphereStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [alt, setAlt] = useState(10000); // m
+  const [{ alt }, update] = useShareableNumbers({ alt: 10000 });
 
   const isa = (h: number) => { const T0 = 288.15, P0 = 101325, L = 0.0065, g = 9.80665, R = 287.05;
     let T: number, P: number; if (h <= 11000) { T = T0 - L * h; P = P0 * Math.pow(T / T0, g / (R * L)); }
@@ -29,14 +37,33 @@ export function StandardAtmosphereStudio() {
     ctx.font = "11px sans-serif"; ctx.fillStyle = "#f9a8d4"; ctx.fillText("T", ox + 60, 20); ctx.fillStyle = "#67e8f9"; ctx.fillText("P", ox + 200, 20); ctx.fillStyle = "#bef264"; ctx.fillText("ρ", ox + 350, 20); ctx.fillStyle = "#94a3b8"; ctx.fillText("tropopause 11 km", W - 130, Y(11000) - 4);
   }, [alt]);
 
+  const explain =
+    alt <= 11000
+      ? `Below the 11 km tropopause, temperature falls at 6.5 °C/km — here it is ${(cur.T - 273.15).toFixed(0)} °C and the air holds ${(cur.rho / 1.225 * 100).toFixed(0)}% of sea-level density.`
+      : `Above the tropopause the temperature holds near −56.5 °C while pressure keeps decaying — density is down to just ${(cur.rho / 1.225 * 100).toFixed(0)}% of the sea-level value.`;
+
+  const code = `import numpy as np
+alt = ${alt}   # geopotential altitude in metres
+T0, P0, L, g, R = 288.15, 101325.0, 0.0065, 9.80665, 287.05
+if alt <= 11000:
+    T = T0 - L*alt
+    P = P0*(T/T0)**(g/(R*L))
+else:
+    T = 216.65
+    P11 = P0*(216.65/T0)**(g/(R*L))
+    P = P11*np.exp(-g*(alt-11000)/(R*216.65))
+rho = P/(R*T)
+print("T", round(T-273.15,1), "P_kPa", round(P/1000,1), "rho", round(rho,3))`;
+
   return (
     <StudioChrome title="Standard Atmosphere (ISA)" tagline="temperature, pressure, density"
       controls={<div>
-        <Slider label="Altitude (m)" value={alt} min={0} max={30000} step={250} onChange={setAlt} />
-        <div className="mt-3 flex flex-wrap gap-1">{[["Sea level", 0], ["Everest", 8849], ["Airliner", 11000], ["U2", 21000]].map(([n, a]) => <button key={n as string} onClick={() => setAlt(a as number)} className="rounded-lg border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">{n}</button>)}</div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Altitude (m)" value={alt} min={0} max={30000} step={250} onChange={(v) => update({ alt: v })} />
         <p className="mt-3 text-xs text-slate-500">The International Standard Atmosphere is the reference model all aircraft and instruments are calibrated against. Temperature falls steadily through the troposphere at 6.5 °C/km, then holds constant in the stratosphere above the tropopause. Pressure and density decay roughly exponentially — at airliner altitude the air is only a quarter as dense as at sea level.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Temperature" value={`${(cur.T - 273.15).toFixed(1)} °C`} /><Stat label="Pressure" value={`${(cur.P / 1000).toFixed(1)} kPa`} /><Stat label="Density" value={`${cur.rho.toFixed(3)} kg/m³`} /><Stat label="% sea-level ρ" value={`${(cur.rho / 1.225 * 100).toFixed(0)}%`} /></div>}
+      inspector={<div><Stat label="Temperature" value={`${(cur.T - 273.15).toFixed(1)} °C`} /><Stat label="Pressure" value={`${(cur.P / 1000).toFixed(1)} kPa`} /><Stat label="Density" value={`${cur.rho.toFixed(3)} kg/m³`} /><Stat label="% sea-level ρ" value={`${(cur.rho / 1.225 * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { a11: number; a12: number; a21: number; a22: number }> = {
+  "Stable spiral": { a11: -0.3, a12: 1, a21: -1, a22: -0.3 },
+  "Saddle": { a11: 1, a12: 0, a21: 0, a22: -1 },
+  "Center (orbits)": { a11: 0, a12: 1, a21: -1, a22: 0 },
+  "Unstable node": { a11: 0.6, a12: 0, a21: 0, a22: 0.9 },
+};
 
 export function StateSpaceStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [a11, setA11] = useState(0), [a12, setA12] = useState(1), [a21, setA21] = useState(-1), [a22, setA22] = useState(-0.3);
+  const [{ a11, a12, a21, a22 }, update] = useShareableNumbers({ a11: 0, a12: 1, a21: -1, a22: -0.3 });
   // eigenvalues of [[a11,a12],[a21,a22]]
   const tr = a11 + a22, det = a11 * a22 - a12 * a21, disc = tr * tr / 4 - det;
   const reLam = tr / 2, imLam = disc < 0 ? Math.sqrt(-disc) : 0;
@@ -22,19 +30,44 @@ export function StateSpaceStudio() {
     ctx.globalAlpha = 1; ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`phase portrait — ${kind}`, 12, 22);
   }, [a11, a12, a21, a22, kind]);
 
+  const explain =
+    kind === "saddle"
+      ? "The determinant is negative, so eigenvalues have opposite signs: one direction pulls in, the other flings out — an unstable saddle with no equilibrium the system settles into."
+      : kind === "center"
+      ? "Eigenvalues are purely imaginary, so trajectories neither grow nor decay — they trace closed orbits around the origin (a marginally-stable center)."
+      : kind === "stable spiral"
+      ? "Complex eigenvalues with negative real part: trajectories spiral inward, oscillating while decaying to the origin — a stable, ringing system."
+      : kind === "stable node"
+      ? "Both eigenvalues are real and negative, so every trajectory decays monotonically into the origin — a stable node with no oscillation."
+      : kind === "unstable spiral"
+      ? "Complex eigenvalues with positive real part: trajectories spiral outward, oscillating with growing amplitude — the origin repels."
+      : "Both eigenvalues are real and positive, so trajectories accelerate away from the origin along straight-ish paths — an unstable node.";
+
+  const code = `import numpy as np
+A = np.array([[${a11}, ${a12}], [${a21}, ${a22}]])
+eig = np.linalg.eigvals(A)
+print("trace", A.trace(), "det", np.linalg.det(A))
+print("eigenvalues", eig)`;
+
   return (
     <StudioChrome title="State-Space Phase Portrait" tagline="the shape of a linear system"
       controls={<div>
-        <Slider label="a₁₁" value={a11} min={-2} max={2} step={0.1} onChange={setA11} />
-        <Slider label="a₁₂" value={a12} min={-2} max={2} step={0.1} onChange={setA12} />
-        <Slider label="a₂₁" value={a21} min={-2} max={2} step={0.1} onChange={setA21} />
-        <Slider label="a₂₂" value={a22} min={-2} max={2} step={0.1} onChange={setA22} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="a₁₁" value={a11} min={-2} max={2} step={0.1} onChange={(v) => update({ a11: v })} />
+        <Slider label="a₁₂" value={a12} min={-2} max={2} step={0.1} onChange={(v) => update({ a12: v })} />
+        <Slider label="a₂₁" value={a21} min={-2} max={2} step={0.1} onChange={(v) => update({ a21: v })} />
+        <Slider label="a₂₂" value={a22} min={-2} max={2} step={0.1} onChange={(v) => update({ a22: v })} />
         <p className="mt-3 text-xs text-slate-500">A linear state-space system ẋ = Ax has a character set by the eigenvalues of A. Negative real parts spiral or decay to the origin (stable); positive parts fly outward; imaginary parts add rotation. The phase portrait reveals it all at a glance. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Trace / Det" value={`${tr.toFixed(2)} / ${det.toFixed(2)}`} />
         <Stat label="Eigenvalues" value={imLam ? `${reLam.toFixed(2)} ± ${imLam.toFixed(2)}j` : `${(reLam + Math.sqrt(Math.max(0, disc))).toFixed(2)}, ${(reLam - Math.sqrt(Math.max(0, disc))).toFixed(2)}`} />
         <Stat label="Classification" value={kind} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

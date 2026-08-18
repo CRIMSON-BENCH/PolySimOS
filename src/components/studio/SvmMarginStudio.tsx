@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { angle: number; offset: number }> = {
+  "Max margin": { angle: 45, offset: 0 },
+  "Rotated 60°": { angle: 60, offset: 0 },
+  "Off-center": { angle: 45, offset: 0.4 },
+  "Misaligned 90°": { angle: 90, offset: 0 },
+};
 
 export function SvmMarginStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [angle, setAngle] = useState(45), [offset, setOffset] = useState(0);
+  const [{ angle, offset }, update] = useShareableNumbers({ angle: 45, offset: 0 });
   const A = angle * Math.PI / 180;
   const classA = [[-1.2, 0.8], [-0.8, 1.4], [-1.5, 0.2], [-0.6, 0.5], [-1.0, 1.0]];
   const classB = [[1.0, -0.6], [1.4, -1.2], [0.7, -0.3], [1.2, -0.9], [0.9, -1.5]];
@@ -27,16 +35,34 @@ export function SvmMarginStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("maximize the margin between the two classes", 12, 20);
   }, [angle, offset, margin]);
 
+  const explain = !correct
+    ? `This orientation misclassifies at least one point, so the margin is meaningless until the two classes are cleanly separated first.`
+    : margin > 0.35
+    ? `A wide margin of ${margin.toFixed(2)} — the separating street is fat, which is exactly what an SVM optimizes for and what generalizes best to new points.`
+    : `The classes are separated but the margin is only ${margin.toFixed(2)} — nudge the angle or offset to widen the street toward the maximum-margin solution.`;
+
+  const code = `import numpy as np
+from sklearn.svm import SVC
+XA = np.array([[-1.2,0.8],[-0.8,1.4],[-1.5,0.2],[-0.6,0.5],[-1.0,1.0]])
+XB = np.array([[1.0,-0.6],[1.4,-1.2],[0.7,-0.3],[1.2,-0.9],[0.9,-1.5]])
+X = np.vstack([XA, XB]); y = np.r_[np.zeros(len(XA)), np.ones(len(XB))]
+clf = SVC(kernel="linear", C=1e6).fit(X, y)
+w = clf.coef_[0]; margin = 2 / np.linalg.norm(w)
+print("max margin", margin)`;
+
   return (
     <StudioChrome title="SVM Maximum Margin" tagline="the widest possible street"
       controls={<div>
-        <Slider label="Boundary angle (°)" value={angle} min={0} max={180} step={1} onChange={setAngle} />
-        <Slider label="Boundary offset" value={offset} min={-1.5} max={1.5} step={0.05} onChange={setOffset} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Boundary angle (°)" value={angle} min={0} max={180} step={1} onChange={(v) => update({ angle: v })} />
+        <Slider label="Boundary offset" value={offset} min={-1.5} max={1.5} step={0.05} onChange={(v) => update({ offset: v })} />
         <p className="mt-3 text-xs text-slate-500">A support vector machine picks the separating line with the widest margin to the nearest points of each class — the support vectors. A fatter margin generalizes better to new data. Try to hand-tune the line to maximize the dashed gap. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Margin width" value={margin.toFixed(3)} />
         <Stat label="Separates classes?" value={correct ? "yes ✓" : "no — misclassified"} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

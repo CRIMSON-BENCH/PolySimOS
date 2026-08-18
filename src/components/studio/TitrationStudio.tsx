@@ -1,16 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 740, H = 440;
 
+const PRESETS: Record<string, { acidConc: number; baseConc: number; acidVol: number }> = {
+  "Standard 0.1 M": { acidConc: 0.1, baseConc: 0.1, acidVol: 50 },
+  "Dilute": { acidConc: 0.02, baseConc: 0.02, acidVol: 50 },
+  "Concentrated": { acidConc: 0.3, baseConc: 0.3, acidVol: 60 },
+  "Strong titrant": { acidConc: 0.1, baseConc: 0.3, acidVol: 40 },
+};
+
 export function TitrationStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [acidConc, setAcidConc] = useState(0.1);
-  const [baseConc, setBaseConc] = useState(0.1);
-  const [acidVol, setAcidVol] = useState(50);
+  const [{ acidConc, baseConc, acidVol }, update] = useShareableNumbers({ acidConc: 0.1, baseConc: 0.1, acidVol: 50 });
 
   const curve = useMemo(() => {
     const pts: { v: number; ph: number }[] = [];
@@ -37,15 +43,40 @@ export function TitrationStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("pH", pad - 26, sy(7)); ctx.fillText("base added (mL) →", W - 150, H - 14); ctx.fillText(`equivalence at ${equivVol.toFixed(1)} mL`, sx(equivVol) + 6, pad + 16);
   }, [curve, equivVol]);
 
+  const molesAcidMmol = acidConc * acidVol;
+  const explain =
+    equivVol < 25
+      ? `The titrant is concentrated relative to the acid, so equivalence arrives early — about ${equivVol.toFixed(1)} mL neutralizes all ${molesAcidMmol.toFixed(2)} mmol of acid.`
+      : equivVol > 65
+      ? `A relatively dilute or low-strength base means you must add roughly ${equivVol.toFixed(1)} mL to reach equivalence, stretching out the flat regions of the curve.`
+      : `Equivalence sits near ${equivVol.toFixed(1)} mL; because this is a strong acid with a strong base, the pH there is exactly 7 and the jump is nearly vertical.`;
+
+  const code = `import numpy as np
+acid_conc, base_conc, acid_vol = ${acidConc}, ${baseConc}, ${acidVol}
+moles_acid = acid_conc * acid_vol / 1000
+for v in np.arange(0, 100.5, 0.5):
+    moles_base = base_conc * v / 1000
+    total = (acid_vol + v) / 1000
+    if moles_base < moles_acid:
+        ph = -np.log10(max(1e-14, (moles_acid - moles_base) / total))
+    elif moles_base > moles_acid:
+        ph = 14 + np.log10(max(1e-14, (moles_base - moles_acid) / total))
+    else:
+        ph = 7
+    print(round(v, 1), round(min(14, max(0, ph)), 2))
+print("equivalence mL:", acid_conc * acid_vol / base_conc)`;
+
   return (
     <StudioChrome title="Acid–Base Titration" tagline="pH curve · equivalence point"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">Add base to an acid and track the pH. The steep jump marks the equivalence point, where moles of acid equal moles of base.</p>
-        <Slider label="Acid concentration (M)" value={acidConc} min={0.02} max={0.3} step={0.01} onChange={setAcidConc} />
-        <Slider label="Base concentration (M)" value={baseConc} min={0.02} max={0.3} step={0.01} onChange={setBaseConc} />
-        <Slider label="Acid volume (mL)" value={acidVol} min={20} max={80} step={5} onChange={setAcidVol} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Acid concentration (M)" value={acidConc} min={0.02} max={0.3} step={0.01} onChange={(v) => update({ acidConc: v })} />
+        <Slider label="Base concentration (M)" value={baseConc} min={0.02} max={0.3} step={0.01} onChange={(v) => update({ baseConc: v })} />
+        <Slider label="Acid volume (mL)" value={acidVol} min={20} max={80} step={5} onChange={(v) => update({ acidVol: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equivalence" value={`${equivVol.toFixed(1)} mL`} /><Stat label="Type" value="strong acid + strong base" /><Stat label="pH at eq." value="7.0" /></div>}
+      inspector={<div><Stat label="Equivalence" value={`${equivVol.toFixed(1)} mL`} /><Stat label="Type" value="strong acid + strong base" /><Stat label="pH at eq." value="7.0" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

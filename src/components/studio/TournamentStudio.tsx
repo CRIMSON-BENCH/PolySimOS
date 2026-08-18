@@ -2,12 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { spread: number }> = {
+  "Even field": { spread: 0 },
+  "Slight edge": { spread: 150 },
+  "Clear favorite": { spread: 400 },
+  "Dominant #1": { spread: 600 },
+};
 
 // Single-elimination bracket: champion probability from seed strength.
 export function TournamentStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [spread, setSpread] = useState(200); // Elo spread between seeds
+  const [{ spread }, update] = useShareableNumbers({ spread: 200 }); // Elo spread between seeds
   const [seed, setSeed] = useState(1);
 
   const N = 8; const ratings = Array.from({ length: N }, (_, i) => 1600 - i * spread / N);
@@ -24,14 +32,37 @@ export function TournamentStudio() {
     ctx.textAlign = "left"; ctx.fillStyle = "#94a3b8"; ctx.fillText("championship probability", 120, 18);
   }, [spread, seed]);
 
+  const topOdds = champProb[0] * 100;
+  const explain =
+    spread < 50
+      ? `With almost no skill gap between seeds, the bracket is a coin-flip lottery — the top seed wins only about ${topOdds.toFixed(0)}% of the time, barely ahead of the field.`
+      : spread > 400
+      ? `A large Elo spread makes the top seed a heavy favorite at roughly ${topOdds.toFixed(0)}%, yet three win-or-go-home rounds still leave real room for an upset.`
+      : `At this moderate spread the top seed takes about ${topOdds.toFixed(0)}% of titles: favored, but each single-elimination round is a fresh chance to be knocked out.`;
+
+  const pyCode = `import random, math
+N, spread, TRIALS = 8, ${spread}, 4000
+ratings = [1600 - i * spread / N for i in range(N)]
+p_win = lambda a, b: 1 / (1 + 10 ** ((ratings[b] - ratings[a]) / 400))
+champ = [0] * N
+for _ in range(TRIALS):
+    alive = list(range(N))
+    while len(alive) > 1:
+        alive = [a if random.random() < p_win(a, b) else b
+                 for a, b in zip(alive[::2], alive[1::2])]
+    champ[alive[0]] += 1
+print([round(c / TRIALS, 3) for c in champ])`;
+
   return (
     <StudioChrome title="Tournament Bracket Odds" tagline="who wins it all?"
       controls={<div>
-        <Slider label="Skill spread (Elo)" value={spread} min={0} max={600} step={20} onChange={setSpread} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Skill spread (Elo)" value={spread} min={0} max={600} step={20} onChange={(v) => update({ spread: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">Re-simulate</button>
         <p className="mt-3 text-xs text-slate-500">In a single-elimination bracket, the best team is far from guaranteed to win — it must string together several wins, each a fresh chance to be upset. Simulating thousands of tournaments reveals the true championship odds for each seed. With little skill spread the field is wide open; with a big gap the top seed dominates, but even then rarely tops 50%.</p>
+        <ShareBar code={pyCode} />
       </div>}
-      inspector={<div><Stat label="Top seed odds" value={`${(champProb[0] * 100).toFixed(0)}%`} /><Stat label="Bottom seed odds" value={`${(champProb[N - 1] * 100).toFixed(1)}%`} /><Stat label="Teams" value={String(N)} /></div>}
+      inspector={<div><Stat label="Top seed odds" value={`${(champProb[0] * 100).toFixed(0)}%`} /><Stat label="Bottom seed odds" value={`${(champProb[N - 1] * 100).toFixed(1)}%`} /><Stat label="Teams" value={String(N)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

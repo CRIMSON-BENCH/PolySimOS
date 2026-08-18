@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -51,6 +52,25 @@ export function Surface3DStudio() {
 
   const examples = ["sin(sqrt(x*x+y*y))", "x*x - y*y", "cos(x)*sin(y)", "exp(-(x*x+y*y)/4)", "sin(x)*cos(y)"];
 
+  const explain =
+    /sqrt|x\*x\s*\+\s*y\*y/.test(expr)
+      ? "This surface is radially symmetric: it depends only on distance from the origin, so it looks the same from every direction around the vertical axis."
+      : /sin|cos|tan/.test(expr)
+      ? "Trigonometric terms make this surface ripple — it rises and falls periodically as you sweep across the x-y plane."
+      : /exp/.test(expr)
+      ? "The exponential term concentrates the surface into a single localized bump (or well) that decays quickly away from the center."
+      : "Warmer colors sit higher and cooler colors lower — drag to orbit and read the shape from the height bands.";
+
+  const code = `import numpy as np
+import matplotlib.pyplot as plt
+X, Y = np.meshgrid(np.linspace(-3, 3, 60), np.linspace(-3, 3, 60))
+# surface currently plotted: z = ${expr}
+# use numpy math for arrays, e.g. Z = np.sin(np.sqrt(X**2 + Y**2))
+Z = np.sin(np.sqrt(X**2 + Y**2))
+ax = plt.figure().add_subplot(projection="3d")
+ax.plot_surface(X, Y, Z, cmap="viridis")
+plt.show()`;
+
   return (
     <StudioChrome title="3D Surface Plotter" tagline="z = f(x, y) · drag to orbit"
       controls={<div>
@@ -59,8 +79,9 @@ export function Surface3DStudio() {
         <div className="flex flex-wrap gap-1">{examples.map((ex) => <button key={ex} onClick={() => setExpr(ex)} className="rounded-md border border-slate-300 px-2 py-0.5 font-mono text-[10px] text-slate-600 dark:border-slate-700 dark:text-slate-400">{ex}</button>)}</div>
         {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
         <button onClick={() => (cam.current.auto = !cam.current.auto)} className="mt-3 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">Toggle auto-rotate</button>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Surface" value="wireframe" /><Stat label="Grid" value="34×34" /><Stat label="Variables" value="x, y" /></div>}
+      inspector={<div><Stat label="Surface" value="wireframe" /><Stat label="Grid" value="34×34" /><Stat label="Variables" value="x, y" /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" />
     </StudioChrome>

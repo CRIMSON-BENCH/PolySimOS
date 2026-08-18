@@ -2,12 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { angle: number }> = {
+  "Aligned (0°)": { angle: 0 },
+  "Coin flip (90°)": { angle: 90 },
+  "Anti-aligned (180°)": { angle: 180 },
+  "Mostly up (45°)": { angle: 45 },
+};
 
 // Sequential Stern-Gerlach: prepared spin-up, measured along angle theta.
 export function SternGerlachStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [angle, setAngle] = useState(60);
+  const [{ angle }, update] = useShareableNumbers({ angle: 60 });
   const [running, setRunning] = useState(true);
   const counts = useRef({ up: 0, down: 0 });
   const [, force] = useState(0);
@@ -41,14 +49,37 @@ export function SternGerlachStudio() {
   }, [running, angle, pUp]);
 
   const tot = counts.current.up + counts.current.down || 1;
+
+  const explain =
+    angle === 0
+      ? "The analyzer is aligned with the prepared spin, so every atom comes out up — a perfectly predictable measurement."
+      : angle === 180
+      ? "The analyzer is anti-aligned, so cos²(θ/2) = 0: every atom is flipped to down."
+      : Math.abs(angle - 90) < 1e-9
+      ? "At 90° the two outcomes are equally likely — the measurement is a perfect quantum coin flip, cos²(45°) = 0.5."
+      : pUp > 0.5
+      ? `Tilted by ${angle}°, the analyzer still favors up: theory predicts P(up) = cos²(θ/2) ≈ ${pUp.toFixed(2)}, and the tally converges there.`
+      : `Tilted past 90°, down becomes the more likely outcome: P(up) = cos²(θ/2) ≈ ${pUp.toFixed(2)}.`;
+
+  const code = `import numpy as np
+theta = np.radians(${angle})
+p_up = np.cos(theta / 2) ** 2
+draws = (np.random.random(10000) < p_up)
+print("P(up) theory", p_up, "measured", draws.mean())`;
+
   return (
     <StudioChrome title="Stern-Gerlach Experiment" tagline="spin measurement & projection"
       controls={<div>
-        <Slider label="Analyzer angle θ (°)" value={angle} min={0} max={180} step={5} onChange={setAngle} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Analyzer angle θ (°)" value={angle} min={0} max={180} step={5} onChange={(v) => update({ angle: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">Atoms prepared spin-up are measured along an axis tilted by θ. Quantum mechanics says each atom randomly comes out up or down, with probability cos²(θ/2) for up — never a fraction. At 90° it is a perfect coin flip; at 180° it always flips. The running tally converges to the Born-rule probability.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="P(up) theory" value={pUp.toFixed(3)} /><Stat label="Measured up" value={`${(counts.current.up / tot * 100).toFixed(1)}%`} /><Stat label="Atoms" value={tot.toLocaleString()} /></div>}
+      inspector={<div><Stat label="P(up) theory" value={pUp.toFixed(3)} /><Stat label="Measured up" value={`${(counts.current.up / tot * 100).toFixed(1)}%`} /><Stat label="Atoms" value={tot.toLocaleString()} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,14 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { vLine: number; current: number; pf: number }> = {
+  "US 480 V motor": { vLine: 480, current: 40, pf: 0.85 },
+  "EU 400 V feeder": { vLine: 400, current: 63, pf: 0.9 },
+  "Low-PF load": { vLine: 400, current: 100, pf: 0.6 },
+  "690 V drive": { vLine: 690, current: 150, pf: 0.95 },
+};
 
 // Three-phase power: waveforms, phasors, power.
 export function ThreePhaseStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [vLine, setVLine] = useState(400); // V line-to-line
-  const [current, setCurrent] = useState(20); // A
-  const [pf, setPf] = useState(0.9); // power factor
+  const [{ vLine, current, pf }, update] = useShareableNumbers({ vLine: 400, current: 20, pf: 0.9 });
   const [running, setRunning] = useState(true);
   const phase = useRef(0);
 
@@ -40,16 +46,39 @@ export function ThreePhaseStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running]);
 
+  const explain =
+    pf >= 0.98
+      ? `At near-unity power factor almost all the ${S.toFixed(1)} kVA does useful work, so reactive burden Q stays low and line losses are minimal.`
+      : pf < 0.7
+      ? `A low power factor (${pf.toFixed(2)}) means the ${current} A carries mostly reactive current — you draw ${S.toFixed(1)} kVA to deliver only ${P.toFixed(1)} kW, wasting capacity.`
+      : `Real power P = √3·V_line·I·cosφ = ${P.toFixed(1)} kW, trailing the ${S.toFixed(1)} kVA apparent power by the angle φ = ${(phi * 180 / Math.PI).toFixed(0)}°.`;
+
+  const code = `import numpy as np
+v_line, current, pf = ${vLine}, ${current}, ${pf}
+v_phase = v_line / np.sqrt(3)
+S = np.sqrt(3) * v_line * current / 1000      # kVA
+P = S * pf                                    # kW
+Q = np.sqrt(max(0, S**2 - P**2))              # kVAR
+print("V_phase", round(v_phase, 1), "P", round(P, 1), "S", round(S, 1), "Q", round(Q, 1))`;
+
   return (
     <StudioChrome title="Three-Phase Power" tagline="the grid's backbone"
       controls={<div>
-        <Slider label="Line voltage (V)" value={vLine} min={120} max={690} step={10} onChange={setVLine} />
-        <Slider label="Line current (A)" value={current} min={1} max={200} step={1} onChange={setCurrent} />
-        <Slider label="Power factor" value={pf} min={0.5} max={1} step={0.01} onChange={setPf} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Line voltage (V)" value={vLine} min={120} max={690} step={10} onChange={(v) => update({ vLine: v })} />
+        <Slider label="Line current (A)" value={current} min={1} max={200} step={1} onChange={(v) => update({ current: v })} />
+        <Slider label="Power factor" value={pf} min={0.5} max={1} step={0.01} onChange={(v) => update({ pf: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">Three-phase power delivers energy on three conductors carrying sinusoids 120° apart, so total power is constant and motors self-start. Line and phase voltages differ by √3, and real power is P = √3·V_line·I·cosφ. The power factor cosφ measures how much current actually does useful work.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Phase voltage" value={`${vPhase.toFixed(0)} V`} /><Stat label="Real power P" value={`${P.toFixed(1)} kW`} /><Stat label="Apparent S" value={`${S.toFixed(1)} kVA`} /><Stat label="Reactive Q" value={`${Q.toFixed(1)} kVAR`} /></div>}
+      inspector={<div>
+        <Stat label="Phase voltage" value={`${vPhase.toFixed(0)} V`} />
+        <Stat label="Real power P" value={`${P.toFixed(1)} kW`} />
+        <Stat label="Apparent S" value={`${S.toFixed(1)} kVA`} />
+        <Stat label="Reactive Q" value={`${Q.toFixed(1)} kVAR`} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

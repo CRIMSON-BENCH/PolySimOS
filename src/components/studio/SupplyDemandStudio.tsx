@@ -1,14 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { demShift: number; supShift: number; tax: number }> = {
+  Baseline: { demShift: 0, supShift: 0, tax: 0 },
+  "Demand boom": { demShift: 30, supShift: 0, tax: 0 },
+  "Supply glut": { demShift: 0, supShift: 30, tax: 0 },
+  "Heavy tax": { demShift: 0, supShift: 0, tax: 30 },
+};
 
 export function SupplyDemandStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [demShift, setDemShift] = useState(0);
-  const [supShift, setSupShift] = useState(0);
-  const [tax, setTax] = useState(0);
+  const [{ demShift, supShift, tax }, update] = useShareableNumbers({ demShift: 0, supShift: 0, tax: 0 });
 
   // demand P = 100 - Q + demShift ; supply P = 20 + Q + supShift + tax
   const a = 100 + demShift, b = 1; const c = 20 + supShift + tax, d = 1;
@@ -29,15 +35,35 @@ export function SupplyDemandStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("demand", X(qMax) - 50, Y(a - b * qMax) - 6); ctx.fillText("supply", X(qMax) - 46, Y(c + d * qMax) - 6); ctx.fillText("Q →", ox + pw - 30, oy + 18);
   }, [demShift, supShift, tax]);
 
+  const explain =
+    tax > 0
+      ? `The $${tax} per-unit tax lifts the supply curve, pushing price to $${pStar.toFixed(1)} and cutting quantity to ${qStar.toFixed(1)} — the wedge between buyers and sellers is deadweight loss.`
+      : demShift > 0
+      ? `Demand has shifted outward, so both the equilibrium price ($${pStar.toFixed(1)}) and quantity (${qStar.toFixed(1)}) rise together.`
+      : supShift > 0
+      ? `Supply has shifted up, raising the price to $${pStar.toFixed(1)} while equilibrium quantity falls to ${qStar.toFixed(1)}.`
+      : `At the free-market equilibrium of $${pStar.toFixed(1)}, ${qStar.toFixed(1)} units clear and the combined surplus (${(cs + ps).toFixed(0)}) is maximized.`;
+
+  const code = `dem_shift, sup_shift, tax = ${demShift}, ${supShift}, ${tax}
+a, b = 100 + dem_shift, 1
+c, d = 20 + sup_shift + tax, 1
+q_star = (a - c) / (b + d)
+p_star = a - b * q_star
+cs = 0.5 * (a - p_star) * q_star
+ps = 0.5 * (p_star - c) * q_star
+print("P*", round(p_star, 1), "Q*", round(q_star, 1), "CS", round(cs), "PS", round(ps))`;
+
   return (
     <StudioChrome title="Supply & Demand" tagline="market equilibrium & surplus"
       controls={<div>
-        <Slider label="Demand shift" value={demShift} min={-40} max={40} step={2} onChange={setDemShift} />
-        <Slider label="Supply shift" value={supShift} min={-15} max={40} step={2} onChange={setSupShift} />
-        <Slider label="Per-unit tax" value={tax} min={0} max={40} step={2} onChange={setTax} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Demand shift" value={demShift} min={-40} max={40} step={2} onChange={(v) => update({ demShift: v })} />
+        <Slider label="Supply shift" value={supShift} min={-15} max={40} step={2} onChange={(v) => update({ supShift: v })} />
+        <Slider label="Per-unit tax" value={tax} min={0} max={40} step={2} onChange={(v) => update({ tax: v })} />
         <p className="mt-3 text-xs text-slate-500">Where the downward demand curve crosses the upward supply curve, the market clears: that price and quantity are the equilibrium. Shifting either curve moves it. The shaded triangles are consumer and producer surplus — the total gains from trade. A per-unit tax lifts the supply curve, raising price, cutting quantity, and creating deadweight loss.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equilibrium price" value={`$${pStar.toFixed(1)}`} /><Stat label="Equilibrium qty" value={qStar.toFixed(1)} /><Stat label="Consumer surplus" value={cs.toFixed(0)} /><Stat label="Producer surplus" value={ps.toFixed(0)} /></div>}
+      inspector={<div><Stat label="Equilibrium price" value={`$${pStar.toFixed(1)}`} /><Stat label="Equilibrium qty" value={qStar.toFixed(1)} /><Stat label="Consumer surplus" value={cs.toFixed(0)} /><Stat label="Producer surplus" value={ps.toFixed(0)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

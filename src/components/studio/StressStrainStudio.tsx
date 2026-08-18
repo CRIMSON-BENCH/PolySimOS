@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const MAT: Record<string, { E: number; yield: number; uts: number; strain: number; label: string }> = {
   "Mild steel": { E: 200, yield: 250, uts: 400, strain: 0.25, label: "ductile" },
@@ -11,10 +12,17 @@ const MAT: Record<string, { E: number; yield: number; uts: number; strain: numbe
   Rubber: { E: 0.05, yield: 0, uts: 15, strain: 5, label: "elastomer" },
 };
 
+const PRESETS: Record<string, { mat: string; frac: number }> = {
+  "Steel · elastic": { mat: "Mild steel", frac: 0.1 },
+  "Steel · necking": { mat: "Mild steel", frac: 0.9 },
+  "Cast iron · brittle": { mat: "Cast iron", frac: 0.95 },
+  "Rubber · stretched": { mat: "Rubber", frac: 0.6 },
+};
+
 export function StressStrainStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mat, setMat] = useState("Mild steel");
-  const [strain, setStrain] = useState(0.05);
+  const [{ strain }, update] = useShareableNumbers({ strain: 0.05 });
 
   const m = MAT[mat]; const yieldStrain = m.yield / (m.E * 1000);
   const stressAt = (e: number) => { if (e <= yieldStrain || m.yield === 0) return Math.min(m.uts, e * m.E * 1000); const plasticFrac = (e - yieldStrain) / (m.strain - yieldStrain); return m.yield + (m.uts - m.yield) * Math.min(1, plasticFrac * 1.6) * (1 - plasticFrac * 0.3); };
@@ -34,14 +42,36 @@ export function StressStrainStudio() {
   }, [mat, strain]);
 
   const region = strain <= yieldStrain || m.yield === 0 ? "elastic" : strain >= m.strain ? "fractured" : "plastic";
+
+  const explain =
+    m.yield === 0 && m.label === "brittle"
+      ? `${mat} is brittle — it barely strains before snapping near ${m.uts} MPa, with almost no plastic warning.`
+      : region === "elastic"
+      ? `Still elastic: unload now and ${mat} springs back to its original shape with no permanent deformation.`
+      : region === "plastic"
+      ? `Past yield (${m.yield} MPa): ${mat} is deforming permanently and hardening toward its ${m.uts} MPa ultimate strength.`
+      : `At fracture: ${mat} has reached the end of its stress-strain curve and would break at this strain.`;
+
+  const code = `E, yield_MPa, uts, max_strain = ${m.E}, ${m.yield}, ${m.uts}, ${m.strain}
+strain = ${strain}
+yield_strain = yield_MPa / (E * 1000)
+if strain <= yield_strain or yield_MPa == 0:
+    stress = min(uts, strain * E * 1000)
+else:
+    frac = (strain - yield_strain) / (max_strain - yield_strain)
+    stress = yield_MPa + (uts - yield_MPa) * min(1, frac * 1.6) * (1 - frac * 0.3)
+print("stress", round(stress, 1), "MPa")`;
+
   return (
     <StudioChrome title="Stress-Strain Curve" tagline="tensile testing"
       controls={<div>
-        <div className="mb-3 grid grid-cols-2 gap-2">{Object.keys(MAT).map((k) => <button key={k} onClick={() => { setMat(k); setStrain(MAT[k].strain * 0.3); }} className={`rounded-lg px-2 py-1 text-xs font-semibold ${mat === k ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{k}</button>)}</div>
-        <Slider label="Applied strain" value={strain} min={0} max={m.strain} step={m.strain / 100} onChange={setStrain} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => { const p = PRESETS[l]; setMat(p.mat); update({ strain: MAT[p.mat].strain * p.frac }); }} />
+        <div className="mb-3 grid grid-cols-2 gap-2">{Object.keys(MAT).map((k) => <button key={k} onClick={() => { setMat(k); update({ strain: MAT[k].strain * 0.3 }); }} className={`rounded-lg px-2 py-1 text-xs font-semibold ${mat === k ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{k}</button>)}</div>
+        <Slider label="Applied strain" value={strain} min={0} max={m.strain} step={m.strain / 100} onChange={(v) => update({ strain: v })} />
         <p className="mt-3 text-xs text-slate-500">Pull on a material and its stress-strain curve tells its story: a straight elastic region with slope equal to Young&apos;s modulus, a yield point where permanent deformation begins, a peak at the ultimate tensile strength, and finally fracture. Ductile metals stretch far; brittle ones like cast iron snap with almost no warning.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Young's modulus" value={`${m.E} GPa`} /><Stat label="Current stress" value={`${curStress.toFixed(0)} MPa`} /><Stat label="UTS" value={`${m.uts} MPa`} /><Stat label="Region" value={region} /></div>}
+      inspector={<div><Stat label="Young's modulus" value={`${m.E} GPa`} /><Stat label="Current stress" value={`${curStress.toFixed(0)} MPa`} /><Stat label="UTS" value={`${m.uts} MPa`} /><Stat label="Region" value={region} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

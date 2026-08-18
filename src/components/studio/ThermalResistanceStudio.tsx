@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Composite-wall heat conduction: series thermal resistances, R-value.
 const LAYERS = [
@@ -11,11 +12,17 @@ const LAYERS = [
   { name: "Brick", k: 0.72, color: "#b45309" },
 ];
 
+const PRESETS: Record<string, { Tin: number; Tout: number }> = {
+  "Winter": { Tin: 21, Tout: -5 },
+  "Deep freeze": { Tin: 22, Tout: -30 },
+  "Mild day": { Tin: 20, Tout: 12 },
+  "Cool spring": { Tin: 19, Tout: 5 },
+};
+
 export function ThermalResistanceStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [thick, setThick] = useState([12, 100, 100]); // mm
-  const [Tin, setTin] = useState(21);
-  const [Tout, setTout] = useState(-5);
+  const [{ Tin, Tout }, update] = useShareableNumbers({ Tin: 21, Tout: -5 });
 
   const R = thick.map((t, i) => (t / 1000) / LAYERS[i].k); // per m^2
   const Rtot = R.reduce((a, b) => a + b, 0); const U = 1 / Rtot; const Q = (Tin - Tout) * U;
@@ -33,15 +40,30 @@ export function ThermalResistanceStudio() {
   }, [thick, Tin, Tout]);
 
   const set = (i: number, v: number) => setThick((t) => t.map((x, j) => j === i ? v : x));
+
+  const dom = R.indexOf(Math.max(...R));
+  const explain = `The ${LAYERS[dom].name.toLowerCase()} layer carries the most thermal resistance, so the temperature falls most steeply across it. A total R-value of ${Rtot.toFixed(2)} m²K/W lets ${Q.toFixed(1)} W/m² flow for this ${(Tin - Tout).toFixed(0)}°C difference.`;
+
+  const code = `# Composite wall: thermal resistances in series
+k = [${LAYERS.map((l) => l.k).join(", ")}]  # W/m.K per layer
+t_mm = [${thick.join(", ")}]
+R = [(t / 1000) / ki for t, ki in zip(t_mm, k)]
+Rtot = sum(R)
+U = 1 / Rtot
+Q = (${Tin} - (${Tout})) * U
+print("Rtot", Rtot, "U", U, "Q(W/m^2)", Q)`;
+
   return (
     <StudioChrome title="Composite Wall Heat Transfer" tagline="R-value & U-value"
       controls={<div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
         {LAYERS.map((l, i) => <Slider key={l.name} label={`${l.name} (mm)`} value={thick[i]} min={5} max={250} step={5} onChange={(v) => set(i, v)} />)}
-        <Slider label="Inside temp (°C)" value={Tin} min={10} max={30} step={1} onChange={setTin} />
-        <Slider label="Outside temp (°C)" value={Tout} min={-30} max={20} step={1} onChange={setTout} />
+        <Slider label="Inside temp (°C)" value={Tin} min={10} max={30} step={1} onChange={(v) => update({ Tin: v })} />
+        <Slider label="Outside temp (°C)" value={Tout} min={-30} max={20} step={1} onChange={(v) => update({ Tout: v })} />
         <p className="mt-3 text-xs text-slate-500">Heat flows through a wall like current through resistors in series. Each layer&apos;s thermal resistance is its thickness over its conductivity; adding them gives the total R-value, and the heat flux is the temperature difference divided by it. Insulation, with very low conductivity, dominates the R-value — the steep temperature drop shows where it does its work.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Total R-value" value={`${Rtot.toFixed(2)} m²K/W`} /><Stat label="U-value" value={`${U.toFixed(2)} W/m²K`} /><Stat label="Heat flux" value={`${Q.toFixed(1)} W/m²`} /></div>}
+      inspector={<div><Stat label="Total R-value" value={`${Rtot.toFixed(2)} m²K/W`} /><Stat label="U-value" value={`${U.toFixed(2)} W/m²K`} /><Stat label="Heat flux" value={`${Q.toFixed(1)} W/m²`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

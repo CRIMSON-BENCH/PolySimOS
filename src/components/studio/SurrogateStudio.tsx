@@ -16,7 +16,15 @@ import {
   particleMetrics,
 } from "@/lib/engines/particles";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { gridSteps: number; gravity: number; restitution: number }> = {
+  "Low gravity": { gridSteps: 6, gravity: 50, restitution: 0.85 },
+  "Earth-like": { gridSteps: 6, gravity: 150, restitution: 0.7 },
+  "Bouncy": { gridSteps: 8, gravity: 250, restitution: 0.98 },
+  "Fine grid": { gridSteps: 10, gravity: 300, restitution: 0.5 },
+};
 
 // Ground-truth solver: run the real particle sim to a fixed horizon and return
 // the final kinetic energy for a given (gravity, restitution) parameter pair.
@@ -30,9 +38,7 @@ function solveParticles(params: number[]): number[] {
 }
 
 export function SurrogateStudio() {
-  const [gridSteps, setGridSteps] = useState(6);
-  const [gravity, setGravity] = useState(150);
-  const [restitution, setRestitution] = useState(0.85);
+  const [{ gridSteps, gravity, restitution }, update] = useShareableNumbers({ gridSteps: 6, gravity: 150, restitution: 0.85 });
   const [trained, setTrained] = useState<{ model: SurrogateModel; trainSamples: Sample[]; trainMs: number; r2: number; rmse: number } | null>(null);
   const [busy, setBusy] = useState(false);
   const [predictMs, setPredictMs] = useState(0);
@@ -82,6 +88,24 @@ export function SurrogateStudio() {
   };
   const [gt, setGt] = useState<number | null>(null);
 
+  const explain = !trained
+    ? `Set the training grid density, then train — a finer n×n grid samples the real solver more times but usually lifts the test R² closer to 1.`
+    : trained.r2 > 0.98
+    ? `Test R² of ${trained.r2.toFixed(3)} means the surrogate reproduces the solver almost exactly, so its instant predictions are trustworthy across the whole gravity–restitution surface.`
+    : trained.r2 > 0.9
+    ? `Test R² of ${trained.r2.toFixed(3)} is solid but imperfect — expect small errors far from the ${trained.trainSamples.length} training points; a denser grid would tighten it.`
+    : `Test R² of ${trained.r2.toFixed(3)} is low: the ${trained.trainSamples.length}-point grid is too coarse for this response surface — raise the grid density and retrain.`;
+
+  const code = `import numpy as np
+from scipy.interpolate import RBFInterpolator
+# sample the real solver on an n x n grid, then fit an RBF surrogate
+grid_steps, gravity, restitution = ${gridSteps}, ${gravity}, ${restitution}
+G = np.linspace(0, 400, grid_steps); R = np.linspace(0.3, 1.0, grid_steps)
+X = np.array([[g, r] for g in G for r in R])
+y = np.array([solve_particles(g, r) for g, r in X])  # your ground-truth solver
+model = RBFInterpolator(X, y, smoothing=1e-6)
+print("surrogate prediction", model([[gravity, restitution]]))`;
+
   return (
     <StudioChrome
       title="AI Surrogate Studio"
@@ -93,7 +117,8 @@ export function SurrogateStudio() {
             instead of re-running the full simulation — the same idea behind PhysicsX and Neural Concept,
             running in your browser.
           </p>
-          <Slider label="Training grid (n×n)" value={gridSteps} min={4} max={10} step={1} onChange={setGridSteps} />
+          <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => { update(PRESETS[label]); setGt(null); }} />
+          <Slider label="Training grid (n×n)" value={gridSteps} min={4} max={10} step={1} onChange={(v) => update({ gridSteps: v })} />
           <button
             onClick={train}
             disabled={busy}
@@ -103,8 +128,8 @@ export function SurrogateStudio() {
           </button>
           {trained && (
             <>
-              <Slider label="Gravity" value={gravity} min={0} max={400} step={5} onChange={(v) => { setGravity(v); setGt(null); }} />
-              <Slider label="Restitution" value={restitution} min={0.3} max={1} step={0.01} onChange={(v) => { setRestitution(v); setGt(null); }} />
+              <Slider label="Gravity" value={gravity} min={0} max={400} step={5} onChange={(v) => { update({ gravity: v }); setGt(null); }} />
+              <Slider label="Restitution" value={restitution} min={0.3} max={1} step={0.01} onChange={(v) => { update({ restitution: v }); setGt(null); }} />
               <button
                 onClick={() => setGt(groundTruth())}
                 className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
@@ -113,29 +138,33 @@ export function SurrogateStudio() {
               </button>
             </>
           )}
+          <ShareBar code={code} />
         </div>
       }
       inspector={
-        trained ? (
-          <div>
-            <Stat label="Train samples" value={String(trained.trainSamples.length)} />
-            <Stat label="Train time" value={`${trained.trainMs.toFixed(1)} ms`} />
-            <Stat label="Test R²" value={trained.r2.toFixed(4)} />
-            <Stat label="Test RMSE" value={trained.rmse.toFixed(4)} />
-            <Stat label="Surrogate prediction" value={prediction != null ? prediction.toFixed(3) : "—"} />
-            {gt != null && (
-              <>
-                <Stat label="Full-solver truth" value={gt.toFixed(3)} />
-                <Stat label="Abs error" value={prediction != null ? Math.abs(prediction - gt).toFixed(3) : "—"} />
-                <Stat label="Surrogate time" value={`${predictMs.toFixed(3)} ms`} />
-                <Stat label="Full-solve time" value={`${solveMs.toFixed(1)} ms`} />
-                <Stat label="Speed-up" value={predictMs > 0 ? `${Math.round(solveMs / predictMs)}×` : "—"} />
-              </>
-            )}
-          </div>
-        ) : (
-          <p className="text-xs text-slate-500">Train the surrogate to see accuracy metrics.</p>
-        )
+        <div>
+          {trained ? (
+            <>
+              <Stat label="Train samples" value={String(trained.trainSamples.length)} />
+              <Stat label="Train time" value={`${trained.trainMs.toFixed(1)} ms`} />
+              <Stat label="Test R²" value={trained.r2.toFixed(4)} />
+              <Stat label="Test RMSE" value={trained.rmse.toFixed(4)} />
+              <Stat label="Surrogate prediction" value={prediction != null ? prediction.toFixed(3) : "—"} />
+              {gt != null && (
+                <>
+                  <Stat label="Full-solver truth" value={gt.toFixed(3)} />
+                  <Stat label="Abs error" value={prediction != null ? Math.abs(prediction - gt).toFixed(3) : "—"} />
+                  <Stat label="Surrogate time" value={`${predictMs.toFixed(3)} ms`} />
+                  <Stat label="Full-solve time" value={`${solveMs.toFixed(1)} ms`} />
+                  <Stat label="Speed-up" value={predictMs > 0 ? `${Math.round(solveMs / predictMs)}×` : "—"} />
+                </>
+              )}
+            </>
+          ) : (
+            <p className="text-xs text-slate-500">Train the surrogate to see accuracy metrics.</p>
+          )}
+          <ExplainResult text={explain} />
+        </div>
       }
     >
       <SurrogateHeatmap trained={trained} gx={gravity} rx={restitution} />
