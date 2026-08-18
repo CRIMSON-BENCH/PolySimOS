@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { sigFreq: number; fs: number }> = {
+  "Clean (5/20)": { sigFreq: 5, fs: 20 },
+  "Nyquist edge (5/11)": { sigFreq: 5, fs: 11 },
+  "Aliased (9/12)": { sigFreq: 9, fs: 12 },
+  "Severe (15/8)": { sigFreq: 15, fs: 8 },
+};
 
 export function SamplingTheoremStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [sigFreq, setSigFreq] = useState(5), [fs, setFs] = useState(8);
+  const [{ sigFreq, fs }, update] = useShareableNumbers({ sigFreq: 5, fs: 8 });
   const aliased = fs < 2 * sigFreq;
   const aliasFreq = aliased ? Math.abs(sigFreq - Math.round(sigFreq / fs) * fs) : sigFreq;
 
@@ -22,17 +30,37 @@ export function SamplingTheoremStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(aliased ? "ALIASING: samples suggest a false low frequency (pink)" : "well sampled — signal is recoverable", 30, 22);
   }, [sigFreq, fs, aliased, aliasFreq]);
 
+  const explain = aliased
+    ? `Undersampled: fs=${fs} Hz is below the ${2 * sigFreq} Hz Nyquist rate, so the ${sigFreq} Hz tone masquerades as a false ${aliasFreq.toFixed(1)} Hz signal.`
+    : fs < 2.5 * sigFreq
+    ? `Just above Nyquist: fs=${fs} Hz clears the ${2 * sigFreq} Hz minimum but with little margin — real converters add headroom for imperfect anti-alias filters.`
+    : `Comfortably sampled: fs=${fs} Hz sits well above the ${2 * sigFreq} Hz Nyquist rate, so the ${sigFreq} Hz signal is fully recoverable.`;
+
+  const code = `import numpy as np
+sig, fs = ${sigFreq}, ${fs}
+t = np.arange(0, 1, 1/1000)
+x = np.sin(2*np.pi*sig*t)
+n = np.arange(0, 1, 1/fs)
+samples = np.sin(2*np.pi*sig*n)
+print("Nyquist", 2*sig, "fs", fs, "aliased", fs < 2*sig)`;
+
   return (
     <StudioChrome title="Sampling & Nyquist" tagline="when digital gets it wrong"
       controls={<div>
-        <Slider label="Signal frequency (Hz)" value={sigFreq} min={1} max={20} step={1} onChange={setSigFreq} />
-        <Slider label="Sample rate fs (Hz)" value={fs} min={2} max={50} step={1} onChange={setFs} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Signal frequency (Hz)" value={sigFreq} min={1} max={20} step={1} onChange={(v) => update({ sigFreq: v })} />
+        <Slider label="Sample rate fs (Hz)" value={fs} min={2} max={50} step={1} onChange={(v) => update({ fs: v })} />
         <p className="mt-3 text-xs text-slate-500">The Nyquist–Shannon theorem says you must sample faster than twice the highest frequency. Sample too slowly and a high frequency masquerades as a low one — aliasing — which is why anti-alias filters guard every ADC. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Nyquist rate" value={`${2 * sigFreq} Hz`} />
         <Stat label="Sampling" value={aliased ? "too slow ⚠" : "adequate ✓"} />
         <Stat label="Apparent frequency" value={`${aliasFreq.toFixed(1)} Hz`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { area: number; eff: number; peakSun: number; tilt: number }> = {
+  "Rooftop home": { area: 20, eff: 20, peakSun: 5, tilt: 30 },
+  "Desert farm": { area: 100, eff: 22, peakSun: 7, tilt: 25 },
+  "Cloudy north": { area: 40, eff: 18, peakSun: 3, tilt: 45 },
+  "Premium panels": { area: 30, eff: 26, peakSun: 5.5, tilt: 35 },
+};
 
 export function SolarPanelStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [area, setArea] = useState(20); // m^2
-  const [eff, setEff] = useState(20); // %
-  const [peakSun, setPeakSun] = useState(5); // peak sun hours
-  const [tilt, setTilt] = useState(30);
+  const [{ area, eff, peakSun, tilt }, update] = useShareableNumbers({ area: 20, eff: 20, peakSun: 5, tilt: 30 });
 
   const rating = area * 1000 * eff / 100; // W at 1000 W/m^2 (STP)
   const tiltFactor = 1 - Math.abs(tilt - 35) / 120;
@@ -26,16 +31,34 @@ export function SolarPanelStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("power output over a day (W)", ox + 6, oy - ph + 12); ctx.fillText("6am", ox + pw / 4 - 8, oy + 14); ctx.fillText("noon", ox + pw / 2 - 10, oy + 14); ctx.fillText("6pm", ox + 3 * pw / 4 - 8, oy + 14);
   }, [area, eff, peakSun, tilt]);
 
+  const explain =
+    tiltFactor < 0.8
+      ? `A tilt of ${tilt}° is far from the ~35° sweet spot, shaving output down to ${(tiltFactor * 100).toFixed(0)}% of ideal — re-aiming the panels is the cheapest gain here.`
+      : peakSun < 3.5
+      ? `With only ${peakSun} peak sun hours, sunlight — not panel size — is the binding constraint; more area helps but each kW earns less.`
+      : eff >= 24
+      ? `High-efficiency panels (${eff}%) pack more watts into ${area} m², so this array delivers ${(rating / 1000).toFixed(1)} kW from a compact footprint.`
+      : `A ${(rating / 1000).toFixed(1)} kW array in ${peakSun}-sun-hour sun yields about ${daily.toFixed(1)} kWh/day — roughly ${(annual / 10000).toFixed(1)} average homes.`;
+
+  const pyCode = `area, eff, peak_sun, tilt = ${area}, ${eff}, ${peakSun}, ${tilt}
+rating = area * 1000 * eff / 100          # W at 1000 W/m^2
+tilt_factor = 1 - abs(tilt - 35) / 120
+daily = rating / 1000 * peak_sun * tilt_factor  # kWh/day
+annual = daily * 365
+print("rating kW", rating / 1000, "daily kWh", daily, "annual kWh", annual)`;
+
   return (
     <StudioChrome title="Solar PV System" tagline="panels to kilowatt-hours"
       controls={<div>
-        <Slider label="Panel area (m²)" value={area} min={2} max={100} step={1} onChange={setArea} />
-        <Slider label="Panel efficiency (%)" value={eff} min={10} max={26} step={0.5} onChange={setEff} />
-        <Slider label="Peak sun hours/day" value={peakSun} min={2} max={7} step={0.1} onChange={setPeakSun} />
-        <Slider label="Tilt angle (°)" value={tilt} min={0} max={90} step={5} onChange={setTilt} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Panel area (m²)" value={area} min={2} max={100} step={1} onChange={(v) => update({ area: v })} />
+        <Slider label="Panel efficiency (%)" value={eff} min={10} max={26} step={0.5} onChange={(v) => update({ eff: v })} />
+        <Slider label="Peak sun hours/day" value={peakSun} min={2} max={7} step={0.1} onChange={(v) => update({ peakSun: v })} />
+        <Slider label="Tilt angle (°)" value={tilt} min={0} max={90} step={5} onChange={(v) => update({ tilt: v })} />
         <p className="mt-3 text-xs text-slate-500">A solar array&apos;s output is its rated power (area × efficiency at 1000 W/m²) multiplied by the peak sun hours your location receives — the equivalent full-intensity hours per day. Tilt matters too: aiming the panels near your latitude maximizes annual yield. Real systems lose a bit more to heat, wiring, and inverters.</p>
+        <ShareBar code={pyCode} />
       </div>}
-      inspector={<div><Stat label="System rating" value={`${(rating / 1000).toFixed(1)} kW`} /><Stat label="Daily energy" value={`${daily.toFixed(1)} kWh`} /><Stat label="Annual energy" value={`${annual.toFixed(0)} kWh`} /><Stat label="Homes powered" value={(annual / 10000).toFixed(1)} /></div>}
+      inspector={<div><Stat label="System rating" value={`${(rating / 1000).toFixed(1)} kW`} /><Stat label="Daily energy" value={`${daily.toFixed(1)} kWh`} /><Stat label="Annual energy" value={`${annual.toFixed(0)} kWh`} /><Stat label="Homes powered" value={(annual / 10000).toFixed(1)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

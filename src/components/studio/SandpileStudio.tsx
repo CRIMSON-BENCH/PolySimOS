@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const N = 101, CELL = 5;
@@ -16,6 +17,23 @@ export function SandpileStudio() {
   const total = useRef(0);
 
   const reset = () => { grid.current = new Uint32Array(N * N); total.current = 0; setGrains(0); };
+
+  const explain = avalanche > 200
+    ? `A large cascade just toppled ${avalanche.toLocaleString()} cells — near the critical slope a single grain can trigger a system-spanning avalanche, with no typical size.`
+    : avalanche > 0
+    ? `The last drop toppled ${avalanche.toLocaleString()} cells; most avalanches are small, but their sizes follow a heavy power-law tail.`
+    : `The pile is still filling toward its critical slope; once cells reach 4 grains, chain-reaction topples begin.`;
+
+  const code = `import numpy as np
+N = 101; g = np.zeros((N, N), int); c = N // 2
+for _ in range(1000):
+    g[c, c] += 1
+    while (g >= 4).any():
+        t = g // 4
+        g -= t * 4
+        g[1:, :] += t[:-1, :]; g[:-1, :] += t[1:, :]
+        g[:, 1:] += t[:, :-1]; g[:, :-1] += t[:, 1:]
+print("max height", int(g.max()))`;
 
   useEffect(() => {
     if (!running) return; let raf = 0;
@@ -41,8 +59,9 @@ export function SandpileStudio() {
       controls={<div>
         <div className="flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">Grains drop on the center cell. When a cell reaches 4 grains it topples, sending one to each neighbor — which can trigger chain-reaction avalanches. The pile self-organizes into an intricate fractal at the critical slope.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Grains added" value={grains.toLocaleString()} /><Stat label="Last avalanche" value={avalanche.toLocaleString()} /><Stat label="Topple at" value="4 grains" /></div>}
+      inspector={<div><Stat label="Grains added" value={grains.toLocaleString()} /><Stat label="Last avalanche" value={avalanche.toLocaleString()} /><Stat label="Topple at" value="4 grains" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

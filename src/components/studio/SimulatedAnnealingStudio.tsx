@@ -2,14 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Simulated annealing minimizing a rugged 1D landscape.
 const f = (x: number) => Math.sin(x) * 2 + Math.sin(2.3 * x + 1) + Math.sin(0.7 * x) * 1.5 + 0.02 * (x - 8) ** 2;
 
+const PRESETS: Record<string, { coolRate: number }> = {
+  "Glacial 0.999": { coolRate: 0.999 },
+  "Slow 0.997": { coolRate: 0.997 },
+  "Moderate 0.99": { coolRate: 0.99 },
+  "Fast quench 0.96": { coolRate: 0.96 },
+};
+
 export function SimulatedAnnealingStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [coolRate, setCoolRate] = useState(0.995);
+  const [{ coolRate }, update] = useShareableNumbers({ coolRate: 0.995 });
   const [running, setRunning] = useState(true);
   const [seed, setSeed] = useState(1);
   const [state, setState] = useState({ x: 8, best: 8, T: 5, bestF: 0 });
@@ -32,14 +40,36 @@ export function SimulatedAnnealingStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, coolRate, seed]);
 
+  const explain =
+    coolRate >= 0.998
+      ? "Very slow cooling: the schedule keeps temperature high for many steps, so the walker explores widely and almost always reaches the global minimum — at the cost of speed."
+      : coolRate <= 0.97
+      ? "Aggressive quench: temperature collapses fast, so the walker freezes early and often gets trapped in whichever local valley it happened to be near."
+      : "Balanced schedule: enough early wandering to escape shallow minima, then a steady settle toward the deepest valley found.";
+
+  const code = `import numpy as np, math
+cool = ${coolRate}
+rng = np.random.default_rng(0)
+f = lambda x: math.sin(x)*2 + math.sin(2.3*x+1) + math.sin(0.7*x)*1.5 + 0.02*(x-8)**2
+x = rng.random()*16; T = 5.0; bestx = x; bestf = f(x)
+for _ in range(4000):
+    nx = min(16.0, max(0.0, x + (rng.random()-0.5)*T*2))
+    dE = f(nx) - f(x)
+    if dE < 0 or rng.random() < math.exp(-dE/T): x = nx
+    if f(x) < bestf: bestf = f(x); bestx = x
+    T = max(0.01, T*cool)
+print("best x", bestx, "best f", bestf)`;
+
   return (
     <StudioChrome title="Simulated Annealing" tagline="escaping local minima"
       controls={<div>
-        <Slider label="Cooling rate" value={coolRate} min={0.95} max={0.999} step={0.001} onChange={setCoolRate} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Cooling rate" value={coolRate} min={0.95} max={0.999} step={0.001} onChange={(v) => update({ coolRate: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={() => setSeed((k) => k + 1)} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Restart</button></div>
         <p className="mt-3 text-xs text-slate-500">Simulated annealing borrows from metallurgy: at high temperature it accepts worse moves freely, letting it jump out of local minima; as it cools, it settles into the best valley it found. The acceptance probability exp(−ΔE/T) is the key. Cool too fast and it gets stuck; cool slowly and it finds the global optimum.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Temperature" value={state.T.toFixed(2)} /><Stat label="Current value" value={f(state.x).toFixed(3)} /><Stat label="Best found" value={state.bestF.toFixed(3)} /></div>}
+      inspector={<div><Stat label="Temperature" value={state.T.toFixed(2)} /><Stat label="Current value" value={f(state.x).toFixed(3)} /><Stat label="Best found" value={state.bestF.toFixed(3)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,14 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const N = 80, CELL = 6;
 
+const PRESETS: Record<string, { tolerance: number; empty: number }> = {
+  "Tolerant (30%)": { tolerance: 0.3, empty: 0.1 },
+  "Mild bias (40%)": { tolerance: 0.4, empty: 0.1 },
+  "Picky (55%)": { tolerance: 0.55, empty: 0.15 },
+  "Sparse city": { tolerance: 0.4, empty: 0.25 },
+};
+
 export function SchellingStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [tolerance, setTolerance] = useState(0.35);
-  const [empty, setEmpty] = useState(0.1);
+  const [{ tolerance, empty }, update] = useShareableNumbers({ tolerance: 0.35, empty: 0.1 });
   const [running, setRunning] = useState(true);
   const [seed, setSeed] = useState(1);
   const [happy, setHappy] = useState(0);
@@ -37,15 +44,34 @@ export function SchellingStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, tolerance]);
 
+  const explain = tolerance <= 0.3
+    ? `A ${(tolerance * 100).toFixed(0)}% similarity wish is low, so neighborhoods stay largely mixed — mild preferences alone rarely tip the grid.`
+    : tolerance >= 0.55
+    ? `A ${(tolerance * 100).toFixed(0)}% demand is high: agents seldom settle, so the grid churns toward sharply segregated blocks.`
+    : `Even a moderate ${(tolerance * 100).toFixed(0)}% preference drives global segregation — Schelling's core surprise — with ${happy > 0 ? `${(happy * 100).toFixed(0)}% currently content` : "the grid still settling"}.`;
+
+  const code = `import numpy as np
+N, tol, empty = ${N}, ${tolerance}, ${empty}
+g = np.where(np.random.rand(N, N) < empty, -1,
+             (np.random.rand(N, N) < 0.5).astype(int))
+# each occupied cell is happy if >= tol of its 8 neighbors match;
+# unhappy agents relocate to a random empty cell until few remain.
+print("similarity threshold", tol, "empty fraction", empty)`;
+
   return (
     <StudioChrome title="Schelling Segregation" tagline="emergent segregation from mild bias"
       controls={<div>
-        <Slider label="Similarity wanted" value={tolerance} min={0.1} max={0.75} step={0.05} onChange={setTolerance} />
-        <Slider label="Empty fraction" value={empty} min={0.05} max={0.3} step={0.05} onChange={setEmpty} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Similarity wanted" value={tolerance} min={0.1} max={0.75} step={0.05} onChange={(v) => update({ tolerance: v })} />
+        <Slider label="Empty fraction" value={empty} min={0.05} max={0.3} step={0.05} onChange={(v) => update({ empty: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={() => setSeed((n) => n + 1)} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reshuffle</button></div>
         <p className="mt-3 text-xs text-slate-500">Each agent is happy if at least this fraction of its neighbors share its color; unhappy agents move to a random empty cell. Even a mild preference for similar neighbors drives sharp, global segregation — Schelling&apos;s famous result.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Happy" value={`${(happy * 100).toFixed(1)}%`} /><Stat label="Threshold" value={`${(tolerance * 100).toFixed(0)}%`} /><Stat label="Grid" value={`${N}²`} /></div>}
+      inspector={<div><Stat label="Happy" value={`${(happy * 100).toFixed(1)}%`} /><Stat label="Threshold" value={`${(tolerance * 100).toFixed(0)}%`} /><Stat label="Grid" value={`${N}²`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

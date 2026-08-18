@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { waveNum: number; amplitude: number }> = {
+  "Zonal (calm)": { waveNum: 6, amplitude: 15 },
+  "Meridional (blocking)": { waveNum: 3, amplitude: 80 },
+  "Long waves": { waveNum: 2, amplitude: 50 },
+  "Short waves": { waveNum: 8, amplitude: 30 },
+};
 
 // Rossby (planetary) waves in the jet stream.
 export function RossbyWaveStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [waveNum, setWaveNum] = useState(4);
-  const [amplitude, setAmplitude] = useState(50);
+  const [{ waveNum, amplitude }, update] = useShareableNumbers({ waveNum: 4, amplitude: 50 });
   const [running, setRunning] = useState(true);
   const phase = useRef(0);
 
@@ -31,15 +38,31 @@ export function RossbyWaveStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [waveNum, amplitude, running]);
 
+  const explain =
+    amplitude > 65
+      ? `Large-amplitude, low-wavenumber meanders like this tend to stall into a blocking pattern that can lock in heat waves, cold snaps, and floods for days.`
+      : waveNum >= 6
+      ? `A high wave number packs many short waves around the hemisphere — a fast, near-zonal flow that hustles weather systems along quickly.`
+      : `A few long Rossby waves with this ${(40000 / waveNum).toFixed(0)} km wavelength drift westward relative to the jet and steer the mid-latitude storm track.`;
+
+  const code = `import numpy as np
+wave_num, amplitude = ${waveNum}, ${amplitude}
+x = np.linspace(0, 1, 400)
+y = amplitude * np.sin(wave_num * x * 2*np.pi)
+westward = 20 / wave_num**2  # long waves drift faster west
+print("wavelength_km", 40000/wave_num, "westward_drift", westward)`;
+
   return (
     <StudioChrome title="Rossby Waves" tagline="the meandering jet stream"
       controls={<div>
-        <Slider label="Wave number" value={waveNum} min={2} max={8} step={1} onChange={setWaveNum} />
-        <Slider label="Amplitude" value={amplitude} min={10} max={90} step={5} onChange={setAmplitude} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Wave number" value={waveNum} min={2} max={8} step={1} onChange={(v) => update({ waveNum: v })} />
+        <Slider label="Amplitude" value={amplitude} min={10} max={90} step={5} onChange={(v) => update({ amplitude: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">The jet stream does not flow straight — it meanders in giant planetary Rossby waves, driven by the Earth&apos;s rotation varying with latitude. These waves carry weather systems around the globe and, when they grow large and stall, lock in heat waves, cold snaps, and floods. A few long waves circle the whole hemisphere.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Wave number" value={String(waveNum)} /><Stat label="Wavelength" value={`${(40000 / waveNum).toFixed(0)} km`} /><Stat label="Drift" value="westward vs flow" /></div>}
+      inspector={<div><Stat label="Wave number" value={String(waveNum)} /><Stat label="Wavelength" value={`${(40000 / waveNum).toFixed(0)} km`} /><Stat label="Drift" value="westward vs flow" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

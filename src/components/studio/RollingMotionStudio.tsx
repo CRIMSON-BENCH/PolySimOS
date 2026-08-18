@@ -1,14 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const SHAPES = [{ n: "Hoop", c: 2 }, { n: "Disk", c: 0.5 }, { n: "Sphere", c: 0.4 }, { n: "Shell", c: 2 / 3 }];
 
+const PRESETS: Record<string, { angle: number }> = {
+  "Gentle (10°)": { angle: 10 },
+  "Moderate (20°)": { angle: 20 },
+  "Steep (35°)": { angle: 35 },
+  "Max (45°)": { angle: 45 },
+};
+
 export function RollingMotionStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [angle, setAngle] = useState(20);
+  const [{ angle }, update] = useShareableNumbers({ angle: 20 });
   const th = angle * Math.PI / 180;
   const acc = (c: number) => 9.81 * Math.sin(th) / (1 + c);
   const st = useRef({ t: 0 });
@@ -29,13 +37,24 @@ export function RollingMotionStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [angle, th]);
 
+  const explain = `At ${angle}° the solid sphere leads at ${acc(0.4).toFixed(2)} m/s² while the hoop trails at ${acc(2).toFixed(2)} m/s² — a ${(acc(0.4) / acc(2)).toFixed(2)}× gap fixed entirely by mass distribution, independent of the incline and of every shape mass and radius.`;
+
+  const code = `import numpy as np
+angle = ${angle}
+th = np.radians(angle); g = 9.81
+for name, c in [("hoop", 2), ("disk", 0.5), ("sphere", 0.4), ("shell", 2/3)]:
+    a = g * np.sin(th) / (1 + c)
+    print(name, round(a, 2), "m/s^2")`;
+
   return (
     <StudioChrome title="Rolling Without Slipping" tagline="a shape race down the ramp"
       controls={<div>
-        <Slider label="Incline angle (°)" value={angle} min={5} max={45} step={1} onChange={setAngle} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Incline angle (°)" value={angle} min={5} max={45} step={1} onChange={(v) => update({ angle: v })} />
         <p className="mt-3 text-xs text-slate-500">All these shapes share the same mass and radius, yet a solid sphere beats a hoop every time. Acceleration = g·sinθ / (1 + I/mR²): mass concentrated near the axis (small I) accelerates faster — and the result is independent of mass and radius.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div>{SHAPES.map((s) => <Stat key={s.n} label={`${s.n} accel`} value={`${acc(s.c).toFixed(2)} m/s²`} />)}</div>}
+      inspector={<div>{SHAPES.map((s) => <Stat key={s.n} label={`${s.n} accel`} value={`${acc(s.c).toFixed(2)} m/s²`} />)}<ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

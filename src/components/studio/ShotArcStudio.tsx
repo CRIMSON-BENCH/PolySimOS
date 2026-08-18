@@ -1,15 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { distance: number; releaseH: number; angle: number }> = {
+  "Free throw": { distance: 4.5, releaseH: 2.1, angle: 52 },
+  "Mid-range": { distance: 6, releaseH: 2.2, angle: 50 },
+  "Three-pointer": { distance: 7, releaseH: 2.3, angle: 48 },
+  "Deep three": { distance: 8.5, releaseH: 2.3, angle: 45 },
+};
 
 // Basketball shot arc: optimal release angle.
 export function ShotArcStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [distance, setDistance] = useState(6); // m
-  const [releaseH, setReleaseH] = useState(2.1); // m
-  const [angle, setAngle] = useState(50); // deg
+  const [{ distance, releaseH, angle }, update] = useShareableNumbers({ distance: 6, releaseH: 2.1, angle: 50 });
 
   const rimH = 3.05, g = 9.81; const dh = rimH - releaseH; const th = angle * Math.PI / 180;
   // required speed to pass through rim at (distance, dh)
@@ -31,15 +37,36 @@ export function ShotArcStudio() {
   }, [distance, releaseH, angle]);
 
   const good = entryAngle > 40 && entryAngle < 55;
+
+  const explain =
+    isNaN(v)
+      ? `At ${angle}° the arc is too flat to clear the rim from ${distance} m — raise the launch angle or step closer.`
+      : good
+      ? `Clean shot: a ${entryAngle.toFixed(0)}° entry sits in the ideal 40–55° window, so the ball sees the widest effective hoop at ${v.toFixed(1)} m/s.`
+      : entryAngle > 55
+      ? `Steep ${entryAngle.toFixed(0)}° entry needs ${v.toFixed(1)} m/s and drops almost straight down — forgiving on aim but demanding on touch.`
+      : `Flat ${entryAngle.toFixed(0)}° entry from ${distance} m risks the front rim; a little more arc would open up the target.`;
+
+  const code = `import numpy as np
+distance, releaseH, angle = ${distance}, ${releaseH}, ${angle}
+rimH, g = 3.05, 9.81
+th = np.radians(angle); dh = rimH - releaseH
+denom = 2 * np.cos(th)**2 * (distance * np.tan(th) - dh)
+v = np.sqrt(g * distance**2 / denom)
+tHit = distance / (v * np.cos(th)); vyHit = v * np.sin(th) - g * tHit
+entry = np.degrees(np.arctan2(-vyHit, v * np.cos(th)))
+print("required speed", round(v, 2), "entry angle", round(entry, 1))`;
   return (
     <StudioChrome title="Basketball Shot Arc" tagline="the physics of a jump shot"
       controls={<div>
-        <Slider label="Distance to hoop (m)" value={distance} min={1} max={9} step={0.5} onChange={setDistance} />
-        <Slider label="Release height (m)" value={releaseH} min={1.5} max={2.8} step={0.05} onChange={setReleaseH} />
-        <Slider label="Launch angle (°)" value={angle} min={35} max={70} step={1} onChange={setAngle} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Distance to hoop (m)" value={distance} min={1} max={9} step={0.5} onChange={(n) => update({ distance: n })} />
+        <Slider label="Release height (m)" value={releaseH} min={1.5} max={2.8} step={0.05} onChange={(n) => update({ releaseH: n })} />
+        <Slider label="Launch angle (°)" value={angle} min={35} max={70} step={1} onChange={(n) => update({ angle: n })} />
         <p className="mt-3 text-xs text-slate-500">A basketball shot must arrive at the rim from above to have a chance of dropping in. Too flat and the ball meets the front rim; too steep and it needs excess speed. Coaches prize an entry angle around 43–47°, which maximizes the effective size of the hoop the ball sees. Higher release points let shorter players shoot flatter and still score.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Required speed" value={isNaN(v) ? "—" : `${v.toFixed(1)} m/s`} /><Stat label="Entry angle" value={isNaN(entryAngle) ? "—" : `${entryAngle.toFixed(0)}°`} /><Stat label="Arc quality" value={good ? "ideal" : entryAngle > 55 ? "too steep" : "too flat"} /></div>}
+      inspector={<div><Stat label="Required speed" value={isNaN(v) ? "—" : `${v.toFixed(1)} m/s`} /><Stat label="Entry angle" value={isNaN(entryAngle) ? "—" : `${entryAngle.toFixed(0)}°`} /><Stat label="Arc quality" value={good ? "ideal" : entryAngle > 55 ? "too steep" : "too flat"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

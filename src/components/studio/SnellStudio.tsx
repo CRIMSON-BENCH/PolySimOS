@@ -1,16 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 640, H = 460;
 
+const PRESETS: Record<string, { n1: number; n2: number; angle: number }> = {
+  "Air → glass": { n1: 1, n2: 1.5, angle: 40 },
+  "Air → water": { n1: 1, n2: 1.33, angle: 45 },
+  "Glass → air (TIR)": { n1: 1.5, n2: 1, angle: 50 },
+  "Diamond → air": { n1: 2.4, n2: 1, angle: 30 },
+};
+
 export function SnellStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [n1, setN1] = useState(1);
-  const [n2, setN2] = useState(1.5);
-  const [angle, setAngle] = useState(40);
+  const [{ n1, n2, angle }, update] = useShareableNumbers({ n1: 1, n2: 1.5, angle: 40 });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
@@ -31,15 +37,37 @@ export function SnellStudio() {
   }, [n1, n2, angle]);
 
   const critical = n1 > n2 ? (Math.asin(n2 / n1) * 180 / Math.PI).toFixed(1) + "°" : "n/a";
+
+  const sinTexplain = (n1 / n2) * Math.sin(angle * Math.PI / 180);
+  const explain =
+    sinTexplain > 1
+      ? `Past the critical angle (~${critical}) with n₁ greater than n₂, every ray reflects back into the dense medium — total internal reflection, the basis of fiber optics.`
+      : n1 === n2
+      ? "Equal indices: the ray passes straight through with no bending at all."
+      : n2 > n1
+      ? "Into a denser, slower medium: the ray bends toward the normal, so the refracted angle is smaller than the incidence angle."
+      : "Into a lighter, faster medium: the ray bends away from the normal and will refract ever more steeply until the critical angle triggers total internal reflection.";
+
+  const code = `import numpy as np
+n1, n2, angle = ${n1}, ${n2}, ${angle}
+ai = np.radians(angle)
+sinT = (n1 / n2) * np.sin(ai)
+if sinT > 1:
+    print("total internal reflection")
+else:
+    print("refracted angle", np.degrees(np.arcsin(sinT)))`;
+
   return (
     <StudioChrome title="Snell's Law — Refraction" tagline="n₁ sin θ₁ = n₂ sin θ₂"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">Light bends when it crosses between media. Going into a slower medium it bends toward the normal; going the other way past the critical angle it reflects entirely.</p>
-        <Slider label="Incidence angle" value={angle} min={0} max={89} step={1} onChange={setAngle} />
-        <Slider label="Index n₁ (top)" value={n1} min={1} max={2.5} step={0.05} onChange={setN1} />
-        <Slider label="Index n₂ (bottom)" value={n2} min={1} max={2.5} step={0.05} onChange={setN2} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Incidence angle" value={angle} min={0} max={89} step={1} onChange={(v) => update({ angle: v })} />
+        <Slider label="Index n₁ (top)" value={n1} min={1} max={2.5} step={0.05} onChange={(v) => update({ n1: v })} />
+        <Slider label="Index n₂ (bottom)" value={n2} min={1} max={2.5} step={0.05} onChange={(v) => update({ n2: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="n₁ → n₂" value={`${n1} → ${n2}`} /><Stat label="Critical angle" value={critical} /><Stat label="Snell" value="n₁sinθ₁ = n₂sinθ₂" /></div>}
+      inspector={<div><Stat label="n₁ → n₂" value={`${n1} → ${n2}`} /><Stat label="Critical angle" value={critical} /><Stat label="Snell" value="n₁sinθ₁ = n₂sinθ₂" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

@@ -2,12 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { p: number }> = {
+  "Ring lattice": { p: 0 },
+  "Small-world": { p: 0.1 },
+  "Half rewired": { p: 0.5 },
+  "Random graph": { p: 1 },
+};
 
 // Watts-Strogatz small-world network.
 export function SmallWorldStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [p, setP] = useState(0.1);
+  const [{ p }, update] = useShareableNumbers({ p: 0.1 });
   const [seed, setSeed] = useState(1);
   const [stats, setStats] = useState({ cluster: 0, pathLen: 0 });
 
@@ -29,14 +37,30 @@ export function SmallWorldStudio() {
     ctx.fillStyle = "#f9a8d4"; ctx.font = "11px sans-serif"; ctx.fillText("pink = rewired shortcut", 10, 20);
   }, [p, seed]);
 
+  const explain =
+    p < 0.02
+      ? "Pure ring lattice: high local clustering, but news must hop neighbor-to-neighbor the whole way around — long average paths."
+      : p < 0.2
+      ? "Small-world regime: a few random shortcuts collapse the average path length while clustering stays high — the six-degrees effect."
+      : p < 0.6
+      ? "Many edges rewired: paths are now short, but the tight local clustering of the ring is starting to fade."
+      : "Nearly random graph: paths are short but clustering is low — the ordered neighborhood structure has essentially dissolved.";
+
+  const code = `import networkx as nx
+G = nx.watts_strogatz_graph(24, 4, ${p})
+print("clustering", nx.average_clustering(G))
+print("avg path length", nx.average_shortest_path_length(G))`;
+
   return (
     <StudioChrome title="Small-World Network" tagline="Watts-Strogatz rewiring"
       controls={<div>
-        <Slider label="Rewiring probability p" value={p} min={0} max={1} step={0.02} onChange={setP} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Rewiring probability p" value={p} min={0} max={1} step={0.02} onChange={(v) => update({ p: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">Regenerate</button>
         <p className="mt-3 text-xs text-slate-500">Start with an orderly ring where everyone knows their neighbors, then randomly rewire a few connections. Even a handful of long-range shortcuts collapses the average path length — the six-degrees-of-separation effect — while keeping high local clustering. This small-world structure appears in social networks, the brain, and power grids.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Rewiring p" value={p.toFixed(2)} /><Stat label="Clustering" value={stats.cluster.toFixed(3)} /><Stat label="Avg path length" value={stats.pathLen.toFixed(2)} /></div>}
+      inspector={<div><Stat label="Rewiring p" value={p.toFixed(2)} /><Stat label="Clustering" value={stats.cluster.toFixed(3)} /><Stat label="Avg path length" value={stats.pathLen.toFixed(2)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={400} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

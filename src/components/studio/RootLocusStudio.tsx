@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { p2: number; K: number }> = {
+  "Overdamped": { p2: 6, K: 3 },
+  "Critically damped": { p2: 4, K: 4 },
+  "Underdamped": { p2: 4, K: 12 },
+  "High gain": { p2: 2, K: 25 },
+};
 
 export function RootLocusStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [p2, setP2] = useState(4), [K, setK] = useState(3);
+  const [{ p2, K }, update] = useShareableNumbers({ p2: 4, K: 3 });
   // 1 + K/(s(s+p2)) = 0 → s² + p2 s + K = 0
   const disc = p2 * p2 / 4 - K;
   const re = -p2 / 2, im = disc >= 0 ? 0 : Math.sqrt(-disc);
@@ -26,17 +34,31 @@ export function RootLocusStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("root locus — pink × poles, green ● closed-loop", 12, 22); ctx.fillText("Re", W - 26, cy - 6); ctx.fillText("Im", cx + 6, 28);
   }, [p2, K, re, im]);
 
+  const explain =
+    disc >= 0
+      ? `Gain K=${K} sits below the breakaway value, so both closed-loop poles stay real and negative near ${re.toFixed(2)} — the response is overdamped with no oscillation.`
+      : `K=${K} has pushed the poles off the real axis to ${re.toFixed(2)} ± ${im.toFixed(2)}j, so the closed loop rings before it settles (underdamped).`;
+
+  const code = `import numpy as np
+p2, K = ${p2}, ${K}
+# 1 + K/(s(s+p2)) = 0  ->  s^2 + p2*s + K = 0
+roots = np.roots([1, p2, K])
+print("closed-loop poles:", roots)`;
+
   return (
     <StudioChrome title="Root Locus" tagline="how poles move with gain"
       controls={<div>
-        <Slider label="Second pole −p₂" value={p2} min={1} max={8} step={0.5} onChange={setP2} />
-        <Slider label="Loop gain K" value={K} min={0.1} max={30} step={0.1} onChange={setK} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Second pole −p₂" value={p2} min={1} max={8} step={0.5} onChange={(v) => update({ p2: v })} />
+        <Slider label="Loop gain K" value={K} min={0.1} max={30} step={0.1} onChange={(v) => update({ K: v })} />
         <p className="mt-3 text-xs text-slate-500">The root locus traces where a system&apos;s closed-loop poles travel as feedback gain increases. Poles in the left half-plane mean stability; as gain rises they migrate toward the imaginary axis, and crossing it triggers oscillation. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Closed-loop poles" value={im === 0 ? `${re.toFixed(2)}, real` : `${re.toFixed(2)} ± ${im.toFixed(2)}j`} />
         <Stat label="Damping" value={disc >= 0 ? "overdamped" : "underdamped"} />
         <Stat label="Stability" value={stable ? "stable ✓" : "unstable ⚠"} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

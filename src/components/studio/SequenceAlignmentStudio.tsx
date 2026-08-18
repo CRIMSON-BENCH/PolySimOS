@@ -2,16 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { match: number; mismatch: number; gap: number }> = {
+  "DNA default (1/-1/-2)": { match: 1, mismatch: -1, gap: -2 },
+  "Strict gaps": { match: 1, mismatch: -1, gap: -4 },
+  "Lenient gaps": { match: 1, mismatch: -1, gap: -1 },
+  "Reward matches": { match: 2, mismatch: -1, gap: -2 },
+};
 
 // Needleman-Wunsch global alignment of two DNA sequences.
 export function SequenceAlignmentStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [seqA, setSeqA] = useState("GATTACA");
   const [seqB, setSeqB] = useState("GCATGCU");
-  const [match, setMatch] = useState(1);
-  const [mismatch, setMismatch] = useState(-1);
-  const [gap, setGap] = useState(-2);
+  const [{ match, mismatch, gap }, update] = useShareableNumbers({ match: 1, mismatch: -1, gap: -2 });
   const [result, setResult] = useState({ score: 0, a: "", b: "", identity: 0 });
 
   useEffect(() => {
@@ -36,6 +42,26 @@ export function SequenceAlignmentStudio() {
     ctx.fillStyle = "#e2e8f0"; ctx.font = "12px sans-serif"; for (let b = 0; b < m; b++) ctx.fillText(B[b], 40 + (b + 1) * cw + cw / 2 - 4, 24); for (let a = 0; a < n; a++) ctx.fillText(A[a], 20, 30 + (a + 1) * ch + ch / 2 + 4);
   }, [seqA, seqB, match, mismatch, gap]);
 
+  const pct = Math.round(result.identity * 100);
+  const explain = result.identity >= 0.7
+    ? `High similarity: ${pct}% of aligned columns match for a score of ${result.score}. These two sequences are closely related — few gaps were needed to line them up.`
+    : result.identity < 0.4
+    ? `Low similarity: only ${pct}% of columns match (score ${result.score}). The optimal alignment leans on ${gap}-penalty gaps and mismatches, so the sequences share little common structure.`
+    : `Moderate similarity: ${pct}% identity at score ${result.score}. With match=${match}, mismatch=${mismatch}, gap=${gap}, the algorithm traded a few gaps against mismatches to maximize the total.`;
+
+  const code = `def needleman_wunsch(A, B, match=${match}, mismatch=${mismatch}, gap=${gap}):
+    n, m = len(A), len(B)
+    H = [[0]*(m+1) for _ in range(n+1)]
+    for i in range(n+1): H[i][0] = i*gap
+    for j in range(m+1): H[0][j] = j*gap
+    for i in range(1, n+1):
+        for j in range(1, m+1):
+            s = match if A[i-1] == B[j-1] else mismatch
+            H[i][j] = max(H[i-1][j-1]+s, H[i-1][j]+gap, H[i][j-1]+gap)
+    return H[n][m]
+
+print(needleman_wunsch("${seqA}", "${seqB}"))`;
+
   const inp = "w-full rounded-lg border border-slate-300 bg-transparent px-2 py-1 text-sm font-mono dark:border-slate-700";
 
   return (
@@ -45,14 +71,16 @@ export function SequenceAlignmentStudio() {
         <input className={inp} value={seqA} onChange={(e) => setSeqA(e.target.value)} maxLength={14} />
         <label className="mt-2 block text-xs font-semibold text-slate-500">Sequence B</label>
         <input className={inp} value={seqB} onChange={(e) => setSeqB(e.target.value)} maxLength={14} />
-        <div className="mt-3 grid grid-cols-3 gap-2 text-xs">
-          <label>Match<input type="number" className={inp} value={match} onChange={(e) => setMatch(+e.target.value)} /></label>
-          <label>Mismatch<input type="number" className={inp} value={mismatch} onChange={(e) => setMismatch(+e.target.value)} /></label>
-          <label>Gap<input type="number" className={inp} value={gap} onChange={(e) => setGap(+e.target.value)} /></label>
+        <div className="mt-3"><Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} /></div>
+        <div className="mt-1 grid grid-cols-3 gap-2 text-xs">
+          <label>Match<input type="number" className={inp} value={match} onChange={(e) => update({ match: +e.target.value })} /></label>
+          <label>Mismatch<input type="number" className={inp} value={mismatch} onChange={(e) => update({ mismatch: +e.target.value })} /></label>
+          <label>Gap<input type="number" className={inp} value={gap} onChange={(e) => update({ gap: +e.target.value })} /></label>
         </div>
         <p className="mt-3 text-xs text-slate-500">The Needleman-Wunsch algorithm finds the optimal global alignment of two sequences by dynamic programming, filling a scoring matrix and tracing back the best path. It is the foundation of bioinformatics — comparing genes, proteins, and genomes. The heatmap shows the accumulated score matrix.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Alignment score" value={String(result.score)} /><Stat label="Identity" value={`${(result.identity * 100).toFixed(0)}%`} /><Stat label="Length" value={String(result.a.length)} /></div>}
+      inspector={<div><Stat label="Alignment score" value={String(result.score)} /><Stat label="Identity" value={`${(result.identity * 100).toFixed(0)}%`} /><Stat label="Length" value={String(result.a.length)} /><ExplainResult text={explain} /></div>}
     ><div>
         <canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" />
         <div className="mt-4 overflow-x-auto rounded-lg bg-slate-900 p-4 font-mono text-sm">
