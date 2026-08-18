@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 600, H = 480;
@@ -16,26 +17,29 @@ const PRESETS: Record<string, { a: number; b: number; delta: number }> = {
 
 export function LissajousStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef = useRef(0);
+  const tRef = useRef(0);
   const [{ a, b, delta }, update] = useShareableNumbers({ a: 3, b: 2, delta: 0.5 });
-  const [running, setRunning] = useState(true);
+  const aRef = useRef(a); aRef.current = a;
+  const bRef = useRef(b); bRef.current = b;
+  const deltaRef = useRef(delta); deltaRef.current = delta;
 
-  useEffect(() => {
-    const ctx = hidpi(canvasRef.current!, W, H); let t = 0;
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = hidpi(canvas, W, H);
+    const a = aRef.current, b = bRef.current, delta = deltaRef.current;
     const R = 200, cx = W / 2, cy = H / 2;
-    const loop = () => {
-      ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-      ctx.strokeStyle = "rgba(34,211,238,0.7)"; ctx.lineWidth = 1.6; ctx.beginPath();
-      for (let p = 0; p <= 1000; p++) { const tt = (p / 1000) * Math.PI * 2; const x = cx + R * Math.sin(a * tt + delta * Math.PI), y = cy + R * Math.sin(b * tt); p ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
-      ctx.stroke();
-      if (running) t += 0.02;
-      const dx = cx + R * Math.sin(a * t + delta * Math.PI), dy = cy + R * Math.sin(b * t);
-      ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(dx, dy, 6, 0, 7); ctx.fill();
-      ctx.fillStyle = "#94a3b8"; ctx.font = "13px system-ui"; ctx.fillText(`x = sin(${a}t + ${delta.toFixed(1)}π),  y = sin(${b}t)`, 16, 26);
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
-  }, [a, b, delta, running]);
+    ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "rgba(34,211,238,0.7)"; ctx.lineWidth = 1.6; ctx.beginPath();
+    for (let p = 0; p <= 1000; p++) { const tt = (p / 1000) * Math.PI * 2; const x = cx + R * Math.sin(a * tt + delta * Math.PI), y = cy + R * Math.sin(b * tt); p ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }
+    ctx.stroke();
+    tRef.current += 0.02 * steps;
+    const dx = cx + R * Math.sin(a * tRef.current + delta * Math.PI), dy = cy + R * Math.sin(b * tRef.current);
+    ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(dx, dy, 6, 0, 7); ctx.fill();
+    ctx.fillStyle = "#94a3b8"; ctx.font = "13px system-ui"; ctx.fillText(`x = sin(${a}t + ${delta.toFixed(1)}π),  y = sin(${b}t)`, 16, 26);
+  };
+
+  const t = useTransport(frame);
 
   const gcd = (x: number, y: number): number => (y ? gcd(y, x % y) : x);
   const g = gcd(a, b) || 1;
@@ -55,7 +59,7 @@ plt.plot(x, y); plt.axis("equal"); plt.show()`;
   return (
     <StudioChrome title="Lissajous Curves" tagline="harmonic motion in two axes"
       controls={<div>
-        <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button></div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} speed={t.speed} onSpeed={t.setSpeed} />
         <p className="mb-3 text-xs text-slate-500">Combine two perpendicular sine waves. The frequency ratio a:b sets the number of lobes; the phase δ morphs the shape — the patterns you see on an oscilloscope.</p>
         <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
         <Slider label="Frequency a (x)" value={a} min={1} max={9} step={1} onChange={(v) => update({ a: v })} />

@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi } from "@/lib/studioKit";
 
 const N = 101, CELL = 5;
@@ -10,7 +11,6 @@ const COLORS = ["#0b1220", "#1e3a8a", "#0891b2", "#a3e635"];
 
 export function SandpileStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [running, setRunning] = useState(true);
   const [grains, setGrains] = useState(0);
   const [avalanche, setAvalanche] = useState(0);
   const grid = useRef<Uint32Array>(new Uint32Array(N * N));
@@ -35,29 +35,31 @@ for _ in range(1000):
         g[:, 1:] += t[:, :-1]; g[:, :-1] += t[:, 1:]
 print("max height", int(g.max()))`;
 
-  useEffect(() => {
-    if (!running) return; let raf = 0;
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const g = grid.current;
     const c = ((N / 2) | 0) * N + ((N / 2) | 0);
-    const loop = () => {
-      const g = grid.current;
+    let toppled = 0;
+    for (let pass = 0; pass < steps; pass++) {
       for (let drop = 0; drop < 30; drop++) { g[c]++; total.current++; }
       // relax (topple) until stable
-      let toppled = 0, unstable = true, guard = 0;
+      toppled = 0; let unstable = true, guard = 0;
       while (unstable && guard++ < 200) { unstable = false;
         for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { const i = y * N + x; if (g[i] >= 4) { const n4 = (g[i] / 4) | 0; g[i] -= n4 * 4; toppled += n4 * 4; unstable = true;
           if (x > 0) g[i - 1] += n4; if (x < N - 1) g[i + 1] += n4; if (y > 0) g[i - N] += n4; if (y < N - 1) g[i + N] += n4; } } }
-      setGrains(total.current); setAvalanche(toppled);
-      const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL);
-      for (let i = 0; i < N * N; i++) { ctx.fillStyle = COLORS[Math.min(3, g[i])]; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL, CELL); }
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
-  }, [running]);
+    }
+    setGrains(total.current); setAvalanche(toppled);
+    const ctx = hidpi(canvas, N * CELL, N * CELL);
+    for (let i = 0; i < N * N; i++) { ctx.fillStyle = COLORS[Math.min(3, g[i])]; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL, CELL); }
+  };
+
+  const t = useTransport(frame);
 
   return (
     <StudioChrome title="Abelian Sandpile" tagline="self-organized criticality"
       controls={<div>
-        <div className="flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { reset(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
         <p className="mt-3 text-xs text-slate-500">Grains drop on the center cell. When a cell reaches 4 grains it topples, sending one to each neighbor — which can trigger chain-reaction avalanches. The pile self-organizes into an intricate fractal at the critical slope.</p>
         <ShareBar code={code} />
       </div>}

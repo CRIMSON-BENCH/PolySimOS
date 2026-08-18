@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const RULE_PRESETS: Record<string, { rule: number }> = {
@@ -83,27 +84,30 @@ print(np.array(grid))  # ROWS x N evolution`;
 function Life() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const gridRef = useRef<Uint8Array>(new Uint8Array(120 * 120));
-  const rafRef = useRef(0);
-  const [running, setRunning] = useState(true);
+  const frameCount = useRef(0);
   const [gen, setGen] = useState(0);
   const N = 120;
   const seed = () => { const g = new Uint8Array(N * N); for (let i = 0; i < N * N; i++) g[i] = Math.random() < 0.28 ? 1 : 0; gridRef.current = g; setGen(0); };
   useEffect(() => { seed(); }, []);
-  useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const img = ctx.createImageData(N, N); let frame = 0;
-    const loop = () => {
-      const g = gridRef.current;
-      if (running && frame % 3 === 0) {
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+    for (let s = 0; s < steps; s++) {
+      frameCount.current++;
+      if (frameCount.current % 3 === 0) {
+        const g = gridRef.current;
         const n = new Uint8Array(N * N);
         for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { let c = 0; for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) { if (dx || dy) c += g[((y + dy + N) % N) * N + (x + dx + N) % N]; } const alive = g[y * N + x]; n[y * N + x] = (alive && (c === 2 || c === 3)) || (!alive && c === 3) ? 1 : 0; }
         gridRef.current = n; setGen((v) => v + 1);
       }
-      const gg = gridRef.current;
-      for (let i = 0; i < N * N; i++) { const on = gg[i]; img.data[i * 4] = on ? 163 : 2; img.data[i * 4 + 1] = on ? 230 : 6; img.data[i * 4 + 2] = on ? 53 : 23; img.data[i * 4 + 3] = 255; }
-      ctx.putImageData(img, 0, 0); frame++; rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
-  }, [running]);
+    }
+    const img = ctx.createImageData(N, N);
+    const gg = gridRef.current;
+    for (let i = 0; i < N * N; i++) { const on = gg[i]; img.data[i * 4] = on ? 163 : 2; img.data[i * 4 + 1] = on ? 230 : 6; img.data[i * 4 + 2] = on ? 53 : 23; img.data[i * 4 + 3] = 255; }
+    ctx.putImageData(img, 0, 0);
+  };
+  const t = useTransport(frame);
   const explain = gen === 0
     ? "Starting from a random 28%-density soup — watch most cells die off in the first few generations before stable still-lifes and oscillators survive."
     : "Birth on exactly 3 neighbors, survival on 2 or 3: these two rules alone yield gliders, oscillators, and even Turing-complete computation.";
@@ -122,7 +126,7 @@ print(g.sum(), "live cells after 100 generations")`;
   return (
     <StudioChrome title="Conway's Game of Life" tagline="cellular automaton · emergent complexity"
       controls={<div>
-        <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button><button onClick={seed} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Randomize</button></div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { seed(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
         <p className="text-xs text-slate-500">Four simple rules produce gliders, oscillators, and endless emergent structure.</p>
         <ShareBar code={code} />
       </div>}

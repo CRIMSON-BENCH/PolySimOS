@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -16,9 +17,8 @@ const PRESETS: Record<string, { ecc: number; a: number }> = {
 
 export function KeplerStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef = useRef(0);
-  const [running, setRunning] = useState(true);
   const [{ ecc, a }, update] = useShareableNumbers({ ecc: 0.6, a: 140 });
+  const eccRef = useRef(ecc); eccRef.current = ecc;
   const st = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
   const trail = useRef<[number, number][]>([]);
 
@@ -29,21 +29,23 @@ export function KeplerStudio() {
   };
   useEffect(() => { reset(); /* eslint-disable-next-line */ }, [ecc, a]);
 
-  useEffect(() => {
-    const ctx = hidpi(canvasRef.current!, W, H); const GM = 4000, cx = W / 2, cy = H / 2;
-    const loop = () => {
-      const s = st.current;
-      if (running) for (let i = 0; i < 4; i++) { const r = Math.hypot(s.x, s.y) || 1; const f = -GM / (r * r * r); s.vx += f * s.x * 0.02; s.vy += f * s.y * 0.02; s.x += s.vx * 0.02; s.y += s.vy * 0.02; }
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = hidpi(canvas, W, H); const GM = 4000, cx = W / 2, cy = H / 2;
+    const s = st.current;
+    for (let n = 0; n < steps; n++) {
+      for (let i = 0; i < 4; i++) { const r = Math.hypot(s.x, s.y) || 1; const f = -GM / (r * r * r); s.vx += f * s.x * 0.02; s.vy += f * s.y * 0.02; s.x += s.vx * 0.02; s.y += s.vy * 0.02; }
       trail.current.push([cx + s.x, cy + s.y]); if (trail.current.length > 1200) trail.current.shift();
-      ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-      ctx.strokeStyle = "rgba(34,211,238,0.5)"; ctx.lineWidth = 1; ctx.beginPath(); trail.current.forEach((p, i) => i ? ctx.lineTo(...p) : ctx.moveTo(...p)); ctx.stroke();
-      ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(cx, cy, 12, 0, 7); ctx.fill(); // star at focus
-      ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(cx + s.x, cy + s.y, 6, 0, 7); ctx.fill();
-      ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(ecc < 0.01 ? "circle" : ecc < 1 ? "ellipse" : "hyperbola", 16, 22);
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
-  }, [running, ecc]);
+    }
+    ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    ctx.strokeStyle = "rgba(34,211,238,0.5)"; ctx.lineWidth = 1; ctx.beginPath(); trail.current.forEach((p, i) => i ? ctx.lineTo(...p) : ctx.moveTo(...p)); ctx.stroke();
+    ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(cx, cy, 12, 0, 7); ctx.fill(); // star at focus
+    ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(cx + s.x, cy + s.y, 6, 0, 7); ctx.fill();
+    ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(eccRef.current < 0.01 ? "circle" : eccRef.current < 1 ? "ellipse" : "hyperbola", 16, 22);
+  };
+
+  const t = useTransport(frame);
 
   const explain =
     ecc < 0.01
@@ -75,7 +77,7 @@ plt.axis('equal'); plt.show()`;
   return (
     <StudioChrome title="Kepler Orbit Studio" tagline="two-body gravity · conic-section orbits"
       controls={<div>
-        <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { reset(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
         <p className="mb-3 text-xs text-slate-500">Set the eccentricity to trace Kepler{"'"}s orbits — a circle, ellipse, or (past e=1) an escape hyperbola. The star sits at the focus.</p>
         <Presets
           presets={Object.keys(PRESETS).map((label) => ({ label }))}

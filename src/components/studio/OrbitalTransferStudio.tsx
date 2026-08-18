@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -16,9 +17,9 @@ const PRESETS: Record<string, { r1: number; r2: number }> = {
 
 export function OrbitalTransferStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef = useRef(0);
   const [{ r1, r2 }, update] = useShareableNumbers({ r1: 90, r2: 200 });
-  const [running, setRunning] = useState(true);
+  const r1Ref = useRef(r1); r1Ref.current = r1;
+  const r2Ref = useRef(r2); r2Ref.current = r2;
   const t = useRef(0);
 
   const { dv1, dv2, total, tof } = useMemo(() => {
@@ -48,27 +49,28 @@ dv2 = abs(v2 - va)              # burn 2: circularize at r2
 tof = np.pi * np.sqrt(a**3 / mu)  # half-ellipse coast time
 print("dv1", dv1, "dv2", dv2, "total", dv1 + dv2, "tof", tof)`;
 
-  useEffect(() => {
-    const ctx = hidpi(canvasRef.current!, W, H); const cx = W / 2, cy = H / 2;
-    const loop = () => {
-      if (running) t.current += 0.01;
-      ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-      ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(cx, cy, 12, 0, 7); ctx.fill();
-      ctx.strokeStyle = "rgba(56,189,248,0.6)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, r1, 0, 7); ctx.stroke();
-      ctx.strokeStyle = "rgba(163,230,53,0.6)"; ctx.beginPath(); ctx.arc(cx, cy, r2, 0, 7); ctx.stroke();
-      const a = (r1 + r2) / 2, b = Math.sqrt(r1 * r2), ec = cx - (a - r1);
-      ctx.strokeStyle = "rgba(244,114,182,0.85)"; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.ellipse(ec, cy, a, b, 0, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
-      const ang = t.current; const sx = cx + Math.cos(ang) * r1, sy = cy + Math.sin(ang) * r1; ctx.fillStyle = "#38bdf8"; ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 7); ctx.fill();
-      ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("Hohmann transfer ellipse (pink) between two circular orbits", 12, 22);
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
-  }, [r1, r2, running]);
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = hidpi(canvas, W, H); const cx = W / 2, cy = H / 2;
+    const r1 = r1Ref.current, r2 = r2Ref.current;
+    t.current += 0.01 * steps;
+    ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(cx, cy, 12, 0, 7); ctx.fill();
+    ctx.strokeStyle = "rgba(56,189,248,0.6)"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.arc(cx, cy, r1, 0, 7); ctx.stroke();
+    ctx.strokeStyle = "rgba(163,230,53,0.6)"; ctx.beginPath(); ctx.arc(cx, cy, r2, 0, 7); ctx.stroke();
+    const a = (r1 + r2) / 2, b = Math.sqrt(r1 * r2), ec = cx - (a - r1);
+    ctx.strokeStyle = "rgba(244,114,182,0.85)"; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.ellipse(ec, cy, a, b, 0, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
+    const ang = t.current; const sx = cx + Math.cos(ang) * r1, sy = cy + Math.sin(ang) * r1; ctx.fillStyle = "#38bdf8"; ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 7); ctx.fill();
+    ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("Hohmann transfer ellipse (pink) between two circular orbits", 12, 22);
+  };
+
+  const tr = useTransport(frame);
 
   return (
     <StudioChrome title="Orbital Transfer (Hohmann)" tagline="minimum-energy orbit change"
       controls={<div>
-        <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button></div>
+        <TransportBar playing={tr.playing} onToggle={tr.toggle} onStep={tr.step} speed={tr.speed} onSpeed={tr.setSpeed} />
         <p className="mb-3 text-xs text-slate-500">The Hohmann transfer is the fuel-cheapest way between two circular orbits: one burn to enter the transfer ellipse, one to circularize. See the two Δv costs.</p>
         <Presets
           presets={Object.keys(PRESETS).map((label) => ({ label }))}

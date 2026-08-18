@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const N = 120, CELL = 4;
@@ -17,17 +18,22 @@ const PRESETS: Record<string, { growth: number; ignite: number }> = {
 export function ForestFireStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [{ growth, ignite }, update] = useShareableNumbers({ growth: 0.01, ignite: 0.0002 });
-  const [running, setRunning] = useState(true);
   const [trees, setTrees] = useState(0);
   const grid = useRef<Uint8Array>(new Uint8Array(N * N)); // 0 empty,1 tree,2 fire
+  const growthRef = useRef(growth); growthRef.current = growth;
+  const igniteRef = useRef(ignite); igniteRef.current = ignite;
+  const rngS = useRef(123);
 
   useEffect(() => { let s = 7; const r = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; }; for (let i = 0; i < N * N; i++) grid.current[i] = r() < 0.5 ? 1 : 0; }, []);
 
-  useEffect(() => {
-    if (!running) return; let raf = 0; let s = 123;
-    const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
-    const loop = () => {
-      const g = grid.current; const next = new Uint8Array(N * N); let tc = 0;
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const growth = growthRef.current, ignite = igniteRef.current;
+    const rnd = () => { rngS.current = (rngS.current * 1664525 + 1013904223) >>> 0; return rngS.current / 4294967296; };
+    let tc = 0;
+    for (let step = 0; step < steps; step++) {
+      const g = grid.current; const next = new Uint8Array(N * N); tc = 0;
       for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
         const i = y * N + x; const c = g[i];
         if (c === 2) next[i] = 0;
@@ -36,15 +42,16 @@ export function ForestFireStudio() {
           for (let dy = -1; dy <= 1 && !burning; dy++) for (let dx = -1; dx <= 1; dx++) { const nx = x + dx, ny = y + dy; if (nx < 0 || ny < 0 || nx >= N || ny >= N) continue; if (g[ny * N + nx] === 2) { burning = true; break; } }
           next[i] = burning || rnd() < ignite ? 2 : 1; if (next[i] === 1) tc++;
         } else next[i] = rnd() < growth ? 1 : 0;
-        if (next[i] === 1) {}
       }
-      grid.current = next; setTrees(tc);
-      const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
-      for (let i = 0; i < N * N; i++) { const v = next[i]; if (!v) continue; ctx.fillStyle = v === 2 ? "#f97316" : "#22c55e"; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL, CELL); }
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
-  }, [running, growth, ignite]);
+      grid.current = next;
+    }
+    setTrees(tc);
+    const g = grid.current;
+    const ctx = hidpi(canvas, N * CELL, N * CELL); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
+    for (let i = 0; i < N * N; i++) { const v = g[i]; if (!v) continue; ctx.fillStyle = v === 2 ? "#f97316" : "#22c55e"; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL, CELL); }
+  };
+
+  const t = useTransport(frame);
 
   const ratio = growth / ignite;
   const explain =
@@ -72,10 +79,10 @@ print("living trees", int((g == 1).sum()))`;
   return (
     <StudioChrome title="Forest Fire Model" tagline="self-organized criticality"
       controls={<div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} speed={t.speed} onSpeed={t.setSpeed} />
         <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
         <Slider label="Growth rate p" value={growth} min={0.001} max={0.05} step={0.001} onChange={(v) => update({ growth: v })} />
         <Slider label="Lightning f" value={ignite} min={0.00001} max={0.001} step={0.00001} onChange={(v) => update({ ignite: v })} />
-        <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">Trees grow at rate p; lightning ignites one at rate f; fire spreads to neighbors. The ratio p/f self-organizes to a critical state where fire sizes follow a power law — a classic model of self-organized criticality.</p>
         <ShareBar code={code} />
       </div>}
