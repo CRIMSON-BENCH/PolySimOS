@@ -1,8 +1,8 @@
 "use client";
 
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect, useRef } from "react";
 import { useUser, useClerk } from "@clerk/nextjs";
-import { clearLocalPlanEntitlements } from "./entitlements";
+import { clearLocalPlanEntitlements, syncAccountEntitlements } from "./entitlements";
 
 // Auth is provided by Clerk. This bridge exposes a stable `useAuth()` shape to
 // the rest of the app (Navbar, Dashboard, monetization slots) so nothing else
@@ -24,6 +24,17 @@ const Ctx = createContext<AuthState>({ user: null, loading: false, configured: f
 function ClerkAuth({ children }: { children: React.ReactNode }) {
   const { user, isLoaded } = useUser();
   const { signOut } = useClerk();
+  const synced = useRef<string | null>(null);
+
+  // Pull account-level entitlements (paid plan) from the server once per sign-in,
+  // so Pro follows the user across devices instead of staying stuck to one browser.
+  useEffect(() => {
+    if (!isLoaded || !user) return;
+    if (synced.current === user.id) return;
+    synced.current = user.id;
+    void syncAccountEntitlements();
+  }, [isLoaded, user]);
+
   const value: AuthState = {
     user: user ? { email: user.primaryEmailAddress?.emailAddress ?? null, id: user.id } : null,
     loading: !isLoaded,

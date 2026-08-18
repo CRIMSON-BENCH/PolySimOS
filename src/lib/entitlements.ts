@@ -58,6 +58,30 @@ export function grant(key: string) {
   writeKeys(keys);
 }
 
+/**
+ * Pull account-level entitlements from the server (Supabase-backed, keyed by the
+ * signed-in user's email) and merge them into the local store. This is what makes
+ * a paid plan follow a user across devices/browsers. Safe no-op when the user is
+ * signed out or Supabase isn't configured (the API returns an empty list).
+ * Called on sign-in from the auth provider.
+ */
+export async function syncAccountEntitlements(): Promise<void> {
+  if (typeof window === "undefined") return;
+  try {
+    const res = await fetch("/api/entitlements", { cache: "no-store" });
+    if (!res.ok) return;
+    const data = (await res.json()) as { keys?: unknown };
+    const incoming = Array.isArray(data.keys) ? (data.keys as string[]) : [];
+    if (!incoming.length) return;
+    const keys = readKeys();
+    let changed = false;
+    for (const k of incoming) if (typeof k === "string" && !keys.has(k)) { keys.add(k); changed = true; }
+    if (changed) writeKeys(keys);
+  } catch {
+    /* offline or unauthenticated — keep local entitlements */
+  }
+}
+
 /** Reactive hook: re-renders when entitlements change. */
 export function useEntitlement(key: string): boolean {
   const [unlocked, setUnlocked] = useState(false);
