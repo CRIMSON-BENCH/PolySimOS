@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { popSize: number; mutation: number }> = {
+  "Explore (high mutation)": { popSize: 120, mutation: 0.3 },
+  "Exploit (low mutation)": { popSize: 120, mutation: 0.02 },
+  "Small tribe": { popSize: 30, mutation: 0.1 },
+  "Big diverse pop": { popSize: 200, mutation: 0.08 },
+};
 
 // Evolve (x,y) to maximize a multi-peak fitness landscape.
 export function GeneticStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [popSize, setPopSize] = useState(80);
-  const [mutation, setMutation] = useState(0.08);
+  const [{ popSize, mutation }, update] = useShareableNumbers({ popSize: 80, mutation: 0.08 });
   const [running, setRunning] = useState(true);
   const [seed, setSeed] = useState(1);
   const [gen, setGen] = useState(0);
@@ -45,15 +52,39 @@ export function GeneticStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, mutation]);
 
+  const explain =
+    mutation >= 0.25
+      ? `High mutation (${mutation}): the swarm explores widely and resists getting stuck in a local peak, but jitters around the optimum instead of settling precisely.`
+      : mutation <= 0.03
+      ? `Low mutation (${mutation}): the population converges fast and sharply, but risks locking onto a nearby local peak instead of the global best.`
+      : `Balanced mutation (${mutation}) with population ${Math.round(popSize)}: enough diversity to escape local optima while still converging — the classic explore-vs-exploit sweet spot.`;
+
+  const code = `import numpy as np
+pop_size, mutation = ${Math.round(popSize)}, ${mutation}
+def fit(x, y):
+    return (np.exp(-((x-0.7)**2+(y-0.3)**2)/0.02)
+            + 0.8*np.exp(-((x-0.25)**2+(y-0.7)**2)/0.03)
+            + 0.6*np.exp(-((x-0.5)**2+(y-0.5)**2)/0.05))
+pop = np.random.rand(pop_size, 2)
+for _ in range(100):
+    order = np.argsort([-fit(*p) for p in pop])
+    elite = pop[order[:max(2, int(pop_size*0.3))]]
+    kids = elite[np.random.randint(len(elite), size=(pop_size, 2)), [0, 1]]
+    kids += (np.random.rand(pop_size, 2) < mutation) * (np.random.rand(pop_size, 2)-0.5)*0.2
+    pop = np.clip(kids, 0, 1)
+print("best", max(fit(*p) for p in pop))`;
+
   return (
     <StudioChrome title="Genetic Algorithm" tagline="evolution as optimization"
       controls={<div>
-        <Slider label="Population" value={popSize} min={20} max={200} step={10} onChange={setPopSize} />
-        <Slider label="Mutation rate" value={mutation} min={0.01} max={0.4} step={0.01} onChange={setMutation} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Population" value={popSize} min={20} max={200} step={10} onChange={(v) => update({ popSize: v })} />
+        <Slider label="Mutation rate" value={mutation} min={0.01} max={0.4} step={0.01} onChange={(v) => update({ mutation: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={init} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Restart</button></div>
         <p className="mt-3 text-xs text-slate-500">A population of candidate solutions is scored by fitness (bright = high). The fittest are selected, crossed over, and mutated each generation. Watch the swarm climb toward the global peak while dodging local optima.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Generation" value={String(gen)} /><Stat label="Best fitness" value={best.toFixed(3)} /><Stat label="Population" value={String(Math.round(popSize))} /></div>}
+      inspector={<div><Stat label="Generation" value={String(gen)} /><Stat label="Best fitness" value={best.toFixed(3)} /><Stat label="Population" value={String(Math.round(popSize))} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

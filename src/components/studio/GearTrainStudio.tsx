@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { t1: number; t2: number; rpm: number; torque: number }> = {
+  "3:1 reduction": { t1: 12, t2: 36, rpm: 90, torque: 4 },
+  "Heavy winch": { t1: 8, t2: 60, rpm: 100, torque: 3 },
+  "Overdrive": { t1: 40, t2: 12, rpm: 200, torque: 2 },
+  "Near 1:1": { t1: 24, t2: 24, rpm: 120, torque: 5 },
+};
 
 export function GearTrainStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [t1, setT1] = useState(12);
-  const [t2, setT2] = useState(36);
-  const [rpm, setRpm] = useState(60);
-  const [torque, setTorque] = useState(2);
+  const [{ t1, t2, rpm, torque }, update] = useShareableNumbers({ t1: 12, t2: 36, rpm: 60, torque: 2 });
 
   const ratio = t2 / t1, outRpm = rpm / ratio, outTorque = torque * ratio;
   const st = useRef({ a: 0 });
@@ -32,19 +37,35 @@ export function GearTrainStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [t1, t2, rpm, ratio]);
 
+  const explain =
+    ratio > 1.5
+      ? `Reduction drive: the driven gear turns ${ratio.toFixed(1)}× slower but multiplies torque ${ratio.toFixed(1)}× — trading speed for pulling force, like low gear on a bike.`
+      : ratio < 0.67
+      ? `Overdrive: the driven gear spins ${(1 / ratio).toFixed(1)}× faster but delivers proportionally less torque — power (speed × torque) is conserved, not created.`
+      : "Near 1:1 — speed and torque pass through almost unchanged; this train mostly transmits motion rather than converting it.";
+
+  const code = `t1, t2, rpm, torque = ${t1}, ${t2}, ${rpm}, ${torque}
+ratio = t2 / t1
+out_rpm = rpm / ratio
+out_torque = torque * ratio
+print("ratio", ratio, "out_rpm", out_rpm, "out_torque", out_torque)`;
+
   return (
     <StudioChrome title="Gear Train Ratios" tagline="trade speed for torque"
       controls={<div>
-        <Slider label="Driver teeth" value={t1} min={8} max={40} step={1} onChange={setT1} />
-        <Slider label="Driven teeth" value={t2} min={8} max={60} step={1} onChange={setT2} />
-        <Slider label="Input speed (rpm)" value={rpm} min={10} max={300} step={5} onChange={setRpm} />
-        <Slider label="Input torque (N·m)" value={torque} min={0.5} max={20} step={0.5} onChange={setTorque} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Driver teeth" value={t1} min={8} max={40} step={1} onChange={(v) => update({ t1: v })} />
+        <Slider label="Driven teeth" value={t2} min={8} max={60} step={1} onChange={(v) => update({ t2: v })} />
+        <Slider label="Input speed (rpm)" value={rpm} min={10} max={300} step={5} onChange={(v) => update({ rpm: v })} />
+        <Slider label="Input torque (N·m)" value={torque} min={0.5} max={20} step={0.5} onChange={(v) => update({ torque: v })} />
         <p className="mt-3 text-xs text-slate-500">A larger driven gear turns slower but with proportionally more torque — the ratio equals the tooth-count ratio. Gears trade speed for force, exactly like a lever.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Gear ratio" value={`${ratio.toFixed(2)} : 1`} />
         <Stat label="Output speed" value={`${outRpm.toFixed(1)} rpm`} />
         <Stat label="Output torque" value={`${outTorque.toFixed(1)} N·m`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

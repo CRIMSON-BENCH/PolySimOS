@@ -1,18 +1,26 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { mass: number }> = {
+  "Red dwarf": { mass: 25 },
+  "Sun-like": { mass: 60 },
+  "Blue giant": { mass: 90 },
+  "Black hole": { mass: 120 },
+};
 
 export function GravityWellStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef(0);
   const cam = useRef({ yaw: 0.6, pitch: -0.6 });
   const drag = useRef<{ x: number; y: number } | null>(null);
-  const [mass, setMass] = useState(60);
+  const [{ mass }, update] = useShareableNumbers({ mass: 60 });
   const body = useRef({ x: 90, z: 0, vx: 0, vz: 1.4 });
 
   useEffect(() => {
@@ -46,14 +54,33 @@ export function GravityWellStudio() {
     return () => { cancelAnimationFrame(rafRef.current); canvas.removeEventListener("pointerdown", onDown); window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); };
   }, [mass]);
 
+  const explain =
+    mass < 40
+      ? `A light central mass (${mass}) makes a shallow well — spacetime is only gently curved, so an orbiting body barely deflects and can easily coast off toward infinity.`
+      : mass > 90
+      ? `A heavy central mass (${mass}) digs a deep, steep well — the same sideways velocity now whips into a tight, fast orbit, the way strong gravity bends nearby trajectories sharply.`
+      : `At mass ${mass} the well is moderately curved; the body traces a near-stable ellipse because its sideways motion balances the inward pull (∝ M/r²).`;
+
+  const code = `import numpy as np
+mass = ${mass}
+x, z, vx, vz = 90.0, 0.0, 0.0, 1.4
+for _ in range(2000):
+    r = np.hypot(x, z) or 1.0
+    f = -mass * 0.9 / r**3
+    vx += f * x; vz += f * z
+    x += vx; z += vz
+print("final position", x, z)`;
+
   return (
     <StudioChrome title="Gravity Well Studio" tagline="curved spacetime · rubber-sheet analogy"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">The classic rubber-sheet picture of gravity: mass warps the grid, and a body orbits in the curved surface. Drag to look around.</p>
-        <Slider label="Central mass" value={mass} min={20} max={120} step={5} onChange={setMass} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Central mass" value={mass} min={20} max={120} step={5} onChange={(v) => update({ mass: v })} />
         <button onClick={() => (body.current = { x: 90, z: 0, vx: 0, vz: 1.4 })} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset orbit</button>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Central mass" value={String(mass)} /><Stat label="Well depth" value="∝ M/r" /><Stat label="View" value="3D orbit" /></div>}
+      inspector={<div><Stat label="Central mass" value={String(mass)} /><Stat label="Well depth" value="∝ M/r" /><Stat label="View" value="3D orbit" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" /></StudioChrome>
   );
 }

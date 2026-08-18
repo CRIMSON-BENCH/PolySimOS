@@ -2,14 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { popSize: number; p0: number; reps: number }> = {
+  "Small pop, fast drift": { popSize: 10, p0: 0.5, reps: 20 },
+  "Large pop, slow drift": { popSize: 500, p0: 0.5, reps: 12 },
+  "Rare allele": { popSize: 50, p0: 0.1, reps: 20 },
+  "Even odds": { popSize: 100, p0: 0.5, reps: 15 },
+};
 
 // Wright-Fisher genetic drift: multiple replicate populations.
 export function GeneticDriftStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [popSize, setPopSize] = useState(50);
-  const [p0, setP0] = useState(0.5);
-  const [reps, setReps] = useState(15);
+  const [{ popSize, p0, reps }, update] = useShareableNumbers({ popSize: 50, p0: 0.5, reps: 15 });
   const [seed, setSeed] = useState(1);
   const [fixed, setFixed] = useState(0);
   const [lost, setLost] = useState(0);
@@ -32,16 +38,36 @@ export function GeneticDriftStudio() {
     ctx.fillText("fixed (1.0)", ox + 4, oy - ph + 2); ctx.fillText("lost (0.0)", ox + 4, oy - 4);
   }, [popSize, p0, reps, seed]);
 
+  const N = Math.round(popSize);
+  const explain =
+    N <= 25
+      ? `Tiny population (N=${N}): sampling error is huge, so alleles drift fast and most replicates fix or vanish within these ${120} generations.`
+      : N >= 300
+      ? `Large population (N=${N}): drift is slow — frequencies hover near p₀=${p0} and few replicates reach fixation in this window.`
+      : `Over many replicates the fraction that fix an allele converges on its starting frequency p₀=${p0} — drift is directionless, but the odds of fixation equal where you began.`;
+
+  const code = `import numpy as np
+N, p0, reps = ${N}, ${p0}, ${Math.round(reps)}
+for _ in range(reps):
+    p = p0
+    for _ in range(120):
+        p = np.random.binomial(N, p) / N
+        if p in (0.0, 1.0):
+            break
+    print("fixed" if p >= 1 else "lost" if p <= 0 else round(p, 3))`;
+
   return (
     <StudioChrome title="Genetic Drift (Wright-Fisher)" tagline="chance changes allele frequencies"
       controls={<div>
-        <Slider label="Population size N" value={popSize} min={5} max={500} step={5} onChange={setPopSize} />
-        <Slider label="Initial frequency p₀" value={p0} min={0.05} max={0.95} step={0.05} onChange={setP0} />
-        <Slider label="Replicate populations" value={reps} min={3} max={24} step={1} onChange={setReps} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Population size N" value={popSize} min={5} max={500} step={5} onChange={(v) => update({ popSize: v })} />
+        <Slider label="Initial frequency p₀" value={p0} min={0.05} max={0.95} step={0.05} onChange={(v) => update({ p0: v })} />
+        <Slider label="Replicate populations" value={reps} min={3} max={24} step={1} onChange={(v) => update({ reps: v })} />
         <button onClick={() => setSeed((n) => n + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">Resample</button>
         <p className="mt-3 text-xs text-slate-500">Even with no selection, allele frequencies wander purely by chance as each generation is randomly sampled from the last. In small populations this genetic drift is fast and alleles quickly fix or vanish; in large populations it is slow. Each colored line is an independent population starting from the same frequency.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fixed (reached 1)" value={String(fixed)} /><Stat label="Lost (reached 0)" value={String(lost)} /><Stat label="Population size" value={String(Math.round(popSize))} /></div>}
+      inspector={<div><Stat label="Fixed (reached 1)" value={String(fixed)} /><Stat label="Lost (reached 0)" value={String(lost)} /><Stat label="Population size" value={String(N)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

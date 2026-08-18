@@ -1,15 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { spin: number; mass: number; radius: number; pivot: number }> = {
+  "Fast top (slow drift)": { spin: 120, mass: 0.5, radius: 0.05, pivot: 0.08 },
+  "Slow wobble": { spin: 10, mass: 0.5, radius: 0.05, pivot: 0.08 },
+  "Heavy flywheel": { spin: 40, mass: 2, radius: 0.12, pivot: 0.1 },
+  "Long lever arm": { spin: 40, mass: 0.5, radius: 0.05, pivot: 0.15 },
+};
 
 export function GyroscopeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [spin, setSpin] = useState(40);
-  const [mass, setMass] = useState(0.5);
-  const [radius, setRadius] = useState(0.05);
-  const [pivot, setPivot] = useState(0.08);
+  const [{ spin, mass, radius, pivot }, update] = useShareableNumbers({ spin: 40, mass: 0.5, radius: 0.05, pivot: 0.08 });
 
   const I = 0.5 * mass * radius * radius;
   const precession = (mass * 9.81 * pivot) / (I * spin);
@@ -34,19 +39,38 @@ export function GyroscopeStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [precession]);
 
+  const explain =
+    spin >= 100
+      ? "Fast spin, slow precession: because Ω = mgr/(Iω), the huge angular momentum makes the top drift around only lazily — it looks almost frozen upright."
+      : spin <= 15
+      ? "Slow spin, fast precession: with little angular momentum the gravity torque swings the axis around quickly, and in reality the top would soon topple."
+      : mass * pivot >= 0.25
+      ? "Big gravity torque (heavy disk or long lever arm) speeds up precession — the sideways drift is driven by mgr in the numerator."
+      : `Gravity's torque never tips the top; it steers the spin axis in a circle every ${precPeriod.toFixed(1)} s, the hallmark of gyroscopic precession.`;
+
+  const code = `import numpy as np
+spin, mass, radius, pivot = ${spin}, ${mass}, ${radius}, ${pivot}  # rad/s, kg, m, m
+I = 0.5 * mass * radius**2
+Omega = mass * 9.81 * pivot / (I * spin)  # precession rate, rad/s
+print("precession rate", round(Omega, 3), "rad/s")
+print("precession period", round(2*np.pi/Omega, 2), "s")`;
+
   return (
     <StudioChrome title="Gyroscope & Precession" tagline="why a spinning top doesn't fall"
       controls={<div>
-        <Slider label="Spin rate ω (rad/s)" value={spin} min={5} max={120} step={1} onChange={setSpin} />
-        <Slider label="Disk mass (kg)" value={mass} min={0.1} max={2} step={0.1} onChange={setMass} />
-        <Slider label="Disk radius (m)" value={radius} min={0.02} max={0.12} step={0.005} onChange={setRadius} />
-        <Slider label="Pivot→CM distance (m)" value={pivot} min={0.02} max={0.15} step={0.005} onChange={setPivot} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Spin rate ω (rad/s)" value={spin} min={5} max={120} step={1} onChange={(v) => update({ spin: v })} />
+        <Slider label="Disk mass (kg)" value={mass} min={0.1} max={2} step={0.1} onChange={(v) => update({ mass: v })} />
+        <Slider label="Disk radius (m)" value={radius} min={0.02} max={0.12} step={0.005} onChange={(v) => update({ radius: v })} />
+        <Slider label="Pivot→CM distance (m)" value={pivot} min={0.02} max={0.15} step={0.005} onChange={(v) => update({ pivot: v })} />
         <p className="mt-3 text-xs text-slate-500">Gravity applies a torque, but a fast-spinning disk responds by precessing sideways instead of toppling. Faster spin → slower precession: Ω = mgr / (Iω).</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Precession rate Ω" value={`${precession.toFixed(2)} rad/s`} />
         <Stat label="Precession period" value={`${precPeriod.toFixed(1)} s`} />
         <Stat label="Spin inertia I" value={`${I.toExponential(2)} kg·m²`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

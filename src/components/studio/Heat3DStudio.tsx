@@ -4,9 +4,17 @@ import { useEffect, useRef, useState } from "react";
 import { Heat3D, heat3dInit, heat3dStep, heat3dSlice, heat3dHotVoxels } from "@/lib/engines/heat3d";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const N = 40, W = 760, H = 480;
+
+const PRESETS: Record<string, { alpha: number; zslice: number }> = {
+  "Slow diffusion": { alpha: 0.03, zslice: 20 },
+  "Fast diffusion": { alpha: 0.15, zslice: 20 },
+  "Bottom slice": { alpha: 0.1, zslice: 5 },
+  "Top slice": { alpha: 0.1, zslice: 35 },
+};
 
 export function Heat3DStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -15,8 +23,7 @@ export function Heat3DStudio() {
   const cam = useRef({ yaw: 0.7, pitch: -0.35 });
   const drag = useRef<{ x: number; y: number } | null>(null);
   const [running, setRunning] = useState(true);
-  const [alpha, setAlpha] = useState(0.12);
-  const [zslice, setZslice] = useState(20);
+  const [{ alpha, zslice }, update] = useShareableNumbers({ alpha: 0.12, zslice: 20 });
   const [mode, setMode] = useState<"volume" | "slice">("volume");
 
   useEffect(() => { fRef.current = heat3dInit(N); }, []);
@@ -53,6 +60,24 @@ export function Heat3DStudio() {
     return () => { cancelAnimationFrame(rafRef.current); canvas.removeEventListener("pointerdown", onDown); window.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); };
   }, [running, alpha, zslice, mode]);
 
+  const explain =
+    alpha > 0.14
+      ? "High diffusivity spreads heat fast, but an explicit finite-difference scheme goes unstable if the step is pushed much higher — the stability (CFL) limit is real."
+      : mode === "slice"
+      ? "The z-slice is a 2D cross-section of the 3D field — watch heat bleed in from neighboring slices as it diffuses through all three dimensions."
+      : alpha < 0.05
+      ? "Low diffusivity: heat lingers near its source and the hot core stays sharp for many steps."
+      : "Heat spreads outward at a rate set by the diffusivity — each cell relaxes toward the average of its six neighbors every step.";
+
+  const code = `import numpy as np
+N, alpha = ${N}, ${alpha}
+u = np.zeros((N, N, N)); u[N//2, N//2, N//2] = 1.0
+lap = lambda f: (np.roll(f,1,0)+np.roll(f,-1,0)+np.roll(f,1,1)
+                 +np.roll(f,-1,1)+np.roll(f,1,2)+np.roll(f,-1,2)-6*f)
+for _ in range(50):
+    u += alpha * lap(u)
+print("peak", round(u.max(), 4))`;
+
   return (
     <StudioChrome
       title="3D Heat Diffusion Studio"
@@ -66,11 +91,16 @@ export function Heat3DStudio() {
           <div className="mb-3 flex gap-2">
             {(["volume", "slice"] as const).map((m) => <button key={m} onClick={() => setMode(m)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold capitalize ${mode === m ? "bg-slate-800 text-white dark:bg-slate-200 dark:text-slate-900" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{m}</button>)}
           </div>
-          <Slider label="Diffusivity α" value={alpha} min={0.02} max={0.16} step={0.01} onChange={setAlpha} />
-          {mode === "slice" && <Slider label="z-slice" value={zslice} min={0} max={N - 1} step={1} onChange={setZslice} />}
+          <Presets
+            presets={Object.keys(PRESETS).map((label) => ({ label }))}
+            onApply={(label) => update(PRESETS[label])}
+          />
+          <Slider label="Diffusivity α" value={alpha} min={0.02} max={0.16} step={0.01} onChange={(v) => update({ alpha: v })} />
+          {mode === "slice" && <Slider label="z-slice" value={zslice} min={0} max={N - 1} step={1} onChange={(v) => update({ zslice: v })} />}
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Grid" value={`${N}³`} /><Stat label="Cells" value={(N * N * N).toLocaleString()} /><Stat label="Scheme" value="Explicit FD" /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}³`} /><Stat label="Cells" value={(N * N * N).toLocaleString()} /><Stat label="Scheme" value="Explicit FD" /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" />
     </StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -30,6 +31,16 @@ export function GrapherStudio() {
     });
   }, [data, range]);
 
+  const nFns = exprs.filter(Boolean).length;
+  const explain = `Plotting ${nFns} function${nFns === 1 ? "" : "s"} sampled at 600 points over x ∈ [−${range}, ${range}]. Widen the range to expose end behavior and periodicity; narrow it to zoom in on roots and turning points where the curves cross the axis.`;
+
+  const code = `import numpy as np
+x = np.linspace(-${range}, ${range}, 600)
+exprs = ${JSON.stringify(exprs)}
+for e in exprs:
+    y = eval(e.replace("^", "**"), {"x": x, "sin": np.sin, "cos": np.cos, "sqrt": np.sqrt})
+    print(e, "->", y[:3])`;
+
   return (
     <StudioChrome title="Function Grapher" tagline="plot up to three functions"
       controls={<div>
@@ -41,8 +52,9 @@ export function GrapherStudio() {
         ))}
         <div className="mt-3"><div className="mb-1 flex justify-between text-xs text-slate-500"><span>x range ±</span><span className="font-mono">{range}</span></div>
           <input type="range" min={2} max={50} step={1} value={range} onChange={(e) => setRange(parseFloat(e.target.value))} className="w-full accent-cyan-500" /></div>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Functions" value={String(exprs.filter(Boolean).length)} /><Stat label="Samples" value="600" /><Stat label="Engine" value="PolySim CAS" /></div>}
+      inspector={<div><Stat label="Functions" value={String(exprs.filter(Boolean).length)} /><Stat label="Samples" value="600" /><Stat label="Engine" value="PolySim CAS" /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>

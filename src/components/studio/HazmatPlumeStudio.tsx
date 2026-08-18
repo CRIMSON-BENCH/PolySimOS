@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Gaussian plume dispersion (Pasquill-Gifford). Ground-level centerline concentration.
 const STABILITY: Record<string, { a: number; b: number; c: number; d: number; label: string }> = {
@@ -12,12 +13,17 @@ const STABILITY: Record<string, { a: number; b: number; c: number; d: number; la
   F: { a: 0.04, b: 0.0001, c: 0.016, d: 0.0003, label: "F very stable" },
 };
 
+const PRESETS: Record<string, { rate: number; wind: number; threshold: number }> = {
+  "Small spill, breezy": { rate: 20, wind: 8, threshold: 1 },
+  "Tanker rupture": { rate: 400, wind: 2, threshold: 1 },
+  "Calm night": { rate: 100, wind: 1, threshold: 0.5 },
+  "Windy day": { rate: 150, wind: 12, threshold: 2 },
+};
+
 export function HazmatPlumeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [rate, setRate] = useState(50); // g/s
-  const [wind, setWind] = useState(4); // m/s
+  const [{ rate, wind, threshold }, update] = useShareableNumbers({ rate: 50, wind: 4, threshold: 1 });
   const [stab, setStab] = useState("D");
-  const [threshold, setThreshold] = useState(1); // mg/m^3 protective action
   const [pad, setPad] = useState(0);
 
   useEffect(() => {
@@ -41,16 +47,43 @@ export function HazmatPlumeStudio() {
     ctx.setLineDash([]); ctx.fillStyle = "#e2e8f0"; ctx.font = "11px sans-serif"; ctx.fillText("release", 8, H / 2 - 10); ctx.fillText("downwind →", W - 90, H - 10);
   }, [rate, wind, stab, threshold]);
 
+  const explain =
+    wind <= 1.5
+      ? "Light wind gives little dilution, so the plume stays concentrated and the protective action distance stretches far downwind."
+      : stab === "F"
+      ? "Very stable air (class F) suppresses vertical mixing, so the plume stays tight and travels a long way before dropping below the action level."
+      : stab === "A"
+      ? "Very unstable air (class A) mixes the release rapidly, spreading it wide and diluting it close to the source."
+      : "Concentration falls off as the wind stretches and vertical mixing thins the plume — stronger wind and less stable air pull the protective distance in toward the source.";
+
+  const code = `import numpy as np
+Q, u = ${rate}, ${Math.max(0.5, wind)}          # g/s, m/s
+a, c = 0.08, 0.06              # Pasquill class D coefficients
+sy = lambda x: a*x/np.sqrt(1 + 1e-4*x)
+sz = lambda x: c*x/np.sqrt(1 + 1.5e-3*x)
+conc = lambda x: Q/(np.pi*u*sy(x)*sz(x))*1000  # mg/m^3 on centerline
+print([round(conc(x), 2) for x in (100, 500, 1000)])`;
+
   return (
     <StudioChrome title="Hazmat Plume Dispersion" tagline="Gaussian plume · protective action"
       controls={<div>
-        <Slider label="Release rate (g/s)" value={rate} min={1} max={500} step={1} onChange={setRate} />
-        <Slider label="Wind speed (m/s)" value={wind} min={0.5} max={15} step={0.5} onChange={setWind} />
-        <Slider label="Action level (mg/m³)" value={threshold} min={0.1} max={20} step={0.1} onChange={setThreshold} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Release rate (g/s)" value={rate} min={1} max={500} step={1} onChange={(v) => update({ rate: v })} />
+        <Slider label="Wind speed (m/s)" value={wind} min={0.5} max={15} step={0.5} onChange={(v) => update({ wind: v })} />
+        <Slider label="Action level (mg/m³)" value={threshold} min={0.1} max={20} step={0.1} onChange={(v) => update({ threshold: v })} />
         <div className="mt-3 grid grid-cols-4 gap-1">{Object.keys(STABILITY).map((k) => <button key={k} onClick={() => setStab(k)} className={`rounded-lg px-2 py-1 text-xs font-semibold ${stab === k ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{k}</button>)}</div>
         <p className="mt-3 text-xs text-slate-500">A Gaussian plume estimates how a gas or vapor release disperses downwind. Stability class (A unstable to F stable) sets how fast the plume spreads. The dashed line is the protective action distance where concentration falls below your action level. Screening estimate only — use ERG and monitors on scene.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Protective distance" value={pad > 0 ? `${(pad).toLocaleString()} m` : ">20 km"} /><Stat label="Stability" value={STABILITY[stab].label} /><Stat label="Wind" value={`${wind} m/s`} /></div>}
+      inspector={<div>
+        <Stat label="Protective distance" value={pad > 0 ? `${(pad).toLocaleString()} m` : ">20 km"} />
+        <Stat label="Stability" value={STABILITY[stab].label} />
+        <Stat label="Wind" value={`${wind} m/s`} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

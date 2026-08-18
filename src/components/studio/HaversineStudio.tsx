@@ -1,13 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { lat1: number; lon1: number; lat2: number; lon2: number }> = {
+  "NYC → London": { lat1: 41, lon1: -74, lat2: 51, lon2: 0 },
+  "Tokyo → LA": { lat1: 36, lon1: 140, lat2: 34, lon2: -118 },
+  "Sydney → Santiago": { lat1: -34, lon1: 151, lat2: -33, lon2: -71 },
+  "Cape Town → Delhi": { lat1: -34, lon1: 18, lat2: 29, lon2: 77 },
+};
 
 export function HaversineStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [lat1, setLat1] = useState(40.7); const [lon1, setLon1] = useState(-74);
-  const [lat2, setLat2] = useState(51.5); const [lon2, setLon2] = useState(0);
+  const [{ lat1, lon1, lat2, lon2 }, update] = useShareableNumbers({ lat1: 40.7, lon1: -74, lat2: 51.5, lon2: 0 });
 
   const R = 6371; const toR = (d: number) => d * Math.PI / 180;
   const dLat = toR(lat2 - lat1), dLon = toR(lon2 - lon1);
@@ -29,16 +36,43 @@ export function HaversineStudio() {
     ctx.fillStyle = "#22d3ee"; ctx.beginPath(); ctx.arc(X(lon1), Y(lat1), 5, 0, 7); ctx.fill(); ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(X(lon2), Y(lat2), 5, 0, 7); ctx.fill();
   }, [lat1, lon1, lat2, lon2, a]);
 
+  const explain =
+    dist < 1
+      ? "The two points are essentially the same spot, so the distance collapses toward zero."
+      : dist > 12000
+      ? "These points are nearly antipodal, so almost every heading is close to shortest — the great-circle route becomes unstable and hugs no single meridian."
+      : Math.abs(lat1 - lat2) < 8 && Math.abs(lon1 - lon2) > 60
+      ? "Same latitude but far apart in longitude: the great-circle arc bows toward the nearer pole, which is exactly why it looks curved on a flat Mercator map."
+      : `A great circle changes heading as you travel, so the ${bearing.toFixed(0)}-degree initial bearing is not the heading you keep — that constant-heading path (a rhumb line) would be longer.`;
+
+  const code = `from math import radians, sin, cos, sqrt, atan2
+lat1, lon1, lat2, lon2 = ${lat1}, ${lon1}, ${lat2}, ${lon2}
+R = 6371.0
+dlat, dlon = radians(lat2 - lat1), radians(lon2 - lon1)
+a = sin(dlat/2)**2 + cos(radians(lat1))*cos(radians(lat2))*sin(dlon/2)**2
+dist = R * 2 * atan2(sqrt(a), sqrt(1 - a))
+print("distance km", round(dist, 1))`;
+
   return (
     <StudioChrome title="Great-Circle Distance (Haversine)" tagline="shortest path on a sphere"
       controls={<div>
-        <Slider label="Point A latitude" value={lat1} min={-80} max={80} step={1} onChange={setLat1} />
-        <Slider label="Point A longitude" value={lon1} min={-180} max={180} step={1} onChange={setLon1} />
-        <Slider label="Point B latitude" value={lat2} min={-80} max={80} step={1} onChange={setLat2} />
-        <Slider label="Point B longitude" value={lon2} min={-180} max={180} step={1} onChange={setLon2} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Point A latitude" value={lat1} min={-80} max={80} step={1} onChange={(v) => update({ lat1: v })} />
+        <Slider label="Point A longitude" value={lon1} min={-180} max={180} step={1} onChange={(v) => update({ lon1: v })} />
+        <Slider label="Point B latitude" value={lat2} min={-80} max={80} step={1} onChange={(v) => update({ lat2: v })} />
+        <Slider label="Point B longitude" value={lon2} min={-180} max={180} step={1} onChange={(v) => update({ lon2: v })} />
         <p className="mt-3 text-xs text-slate-500">The shortest route between two points on Earth is a great-circle arc, not a straight line on a flat map. The haversine formula computes that distance from latitude and longitude, staying accurate even for nearly antipodal points. It powers flight planning, GPS, and every &quot;distance between&quot; feature — and explains why polar routes look curved on a Mercator map.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Distance" value={`${dist.toFixed(0)} km`} /><Stat label="In miles" value={`${(dist * 0.621).toFixed(0)} mi`} /><Stat label="Initial bearing" value={`${bearing.toFixed(0)}°`} /></div>}
+      inspector={<div>
+        <Stat label="Distance" value={`${dist.toFixed(0)} km`} />
+        <Stat label="In miles" value={`${(dist * 0.621).toFixed(0)} mi`} />
+        <Stat label="Initial bearing" value={`${bearing.toFixed(0)}°`} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={540} height={280} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
