@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { WindkesselStudio } from "@/components/studio/WindkesselStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Windkessel Arterial Pressure Model Simulator", description: "See how the Windkessel model turns pulsatile heartbeats into a smooth arterial pressure wave, from resistance, compliance, and heart rate. Free.", alternates: { canonical: "/studio/windkessel" } };
+export default function Page() { return <StudioPageShell slug="windkessel" name="Windkessel Model" keyword="windkessel arterial model" lede="Your heart pumps in pulses, yet blood flows smoothly. The Windkessel model shows how elastic arteries store and release each beat." about="The Windkessel model treats the arterial system as an elastic reservoir (compliance C) draining through peripheral resistance R. During systole the aorta fills; during diastole it recoils, sustaining pressure between beats. Stiffer arteries give sharper, higher pressure swings. Educational tool, not medical advice."><WindkesselStudio /></StudioPageShell>; }

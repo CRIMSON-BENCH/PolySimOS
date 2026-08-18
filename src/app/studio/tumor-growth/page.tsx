@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { TumorGrowthStudio } from "@/components/studio/TumorGrowthStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Tumor Growth Simulator — Gompertz & Logistic", description: "Model tumor size over time with Gompertz and logistic growth toward a carrying capacity. Free, interactive educational tool.", alternates: { canonical: "/studio/tumor-growth" } };
+export default function Page() { return <StudioPageShell slug="tumor-growth" name="Tumor Growth" keyword="gompertz tumor growth model" lede="Tumors grow fast at first, then slow as they outrun their blood supply. Compare Gompertz and logistic curves bending toward a ceiling." about="Unrestricted exponential growth never lasts; nutrient and oxygen limits impose a carrying capacity. The Gompertz and logistic models both capture this S-shaped slowdown, with growth fastest when the tumor is small — a pattern that informs how and when therapies are applied. Educational tool, not medical advice."><TumorGrowthStudio /></StudioPageShell>; }

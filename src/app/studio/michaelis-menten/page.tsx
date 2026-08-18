@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MichaelisMentenStudio } from "@/components/studio/MichaelisMentenStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Michaelis–Menten Enzyme Kinetics Simulator", description: "Plot enzyme reaction rate versus substrate concentration, and see how Vmax and Km shape the saturation curve. Free, interactive.", alternates: { canonical: "/studio/michaelis-menten" } };
+export default function Page() { return <StudioPageShell slug="michaelis-menten" name="Michaelis–Menten Kinetics" keyword="michaelis menten calculator" lede="Enzymes get faster with more substrate — but only up to a point. Watch the rate climb and then flatten at Vmax as the enzyme saturates." about="The Michaelis–Menten equation, v = Vmax·[S]/(Km + [S]), describes how enzyme rate saturates with substrate. Vmax is the maximum rate; Km, the substrate concentration giving half Vmax, measures binding affinity — lower Km means the enzyme grabs substrate more tightly. Educational tool."><MichaelisMentenStudio /></StudioPageShell>; }

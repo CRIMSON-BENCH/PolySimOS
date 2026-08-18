@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MutationSelectionStudio } from "@/components/studio/MutationSelectionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Mutation–Selection Balance Simulator (Population Genetics)", description: "Track an allele's frequency across generations under selection and mutation, and see where the two forces reach balance. Free, interactive.", alternates: { canonical: "/studio/mutation-selection" } };
+export default function Page() { return <StudioPageShell slug="mutation-selection" name="Mutation–Selection Balance" keyword="mutation selection balance" lede="Natural selection weeds out harmful genes, yet they never fully vanish. Watch selection and mutation fight to a standstill over the generations." about="Selection changes allele frequencies by favoring fitter genotypes, while recurrent mutation keeps reintroducing variants. The two reach a mutation–selection balance where a deleterious allele persists at a low, steady frequency — a core result of population genetics. Educational tool."><MutationSelectionStudio /></StudioPageShell>; }

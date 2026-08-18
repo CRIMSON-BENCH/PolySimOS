@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PhyloDistanceStudio } from "@/components/studio/PhyloDistanceStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Phylogenetic Distance & Jukes–Cantor Simulator", description: "Convert DNA sequence differences into an evolutionary distance with the Jukes–Cantor correction and build a simple tree. Free, interactive.", alternates: { canonical: "/studio/phylo-distance" } };
+export default function Page() { return <StudioPageShell slug="phylo-distance" name="Phylogenetic Distance" keyword="jukes cantor distance calculator" lede="Count the differences between two DNA sequences and estimate how long ago they diverged — correcting for the mutations you can no longer see." about="Raw sequence differences underestimate evolutionary distance because a single site can mutate more than once. The Jukes–Cantor model corrects this, converting the observed fraction of differing sites into an estimate of substitutions per site — the currency of molecular phylogenetics. Educational tool."><PhyloDistanceStudio /></StudioPageShell>; }

@@ -164,6 +164,14 @@ import { SolubilityStudio } from "./SolubilityStudio";
 import { VanDerWaalsStudio } from "./VanDerWaalsStudio";
 import { BufferSolutionStudio } from "./BufferSolutionStudio";
 import { ElectrolysisStudio } from "./ElectrolysisStudio";
+import { PharmacokineticsStudio } from "./PharmacokineticsStudio";
+import { MichaelisMentenStudio } from "./MichaelisMentenStudio";
+import { WindkesselStudio } from "./WindkesselStudio";
+import { CardiacActionPotentialStudio } from "./CardiacActionPotentialStudio";
+import { MutationSelectionStudio } from "./MutationSelectionStudio";
+import { PhyloDistanceStudio } from "./PhyloDistanceStudio";
+import { TumorGrowthStudio } from "./TumorGrowthStudio";
+import { OxygenDissociationStudio } from "./OxygenDissociationStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -668,6 +676,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "van-der-waals": VanDerWaalsStudio,
   "buffer-solution": BufferSolutionStudio,
   electrolysis: ElectrolysisStudio,
+  pharmacokinetics: PharmacokineticsStudio,
+  "michaelis-menten": MichaelisMentenStudio,
+  windkessel: WindkesselStudio,
+  "cardiac-action-potential": CardiacActionPotentialStudio,
+  "mutation-selection": MutationSelectionStudio,
+  "phylo-distance": PhyloDistanceStudio,
+  "tumor-growth": TumorGrowthStudio,
+  "oxygen-dissociation": OxygenDissociationStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

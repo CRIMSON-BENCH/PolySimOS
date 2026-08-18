@@ -348,6 +348,14 @@ export const SIMS = [
   { slug: "van-der-waals", name: "Van der Waals Gas", desc: "Where the ideal gas law breaks.", tag: "Chemistry" },
   { slug: "buffer-solution", name: "Buffer Solution", desc: "Henderson–Hasselbalch pH.", tag: "Chemistry" },
   { slug: "electrolysis", name: "Electrolysis", desc: "Faraday's laws & electroplating.", tag: "Chemistry" },
+  { slug: "pharmacokinetics", name: "Pharmacokinetics", desc: "Drug concentration over time.", tag: "Biology" },
+  { slug: "michaelis-menten", name: "Michaelis–Menten", desc: "Enzyme kinetics & saturation.", tag: "Biology" },
+  { slug: "windkessel", name: "Windkessel Model", desc: "Arterial pressure waveform.", tag: "Biology" },
+  { slug: "cardiac-action-potential", name: "Cardiac Action Potential", desc: "The electrical heartbeat.", tag: "Biology" },
+  { slug: "mutation-selection", name: "Mutation–Selection", desc: "Allele frequency evolution.", tag: "Biology" },
+  { slug: "phylo-distance", name: "Phylogenetic Distance", desc: "DNA divergence to a tree.", tag: "Biology" },
+  { slug: "tumor-growth", name: "Tumor Growth", desc: "Gompertz & logistic dynamics.", tag: "Biology" },
+  { slug: "oxygen-dissociation", name: "O₂–Hemoglobin Curve", desc: "How blood loads & unloads O₂.", tag: "Biology" },
 ];
 
 export default function StudioIndex() {

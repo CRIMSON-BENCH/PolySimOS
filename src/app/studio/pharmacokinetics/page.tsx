@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PharmacokineticsStudio } from "@/components/studio/PharmacokineticsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Pharmacokinetics Simulator — Drug Concentration Curve", description: "Plot plasma drug concentration over time from dose, volume of distribution, half-life, and absorption rate. Free, interactive PK tool.", alternates: { canonical: "/studio/pharmacokinetics" } };
+export default function Page() { return <StudioPageShell slug="pharmacokinetics" name="Pharmacokinetics" keyword="pharmacokinetics simulator" lede="Every drug rises, peaks, and clears. See the concentration curve form, and how half-life and dose keep it inside the therapeutic window." about="A one-compartment model tracks plasma concentration as a drug absorbs and is eliminated. The half-life sets the exponential decline; dosing aims to keep levels above the minimum effective concentration but below the toxic threshold. Educational tool, not medical advice."><PharmacokineticsStudio /></StudioPageShell>; }
