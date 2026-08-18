@@ -2,12 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { step: number }> = {
+  "Fine": { step: 10 },
+  "Balanced": { step: 18 },
+  "Coarse": { step: 30 },
+  "Jumpy": { step: 40 },
+};
 
 // Rapidly-exploring Random Tree path planner.
 export function RRTStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [step, setStep] = useState(18);
+  const [{ step }, update] = useShareableNumbers({ step: 18 });
   const [seed, setSeed] = useState(1);
   const [stats, setStats] = useState({ nodes: 0, found: false, len: 0 });
 
@@ -36,14 +44,47 @@ export function RRTStudio() {
     setStats({ nodes: nodes.length, found: goalIdx >= 0, len });
   }, [step, seed]);
 
+  const explain = !stats.found
+    ? `No path yet at step ${step} — the tree ran out of iterations before reaching the goal. Try Replan or a smaller step.`
+    : step <= 12
+    ? `Small steps trace a tight, smooth path (${stats.len.toFixed(0)} units) but need many nodes (${stats.nodes}) to weave through.`
+    : step >= 30
+    ? `Large steps reached the goal with just ${stats.nodes} nodes, but the ${stats.len.toFixed(0)}-unit path is coarse and hugs obstacles.`
+    : `A balanced step found the goal in ${stats.nodes} nodes along a ${stats.len.toFixed(0)}-unit path.`;
+
+  const code = `import numpy as np
+step, seed = ${step}, ${seed}
+s = (seed*1299709) & 0xffffffff
+def rnd():
+    global s
+    s = (s*1664525 + 1013904223) & 0xffffffff
+    return s/4294967296
+W, H = 540, 400
+obstacles = [(120,90,70),(330,130,60),(200,280,55),(400,300,50)]
+hit = lambda x,y: any((x-ox)**2+(y-oy)**2 < r*r for ox,oy,r in obstacles)
+nodes = [(30.0,30.0,-1)]; goal = (500,370); gi = -1
+for _ in range(3000):
+    if gi >= 0: break
+    rx = goal[0] if rnd()<0.1 else rnd()*W
+    ry = goal[1] if rnd()<0.1 else rnd()*H
+    b = min(range(len(nodes)), key=lambda i:(nodes[i][0]-rx)**2+(nodes[i][1]-ry)**2)
+    a = np.arctan2(ry-nodes[b][1], rx-nodes[b][0])
+    nx, ny = nodes[b][0]+np.cos(a)*step, nodes[b][1]+np.sin(a)*step
+    if hit(nx,ny): continue
+    nodes.append((nx,ny,b))
+    if np.hypot(nx-goal[0], ny-goal[1]) < step: gi = len(nodes)-1
+print("nodes", len(nodes), "found", gi>=0)`;
+
   return (
     <StudioChrome title="RRT Path Planning" tagline="rapidly-exploring random tree"
       controls={<div>
-        <Slider label="Step size" value={step} min={8} max={40} step={2} onChange={setStep} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Step size" value={step} min={8} max={40} step={2} onChange={(v) => update({ step: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">Replan</button>
         <p className="mt-3 text-xs text-slate-500">A Rapidly-exploring Random Tree grows toward random points in free space, quickly filling the map and snaking around obstacles to connect start (blue) to goal (yellow). It is a cornerstone of motion planning for robot arms, self-driving cars, and drones — fast even in high dimensions where grid search fails.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Tree nodes" value={String(stats.nodes)} /><Stat label="Path found" value={stats.found ? "yes" : "no"} /><Stat label="Path length" value={stats.len.toFixed(0)} /></div>}
+      inspector={<div><Stat label="Tree nodes" value={String(stats.nodes)} /><Stat label="Path found" value={stats.found ? "yes" : "no"} /><Stat label="Path length" value={stats.len.toFixed(0)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

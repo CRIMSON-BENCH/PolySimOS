@@ -2,15 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
 
+const PRESETS: Record<string, { f: number; objDist: number; objH: number }> = {
+  Camera: { f: 100, objDist: 320, objH: 60 },
+  "1:1 macro (2f)": { f: 120, objDist: 240, objH: 70 },
+  Projector: { f: 80, objDist: 100, objH: 90 },
+  Magnifier: { f: 200, objDist: 120, objH: 60 },
+};
+
 export function RayOpticsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [f, setF] = useState(120);       // focal length (px), sign chooses lens type
-  const [objDist, setObjDist] = useState(240);
-  const [objH, setObjH] = useState(70);
+  const [{ f, objDist, objH }, update] = useShareableNumbers({ f: 120, objDist: 240, objH: 70 });
   const [converging, setConverging] = useState(true);
 
   useEffect(() => {
@@ -41,16 +47,40 @@ export function RayOpticsStudio() {
     ctx.fillText(`magnification ${mag.toFixed(2)}×`, 14, H - 12);
   }, [f, objDist, objH, converging]);
 
+  const Fsign = converging ? f : -f;
+  const uObj = -objDist;
+  const vImg = 1 / (1 / Fsign + 1 / uObj);
+  const magImg = vImg / uObj;
+  const realImg = vImg > 0;
+
+  const explain = !converging
+    ? "A diverging lens always forms a virtual, upright, reduced image, wherever the object sits."
+    : !realImg
+    ? "The object is inside the focal length, so the lens forms a virtual, upright, magnified image — the magnifying-glass regime."
+    : Math.abs(magImg) > 1.05
+    ? "The object lies between f and 2f, giving a real, inverted, magnified image — the projector regime."
+    : Math.abs(magImg) < 0.95
+    ? "The object is beyond 2f, giving a real, inverted, reduced image — the camera regime."
+    : "The object sits near 2f, so the image is real, inverted and roughly the same size (1:1).";
+
+  const code = `f = ${Fsign}  # px, sign sets lens type
+u = ${uObj}
+v = 1/(1/f + 1/u)
+mag = v/u
+print("image dist", round(v, 1), "mag", round(mag, 2), "real" if v > 0 else "virtual")`;
+
   return (
     <StudioChrome title="Ray Optics / Lens Studio" tagline="thin-lens equation · ray tracing"
       controls={<div>
         <div className="mb-3 flex gap-2">{[true, false].map((c) => <button key={String(c)} onClick={() => setConverging(c)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold ${converging === c ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{c ? "Converging" : "Diverging"}</button>)}</div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
         <p className="mb-3 text-xs text-slate-500">Trace principal rays through a thin lens to locate the image. Move the object inside the focal point to flip from a real to a virtual image.</p>
-        <Slider label="Focal length" value={f} min={60} max={220} step={10} onChange={setF} />
-        <Slider label="Object distance" value={objDist} min={60} max={340} step={10} onChange={setObjDist} />
-        <Slider label="Object height" value={objH} min={30} max={120} step={5} onChange={setObjH} />
+        <Slider label="Focal length" value={f} min={60} max={220} step={10} onChange={(v) => update({ f: v })} />
+        <Slider label="Object distance" value={objDist} min={60} max={340} step={10} onChange={(v) => update({ objDist: v })} />
+        <Slider label="Object height" value={objH} min={30} max={120} step={5} onChange={(v) => update({ objH: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Lens" value={converging ? "converging" : "diverging"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Equation" value="1/v − 1/u = 1/f" /></div>}
+      inspector={<div><Stat label="Lens" value={converging ? "converging" : "diverging"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Magnification" value={`${magImg.toFixed(2)}×`} /><Stat label="Equation" value="1/v − 1/u = 1/f" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

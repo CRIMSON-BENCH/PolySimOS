@@ -2,17 +2,24 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { n: number; step: number }> = {
+  "Balanced": { n: 400, step: 2 },
+  "Few, big steps": { n: 100, step: 5 },
+  "Many, small steps": { n: 1000, step: 1 },
+  "Crowd": { n: 1500, step: 3 },
+};
 
 export function RandomWalkStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const walkers = useRef<{ x: number; y: number }[]>([]);
   const rafRef = useRef(0);
   const [running, setRunning] = useState(true);
-  const [n, setN] = useState(400);
-  const [step, setStep] = useState(2);
+  const [{ n, step }, update] = useShareableNumbers({ n: 400, step: 2 });
   const [rms, setRms] = useState(0);
   const steps = useRef(0);
 
@@ -33,15 +40,34 @@ export function RandomWalkStudio() {
     rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
   }, [running, step]);
 
+  const explain =
+    step >= 4
+      ? "Large steps make each walker cover ground fast, so the cloud reaches a big RMS radius in only a few frames."
+      : step <= 1.5
+      ? "Tiny steps mean slow spreading — the √t growth is gentle and the cloud stays compact far longer."
+      : `With ${n} walkers the RMS distance grows as √(steps) — the defining signature of diffusion.`;
+
+  const code = `import numpy as np
+n, step = ${n}, ${step}
+pos = np.zeros((n, 2))
+for _ in range(200):
+    a = np.random.uniform(0, 2 * np.pi, n)
+    pos[:, 0] += np.cos(a) * step
+    pos[:, 1] += np.sin(a) * step
+rms = np.sqrt(np.mean(np.sum(pos ** 2, axis=1)))
+print("rms distance:", rms)`;
+
   return (
     <StudioChrome title="Random Walk & Diffusion" tagline="Brownian motion · √t spreading"
       controls={<div>
         <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mb-3 text-xs text-slate-500">Hundreds of walkers start at the center and step randomly. The cloud spreads as √(time) — the signature of diffusion.</p>
-        <Slider label="Walkers" value={n} min={50} max={1500} step={50} onChange={setN} />
-        <Slider label="Step size" value={step} min={1} max={6} step={0.5} onChange={setStep} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Walkers" value={n} min={50} max={1500} step={50} onChange={(v) => update({ n: v })} />
+        <Slider label="Step size" value={step} min={1} max={6} step={0.5} onChange={(v) => update({ step: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Walkers" value={String(n)} /><Stat label="Steps" value={String(steps.current)} /><Stat label="RMS distance" value={rms.toFixed(1)} /><Stat label="Law" value="⟨r²⟩ ∝ t" /></div>}
+      inspector={<div><Stat label="Walkers" value={String(n)} /><Stat label="Steps" value={String(steps.current)} /><Stat label="RMS distance" value={rms.toFixed(1)} /><Stat label="Law" value="⟨r²⟩ ∝ t" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

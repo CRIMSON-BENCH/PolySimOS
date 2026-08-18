@@ -2,12 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { reactivity: number }> = {
+  "Subcritical": { reactivity: -0.003 },
+  "Delayed critical": { reactivity: 0.002 },
+  "Near prompt": { reactivity: 0.006 },
+  "Prompt-critical": { reactivity: 0.008 },
+};
 
 // Point reactor kinetics with one delayed-neutron group.
 export function ReactorKineticsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [reactivity, setReactivity] = useState(0.001); // dollars-ish (as fraction)
+  const [{ reactivity }, update] = useShareableNumbers({ reactivity: 0.001 }); // dollars-ish (as fraction)
   const [running, setRunning] = useState(true);
   const state = useRef({ n: 1, c: 1, t: 0 });
   const hist = useRef<number[]>([]);
@@ -33,14 +41,35 @@ export function ReactorKineticsStudio() {
   }, [running, reactivity]);
 
   const prompt = reactivity >= beta; const period = reactivity !== 0 ? Lambda / reactivity : Infinity;
+
+  const explain =
+    reactivity >= beta
+      ? "Reactivity exceeds the delayed fraction β — the reactor is prompt-critical and power races up on the neutron lifetime (milliseconds), effectively uncontrollable."
+      : reactivity > 0
+      ? "Positive but below β — delayed neutrons stretch the response onto a stable, controllable reactor period."
+      : reactivity === 0
+      ? "Exactly critical — power holds steady as neutron production balances loss."
+      : "Negative reactivity — the reactor is subcritical and power decays away over time.";
+
+  const code = `import numpy as np
+rho, beta, Lambda, lam = ${reactivity}, 0.0065, 1e-4, 0.08
+n, c, dt = 1.0, beta/(Lambda*lam), 0.002
+for _ in range(3000):
+    dn = ((rho-beta)/Lambda)*n + lam*c
+    dc = (beta/Lambda)*n - lam*c
+    n += dn*dt; c += dc*dt
+print("power", n)`;
+
   return (
     <StudioChrome title="Reactor Point Kinetics" tagline="power, reactivity & period"
       controls={<div>
-        <Slider label="Reactivity ρ" value={reactivity} min={-0.005} max={0.008} step={0.0002} onChange={setReactivity} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Reactivity ρ" value={reactivity} min={-0.005} max={0.008} step={0.0002} onChange={(v) => update({ reactivity: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">A small step in reactivity does not blow the power up instantly, because a fraction of neutrons are released with a delay. Those delayed neutrons slow the response to a controllable timescale — the reactor period. But push reactivity past the delayed fraction β and it goes prompt-critical, growing on the neutron lifetime — millisecond-fast and uncontrollable.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Reactivity" value={`${(reactivity / beta).toFixed(2)} $`} /><Stat label="Regime" value={prompt ? "PROMPT-CRITICAL" : reactivity > 0 ? "delayed (controllable)" : "subcritical"} /><Stat label="Power" value={state.current.n.toExponential(2)} /></div>}
+      inspector={<div><Stat label="Reactivity" value={`${(reactivity / beta).toFixed(2)} $`} /><Stat label="Regime" value={prompt ? "PROMPT-CRITICAL" : reactivity > 0 ? "delayed (controllable)" : "subcritical"} /><Stat label="Power" value={state.current.n.toExponential(2)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

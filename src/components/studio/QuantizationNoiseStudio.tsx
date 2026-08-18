@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { bits: number; freq: number }> = {
+  "Telephone (8-bit)": { bits: 8, freq: 2 },
+  "Hi-fi (10-bit)": { bits: 10, freq: 3 },
+  "Coarse (2-bit)": { bits: 2, freq: 2 },
+  "1-bit extreme": { bits: 1, freq: 4 },
+};
 
 export function QuantizationNoiseStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [bits, setBits] = useState(3), [freq, setFreq] = useState(2);
+  const [{ bits, freq }, update] = useShareableNumbers({ bits: 3, freq: 2 });
   const levels = Math.pow(2, bits);
   const snr = 6.02 * bits + 1.76;
   const quant = (v: number) => Math.round((v + 1) / 2 * (levels - 1)) / (levels - 1) * 2 - 1;
@@ -23,17 +31,41 @@ export function QuantizationNoiseStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`${bits}-bit = ${levels} levels · staircase = quantized`, 30, 20);
   }, [bits, freq, levels]);
 
+  const explain =
+    bits <= 2
+      ? `At ${bits} bits there are only ${levels} levels, so the staircase barely tracks the wave — quantization noise dominates (SNR ≈ ${snr.toFixed(1)} dB).`
+      : bits >= 8
+      ? `At ${bits} bits the ${levels}-level staircase hugs the original wave and quantization noise is negligible (SNR ≈ ${snr.toFixed(1)} dB).`
+      : `Each extra bit halves the step size and adds about 6 dB; ${bits} bits gives ${levels} levels and roughly ${snr.toFixed(1)} dB of SNR.`;
+
+  const code = `import numpy as np
+bits, freq = ${bits}, ${freq}
+levels = 2 ** bits
+t = np.linspace(0, 1, 1000)
+sig = np.sin(2 * np.pi * freq * t)
+q = np.round((sig + 1) / 2 * (levels - 1)) / (levels - 1) * 2 - 1
+noise = sig - q
+snr = 6.02 * bits + 1.76
+print("levels", levels, "ideal SNR dB", round(snr, 1),
+      "rms error", round(np.sqrt((noise ** 2).mean()), 4))`;
+
   return (
     <StudioChrome title="ADC Quantization Noise" tagline="how many bits is enough?"
       controls={<div>
-        <Slider label="Resolution (bits)" value={bits} min={1} max={10} step={1} onChange={setBits} />
-        <Slider label="Signal frequency" value={freq} min={1} max={6} step={1} onChange={setFreq} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Resolution (bits)" value={bits} min={1} max={10} step={1} onChange={(v) => update({ bits: v })} />
+        <Slider label="Signal frequency" value={freq} min={1} max={6} step={1} onChange={(v) => update({ freq: v })} />
         <p className="mt-3 text-xs text-slate-500">An analog-to-digital converter rounds each sample to the nearest of 2ᴺ levels, adding quantization noise. Each extra bit halves the step size and adds about 6 dB of signal-to-noise ratio — the famous 6.02N + 1.76 dB rule. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Levels" value={`${levels}`} />
         <Stat label="Ideal SNR" value={`${snr.toFixed(1)} dB`} />
         <Stat label="Step size" value={`${(2 / levels).toFixed(4)}`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

@@ -1,13 +1,19 @@
 "use client";
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { useState } from "react";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { activity: number; distance: number; time: number }> = {
+  "Cs-137 at 1 m": { activity: 37, distance: 1, time: 1 },
+  "Handling a sample": { activity: 370, distance: 0.3, time: 0.5 },
+  "Stepped back": { activity: 370, distance: 2, time: 0.5 },
+  "Long shift near source": { activity: 100, distance: 1, time: 8 },
+};
 
 // Radiation dose: inverse-square + time, compared to reference doses.
 export function RadiationDoseStudio() {
-  const [activity, setActivity] = useState(37); // MBq
-  const [distance, setDistance] = useState(1); // m
-  const [time, setTime] = useState(1); // hr
+  const [{ activity, distance, time }, update] = useShareableNumbers({ activity: 37, distance: 1, time: 1 });
 
   // dose-rate constant (approx, mSv/hr per MBq at 1 m for Cs-137 ~ 8.4e-5)
   const gamma = 8.4e-5; const doseRate = gamma * activity / (distance * distance); // mSv/hr
@@ -16,15 +22,33 @@ export function RadiationDoseStudio() {
   const refs = [["Dental X-ray", 0.005], ["Chest X-ray", 0.1], ["Annual limit (public)", 1], ["CT scan", 7], ["Annual limit (worker)", 20]] as const;
   const risk = dose < 1 ? "very low" : dose < 20 ? "occupational range" : dose < 1000 ? "elevated" : "acute — dangerous";
 
+  const explain =
+    dose >= 1000
+      ? `A total dose of ${dose.toFixed(0)} mSv is in the acute range — a serious, potentially life-threatening exposure.`
+      : dose >= 20
+      ? `${dose.toFixed(1)} mSv exceeds the annual worker limit; here distance and shielding matter far more than shaving time.`
+      : distance <= 0.5
+      ? `At just ${distance} m you are very close, and because dose falls with the square of distance, backing away even a little would cut this sharply.`
+      : `At ${distance} m for ${time} h the estimated dose is ${dose.toFixed(3)} mSv — about ${bananas.toFixed(0)} banana-equivalents, a low everyday-scale exposure.`;
+
+  const code = `# Radiation dose: inverse-square law + exposure time
+gamma = 8.4e-5  # mSv/hr per MBq at 1 m (Cs-137 approx)
+activity, distance, time = ${activity}, ${distance}, ${time}
+dose_rate = gamma * activity / distance**2  # mSv/hr
+dose = dose_rate * time  # mSv
+print(f"dose rate {dose_rate:.4f} mSv/hr, total {dose:.3f} mSv")`;
+
   return (
     <StudioChrome title="Radiation Dose" tagline="exposure, distance & time"
       controls={<div>
-        <Slider label="Source activity (MBq)" value={activity} min={1} max={10000} step={1} onChange={setActivity} />
-        <Slider label="Distance (m)" value={distance} min={0.1} max={10} step={0.1} onChange={setDistance} />
-        <Slider label="Exposure time (hr)" value={time} min={0.1} max={24} step={0.1} onChange={setTime} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Source activity (MBq)" value={activity} min={1} max={10000} step={1} onChange={(v) => update({ activity: v })} />
+        <Slider label="Distance (m)" value={distance} min={0.1} max={10} step={0.1} onChange={(v) => update({ distance: v })} />
+        <Slider label="Exposure time (hr)" value={time} min={0.1} max={24} step={0.1} onChange={(v) => update({ time: v })} />
         <p className="mt-3 text-xs text-slate-500">The three ways to reduce radiation dose are time, distance, and shielding. Dose builds with exposure time but falls with the square of distance — doubling your distance quarters the dose. Effective dose in millisieverts lets you compare any exposure to everyday references like a chest X-ray or the annual background dose. Educational estimate only.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Dose rate" value={`${doseRate.toFixed(4)} mSv/hr`} /><Stat label="Total dose" value={`${dose.toFixed(3)} mSv`} /><Stat label="≈ bananas" value={bananas.toFixed(0)} /><Stat label="Risk level" value={risk} /></div>}
+      inspector={<div><Stat label="Dose rate" value={`${doseRate.toFixed(4)} mSv/hr`} /><Stat label="Total dose" value={`${dose.toFixed(3)} mSv`} /><Stat label="≈ bananas" value={bananas.toFixed(0)} /><Stat label="Risk level" value={risk} /><ExplainResult text={explain} /></div>}
     ><div className="p-4">
         <div className="mb-3 text-center text-xs uppercase tracking-widest text-slate-500">Your dose vs common references (mSv, log scale)</div>
         {[["Your exposure", dose] as const, ...refs].map(([n, d]) => (
