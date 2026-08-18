@@ -1,49 +1,152 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { PALETTE, hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
+const PRESETS: Record<string, { angle: number; speed: number; drag: number }> = {
+  "Vacuum 45°": { angle: 45, speed: 60, drag: 0 },
+  "Max range (drag)": { angle: 38, speed: 90, drag: 0.02 },
+  "Mortar (75°)": { angle: 75, speed: 70, drag: 0.015 },
+  "Line drive (20°)": { angle: 20, speed: 100, drag: 0.02 },
+};
+
 export function ProjectileStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [angle, setAngle] = useState(45);
-  const [speed, setSpeed] = useState(60);
-  const [drag, setDrag] = useState(0.02);
+  const [{ angle, speed, drag }, update] = useShareableNumbers({ angle: 45, speed: 60, drag: 0.02 });
 
   const traj = useMemo(() => {
-    const rad = (angle * Math.PI) / 180; let x = 0, y = 0, vx = speed * Math.cos(rad), vy = speed * Math.sin(rad);
-    const g = 30, dt = 0.02; const pts: [number, number][] = [[0, 0]];
-    for (let i = 0; i < 2000 && y >= 0; i++) {
+    const rad = (angle * Math.PI) / 180;
+    let x = 0, y = 0, vx = speed * Math.cos(rad), vy = speed * Math.sin(rad);
+    const g = 30, dt = 0.02;
+    const pts: [number, number][] = [[0, 0]];
+    for (let i = 0; i < 4000 && y >= 0; i++) {
       const v = Math.hypot(vx, vy);
-      vx += (-drag * v * vx) * dt; vy += (-g - drag * v * vy) * dt;
-      x += vx * dt; y += vy * dt; if (y < 0) break; pts.push([x, y]);
+      vx += -drag * v * vx * dt;
+      vy += (-g - drag * v * vy) * dt;
+      x += vx * dt; y += vy * dt;
+      if (y < 0) break;
+      pts.push([x, y]);
     }
     return pts;
   }, [angle, speed, drag]);
 
-  useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
-    ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-    const maxX = Math.max(...traj.map((p) => p[0]), 10), maxY = Math.max(...traj.map((p) => p[1]), 10);
-    const pad = 40; const sx = (x: number) => pad + (x / maxX) * (W - 2 * pad); const sy = (y: number) => H - pad - (y / maxY) * (H - 2 * pad);
-    ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(pad, H - pad); ctx.lineTo(W - pad, H - pad); ctx.stroke();
-    ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); traj.forEach((p, i) => i ? ctx.lineTo(sx(p[0]), sy(p[1])) : ctx.moveTo(sx(p[0]), sy(p[1]))); ctx.stroke();
-    const last = traj[traj.length - 1]; ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(sx(last[0]), sy(last[1]), 6, 0, 7); ctx.fill();
-    ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`range ${maxX.toFixed(1)} m · apex ${maxY.toFixed(1)} m`, pad, 24);
-  }, [traj]);
+  const range = Math.max(...traj.map((p) => p[0]), 0);
+  const apex = Math.max(...traj.map((p) => p[1]), 0);
 
-  const range = Math.max(...traj.map((p) => p[0])), apex = Math.max(...traj.map((p) => p[1]));
+  useEffect(() => {
+    const ctx = hidpi(canvasRef.current!, W, H);
+    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = PALETTE.bg;
+    ctx.fillRect(0, 0, W, H);
+
+    const pad = 52;
+    const maxX = Math.max(range, 10), maxY = Math.max(apex, 10);
+    const sx = (x: number) => pad + (x / maxX) * (W - 2 * pad);
+    const sy = (y: number) => H - pad - (y / maxY) * (H - 2 * pad);
+
+    // gridlines + tick labels
+    ctx.font = "11px ui-monospace, monospace";
+    ctx.fillStyle = PALETTE.text;
+    ctx.textAlign = "center";
+    for (let i = 0; i <= 5; i++) {
+      const gx = pad + (i / 5) * (W - 2 * pad);
+      ctx.strokeStyle = PALETTE.grid;
+      ctx.globalAlpha = 0.4;
+      ctx.beginPath(); ctx.moveTo(gx, pad); ctx.lineTo(gx, H - pad); ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.fillText(((i / 5) * maxX).toFixed(0), gx, H - pad + 16);
+    }
+    ctx.textAlign = "right";
+    for (let i = 0; i <= 4; i++) {
+      const gy = H - pad - (i / 4) * (H - 2 * pad);
+      ctx.strokeStyle = PALETTE.grid;
+      ctx.globalAlpha = 0.4;
+      ctx.beginPath(); ctx.moveTo(pad, gy); ctx.lineTo(W - pad, gy); ctx.stroke();
+      ctx.globalAlpha = 1;
+      ctx.fillText(((i / 4) * maxY).toFixed(0), pad - 8, gy + 4);
+    }
+
+    // axis titles
+    ctx.fillStyle = PALETTE.axis;
+    ctx.textAlign = "center";
+    ctx.fillText("distance (m)", W / 2, H - 12);
+    ctx.save();
+    ctx.translate(16, H / 2);
+    ctx.rotate(-Math.PI / 2);
+    ctx.fillText("height (m)", 0, 0);
+    ctx.restore();
+
+    // trajectory
+    ctx.strokeStyle = PALETTE.series[0];
+    ctx.lineWidth = 2.5;
+    ctx.beginPath();
+    traj.forEach((p, i) => (i ? ctx.lineTo(sx(p[0]), sy(p[1])) : ctx.moveTo(sx(p[0]), sy(p[1]))));
+    ctx.stroke();
+
+    // landing marker
+    const last = traj[traj.length - 1];
+    ctx.fillStyle = PALETTE.series[1];
+    ctx.beginPath(); ctx.arc(sx(last[0]), sy(last[1]), 6, 0, 7); ctx.fill();
+
+    // apex marker
+    const apexPt = traj.reduce((a, b) => (b[1] > a[1] ? b : a), traj[0]);
+    ctx.strokeStyle = PALETTE.series[2];
+    ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(sx(apexPt[0]), sy(apexPt[1])); ctx.lineTo(sx(apexPt[0]), H - pad); ctx.stroke();
+    ctx.setLineDash([]);
+  }, [traj, range, apex]);
+
+  const explain =
+    drag < 0.005
+      ? "Near-vacuum: 45° maximizes range and the arc is symmetric — the classic textbook result."
+      : angle > 60
+      ? "Steep launch: tall apex, short range. Most of the launch energy goes up, not out."
+      : angle < 30
+      ? "Shallow launch: fast and flat with a low apex — flight time is short, so range is capped."
+      : "With this much air drag the range-optimal angle falls below 45° (toward ~35°), and the descent is steeper than the climb.";
+
+  const code = `import numpy as np
+angle, speed, drag = ${angle}, ${speed}, ${drag}
+rad = np.radians(angle); g, dt = 30.0, 0.02
+x = y = 0.0; vx = speed*np.cos(rad); vy = speed*np.sin(rad)
+xs, ys = [0.0], [0.0]
+while y >= 0:
+    v = np.hypot(vx, vy)
+    vx += -drag*v*vx*dt
+    vy += (-g - drag*v*vy)*dt
+    x += vx*dt; y += vy*dt
+    xs.append(x); ys.append(y)
+print("range", max(xs), "apex", max(ys))`;
 
   return (
-    <StudioChrome title="Projectile Motion Studio" tagline="ballistics with air drag"
-      controls={<div>
-        <p className="mb-3 text-xs text-slate-500">Launch a projectile and see how angle, speed, and air resistance shape the arc.</p>
-        <Slider label="Launch angle (°)" value={angle} min={5} max={85} step={1} onChange={setAngle} />
-        <Slider label="Launch speed" value={speed} min={10} max={120} step={5} onChange={setSpeed} />
-        <Slider label="Air drag" value={drag} min={0} max={0.1} step={0.005} onChange={setDrag} />
-      </div>}
-      inspector={<div><Stat label="Range" value={`${range.toFixed(1)} m`} /><Stat label="Max height" value={`${apex.toFixed(1)} m`} /><Stat label="Drag" value={drag === 0 ? "none (ideal)" : "quadratic"} /></div>}
+    <StudioChrome
+      title="Projectile Motion Studio"
+      tagline="ballistics with air drag"
+      controls={
+        <div>
+          <p className="mb-3 text-xs text-slate-500">Launch a projectile and see how angle, speed, and air resistance shape the arc.</p>
+          <Presets
+            presets={Object.keys(PRESETS).map((label) => ({ label }))}
+            onApply={(label) => update(PRESETS[label])}
+          />
+          <Slider label="Launch angle (°)" value={angle} min={5} max={85} step={1} onChange={(v) => update({ angle: v })} />
+          <Slider label="Launch speed" value={speed} min={10} max={120} step={5} onChange={(v) => update({ speed: v })} />
+          <Slider label="Air drag" value={drag} min={0} max={0.1} step={0.005} onChange={(v) => update({ drag: v })} />
+          <ShareBar code={code} />
+        </div>
+      }
+      inspector={
+        <div>
+          <Stat label="Range" value={`${range.toFixed(1)} m`} />
+          <Stat label="Max height" value={`${apex.toFixed(1)} m`} />
+          <Stat label="Drag model" value={drag === 0 ? "none (ideal)" : "quadratic"} />
+          <ExplainResult text={explain} />
+        </div>
+      }
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>
