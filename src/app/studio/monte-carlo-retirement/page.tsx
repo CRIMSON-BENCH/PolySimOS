@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MonteCarloRetirementStudio } from "@/components/studio/MonteCarloRetirementStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Retirement Monte Carlo Simulator (Browser)", description: "Project a retirement portfolio as a band of outcomes from savings, contributions, return, and volatility. Free, interactive.", alternates: { canonical: "/studio/monte-carlo-retirement" } };
+export default function Page() { return <StudioPageShell slug="monte-carlo-retirement" name="Retirement Monte Carlo" keyword="retirement monte carlo simulator" lede="A single retirement projection is a fairy tale — markets are random. See the realistic band of outcomes, from unlucky to fortunate." about="Because returns vary year to year, a portfolio's future is a distribution, not a line. This shows the median path with a 10th-to-90th-percentile band; higher volatility widens the spread even when the average return is unchanged, which is why sequence-of-returns risk matters. Educational tool, not financial advice."><MonteCarloRetirementStudio /></StudioPageShell>; }

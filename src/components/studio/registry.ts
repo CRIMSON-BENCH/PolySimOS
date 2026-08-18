@@ -172,6 +172,14 @@ import { MutationSelectionStudio } from "./MutationSelectionStudio";
 import { PhyloDistanceStudio } from "./PhyloDistanceStudio";
 import { TumorGrowthStudio } from "./TumorGrowthStudio";
 import { OxygenDissociationStudio } from "./OxygenDissociationStudio";
+import { BondDurationStudio } from "./BondDurationStudio";
+import { OptionsGreeksStudio } from "./OptionsGreeksStudio";
+import { BinomialOptionStudio } from "./BinomialOptionStudio";
+import { CapmBetaStudio } from "./CapmBetaStudio";
+import { DcfValuationStudio } from "./DcfValuationStudio";
+import { KellyCriterionStudio } from "./KellyCriterionStudio";
+import { MonteCarloRetirementStudio } from "./MonteCarloRetirementStudio";
+import { DividendDiscountStudio } from "./DividendDiscountStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -684,6 +692,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "phylo-distance": PhyloDistanceStudio,
   "tumor-growth": TumorGrowthStudio,
   "oxygen-dissociation": OxygenDissociationStudio,
+  "bond-duration": BondDurationStudio,
+  "options-greeks": OptionsGreeksStudio,
+  "binomial-option": BinomialOptionStudio,
+  "capm-beta": CapmBetaStudio,
+  "dcf-valuation": DcfValuationStudio,
+  "kelly-criterion": KellyCriterionStudio,
+  "monte-carlo-retirement": MonteCarloRetirementStudio,
+  "dividend-discount": DividendDiscountStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

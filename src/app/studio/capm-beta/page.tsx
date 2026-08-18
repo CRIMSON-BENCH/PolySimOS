@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CapmBetaStudio } from "@/components/studio/CapmBetaStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "CAPM Expected Return & Beta Calculator", description: "Compute an asset's expected return from the risk-free rate, market return, and beta on the Security Market Line. Free, interactive.", alternates: { canonical: "/studio/capm-beta" } };
+export default function Page() { return <StudioPageShell slug="capm-beta" name="CAPM & Beta" keyword="capm calculator beta" lede="Riskier assets should pay more. The Capital Asset Pricing Model puts a number on it — see where any stock lands on the Security Market Line." about="CAPM prices risk: expected return = risk-free rate + β·(market return − risk-free rate). Beta measures an asset's volatility relative to the market — a beta above 1 is more volatile and commands a higher expected return, plotted along the Security Market Line. Educational tool, not financial advice."><CapmBetaStudio /></StudioPageShell>; }

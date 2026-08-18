@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OptionsGreeksStudio } from "@/components/studio/OptionsGreeksStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Option Greeks Calculator (Black–Scholes)", description: "Compute delta, gamma, vega, and theta for a call option with Black–Scholes, and see delta versus the underlying price. Free, interactive.", alternates: { canonical: "/studio/options-greeks" } };
+export default function Page() { return <StudioPageShell slug="options-greeks" name="Option Greeks (Black–Scholes)" keyword="option greeks calculator" lede="The Greeks are an option trader's dashboard. See how delta, gamma, vega, and theta shift as the price, volatility, and time change." about="Under the Black–Scholes model, the Greeks are the option price's sensitivities: delta to the underlying, gamma to delta, vega to volatility, and theta to time decay. Traders combine positions to neutralize the Greeks they do not want exposure to. Educational tool, not financial advice."><OptionsGreeksStudio /></StudioPageShell>; }

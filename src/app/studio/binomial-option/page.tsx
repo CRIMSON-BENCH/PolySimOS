@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BinomialOptionStudio } from "@/components/studio/BinomialOptionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Binomial Option Pricing Model Simulator", description: "Price a call option on a binomial tree of up and down moves using risk-neutral valuation, and watch it converge to Black–Scholes. Free.", alternates: { canonical: "/studio/binomial-option" } };
+export default function Page() { return <StudioPageShell slug="binomial-option" name="Binomial Option Pricing" keyword="binomial option pricing model" lede="Chart every path a stock could take, then work backward to price the option today. Add steps and watch the lattice converge to Black–Scholes." about="The binomial model discretizes price movement into up and down steps, assigns risk-neutral probabilities, and values the option by backward induction from expiry. It handles early exercise and other features that closed-form models cannot, and converges to Black–Scholes as steps increase. Educational tool, not financial advice."><BinomialOptionStudio /></StudioPageShell>; }

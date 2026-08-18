@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { KellyCriterionStudio } from "@/components/studio/KellyCriterionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Kelly Criterion Bet-Size Calculator (Browser)", description: "Find the growth-optimal fraction to bet or invest from win probability and payoff, and see the growth-rate curve. Free, interactive.", alternates: { canonical: "/studio/kelly-criterion" } };
+export default function Page() { return <StudioPageShell slug="kelly-criterion" name="Kelly Criterion" keyword="kelly criterion calculator" lede="Bet too little and you grow slowly; bet too much and you go broke. The Kelly criterion finds the fraction that maximizes long-run growth." about="The Kelly criterion maximizes the expected logarithm of wealth, giving the optimal bet fraction f = (bp − q)/b. Betting more than Kelly increases volatility and eventually guarantees ruin; many practitioners use half-Kelly to trade a little growth for much smoother returns. Educational tool, not financial advice."><KellyCriterionStudio /></StudioPageShell>; }

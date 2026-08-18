@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DcfValuationStudio } from "@/components/studio/DcfValuationStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "DCF Valuation Calculator (Discounted Cash Flow)", description: "Value a business as the present value of its projected cash flows plus a terminal value, from growth and discount rate. Free, interactive.", alternates: { canonical: "/studio/dcf-valuation" } };
+export default function Page() { return <StudioPageShell slug="dcf-valuation" name="DCF Valuation" keyword="dcf valuation calculator" lede="A company is worth the cash it will generate — discounted back to today. Build a DCF and watch how growth and discount rate swing the value." about="Discounted cash flow sums the present value of forecast cash flows, discounting distant cash more heavily, and adds a terminal value for everything beyond the horizon. The discount rate and terminal growth assumption dominate the result — small changes move the valuation a lot. Educational tool, not financial advice."><DcfValuationStudio /></StudioPageShell>; }

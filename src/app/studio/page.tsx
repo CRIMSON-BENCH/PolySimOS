@@ -356,6 +356,14 @@ export const SIMS = [
   { slug: "phylo-distance", name: "Phylogenetic Distance", desc: "DNA divergence to a tree.", tag: "Biology" },
   { slug: "tumor-growth", name: "Tumor Growth", desc: "Gompertz & logistic dynamics.", tag: "Biology" },
   { slug: "oxygen-dissociation", name: "O₂–Hemoglobin Curve", desc: "How blood loads & unloads O₂.", tag: "Biology" },
+  { slug: "bond-duration", name: "Bond Duration", desc: "Interest-rate sensitivity.", tag: "Finance" },
+  { slug: "options-greeks", name: "Option Greeks", desc: "Delta, gamma, vega, theta.", tag: "Finance" },
+  { slug: "binomial-option", name: "Binomial Option Pricing", desc: "Lattice option valuation.", tag: "Finance" },
+  { slug: "capm-beta", name: "CAPM & Beta", desc: "Pricing risk with beta.", tag: "Finance" },
+  { slug: "dcf-valuation", name: "DCF Valuation", desc: "Present value of future cash.", tag: "Finance" },
+  { slug: "kelly-criterion", name: "Kelly Criterion", desc: "Optimal bet sizing.", tag: "Finance" },
+  { slug: "monte-carlo-retirement", name: "Retirement Monte Carlo", desc: "Range of portfolio outcomes.", tag: "Finance" },
+  { slug: "dividend-discount", name: "Dividend Discount Model", desc: "Gordon growth valuation.", tag: "Finance" },
 ];
 
 export default function StudioIndex() {
