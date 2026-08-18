@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { r0: number; infPeriod: number; vacc: number }> = {
@@ -76,7 +77,7 @@ print("peak infected", I.max(), "total infected", R[-1] - vacc)`;
         <p className="mt-3 text-xs text-slate-500">The SIR model splits a population into Susceptible, Infected, and Recovered and lets them flow between compartments. R₀ — the average number infected by one case — sets whether an outbreak grows. Vaccinating above the herd-immunity threshold 1−1/R₀ prevents an epidemic outright.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Peak infected" value={`${(peakI * 100).toFixed(1)}%`} /><Stat label="Total infected" value={`${(totalInf * 100).toFixed(1)}%`} /><Stat label="Herd immunity" value={`${(herd * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Peak infected" value={`${(peakI * 100).toFixed(1)}%`} /><Stat label="Total infected" value={`${(totalInf * 100).toFixed(1)}%`} /><Stat label="Herd immunity" value={`${(herd * 100).toFixed(0)}%`} /><Equation tex={`\\frac{dS}{dt}=-\\beta SI,\\ \\frac{dI}{dt}=\\beta SI-\\gamma I,\\ \\frac{dR}{dt}=\\gamma I;\\ \\beta=${(r0 / infPeriod).toFixed(3)},\\ \\gamma=${(1 / infPeriod).toFixed(3)},\\ R_0=\\frac{\\beta}{\\gamma}=${r0.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

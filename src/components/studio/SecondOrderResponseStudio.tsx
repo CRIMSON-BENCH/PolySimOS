@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { wn: number }> = {
@@ -62,6 +63,7 @@ plt.legend(); plt.xlabel("time"); plt.ylabel("response"); plt.show()`;
         <Stat label="ζ = 0.2 overshoot" value={`${(Math.exp(-Math.PI * 0.2 / Math.sqrt(1 - 0.04)) * 100).toFixed(0)}%`} />
         <Stat label="ζ = 0.707 overshoot" value="4%" />
         <Stat label="Critical damping" value="ζ = 1 (fastest, no overshoot)" />
+        <Equation tex={`\\ddot x + 2\\zeta\\omega_n\\dot x + \\omega_n^2 x = \\omega_n^2 u,\\quad \\omega_n = ${wn.toFixed(1)},\\ M_p = e^{-\\zeta\\pi/\\sqrt{1-\\zeta^2}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

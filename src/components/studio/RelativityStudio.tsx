@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { beta: number }> = {
   "Everyday (0.1c)": { beta: 0.1 },
@@ -56,7 +57,7 @@ print("length contraction", 1/gamma)`;
         <p className="mt-3 text-xs text-slate-500">Near the speed of light, space and time warp. The Lorentz factor γ = 1/√(1−v²/c²) governs it all: moving clocks run slow by γ (time dilation), moving objects shrink along their motion by 1/γ (length contraction), and energy grows without bound. At everyday speeds γ ≈ 1, so we never notice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Lorentz factor γ" value={gamma.toFixed(3)} /><Stat label="Time dilation" value={`×${gamma.toFixed(2)}`} /><Stat label="Length contraction" value={`×${(1 / gamma).toFixed(3)}`} /><Stat label="Speed" value={`${(beta * c / 1e6).toFixed(0)} Mm/s`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Lorentz factor γ" value={gamma.toFixed(3)} /><Stat label="Time dilation" value={`×${gamma.toFixed(2)}`} /><Stat label="Length contraction" value={`×${(1 / gamma).toFixed(3)}`} /><Stat label="Speed" value={`${(beta * c / 1e6).toFixed(0)} Mm/s`} /><Equation tex={`\\gamma=\\dfrac{1}{\\sqrt{1-\\beta^2}}=\\dfrac{1}{\\sqrt{1-${beta}^2}}=${gamma.toFixed(3)},\\quad \\Delta t'=\\gamma\\,\\Delta t`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

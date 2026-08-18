@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { volume: number; area: number; alpha: number }> = {
@@ -58,7 +59,7 @@ print("RT60 %.2f s" % rt60, "A", round(A), "sabins")`;
         <p className="mt-3 text-xs text-slate-500">Reverberation time — how long a sound takes to decay by 60 dB — is set by Sabine&apos;s formula RT60 = 0.161·V/(S·α). Big, hard rooms ring for seconds; small, soft rooms deaden almost instantly. Concert halls target around 2 seconds; recording studios far less. Adding absorption pulls the decay down.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="RT60" value={`${rt60.toFixed(2)} s`} /><Stat label="Absorption A" value={`${A.toFixed(0)} sabins`} /><Stat label="Character" value={verdict} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="RT60" value={`${rt60.toFixed(2)} s`} /><Stat label="Absorption A" value={`${A.toFixed(0)} sabins`} /><Stat label="Character" value={verdict} /><Equation tex={`\\text{RT}_{60} = \\dfrac{0.161\\,V}{A} = \\dfrac{0.161\\times ${volume}}{${A.toFixed(0)}} = ${rt60.toFixed(2)}\\ \\text{s},\\quad A = \\sum_i \\alpha_i S_i = ${A.toFixed(0)}\\ \\text{sabins}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={280} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

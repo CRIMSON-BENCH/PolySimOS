@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
@@ -75,7 +76,7 @@ print(approx)`;
         <Slider label="Rectangles" value={nRect} min={2} max={100} step={1} onChange={(v) => update({ nRect: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Riemann sum" value={sum.toFixed(4)} /><Stat label="Exact integral" value={exact.toFixed(4)} /><Stat label="Error" value={Math.abs(sum - exact).toFixed(4)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Riemann sum" value={sum.toFixed(4)} /><Stat label="Exact integral" value={exact.toFixed(4)} /><Stat label="Error" value={Math.abs(sum - exact).toFixed(4)} /><Equation tex={`\\int_{${a}}^{${b}} f(x)\\,dx \\approx \\sum_{i=0}^{${nRect - 1}} f(x_i)\\,\\Delta x = ${sum.toFixed(3)},\\quad \\Delta x = ${dxNow.toFixed(3)}\\ (\\text{${mode === "mid" ? "midpoint" : mode}})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

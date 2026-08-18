@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { H: number; phi: number; gamma: number; width: number }> = {
   "Low garden wall": { H: 2, phi: 32, gamma: 17, width: 1.5 },
@@ -67,7 +68,7 @@ print("Ka", round(Ka, 3), "FS_overturn", round(resist/overturn, 2), "FS_slide", 
         <p className="mt-3 text-xs text-slate-500">Rankine theory gives the active earth pressure behind a wall from the coefficient Ka = tan²(45−φ/2). The soil pushes with a triangular pressure resultant Pa acting at one-third the height. The wall must resist overturning and sliding with adequate factors of safety. Educational tool, not a geotechnical design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Ka" value={Ka.toFixed(3)} /><Stat label="Active thrust Pa" value={`${Pa.toFixed(1)} kN/m`} /><Stat label="FS overturning" value={FS_overturn.toFixed(2)} /><Stat label="FS sliding" value={FS_slide.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Ka" value={Ka.toFixed(3)} /><Stat label="Active thrust Pa" value={`${Pa.toFixed(1)} kN/m`} /><Stat label="FS overturning" value={FS_overturn.toFixed(2)} /><Stat label="FS sliding" value={FS_slide.toFixed(2)} /><Equation tex={`K_a=\\tan^2\\!\\left(45-\\tfrac{\\varphi}{2}\\right)=${Ka.toFixed(3)},\\quad P_a=\\tfrac{1}{2}K_a\\gamma H^2=${Pa.toFixed(1)}\\ \\mathrm{kN/m}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,6 +2,7 @@
 
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useState } from "react";
 
 export function ShannonEntropyStudio() {
@@ -37,7 +38,7 @@ print("entropy bits", round(entropy, 1), "crack seconds", seconds)`;
         <p className="mt-3 text-xs text-slate-500">Shannon entropy measures information in bits — how many yes/no questions it takes to pin down a value. For a password it is length times the log₂ of the character-set size, quantifying how unpredictable it is. Each extra bit doubles the guessing effort, so length beats complexity: a long passphrase can carry more entropy than a short scramble of symbols.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Character pool" value={String(pool)} /><Stat label="Entropy" value={`${entropy.toFixed(1)} bits`} /><Stat label="Strength" value={strength} /><Stat label="Crack time" value={fmt(seconds)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Character pool" value={String(pool)} /><Stat label="Entropy" value={`${entropy.toFixed(1)} bits`} /><Stat label="Strength" value={strength} /><Stat label="Crack time" value={fmt(seconds)} /><Equation tex={`H=-\\sum_i p_i\\log_2 p_i=\\log_2 ${pool || 1}=${perChar.toFixed(2)}\\;\\text{bits/char}\\;\\Rightarrow\\;${pw.length}\\times${perChar.toFixed(2)}=${entropy.toFixed(1)}\\;\\text{bits}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Entropy</div>
         <div className="mt-3 text-7xl font-black" style={{ color: entropy < 36 ? "#ef4444" : entropy < 60 ? "#fbbf24" : "#a3e635" }}>{entropy.toFixed(0)}<span className="ml-2 text-3xl text-slate-400">bits</span></div>

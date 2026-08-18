@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 import { useState } from "react";
 
@@ -46,7 +47,7 @@ print("EV", round(ev, 2), "house_edge_pct", round(-ev / wager * 100, 2))`;
         <p className="mt-3 text-xs text-slate-500">Roulette payouts are set as if the wheel had no zeros — but it does. That extra 0 (and 00 on American wheels) is where the house edge lives: every bet, from a single number to red/black, carries the same expected loss of 5.26% American or 2.70% European. No betting system changes it, because each spin is independent.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Win probability" value={`${(pWin * 100).toFixed(1)}%`} /><Stat label="Payout" value={`${b.payout} to 1`} /><Stat label="Expected value" value={`$${ev.toFixed(2)}`} /><Stat label="House edge" value={`${houseEdge.toFixed(2)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Win probability" value={`${(pWin * 100).toFixed(1)}%`} /><Stat label="Payout" value={`${b.payout} to 1`} /><Stat label="Expected value" value={`$${ev.toFixed(2)}`} /><Stat label="House edge" value={`${houseEdge.toFixed(2)}%`} /><Equation tex={`E = \\frac{${b.win}}{${slots}}\\cdot ${b.payout} - \\frac{${slots - b.win}}{${slots}} = ${(ev / wager).toFixed(4)}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Expected value per ${wager} bet</div>
         <div className="mt-3 text-6xl font-black text-red-400">−${Math.abs(ev).toFixed(2)}</div>

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const N = 80, CELL = 6;
@@ -77,7 +78,7 @@ print("similarity threshold", tol, "empty fraction", empty)`;
         <p className="mt-3 text-xs text-slate-500">Each agent is happy if at least this fraction of its neighbors share its color; unhappy agents move to a random empty cell. Even a mild preference for similar neighbors drives sharp, global segregation — Schelling&apos;s famous result.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Happy" value={`${(happy * 100).toFixed(1)}%`} /><Stat label="Threshold" value={`${(tolerance * 100).toFixed(0)}%`} /><Stat label="Grid" value={`${N}²`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Happy" value={`${(happy * 100).toFixed(1)}%`} /><Stat label="Threshold" value={`${(tolerance * 100).toFixed(0)}%`} /><Stat label="Grid" value={`${N}²`} /><Equation tex={`\\text{move if}\\quad \\frac{n_{\\text{like}}}{n_{\\text{total}}} < \\tau = ${tolerance.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

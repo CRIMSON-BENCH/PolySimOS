@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { isp: number; ratio: number; stages: number }> = {
@@ -57,6 +58,7 @@ print("reaches LEO" if dv_total >= 9400 else "short of LEO")`;
         <Stat label="Δv per stage" value={`${(dvStage / 1000).toFixed(2)} km/s`} />
         <Stat label="Total Δv" value={`${(dvTotal / 1000).toFixed(2)} km/s`} />
         <Stat label="Reaches LEO?" value={dvTotal >= leo ? "yes ✓" : "no"} />
+        <Equation tex={`\\Delta v = v_e\\,\\ln\\frac{m_0}{m_f} = I_{sp}\\,g_0\\,\\ln\\frac{m_0}{m_f} = ${isp}\\cdot 9.81\\cdot\\ln ${ratio} = ${(dvStage / 1000).toFixed(2)}\\,\\text{km/s}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

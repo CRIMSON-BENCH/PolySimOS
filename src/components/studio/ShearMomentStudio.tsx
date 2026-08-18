@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { L: number; P: number; a: number; w: number }> = {
@@ -63,7 +64,7 @@ print("RA", RA, "RB", RB, "Mmax", moment.max(), "at x", x[moment.argmax()])`;
         <p className="mt-3 text-xs text-slate-500">Shear and bending-moment diagrams show the internal forces along a beam. Shear jumps at each point load; the moment is the running integral of shear and peaks where shear crosses zero. Engineers size beams for this maximum moment. Educational tool, not a substitute for structural design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Reaction A" value={`${RA.toFixed(1)} kN`} /><Stat label="Reaction B" value={`${RB.toFixed(1)} kN`} /><Stat label="Max moment" value={`${mMax.toFixed(1)} kN·m`} /><Stat label="at x" value={`${xMax.toFixed(2)} m`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Reaction A" value={`${RA.toFixed(1)} kN`} /><Stat label="Reaction B" value={`${RB.toFixed(1)} kN`} /><Stat label="Max moment" value={`${mMax.toFixed(1)} kN·m`} /><Stat label="at x" value={`${xMax.toFixed(2)} m`} /><Equation tex={`\\frac{dV}{dx}=-w=-${w},\\quad \\frac{dM}{dx}=V,\\quad M_{\\max}=${mMax.toFixed(1)}\\;\\text{kN·m}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

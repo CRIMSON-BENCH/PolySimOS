@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { p2: number; K: number }> = {
@@ -58,6 +59,7 @@ print("closed-loop poles:", roots)`;
         <Stat label="Closed-loop poles" value={im === 0 ? `${re.toFixed(2)}, real` : `${re.toFixed(2)} ± ${im.toFixed(2)}j`} />
         <Stat label="Damping" value={disc >= 0 ? "overdamped" : "underdamped"} />
         <Stat label="Stability" value={stable ? "stable ✓" : "unstable ⚠"} />
+        <Equation tex={`1 + \\frac{K}{s(s+p_2)} = 0 \\;\\Rightarrow\\; s^2 + ${p2}\\,s + ${K} = 0`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

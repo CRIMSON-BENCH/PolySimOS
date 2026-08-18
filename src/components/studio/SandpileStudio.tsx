@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi } from "@/lib/studioKit";
 
@@ -63,7 +64,7 @@ print("max height", int(g.max()))`;
         <p className="mt-3 text-xs text-slate-500">Grains drop on the center cell. When a cell reaches 4 grains it topples, sending one to each neighbor — which can trigger chain-reaction avalanches. The pile self-organizes into an intricate fractal at the critical slope.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Grains added" value={grains.toLocaleString()} /><Stat label="Last avalanche" value={avalanche.toLocaleString()} /><Stat label="Topple at" value="4 grains" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Grains added" value={grains.toLocaleString()} /><Stat label="Last avalanche" value={avalanche.toLocaleString()} /><Stat label="Topple at" value="4 grains" /><Equation tex={`z_{ij} \\geq 4:\\ z_{ij} \\to z_{ij}-4,\\ z_{\\text{nbr}} \\to z_{\\text{nbr}}+1;\\ \\text{grains}=${grains}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

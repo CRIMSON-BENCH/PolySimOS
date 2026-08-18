@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -63,7 +64,7 @@ print("wavelength_km", 40000/wave_num, "westward_drift", westward)`;
         <p className="mt-3 text-xs text-slate-500">The jet stream does not flow straight — it meanders in giant planetary Rossby waves, driven by the Earth&apos;s rotation varying with latitude. These waves carry weather systems around the globe and, when they grow large and stall, lock in heat waves, cold snaps, and floods. A few long waves circle the whole hemisphere.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Wave number" value={String(waveNum)} /><Stat label="Wavelength" value={`${(40000 / waveNum).toFixed(0)} km`} /><Stat label="Drift" value="westward vs flow" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Wave number" value={String(waveNum)} /><Stat label="Wavelength" value={`${(40000 / waveNum).toFixed(0)} km`} /><Stat label="Drift" value="westward vs flow" /><Equation tex={`\\omega = -\\frac{\\beta k}{k^2 + l^2},\\quad c = -\\frac{\\beta}{k^2} \\;\\; (k=${waveNum})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

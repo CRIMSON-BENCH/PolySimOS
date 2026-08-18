@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const C = 343;
@@ -66,7 +67,7 @@ print(sorted(modes))`;
         <p className="mt-3 text-xs text-slate-500">A room resonates at frequencies where sound waves fit exactly between its surfaces. These modes — axial between two walls, tangential among four, oblique among all six — cause the boomy bass and dead spots in small rooms. Even spacing sounds smooth; clustered modes cause problems. Cube-shaped rooms are the worst.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Lowest mode" value={`${first.toFixed(1)} Hz`} /><Stat label="Modes < 200 Hz" value={String(modes.length)} /><Stat label="Volume" value={`${(Lx * Ly * Lz).toFixed(0)} m³`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Lowest mode" value={`${first.toFixed(1)} Hz`} /><Stat label="Modes < 200 Hz" value={String(modes.length)} /><Stat label="Volume" value={`${(Lx * Ly * Lz).toFixed(0)} m³`} /><Equation tex={`f = \\frac{c}{2}\\sqrt{\\left(\\frac{n_x}{${Lx}}\\right)^2 + \\left(\\frac{n_y}{${Ly}}\\right)^2 + \\left(\\frac{n_z}{${Lz}}\\right)^2}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

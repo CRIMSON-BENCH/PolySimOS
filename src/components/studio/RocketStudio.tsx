@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { m0: number; mf: number; isp: number }> = {
@@ -46,7 +47,7 @@ print("delta-v", round(dv), "m/s", "| mass ratio", round(m0 / mf, 2))`;
         <Slider label="Specific impulse Isp (s)" value={isp} min={200} max={460} step={5} onChange={(v) => update({ isp: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Δv" value={`${dv.toFixed(0)} m/s`} /><Stat label="Mass ratio" value={massRatio.toFixed(2)} /><Stat label="Propellant" value={`${propellant} t`} /><Stat label="Exhaust vel." value={`${(9.80665 * isp).toFixed(0)} m/s`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Δv" value={`${dv.toFixed(0)} m/s`} /><Stat label="Mass ratio" value={massRatio.toFixed(2)} /><Stat label="Propellant" value={`${propellant} t`} /><Stat label="Exhaust vel." value={`${(9.80665 * isp).toFixed(0)} m/s`} /><Equation tex={`\\Delta v = v_e\\ln\\frac{m_0}{m_f} = ${(9.80665 * isp).toFixed(0)}\\ln\\frac{${m0}}{${mf}} = ${dv.toFixed(0)}\\ \\text{m/s}`} /><ExplainResult text={explain} /></div>}
     >
       <div className="p-4">
         <div className="rounded-2xl border border-cyan-200 bg-cyan-50 p-6 text-center dark:border-cyan-900 dark:bg-cyan-950/40">

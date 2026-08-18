@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { sigFreq: number; fs: number }> = {
@@ -60,6 +61,7 @@ print("Nyquist", 2*sig, "fs", fs, "aliased", fs < 2*sig)`;
         <Stat label="Nyquist rate" value={`${2 * sigFreq} Hz`} />
         <Stat label="Sampling" value={aliased ? "too slow ⚠" : "adequate ✓"} />
         <Stat label="Apparent frequency" value={`${aliasFreq.toFixed(1)} Hz`} />
+        <Equation tex={`f_s > 2f_{\\max}:\\ ${fs}\\,\\text{Hz} ${aliased ? "<" : ">"} ${2 * sigFreq}\\,\\text{Hz}${aliased ? `\\ \\Rightarrow\\ f_{\\text{alias}}=${aliasFreq.toFixed(1)}\\,\\text{Hz}` : ""}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { lat1: number; lat2: number; lon2: number }> = {
@@ -63,7 +64,7 @@ print("great-circle", round(gc), "km  rhumb", round(rhumb), "km")`;
         <p className="mt-3 text-xs text-slate-500">A rhumb line holds a constant compass bearing — easy to steer, and a straight line on a Mercator map, but longer. A great circle is the shortest route but its bearing changes continuously, tracing a curve on the map. Ships and planes crossing oceans follow the great circle, adjusting heading along the way to save fuel and time.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Great-circle dist" value={`${gc.toFixed(0)} km`} /><Stat label="Rhumb-line dist" value={`${rhumb.toFixed(0)} km`} /><Stat label="Extra by rhumb" value={`${(rhumb - gc).toFixed(0)} km`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Great-circle dist" value={`${gc.toFixed(0)} km`} /><Stat label="Rhumb-line dist" value={`${rhumb.toFixed(0)} km`} /><Stat label="Extra by rhumb" value={`${(rhumb - gc).toFixed(0)} km`} /><Equation tex={`d_{\\text{rhumb}} = R\\,\\dfrac{\\Delta\\varphi}{\\cos\\theta} = ${rhumb.toFixed(0)}\\ \\text{km},\\quad \\Delta\\varphi = ${(lat2 - lat1).toFixed(0)}^\\circ,\\ \\Delta\\lambda = ${(lon2 - lon1).toFixed(0)}^\\circ,\\ \\theta = \\text{const}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

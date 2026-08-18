@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { angle: number; beta: number }> = {
   "Shallow (skip risk)": { angle: 1.5, beta: 400 },
@@ -60,7 +61,7 @@ print("peak g", maxg)`;
         <p className="mt-3 text-xs text-slate-500">A returning spacecraft sheds nearly all its 7.8 km/s orbital speed as heat in the upper atmosphere. Too shallow an angle and it skips back into space; too steep and the deceleration g-load and heating spike to lethal levels. The ballistic coefficient sets how deep it plunges before the thickening air finally slows it.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Peak deceleration" value={`${peakG.toFixed(1)} g`} /><Stat label="Entry angle" value={`${angle}°`} /><Stat label="Survivable?" value={peakG < 12 ? "yes" : "extreme"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Peak deceleration" value={`${peakG.toFixed(1)} g`} /><Stat label="Entry angle" value={`${angle}°`} /><Stat label="Survivable?" value={peakG < 12 ? "yes" : "extreme"} /><Equation tex={`\\dot v = -\\dfrac{\\rho v^2}{2\\beta},\\quad \\beta=${beta}\\ \\mathrm{kg/m^2},\\quad g_{\\max}=${peakG.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

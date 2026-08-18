@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { match: number; mismatch: number; gap: number }> = {
@@ -80,7 +81,7 @@ print(needleman_wunsch("${seqA}", "${seqB}"))`;
         <p className="mt-3 text-xs text-slate-500">The Needleman-Wunsch algorithm finds the optimal global alignment of two sequences by dynamic programming, filling a scoring matrix and tracing back the best path. It is the foundation of bioinformatics — comparing genes, proteins, and genomes. The heatmap shows the accumulated score matrix.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Alignment score" value={String(result.score)} /><Stat label="Identity" value={`${(result.identity * 100).toFixed(0)}%`} /><Stat label="Length" value={String(result.a.length)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Alignment score" value={String(result.score)} /><Stat label="Identity" value={`${(result.identity * 100).toFixed(0)}%`} /><Stat label="Length" value={String(result.a.length)} /><Equation tex={`F_{i,j}=\\max\\!\\big(F_{i-1,j-1}+s,\\; F_{i-1,j}+d,\\; F_{i,j-1}+d\\big),\\quad d=${gap},\\quad \\text{score}=${result.score}`} /><ExplainResult text={explain} /></div>}
     ><div>
         <canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" />
         <div className="mt-4 overflow-x-auto rounded-lg bg-slate-900 p-4 font-mono text-sm">

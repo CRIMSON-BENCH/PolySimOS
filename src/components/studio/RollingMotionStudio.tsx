@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const SHAPES = [{ n: "Hoop", c: 2 }, { n: "Disk", c: 0.5 }, { n: "Sphere", c: 0.4 }, { n: "Shell", c: 2 / 3 }];
@@ -54,7 +55,7 @@ for name, c in [("hoop", 2), ("disk", 0.5), ("sphere", 0.4), ("shell", 2/3)]:
         <p className="mt-3 text-xs text-slate-500">All these shapes share the same mass and radius, yet a solid sphere beats a hoop every time. Acceleration = g·sinθ / (1 + I/mR²): mass concentrated near the axis (small I) accelerates faster — and the result is independent of mass and radius.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div>{SHAPES.map((s) => <Stat key={s.n} label={`${s.n} accel`} value={`${acc(s.c).toFixed(2)} m/s²`} />)}<ExplainResult text={explain} /></div>}
+      inspector={<div>{SHAPES.map((s) => <Stat key={s.n} label={`${s.n} accel`} value={`${acc(s.c).toFixed(2)} m/s²`} />)}<Equation tex={`a = \\frac{g\\sin\\theta}{1 + I/mR^2} = \\frac{9.81\\sin ${angle}^\\circ}{1 + I/mR^2} = \\frac{${(9.81 * Math.sin(th)).toFixed(2)}}{1 + I/mR^2}\\ \\text{m/s}^2`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

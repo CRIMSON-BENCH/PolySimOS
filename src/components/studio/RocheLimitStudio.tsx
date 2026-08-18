@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { rhoRatio: number; distance: number }> = {
@@ -52,7 +53,7 @@ print("Roche limit", round(roche, 3), "R ->", "disrupted" if distance < roche el
         <p className="mt-3 text-xs text-slate-500">Inside the Roche limit, tidal forces from the primary exceed the satellite&apos;s own gravity and pull it apart — the origin of planetary rings. The rigid-body limit is d = R·(2·ρ_primary/ρ_sat)^(1/3). Drag the moon inside the red ring to shred it.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Roche limit" value={`${roche.toFixed(2)} R`} /><Stat label="Orbit" value={`${distance.toFixed(1)} R`} /><Stat label="Status" value={inside ? "DISRUPTED" : "stable"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Roche limit" value={`${roche.toFixed(2)} R`} /><Stat label="Orbit" value={`${distance.toFixed(1)} R`} /><Stat label="Status" value={inside ? "DISRUPTED" : "stable"} /><Equation tex={`d = R\\left(2\\,\\frac{\\rho_M}{\\rho_m}\\right)^{1/3} = ${Rprimary}\\left(2\\cdot ${rhoRatio.toFixed(1)}\\right)^{1/3} = ${roche.toFixed(2)}\\,R`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

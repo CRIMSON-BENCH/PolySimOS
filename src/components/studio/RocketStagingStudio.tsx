@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { stages: number; massRatio: number; isp: number }> = {
@@ -52,7 +53,7 @@ print("reaches LEO" if total >= 9400 else "short of LEO")`;
         <p className="mt-3 text-xs text-slate-500">The rocket equation grows delta-v only with the logarithm of the mass ratio, so a single stage hauling empty tanks all the way up is hopelessly inefficient. Staging drops dead weight along the way: each stage contributes ve·ln(mass ratio), and their sum easily clears the ~9.4 km/s needed for low Earth orbit.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Δv per stage" value={`${(perStage / 1000).toFixed(2)} km/s`} /><Stat label="Total Δv" value={`${(total / 1000).toFixed(2)} km/s`} /><Stat label="Reaches LEO?" value={total >= orbitDV ? "yes" : "no"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Δv per stage" value={`${(perStage / 1000).toFixed(2)} km/s`} /><Stat label="Total Δv" value={`${(total / 1000).toFixed(2)} km/s`} /><Stat label="Reaches LEO?" value={total >= orbitDV ? "yes" : "no"} /><Equation tex={`\\Delta v = \\sum_{i=1}^{${Math.round(stages)}} v_{e,i}\\,\\ln\\frac{m_{0,i}}{m_{f,i}} = ${Math.round(stages)}\\cdot ${(perStage / 1000).toFixed(2)} = ${(total / 1000).toFixed(2)}\\,\\text{km/s}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={300} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { mag: number; distance: number }> = {
@@ -57,7 +58,7 @@ print("peak ground accel (%g):", pga)`;
         <p className="mt-3 text-xs text-slate-500">Magnitude is logarithmic in amplitude but each unit releases about 32× more energy (E ∝ 10^1.5M). Shaking at a site falls off with distance through attenuation. Peak ground acceleration maps to the Modified Mercalli intensity people actually feel — a planning estimate, not a site-specific hazard analysis.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Energy" value={`${energyJ.toExponential(2)} J`} /><Stat label="TNT equivalent" value={tntTons > 1e6 ? `${(tntTons / 1e6).toFixed(1)} Mt` : `${(tntTons / 1e3).toFixed(1)} kt`} /><Stat label="Peak accel." value={`${pga.toFixed(1)} %g`} /><Stat label="Intensity" value={mercalli} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Energy" value={`${energyJ.toExponential(2)} J`} /><Stat label="TNT equivalent" value={tntTons > 1e6 ? `${(tntTons / 1e6).toFixed(1)} Mt` : `${(tntTons / 1e3).toFixed(1)} kt`} /><Stat label="Peak accel." value={`${pga.toFixed(1)} %g`} /><Stat label="Intensity" value={mercalli} /><Equation tex={`\\log_{10} E = 1.5\\,M + 4.8 = ${(1.5 * mag + 4.8).toFixed(1)}\\quad (M = ${mag.toFixed(1)})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
