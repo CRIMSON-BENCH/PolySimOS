@@ -2,16 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { ecc: number; a: number }> = {
+  "Circular (e=0)": { ecc: 0, a: 140 },
+  "Earth-like (e≈0.017)": { ecc: 0.02, a: 160 },
+  "Comet (high e)": { ecc: 0.96, a: 120 },
+  "Elongated ellipse": { ecc: 0.8, a: 150 },
+};
 
 export function KeplerStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const rafRef = useRef(0);
   const [running, setRunning] = useState(true);
-  const [ecc, setEcc] = useState(0.6);
-  const [a, setA] = useState(140);
+  const [{ ecc, a }, update] = useShareableNumbers({ ecc: 0.6, a: 140 });
   const st = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
   const trail = useRef<[number, number][]>([]);
 
@@ -38,15 +45,47 @@ export function KeplerStudio() {
     rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
   }, [running, ecc]);
 
+  const explain =
+    ecc < 0.01
+      ? `At e=0 the orbit is a perfect circle: the planet holds a constant distance from the star and moves at constant speed. Its period still scales as a^(3/2) (Kepler's third law), so a=${a} fixes the year length.`
+      : ecc < 1
+      ? `At e=${ecc.toFixed(2)} the orbit is an ellipse with the star at one focus. The planet sweeps equal areas in equal times, so it runs fastest at perihelion and slowest at aphelion. A higher e means a more elongated ellipse. The period grows as a^(3/2) (Kepler's third law), so a=${a} sets the year length.`
+      : `At e=${ecc.toFixed(2)} (>1) the path is an open hyperbola: the body swings past the star once and escapes, so there is no closed period — Kepler's third law applies only to bound e<1 orbits.`;
+
+  const code = `import numpy as np
+import matplotlib.pyplot as plt
+
+e = ${ecc}          # eccentricity
+a = ${a}            # semi-major axis
+
+# Solve Kepler's equation  M = E - e*sin(E)  for E via Newton iteration
+M = np.linspace(0, 2*np.pi, 400)   # mean anomaly
+E = M.copy()                        # initial guess
+for _ in range(50):
+    E -= (E - e*np.sin(E) - M) / (1 - e*np.cos(E))
+
+# true anomaly + radius, then Cartesian orbit
+theta = 2*np.arctan2(np.sqrt(1+e)*np.sin(E/2), np.sqrt(1-e)*np.cos(E/2))
+r = a*(1 - e*np.cos(E))
+x, y = r*np.cos(theta), r*np.sin(theta)
+
+plt.plot(x, y); plt.plot(0, 0, 'y*', ms=15)  # star at focus
+plt.axis('equal'); plt.show()`;
+
   return (
     <StudioChrome title="Kepler Orbit Studio" tagline="two-body gravity · conic-section orbits"
       controls={<div>
         <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
-        <p className="mb-3 text-xs text-slate-500">Set the eccentricity to trace Kepler&apos;s orbits — a circle, ellipse, or (past e=1) an escape hyperbola. The star sits at the focus.</p>
-        <Slider label="Eccentricity e" value={ecc} min={0} max={1.2} step={0.02} onChange={setEcc} />
-        <Slider label="Semi-major axis" value={a} min={80} max={200} step={5} onChange={setA} />
+        <p className="mb-3 text-xs text-slate-500">Set the eccentricity to trace Kepler{"'"}s orbits — a circle, ellipse, or (past e=1) an escape hyperbola. The star sits at the focus.</p>
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Eccentricity e" value={ecc} min={0} max={1.2} step={0.02} onChange={(v) => update({ ecc: v })} />
+        <Slider label="Semi-major axis" value={a} min={80} max={200} step={5} onChange={(v) => update({ a: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Eccentricity" value={ecc.toFixed(2)} /><Stat label="Orbit" value={ecc < 0.01 ? "circular" : ecc < 1 ? "elliptical" : "hyperbolic"} /><Stat label="Law" value="Kepler / 1-r²" /></div>}
+      inspector={<div><Stat label="Eccentricity" value={ecc.toFixed(2)} /><Stat label="Orbit" value={ecc < 0.01 ? "circular" : ecc < 1 ? "elliptical" : "hyperbolic"} /><Stat label="Law" value="Kepler / 1-r²" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

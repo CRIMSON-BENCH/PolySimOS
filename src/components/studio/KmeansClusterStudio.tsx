@@ -1,15 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
 const COLORS = ["#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#c084fc"];
+const TRUE_BLOBS = 4;
+
+const PRESETS: Record<string, { k: number; iters: number }> = {
+  "Two clusters (k=2)": { k: 2, iters: 8 },
+  "Three clusters": { k: 3, iters: 8 },
+  "Over-clustered (k too high)": { k: 5, iters: 8 },
+  "Many points": { k: 4, iters: 12 },
+};
 
 export function KmeansClusterStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [k, setK] = useState(3), [iters, setIters] = useState(6);
+  const [{ k, iters }, update] = useShareableNumbers({ k: 3, iters: 6 });
   const pts: { x: number; y: number }[] = [];
   for (let b = 0; b < 4; b++) for (let i = 0; i < 20; i++) pts.push({ x: rnd(b * 50 + i * 3 + 1) * 0.6 + [0.15, 0.7, 0.2, 0.75][b], y: rnd(b * 50 + i * 7 + 2) * 0.6 + [0.15, 0.2, 0.75, 0.7][b] });
 
@@ -28,17 +37,40 @@ export function KmeansClusterStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`k-means · ${k} clusters · ${iters} iterations (large dots = centroids)`, 12, 20);
   }, [k, iters]);
 
+  const explain =
+    k === TRUE_BLOBS
+      ? `With k = ${k} matching the ${TRUE_BLOBS} true blobs, Lloyd’s algorithm alternates assign-to-nearest and move-to-mean and settles into clean, well-separated clusters within a few iterations.`
+      : k < TRUE_BLOBS
+      ? `k = ${k} is fewer than the ${TRUE_BLOBS} true blobs, so Lloyd’s algorithm is forced to merge neighbouring groups into one cluster and real structure is lost. Try k = ${TRUE_BLOBS}.`
+      : `k = ${k} exceeds the ${TRUE_BLOBS} true blobs, so at least one real group is split across centroids. Which split you get depends on where the ${k} centroids were initialised.`;
+
+  const code = `from sklearn.cluster import KMeans
+import numpy as np
+
+# ${pts.length} points, ${TRUE_BLOBS} true blobs in this demo
+X = np.random.rand(${pts.length}, 2)
+
+km = KMeans(n_clusters=${k}, n_init=10, max_iter=${iters}).fit(X)
+labels, centroids = km.labels_, km.cluster_centers_
+print("inertia", km.inertia_)`;
+
   return (
     <StudioChrome title="k-Means Clustering" tagline="finding groups in data"
       controls={<div>
-        <Slider label="Number of clusters k" value={k} min={2} max={5} step={1} onChange={setK} />
-        <Slider label="Iterations" value={iters} min={0} max={15} step={1} onChange={setIters} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Number of clusters k" value={k} min={2} max={5} step={1} onChange={(v) => update({ k: v })} />
+        <Slider label="Iterations" value={iters} min={0} max={15} step={1} onChange={(v) => update({ iters: v })} />
         <p className="mt-3 text-xs text-slate-500">k-means alternates two steps: assign each point to its nearest centroid, then move each centroid to the mean of its points. Repeat and the clusters snap into place. Choosing the right k, and where to start, both matter. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Clusters" value={`${k}`} />
         <Stat label="Points" value={`${pts.length}`} />
         <Stat label="Status" value={iters >= 6 ? "converged" : "still moving"} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
