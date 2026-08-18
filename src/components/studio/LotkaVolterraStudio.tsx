@@ -1,16 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { a: number; b: number; c: number; d: number }> = {
+  "Classic cycle": { a: 1.0, b: 0.1, c: 1.5, d: 0.075 },
+  "Predator crash": { a: 1.0, b: 0.1, c: 2.5, d: 0.05 },
+  "Prey boom": { a: 1.8, b: 0.04, c: 1.5, d: 0.075 },
+  "Near-equilibrium": { a: 0.5, b: 0.1, c: 1.0, d: 0.1 },
+};
 
 // Lotka-Volterra predator-prey ODE with time series + phase portrait.
 export function LotkaVolterraStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [a, setA] = useState(1.0); // prey growth
-  const [b, setB] = useState(0.1); // predation
-  const [c, setC] = useState(1.5); // predator death
-  const [d, setD] = useState(0.075); // predator growth per prey
+  const [{ a, b, c, d }, update] = useShareableNumbers({ a: 1.0, b: 0.1, c: 1.5, d: 0.075 });
 
   useEffect(() => {
     const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
@@ -29,16 +34,38 @@ export function LotkaVolterraStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.fillText("phase portrait", px0 + 6, py0 - pph + 14); ctx.fillText("prey →", px0 + ppw - 44, py0 + 14); ctx.save(); ctx.translate(px0 - 6, py0 - pph / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("predator", -24, 0); ctx.restore();
   }, [a, b, c, d]);
 
+  const preyEq = c / d;
+  const predEq = a / b;
+  const explain =
+    `These parameters trace a closed orbit: prey and predator populations cycle forever without settling, staying about a quarter-period out of phase — the predator peak lags the prey peak. ` +
+    `The orbit encircles the fixed point at (prey ${preyEq.toFixed(1)}, predator ${predEq.toFixed(1)}) = (c/d, a/b). ` +
+    `Raising predation b (now ${b}) or predator death c (now ${c}) shifts and reshapes that orbit — a higher death rate c pushes the prey equilibrium up and tends to lengthen the boom-and-bust period, while stronger coupling widens the amplitude of each swing.`;
+
+  const code = `import numpy as np
+from scipy.integrate import odeint
+a, b, c, d = ${a}, ${b}, ${c}, ${d}
+def lv(state, t):
+    x, y = state
+    return [a*x - b*x*y, -c*y + d*x*y]
+t = np.linspace(0, 40, 4000)
+sol = odeint(lv, [10.0, 5.0], t)
+print("prey equilibrium", c/d, "predator equilibrium", a/b)`;
+
   return (
     <StudioChrome title="Lotka-Volterra Predator-Prey" tagline="coupled population cycles"
       controls={<div>
-        <Slider label="Prey growth a" value={a} min={0.2} max={2} step={0.05} onChange={setA} />
-        <Slider label="Predation rate b" value={b} min={0.02} max={0.3} step={0.01} onChange={setB} />
-        <Slider label="Predator death c" value={c} min={0.2} max={3} step={0.05} onChange={setC} />
-        <Slider label="Predator growth d" value={d} min={0.02} max={0.2} step={0.005} onChange={setD} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Prey growth a" value={a} min={0.2} max={2} step={0.05} onChange={(v) => update({ a: v })} />
+        <Slider label="Predation rate b" value={b} min={0.02} max={0.3} step={0.01} onChange={(v) => update({ b: v })} />
+        <Slider label="Predator death c" value={c} min={0.2} max={3} step={0.05} onChange={(v) => update({ c: v })} />
+        <Slider label="Predator growth d" value={d} min={0.02} max={0.2} step={0.005} onChange={(v) => update({ d: v })} />
         <p className="mt-3 text-xs text-slate-500">Two coupled equations produce the classic boom-and-bust cycle: prey multiply, predators feast and multiply, prey crash, predators starve, and the cycle repeats. The phase portrait shows the closed orbit — populations forever chasing each other, never settling.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Prey equilibrium" value={(c / d).toFixed(1)} /><Stat label="Predator equilibrium" value={(a / b).toFixed(1)} /><Stat label="Dynamics" value="limit cycle" /></div>}
+      inspector={<div><Stat label="Prey equilibrium" value={preyEq.toFixed(1)} /><Stat label="Predator equilibrium" value={predEq.toFixed(1)} /><Stat label="Dynamics" value="limit cycle" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

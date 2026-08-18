@@ -1,16 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
+const PRESETS: Record<string, { R: number; L: number; C: number }> = {
+  "Underdamped (rings)": { R: 1, L: 1, C: 1 },
+  "Critically damped": { R: 2, L: 1, C: 1 },
+  "Overdamped (sluggish)": { R: 6, L: 1, C: 1 },
+  "Resonance": { R: 0.2, L: 4, C: 4 },
+};
+
 export function RLCStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [R, setR] = useState(1.5);
-  const [L, setL] = useState(1);
-  const [C, setC] = useState(1);
+  const [{ R, L, C }, update] = useShareableNumbers({ R: 1.5, L: 1, C: 1 });
 
   const data = useMemo(() => {
     // series RLC step response: L q'' + R q' + q/C = V0
@@ -37,15 +43,53 @@ export function RLCStudio() {
   }, [data]);
 
   const zeta = (R / 2) * Math.sqrt(C / L);
+  const w0 = 1 / Math.sqrt(L * C);
+
+  const explain =
+    zeta < 0.98
+      ? `ζ = ${zeta.toFixed(3)} < 1: underdamped. With ω₀ = ${w0.toFixed(3)} rad/s the charge overshoots and rings, oscillating while it decays toward its steady value. Lower ζ means more ringing.`
+      : zeta > 1.02
+      ? `ζ = ${zeta.toFixed(3)} > 1: overdamped. With ω₀ = ${w0.toFixed(3)} rad/s there is no oscillation — the charge crawls to steady state sluggishly, and larger ζ makes it slower.`
+      : `ζ = ${zeta.toFixed(3)} ≈ 1: critically damped. With ω₀ = ${w0.toFixed(3)} rad/s this is the fastest approach to steady state with no overshoot or oscillation.`;
+
+  const code = `import numpy as np
+from scipy.integrate import odeint
+
+R, L, C, V0 = ${R}, ${L}, ${C}, 1.0
+
+# series RLC: L q'' + R q' + q/C = V0, state = [q, i] with i = q'
+def rlc(y, t):
+    q, i = y
+    di = (V0 - R * i - q / C) / L
+    return [i, di]
+
+t = np.arange(0, 40, 0.01)
+sol = odeint(rlc, [0.0, 0.0], t)
+q, i = sol[:, 0], sol[:, 1]
+
+zeta = (R / 2) * np.sqrt(C / L)
+w0 = 1 / np.sqrt(L * C)
+print("zeta", zeta, "w0", w0)`;
+
   return (
     <StudioChrome title="RLC Circuit Studio" tagline="series RLC step response"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">Apply a step voltage to a series RLC circuit and watch charge and current respond — under-, over-, or critically damped.</p>
-        <Slider label="Resistance R" value={R} min={0} max={6} step={0.1} onChange={setR} />
-        <Slider label="Inductance L" value={L} min={0.2} max={4} step={0.1} onChange={setL} />
-        <Slider label="Capacitance C" value={C} min={0.2} max={4} step={0.1} onChange={setC} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Resistance R" value={R} min={0} max={6} step={0.1} onChange={(v) => update({ R: v })} />
+        <Slider label="Inductance L" value={L} min={0.2} max={4} step={0.1} onChange={(v) => update({ L: v })} />
+        <Slider label="Capacitance C" value={C} min={0.2} max={4} step={0.1} onChange={(v) => update({ C: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Damping ζ" value={zeta.toFixed(3)} /><Stat label="Regime" value={zeta < 1 ? "underdamped" : zeta > 1 ? "overdamped" : "critical"} /><Stat label="ω₀" value={(1 / Math.sqrt(L * C)).toFixed(3)} /></div>}
+      inspector={<div>
+        <Stat label="Damping ζ" value={zeta.toFixed(3)} />
+        <Stat label="Regime" value={zeta < 1 ? "underdamped" : zeta > 1 ? "overdamped" : "critical"} />
+        <Stat label="ω₀" value={w0.toFixed(3)} />
+        <ExplainResult text={explain} />
+      </div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>

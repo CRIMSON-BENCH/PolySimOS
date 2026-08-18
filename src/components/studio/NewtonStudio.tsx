@@ -3,14 +3,22 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, evaluate, derivativeExprSafe, sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { x0: number }> = {
+  "Fast convergence": { x0: 2 },
+  "Bad guess (overshoots)": { x0: 0.75 },
+  "Near a flat spot (slow)": { x0: -0.75 },
+  "Far start": { x0: 5 },
+};
 
 export function NewtonStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [expr, setExpr] = useState("x^3 - 2*x - 5");
-  const [x0, setX0] = useState(3);
+  const [{ x0 }, update] = useShareableNumbers({ x0: 3 });
   const [err, setErr] = useState("");
 
   const iters = useMemo(() => {
@@ -39,16 +47,44 @@ export function NewtonStudio() {
   }, [expr, iters]);
 
   const root = iters[iters.length - 1];
+  const iterCount = iters.length - 1;
+
+  let slope0 = NaN;
+  try { slope0 = evaluate(parse(derivativeExprSafe(expr, "x")), { x: x0 }); } catch { /* */ }
+  const flat = isFinite(slope0) && Math.abs(slope0) < 0.5;
+  const converged = isFinite(root) && iterCount < 12;
+
+  const explain = flat
+    ? `f'(x0) ≈ ${slope0.toFixed(2)} is almost zero at x0 = ${x0}, so the tangent is nearly flat. Newton divides by that tiny slope, so the next iterate is flung far away — it may stall, or jump into a completely different root's basin.`
+    : converged
+    ? `Starting at x0 = ${x0}, Newton reached x ≈ ${isFinite(root) ? root.toFixed(6) : "—"} in ${iterCount} steps. This is a simple root where f'(x) is well away from zero, so the error roughly squares each step (quadratic convergence) — the number of correct digits doubles per iteration.`
+    : `From x0 = ${x0} the iteration did not settle within 12 steps. The starting point decides which root's basin you fall into; nudge x0 nearer a crossing (where f'(x) is safely nonzero) to recover clean quadratic convergence.`;
+
+  const code = `import numpy as np
+def f(x): return ${expr.replace(/\^/g, "**")}
+def fp(x): return (f(x + 1e-6) - f(x - 1e-6)) / 2e-6
+x = ${x0}
+for _ in range(12):
+    d = fp(x)
+    if abs(d) < 1e-9: break
+    nx = x - f(x) / d
+    if abs(nx - x) < 1e-9:
+        x = nx; break
+    x = nx
+print("root", x)`;
+
   return (
     <StudioChrome title="Newton's Method Visualizer" tagline="root finding · tangent iterations"
       controls={<div>
         <label className="mb-1 block text-xs text-slate-500">f(x)</label>
         <input value={expr} onChange={(e) => setExpr(e.target.value)} className="mb-3 w-full rounded border border-slate-300 bg-white px-2 py-1 font-mono text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100" />
         <p className="mb-3 text-xs text-slate-500">Newton&apos;s method slides down each tangent line to the x-axis, homing in on a root.</p>
-        <Slider label="Start x₀" value={x0} min={-5} max={5} step={0.25} onChange={setX0} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Start x₀" value={x0} min={-5} max={5} step={0.25} onChange={(v) => update({ x0: v })} />
         {err && <p className="text-xs text-red-500">{err}</p>}
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Root" value={isFinite(root) ? root.toFixed(6) : "—"} /><Stat label="Iterations" value={String(iters.length - 1)} /><Stat label="Convergence" value="quadratic" /></div>}
+      inspector={<div><Stat label="Root" value={isFinite(root) ? root.toFixed(6) : "—"} /><Stat label="Iterations" value={String(iters.length - 1)} /><Stat label="Convergence" value="quadratic" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

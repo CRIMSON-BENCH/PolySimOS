@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -13,11 +14,25 @@ const SURFACES: Record<string, (x: number, y: number) => number> = {
   ripple: (x, y) => 10 + 6 * Math.sin(x / 12) * Math.cos(y / 12) + 0.01 * (x * x + y * y),
 };
 
+// Python expression for f(x, y) matching each SURFACES entry, for the exportable snippet.
+const SURFACE_PY: Record<string, string> = {
+  bowl: "0.04*(x*x + y*y)",
+  saddle: "0.03*(x*x - y*y) + 20",
+  rosenbrock: "0.0006*((1 - x/10)**2 + 100*(y/10 - (x/10)**2)**2)*100",
+  ripple: "10 + 6*np.sin(x/12)*np.cos(y/12) + 0.01*(x*x + y*y)",
+};
+
+const PRESETS: Record<string, { lr: number; momentum: number }> = {
+  "Too-high LR (diverges)": { lr: 8, momentum: 0.9 },
+  "Tiny LR (crawls)": { lr: 0.5, momentum: 0 },
+  "Well-tuned": { lr: 3, momentum: 0.8 },
+  "Overshoot & oscillate": { lr: 6.5, momentum: 0.5 },
+};
+
 export function GradientDescentStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [surface, setSurface] = useState("ripple");
-  const [lr, setLr] = useState(3);
-  const [momentum, setMomentum] = useState(0.8);
+  const [{ lr, momentum }, update] = useShareableNumbers({ lr: 3, momentum: 0.8 });
   const [tick, setTick] = useState(0);
 
   const path = useMemo(() => {
@@ -47,15 +62,46 @@ export function GradientDescentStudio() {
 
   useEffect(() => { setTick(0); const id = setInterval(() => setTick((t) => (t < 200 ? t + 2 : t)), 40); return () => clearInterval(id); }, [surface, lr, momentum]);
 
+  const explain =
+    lr >= 6
+      ? `A learning rate of ${lr} is large relative to this landscape's curvature: each step overshoots the minimum, so the path diverges or bounces around instead of settling.`
+      : lr <= 1
+      ? `A learning rate of ${lr} is tiny, so descent crawls — steps are stable but so short that 200 iterations barely reach the basin.`
+      : `A learning rate of ${lr} is well matched to the curvature here: steps are large enough to make progress yet small enough to avoid overshoot, giving a smooth, roughly quadratic descent toward the minimum.`;
+
+  const code = `import numpy as np
+
+lr, momentum = ${lr}, ${momentum}
+h = 0.5
+
+def f(x, y):
+    return ${SURFACE_PY[surface]}
+
+x, y, vx, vy = -120.0, 90.0, 0.0, 0.0
+path = [(x, y)]
+for _ in range(200):
+    gx = (f(x + h, y) - f(x - h, y)) / (2 * h)
+    gy = (f(x, y + h) - f(x, y - h)) / (2 * h)
+    vx = momentum * vx - lr * gx
+    vy = momentum * vy - lr * gy
+    x += vx; y += vy
+    path.append((x, y))
+print("final", path[-1], "loss", f(x, y))`;
+
   return (
     <StudioChrome title="Gradient Descent Studio" tagline="optimization on a loss landscape"
       controls={<div>
         <div className="mb-3 grid grid-cols-2 gap-1.5">{Object.keys(SURFACES).map((s) => <button key={s} onClick={() => setSurface(s)} className={`rounded-lg px-2 py-1 text-xs font-semibold capitalize ${surface === s ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{s}</button>)}</div>
         <p className="mb-3 text-xs text-slate-500">Watch gradient descent (with momentum) roll downhill on different loss landscapes. Too high a learning rate overshoots.</p>
-        <Slider label="Learning rate" value={lr} min={0.5} max={8} step={0.5} onChange={setLr} />
-        <Slider label="Momentum" value={momentum} min={0} max={0.95} step={0.05} onChange={setMomentum} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Learning rate" value={lr} min={0.5} max={8} step={0.5} onChange={(v) => update({ lr: v })} />
+        <Slider label="Momentum" value={momentum} min={0} max={0.95} step={0.05} onChange={(v) => update({ momentum: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Surface" value={surface} /><Stat label="Step" value={`${Math.min(tick, 200)}/200`} /><Stat label="Optimizer" value="momentum GD" /></div>}
+      inspector={<div><Stat label="Surface" value={surface} /><Stat label="Step" value={`${Math.min(tick, 200)}/200`} /><Stat label="Optimizer" value="momentum GD" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

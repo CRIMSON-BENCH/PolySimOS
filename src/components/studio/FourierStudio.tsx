@@ -2,13 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
+const PRESETS: Record<string, { harmonics: number }> = {
+  "Few terms (blocky)": { harmonics: 3 },
+  "Smooth (many terms)": { harmonics: 30 },
+  "Gibbs overshoot": { harmonics: 12 },
+  "Near-ideal": { harmonics: 50 },
+};
+
 export function FourierStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [harmonics, setHarmonics] = useState(8);
+  const [{ harmonics }, update] = useShareableNumbers({ harmonics: 8 });
   const [wave, setWave] = useState<"square" | "sawtooth" | "triangle">("square");
 
   useEffect(() => {
@@ -35,6 +43,23 @@ export function FourierStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`${wave} wave · ${harmonics} harmonics`, pad, 24);
   }, [harmonics, wave]);
 
+  const explain = `Reconstructing the ${wave} wave from ${harmonics} sine harmonic${harmonics === 1 ? "" : "s"}. More harmonics sharpen the reconstruction and pull it closer to the ideal shape. But at each discontinuity the Gibbs phenomenon leaves a persistent ~9% overshoot spike — adding terms only narrows that ripple, it never removes it, no matter how many harmonics you sum.`;
+
+  const code = `import numpy as np
+harmonics, wave = ${harmonics}, "${wave}"
+t = np.linspace(0, 4*np.pi, 2000)
+s = np.zeros_like(t)
+for n in range(1, harmonics + 1):
+    if wave == "square":
+        if n % 2 == 1: s += np.sin(n*t) / n
+    elif wave == "sawtooth":
+        s += (-1 if n % 2 == 0 else 1) * np.sin(n*t) / n
+    else:  # triangle
+        if n % 2 == 1: s += (1 if n % 4 == 1 else -1) * np.sin(n*t) / (n*n)
+norm = 4/np.pi if wave == "square" else 2/np.pi if wave == "sawtooth" else 8/np.pi**2
+s *= norm
+print("partial sum with", harmonics, "harmonics")`;
+
   return (
     <StudioChrome title="Fourier Series Builder" tagline="synthesize waves from sinusoids"
       controls={<div>
@@ -42,9 +67,14 @@ export function FourierStudio() {
           {(["square", "sawtooth", "triangle"] as const).map((m) => <button key={m} onClick={() => setWave(m)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold capitalize ${wave === m ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{m}</button>)}
         </div>
         <p className="mb-3 text-xs text-slate-500">Add harmonics and watch sine waves sum into a square, sawtooth, or triangle wave — the Fourier series in action.</p>
-        <Slider label="Harmonics" value={harmonics} min={1} max={50} step={1} onChange={setHarmonics} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Harmonics" value={harmonics} min={1} max={50} step={1} onChange={(v) => update({ harmonics: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Wave" value={wave} /><Stat label="Harmonics" value={String(harmonics)} /><Stat label="Basis" value="sine" /></div>}
+      inspector={<div><Stat label="Wave" value={wave} /><Stat label="Harmonics" value={String(harmonics)} /><Stat label="Basis" value="sine" /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>
