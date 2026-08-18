@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { StepResponseStudio } from "@/components/studio/StepResponseStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Second-Order Step Response Simulator (Browser)", description: "Explore how damping ratio and natural frequency set overshoot, settling time, and peak time of a second-order system. Free, interactive.", alternates: { canonical: "/studio/step-response" } };
+export default function Page() { return <StudioPageShell slug="step-response" name="Second-Order Step Response" keyword="step response calculator" lede="Poke a system with a sudden change and its damping ratio decides everything — a clean settle, a bouncy overshoot, or a sluggish crawl." about="A second-order system responds to a step according to its damping ratio ζ and natural frequency ωₙ. Overshoot depends only on ζ; settling time scales with 1/(ζωₙ). These metrics are the standard vocabulary of control design. Educational tool."><StepResponseStudio /></StudioPageShell>; }

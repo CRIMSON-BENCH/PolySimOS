@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { FeedbackLoopStudio } from "@/components/studio/FeedbackLoopStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Feedback Control Loop Simulator (Browser)", description: "See how negative feedback shrinks tracking error and rejects disturbances by a factor of 1+G. Free, interactive control-systems tool.", alternates: { canonical: "/studio/feedback-loop" } };
+export default function Page() { return <StudioPageShell slug="feedback-loop" name="Feedback Loop" keyword="feedback control loop" lede="Why is feedback everywhere? Because measuring the output and correcting the error makes a system dramatically more accurate and robust." about="Negative feedback compares the output to the setpoint and drives the difference to zero. High loop gain G reduces both tracking error and disturbance effects by a factor of 1+G, and makes the closed-loop behavior insensitive to plant variations — the reason feedback dominates engineering. Educational tool."><FeedbackLoopStudio /></StudioPageShell>; }

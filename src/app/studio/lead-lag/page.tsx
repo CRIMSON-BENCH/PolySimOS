@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LeadLagStudio } from "@/components/studio/LeadLagStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Lead–Lag Compensator Simulator (Control Design)", description: "Design a lead or lag compensator and see its phase-boost or gain-shaping effect across frequency. Free, interactive control-systems tool.", alternates: { canonical: "/studio/lead-lag" } };
+export default function Page() { return <StudioPageShell slug="lead-lag" name="Lead–Lag Compensator" keyword="lead lag compensator" lede="Sometimes a controller needs a nudge of phase in just the right place. Place a zero and a pole and watch a lead or lag compensator do the shaping." about="A lead compensator (pole above zero) injects phase near the crossover to improve stability margins and transient speed; a lag compensator (pole below zero) boosts low-frequency gain to cut steady-state error. Both are staples of classical control design. Educational tool."><LeadLagStudio /></StudioPageShell>; }

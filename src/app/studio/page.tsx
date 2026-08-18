@@ -364,6 +364,14 @@ export const SIMS = [
   { slug: "kelly-criterion", name: "Kelly Criterion", desc: "Optimal bet sizing.", tag: "Finance" },
   { slug: "monte-carlo-retirement", name: "Retirement Monte Carlo", desc: "Range of portfolio outcomes.", tag: "Finance" },
   { slug: "dividend-discount", name: "Dividend Discount Model", desc: "Gordon growth valuation.", tag: "Finance" },
+  { slug: "pid-tuner", name: "PID Controller Tuner", desc: "Tune Kp, Ki, Kd for a step.", tag: "Robotics" },
+  { slug: "root-locus", name: "Root Locus", desc: "Poles moving with gain.", tag: "Robotics" },
+  { slug: "step-response", name: "Second-Order Step Response", desc: "Overshoot & settling time.", tag: "Robotics" },
+  { slug: "bode-nyquist", name: "Bode Plot", desc: "Magnitude, phase & margins.", tag: "Robotics" },
+  { slug: "state-space", name: "State-Space Phase Portrait", desc: "Eigenvalues & stability.", tag: "Robotics" },
+  { slug: "lead-lag", name: "Lead–Lag Compensator", desc: "Shaping phase for stability.", tag: "Robotics" },
+  { slug: "feedback-loop", name: "Feedback Loop", desc: "Why feedback beats open-loop.", tag: "Robotics" },
+  { slug: "second-order-response", name: "Damping Regimes", desc: "Under, critical & overdamped.", tag: "Robotics" },
 ];
 
 export default function StudioIndex() {

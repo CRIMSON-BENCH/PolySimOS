@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { StateSpaceStudio } from "@/components/studio/StateSpaceStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "State-Space Phase Portrait Simulator (Browser)", description: "Set a 2×2 system matrix and see its phase portrait — stable nodes, spirals, saddles, and centers — from the eigenvalues. Free, interactive.", alternates: { canonical: "/studio/state-space" } };
+export default function Page() { return <StudioPageShell slug="state-space" name="State-Space Phase Portrait" keyword="phase portrait simulator" lede="A linear system's whole personality lives in one 2×2 matrix. Change its entries and watch trajectories spiral, decay, or fly apart." about="For ẋ = Ax, the eigenvalues of A classify the behavior: negative real parts give stable nodes or spirals, positive parts give instability, imaginary parts add rotation, and a negative determinant makes a saddle. The phase portrait visualizes every trajectory at once. Educational tool."><StateSpaceStudio /></StudioPageShell>; }

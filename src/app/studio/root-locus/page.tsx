@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { RootLocusStudio } from "@/components/studio/RootLocusStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Root Locus Simulator (Control Systems)", description: "Watch closed-loop poles travel through the complex plane as feedback gain rises, and see where a system becomes unstable. Free, interactive.", alternates: { canonical: "/studio/root-locus" } };
+export default function Page() { return <StudioPageShell slug="root-locus" name="Root Locus" keyword="root locus simulator" lede="Turn up the feedback gain and watch a system's poles march across the complex plane — straight toward instability if you push too far." about="The root locus plots how closed-loop pole locations change as loop gain varies from zero to infinity. Poles in the left half-plane are stable; as gain increases they move toward and may cross the imaginary axis, marking the onset of sustained oscillation. Educational tool."><RootLocusStudio /></StudioPageShell>; }

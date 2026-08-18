@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BodeNyquistStudio } from "@/components/studio/BodeNyquistStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bode Plot Simulator with Gain & Phase Margin", description: "Plot the Bode magnitude and phase of a transfer function, find the gain crossover, and read the phase margin for stability. Free, interactive.", alternates: { canonical: "/studio/bode-nyquist" } };
+export default function Page() { return <StudioPageShell slug="bode-nyquist" name="Bode Plot" keyword="bode plot simulator" lede="A Bode plot is a control engineer's stethoscope: magnitude and phase across frequency, with margins that predict whether the loop will hold." about="The Bode plot shows a system's magnitude (dB) and phase (degrees) versus frequency on a log scale. The phase margin — how much phase remains above −180° at the gain crossover — measures how close the closed loop is to instability. Educational tool."><BodeNyquistStudio /></StudioPageShell>; }

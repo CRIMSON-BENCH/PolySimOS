@@ -180,6 +180,14 @@ import { DcfValuationStudio } from "./DcfValuationStudio";
 import { KellyCriterionStudio } from "./KellyCriterionStudio";
 import { MonteCarloRetirementStudio } from "./MonteCarloRetirementStudio";
 import { DividendDiscountStudio } from "./DividendDiscountStudio";
+import { PidTunerStudio } from "./PidTunerStudio";
+import { RootLocusStudio } from "./RootLocusStudio";
+import { StepResponseStudio } from "./StepResponseStudio";
+import { BodeNyquistStudio } from "./BodeNyquistStudio";
+import { StateSpaceStudio } from "./StateSpaceStudio";
+import { LeadLagStudio } from "./LeadLagStudio";
+import { FeedbackLoopStudio } from "./FeedbackLoopStudio";
+import { SecondOrderResponseStudio } from "./SecondOrderResponseStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -700,6 +708,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "kelly-criterion": KellyCriterionStudio,
   "monte-carlo-retirement": MonteCarloRetirementStudio,
   "dividend-discount": DividendDiscountStudio,
+  "pid-tuner": PidTunerStudio,
+  "root-locus": RootLocusStudio,
+  "step-response": StepResponseStudio,
+  "bode-nyquist": BodeNyquistStudio,
+  "state-space": StateSpaceStudio,
+  "lead-lag": LeadLagStudio,
+  "feedback-loop": FeedbackLoopStudio,
+  "second-order-response": SecondOrderResponseStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

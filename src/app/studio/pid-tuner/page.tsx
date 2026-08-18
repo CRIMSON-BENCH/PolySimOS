@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PidTunerStudio } from "@/components/studio/PidTunerStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "PID Controller Tuning Simulator (Browser)", description: "Tune the proportional, integral, and derivative gains of a PID controller and watch the closed-loop step response, overshoot, and settling time. Free.", alternates: { canonical: "/studio/pid-tuner" } };
+export default function Page() { return <StudioPageShell slug="pid-tuner" name="PID Controller Tuner" keyword="pid tuning simulator" lede="PID controllers run everything from thermostats to drones. Drag the three gains and watch the system settle — or ring and overshoot." about="A PID controller sums three responses to error: proportional (present), integral (past), and derivative (future trend). Raising Kp speeds response but risks overshoot, Ki removes steady-state error, and Kd adds damping. Tuning balances speed against stability. Educational tool."><PidTunerStudio /></StudioPageShell>; }
