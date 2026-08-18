@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { measNoise: number; procNoise: number }> = {
+  "Clean sensor": { measNoise: 8, procNoise: 1 },
+  "Noisy sensor": { measNoise: 55, procNoise: 1 },
+  "Erratic target": { measNoise: 30, procNoise: 5 },
+  "Balanced": { measNoise: 30, procNoise: 1 },
+};
 
 // 1D Kalman filter tracking a moving object from noisy measurements.
 export function KalmanFilterStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [measNoise, setMeasNoise] = useState(30);
-  const [procNoise, setProcNoise] = useState(1);
+  const [{ measNoise, procNoise }, update] = useShareableNumbers({ measNoise: 30, procNoise: 1 });
   const [seed, setSeed] = useState(1);
   const [rmse, setRmse] = useState({ meas: 0, kf: 0 });
 
@@ -37,15 +44,35 @@ export function KalmanFilterStudio() {
     ctx.font = "11px sans-serif"; ctx.fillStyle = "#94a3b8"; ctx.fillText("measurements", 24, 16); ctx.fillStyle = "#a3e635"; ctx.fillText("true", 120, 16); ctx.fillStyle = "#22d3ee"; ctx.fillText("Kalman estimate", 160, 16);
   }, [measNoise, procNoise, seed]);
 
+  const ratio = measNoise / procNoise;
+  const explain = ratio > 20
+    ? `Measurement noise dwarfs process noise, so the Kalman gain stays small — the filter leans on its motion model and smooths the jitter hard.`
+    : ratio < 8
+    ? `Process noise rivals the sensor noise, so the gain stays high — the filter trusts each measurement, tracking fast but staying a little jumpy.`
+    : `Balanced noise: the gain settles mid-range, blending model and measurement so the estimate is both smooth and responsive.`;
+
+  const code = `import numpy as np
+meas_noise, proc_noise = ${measNoise}, ${procNoise}
+R, Q = meas_noise**2, proc_noise**2
+xh, P = 60.0, 100.0
+for z in measurements:      # your noisy sensor stream
+    P += Q                  # predict: uncertainty grows
+    K = P / (P + R)         # Kalman gain
+    xh += K * (z - xh)      # update toward the measurement
+    P = (1 - K) * P         # uncertainty shrinks
+print("estimate:", xh, " gain:", K)`;
+
   return (
     <StudioChrome title="Kalman Filter" tagline="optimal state estimation"
       controls={<div>
-        <Slider label="Measurement noise" value={measNoise} min={5} max={60} step={1} onChange={setMeasNoise} />
-        <Slider label="Process noise" value={procNoise} min={0.2} max={6} step={0.2} onChange={setProcNoise} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Measurement noise" value={measNoise} min={5} max={60} step={1} onChange={(v) => update({ measNoise: v })} />
+        <Slider label="Process noise" value={procNoise} min={0.2} max={6} step={0.2} onChange={(v) => update({ procNoise: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New run</button>
         <p className="mt-3 text-xs text-slate-500">The Kalman filter fuses a motion model with noisy measurements to track a hidden state optimally. Each step it predicts, then corrects using the Kalman gain — trusting the measurement more when the model is uncertain, and vice versa. It smooths the jittery sensor (gray) into a clean estimate (cyan) that hugs the truth. The math behind GPS, radar, and spacecraft navigation.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Measurement RMSE" value={rmse.meas.toFixed(1)} /><Stat label="Kalman RMSE" value={rmse.kf.toFixed(1)} /><Stat label="Noise reduction" value={`${(100 * (1 - rmse.kf / rmse.meas)).toFixed(0)}%`} /></div>}
+      inspector={<div><Stat label="Measurement RMSE" value={rmse.meas.toFixed(1)} /><Stat label="Kalman RMSE" value={rmse.kf.toFixed(1)} /><Stat label="Noise reduction" value={`${(100 * (1 - rmse.kf / rmse.meas)).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -1,16 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { alpha: number; income: number; px: number; py: number }> = {
+  "Balanced taste": { alpha: 0.5, income: 100, px: 4, py: 3 },
+  "Strong X-lover": { alpha: 0.8, income: 100, px: 4, py: 3 },
+  "X gets cheap": { alpha: 0.5, income: 100, px: 1, py: 5 },
+  "Higher income": { alpha: 0.5, income: 300, px: 4, py: 3 },
+};
 
 // Consumer choice: U = x^a y^(1-a), budget px x + py y = I.
 export function IndifferenceCurveStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [alpha, setAlpha] = useState(0.5);
-  const [income, setIncome] = useState(100);
-  const [px, setPx] = useState(4);
-  const [py, setPy] = useState(3);
+  const [{ alpha, income, px, py }, update] = useShareableNumbers({ alpha: 0.5, income: 100, px: 4, py: 3 });
 
   const x = alpha * income / px, y = (1 - alpha) * income / py; const U = Math.pow(x, alpha) * Math.pow(y, 1 - alpha);
 
@@ -27,16 +32,27 @@ export function IndifferenceCurveStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("indifference curves + budget line", ox + 6, oy - ph + 14); ctx.fillText("good X →", ox + pw - 60, oy + 16); ctx.save(); ctx.translate(16, oy - ph / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("good Y", -20, 0); ctx.restore();
   }, [alpha, income, px, py]);
 
+  const explain = `With Cobb-Douglas preferences the optimal bundle spends a fixed income share on each good — here ${(alpha * 100).toFixed(0)}% of income (${(alpha * income).toFixed(0)}) buys X and ${((1 - alpha) * 100).toFixed(0)}% buys Y, no matter how prices move; a price only changes how many units that fixed budget buys.`;
+
+  const pyCode = `alpha, income, px, py = ${alpha}, ${income}, ${px}, ${py}
+x = alpha * income / px           # optimal good X
+y = (1 - alpha) * income / py     # optimal good Y
+U = x**alpha * y**(1 - alpha)     # utility at the optimum
+print("spend on X:", alpha * income, " spend on Y:", (1 - alpha) * income)
+print("x:", x, "y:", y, "U:", U)`;
+
   return (
     <StudioChrome title="Consumer Choice" tagline="indifference curves & budget"
       controls={<div>
-        <Slider label="Preference for X (α)" value={alpha} min={0.1} max={0.9} step={0.05} onChange={setAlpha} />
-        <Slider label="Income" value={income} min={40} max={300} step={10} onChange={setIncome} />
-        <Slider label="Price of X" value={px} min={1} max={10} step={0.5} onChange={setPx} />
-        <Slider label="Price of Y" value={py} min={1} max={10} step={0.5} onChange={setPy} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Preference for X (α)" value={alpha} min={0.1} max={0.9} step={0.05} onChange={(v) => update({ alpha: v })} />
+        <Slider label="Income" value={income} min={40} max={300} step={10} onChange={(v) => update({ income: v })} />
+        <Slider label="Price of X" value={px} min={1} max={10} step={0.5} onChange={(v) => update({ px: v })} />
+        <Slider label="Price of Y" value={py} min={1} max={10} step={0.5} onChange={(v) => update({ py: v })} />
         <p className="mt-3 text-xs text-slate-500">A consumer maximizes utility subject to a budget. Indifference curves connect equally-satisfying bundles; the budget line shows what income affords. The best choice is where the budget line just touches the highest reachable indifference curve — the tangency where the marginal rate of substitution equals the price ratio. Change a price and watch the optimal bundle move.</p>
+        <ShareBar code={pyCode} />
       </div>}
-      inspector={<div><Stat label="Optimal X" value={x.toFixed(1)} /><Stat label="Optimal Y" value={y.toFixed(1)} /><Stat label="Utility" value={U.toFixed(1)} /></div>}
+      inspector={<div><Stat label="Optimal X" value={x.toFixed(1)} /><Stat label="Optimal Y" value={y.toFixed(1)} /><Stat label="Utility" value={U.toFixed(1)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

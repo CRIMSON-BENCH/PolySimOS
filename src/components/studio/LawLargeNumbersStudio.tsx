@@ -2,11 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { pHeads: number }> = {
+  "Fair coin": { pHeads: 0.5 },
+  "Loaded 0.7": { pHeads: 0.7 },
+  "Rare heads": { pHeads: 0.1 },
+  "Near-certain": { pHeads: 0.9 },
+};
 
 export function LawLargeNumbersStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [pHeads, setPHeads] = useState(0.5);
+  const [{ pHeads }, update] = useShareableNumbers({ pHeads: 0.5 });
   const [running, setRunning] = useState(true);
   const state = useRef({ heads: 0, n: 0 });
   const hist = useRef<number[]>([]);
@@ -34,14 +42,27 @@ export function LawLargeNumbersStudio() {
   }, [running, pHeads]);
 
   const obs = state.current.n ? state.current.heads / state.current.n : 0;
+  const explain =
+    Math.abs(pHeads - 0.5) < 0.06
+      ? "With a near-fair coin the running proportion wanders wildly at first, but the law pulls it toward 0.50 as flips pile up — and a streak of tails never makes heads “due.”"
+      : `A biased coin obeys the same law: the proportion converges on ${pHeads}, not 0.5. The bias sets the target the average homes in on; the number of flips sets how tightly it locks on.`;
+  const code = `import random
+p = ${pHeads}
+heads = n = 0
+for _ in range(10000):
+    if random.random() < p: heads += 1
+    n += 1
+print("observed", heads / n, "target", p)`;
   return (
     <StudioChrome title="Law of Large Numbers" tagline="chance averages out"
       controls={<div>
-        <Slider label="True P(heads)" value={pHeads} min={0.1} max={0.9} step={0.05} onChange={setPHeads} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="True P(heads)" value={pHeads} min={0.1} max={0.9} step={0.05} onChange={(v) => update({ pHeads: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">Flip a coin a few times and the proportion of heads jumps around wildly; flip it thousands of times and it settles onto the true probability. That is the law of large numbers — averages converge even though individual flips stay random. Crucially, it does not mean a run of tails is &quot;due&quot; to reverse; that belief is the gambler&apos;s fallacy.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Flips" value={state.current.n.toLocaleString()} /><Stat label="Observed p" value={obs.toFixed(4)} /><Stat label="Deviation" value={`${((obs - pHeads) * 100).toFixed(2)}%`} /></div>}
+      inspector={<div><Stat label="Flips" value={state.current.n.toLocaleString()} /><Stat label="Observed p" value={obs.toFixed(4)} /><Stat label="Deviation" value={`${((obs - pHeads) * 100).toFixed(2)}%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,11 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { pressure: number }> = {
+  "Tropical storm": { pressure: 1000 },
+  "Cat 1": { pressure: 980 },
+  "Cat 3": { pressure: 950 },
+  "Cat 5 monster": { pressure: 900 },
+};
 
 export function HurricaneStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [pressure, setPressure] = useState(950); // central mbar
+  const [{ pressure }, update] = useShareableNumbers({ pressure: 950 }); // central mbar
   const [running, setRunning] = useState(true);
   const rot = useRef(0);
 
@@ -29,14 +37,32 @@ export function HurricaneStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [pressure, running]);
 
+  const explain =
+    cat >= 5
+      ? "The pressure has plunged into catastrophic territory — winds scale as the square root of the deficit, so each extra millibar of drop now buys a large jump in destructive power."
+      : cat >= 3
+      ? "This is a major hurricane: the deep central low is driving eyewall winds strong enough to cause devastating damage well inland."
+      : cat >= 1
+      ? "A moderate pressure deficit gives a genuine hurricane, but doubling the wind would require roughly four times this deficit — intensity climbs slowly with pressure."
+      : "The low is still shallow, so winds stay at tropical-storm strength; the storm needs to deepen its central pressure substantially to reach hurricane force.";
+
+  const code = `import numpy as np
+pressure = ${pressure}  # central mbar
+deficit = 1013 - pressure
+max_wind = 6.3 * np.sqrt(deficit)  # m/s
+mph = max_wind * 2.237
+print("deficit", deficit, "mbar | max wind", round(mph), "mph")`;
+
   return (
     <StudioChrome title="Hurricane Wind Model" tagline="pressure drives the wind"
       controls={<div>
-        <Slider label="Central pressure (mbar)" value={pressure} min={880} max={1005} step={1} onChange={setPressure} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Central pressure (mbar)" value={pressure} min={880} max={1005} step={1} onChange={(v) => update({ pressure: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">A hurricane is a giant heat engine whose winds are driven by the pressure drop at its center — the deeper the low, the fiercer the winds, roughly as the square root of the pressure deficit. The calm eye sits in the middle, ringed by the eyewall of strongest wind. Central pressure is the single best predictor of a storm&apos;s intensity.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Pressure deficit" value={`${deficit} mbar`} /><Stat label="Max wind" value={`${kmh.toFixed(0)} km/h`} /><Stat label="Max wind (mph)" value={`${mph.toFixed(0)} mph`} /><Stat label="Saffir-Simpson" value={cat === 0 ? "tropical storm" : `Category ${cat}`} /></div>}
+      inspector={<div><Stat label="Pressure deficit" value={`${deficit} mbar`} /><Stat label="Max wind" value={`${kmh.toFixed(0)} km/h`} /><Stat label="Max wind (mph)" value={`${mph.toFixed(0)} mph`} /><Stat label="Saffir-Simpson" value={cat === 0 ? "tropical storm" : `Category ${cat}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={400} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

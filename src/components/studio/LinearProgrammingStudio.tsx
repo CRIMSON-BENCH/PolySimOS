@@ -1,17 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Maximize c1 x + c2 y over a fixed feasible region.
 const CONS = [ (x: number, y: number) => x + y <= 10, (x: number, y: number) => 2 * x + y <= 16, (x: number, y: number) => x + 3 * y <= 18 ];
 const feasible = (x: number, y: number) => x >= 0 && y >= 0 && CONS.every((c) => c(x, y));
 
+const PRESETS: Record<string, { c1: number; c2: number }> = {
+  "Balanced": { c1: 3, c2: 2 },
+  "x-heavy": { c1: 5, c2: 0.5 },
+  "y-heavy": { c1: 0.5, c2: 5 },
+  "Trade-off": { c1: -2, c2: 4 },
+};
+
 export function LinearProgrammingStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [c1, setC1] = useState(3);
-  const [c2, setC2] = useState(2);
+  const [{ c1, c2 }, update] = useShareableNumbers({ c1: 3, c2: 2 });
 
   // candidate vertices from pairwise line intersections + axes
   const lines = [[1, 1, 10], [2, 1, 16], [1, 3, 18], [1, 0, 0], [0, 1, 0]];
@@ -34,14 +41,29 @@ export function LinearProgrammingStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("feasible region + optimum", ox + 4, 18); ctx.fillText("x →", ox + 11 * sc - 20, oy + 16);
   }, [c1, c2, best, bestV]);
 
+  const explain =
+    c1 <= 0 && c2 <= 0
+      ? `With both coefficients ≤ 0 there is nothing to gain by producing, so the optimum collapses toward the origin at (${best[0].toFixed(1)}, ${best[1].toFixed(1)}).`
+      : `Maximizing ${c1}·x + ${c2}·y lands the optimum at the corner (${best[0].toFixed(1)}, ${best[1].toFixed(1)}) worth ${bestV.toFixed(1)} — a linear objective over a convex region always peaks at a vertex, so sliding c₁/c₂ just makes the solution hop between corners.`;
+
+  const code = `from scipy.optimize import linprog
+c1, c2 = ${c1}, ${c2}
+# maximize c1*x + c2*y  ->  minimize -(c1*x + c2*y)
+A_ub = [[1, 1], [2, 1], [1, 3]]
+b_ub = [10, 16, 18]
+res = linprog(c=[-c1, -c2], A_ub=A_ub, b_ub=b_ub, bounds=[(0, None), (0, None)])
+print("x,y =", res.x, "objective =", -res.fun)`;
+
   return (
     <StudioChrome title="Linear Programming" tagline="optimize over a feasible region"
       controls={<div>
-        <Slider label="Objective coeff. c₁ (x)" value={c1} min={-5} max={5} step={0.5} onChange={setC1} />
-        <Slider label="Objective coeff. c₂ (y)" value={c2} min={-5} max={5} step={0.5} onChange={setC2} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Objective coeff. c₁ (x)" value={c1} min={-5} max={5} step={0.5} onChange={(v) => update({ c1: v })} />
+        <Slider label="Objective coeff. c₂ (y)" value={c2} min={-5} max={5} step={0.5} onChange={(v) => update({ c2: v })} />
         <p className="mt-3 text-xs text-slate-500">Linear programming maximizes a linear objective subject to linear constraints. The constraints carve out a convex feasible region (shaded), and the optimum always sits at a corner. Slide the objective coefficients and watch the optimal vertex jump between corners — the geometric idea behind the simplex algorithm that runs global logistics and finance.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Optimal x" value={best[0].toFixed(2)} /><Stat label="Optimal y" value={best[1].toFixed(2)} /><Stat label="Objective value" value={bestV.toFixed(2)} /></div>}
+      inspector={<div><Stat label="Optimal x" value={best[0].toFixed(2)} /><Stat label="Optimal y" value={best[1].toFixed(2)} /><Stat label="Objective value" value={bestV.toFixed(2)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

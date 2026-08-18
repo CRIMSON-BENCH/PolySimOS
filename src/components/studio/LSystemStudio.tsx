@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const CW = 560, CH = 480;
 
@@ -16,10 +17,10 @@ const PRESETS: Record<string, { axiom: string; rules: Record<string, string>; an
 export function LSystemStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [preset, setPreset] = useState("Fractal plant");
-  const [iter, setIter] = useState(5);
+  const [{ iter }, update] = useShareableNumbers({ iter: 5 });
   const [len, setLen] = useState(0);
 
-  useEffect(() => { setIter(PRESETS[preset].iter); }, [preset]);
+  useEffect(() => { update({ iter: PRESETS[preset].iter }); }, [preset]);
 
   useEffect(() => {
     const p = PRESETS[preset]; let str = p.axiom; const N = Math.round(iter);
@@ -38,12 +39,28 @@ export function LSystemStudio() {
     ctx.stroke();
   }, [preset, iter]);
 
+  const N = Math.round(iter);
+  const explain =
+    N <= 2
+      ? `Only ${N} rewrite${N === 1 ? "" : "s"} so far: the rule has barely compounded, so the figure still looks close to its ${PRESETS[preset].axiom} axiom.`
+      : `After ${N} rewrites the string holds ${len.toLocaleString()} symbols — each pass replaces every symbol at once, so detail multiplies exponentially, not linearly.`;
+
+  const rulesPy = Object.entries(PRESETS[preset].rules).map(([k, v]) => `"${k}": "${v}"`).join(", ");
+  const code = `axiom = "${PRESETS[preset].axiom}"
+rules = {${rulesPy}}
+s = axiom
+for _ in range(${N}):
+    s = "".join(rules.get(c, c) for c in s)
+print("symbols", len(s))  # F/G draw, +/- turn ${PRESETS[preset].angle} deg, [ ] push/pop`;
+
   return (
     <StudioChrome title="L-System Fractals" tagline="turtle graphics · rewriting rules"
       controls={<div>
-        <div className="mb-3 grid grid-cols-2 gap-2">{Object.keys(PRESETS).map((k) => <button key={k} onClick={() => setPreset(k)} className={`rounded-lg px-2 py-1 text-xs font-semibold ${preset === k ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{k}</button>)}</div>
-        <Slider label="Iterations" value={iter} min={1} max={preset === "Dragon curve" ? 14 : 6} step={1} onChange={setIter} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => setPreset(label)} />
+        <Slider label="Iterations" value={iter} min={1} max={preset === "Dragon curve" ? 14 : 6} step={1} onChange={(v) => update({ iter: v })} />
         <p className="mt-3 text-xs text-slate-500">A Lindenmayer system grows a string by rewriting each symbol with a rule, then reads it as turtle commands: F draw, +/− turn, [ ] push/pop. Simple rules, botanical complexity.</p>
+        <ExplainResult text={explain} />
+        <ShareBar code={code} />
       </div>}
       inspector={<div><Stat label="Angle" value={`${PRESETS[preset].angle}°`} /><Stat label="Symbols" value={len.toLocaleString()} /><Stat label="Axiom" value={PRESETS[preset].axiom} /></div>}
     ><canvas ref={canvasRef} width={560} height={480} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

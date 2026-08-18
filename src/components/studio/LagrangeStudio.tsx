@@ -2,12 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { mu: number }> = {
+  "Earth–Moon": { mu: 0.0123 },
+  "Stability limit": { mu: 0.0385 },
+  "Pluto–Charon": { mu: 0.1 },
+  "Equal masses": { mu: 0.5 },
+};
 
 // Restricted 3-body: effective potential in rotating frame + L1-L5.
 export function LagrangeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mu, setMu] = useState(0.15); // mass ratio m2/(m1+m2)
+  const [{ mu }, update] = useShareableNumbers({ mu: 0.15 }); // mass ratio m2/(m1+m2)
   const [showPot, setShowPot] = useState(true);
 
   useEffect(() => {
@@ -30,14 +38,31 @@ export function LagrangeStudio() {
     ctx.beginPath(); ctx.arc(cx + x2 * scale, cy, 6, 0, 7); ctx.fillStyle = "#60a5fa"; ctx.fill();
   }, [mu, showPot]);
 
+  const explain =
+    mu < 0.0385
+      ? `With μ=${mu.toFixed(3)} below the 0.0385 threshold, the triangular points L4 and L5 are genuinely stable — a body nudged there drifts back, which is why Jupiter’s Trojan asteroids collect 60° ahead of and behind the planet.`
+      : `At μ=${mu.toFixed(3)} the masses are too comparable: even L4 and L5 turn unstable, so every Lagrange point here needs active station-keeping to hold a spacecraft in place.`;
+
+  const code = `mu = ${mu}
+x2 = 1 - mu
+L1 = x2 - (mu/3)**(1/3)
+L2 = x2 + (mu/3)**(1/3)
+L3 = -1 - 5/12*mu
+L4 = (0.5 - mu,  3**0.5/2)   # leads by 60 deg
+L5 = (0.5 - mu, -3**0.5/2)   # trails by 60 deg
+print("L4/L5 stable" if mu < 0.0385 else "L4/L5 unstable")
+print(L1, L2, L3, L4, L5)`;
+
   return (
     <StudioChrome title="Lagrange Points" tagline="restricted three-body problem"
       controls={<div>
-        <Slider label="Mass ratio μ" value={mu} min={0.01} max={0.5} step={0.01} onChange={setMu} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Mass ratio μ" value={mu} min={0.01} max={0.5} step={0.01} onChange={(v) => update({ mu: v })} />
         <label className="mt-3 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400"><input type="checkbox" checked={showPot} onChange={(e) => setShowPot(e.target.checked)} /> Show effective potential</label>
         <p className="mt-3 text-xs text-slate-500">In a two-body system, five points let a small object stay fixed in the rotating frame. L1-L3 sit on the line through the two masses (unstable); L4 and L5 lead and trail the secondary by 60° and are stable for μ below 0.0385 — where Jupiter&apos;s Trojan asteroids live. JWST orbits the Sun-Earth L2.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="μ = m₂/(m₁+m₂)" value={mu.toFixed(3)} /><Stat label="L4/L5 stable?" value={mu < 0.0385 ? "yes" : "no"} /><Stat label="Points" value="5" /></div>}
+      inspector={<div><Stat label="μ = m₂/(m₁+m₂)" value={mu.toFixed(3)} /><Stat label="L4/L5 stable?" value={mu < 0.0385 ? "yes" : "no"} /><Stat label="Points" value="5" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={420} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -1,15 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { T0: number; dew: number; lapse: number }> = {
+  "Standard atmosphere": { T0: 15, dew: 8, lapse: 6.5 },
+  "Humid summer day": { T0: 30, dew: 24, lapse: 6.5 },
+  "Dry desert": { T0: 40, dew: 5, lapse: 9 },
+  "Cold moist front": { T0: 5, dew: 3, lapse: 7.5 },
+};
 
 // Atmospheric profile: T = T0 - lapse*z ; barometric pressure ; lifting condensation level.
 export function LapseRateStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [T0, setT0] = useState(15); // surface temp C
-  const [dew, setDew] = useState(8); // surface dew point C
-  const [lapse, setLapse] = useState(6.5); // C/km environmental
+  const [{ T0, dew, lapse }, update] = useShareableNumbers({ T0: 15, dew: 8, lapse: 6.5 });
 
   // LCL height (km) ~ (T - Td)/8 ; cloud base
   const lcl = Math.max(0, (T0 - dew) / 8);
@@ -27,15 +33,35 @@ export function LapseRateStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("temperature (°C) →", ox + pw - 110, oy + 20); ctx.save(); ctx.translate(16, oy - ph / 2); ctx.rotate(-Math.PI / 2); ctx.fillText("altitude (km)", -30, 0); ctx.restore();
   }, [T0, dew, lapse, lcl]);
 
+  const explain =
+    lcl < 0.6
+      ? "The dew-point spread is tiny, so air needs to rise barely any distance to saturate — expect a very low, overcast cloud base, sometimes fog at the surface."
+      : lcl > 3
+      ? "A wide temperature–dew-point spread means air must climb far before it saturates, giving a high cloud base or clear skies — the hallmark of dry, stable air."
+      : "Cloud base is set by the dew-point depression, not the lapse rate: it sits at roughly (T − Td)/8 km, while the lapse rate only controls how cold it gets on the way up.";
+
+  const code = `import numpy as np
+T0, dew, lapse = ${T0}, ${dew}, ${lapse}       # surface temp, dew point (C); lapse (C/km)
+lcl = max(0.0, (T0 - dew) / 8)                # cloud base height, km
+z = np.linspace(0, 12, 200)
+T = T0 - lapse * np.minimum(z, 11)            # environmental temperature profile
+P = 1013.25 * (1 - 0.0065 * z * 1000 / (T0 + 273.15))**5.255  # barometric pressure
+print("cloud base", round(lcl, 2), "km")`;
+
   return (
     <StudioChrome title="Atmospheric Lapse Rate & Cloud Base" tagline="temperature & pressure with altitude"
       controls={<div>
-        <Slider label="Surface temperature (°C)" value={T0} min={-20} max={45} step={1} onChange={setT0} />
-        <Slider label="Surface dew point (°C)" value={dew} min={-30} max={35} step={1} onChange={setDew} />
-        <Slider label="Environmental lapse rate (°C/km)" value={lapse} min={2} max={10} step={0.1} onChange={setLapse} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Surface temperature (°C)" value={T0} min={-20} max={45} step={1} onChange={(v) => update({ T0: v })} />
+        <Slider label="Surface dew point (°C)" value={dew} min={-30} max={35} step={1} onChange={(v) => update({ dew: v })} />
+        <Slider label="Environmental lapse rate (°C/km)" value={lapse} min={2} max={10} step={0.1} onChange={(v) => update({ lapse: v })} />
         <p className="mt-3 text-xs text-slate-500">Air cools with height at the environmental lapse rate. Rising air cools until it hits its dew point at the lifting condensation level — the cloud base — estimated by (T − Td)/8 km. The pressure falls with altitude following the barometric formula.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cloud base" value={`${lcl.toFixed(2)} km`} /><Stat label="Pressure at 3 km" value={`${P(3).toFixed(0)} hPa`} /><Stat label="T at 5 km" value={`${(T0 - lapse * 5).toFixed(1)} °C`} /></div>}
+      inspector={<div><Stat label="Cloud base" value={`${lcl.toFixed(2)} km`} /><Stat label="Pressure at 3 km" value={`${P(3).toFixed(0)} hPa`} /><Stat label="T at 5 km" value={`${(T0 - lapse * 5).toFixed(1)} °C`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
