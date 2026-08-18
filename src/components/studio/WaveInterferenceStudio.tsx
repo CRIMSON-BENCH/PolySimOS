@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = 220, PX = 2;
@@ -16,29 +17,32 @@ const PRESETS: Record<string, { freq: number; sep: number }> = {
 
 export function WaveInterferenceStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const rafRef = useRef(0);
-  const [running, setRunning] = useState(true);
+  const timeRef = useRef(0);
   const [{ freq, sep }, update] = useShareableNumbers({ freq: 0.4, sep: 50 });
+  const freqRef = useRef(freq); freqRef.current = freq;
+  const sepRef = useRef(sep); sepRef.current = sep;
 
-  useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
     const img = ctx.createImageData(N, N);
-    let t = 0;
-    const loop = () => {
-      if (running) t += 0.3;
-      const s1x = N / 2 - sep, s1y = N / 2, s2x = N / 2 + sep, s2y = N / 2;
-      for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
-        const d1 = Math.hypot(x - s1x, y - s1y), d2 = Math.hypot(x - s2x, y - s2y);
-        const a = Math.sin(freq * d1 - t) / (1 + d1 * 0.03) + Math.sin(freq * d2 - t) / (1 + d2 * 0.03);
-        const v = (a + 2) / 4; const i = (y * N + x) * 4;
-        img.data[i] = v * 60; img.data[i + 1] = v * 200; img.data[i + 2] = v * 255; img.data[i + 3] = 255;
-      }
-      ctx.putImageData(img, 0, 0);
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [running, freq, sep]);
+    // `steps` (speed) advances the wave phase faster
+    timeRef.current += 0.3 * steps;
+    const tm = timeRef.current;
+    const fq = freqRef.current, sp = sepRef.current;
+    const s1x = N / 2 - sp, s1y = N / 2, s2x = N / 2 + sp, s2y = N / 2;
+    for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
+      const d1 = Math.hypot(x - s1x, y - s1y), d2 = Math.hypot(x - s2x, y - s2y);
+      const a = Math.sin(fq * d1 - tm) / (1 + d1 * 0.03) + Math.sin(fq * d2 - tm) / (1 + d2 * 0.03);
+      const v = (a + 2) / 4; const i = (y * N + x) * 4;
+      img.data[i] = v * 60; img.data[i + 1] = v * 200; img.data[i + 2] = v * 255; img.data[i + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  };
+
+  const t = useTransport(frame);
 
   const wavelength = (2 * Math.PI) / freq;
   const spacing = sep * 2;
@@ -66,7 +70,7 @@ print("peak intensity", intensity.max())`;
   return (
     <StudioChrome title="Wave Interference Studio" tagline="two-source interference · ripple tank"
       controls={<div>
-        <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button></div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} speed={t.speed} onSpeed={t.setSpeed} />
         <p className="mb-3 text-xs text-slate-500">Two point sources emit circular waves — where they meet, you see constructive and destructive interference fringes.</p>
         <Presets
           presets={Object.keys(PRESETS).map((label) => ({ label }))}

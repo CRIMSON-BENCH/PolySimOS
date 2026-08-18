@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 // 2D Ising model — Metropolis Monte Carlo. Tune temperature through the
@@ -20,38 +21,34 @@ const PRESETS: Record<string, { temp: number }> = {
 export function IsingStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const spins = useRef<Int8Array>(new Int8Array(N * N));
-  const rafRef = useRef(0);
-  const [running, setRunning] = useState(true);
   const [{ temp }, update] = useShareableNumbers({ temp: 2.2 });
+  const tempRef = useRef(temp); tempRef.current = temp;
   const [mag, setMag] = useState(0);
+  const magTick = useRef(0);
 
   const reset = () => { for (let i = 0; i < N * N; i++) spins.current[i] = Math.random() < 0.5 ? 1 : -1; };
   useEffect(() => { reset(); }, []);
 
-  useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
     const img = ctx.createImageData(N, N);
-    let frame = 0;
-    const loop = () => {
-      const s = spins.current;
-      if (running) {
-        const beta = 1 / Math.max(0.05, temp);
-        for (let k = 0; k < N * N; k++) {
-          const x = (Math.random() * N) | 0, y = (Math.random() * N) | 0, i = y * N + x;
-          const nb = s[((y - 1 + N) % N) * N + x] + s[((y + 1) % N) * N + x] + s[y * N + (x - 1 + N) % N] + s[y * N + (x + 1) % N];
-          const dE = 2 * s[i] * nb;
-          if (dE <= 0 || Math.random() < Math.exp(-beta * dE)) s[i] = -s[i] as -1 | 1;
-        }
-      }
-      let m = 0;
-      for (let i = 0; i < N * N; i++) { const up = s[i] > 0; m += s[i]; const c = up ? 210 : 40; img.data[i * 4] = up ? 34 : 15; img.data[i * 4 + 1] = up ? 211 : 23; img.data[i * 4 + 2] = c; img.data[i * 4 + 3] = 255; }
-      ctx.putImageData(img, 0, 0);
-      if (frame++ % 10 === 0) setMag(Math.abs(m) / (N * N));
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [running, temp]);
+    const s = spins.current;
+    const beta = 1 / Math.max(0.05, tempRef.current);
+    for (let k = 0; k < N * N * steps; k++) {
+      const x = (Math.random() * N) | 0, y = (Math.random() * N) | 0, i = y * N + x;
+      const nb = s[((y - 1 + N) % N) * N + x] + s[((y + 1) % N) * N + x] + s[y * N + (x - 1 + N) % N] + s[y * N + (x + 1) % N];
+      const dE = 2 * s[i] * nb;
+      if (dE <= 0 || Math.random() < Math.exp(-beta * dE)) s[i] = -s[i] as -1 | 1;
+    }
+    let m = 0;
+    for (let i = 0; i < N * N; i++) { const up = s[i] > 0; m += s[i]; const c = up ? 210 : 40; img.data[i * 4] = up ? 34 : 15; img.data[i * 4 + 1] = up ? 211 : 23; img.data[i * 4 + 2] = c; img.data[i * 4 + 3] = 255; }
+    ctx.putImageData(img, 0, 0);
+    if (magTick.current++ % 10 === 0) setMag(Math.abs(m) / (N * N));
+  };
+
+  const t = useTransport(frame);
 
   const explain =
     temp < TC - 0.35
@@ -76,10 +73,7 @@ print("magnetization", abs(s.sum()) / (N * N))`;
   return (
     <StudioChrome title="Ising Model Studio" tagline="statistical mechanics · Metropolis Monte Carlo"
       controls={<div>
-        <div className="mb-3 flex gap-2">
-          <button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button>
-          <button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Randomize</button>
-        </div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { reset(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
         <p className="mb-3 text-xs text-slate-500">Below the critical temperature (~2.27) domains align; above it, thermal noise wins. A live phase transition.</p>
         <Presets
           presets={Object.keys(PRESETS).map((label) => ({ label }))}

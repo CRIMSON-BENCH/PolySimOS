@@ -12,6 +12,7 @@ import {
 } from "@/lib/engines/particles";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -27,9 +28,9 @@ export function ParticleStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const partsRef = useRef<Particle[]>([]);
   const paramsRef = useRef<ParticleParams>({ ...DEFAULT_PARTICLE_PARAMS, width: W, height: H });
-  const rafRef = useRef<number>(0);
+  const lastRef = useRef(0);
+  const frameCountRef = useRef(0);
 
-  const [running, setRunning] = useState(true);
   const [scene, setScene] = useState<"orbit" | "gas">("orbit");
   const [{ count, pairwiseG, gravityY, restitution }, update] = useShareableNumbers({
     count: 120,
@@ -56,38 +57,33 @@ export function ParticleStudio() {
     paramsRef.current.restitution = restitution;
   }, [gravityY, pairwiseG, restitution]);
 
-  useEffect(() => {
-    const canvas = canvasRef.current!;
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     const ctx = hidpi(canvas, W, H);
-    let last = 0;
-    let frame = 0;
+    const now = performance.now();
+    const dt = lastRef.current ? Math.min(0.033, (now - lastRef.current) / 1000) : 0.016;
+    lastRef.current = now;
+    const parts = partsRef.current;
+    // substep for stability; `steps` (speed) advances more sim time per frame
+    const sub = 2;
+    const total = sub * steps;
+    for (let s = 0; s < total; s++) stepParticles(parts, paramsRef.current, dt / sub);
+    // render
+    ctx.fillStyle = "#020617";
+    ctx.fillRect(0, 0, W, H);
+    for (const pt of parts) {
+      const speed = Math.hypot(pt.vx, pt.vy);
+      const hue = 190 - Math.min(120, speed * 0.6);
+      ctx.beginPath();
+      ctx.fillStyle = pt.fixed ? "#a3e635" : `hsl(${hue}, 90%, 60%)`;
+      ctx.arc(pt.x, pt.y, pt.radius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    if (frameCountRef.current++ % 10 === 0) setMetrics(particleMetrics(parts));
+  };
 
-    const loop = (ts: number) => {
-      const dt = last ? Math.min(0.033, (ts - last) / 1000) : 0.016;
-      last = ts;
-      const parts = partsRef.current;
-      if (running) {
-        // substep for stability
-        const sub = 2;
-        for (let s = 0; s < sub; s++) stepParticles(parts, paramsRef.current, dt / sub);
-      }
-      // render
-      ctx.fillStyle = "#020617";
-      ctx.fillRect(0, 0, W, H);
-      for (const pt of parts) {
-        const speed = Math.hypot(pt.vx, pt.vy);
-        const hue = 190 - Math.min(120, speed * 0.6);
-        ctx.beginPath();
-        ctx.fillStyle = pt.fixed ? "#a3e635" : `hsl(${hue}, 90%, 60%)`;
-        ctx.arc(pt.x, pt.y, pt.radius, 0, Math.PI * 2);
-        ctx.fill();
-      }
-      if (frame++ % 10 === 0) setMetrics(particleMetrics(parts));
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [running]);
+  const t = useTransport(frame);
 
   const reset = () => {
     const p = paramsRef.current;
@@ -117,20 +113,7 @@ print(count, "bodies; G", G, "gy", gy, "restitution", e)`;
       tagline="symplectic Euler · impulse collisions"
       controls={
         <div>
-          <div className="mb-3 flex gap-2">
-            <button
-              onClick={() => setRunning((v) => !v)}
-              className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700"
-            >
-              {running ? "Pause" : "Play"}
-            </button>
-            <button
-              onClick={reset}
-              className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
-            >
-              Reset
-            </button>
-          </div>
+          <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { reset(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
           <div className="mb-3 flex gap-2">
             {(["orbit", "gas"] as const).map((s) => (
               <button
