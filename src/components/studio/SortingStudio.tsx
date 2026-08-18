@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 type Step = { arr: number[]; a: number; b: number };
@@ -30,7 +31,7 @@ export function SortingStudio() {
   useEffect(() => { reset(); /* eslint-disable-next-line */ }, [algo, size]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     const loop = () => {
       idx.current = Math.min(steps.current.length - 1, idx.current + speed);
       const step = steps.current[idx.current]; if (!step) { rafRef.current = requestAnimationFrame(loop); return; }

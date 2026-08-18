@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function ExoplanetTransitStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -27,7 +28,7 @@ export function ExoplanetTransitStudio() {
         const A1 = r1 * r1 * Math.acos(Math.min(1, Math.max(-1, a / r1))); const A2 = r2 * r2 * Math.acos(Math.min(1, Math.max(-1, (d - a) / r2)));
         const area = A1 + A2 - d * h; flux = 1 - (area / (Math.PI * Rs * Rs)); } }
       curve.current.push(flux); if (curve.current.length > 260) curve.current.shift();
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // star
       const g = ctx.createRadialGradient(starX, starY, 10, starX, starY, Rs); g.addColorStop(0, "#fff7ed"); g.addColorStop(0.7, "#fbbf24"); g.addColorStop(1, "#f59e0b");
       ctx.fillStyle = g; ctx.beginPath(); ctx.arc(starX, starY, Rs, 0, 7); ctx.fill();

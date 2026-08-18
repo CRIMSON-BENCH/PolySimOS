@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Gaussian plume dispersion (Pasquill-Gifford). Ground-level centerline concentration.
 const STABILITY: Record<string, { a: number; b: number; c: number; d: number; label: string }> = {
@@ -28,7 +29,7 @@ export function HazmatPlumeStudio() {
     // protective action distance: where centerline conc drops below threshold
     let padDist = 0; for (let x = 5; x < 20000; x += 5) { if (conc(x, 0) < threshold) { padDist = x; break; } }
     setPad(padDist);
-    const W = 520, H = 300; const ctx = canvasRef.current!.getContext("2d")!; const img = ctx.createImageData(W, H);
+    const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); const img = ctx.createImageData(W, H);
     const scaleX = (padDist > 0 ? padDist * 1.4 : 4000) / W; const scaleY = scaleX; // meters/px
     for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const x = px * scaleX; const y = (py - H / 2) * scaleY; const c = conc(x, y);
       const t = Math.min(1, Math.log10(c + 1) / 3); const idx = (py * W + px) * 4;

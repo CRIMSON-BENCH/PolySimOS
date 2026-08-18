@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // SPC X-bar control chart with a process shift.
 export function ControlChartStudio() {
@@ -21,7 +22,7 @@ export function ControlChartStudio() {
     const loop = () => {
       frame++; if (frame % 25 === 0) { const val = target + shift + gauss() * sigma; data.current.push(val); if (data.current.length > 40) data.current.shift(); }
       let viol = 0; data.current.forEach((d) => { if (d > UCL || d < LCL) viol++; }); setViolations(viol);
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 540, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const ox = 40, pw = W - 60, ph = H - 60, oy = H - 30; const Y = (v: number) => oy - ((v - 40) / 20) * ph;
       ctx.strokeStyle = "#a3e635"; ctx.beginPath(); ctx.moveTo(ox, Y(target)); ctx.lineTo(ox + pw, Y(target)); ctx.stroke();
       ctx.strokeStyle = "#ef4444"; ctx.setLineDash([4, 4]); [UCL, LCL].forEach((l) => { ctx.beginPath(); ctx.moveTo(ox, Y(l)); ctx.lineTo(ox + pw, Y(l)); ctx.stroke(); }); ctx.setLineDash([]);

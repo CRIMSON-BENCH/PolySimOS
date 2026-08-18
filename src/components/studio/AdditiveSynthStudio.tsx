@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 type Wave = "sawtooth" | "square" | "triangle";
 function amp(wave: Wave, k: number): number {
@@ -16,7 +17,7 @@ export function AdditiveSynthStudio() {
   const [nHarm, setNHarm] = useState(8);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const N = Math.round(nHarm); const ox = 30, sw = W - 60;
     // reconstructed wave
     const midY = 110, wh = 70; ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();

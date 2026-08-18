@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 460;
 
@@ -12,7 +13,7 @@ export function SnellStudio() {
   const [angle, setAngle] = useState(40);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, cy = H / 2;
     ctx.fillStyle = "rgba(34,120,200,0.18)"; ctx.fillRect(0, cy, W, H - cy);

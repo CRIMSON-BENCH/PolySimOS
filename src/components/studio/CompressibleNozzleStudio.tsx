@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function CompressibleNozzleStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function CompressibleNozzleStudio() {
   const AeAstar = Me > 0 ? areaRatio(Me) : 1;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2;
     // converging-diverging nozzle profile: throat at x=0.4
     ctx.strokeStyle = "#64748b"; ctx.lineWidth = 2; ctx.beginPath();

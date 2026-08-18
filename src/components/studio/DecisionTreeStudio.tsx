@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
 
@@ -14,7 +15,7 @@ export function DecisionTreeStudio() {
   const acc = pts.filter(p => classify(p.x, p.y) === p.c).length / pts.length;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const gx = 60, gy = 30, gw = W - 100, gh = H - 60, cols = ["#f472b6", "#22d3ee"];
     const res = 30; for (let i = 0; i < res; i++) for (let j = 0; j < res; j++) { const cls = classify(i / res, j / res); ctx.fillStyle = cols[cls] + "22"; ctx.fillRect(gx + i / res * gw, gy + j / res * gh, gw / res + 1, gh / res + 1); }
     // split lines

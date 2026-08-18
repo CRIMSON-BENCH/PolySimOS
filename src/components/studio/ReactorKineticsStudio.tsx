@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Point reactor kinetics with one delayed-neutron group.
 export function ReactorKineticsStudio() {
@@ -21,7 +22,7 @@ export function ReactorKineticsStudio() {
       const s = state.current; const dt = 0.002; const c0 = beta / (Lambda * lam);
       for (let k = 0; k < 30; k++) { const dn = ((rho - beta) / Lambda) * s.n + lam * s.c; const dc = (beta / Lambda) * s.n - lam * s.c; s.n += dn * dt; s.c += dc * dt; s.t += dt; if (s.n > 1e6) s.n = 1e6; if (s.n < 1e-6) s.n = 1e-6; }
       hist.current.push(s.n); if (hist.current.length > 300) hist.current.shift(); void c0;
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const maxP = Math.max(...hist.current, 2), minP = Math.min(...hist.current, 0.5);
       ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
       ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); hist.current.forEach((p, i) => { const x = ox + (i / 300) * pw; const y = oy - (Math.log10(p / minP) / Math.log10(maxP / minP + 0.01)) * ph; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { minimize1D, monteCarloUQ } from "@/lib/engines/fieldmath";
 import { sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 720, H = 460;
 
@@ -18,7 +19,7 @@ export function OptimizeStudio() {
   const uq = useMemo(() => { try { return opt ? monteCarloUQ(expr, opt.x, sd, 4000) : null; } catch { return null; } }, [expr, opt, sd]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     let data: { x: number; y: number }[] = []; try { data = sampleExpr(expr, "x", -3, 3, 400); } catch { /* */ }
     const ys = data.map((d) => d.y).filter(isFinite); let minY = Math.min(...ys), maxY = Math.max(...ys); if (!isFinite(minY)) { minY = -1; maxY = 1; }
     const pad = 30; const sx = (x: number) => pad + ((x + 3) / 6) * (W - 2 * pad); const sy = (y: number) => H - pad - ((y - minY) / (maxY - minY || 1)) * (H - 2 * pad);

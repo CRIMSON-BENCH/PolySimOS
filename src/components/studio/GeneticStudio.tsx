@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Evolve (x,y) to maximize a multi-peak fitness landscape.
 export function GeneticStudio() {
@@ -35,7 +36,7 @@ export function GeneticStudio() {
         if (rnd() < mutation) nx += (rnd() - 0.5) * W * 0.2; if (rnd() < mutation) ny += (rnd() - 0.5) * H * 0.2;
         next.push([Math.max(0, Math.min(W, nx)), Math.max(0, Math.min(H, ny))]); }
       pop.current = next;
-      const ctx = canvasRef.current!.getContext("2d")!; const img = ctx.createImageData(W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); const img = ctx.createImageData(W, H);
       for (let y = 0; y < H; y += 2) for (let x = 0; x < W; x += 2) { const v = Math.min(1, fit(x, y)); for (let dy = 0; dy < 2; dy++) for (let dx = 0; dx < 2; dx++) { const idx = ((y + dy) * W + (x + dx)) * 4; img.data[idx] = 11 + v * 60; img.data[idx + 1] = 18 + v * 120; img.data[idx + 2] = 32 + v * 90; img.data[idx + 3] = 255; } }
       ctx.putImageData(img, 0, 0);
       pop.current.forEach((p) => { ctx.beginPath(); ctx.arc(p[0], p[1], 3, 0, 7); ctx.fillStyle = "#f472b6"; ctx.fill(); });

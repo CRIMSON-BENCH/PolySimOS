@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Lawson criterion / triple product for fusion ignition.
 export function FusionLawsonStudio() {
@@ -15,7 +16,7 @@ export function FusionLawsonStudio() {
   const ratio = triple / ignition; const ignited = ratio >= 1;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const tMax = 60;
     const X = (t: number) => ox + (t / tMax) * pw; const Y = (nt: number) => oy - (Math.log10(nt) - 19) / 3 * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

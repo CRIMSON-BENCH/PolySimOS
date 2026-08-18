@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function TitrationCurveStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function TitrationCurveStudio() {
   const pHat = (v: number) => { const na = Ca * Va / 1000, nb = Cb * v / 1000, tot = (Va + v) / 1000; if (Math.abs(na - nb) < 1e-9) return 7; if (nb < na) return -Math.log10((na - nb) / tot); return 14 + Math.log10((nb - na) / tot); };
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 32, pw = W - 60, ph = H - 52, vmax = Veq * 2;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     for (let p = 0; p <= 14; p += 7) { const y = oy - (p / 14) * ph; ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(ox, y); ctx.lineTo(ox + pw, y); ctx.stroke(); }

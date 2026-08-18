@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
 const COLORS = ["#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#c084fc"];
@@ -13,7 +14,7 @@ export function KmeansClusterStudio() {
   for (let b = 0; b < 4; b++) for (let i = 0; i < 20; i++) pts.push({ x: rnd(b * 50 + i * 3 + 1) * 0.6 + [0.15, 0.7, 0.2, 0.75][b], y: rnd(b * 50 + i * 7 + 2) * 0.6 + [0.15, 0.2, 0.75, 0.7][b] });
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // init centroids deterministically, run k-means for `iters`
     let cent = Array.from({ length: k }, (_, i) => ({ x: 0.2 + 0.6 * rnd(i * 13 + 5), y: 0.2 + 0.6 * rnd(i * 17 + 9) }));
     let assign = pts.map(() => 0);

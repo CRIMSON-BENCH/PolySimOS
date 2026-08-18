@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function DiceProbabilityStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -15,7 +16,7 @@ export function DiceProbabilityStudio() {
   const mostLikely = dist.indexOf(Math.max(...dist)) + N;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, oy = H - 35, pw = W - 50, ph = H - 55; const maxV = Math.max(...dist); const bw = pw / dist.length;
     dist.forEach((v, i) => { const sum = i + N; const h = (v / maxV) * ph; ctx.fillStyle = sum === target ? "#f472b6" : "#22d3ee"; ctx.fillRect(ox + i * bw, oy - h, bw - 1, h); if (dist.length <= 20) { ctx.fillStyle = "#64748b"; ctx.font = "9px sans-serif"; ctx.fillText(String(sum), ox + i * bw + 2, oy + 12); } });
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`sum of ${N}d${S} distribution`, ox + 6, oy - ph + 12);

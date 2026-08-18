@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function ActiveFilterStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -9,7 +10,7 @@ export function ActiveFilterStudio() {
   const mag = (f: number) => { const r = f / fc; const lp = 1 / Math.sqrt(1 + Math.pow(r, 2 * order)); const hp = Math.pow(r, order) / Math.sqrt(1 + Math.pow(r, 2 * order)); return type ? hp : lp; };
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     const fmin = 10, fmax = 1e6, dbMin = -60;

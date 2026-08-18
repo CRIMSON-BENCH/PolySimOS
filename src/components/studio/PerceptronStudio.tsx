@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
 
@@ -14,7 +15,7 @@ export function PerceptronStudio() {
 
   useEffect(() => {
     const s = st.current; s.w = [0.3, -0.2]; s.b = 0; s.i = 0;
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; let raf = 0;
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); let raf = 0;
     const loop = () => {
       // one update step
       for (let k = 0; k < 3; k++) { const p = pts[s.i % pts.length]; s.i++; const pred = (s.w[0] * p.x + s.w[1] * p.y + s.b) > 0 ? 1 : 0; const err = p.c - pred; s.w[0] += lr * err * p.x; s.w[1] += lr * err * p.y; s.b += lr * err; }

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function VanDerWaalsStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function VanDerWaalsStudio() {
   const Pideal = (V: number) => R * T / V;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55, Vmin = b + 0.02, Vmax = 1.2, Pmax = 120;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     const plot = (f: (V: number) => number, col: string) => { ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); let started = false; for (let i = 0; i <= pw; i++) { const V = Vmin + (Vmax - Vmin) * i / pw; const P = f(V); if (P < 0 || P > Pmax) { started = false; continue; } const x = ox + i, y = oy - (P / Pmax) * ph; started ? ctx.lineTo(x, y) : ctx.moveTo(x, y); started = true; } ctx.stroke(); };

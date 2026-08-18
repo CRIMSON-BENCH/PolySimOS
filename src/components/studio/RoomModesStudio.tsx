@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const C = 343;
 export function RoomModesStudio() {
@@ -18,7 +19,7 @@ export function RoomModesStudio() {
   modes.sort((a, b) => a.f - b.f);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 240; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 240; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, oy = H - 40, pw = W - 50; const fMax = 200;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.stroke();
     const col = { axial: "#22d3ee", tangential: "#a3e635", oblique: "#64748b" } as Record<string, string>;

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Max flow (Edmonds-Karp) on a fixed network.
 export function MaxFlowStudio() {
@@ -20,7 +21,7 @@ export function MaxFlowStudio() {
     for (let v = 5; v !== 0; v = par[v]) { flow[par[v]][v] += bottle; flow[v][par[v]] -= bottle; } maxflow += bottle; }
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     edges.forEach(([u, v, c]) => { const a = nodes[u], b = nodes[v]; const f = flow[u][v]; ctx.strokeStyle = f > 0 ? "#22d3ee" : "#334155"; ctx.lineWidth = f > 0 ? 1.5 + f / 2 : 1.5; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       const mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2; ctx.fillStyle = "#94a3b8"; ctx.font = "10px sans-serif"; ctx.fillText(`${Math.max(0, f)}/${c}`, mx - 10, my - 4); });
     nodes.forEach((n) => { ctx.fillStyle = n.id === 0 ? "#a3e635" : n.id === 5 ? "#f472b6" : "#1e293b"; ctx.strokeStyle = "#64748b"; ctx.beginPath(); ctx.arc(n.x, n.y, 20, 0, 7); ctx.fill(); ctx.stroke(); ctx.fillStyle = n.id === 0 || n.id === 5 ? "#0b1220" : "#e2e8f0"; ctx.font = "bold 13px sans-serif"; ctx.fillText(n.l, n.x - 5, n.y + 4); });

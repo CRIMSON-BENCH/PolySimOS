@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function CompoundInterestStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,7 +18,7 @@ export function CompoundInterestStudio() {
   const final = balance; const totalContrib = contrib; const interest = final - totalContrib;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 55, oy = H - 35, pw = W - 75, ph = H - 55; const maxV = final * 1.05;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     // total balance area

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function TumorGrowthStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function TumorGrowthStudio() {
   const days = 200; const halfT = (() => { for (let t = 0; t < days; t++) if (f(t) >= K / 2) return t; return days; })();
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 32, pw = W - 65, ph = H - 52;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#475569"; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(ox, oy - ph * 0.95); ctx.lineTo(ox + pw, oy - ph * 0.95); ctx.stroke(); ctx.setLineDash([]);

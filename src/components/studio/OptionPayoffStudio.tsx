@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 type Leg = { type: "call" | "put"; qty: number; strike: number; premium: number };
 const STRATS: Record<string, (k: number) => Leg[]> = {
@@ -25,7 +26,7 @@ export function OptionPayoffStudio() {
   for (let s = 0; s <= 200; s += 0.5) { const p = payoff(s); maxProfit = Math.max(maxProfit, p); maxLoss = Math.min(maxLoss, p); }
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, cy = H / 2, pw = W - 70, sMax = 200;
     let pmax = 1; for (let s = 0; s <= sMax; s += 2) pmax = Math.max(pmax, Math.abs(payoff(s))); const scale = (H / 2 - 30) / pmax;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, cy); ctx.lineTo(ox + pw, cy); ctx.moveTo(ox, 20); ctx.lineTo(ox, H - 20); ctx.stroke();

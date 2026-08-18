@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function QuantizationNoiseStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function QuantizationNoiseStudio() {
   const quant = (v: number) => Math.round((v + 1) / 2 * (levels - 1)) / (levels - 1) * 2 - 1;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2, amp = 110, pw = W - 60;
     // quantization levels
     ctx.strokeStyle = "#1e293b"; for (let l = 0; l < levels; l++) { const v = l / (levels - 1) * 2 - 1; const y = cy - v * amp; ctx.beginPath(); ctx.moveTo(30, y); ctx.lineTo(W - 30, y); ctx.stroke(); }

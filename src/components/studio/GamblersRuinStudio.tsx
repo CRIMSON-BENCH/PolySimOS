@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function GamblersRuinStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function GamblersRuinStudio() {
 
   useEffect(() => {
     const W = 520, H = 300; let s = seed * 8951 >>> 0; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, oy = H - 20, ph = H - 40; const Y = (v: number) => oy - (v / target) * ph;
     ctx.strokeStyle = "#a3e635"; ctx.setLineDash([3, 3]); ctx.beginPath(); ctx.moveTo(ox, Y(target)); ctx.lineTo(W, Y(target)); ctx.stroke(); ctx.setLineDash([]);
     let ruinCount = 0; const TRIALS = 30;

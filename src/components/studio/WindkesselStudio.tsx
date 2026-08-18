@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function WindkesselStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function WindkesselStudio() {
   const st = useRef({ P: 80, hist: [] as number[] });
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; let raf = 0, last = 0; const s = st.current;
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); let raf = 0, last = 0; const s = st.current;
     const loop = (t: number) => {
       const dt = last ? Math.min(0.02, (t - last) / 1000) : 0; last = t;
       const phase = (t / 1000) % period;

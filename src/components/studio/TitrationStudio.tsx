@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 740, H = 440;
 
@@ -27,7 +28,7 @@ export function TitrationStudio() {
 
   const equivVol = (acidConc * acidVol) / baseConc;
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); const pad = 40;
     const sx = (v: number) => pad + (v / 100) * (W - 2 * pad); const sy = (ph: number) => H - pad - (ph / 14) * (H - 2 * pad);
     ctx.strokeStyle = "#1e293b"; for (let ph = 0; ph <= 14; ph += 7) { ctx.beginPath(); ctx.moveTo(pad, sy(ph)); ctx.lineTo(W - pad, sy(ph)); ctx.stroke(); }

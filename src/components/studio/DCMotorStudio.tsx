@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // DC motor step response + speed-torque curve.
 export function DCMotorStudio() {
@@ -18,7 +19,7 @@ export function DCMotorStudio() {
   const currentSS = (V - ke * omegaSS) / R;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // step response (left)
     const ox = 40, oy = 150, pw = 280, ph = 120;
     ctx.strokeStyle = "#334155"; ctx.strokeRect(ox, oy - ph, pw, ph);

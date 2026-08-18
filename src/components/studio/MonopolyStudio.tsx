@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Monopoly: demand P=a-bQ, MR=a-2bQ, MC constant. Monopolist sets MR=MC.
 export function MonopolyStudio() {
@@ -13,7 +14,7 @@ export function MonopolyStudio() {
   const dwl = 0.5 * (qc - qm) * (pm - mc); const profit = (pm - mc) * qm;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const qMax = 100, pMax = 110;
     const X = (q: number) => ox + (q / qMax) * pw; const Y = (p: number) => oy - (p / pMax) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // 1D Kalman filter tracking a moving object from noisy measurements.
 export function KalmanFilterStudio() {
@@ -28,7 +29,7 @@ export function KalmanFilterStudio() {
       trueA.push(xt); measA.push(z); kfA.push(xh); seM += (z - xt) ** 2; seK += (xh - xt) ** 2;
     }
     setRmse({ meas: Math.sqrt(seM / N), kf: Math.sqrt(seK / N) });
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const X = (i: number) => 20 + (i / N) * (W - 40); const Y = (v: number) => H - 20 - (v / 260) * (H - 40);
     ctx.fillStyle = "#64748b"; measA.forEach((v, i) => { ctx.beginPath(); ctx.arc(X(i), Y(v), 1.6, 0, 7); ctx.fill(); });
     ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 2; ctx.beginPath(); trueA.forEach((v, i) => (i ? ctx.lineTo(X(i), Y(v)) : ctx.moveTo(X(i), Y(v)))); ctx.stroke();

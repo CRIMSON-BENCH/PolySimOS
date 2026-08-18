@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function FirFilterStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function FirFilterStudio() {
   const mag = (w: number) => { let re = 0, im = 0; hn.forEach((v, n) => { re += v * Math.cos(w * n); im -= v * Math.sin(w * n); }); return Math.sqrt(re * re + im * im); };
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 32, pw = W - 65, ph = H - 52;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); for (let i = 0; i <= pw; i++) { const w = Math.PI * i / pw; const m = mag(w); const y = oy - Math.min(1.1, m) / 1.1 * ph; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke();

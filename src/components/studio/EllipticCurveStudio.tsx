@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Elliptic curve point addition over the reals: y^2 = x^3 + ax + b.
 export function EllipticCurveStudio() {
@@ -18,7 +19,7 @@ export function EllipticCurveStudio() {
   const rx = m * m - px - qx; const ry = -(Py + m * (rx - px));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 420, H = 380; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 420, H = 380; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, cy = H / 2, sc = 55;
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke();
     // curve

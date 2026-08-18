@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function HaversineStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function HaversineStudio() {
   const bearing = (Math.atan2(y, x) * 180 / Math.PI + 360) % 360;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 280; ctx.fillStyle = "#0b1a2e"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 280; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b1a2e"; ctx.fillRect(0, 0, W, H);
     const X = (lon: number) => (lon + 180) / 360 * W; const Y = (lat: number) => (90 - lat) / 180 * H;
     // graticule
     ctx.strokeStyle = "#1e3a5f"; ctx.lineWidth = 0.5; for (let lo = -180; lo <= 180; lo += 30) { ctx.beginPath(); ctx.moveTo(X(lo), 0); ctx.lineTo(X(lo), H); ctx.stroke(); } for (let la = -60; la <= 60; la += 30) { ctx.beginPath(); ctx.moveTo(0, Y(la)); ctx.lineTo(W, Y(la)); ctx.stroke(); }

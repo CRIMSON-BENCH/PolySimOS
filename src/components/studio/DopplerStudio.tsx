@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 420;
 
@@ -15,7 +16,7 @@ export function DopplerStudio() {
   const t = useRef(0);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const cy = H / 2;
+    const ctx = hidpi(canvasRef.current!, W, H); const cy = H / 2;
     const loop = () => {
       if (running) {
         src.current.x += speed * src.current.dir; if (src.current.x > W - 60) src.current.dir = -1; if (src.current.x < 60) src.current.dir = 1;

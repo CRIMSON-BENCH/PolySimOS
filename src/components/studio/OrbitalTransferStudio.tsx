@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
 
@@ -21,7 +22,7 @@ export function OrbitalTransferStudio() {
   }, [r1, r2]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const cx = W / 2, cy = H / 2;
+    const ctx = hidpi(canvasRef.current!, W, H); const cx = W / 2, cy = H / 2;
     const loop = () => {
       if (running) t.current += 0.01;
       ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);

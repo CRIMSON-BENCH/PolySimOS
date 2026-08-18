@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function NernstCellStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -9,7 +10,7 @@ export function NernstCellStudio() {
   const E = E0 - (8.314 * T / (n * 96485)) * Math.log(Q);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy - ph / 2); ctx.lineTo(ox + pw, oy - ph / 2); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     const Emax = E0 + 0.3, Emin = E0 - 0.3;

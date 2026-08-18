@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Cobb-Douglas production Q = A K^a L^(1-a); isoquants + cost-min.
 export function CobbDouglasStudio() {
@@ -15,7 +16,7 @@ export function CobbDouglasStudio() {
   const K = alpha * budget / r, L = (1 - alpha) * budget / w; const A = 1; const Q = A * Math.pow(K, alpha) * Math.pow(L, 1 - alpha);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 460, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const kMax = budget / r * 1.3, lMax = budget / w * 1.3;
     const X = (l: number) => ox + (l / lMax) * pw; const Y = (k: number) => oy - (k / kMax) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

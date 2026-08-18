@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 720, H = 440;
 
@@ -11,7 +12,7 @@ export function PrismStudio() {
   const [angle, setAngle] = useState(35);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, cy = H / 2;
     // prism triangle

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -11,7 +12,7 @@ export function FourierStudio() {
   const [wave, setWave] = useState<"square" | "sawtooth" | "triangle">("square");
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const mid = H / 2, amp = H * 0.32, pad = 30;
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(pad, mid); ctx.lineTo(W - pad, mid); ctx.stroke();

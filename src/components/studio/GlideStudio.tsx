@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function GlideStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function GlideStudio() {
   const time = range / speed;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 260; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 260; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, oy = 40; const gx = W - 40, gy = oy + Math.min(H - 80, (gx - ox) / ld);
     // ground
     ctx.fillStyle = "#1e293b"; ctx.fillRect(0, H - 30, W, 30);

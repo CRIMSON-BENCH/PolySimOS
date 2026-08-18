@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function ParallaxStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function ParallaxStudio() {
     if (!running) return; let raf = 0;
     const loop = () => {
       phase.current += 0.02; const t = phase.current; const W = 520, H = 360;
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // sun
       const sunX = 130, sunY = H / 2; ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(sunX, sunY, 12, 0, 7); ctx.fill();
       // Earth orbit

@@ -3,6 +3,7 @@
 import { useMemo, useRef, useState, useEffect } from "react";
 import { starterTruss, solveTruss } from "@/lib/engines/fea";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -18,7 +19,7 @@ export function FEAStudio() {
   }, [base, load]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 180, oy = 300, sc = 1.4;
     const P = (x: number, y: number) => [ox + x * sc, oy - y * sc] as const;

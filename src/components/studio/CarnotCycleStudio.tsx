@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function CarnotCycleStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function CarnotCycleStudio() {
   const eff = 1 - Tc / Th; const gamma = 1.4;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, oy = H - 35, pw = W - 80, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     // Carnot cycle in PV: V1..V4; isotherm PV=const, adiabat PV^gamma=const

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function SvmMarginStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function SvmMarginStudio() {
   const correct = classA.every(p => dist(p) < 0) && classB.every(p => dist(p) > 0);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); const cx = W / 2, cy = H / 2, sc = 80;
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); const cx = W / 2, cy = H / 2, sc = 80;
     // boundary line perpendicular to nrm through offset*nrm
     const dir = [-Math.sin(A), Math.cos(A)]; const c0 = [offset * nrm[0], offset * nrm[1]];
     const drawLine = (o: number, col: string, dash: boolean) => { ctx.strokeStyle = col; ctx.lineWidth = 2; if (dash) ctx.setLineDash([5, 5]); ctx.beginPath(); const p1 = [c0[0] + o * nrm[0] - dir[0] * 3, c0[1] + o * nrm[1] - dir[1] * 3], p2 = [c0[0] + o * nrm[0] + dir[0] * 3, c0[1] + o * nrm[1] + dir[1] * 3]; ctx.moveTo(cx + p1[0] * sc, cy - p1[1] * sc); ctx.lineTo(cx + p2[0] * sc, cy - p2[1] * sc); ctx.stroke(); ctx.setLineDash([]); };

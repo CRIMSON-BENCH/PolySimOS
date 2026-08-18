@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function BodeNyquistStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function BodeNyquistStudio() {
   const pm = 180 + phase(wc);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, pw = W - 60, wmin = 0.01, wmax = 1000;
     const drawAxis = (oy: number, ph: number) => { ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy - ph); ctx.lineTo(ox, oy + ph); ctx.stroke(); };
     // magnitude (top)

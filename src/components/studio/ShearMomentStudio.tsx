@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Simply-supported beam with a point load at position a and a uniform load.
 export function ShearMomentStudio() {
@@ -19,7 +20,7 @@ export function ShearMomentStudio() {
   const vMax = Math.max(Math.abs(RA), Math.abs(RB), Math.abs(shear(a) ), Math.abs(shear(Math.min(a + 0.001, L))));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, span = W - 80;
     const drawAxis = (y0: number, label: string) => { ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, y0); ctx.lineTo(ox + span, y0); ctx.stroke(); ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(label, ox, y0 - 44); };
     // shear diagram

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Single-elimination bracket: champion probability from seed strength.
 export function TournamentStudio() {
@@ -18,7 +19,7 @@ export function TournamentStudio() {
   const champProb = champCount.map((c) => c / TRIALS);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     champProb.forEach((p, i) => { const y = 30 + i * 34; const bw = p * (W - 160); ctx.fillStyle = `hsl(${190 - i * 12},70%,55%)`; ctx.fillRect(120, y, bw, 22); ctx.fillStyle = "#e2e8f0"; ctx.font = "11px sans-serif"; ctx.textAlign = "right"; ctx.fillText(`Seed ${i + 1}`, 112, y + 16); ctx.textAlign = "left"; ctx.fillText(`${(p * 100).toFixed(0)}%`, 124 + bw, y + 16); });
     ctx.textAlign = "left"; ctx.fillStyle = "#94a3b8"; ctx.fillText("championship probability", 120, 18);
   }, [spread, seed]);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function BernoulliStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function BernoulliStudio() {
   const p2rel = 0.5 * rho * (v1 * v1 - v2 * v2);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2, r1 = Math.min(70, a1 * 900), r2 = Math.min(70, a2 * 900);
     ctx.fillStyle = "#0e7490";
     ctx.beginPath(); ctx.moveTo(30, cy - r1); ctx.lineTo(200, cy - r1); ctx.lineTo(300, cy - r2); ctx.lineTo(W - 30, cy - r2); ctx.lineTo(W - 30, cy + r2); ctx.lineTo(300, cy + r2); ctx.lineTo(200, cy + r1); ctx.lineTo(30, cy + r1); ctx.closePath(); ctx.fill();

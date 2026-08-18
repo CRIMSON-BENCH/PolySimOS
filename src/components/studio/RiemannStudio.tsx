@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 440;
 
@@ -23,7 +24,7 @@ export function RiemannStudio() {
   }, [expr, nRect, mode]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; if (!tree) return;
+    const ctx = hidpi(canvasRef.current!, W, H); if (!tree) return;
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const f = (x: number) => { try { return evaluate(tree, { x }); } catch { return 0; } };
     let maxY = 0; for (let x = a; x <= b; x += 0.05) maxY = Math.max(maxY, Math.abs(f(x))); maxY = maxY || 1;

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // BJT voltage-divider bias, Q-point on load line.
 export function TransistorBiasStudio() {
@@ -20,7 +21,7 @@ export function TransistorBiasStudio() {
   const region = Vce < 0.2 ? "saturation" : Ic < 0.001 ? "cutoff" : "active";
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 70, ph = H - 55; const IcMax = Vcc / (Rc + Re);
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     // load line: Ic = (Vcc - Vce)/(Rc+Re)

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Little's Law: WIP = throughput x lead time.
 export function LittlesLawStudio() {
@@ -15,7 +16,7 @@ export function LittlesLawStudio() {
   useEffect(() => {
     if (!running) return; let raf = 0; let t = 0;
     const loop = () => {
-      t += 0.02; const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 260; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      t += 0.02; const W = 520, H = 260; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // pipe
       ctx.strokeStyle = "#334155"; ctx.lineWidth = 2; ctx.strokeRect(60, 100, W - 120, 60);
       // items flowing (count ~ wip)

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 600, H = 480;
 
@@ -14,7 +15,7 @@ export function LissajousStudio() {
   const [running, setRunning] = useState(true);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; let t = 0;
+    const ctx = hidpi(canvasRef.current!, W, H); let t = 0;
     const R = 200, cx = W / 2, cy = H / 2;
     const loop = () => {
       ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);

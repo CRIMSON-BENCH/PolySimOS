@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 type Dist = "uniform" | "exponential" | "bimodal";
 
@@ -26,7 +27,7 @@ export function CentralLimitStudio() {
     const loop = () => {
       for (let k = 0; k < 15; k++) { let sum = 0; for (let i = 0; i < Math.round(n); i++) sum += draw1(); means.current.push(sum / Math.round(n)); }
       setCount(means.current.length);
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const bins = 40; const hist = new Array(bins).fill(0); const lo = 0, hi = dist === "exponential" ? 1.2 : 1;
       means.current.forEach((m) => { const b = Math.min(bins - 1, Math.max(0, ((m - lo) / (hi - lo) * bins) | 0)); hist[b]++; });
       const hmax = Math.max(...hist, 1); const ox = 30, oy = H - 30, pw = W - 60, ph = H - 60;

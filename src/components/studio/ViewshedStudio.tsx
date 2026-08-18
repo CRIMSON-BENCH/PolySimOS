@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Line-of-sight viewshed over a 1D terrain profile.
 export function ViewshedStudio() {
@@ -21,7 +22,7 @@ export function ViewshedStudio() {
     const vis: boolean[] = new Array(W).fill(false); let count = 0;
     for (const dir of [1, -1]) { let maxSlope = -Infinity; for (let x = ox + dir; x >= 0 && x < W; x += dir) { const slope = (ground(x) - oy) / Math.abs(x - ox); if (slope >= maxSlope) { vis[x] = true; count++; maxSlope = slope; } } }
     setVisible(count);
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // terrain fill
     ctx.fillStyle = "#292524"; ctx.beginPath(); ctx.moveTo(0, H); for (let x = 0; x < W; x++) ctx.lineTo(x, ground(x)); ctx.lineTo(W, H); ctx.fill();
     // visible overlay

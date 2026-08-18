@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function BatteryStorageStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function BatteryStorageStudio() {
   const hoursBackup = delivered / (dailyLoad / 24); const cycles = 6000; const lifetimeThroughput = cycles * delivered;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 480, H = 260; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 480, H = 260; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // battery graphic
     const bx = 60, by = 60, bw = 120, bh = 140; ctx.strokeStyle = "#64748b"; ctx.lineWidth = 3; ctx.strokeRect(bx, by, bw, bh); ctx.fillStyle = "#64748b"; ctx.fillRect(bx + bw / 2 - 15, by - 10, 30, 10);
     const fillH = bh * dod / 100; ctx.fillStyle = "#a3e635"; ctx.fillRect(bx + 4, by + bh - fillH + 4, bw - 8, fillH - 8);

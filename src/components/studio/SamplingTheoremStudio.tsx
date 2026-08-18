@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function SamplingTheoremStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function SamplingTheoremStudio() {
   const aliasFreq = aliased ? Math.abs(sigFreq - Math.round(sigFreq / fs) * fs) : sigFreq;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2, amp = 90, pw = W - 60, dur = 1;
     ctx.strokeStyle = "#0e7490"; ctx.lineWidth = 1.5; ctx.beginPath(); for (let i = 0; i <= pw; i++) { const t = dur * i / pw; const y = cy - Math.sin(2 * Math.PI * sigFreq * t) * amp; i ? ctx.lineTo(30 + i, y) : ctx.moveTo(30 + i, y); } ctx.stroke();
     // samples

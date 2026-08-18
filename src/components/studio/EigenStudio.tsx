@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 520, H = 480;
 
@@ -18,7 +19,7 @@ export function EigenStudio() {
   }, [a, b, c, d]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const cx = W / 2, cy = H / 2, S = 60;
+    const ctx = hidpi(canvasRef.current!, W, H); const cx = W / 2, cy = H / 2, S = 60;
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
     // unit circle

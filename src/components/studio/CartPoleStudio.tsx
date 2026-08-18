@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Inverted pendulum on a cart, stabilized by state feedback.
 export function CartPoleStudio() {
@@ -32,7 +33,7 @@ export function CartPoleStudio() {
         if (p.x < -2.4) { p.x = -2.4; p.xd = 0; } if (p.x > 2.4) { p.x = 2.4; p.xd = 0; }
       }
       setBalanced(Math.abs(p.th) < 0.5);
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const cy = H - 80, cx = W / 2 + p.x * 90; ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(0, cy + 16); ctx.lineTo(W, cy + 16); ctx.stroke();
       ctx.fillStyle = "#22d3ee"; ctx.fillRect(cx - 30, cy, 60, 16);
       const px = cx + Math.sin(p.th) * 120, py = cy - Math.cos(p.th) * 120;

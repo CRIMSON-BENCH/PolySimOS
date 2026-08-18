@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Beta-Binomial Bayesian updating for a coin's bias.
 function betaPDF(x: number, a: number, b: number) { if (x <= 0 || x >= 1) return 0;
@@ -21,7 +22,7 @@ export function BayesInferenceStudio() {
   const postVar = (postA * postB) / ((postA + postB) ** 2 * (postA + postB + 1)); const postSd = Math.sqrt(postVar);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, pw = W - 60, ph = H - 55;
     let ymax = 0; for (let i = 1; i < 200; i++) { const x = i / 200; ymax = Math.max(ymax, betaPDF(x, postA, postB), betaPDF(x, priorA, priorB)); }
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

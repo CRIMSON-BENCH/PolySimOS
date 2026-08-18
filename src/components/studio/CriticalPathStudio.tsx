@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Critical Path Method on a small fixed project network.
 type Task = { id: string; dur: number; deps: string[]; x: number; y: number };
@@ -30,7 +31,7 @@ export function CriticalPathStudio() {
   const critical = new Set(order.filter((id) => Math.abs(ls[id] - es[id]) < 1e-6));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 240; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 240; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     tasks.forEach((t) => t.deps.forEach((d) => { const a = map[d]; const crit = critical.has(d) && critical.has(t.id); ctx.strokeStyle = crit ? "#f472b6" : "#334155"; ctx.lineWidth = crit ? 2.5 : 1.5; ctx.beginPath(); ctx.moveTo(a.x + 24, a.y); ctx.lineTo(t.x - 24, t.y); ctx.stroke(); }));
     tasks.forEach((t) => { ctx.fillStyle = critical.has(t.id) ? "#f472b6" : "#22d3ee"; ctx.beginPath(); ctx.arc(t.x, t.y, 24, 0, 7); ctx.fill(); ctx.fillStyle = "#0b1220"; ctx.font = "bold 14px sans-serif"; ctx.fillText(t.id, t.x - 5, t.y - 2); ctx.font = "9px sans-serif"; ctx.fillText(`${t.dur}d`, t.x - 7, t.y + 10); });
     ctx.fillStyle = "#f9a8d4"; ctx.font = "11px sans-serif"; ctx.fillText("critical path (pink) — zero slack", 14, 20);

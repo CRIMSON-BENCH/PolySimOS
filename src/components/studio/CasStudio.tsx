@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { differentiateExpr, simplifyExpr, sampleExpr, solveRoot, integrateExpr } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -32,7 +33,7 @@ export function CasStudio() {
   }, [expr, xVar]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617";
     ctx.fillRect(0, 0, W, H);
     // axes

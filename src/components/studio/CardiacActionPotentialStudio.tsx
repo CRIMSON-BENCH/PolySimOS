@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function CardiacActionPotentialStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function CardiacActionPotentialStudio() {
   const ap = (ph: number) => { const t = ph * period; if (t < 0.01) return -90 + amp * (t / 0.01); if (t < apd) { const f = (t - 0.01) / (apd - 0.01); return 20 - 10 * f; } if (t < apd + 0.08) { const f = (t - apd) / 0.08; return 10 - (100) * f; } return -90; };
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(W - 10, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();

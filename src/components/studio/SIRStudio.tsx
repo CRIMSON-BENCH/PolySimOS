@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function SIRStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,7 +22,7 @@ export function SIRStudio() {
       if (t % 5 === 0) { sArr.push(S); iArr.push(I); rArr.push(R); }
     }
     setPeakI(pI); setTotalInf(R - vacc);
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, pw = W - 60, ph = H - 50;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     const plot = (arr: number[], col: string) => { ctx.strokeStyle = col; ctx.lineWidth = 2; ctx.beginPath(); arr.forEach((v, i) => { const x = ox + (i / arr.length) * pw; const y = oy - v * ph; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke(); };

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Helmholtz resonator: f = (c/2pi) sqrt(A/(V*Leff)).
 const C = 343;
@@ -15,7 +16,7 @@ export function HelmholtzStudio() {
   const f = (C / (2 * Math.PI)) * Math.sqrt(A / (V * Leff));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 420, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 420, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2; const bodyR = Math.cbrt(volume) * 4; const neckW = neckD * 8, neckH = neckL * 8;
     ctx.fillStyle = "rgba(34,211,238,0.18)"; ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.arc(cx, 210, bodyR, 0, 7); ctx.fill(); ctx.stroke();

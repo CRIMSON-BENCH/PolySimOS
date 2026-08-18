@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Ant Colony Optimization for the Traveling Salesman Problem.
 export function AntColonyStudio() {
@@ -44,7 +45,7 @@ export function AntColonyStudio() {
       for (let i = 0; i < M; i++) for (let j = 0; j < M; j++) ph[i][j] = ph[i][j] * (1 - evap) + deposit[i][j];
       if (!bestTour.current.length || roundBestLen < tourLen(bestTour.current)) bestTour.current = roundBest;
       setBestLen(tourLen(bestTour.current)); setIter((n) => n + 1);
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, H);
       let maxP = 0; for (let i = 0; i < M; i++) for (let j = i + 1; j < M; j++) maxP = Math.max(maxP, ph[i][j]);
       for (let i = 0; i < M; i++) for (let j = i + 1; j < M; j++) { const a = ph[i][j] / (maxP || 1); if (a < 0.08) continue; ctx.strokeStyle = `rgba(34,211,238,${a * 0.5})`; ctx.lineWidth = a * 3; ctx.beginPath(); ctx.moveTo(cities.current[i][0], cities.current[i][1]); ctx.lineTo(cities.current[j][0], cities.current[j][1]); ctx.stroke(); }
       const bt = bestTour.current; if (bt.length) { ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 2; ctx.beginPath(); bt.forEach((c, i) => { const p = cities.current[c]; i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]); }); ctx.closePath(); ctx.stroke(); }

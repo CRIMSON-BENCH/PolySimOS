@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function HeatPumpStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function HeatPumpStudio() {
   const Th = indoor + 273.15, Tc = outdoor + 273.15; const carnotCOP = Th / Math.max(1, Th - Tc); const cop = Math.max(1, carnotCOP * effFrac);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); for (let t = -20; t <= 20; t += 0.5) { const c = Math.max(1, Th / Math.max(1, Th - (t + 273.15)) * effFrac); const x = ox + ((t + 20) / 40) * pw; const y = oy - (c / 8) * ph; t === -20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); } ctx.stroke();

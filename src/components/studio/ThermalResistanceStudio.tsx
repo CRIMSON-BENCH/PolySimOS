@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Composite-wall heat conduction: series thermal resistances, R-value.
 const LAYERS = [
@@ -22,7 +23,7 @@ export function ThermalResistanceStudio() {
   const temps = [Tin]; let acc = Tin; for (let i = 0; i < R.length; i++) { acc -= Q * R[i]; temps.push(acc); }
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, top = 40, wh = 160; const totalT = thick.reduce((a, b) => a + b, 0); let x = ox; const scale = (W - 120) / totalT;
     LAYERS.forEach((l, i) => { const w = thick[i] * scale; ctx.fillStyle = l.color; ctx.globalAlpha = 0.5; ctx.fillRect(x, top, w, wh); ctx.globalAlpha = 1; ctx.strokeStyle = "#0b1220"; ctx.strokeRect(x, top, w, wh); ctx.fillStyle = "#e2e8f0"; ctx.font = "10px sans-serif"; ctx.save(); ctx.translate(x + w / 2, top + wh / 2); ctx.rotate(-Math.PI / 2); ctx.fillText(l.name, -20, 0); ctx.restore(); x += w; });
     // temperature gradient line

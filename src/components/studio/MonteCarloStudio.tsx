@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Geometric Brownian Motion Monte Carlo.
 export function MonteCarloStudio() {
@@ -22,7 +23,7 @@ export function MonteCarloStudio() {
     const finals: number[] = []; const allPaths: number[][] = [];
     for (let p = 0; p < paths; p++) { let S = S0; const path = [S]; for (let t = 0; t < steps; t++) { S *= Math.exp((mu - sigma * sigma / 2) * dt + sigma * Math.sqrt(dt) * gauss()); path.push(S); } finals.push(S); allPaths.push(path); }
     finals.sort((a, b) => a - b); const med = finals[finals.length >> 1]; setMedian(med); setP5(finals[(finals.length * 0.05) | 0]); setP95(finals[(finals.length * 0.95) | 0]);
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, pw = W - 160, ph = H - 50, oy = H - 30; const yMax = finals[finals.length - 1] * 1.05, yMin = 0;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy - ph); ctx.lineTo(ox, oy); ctx.stroke();
     allPaths.forEach((path, i) => { ctx.strokeStyle = `rgba(34,211,238,${i < 5 ? 0.9 : 0.06})`; ctx.lineWidth = i < 5 ? 1.5 : 1; ctx.beginPath(); path.forEach((v, t) => { const x = ox + (t / steps) * pw; const y = oy - ((v - yMin) / (yMax - yMin)) * ph; t ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke(); });

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 480, H = 420;
 
@@ -19,7 +20,7 @@ export function GasStudio() {
   useEffect(() => { seed(); /* eslint-disable-next-line */ }, [n]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; let frame = 0;
+    const ctx = hidpi(canvasRef.current!, W, H); let frame = 0;
     const loop = () => {
       const A = atoms.current; const r = 4;
       if (running) {

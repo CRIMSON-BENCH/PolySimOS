@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function PidTunerStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function PidTunerStudio() {
   const { out, over, settleT } = sim();
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, pw = W - 55, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#475569"; ctx.setLineDash([4, 4]); const setY = oy - (1 / 1.8) * ph; ctx.beginPath(); ctx.moveTo(ox, setY); ctx.lineTo(ox + pw, setY); ctx.stroke(); ctx.setLineDash([]);

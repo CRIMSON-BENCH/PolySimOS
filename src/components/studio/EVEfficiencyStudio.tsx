@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function EVEfficiencyStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function EVEfficiencyStudio() {
   const cons = consumption(speed); const range = battery / cons;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const vMax = 160;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); for (let v = 20; v <= vMax; v += 2) { const r = battery / consumption(v); const x = ox + (v / vMax) * pw; const y = oy - (r / (battery / consumption(20) * 1.05)) * ph; v === 20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); } ctx.stroke();

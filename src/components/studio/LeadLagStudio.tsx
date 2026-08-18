@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function LeadLagStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function LeadLagStudio() {
   let maxPhase = 0, wAtMax = 0; for (let i = 0; i < 400; i++) { const w = Math.pow(10, -2 + 5 * i / 400); const ph = phase(w); if (Math.abs(ph) > Math.abs(maxPhase)) { maxPhase = ph; wAtMax = w; } }
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H / 2 + 40, pw = W - 60, ph = H / 2, wmin = 0.01, wmax = 1000;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy - ph); ctx.lineTo(ox, oy + ph); ctx.stroke();
     ctx.strokeStyle = "#f472b6"; ctx.lineWidth = 2; ctx.beginPath(); for (let i = 0; i <= pw; i++) { const w = wmin * Math.pow(wmax / wmin, i / pw); const y = oy - (phase(w) / 90) * ph; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke();

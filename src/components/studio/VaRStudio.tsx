@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 function normPDF(x: number) { return 0.3989423 * Math.exp(-x * x / 2); }
 const Z: Record<number, number> = { 90: 1.2816, 95: 1.6449, 97.5: 1.9600, 99: 2.3263, 99.9: 3.0902 };
@@ -19,7 +20,7 @@ export function VaRStudio() {
   const cvarFrac = horizonVol * normPDF(z) / (1 - conf / 100) - horizonRet; const CVaR = cvarFrac * value;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, oy = H - 40, pw = W - 60, ph = H - 70; const mean = horizonRet, sd = horizonVol; const lo = mean - 4 * sd, hi = mean + 4 * sd;
     const X = (r: number) => ox + ((r - lo) / (hi - lo)) * pw;
     // pdf

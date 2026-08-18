@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Two countries, two goods: PPF + comparative advantage.
 export function ComparativeAdvantageStudio() {
@@ -16,7 +17,7 @@ export function ComparativeAdvantageStudio() {
   const aAdv = aOppWine < bOppWine ? "wine" : "cloth"; const bAdv = aOppWine < bOppWine ? "cloth" : "wine";
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const maxW = 8, maxC = 8;
     const X = (w: number) => ox + (w / maxW) * pw; const Y = (c: number) => oy - (c / maxC) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

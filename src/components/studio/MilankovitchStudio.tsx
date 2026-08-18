@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Milankovitch cycles: eccentricity (~100kyr), obliquity (~41kyr), precession (~23kyr).
 export function MilankovitchStudio() {
@@ -11,7 +12,7 @@ export function MilankovitchStudio() {
   const [wP, setWP] = useState(1);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 400; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 400; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const kyr = 800; const ecc = (t: number) => Math.sin(2 * Math.PI * t / 100) * 0.5 + Math.sin(2 * Math.PI * t / 413) * 0.5;
     const obl = (t: number) => Math.sin(2 * Math.PI * t / 41);
     const pre = (t: number) => Math.sin(2 * Math.PI * t / 23) * Math.cos(2 * Math.PI * t / 19);

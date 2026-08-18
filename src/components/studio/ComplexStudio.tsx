@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 560, H = 480;
 type C = [number, number];
@@ -26,7 +27,7 @@ export function ComplexStudio() {
   const [fn, setFn] = useState("z^2");
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const img = ctx.createImageData(W, H); const f = FUNCS[fn];
+    const ctx = hidpi(canvasRef.current!, W, H); const img = ctx.createImageData(W, H); const f = FUNCS[fn];
     const span = 4;
     for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) {
       const zr = (px / W - 0.5) * span * 2, zi = (0.5 - py / H) * span * 2 * (H / W);

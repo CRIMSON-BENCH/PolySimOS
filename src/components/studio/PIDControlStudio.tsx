@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // PID control of a 2nd-order plant, step response.
 export function PIDControlStudio() {
@@ -12,7 +13,7 @@ export function PIDControlStudio() {
   const [metrics, setMetrics] = useState({ overshoot: 0, settle: 0, ess: 0 });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // plant: 1/(s^2 + s) => y'' + y' = u
     const dt = 0.01, T = 8; const setpoint = 1; let y = 0, yd = 0, integ = 0, prevErr = 1;
     const ys: number[] = []; let peak = 0; let settleT = T;

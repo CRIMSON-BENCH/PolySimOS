@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function TelescopeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function TelescopeStudio() {
   const limitingMag = 2.7 + 5 * Math.log10(aperture); // approx
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 480, H = 240; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 480, H = 240; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // two stars separated by the resolution limit — show Airy disks
     const sep = 60; const cx = W / 2, cy = H / 2; const airy = Math.max(4, 2000 / aperture);
     for (const dx of [-sep / 2, sep / 2]) { const g = ctx.createRadialGradient(cx + dx, cy, 0, cx + dx, cy, airy * 3); g.addColorStop(0, "#fff"); g.addColorStop(0.3, "#67e8f9"); g.addColorStop(1, "rgba(103,232,249,0)"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx + dx, cy, airy * 3, 0, 7); ctx.fill(); }

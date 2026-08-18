@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Ballistic reentry: velocity vs altitude, peak g-load.
 export function ReentryStudio() {
@@ -11,7 +12,7 @@ export function ReentryStudio() {
   const [peakG, setPeakG] = useState(0);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const rho0 = 1.225, Hs = 7200; const g = 9.81; let V = 7800; let alt = 120000; const gamma = angle * Math.PI / 180; const dt = 0.5;
     const pts: [number, number][] = []; const gpts: [number, number][] = []; let maxG = 0;
     for (let t = 0; t < 600 && alt > 0; t++) { const rho = rho0 * Math.exp(-alt / Hs); const drag = 0.5 * rho * V * V / beta; const decel = drag; if (decel / g > maxG) maxG = decel / g;

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const INTERVAL = ["", "unison", "octave", "fifth", "octave", "major 3rd", "fifth", "min 7th", "octave"];
 
@@ -12,7 +13,7 @@ export function HarmonicSeriesStudio() {
   const [rolloff, setRolloff] = useState(1);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const N = Math.round(nHarm); const amps = Array.from({ length: N + 1 }, (_, k) => k === 0 ? 0 : 1 / Math.pow(k, rolloff));
     // spectrum (top)
     const ox = 40, topY = 150, sw = W - 80;

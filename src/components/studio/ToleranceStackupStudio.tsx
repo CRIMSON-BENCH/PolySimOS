@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function ToleranceStackupStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function ToleranceStackupStudio() {
   const N = Math.round(nParts); const worstCase = N * tol; const rss = Math.sqrt(N) * tol;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 260; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 260; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, cy = 90; let x = ox;
     for (let i = 0; i < N; i++) { const w = (W - 60) / N; ctx.fillStyle = "#334155"; ctx.fillRect(x, cy - 20, w - 4, 40); ctx.strokeStyle = "#22d3ee"; ctx.strokeRect(x, cy - 20, w - 4, 40); ctx.fillStyle = "#94a3b8"; ctx.font = "10px sans-serif"; ctx.fillText(`±${tol}`, x + w / 2 - 12, cy + 4); x += w; }
     ctx.fillStyle = "#e2e8f0"; ctx.font = "11px sans-serif"; ctx.fillText(`${N} stacked parts`, ox, cy - 32);

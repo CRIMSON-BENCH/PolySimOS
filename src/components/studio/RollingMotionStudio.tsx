@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const SHAPES = [{ n: "Hoop", c: 2 }, { n: "Disk", c: 0.5 }, { n: "Sphere", c: 0.4 }, { n: "Shell", c: 2 / 3 }];
 
@@ -13,7 +14,7 @@ export function RollingMotionStudio() {
   const st = useRef({ t: 0 });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; let raf = 0, last = 0; st.current.t = 0;
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); let raf = 0, last = 0; st.current.t = 0;
     const cols = ["#22d3ee", "#f472b6", "#a3e635", "#fbbf24"];
     const loop = (t: number) => {
       const dt = last ? Math.min(0.03, (t - last) / 1000) : 0; last = t; st.current.t += dt;

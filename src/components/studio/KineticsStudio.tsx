@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 740, H = 440;
 
@@ -18,7 +19,7 @@ export function KineticsStudio() {
   }, [order, k, temp]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); const pad = 40;
     const sx = (i: number) => pad + (i / curve.pts.length) * (W - 2 * pad); const sy = (a: number) => H - pad - a * (H - 2 * pad);
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(pad, sy(0)); ctx.lineTo(W - pad, sy(0)); ctx.stroke();

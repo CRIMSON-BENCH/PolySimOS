@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Restricted 3-body: effective potential in rotating frame + L1-L5.
 export function LagrangeStudio() {
@@ -10,7 +11,7 @@ export function LagrangeStudio() {
   const [showPot, setShowPot] = useState(true);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 480, H = 420; const cx = W / 2, cy = H / 2; const scale = 130;
+    const W = 480, H = 420; const ctx = hidpi(canvasRef.current!, W, H); const cx = W / 2, cy = H / 2; const scale = 130;
     // positions (rotating frame), primary at -mu, secondary at 1-mu
     const x1 = -mu, x2 = 1 - mu;
     const Omega = (X: number, Y: number) => { const r1 = Math.hypot(X - x1, Y), r2 = Math.hypot(X - x2, Y); return 0.5 * (X * X + Y * Y) + (1 - mu) / (r1 + 1e-6) + mu / (r2 + 1e-6); };

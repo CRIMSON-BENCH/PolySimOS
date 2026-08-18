@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function HeatExchangerStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function HeatExchangerStudio() {
   const Q = UA * lmtd / 1000;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const y1 = 110, y2 = 210;
     ctx.fillStyle = "#334155"; ctx.fillRect(40, y1 - 18, W - 80, 36); ctx.fillRect(40, y2 - 18, W - 80, 36);
     const grad = (x: number, hot: number) => { const t = hot ? thi - (thi - tho) * x : (counter ? tco - (tco - tci) * x : tci + (tco - tci) * x); return t; };

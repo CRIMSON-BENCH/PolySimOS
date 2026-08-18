@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MonteCarloRetirementStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function MonteCarloRetirementStudio() {
   const median = band(0, years), p10 = band(-1.28, years), p90 = band(1.28, years);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, oy = H - 32, pw = W - 70, ph = H - 52, ymax = band(1.28, years) * 1.1;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     const line = (z: number, col: string, w: number) => { ctx.strokeStyle = col; ctx.lineWidth = w; ctx.beginPath(); for (let t = 0; t <= years; t++) { const x = ox + t / years * pw, y = oy - (band(z, t) / ymax) * ph; t ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke(); };

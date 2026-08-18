@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function DftAnalysisStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function DftAnalysisStudio() {
   const spectrum: number[] = []; for (let k = 0; k < N / 2; k++) { let re = 0, im = 0; for (let n = 0; n < N; n++) { re += sig(n) * Math.cos(2 * Math.PI * k * n / N); im -= sig(n) * Math.sin(2 * Math.PI * k * n / N); } spectrum.push(Math.sqrt(re * re + im * im) / N * 2); }
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // signal (top)
     ctx.strokeStyle = "#0e7490"; ctx.lineWidth = 1.5; ctx.beginPath(); for (let n = 0; n < N; n++) { const x = 40 + n / N * (W - 60), y = 70 - sig(n) * 22; n ? ctx.lineTo(x, y) : ctx.moveTo(x, y); } ctx.stroke();
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("time signal", 40, 20);

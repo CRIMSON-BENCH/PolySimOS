@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Actuator-disk (momentum) theory for a propeller.
 export function PropellerStudio() {
@@ -16,7 +17,7 @@ export function PropellerStudio() {
   const T = P / (V + vi); const eff = V > 0 ? (T * V) / P : 0; const staticThrust = Math.cbrt(2 * rho * A * P * P);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 260; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 460, H = 260; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2; const dx = 200; const rpx = (diameter / 2) * 50;
     // streamtube contraction
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(40, cy - rpx * 1.4); ctx.quadraticCurveTo(dx, cy - rpx, W - 40, cy - rpx * 0.7); ctx.moveTo(40, cy + rpx * 1.4); ctx.quadraticCurveTo(dx, cy + rpx, W - 40, cy + rpx * 0.7); ctx.stroke();

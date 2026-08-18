@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function StepResponseStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function StepResponseStudio() {
   const settling = 4 / (zeta * wn), tpeak = zeta < 1 ? Math.PI / (wn * Math.sqrt(1 - zeta * zeta)) : 0;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, pw = W - 55, ph = H - 55, tmax = 12;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#475569"; ctx.setLineDash([4, 4]); const sy = oy - (1 / 1.7) * ph; ctx.beginPath(); ctx.moveTo(ox, sy); ctx.lineTo(ox + pw, sy); ctx.stroke(); ctx.setLineDash([]);

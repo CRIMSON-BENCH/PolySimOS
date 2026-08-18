@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function PCAStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,7 +19,7 @@ export function PCAStudio() {
     let cxx = 0, cyy = 0, cxy = 0; for (const [x, y] of pts) { cxx += (x - mx) ** 2; cyy += (y - my) ** 2; cxy += (x - mx) * (y - my); } cxx /= pts.length; cyy /= pts.length; cxy /= pts.length;
     const tr = cxx + cyy, det = cxx * cyy - cxy * cxy; const l1 = tr / 2 + Math.sqrt(tr * tr / 4 - det), l2 = tr / 2 - Math.sqrt(tr * tr / 4 - det);
     const angle = 0.5 * Math.atan2(2 * cxy, cxx - cyy); setEv({ l1, l2, angle: angle * 180 / Math.PI });
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 380; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); const cx = W / 2, cy = H / 2, sc = 40;
+    const W = 460, H = 380; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); const cx = W / 2, cy = H / 2, sc = 40;
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke();
     for (const [x, y] of pts) { ctx.beginPath(); ctx.arc(cx + x * sc, cy - y * sc, 2.5, 0, 7); ctx.fillStyle = "rgba(244,114,182,0.7)"; ctx.fill(); }
     // principal axes

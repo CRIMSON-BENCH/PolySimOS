@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Three-phase power: waveforms, phasors, power.
 export function ThreePhaseStudio() {
@@ -23,7 +24,7 @@ export function ThreePhaseStudio() {
     const cols = ["#f472b6", "#a3e635", "#22d3ee"];
     const loop = () => {
       phase.current += 0.04; const t = phase.current; const W = 540, H = 320;
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // waveforms (left)
       const ox = 20, mid = H / 2, wv = 300;
       ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, mid); ctx.lineTo(ox + wv, mid); ctx.stroke();

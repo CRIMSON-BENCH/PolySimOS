@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 type Beam = "ss-point" | "ss-udl" | "cant-point" | "cant-udl";
 
@@ -21,7 +22,7 @@ export function BeamDeflectionStudio() {
   else { defl = w * L ** 4 / (8 * EI); mmax = w * L ** 2 / 2; }
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, y0 = 110, span = W - 100; const cant = type.startsWith("cant");
     // deflected shape (scaled)
     const scale = 60 / (defl || 1e-9);

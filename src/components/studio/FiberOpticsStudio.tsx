@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function FiberOpticsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function FiberOpticsStudio() {
   const V = Math.PI * coreD * 1e-6 * NA / (1310e-9); const modes = V < 2.405 ? 1 : Math.round(V * V / 2);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 240; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 240; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2, coreH = 60;
     ctx.fillStyle = "#1e3a5f"; ctx.fillRect(0, cy - coreH, W, coreH * 2);
     ctx.fillStyle = "#22d3ee"; ctx.globalAlpha = 0.15; ctx.fillRect(0, cy - coreH / 2, W, coreH); ctx.globalAlpha = 1;

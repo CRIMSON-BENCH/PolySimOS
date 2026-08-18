@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Maximize c1 x + c2 y over a fixed feasible region.
 const CONS = [ (x: number, y: number) => x + y <= 10, (x: number, y: number) => 2 * x + y <= 16, (x: number, y: number) => x + 3 * y <= 18 ];
@@ -22,7 +23,7 @@ export function LinearProgrammingStudio() {
   let best: [number, number] = [0, 0], bestV = -Infinity; verts.forEach(([x, y]) => { const v = c1 * x + c2 * y; if (v > bestV) { bestV = v; best = [x, y]; } });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 420, H = 380; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 420, H = 380; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 35, sc = 32;
     for (let px = 0; px < 11; px++) for (let py = 0; py < 11; py++) { if (feasible(px, py)) { ctx.fillStyle = "rgba(34,211,238,0.15)"; ctx.fillRect(ox + px * sc - sc / 2, oy - py * sc - sc / 2, sc, sc); } }
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + 11 * sc, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - 11 * sc); ctx.stroke();

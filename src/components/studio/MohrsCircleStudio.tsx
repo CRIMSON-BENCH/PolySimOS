@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MohrsCircleStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function MohrsCircleStudio() {
   const theta = 0.5 * Math.atan2(2 * txy, sx - sy) * 180 / Math.PI;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = 250, cy = 180; const scale = 120 / Math.max(R, Math.abs(center), 40);
     // axes
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(30, cy); ctx.lineTo(W - 20, cy); ctx.moveTo(cx, 20); ctx.lineTo(cx, H - 20); ctx.stroke();

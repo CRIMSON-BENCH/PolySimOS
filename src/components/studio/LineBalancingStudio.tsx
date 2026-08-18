@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const TASKS = [5, 3, 8, 2, 6, 4, 7, 3]; // task times (s)
 
@@ -18,7 +19,7 @@ export function LineBalancingStudio() {
   const efficiency = total / (stations.length * takt) * 100;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const bw = (W - 40) / stations.length; const scale = 200 / takt;
     stations.forEach((st, i) => { const x = 20 + i * bw; let y = H - 40; st.forEach((t, j) => { const h = t * scale; ctx.fillStyle = ["#22d3ee", "#a3e635", "#f472b6", "#fbbf24"][j % 4]; ctx.fillRect(x, y - h, bw - 8, h); ctx.strokeStyle = "#0b1220"; ctx.strokeRect(x, y - h, bw - 8, h); y -= h; });
       ctx.fillStyle = "#94a3b8"; ctx.font = "10px sans-serif"; ctx.fillText(`S${i + 1}`, x + bw / 2 - 8, H - 24); const load = st.reduce((a, b) => a + b, 0); ctx.fillText(`${load}s`, x + bw / 2 - 8, H - 12); });

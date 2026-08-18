@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Thiem steady-state drawdown cone: s(r) = Q/(2*pi*T) * ln(R/r)
 export function GroundwaterStudio() {
@@ -14,7 +15,7 @@ export function GroundwaterStudio() {
   const sWell = drawdownAt(0.3);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2; const surfaceY = 40; const waterY0 = 110; const scaleR = (W / 2 - 20) / R; const scaleS = 8;
     // aquifer fill
     ctx.fillStyle = "#1e3a5f"; ctx.fillRect(0, waterY0, W, H - waterY0);

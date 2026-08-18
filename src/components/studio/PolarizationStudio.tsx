@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Malus's law through a chain of polarizers.
 export function PolarizationStudio() {
@@ -12,7 +13,7 @@ export function PolarizationStudio() {
   for (let i = 1; i < angles.length; i++) { const d = (angles[i] - angles[i - 1]) * Math.PI / 180; intensity *= Math.cos(d) ** 2; outs.push(intensity); }
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 220; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 220; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const n = angles.length; const spacing = W / (n + 1);
     // beam
     ctx.strokeStyle = "#fbbf24"; ctx.lineWidth = Math.max(2, outs[0] * 20); ctx.beginPath(); ctx.moveTo(10, H / 2); ctx.lineTo(spacing, H / 2); ctx.stroke();

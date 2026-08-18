@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Hardy-Weinberg with selection: allele A freq p evolves under fitness.
 export function HardyWeinbergStudio() {
@@ -13,7 +14,7 @@ export function HardyWeinbergStudio() {
   const [pEnd, setPEnd] = useState(0.5);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     let p = p0; const gens = 100; const traj: number[] = [p];
     for (let g = 0; g < gens; g++) { const q = 1 - p; const wbar = p * p * wAA + 2 * p * q * wAa + q * q * waa; const pn = (p * p * wAA + p * q * wAa) / wbar; p = pn; traj.push(p); }
     setPEnd(p);

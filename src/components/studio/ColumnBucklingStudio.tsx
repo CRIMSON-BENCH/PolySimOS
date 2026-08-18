@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const ENDS: Record<string, { K: number; label: string }> = {
   "Pinned-pinned": { K: 1.0, label: "both ends pinned" },
@@ -25,7 +26,7 @@ export function ColumnBucklingStudio() {
   const criticalStress = Pcr * 1000 / (area * 1e-6) / 1e6; // MPa
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 360, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 360, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, top = 30, bot = H - 30, amp = 30;
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 4; ctx.beginPath();
     for (let i = 0; i <= 100; i++) { const t = i / 100; const y = top + t * (bot - top); let dx = 0;

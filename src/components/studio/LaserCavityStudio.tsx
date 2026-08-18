@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function LaserCavityStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function LaserCavityStudio() {
   const threshold = loss; const output = pump > threshold ? (pump - threshold) * 0.8 : 0; const lasing = pump > threshold;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const pMax = 12;
     const X = (p: number) => ox + (p / pMax) * pw; const Y = (o: number) => oy - (o / 8) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

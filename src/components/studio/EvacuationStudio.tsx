@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 480, H = 400;
 
@@ -40,7 +41,7 @@ export function EvacuationStudio() {
         if (a.x >= W - 8 && Math.abs(a.y - ex[1]) < 22) a.out = true;
       }
       setEvac(done); if (done < A.length) { t0.current += 1 / 60; setTime(t0.current); }
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, H);
       ctx.strokeStyle = "#334155"; ctx.lineWidth = 3; ctx.strokeRect(4, 4, W - 8, H - 8);
       ctx.fillStyle = "#a3e635"; for (const e of exs) ctx.fillRect(W - 8, e[1] - 20, 8, 40);
       for (const a of A) { if (a.out) continue; ctx.beginPath(); ctx.arc(a.x, a.y, R * 0.6, 0, 7); ctx.fillStyle = "#22d3ee"; ctx.fill(); }

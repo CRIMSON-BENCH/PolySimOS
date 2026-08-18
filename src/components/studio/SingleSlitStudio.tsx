@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Fraunhofer single-slit diffraction.
 export function SingleSlitStudio() {
@@ -12,7 +13,7 @@ export function SingleSlitStudio() {
   const a = slit * 1e-6; const lam = wavelength * 1e-9; const firstMin = Math.asin(Math.min(1, lam / a)) * 180 / Math.PI;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 20, oy = H - 40, pw = W - 40, ph = H - 70; const angMax = 30 * Math.PI / 180;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.stroke();
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();

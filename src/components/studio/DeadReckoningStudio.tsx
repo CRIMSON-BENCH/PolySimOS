@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Dead reckoning with current/wind drift.
 export function DeadReckoningStudio() {
@@ -18,7 +19,7 @@ export function DeadReckoningStudio() {
   const actualX = vx * hours, actualY = vy * hours; const drift = Math.hypot(actualX - intendedX, actualY - intendedY);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 360; ctx.fillStyle = "#0b1a2e"; ctx.fillRect(0, 0, W, H);
+    const W = 460, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b1a2e"; ctx.fillRect(0, 0, W, H);
     const cx = 120, cy = 260; const sc = 3;
     ctx.strokeStyle = "#1e3a5f"; for (let i = 0; i < W; i += 40) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, H); ctx.stroke(); ctx.beginPath(); ctx.moveTo(0, i); ctx.lineTo(W, i); ctx.stroke(); }
     // intended track (dashed)

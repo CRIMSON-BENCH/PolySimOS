@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function PipeFlowStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function PipeFlowStudio() {
   const hf = f * (L / D) * v * v / (2 * 9.81), dp = 1000 * 9.81 * hf / 1000;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const py = H / 2, pr = Math.max(10, Math.min(60, D * 300));
     ctx.fillStyle = "#0e7490"; ctx.fillRect(30, py - pr, W - 60, pr * 2);
     ctx.strokeStyle = "#67e8f9"; ctx.lineWidth = 2; for (let i = 0; i < 6; i++) { const x = 60 + i * 70; ctx.beginPath(); ctx.moveTo(x, py); ctx.lineTo(x + 30, py); ctx.lineTo(x + 22, py - 6); ctx.moveTo(x + 30, py); ctx.lineTo(x + 22, py + 6); ctx.stroke(); }

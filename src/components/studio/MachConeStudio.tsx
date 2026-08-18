@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MachConeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function MachConeStudio() {
   const coneAngle = mach > 1 ? Math.asin(1 / mach) * 180 / Math.PI : 90;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2; const acx = W - 120;
     // expanding sound circles emitted along the path
     const speed = 60; const c = speed / mach;

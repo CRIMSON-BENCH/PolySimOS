@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Reinforced concrete beam flexural capacity (Whitney stress block, ACI).
 export function ConcreteBeamStudio() {
@@ -21,7 +22,7 @@ export function ConcreteBeamStudio() {
   const tension = rho < 0.75 * rhoBal;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 340, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 340, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const scale = 220 / Math.max(d + 60, b); const ox = W / 2 - b * scale / 2, oy = 40; const bh = (d + 60) * scale;
     ctx.fillStyle = "#475569"; ctx.fillRect(ox, oy, b * scale, bh); ctx.strokeStyle = "#94a3b8"; ctx.strokeRect(ox, oy, b * scale, bh);
     // compression block

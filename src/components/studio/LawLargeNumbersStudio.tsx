@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function LawLargeNumbersStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,7 +22,7 @@ export function LawLargeNumbersStudio() {
       const batch = Math.max(1, Math.floor(state.current.n / 50) + 1);
       for (let k = 0; k < batch; k++) { if (rnd() < pHeads) state.current.heads++; state.current.n++; }
       hist.current.push(state.current.heads / state.current.n); if (hist.current.length > 400) hist.current.shift();
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const ox = 40, oy = H - 30, pw = W - 60, ph = H - 50;
       ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
       ctx.strokeStyle = "#a3e635"; ctx.setLineDash([4, 4]); const ty = oy - pHeads * ph; ctx.beginPath(); ctx.moveTo(ox, ty); ctx.lineTo(ox + pw, ty); ctx.stroke(); ctx.setLineDash([]);

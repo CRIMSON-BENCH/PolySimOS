@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Basketball shot arc: optimal release angle.
 export function ShotArcStudio() {
@@ -18,7 +19,7 @@ export function ShotArcStudio() {
   const vx = v * Math.cos(th), vy0 = v * Math.sin(th); const tHit = distance / vx; const vyHit = vy0 - g * tHit; const entryAngle = Math.atan2(-vyHit, vx) * 180 / Math.PI;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, sc = (W - 80) / (distance + 1);
     ctx.fillStyle = "#78716c"; ctx.fillRect(0, oy, W, 4);
     // hoop

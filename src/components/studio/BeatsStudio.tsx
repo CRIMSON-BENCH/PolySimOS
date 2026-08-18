@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 440;
 
@@ -11,7 +12,7 @@ export function BeatsStudio() {
   const [f2, setF2] = useState(11);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const pad = 30;
     const wave = (fn: (x: number) => number, color: string, midY: number, amp: number, lw: number) => { ctx.strokeStyle = color; ctx.lineWidth = lw; ctx.beginPath(); for (let px = pad; px <= W - pad; px++) { const x = (px - pad) / (W - 2 * pad) * 4 * Math.PI; const y = midY - amp * fn(x); px === pad ? ctx.moveTo(px, y) : ctx.lineTo(px, y); } ctx.stroke(); };

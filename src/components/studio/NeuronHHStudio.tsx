@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Hodgkin-Huxley neuron model.
 export function NeuronHHStudio() {
@@ -30,7 +31,7 @@ export function NeuronHHStudio() {
       }
       trace.push(V); if (trace.length > 500) trace.shift();
       setRate(spikes / (tSim / 1000) || 0);
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const ox = 30, oy = H / 2, ph = H - 40;
       ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy + 20); ctx.lineTo(W - 10, oy + 20); ctx.stroke();
       ctx.strokeStyle = "#f472b6"; ctx.lineWidth = 2; ctx.beginPath(); trace.forEach((v, i) => { const x = ox + (i / 500) * (W - 40); const y = (H - 20) - ((v + 80) / 130) * ph; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();

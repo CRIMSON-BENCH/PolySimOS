@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Wright-Fisher genetic drift: multiple replicate populations.
 export function GeneticDriftStudio() {
@@ -14,7 +15,7 @@ export function GeneticDriftStudio() {
   const [lost, setLost] = useState(0);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const N = Math.round(popSize); const gens = 120; const ox = 40, oy = H - 30, pw = W - 60, ph = H - 50;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#475569"; ctx.setLineDash([3, 4]); [0, 0.5, 1].forEach((f) => { const y = oy - f * ph; ctx.beginPath(); ctx.moveTo(ox, y); ctx.lineTo(ox + pw, y); ctx.stroke(); }); ctx.setLineDash([]);

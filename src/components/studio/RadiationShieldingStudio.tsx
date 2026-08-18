@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const MAT: Record<string, number> = { Water: 0.0086, Concrete: 0.022, Aluminum: 0.024, Iron: 0.058, Lead: 0.113 }; // mu (1/mm) for ~1 MeV gamma
 
@@ -13,7 +14,7 @@ export function RadiationShieldingStudio() {
   const mu = MAT[mat]; const transmitted = Math.exp(-mu * thickness); const hvl = Math.log(2) / mu; const tvl = Math.log(10) / mu;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 240; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 240; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2; // source
     ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(30, cy, 12, 0, 7); ctx.fill();
     // shield

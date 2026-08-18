@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, derivative, evaluate, simplify, sampleExpr, Node } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -25,7 +26,7 @@ export function TaylorStudio() {
   }, [expr, order, center]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     let f: { x: number; y: number }[] = []; try { f = sampleExpr(expr, "x", -10, 10, 500); } catch { /* */ }
     const ys = f.map((p) => p.y).filter(isFinite); let minY = Math.max(-8, Math.min(...ys, -2)), maxY = Math.min(8, Math.max(...ys, 2));

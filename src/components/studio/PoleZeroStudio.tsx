@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function PoleZeroStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function PoleZeroStudio() {
   const resp = (w: number) => { const ejw = [Math.cos(w), Math.sin(w)]; const distTo = (r: number, a: number) => Math.hypot(ejw[0] - r * Math.cos(a), ejw[1] - r * Math.sin(a)) * Math.hypot(ejw[0] - r * Math.cos(-a), ejw[1] - r * Math.sin(-a)); return distTo(1, za) / (distTo(poleR, pa) + 1e-6); };
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // z-plane (left)
     const cx = 130, cy = H / 2, R = 90; ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.stroke();
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(cx - R - 20, cy); ctx.lineTo(cx + R + 20, cy); ctx.moveTo(cx, cy - R - 20); ctx.lineTo(cx, cy + R + 20); ctx.stroke();

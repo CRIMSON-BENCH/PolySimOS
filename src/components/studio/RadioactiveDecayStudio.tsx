@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 740, H = 440;
 
@@ -14,7 +15,7 @@ export function RadioactiveDecayStudio() {
   const [remaining, setRemaining] = useState(100);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     const loop = () => {
       if (running) t.current += 0.03; if (t.current > 24) t.current = 0;
       const frac = Math.pow(0.5, t.current / halfLife);

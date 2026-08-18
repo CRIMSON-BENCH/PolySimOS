@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Double pendulum — the textbook chaotic system. Exact equations of motion,
 // integrated with RK4, with a fading trail of the lower bob.
@@ -42,7 +43,7 @@ export function DoublePendulumStudio() {
   const reset = () => { stateRef.current = [Math.PI / 2 + (Math.random() - 0.5) * 0.02, Math.PI / 2, 0, 0]; trail.current = []; };
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     const l1 = 120, l2 = 120, m1 = 10;
     const loop = () => {
       const p = { m1, m2, l1: 1.2, l2: 1.2, g };

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // 1D infinite square well: E_n = n^2 h^2 / (8 m L^2).
 export function ParticleBoxStudio() {
@@ -14,7 +15,7 @@ export function ParticleBoxStudio() {
   const energy = En(Math.round(n));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, ow = W - 80, oy = H - 40, oh = H - 70; const N = Math.round(n);
     // well walls
     ctx.strokeStyle = "#475569"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(ox, oy - oh); ctx.lineTo(ox, oy); ctx.lineTo(ox + ow, oy); ctx.lineTo(ox + ow, oy - oh); ctx.stroke();

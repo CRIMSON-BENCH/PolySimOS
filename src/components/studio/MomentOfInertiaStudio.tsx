@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const SHAPES = [{ n: "Solid disk", c: 0.5 }, { n: "Hoop / ring", c: 1 }, { n: "Solid sphere", c: 0.4 }, { n: "Rod (center)", c: 1 / 12 }];
 
@@ -15,7 +16,7 @@ export function MomentOfInertiaStudio() {
   const c = SHAPES[shape].c, Icm = c * mass * size * size, I = Icm + mass * d * d;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, cy = H / 2, R = size * 260, axoff = d * 260;
     ctx.strokeStyle = "#f472b6"; ctx.setLineDash([5, 5]); ctx.beginPath(); ctx.moveTo(cx - axoff, 20); ctx.lineTo(cx - axoff, H - 20); ctx.stroke(); ctx.setLineDash([]);
     ctx.globalAlpha = 0.85;

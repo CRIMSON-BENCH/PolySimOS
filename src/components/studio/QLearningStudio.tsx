@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 6;
 export function QLearningStudio() {
@@ -16,7 +17,7 @@ export function QLearningStudio() {
   for (let it = 0; it < 80; it++) { const nV = V.map(r => r.slice()); for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) { if (term(i, j) || (i === wall[0] && j === wall[1])) { nV[i][j] = term(i, j) ? reward(i, j) : 0; continue; } let best = -1e9; for (const [di, dj] of moves) { let ni = i + di, nj = j + dj; if (ni < 0 || nj < 0 || ni >= N || nj >= N || (ni === wall[0] && nj === wall[1])) { ni = i; nj = j; } best = Math.max(best, V[ni][nj]); } nV[i][j] = reward(i, j) + gamma * best; } for (let i = 0; i < N; i++) V[i] = nV[i]; }
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cell = 46, ox = (W - N * cell) / 2, oy = 20;
     for (let i = 0; i < N; i++) for (let j = 0; j < N; j++) { const x = ox + i * cell, y = oy + j * cell; let col = "#0f172a";
       if (i === goal[0] && j === goal[1]) col = "#166534"; else if (i === trap[0] && j === trap[1]) col = "#7f1d1d"; else if (i === wall[0] && j === wall[1]) col = "#334155"; else { const v = V[i][j]; col = v > 0 ? `rgba(34,211,238,${Math.min(0.6, v)})` : `rgba(244,114,182,${Math.min(0.6, -v)})`; }

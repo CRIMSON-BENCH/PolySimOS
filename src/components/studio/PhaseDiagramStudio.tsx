@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Water phase diagram (schematic, log-P vs T).
 export function PhaseDiagramStudio() {
@@ -24,7 +25,7 @@ export function PhaseDiagramStudio() {
   const phase = phaseOf(T, logP);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const Tmin = -50, Tmax = 400, lpMin = -1, lpMax = 5;
     const X = (t: number) => ox + ((t - Tmin) / (Tmax - Tmin)) * pw; const Y = (lp: number) => oy - ((lp - lpMin) / (lpMax - lpMin)) * ph;
     // regions (rough shading)

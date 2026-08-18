@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function LogisticGrowthStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function LogisticGrowthStudio() {
   const [N0, setN0] = useState(20);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 30, pw = W - 65, ph = H - 50; const days = 40; const dt = 0.05;
     let Nl = N0, Ne = N0; const log: number[] = [Nl], exp: number[] = [Ne];
     for (let t = 0; t < days / dt; t++) { Nl += r * Nl * (1 - Nl / K) * dt; Ne += r * Ne * dt; if (t % 4 === 0) { log.push(Nl); exp.push(Math.min(Ne, K * 2)); } }

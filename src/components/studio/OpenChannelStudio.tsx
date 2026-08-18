@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function OpenChannelStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function OpenChannelStudio() {
   const Fr = V / Math.sqrt(9.81 * y);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, base = H - 60, bw = Math.min(360, b * 60), wh = Math.min(160, y * 90);
     ctx.strokeStyle = "#475569"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(cx - bw / 2 - 30, base - 120); ctx.lineTo(cx - bw / 2, base); ctx.lineTo(cx + bw / 2, base); ctx.lineTo(cx + bw / 2 + 30, base - 120); ctx.stroke();
     ctx.fillStyle = "#0e7490"; ctx.globalAlpha = 0.8; ctx.fillRect(cx - bw / 2, base - wh, bw, wh); ctx.globalAlpha = 1;

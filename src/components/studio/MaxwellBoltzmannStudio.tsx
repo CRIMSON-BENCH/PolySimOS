@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 740, H = 440;
 
@@ -18,7 +19,7 @@ export function MaxwellBoltzmannStudio() {
   }, [temp, mass]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); const pad = 40;
     const sx = (v: number) => pad + (v / 1500) * (W - 2 * pad); const sy = (y: number) => H - pad - (y / data.maxY) * (H - 2 * pad);
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(pad, H - pad); ctx.lineTo(W - pad, H - pad); ctx.stroke();

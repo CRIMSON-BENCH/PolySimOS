@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Rapidly-exploring Random Tree path planner.
 export function RRTStudio() {
@@ -26,7 +27,7 @@ export function RRTStudio() {
       nodes.push({ x: nx, y: ny, p: best });
       if (Math.hypot(nx - goal[0], ny - goal[1]) < step) goalIdx = nodes.length - 1;
     }
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     ctx.fillStyle = "#334155"; obstacles.forEach(([ox, oy, r]) => { ctx.beginPath(); ctx.arc(ox, oy, r, 0, 7); ctx.fill(); });
     ctx.strokeStyle = "rgba(34,211,238,0.4)"; ctx.lineWidth = 1; nodes.forEach((n) => { if (n.p >= 0) { ctx.beginPath(); ctx.moveTo(n.x, n.y); ctx.lineTo(nodes[n.p].x, nodes[n.p].y); ctx.stroke(); } });
     let len = 0;

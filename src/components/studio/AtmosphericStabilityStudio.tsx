@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Parcel vs environment: CAPE and stability.
 export function AtmosphericStabilityStudio() {
@@ -16,7 +17,7 @@ export function AtmosphericStabilityStudio() {
   cape = cape * 100; // rough scaling to J/kg-ish
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 460, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 30, ph = H - 50; const zMax = 12; const tMin = -40, tMax = 35;
     const X = (t: number) => ox + ((t - tMin) / (tMax - tMin)) * (W - 65); const Y = (z: number) => oy - (z / zMax) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(W - 20, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

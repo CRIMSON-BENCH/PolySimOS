@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { sampleVectorField } from "@/lib/engines/fieldmath";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
 
@@ -18,7 +19,7 @@ export function VectorFieldStudio() {
   }, [fx, fy]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const sx = (x: number) => ((x + 5) / 10) * W, sy = (y: number) => H - ((y + 5) / 10) * H;
     let maxM = 0; for (const a of arrows) maxM = Math.max(maxM, Math.hypot(a.u, a.v) || 0);

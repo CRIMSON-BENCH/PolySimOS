@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function LinearRegressionStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -19,7 +20,7 @@ export function LinearRegressionStudio() {
     const mx = pts.reduce((a, p) => a + p[0], 0) / N, my = pts.reduce((a, p) => a + p[1], 0) / N;
     let sxy = 0, sxx = 0, syy = 0; for (const [x, y] of pts) { sxy += (x - mx) * (y - my); sxx += (x - mx) ** 2; syy += (y - my) ** 2; }
     const m = sxy / sxx, b = my - m * mx; const r2 = (sxy * sxy) / (sxx * syy); setFit({ m, b, r2 });
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, pw = W - 60, ph = H - 50; const yMax = Math.max(...pts.map((p) => p[1]), 5) * 1.1, yMin = Math.min(...pts.map((p) => p[1]), 0);
     const X = (x: number) => ox + (x / 10) * pw; const Y = (y: number) => oy - ((y - yMin) / (yMax - yMin)) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

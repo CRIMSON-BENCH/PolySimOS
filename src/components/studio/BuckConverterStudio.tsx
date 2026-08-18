@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function BuckConverterStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function BuckConverterStudio() {
   const ripplePct = iout > 0 ? (dIL / iout) * 100 : 0;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const oy = H / 2 + 40, amp = 60, period = (W - 60) / 4;
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();
     for (let cyc = 0; cyc < 4; cyc++) { const x0 = 30 + cyc * period; const on = period * duty; ctx.moveTo(x0, oy); ctx.lineTo(x0 + on, oy - amp); ctx.lineTo(x0 + period, oy + 0); }

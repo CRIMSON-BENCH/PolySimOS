@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const MAT: Record<string, number> = { Steel: 12, Aluminum: 23, Copper: 17, Glass: 9, Concrete: 12, Invar: 1.2 };
 
@@ -14,7 +15,7 @@ export function ThermalExpansionStudio() {
   const alpha = MAT[mat] * 1e-6; const dL = alpha * L0 * dT; const dA = 2 * alpha * (L0 * L0) * dT; const dV = 3 * alpha * (L0 ** 3) * dT;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 220; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 220; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, baseW = 300, exag = 30000; // exaggerate for visibility
     ctx.fillStyle = "#334155"; ctx.fillRect(ox, 60, baseW, 30); ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("original", ox, 55);
     const grow = (dL / L0) * exag; ctx.fillStyle = "#22d3ee"; ctx.fillRect(ox, 130, baseW + grow, 30); ctx.fillStyle = "#67e8f9"; ctx.fillText(`heated +${dT}°C (expansion exaggerated)`, ox, 125);

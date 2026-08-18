@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function BinomialOptionStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function BinomialOptionStudio() {
   const price = vals[0];
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H / 2, dx = (W - 80) / steps, dy = 26;
     for (let n = 0; n <= steps; n++) for (let j = 0; j <= n; j++) { const x = ox + n * dx, y = oy - (n - 2 * j) * dy; if (n < steps) { ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(x, y); ctx.lineTo(x + dx, y - dy); ctx.moveTo(x, y); ctx.lineTo(x + dx, y + dy); ctx.stroke(); } }
     for (let n = 0; n <= steps; n++) for (let j = 0; j <= n; j++) { const x = ox + n * dx, y = oy - (n - 2 * j) * dy; const price = S * Math.pow(u, j) * Math.pow(d, n - j); ctx.fillStyle = price > K ? "#22d3ee" : "#64748b"; ctx.beginPath(); ctx.arc(x, y, 4, 0, Math.PI * 2); ctx.fill(); }

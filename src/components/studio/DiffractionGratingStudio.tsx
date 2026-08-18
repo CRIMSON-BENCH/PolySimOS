@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 440;
 
@@ -12,7 +13,7 @@ export function DiffractionGratingStudio() {
   const [lambda, setLambda] = useState(20);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const inten = (theta: number) => { const phi = Math.PI * spacing * Math.sin(theta) / lambda; if (Math.abs(Math.sin(phi)) < 1e-6) return 1; const v = Math.sin(slits * phi) / (slits * Math.sin(phi)); return v * v; };
     for (let px = 0; px < W; px++) { const theta = ((px - W / 2) / W) * 1.6; const I = inten(theta); const c = Math.round(I * 255); ctx.fillStyle = `rgb(${c * 0.2},${c * 0.85},${c})`; ctx.fillRect(px, 0, 1, 120); }

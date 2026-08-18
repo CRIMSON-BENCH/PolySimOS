@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 460;
 
@@ -13,7 +14,7 @@ export function BlackbodyStudio() {
   const peakNm = 2.898e6 / T; // Wien's law (nm)
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const pad = 44, loNm = 100, hiNm = 2500;
     let maxI = 0; for (let nm = loNm; nm <= hiNm; nm += 5) maxI = Math.max(maxI, planck(nm, T));

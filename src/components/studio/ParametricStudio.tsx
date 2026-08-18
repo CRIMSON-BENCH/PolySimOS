@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 560, H = 480;
 
@@ -15,7 +16,7 @@ export function ParametricStudio() {
   const rafRef = useRef(0);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     let tx, ty; try { tx = parse(xt); ty = parse(yt); setErr(""); } catch (e) { setErr((e as Error).message); return; }
     const cx = W / 2, cy = H / 2, S = 180; let anim = 0;
     const loop = () => {

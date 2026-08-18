@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function GyroscopeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function GyroscopeStudio() {
   const stateRef = useRef({ phi: 0 });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; let raf = 0, last = 0;
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); let raf = 0, last = 0;
     const loop = (t: number) => {
       const dt = last ? Math.min(0.05, (t - last) / 1000) : 0; last = t; const st = stateRef.current; st.phi += precession * dt;
       ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);

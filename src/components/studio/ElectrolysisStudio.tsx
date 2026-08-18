@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const METALS = [{ n: "Copper", M: 63.5, z: 2 }, { n: "Silver", M: 107.9, z: 1 }, { n: "Aluminum", M: 27, z: 3 }, { n: "Gold", M: 197, z: 3 }, { n: "Nickel", M: 58.7, z: 2 }];
 
@@ -14,7 +15,7 @@ export function ElectrolysisStudio() {
   const grams = moles * m.M;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // beaker with two electrodes; deposit thickness ~ grams
     ctx.strokeStyle = "#475569"; ctx.lineWidth = 2; ctx.strokeRect(120, 70, 280, 200);
     ctx.fillStyle = "rgba(56,189,248,0.15)"; ctx.fillRect(122, 100, 276, 168);

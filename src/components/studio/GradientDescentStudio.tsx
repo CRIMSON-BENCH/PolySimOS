@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -32,7 +33,7 @@ export function GradientDescentStudio() {
   }, [surface, lr, momentum]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const f = SURFACES[surface];
+    const ctx = hidpi(canvasRef.current!, W, H); const f = SURFACES[surface];
     const img = ctx.createImageData(W, H); let min = Infinity, max = -Infinity; const vals = new Float32Array(W * H);
     for (let py = 0; py < H; py += 1) for (let px = 0; px < W; px += 1) { const v = f(px - W / 2, py - H / 2); vals[py * W + px] = v; if (v < min) min = v; if (v > max) max = v; }
     for (let i = 0; i < W * H; i++) { const t = (vals[i] - min) / (max - min || 1); img.data[i * 4] = 20 + t * 60; img.data[i * 4 + 1] = 30 + (1 - t) * 120; img.data[i * 4 + 2] = 60 + (1 - t) * 160; img.data[i * 4 + 3] = 255; }

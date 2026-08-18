@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function SecondOrderResponseStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function SecondOrderResponseStudio() {
   const cases = [{ z: 0.2, n: "ζ=0.2 underdamped", c: "#f472b6" }, { z: 0.707, n: "ζ=0.707", c: "#22d3ee" }, { z: 1, n: "ζ=1 critical", c: "#a3e635" }, { z: 2, n: "ζ=2 overdamped", c: "#fbbf24" }];
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 30, pw = W - 55, ph = H - 55, tmax = 10;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#475569"; ctx.setLineDash([4, 4]); const sy = oy - (1 / 1.6) * ph; ctx.beginPath(); ctx.moveTo(ox, sy); ctx.lineTo(ox + pw, sy); ctx.stroke(); ctx.setLineDash([]);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function HydroPowerStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function HydroPowerStudio() {
   const annual = power * 8760 * 0.5 / 1e6; // MWh at 50% capacity factor
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 460, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const damX = 200; const topY = 40, botY = H - 40; const hpx = Math.min(botY - topY, head * 2.5);
     // reservoir
     ctx.fillStyle = "#1e3a5f"; ctx.fillRect(20, botY - hpx, damX - 20, hpx);

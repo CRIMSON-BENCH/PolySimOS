@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function AmFmModulationStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function AmFmModulationStudio() {
   const modulated = (t: number) => mode ? Math.cos(2 * Math.PI * fc * t + index * 8 * Math.sin(2 * Math.PI * fm * t)) : (1 + index * msg(t)) * carrier(t);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const pw = W - 60;
     const wave = (f: (t: number) => number, oy: number, amp: number, col: string, lbl: string) => { ctx.strokeStyle = col; ctx.lineWidth = 1.5; ctx.beginPath(); for (let i = 0; i <= pw; i++) { const t = i / pw; const y = oy - f(t) * amp; i ? ctx.lineTo(30 + i, y) : ctx.moveTo(30 + i, y); } ctx.stroke(); ctx.fillStyle = "#94a3b8"; ctx.font = "10px sans-serif"; ctx.fillText(lbl, 30, oy - amp - 6); };
     wave(msg, 55, 24, "#a3e635", "message"); wave(carrier, 140, 24, "#64748b", "carrier"); wave(modulated, 250, 46, "#22d3ee", mode ? "FM signal" : "AM signal");

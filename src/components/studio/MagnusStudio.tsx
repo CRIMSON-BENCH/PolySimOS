@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Magnus effect: a spinning ball curves.
 export function MagnusStudio() {
@@ -13,7 +14,7 @@ export function MagnusStudio() {
   useEffect(() => {
     if (!running) return; let raf = 0;
     const loop = () => {
-      const W = 540, H = 320; const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#0b2818"; ctx.fillRect(0, 0, W, H);
+      const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b2818"; ctx.fillRect(0, 0, W, H);
       // pitch lines
       ctx.strokeStyle = "#1a4a2e"; for (let i = 0; i < W; i += 40) { ctx.beginPath(); ctx.moveTo(i, 0); ctx.lineTo(i, H); ctx.stroke(); }
       // trajectory: x forward, lateral deflection from Magnus

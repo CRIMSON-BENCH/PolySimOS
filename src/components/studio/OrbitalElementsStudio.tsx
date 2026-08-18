@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Visualize an orbit from semi-major axis and eccentricity.
 export function OrbitalElementsStudio() {
@@ -19,7 +20,7 @@ export function OrbitalElementsStudio() {
   useEffect(() => {
     if (!running) return; let raf = 0;
     const loop = () => {
-      theta.current += 0.02; const ctx = canvasRef.current!.getContext("2d")!; const W = 420, H = 380; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      theta.current += 0.02; const W = 420, H = 380; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const cx = W / 2, cy = H / 2; const scale = 150 / (sma * (1 + ecc));
       // Earth
       ctx.fillStyle = "#1e40af"; ctx.beginPath(); ctx.arc(cx, cy, Re * scale, 0, 7); ctx.fill();

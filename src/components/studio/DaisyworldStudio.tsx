@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Watson-Lovelock Daisyworld: self-regulating planetary temperature.
 export function DaisyworldStudio() {
@@ -33,7 +34,7 @@ export function DaisyworldStudio() {
       setLum(wr.L);
       const bare = Math.max(0, 1 - wr.w - wr.b); const A = wr.w * Aw + wr.b * Ab + bare * Ag; const Te = Math.pow(S0 * wr.L * (1 - A) / SIGMA, 0.25) - 273.15;
       hist.current.push({ L: wr.L, T: Te, w: wr.w, b: wr.b }); if (hist.current.length > 500) hist.current.shift();
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 520, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // planet disk
       const cx = 90, cy = 90, R = 60; ctx.fillStyle = "#57534e"; ctx.beginPath(); ctx.arc(cx, cy, R, 0, 7); ctx.fill();
       let s = 42; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };

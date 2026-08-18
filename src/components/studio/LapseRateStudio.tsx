@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Atmospheric profile: T = T0 - lapse*z ; barometric pressure ; lifting condensation level.
 export function LapseRateStudio() {
@@ -15,7 +16,7 @@ export function LapseRateStudio() {
   const P = (z: number) => 1013.25 * Math.pow(1 - 0.0065 * z * 1000 / (T0 + 273.15), 5.255);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 480, H = 400; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 480, H = 400; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, oy = H - 40, ph = H - 70, pw = W - 90; const maxZ = 12; // km
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.stroke();
     // temperature profile (x = temp -80..30)

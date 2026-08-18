@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Neutron random walk / moderation.
 export function NeutronTransportStudio() {
@@ -12,7 +13,7 @@ export function NeutronTransportStudio() {
 
   useEffect(() => {
     const W = 400, H = 400; let s = seed * 3571 >>> 0; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     ctx.strokeStyle = "#334155"; ctx.strokeRect(40, 40, W - 80, H - 80);
     let esc = 0, absorbed = 0; const N = 40;
     for (let p = 0; p < N; p++) { let x = W / 2, y = H / 2; let energy = 2e6; ctx.strokeStyle = `hsla(${180 + p * 4},70%,55%,0.5)`; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(x, y);

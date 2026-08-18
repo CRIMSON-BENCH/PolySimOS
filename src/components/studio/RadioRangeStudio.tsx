@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Radio: line-of-sight horizon + free-space path loss link budget.
 export function RadioRangeStudio() {
@@ -24,7 +25,7 @@ export function RadioRangeStudio() {
   const limited = horizon < dmiles ? "line-of-sight" : "signal strength";
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 240; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 240; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, H);
     // earth curve
     ctx.strokeStyle = "#334155"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(W / 2, H + 900, 940, Math.PI * 1.35, Math.PI * 1.65); ctx.stroke();
     // tx tower

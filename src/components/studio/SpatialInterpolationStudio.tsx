@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Inverse-distance-weighted spatial interpolation.
 export function SpatialInterpolationStudio() {
@@ -12,7 +13,7 @@ export function SpatialInterpolationStudio() {
   useEffect(() => {
     const W = 440, H = 340; let s = seed * 6151 >>> 0; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
     const pts = Array.from({ length: 8 }, () => ({ x: rnd() * W, y: rnd() * H, v: rnd() }));
-    const ctx = canvasRef.current!.getContext("2d")!; const img = ctx.createImageData(W, H);
+    const ctx = hidpi(canvasRef.current!, W, H); const img = ctx.createImageData(W, H);
     for (let y = 0; y < H; y += 2) for (let x = 0; x < W; x += 2) { let num = 0, den = 0; for (const p of pts) { const d = Math.hypot(x - p.x, y - p.y); if (d < 1) { num = p.v; den = 1; break; } const w = 1 / Math.pow(d, power); num += w * p.v; den += w; } const v = num / den;
       for (let dy = 0; dy < 2; dy++) for (let dx = 0; dx < 2; dx++) { const idx = ((y + dy) * W + (x + dx)) * 4; img.data[idx] = 20 + v * 60; img.data[idx + 1] = 40 + v * 190; img.data[idx + 2] = 60 + (1 - v) * 180; img.data[idx + 3] = 255; } }
     ctx.putImageData(img, 0, 0);

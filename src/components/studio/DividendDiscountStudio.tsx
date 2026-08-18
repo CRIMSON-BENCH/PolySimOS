@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function DividendDiscountStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function DividendDiscountStudio() {
   const yieldPct = isFinite(value) ? d1 / value * 100 : 0;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, oy = H - 32, pw = W - 70, ph = H - 52, gmax = r - 0.2;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     const vAt = (gg: number) => d1 / ((r - gg) / 100); const vmax = vAt(gmax * 0.95);

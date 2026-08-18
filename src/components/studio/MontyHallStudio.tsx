@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MontyHallStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,7 +19,7 @@ export function MontyHallStudio() {
       let s = seedRef.current; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; seedRef.current = s; return s / 4294967296; };
       for (let k = 0; k < 20; k++) { const car = (rnd() * 3) | 0; const pick = (rnd() * 3) | 0; if (pick === car) stats.current.stayWins++; else stats.current.switchWins++; stats.current.games++; }
       force((n) => n + 1);
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 240; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 500, H = 240; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const g = stats.current.games || 1; const sw = stats.current.switchWins / g, st = stats.current.stayWins / g;
       const barY = 80; ctx.fillStyle = "#a3e635"; ctx.fillRect(60, barY, sw * (W - 120), 40); ctx.fillStyle = "#f472b6"; ctx.fillRect(60, barY + 70, st * (W - 120), 40);
       ctx.fillStyle = "#e2e8f0"; ctx.font = "12px sans-serif"; ctx.fillText(`switch: ${(sw * 100).toFixed(1)}%`, 60, barY - 6); ctx.fillText(`stay: ${(st * 100).toFixed(1)}%`, 60, barY + 64);

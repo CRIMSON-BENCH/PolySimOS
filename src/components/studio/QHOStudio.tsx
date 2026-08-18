@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Quantum harmonic oscillator: E_n = (n+1/2) hbar omega, Hermite wavefunctions.
 function hermite(n: number, x: number): number { if (n === 0) return 1; if (n === 1) return 2 * x; let h0 = 1, h1 = 2 * x; for (let k = 2; k <= n; k++) { const h = 2 * x * h1 - 2 * (k - 1) * h0; h0 = h1; h1 = h; } return h1; }
@@ -12,7 +13,7 @@ export function QHOStudio() {
   const [showProb, setShowProb] = useState(false);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, oy = H - 30, ph = H - 60; const N = Math.round(n);
     // potential parabola
     ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.5; ctx.beginPath(); for (let px = 0; px < W; px++) { const x = (px - cx) / 55; const v = 0.5 * x * x; const y = oy - (v / 8) * ph; px ? ctx.lineTo(px, y) : ctx.moveTo(px, y); } ctx.stroke();

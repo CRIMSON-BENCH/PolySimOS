@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Shallow-water wave: speed v = sqrt(g h); amplitude shoals as h^(-1/4) (Green's law).
 const G = 9.81;
@@ -25,7 +26,7 @@ export function TsunamiStudio() {
       pos.current += v / 800 * (W / 60); if (pos.current > W) pos.current = 0;
       const amp = deepAmp * Math.pow(deepDepth / h, 0.25); // Green's law
       setSpeed(v); setShoreAmp(deepAmp * Math.pow(deepDepth / depthAt(W - 2), 0.25));
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // seabed
       ctx.fillStyle = "#292524"; ctx.beginPath(); ctx.moveTo(0, H); for (let x = 0; x <= W; x += 4) { const d = depthAt(x); const y = H - 30 - (1 - d / deepDepth) * (H - 90); ctx.lineTo(x, y); } ctx.lineTo(W, H); ctx.closePath(); ctx.fill();
       // ocean surface with wave pulse

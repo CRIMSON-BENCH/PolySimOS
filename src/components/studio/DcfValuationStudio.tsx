@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function DcfValuationStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function DcfValuationStudio() {
   const total = pv + terminal;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 40, oy = H - 40, bw = (W - 70) / nyears, maxv = Math.max(...flows, 1);
     flows.forEach((v, i) => { const h = (v / maxv) * (H - 90); ctx.fillStyle = "#22d3ee"; ctx.fillRect(ox + i * bw + 2, oy - h, bw - 4, h); });
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("present value of each year's cash flow (shrinking)", ox, 22); ctx.fillText("years →", W - 70, oy + 18);

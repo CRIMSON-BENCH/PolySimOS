@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, evaluate, derivativeExprSafe, sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -22,7 +23,7 @@ export function NewtonStudio() {
   }, [expr, x0]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     let data: { x: number; y: number }[] = []; try { data = sampleExpr(expr, "x", -6, 6, 500); } catch { /* */ }
     const ys = data.map((p) => p.y).filter(isFinite); let minY = Math.max(-30, Math.min(...ys, -5)), maxY = Math.min(30, Math.max(...ys, 5));

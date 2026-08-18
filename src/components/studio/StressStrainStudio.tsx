@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const MAT: Record<string, { E: number; yield: number; uts: number; strain: number; label: string }> = {
   "Mild steel": { E: 200, yield: 250, uts: 400, strain: 0.25, label: "ductile" },
@@ -20,7 +21,7 @@ export function StressStrainStudio() {
   const curStress = stressAt(Math.min(strain, m.strain));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const eMax = m.strain * 1.05, sMax = m.uts * 1.15;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); for (let i = 0; i <= 200; i++) { const e = (i / 200) * m.strain; const y = oy - (stressAt(e) / sMax) * ph; i ? ctx.lineTo(ox + (e / eMax) * pw, y) : ctx.moveTo(ox + (e / eMax) * pw, y); } ctx.stroke();

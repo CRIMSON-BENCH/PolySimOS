@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function RelativityStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -9,7 +10,7 @@ export function RelativityStudio() {
   const gamma = 1 / Math.sqrt(1 - beta * beta);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // rest ruler + moving (contracted) ruler
     const restLen = 300, restY = 90, movY = 200; const ox = 60;
     ctx.strokeStyle = "#64748b"; ctx.lineWidth = 2; ctx.strokeRect(ox, restY, restLen, 30);

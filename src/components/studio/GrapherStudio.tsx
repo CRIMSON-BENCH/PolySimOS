@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 const COLORS = ["#22d3ee", "#a3e635", "#f472b6"];
@@ -15,7 +16,7 @@ export function GrapherStudio() {
   const data = useMemo(() => exprs.map((e) => { try { return sampleExpr(e, "x", -range, range, 600); } catch { return []; } }), [exprs, range]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ys = data.flat().map((p) => p.y).filter(isFinite);
     let minY = Math.min(...ys, -1), maxY = Math.max(...ys, 1);

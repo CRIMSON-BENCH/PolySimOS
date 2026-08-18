@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function GearTrainStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function GearTrainStudio() {
   const st = useRef({ a: 0 });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; let raf = 0, last = 0;
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); let raf = 0, last = 0;
     const gear = (cx: number, cy: number, teeth: number, r: number, ang: number, col: string) => {
       ctx.fillStyle = col; ctx.beginPath(); const steps = teeth * 2;
       for (let i = 0; i <= steps; i++) { const rr = r * (i % 2 ? 1 : 0.82); const th = ang + i / steps * Math.PI * 2; const x = cx + Math.cos(th) * rr, y = cy + Math.sin(th) * rr; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }

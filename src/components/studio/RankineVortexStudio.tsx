@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Rankine vortex: tornado wind profile (solid-body core + 1/r outside).
 export function RankineVortexStudio() {
@@ -18,7 +19,7 @@ export function RankineVortexStudio() {
   useEffect(() => {
     if (!running) return; let raf = 0;
     const loop = () => {
-      rot.current += 0.05; const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      rot.current += 0.05; const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // wind profile plot (left)
       const ox = 40, oy = H - 30, pw = 200, ph = H - 60; const rMax = coreR * 4;
       ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

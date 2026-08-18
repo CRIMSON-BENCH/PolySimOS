@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Simulated annealing minimizing a rugged 1D landscape.
 const f = (x: number) => Math.sin(x) * 2 + Math.sin(2.3 * x + 1) + Math.sin(0.7 * x) * 1.5 + 0.02 * (x - 8) ** 2;
@@ -19,7 +20,7 @@ export function SimulatedAnnealingStudio() {
     const loop = () => {
       for (let k = 0; k < 8; k++) { const nx = Math.max(0, Math.min(16, x + (rnd() - 0.5) * T * 2)); const dE = f(nx) - f(x); if (dE < 0 || rnd() < Math.exp(-dE / T)) x = nx; if (f(x) < bestF) { bestF = f(x); bestX = x; } T *= coolRate; if (T < 0.01) T = 0.01; }
       setState({ x, best: bestX, T, bestF });
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 540, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const ox = 20, oy = H - 40, pw = W - 40, ph = H - 70; const X = (xx: number) => ox + (xx / 16) * pw; let mn = Infinity, mx = -Infinity; for (let i = 0; i <= 100; i++) { const v = f(i / 100 * 16); mn = Math.min(mn, v); mx = Math.max(mx, v); }
       const Y = (v: number) => oy - ((v - mn) / (mx - mn)) * ph;
       ctx.strokeStyle = "#334155"; ctx.lineWidth = 2; ctx.beginPath(); for (let i = 0; i <= 200; i++) { const xx = i / 200 * 16; i ? ctx.lineTo(X(xx), Y(f(xx))) : ctx.moveTo(X(xx), Y(f(xx))); } ctx.stroke();

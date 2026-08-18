@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 interface B { x: number; y: number; vx: number; vy: number; }
@@ -18,7 +19,7 @@ export function BoidsStudio() {
   useEffect(() => { boids.current = Array.from({ length: n }, () => ({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - 0.5) * 4, vy: (Math.random() - 0.5) * 4 })); }, [n]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     const loop = () => {
       const bs = boids.current; const R = 45, sepR = 20, maxV = 4;
       for (const b of bs) {

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Bode plot of a 2nd-order low-pass: H(s) = wn^2 / (s^2 + 2*zeta*wn*s + wn^2)
 export function BodePlotStudio() {
@@ -14,7 +15,7 @@ export function BodePlotStudio() {
   const peak = zeta < 0.707 ? 20 * Math.log10(1 / (2 * zeta * Math.sqrt(1 - zeta * zeta))) : 0;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, fMin = 1, fMax = 1e6; const logMin = Math.log10(fMin), logMax = Math.log10(fMax);
     const X = (f: number) => ox + (Math.log10(f) - logMin) / (logMax - logMin) * (W - 60);
     // magnitude plot (top)

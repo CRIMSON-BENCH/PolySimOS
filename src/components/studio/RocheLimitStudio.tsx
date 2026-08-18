@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function RocheLimitStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function RocheLimitStudio() {
   const inside = distance < roche;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = 120, cy = H / 2; const scale = 60;
     // primary
     const g = ctx.createRadialGradient(cx, cy, 5, cx, cy, scale); g.addColorStop(0, "#fbbf24"); g.addColorStop(1, "#b45309"); ctx.fillStyle = g; ctx.beginPath(); ctx.arc(cx, cy, scale, 0, 7); ctx.fill();

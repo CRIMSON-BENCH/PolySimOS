@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 function normCDF(x: number) { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.3989423 * Math.exp(-x * x / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x > 0 ? 1 - p : p; }
 function normPDF(x: number) { return 0.3989423 * Math.exp(-x * x / 2); }
@@ -19,7 +20,7 @@ export function HypothesisTestStudio() {
   const zCrit = twoTail ? 1.96 : 1.645; const reject = Math.abs(z) > zCrit;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 20, oy = H - 40, pw = W - 40, ph = H - 70;
     const X = (zz: number) => ox + ((zz + 4) / 8) * pw;
     // rejection regions

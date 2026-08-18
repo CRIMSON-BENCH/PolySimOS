@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function CollisionLabStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -18,7 +19,7 @@ export function CollisionLabStudio() {
   const st = useRef({ x1: 120, x2: 360, done: false, t: 0 });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; let raf = 0, last = 0;
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); let raf = 0, last = 0;
     const s = st.current; s.x1 = 120; s.x2 = 360; s.done = false; s.t = 0;
     const loop = (t: number) => {
       const dt = last ? Math.min(0.03, (t - last) / 1000) : 0; last = t; s.t += dt; const sc = 30;

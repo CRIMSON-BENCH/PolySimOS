@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function PitotTubeStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -12,7 +13,7 @@ export function PitotTubeStudio() {
   const mach = vTrue / Math.sqrt(1.4 * 287 * (288.15 - 0.0065 * Math.min(alt, 11000)));
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2;
     // pitot tube
     ctx.strokeStyle = "#64748b"; ctx.lineWidth = 6; ctx.beginPath(); ctx.moveTo(360, cy); ctx.lineTo(430, cy); ctx.stroke();

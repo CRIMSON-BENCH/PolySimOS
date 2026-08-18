@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Sequential Stern-Gerlach: prepared spin-up, measured along angle theta.
 export function SternGerlachStudio() {
@@ -23,7 +24,7 @@ export function SternGerlachStudio() {
       let s = seedRef.current; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; seedRef.current = s; return s / 4294967296; };
       for (let k = 0; k < 5; k++) { if (rnd() < pUp) counts.current.up++; else counts.current.down++; }
       force((n) => n + 1);
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 520, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       // source beam
       ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(20, H / 2); ctx.lineTo(200, H / 2); ctx.stroke();
       ctx.fillStyle = "#bef264"; ctx.font = "11px sans-serif"; ctx.fillText("spin-up source", 24, H / 2 - 10);

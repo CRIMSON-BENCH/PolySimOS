@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 460;
 
@@ -11,7 +12,7 @@ export function BifurcationStudio() {
   const [rMax, setRMax] = useState(4);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const img = ctx.getImageData(0, 0, W, H);
     for (let px = 0; px < W; px++) {

@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 440;
 
@@ -14,7 +15,7 @@ export function BuoyancyStudio() {
   const submerged = useMemo(() => Math.min(1, objDensity / fluidDensity), [objDensity, fluidDensity]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const waterY = 160;
     ctx.fillStyle = "rgba(34,120,200,0.35)"; ctx.fillRect(0, waterY, W, H - waterY);

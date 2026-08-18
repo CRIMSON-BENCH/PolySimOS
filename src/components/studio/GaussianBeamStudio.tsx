@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function GaussianBeamStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function GaussianBeamStudio() {
   const w0 = waist * 1e-6; const lam = wavelength * 1e-9; const zR = Math.PI * w0 * w0 / lam; const div = lam / (Math.PI * w0) * 1000; // mrad
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 280; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 280; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cy = H / 2; const zMax = zR * 4; const scaleZ = W / (2 * zMax); const scaleW = 40 / w0;
     const wz = (z: number) => w0 * Math.sqrt(1 + (z / zR) ** 2);
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2;

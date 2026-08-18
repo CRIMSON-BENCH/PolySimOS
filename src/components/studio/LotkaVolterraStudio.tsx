@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Lotka-Volterra predator-prey ODE with time series + phase portrait.
 export function LotkaVolterraStudio() {
@@ -12,7 +13,7 @@ export function LotkaVolterraStudio() {
   const [d, setD] = useState(0.075); // predator growth per prey
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     let x = 10, y = 5; const dt = 0.01; const xs: number[] = [], ys: number[] = [];
     for (let t = 0; t < 4000; t++) { const dx = a * x - b * x * y, dy = -c * y + d * x * y; x += dx * dt; y += dy * dt; if (t % 4 === 0) { xs.push(x); ys.push(y); } }
     // time series (left 60%)

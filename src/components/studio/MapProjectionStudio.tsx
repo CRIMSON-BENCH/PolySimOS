@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MapProjectionStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -10,7 +11,7 @@ export function MapProjectionStudio() {
   const areaDistortion = 1 / Math.cos(latitude * Math.PI / 180) ** 2;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 340; ctx.fillStyle = "#0b1a2e"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b1a2e"; ctx.fillRect(0, 0, W, H);
     // Mercator graticule with Tissot circles
     const merc = (lat: number) => Math.log(Math.tan(Math.PI / 4 + lat * Math.PI / 360));
     const maxM = merc(80); const Y = (lat: number) => H / 2 - merc(lat) / maxM * (H / 2 - 10);

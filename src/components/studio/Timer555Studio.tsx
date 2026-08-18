@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function Timer555Studio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function Timer555Studio() {
   const thigh = 0.693 * (R1 + R2) * C, tlow = 0.693 * R2 * C;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const oy = H / 2, amp = 70, period = (W - 60) / 6;
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); let x = 30; ctx.moveTo(x, oy + amp);
     for (let cyc = 0; cyc < 6; cyc++) { const wh = period * duty, wl = period * (1 - duty); ctx.lineTo(x, oy - amp); ctx.lineTo(x + wh, oy - amp); ctx.lineTo(x + wh, oy + amp); ctx.lineTo(x + wh + wl, oy + amp); x += period; }

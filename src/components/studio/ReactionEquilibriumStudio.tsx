@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function ReactionEquilibriumStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function ReactionEquilibriumStudio() {
   const aeq = a0 - x, beq = b0 - x;
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const bars = [{ n: "A", v: aeq, col: "#22d3ee" }, { n: "B", v: beq, col: "#38bdf8" }, { n: "C", v: x, col: "#f472b6" }, { n: "D", v: x, col: "#fb7185" }];
     const maxv = Math.max(a0, b0, x, 0.01), bw = 90, gap = 30, ox = 60, oy = H - 50;
     bars.forEach((bar, i) => { const h = (bar.v / maxv) * (H - 100); const bx = ox + i * (bw + gap); ctx.fillStyle = bar.col; ctx.fillRect(bx, oy - h, bw, h); ctx.fillStyle = "#e2e8f0"; ctx.font = "12px sans-serif"; ctx.fillText(bar.n, bx + bw / 2 - 4, oy + 18); ctx.fillText(bar.v.toFixed(2), bx + bw / 2 - 12, oy - h - 6); });

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MatchedFilterStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -15,7 +16,7 @@ export function MatchedFilterStudio() {
   const peakIdx = corr.indexOf(Math.max(...corr));
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     ctx.strokeStyle = "#0e7490"; ctx.lineWidth = 1; ctx.beginPath(); sig.forEach((v, n) => { const x = 30 + n / N * (W - 50), y = 80 - v * 30; n ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("noisy signal — pulse is buried", 30, 20);
     const cmax = Math.max(...corr, 0.01); ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); corr.forEach((v, k) => { const x = 30 + k / N * (W - 50), y = 250 - v / cmax * 120; k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();

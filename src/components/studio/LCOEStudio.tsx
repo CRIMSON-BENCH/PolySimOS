@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Levelized cost of energy.
 export function LCOEStudio() {
@@ -19,7 +20,7 @@ export function LCOEStudio() {
   const refs = [["Solar PV", 40], ["Wind", 35], ["Gas (CCGT)", 60], ["Nuclear", 90], ["Coal", 80]] as const;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 280; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 460, H = 280; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const items = [["Your project", lcoe] as const, ...refs]; const max = Math.max(...items.map((i) => i[1]), lcoe) * 1.1;
     items.forEach(([n, v], i) => { const y = 30 + i * 40; const bw = (v / max) * (W - 160); ctx.fillStyle = n === "Your project" ? "#f472b6" : "#22d3ee"; ctx.fillRect(120, y, bw, 24); ctx.fillStyle = "#e2e8f0"; ctx.font = "11px sans-serif"; ctx.textAlign = "right"; ctx.fillText(n, 112, y + 16); ctx.textAlign = "left"; ctx.fillText(`$${v.toFixed(0)}`, 124 + bw, y + 16); });
     ctx.textAlign = "left"; ctx.fillStyle = "#94a3b8"; ctx.fillText("LCOE ($/MWh)", 120, 18);

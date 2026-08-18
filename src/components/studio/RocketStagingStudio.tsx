@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Multi-stage rocket delta-v (Tsiolkovsky per stage).
 export function RocketStagingStudio() {
@@ -14,7 +15,7 @@ export function RocketStagingStudio() {
   const orbitDV = 9400; // approx LEO
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 300, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 300, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2; const n = Math.round(stages); let y = H - 40;
     const cols = ["#22d3ee", "#a3e635", "#f472b6", "#fbbf24"];
     for (let i = 0; i < n; i++) { const w = 60 - i * 8, h = 60; ctx.fillStyle = cols[i % cols.length]; ctx.fillRect(cx - w / 2, y - h, w, h); ctx.strokeStyle = "#0b1220"; ctx.strokeRect(cx - w / 2, y - h, w, h); ctx.fillStyle = "#0b1220"; ctx.font = "10px sans-serif"; ctx.fillText(`stage ${i + 1}`, cx - 20, y - h / 2); y -= h + 4; }

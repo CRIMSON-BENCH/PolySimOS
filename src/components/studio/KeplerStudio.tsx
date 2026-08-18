@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -22,7 +23,7 @@ export function KeplerStudio() {
   useEffect(() => { reset(); /* eslint-disable-next-line */ }, [ecc, a]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const GM = 4000, cx = W / 2, cy = H / 2;
+    const ctx = hidpi(canvasRef.current!, W, H); const GM = 4000, cx = W / 2, cy = H / 2;
     const loop = () => {
       const s = st.current;
       if (running) for (let i = 0; i < 4; i++) { const r = Math.hypot(s.x, s.y) || 1; const f = -GM / (r * r * r); s.vx += f * s.x * 0.02; s.vy += f * s.y * 0.02; s.x += s.vx * 0.02; s.y += s.vy * 0.02; }

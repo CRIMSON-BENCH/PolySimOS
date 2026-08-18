@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const ORBITALS: Record<string, { n: number; label: string; psi: (r: number, ct: number) => number }> = {
   "1s": { n: 1, label: "1s", psi: (r) => Math.exp(-r) },
@@ -16,7 +17,7 @@ export function HydrogenOrbitalStudio() {
   const [orb, setOrb] = useState("2p");
 
   useEffect(() => {
-    const o = ORBITALS[orb]; const W = 400, H = 400; const ctx = canvasRef.current!.getContext("2d")!;
+    const o = ORBITALS[orb]; const W = 400, H = 400; const ctx = hidpi(canvasRef.current!, W, H);
     const img = ctx.createImageData(W, H); const cx = W / 2, cy = H / 2; const scale = 7 * o.n;
     let maxV = 0; for (let py = 0; py < H; py += 2) for (let px = 0; px < W; px += 2) { const x = (px - cx) / scale, z = (py - cy) / scale; const r = Math.hypot(x, z); const ct = r > 0 ? z / r : 0; const v = o.psi(r, ct) ** 2; if (v > maxV) maxV = v; }
     for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const x = (px - cx) / scale, z = (py - cy) / scale; const r = Math.hypot(x, z); const ct = r > 0 ? z / r : 0; const v = Math.min(1, (o.psi(r, ct) ** 2) / maxV * 3); const idx = (py * W + px) * 4;

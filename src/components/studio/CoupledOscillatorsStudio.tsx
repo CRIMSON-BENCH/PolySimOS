@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function CoupledOscillatorsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -13,7 +14,7 @@ export function CoupledOscillatorsStudio() {
   const st = useRef({ x1: 1, x2: -0.3, v1: 0, v2: 0 });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; let raf = 0, last = 0;
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); let raf = 0, last = 0;
     const loop = (t: number) => {
       const dt = last ? Math.min(0.03, (t - last) / 1000) : 0; last = t; const s = st.current;
       for (let i = 0; i < 4; i++) { const h = dt / 4; const a1 = (-k * s.x1 - kc * (s.x1 - s.x2)) / m; const a2 = (-k * s.x2 - kc * (s.x2 - s.x1)) / m; s.v1 += a1 * h; s.v2 += a2 * h; s.x1 += s.v1 * h; s.x2 += s.v2 * h; }

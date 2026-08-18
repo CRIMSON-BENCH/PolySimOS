@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Transmission line: reflection, VSWR, standing wave.
 export function TransmissionLineStudio() {
@@ -23,7 +24,7 @@ export function TransmissionLineStudio() {
     if (!running) return; let raf = 0;
     const loop = () => {
       phase.current += 0.05; const t = phase.current; const W = 540, H = 300;
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const ox = 30, mid = H / 2, len = W - 60;
       // incident + reflected -> standing wave envelope
       ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();

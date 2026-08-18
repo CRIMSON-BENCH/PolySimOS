@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Rectangular barrier transmission coefficient.
 export function QuantumTunnelingStudio() {
@@ -17,7 +18,7 @@ export function QuantumTunnelingStudio() {
   else { const k = Math.sqrt(2 * 0.512 * (E - V)) * width * 10; const sn = Math.sin(k); T = 1 / (1 + (V * V * sn * sn) / (4 * E * (E - V) + 1e-9)); }
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 20, oy = H - 40, ow = W - 40; const bx = ox + ow * 0.42, bw = Math.max(10, width * 90);
     // barrier
     const vh = (V / 8) * (H - 80); ctx.fillStyle = "rgba(100,116,139,0.35)"; ctx.fillRect(bx, oy - vh, bw, vh); ctx.strokeStyle = "#64748b"; ctx.strokeRect(bx, oy - vh, bw, vh);

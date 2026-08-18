@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -22,7 +23,7 @@ export function DistributionsStudio() {
   }, [dist, p1, p2]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const pad = 40; const maxY = Math.max(...ys, 0.01); const minX = xs[0], maxX = xs[xs.length - 1];
     const sx = (x: number) => pad + ((x - minX) / (maxX - minX || 1)) * (W - 2 * pad); const sy = (y: number) => H - pad - (y / maxY) * (H - 2 * pad);

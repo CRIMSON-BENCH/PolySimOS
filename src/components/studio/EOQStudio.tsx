@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Economic Order Quantity.
 export function EOQStudio() {
@@ -14,7 +15,7 @@ export function EOQStudio() {
   const optCost = totalCost(eoq); const orders = D / eoq;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, oy = H - 35, pw = W - 70, ph = H - 55; const qMax = eoq * 3, cMax = totalCost(eoq * 0.15);
     const X = (q: number) => ox + (q / qMax) * pw; const Y = (c: number) => oy - (c / cMax) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Chain reaction: neutron multiplication factor k.
 export function FissionReactorStudio() {
@@ -19,7 +20,7 @@ export function FissionReactorStudio() {
     const loop = () => {
       frame++;
       if (frame % 25 === 0) { pop.current = Math.max(0, pop.current * k * (0.9 + Math.random() * 0.2)); if (pop.current > 1e6) pop.current = 1e6; hist.current.push(pop.current); if (hist.current.length > 60) hist.current.shift(); setGen((g) => g + 1); }
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 520, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const maxP = Math.max(...hist.current, 10);
       ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
       ctx.strokeStyle = k > 1 ? "#f472b6" : k < 1 ? "#60a5fa" : "#a3e635"; ctx.lineWidth = 2; ctx.beginPath(); hist.current.forEach((p, i) => { const x = ox + (i / 60) * pw; const y = oy - (Math.log10(p + 1) / Math.log10(maxP + 1)) * ph; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();

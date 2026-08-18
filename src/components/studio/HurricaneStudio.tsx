@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function HurricaneStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function HurricaneStudio() {
   useEffect(() => {
     if (!running) return; let raf = 0;
     const loop = () => {
-      rot.current += 0.02 + deficit / 5000; const ctx = canvasRef.current!.getContext("2d")!; const W = 400, H = 380; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      rot.current += 0.02 + deficit / 5000; const W = 400, H = 380; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const cx = W / 2, cy = H / 2; const size = 60 + deficit * 1.2;
       // spiral bands
       for (let arm = 0; arm < 5; arm++) { ctx.strokeStyle = `rgba(34,211,238,${0.5 - arm * 0.06})`; ctx.lineWidth = 6; ctx.beginPath(); for (let t = 0; t < 6; t += 0.1) { const r = 12 + t * size / 6; const a = t * 1.6 + rot.current + arm * 1.256; const x = cx + Math.cos(a) * r, y = cy + Math.sin(a) * r; t === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); } ctx.stroke(); }

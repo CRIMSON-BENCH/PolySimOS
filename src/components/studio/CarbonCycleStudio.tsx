@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Simple 4-box carbon cycle (GtC): atmosphere, surface ocean, deep ocean, biosphere.
 export function CarbonCycleStudio() {
@@ -28,7 +29,7 @@ export function CarbonCycleStudio() {
         b.deep += fSurfDeep * dt; b.bio += fAtmBio * dt;
       }
       setAtm(b.atm); setYear((y) => y + 1); hist.current.push(b.atm); if (hist.current.length > 400) hist.current.shift();
-      const ctx = canvasRef.current!.getContext("2d")!; const W = 520, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const W = 520, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const boxes = [["Atmosphere", b.atm, "#f472b6", 20], ["Surface ocean", b.surf, "#22d3ee", 150], ["Biosphere", b.bio, "#a3e635", 280], ["Deep ocean", b.deep, "#60a5fa", 410]] as const;
       boxes.forEach(([label, val, col, x]) => { const bh = Math.min(120, Math.sqrt(val) * 1.6); ctx.fillStyle = col; ctx.fillRect(x, 130 - bh + 10, 90, bh); ctx.fillStyle = "#e2e8f0"; ctx.font = "11px sans-serif"; ctx.fillText(label, x, 160); ctx.fillText(`${val.toFixed(0)} GtC`, x, 174); });
       // atmosphere time series (ppm approx: GtC*0.469)

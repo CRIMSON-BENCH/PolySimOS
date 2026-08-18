@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Otto cycle (gasoline engine) efficiency vs compression ratio.
 export function OttoCycleStudio() {
@@ -12,7 +13,7 @@ export function OttoCycleStudio() {
   const eff = 1 - 1 / Math.pow(ratio, gamma - 1);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 330; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 330; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, oy = H - 35, pw = W - 80, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     const V1 = ratio, V2 = 1; const P1 = 1, P2 = P1 * Math.pow(V1 / V2, gamma); const P3 = P2 * 3, P4 = P3 * Math.pow(V2 / V1, gamma);

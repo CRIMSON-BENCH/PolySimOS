@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Sampling & aliasing: Nyquist demonstration.
 export function AliasingStudio() {
@@ -15,7 +16,7 @@ export function AliasingStudio() {
   let apparent = signalF; if (aliased) { apparent = Math.abs(signalF - sampleF * Math.round(signalF / sampleF)); }
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 20, mid = H / 2, pw = W - 40, dur = 1; // 1 second window
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, mid); ctx.lineTo(ox + pw, mid); ctx.stroke();
     // true signal

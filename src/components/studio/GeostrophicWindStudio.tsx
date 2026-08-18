@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Geostrophic wind: balance of pressure-gradient and Coriolis.
 export function GeostrophicWindStudio() {
@@ -14,7 +15,7 @@ export function GeostrophicWindStudio() {
   const vg = latitude > 1 ? dpdn / (rho * f) : Infinity;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 340; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // isobars (horizontal lines), spacing ~ gradient
     const spacing = 200 / gradient; ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.5;
     for (let y = 30, p = 1012; y < H - 20; y += spacing, p -= 4) { ctx.beginPath(); ctx.moveTo(20, y); ctx.lineTo(W - 20, y); ctx.stroke(); ctx.fillStyle = "#64748b"; ctx.font = "10px sans-serif"; ctx.fillText(`${p}`, W - 45, y - 3); }

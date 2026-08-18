@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 420;
 interface Ball { x: number; y: number; vx: number; vy: number; r: number; m: number; }
@@ -19,7 +20,7 @@ export function CollisionsStudio() {
   useEffect(() => { seed(); /* eslint-disable-next-line */ }, [n]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     const loop = () => {
       const B = balls.current; const e = restitution;
       if (running) {

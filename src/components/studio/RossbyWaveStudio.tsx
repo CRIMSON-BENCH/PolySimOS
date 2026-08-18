@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Rossby (planetary) waves in the jet stream.
 export function RossbyWaveStudio() {
@@ -18,7 +19,7 @@ export function RossbyWaveStudio() {
     if (!running) return; let raf = 0;
     const loop = () => {
       phase.current += 0.02 * (1 - westward / 10); const t = phase.current; const W = 540, H = 300;
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
       const cy = H / 2;
       // cold north / warm south shading
       ctx.fillStyle = "rgba(96,165,250,0.08)"; ctx.fillRect(0, 0, W, cy); ctx.fillStyle = "rgba(249,115,22,0.06)"; ctx.fillRect(0, cy, W, cy);

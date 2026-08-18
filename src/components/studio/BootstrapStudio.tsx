@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function BootstrapStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,7 +18,7 @@ export function BootstrapStudio() {
     const origMean = data.reduce((a, b) => a + b, 0) / N;
     const boots: number[] = []; for (let b = 0; b < B; b++) { let sum = 0; for (let i = 0; i < N; i++) sum += data[(rnd() * N) | 0]; boots.push(sum / N); }
     boots.sort((a, b) => a - b); const lo = boots[(B * 0.025) | 0], hi = boots[(B * 0.975) | 0]; setCi({ lo, hi, mean: origMean });
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 30, oy = H - 30, pw = W - 60, ph = H - 55; const mn = boots[0], mx = boots[B - 1];
     const bins = 45; const hist = new Array(bins).fill(0); boots.forEach((v) => { const bi = Math.min(bins - 1, ((v - mn) / (mx - mn) * bins) | 0); hist[bi]++; });
     const hmax = Math.max(...hist); const X = (v: number) => ox + ((v - mn) / (mx - mn)) * pw;

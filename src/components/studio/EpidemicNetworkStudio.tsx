@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 type State = 0 | 1 | 2; // S, I, R
@@ -28,7 +29,7 @@ export function EpidemicNetworkStudio() {
   useEffect(() => { build(); /* eslint-disable-next-line */ }, [radius]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     const loop = () => {
       const nodes = net.current, es = edges.current;
       if (running) { frame.current++;

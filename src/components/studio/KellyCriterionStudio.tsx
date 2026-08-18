@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function KellyCriterionStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function KellyCriterionStudio() {
   const growth = (f: number) => f <= 0 || f >= 1 ? -Infinity : p * Math.log(1 + b * f) + q * Math.log(1 - f);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H / 2 + 60, pw = W - 65, ph = H - 60;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy - ph / 2); ctx.lineTo(ox, oy + ph / 2); ctx.stroke();
     let gmax = 0; for (let i = 1; i < 100; i++) gmax = Math.max(gmax, growth(i / 100));

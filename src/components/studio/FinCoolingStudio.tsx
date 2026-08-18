@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function FinCoolingStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -14,7 +15,7 @@ export function FinCoolingStudio() {
   const q = Math.sqrt(2 * h * k * t) * (Tb - Tinf) * Math.tanh(m * L);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const y = H / 2, len = W - 80;
     for (let i = 0; i < len; i++) { const x = i / len * L; const T = Tinf + (Tb - Tinf) * theta(x); const c01 = (T - Tinf) / (Tb - Tinf); ctx.fillStyle = `rgb(${Math.round(60 + c01 * 195)},${Math.round(90 + (1 - c01) * 120)},${Math.round(160 - c01 * 100)})`; ctx.fillRect(40 + i, y - 26, 1, 52); }
     ctx.strokeStyle = "#334155"; ctx.strokeRect(40, y - 26, len, 52);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Star color from temperature (approx blackbody)
 function tempColor(T: number): string {
@@ -26,7 +27,7 @@ export function HRDiagramStudio() {
   const L = Math.pow(temp / 5778, 4);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 420; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 420; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const x = (T: number) => W - 40 - ((T - 3000) / 32000) * (W - 70); // hot on left
     const y = (Lum: number) => 30 + (1 - (Math.log10(Lum) + 4) / 9) * (H - 70); // log L, -4..5
     ctx.strokeStyle = "#1e293b"; ctx.strokeRect(30, 20, W - 50, H - 50);

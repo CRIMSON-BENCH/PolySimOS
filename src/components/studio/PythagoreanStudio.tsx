@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const SPORT: Record<string, { exp: number; games: number }> = { Baseball: { exp: 1.83, games: 162 }, Basketball: { exp: 13.9, games: 82 }, "Am. Football": { exp: 2.37, games: 17 }, Soccer: { exp: 1.35, games: 38 } };
 
@@ -15,7 +16,7 @@ export function PythagoreanStudio() {
   const wins = winPct * SPORT[sport].games;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); for (let i = 0; i <= pw; i++) { const ratio = 0.5 + (i / pw) * 1; const wp = Math.pow(ratio, exp) / (Math.pow(ratio, exp) + 1); const y = oy - wp * ph; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke();

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 function normCDF(x: number) { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.3989423 * Math.exp(-x * x / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x > 0 ? 1 - p : p; }
 
@@ -18,7 +19,7 @@ export function ABTestStudio() {
   const lift = pA > 0 ? (pB - pA) / pA * 100 : 0; const sig = pVal < 0.05;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // two conversion-rate distributions (normal approx)
     const ox = 30, oy = H - 40, pw = W - 60, ph = H - 70; const lo = Math.min(pA, pB) - 0.06, hi = Math.max(pA, pB) + 0.06;
     const X = (p: number) => ox + ((p - lo) / (hi - lo)) * pw;

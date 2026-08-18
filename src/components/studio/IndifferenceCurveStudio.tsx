@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Consumer choice: U = x^a y^(1-a), budget px x + py y = I.
 export function IndifferenceCurveStudio() {
@@ -14,7 +15,7 @@ export function IndifferenceCurveStudio() {
   const x = alpha * income / px, y = (1 - alpha) * income / py; const U = Math.pow(x, alpha) * Math.pow(y, 1 - alpha);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 460, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 460, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 45, oy = H - 35, pw = W - 65, ph = H - 55; const xMax = income / px * 1.2, yMax = income / py * 1.2;
     const X = (xx: number) => ox + (xx / xMax) * pw; const Y = (yy: number) => oy - (yy / yMax) * ph;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + pw, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - ph); ctx.stroke();

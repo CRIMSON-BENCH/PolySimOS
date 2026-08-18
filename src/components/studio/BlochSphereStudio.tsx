@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Qubit on the Bloch sphere.
 export function BlochSphereStudio() {
@@ -14,7 +15,7 @@ export function BlochSphereStudio() {
   const p0 = a * a, p1 = 1 - p0;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 400, H = 400; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 400, H = 400; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const cx = W / 2, cy = H / 2, R = 130; const yaw = -0.5;
     const proj = (x: number, y: number, z: number) => { const xr = x * Math.cos(yaw) - z * Math.sin(yaw); const zr = x * Math.sin(yaw) + z * Math.cos(yaw); return [cx + xr * R, cy - y * R + zr * 20]; };
     // sphere outline + equator

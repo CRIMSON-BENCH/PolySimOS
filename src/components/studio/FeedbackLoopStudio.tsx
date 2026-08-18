@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function FeedbackLoopStudio() {
   const c = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,7 @@ export function FeedbackLoopStudio() {
   const openDist = disturbance; const closedDist = disturbance / (1 + G);
 
   useEffect(() => {
-    const ctx = c.current!.getContext("2d")!; const W = 520, H = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 520, H = 320; const ctx = hidpi(c.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // block diagram
     ctx.strokeStyle = "#475569"; ctx.lineWidth = 2;
     ctx.beginPath(); ctx.arc(90, 110, 16, 0, Math.PI * 2); ctx.stroke(); ctx.fillStyle = "#e2e8f0"; ctx.font = "14px sans-serif"; ctx.fillText("+", 84, 115); ctx.fillText("−", 84, 140);

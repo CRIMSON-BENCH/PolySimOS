@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Two-asset efficient frontier.
 export function EfficientFrontierStudio() {
@@ -12,7 +13,7 @@ export function EfficientFrontierStudio() {
   const [minVar, setMinVar] = useState({ w: 0, ret: 0, vol: 0 });
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 500, H = 360; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 500, H = 360; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = 50, oy = H - 35, pw = W - 80, ph = H - 60;
     const pts: { w: number; ret: number; vol: number }[] = [];
     for (let i = 0; i <= 100; i++) { const w = i / 100; const ret = w * rA + (1 - w) * rB; const varr = w * w * sA * sA + (1 - w) * (1 - w) * sB * sB + 2 * w * (1 - w) * corr * sA * sB; pts.push({ w, ret, vol: Math.sqrt(varr) }); }
