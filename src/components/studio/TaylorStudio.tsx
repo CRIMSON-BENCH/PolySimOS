@@ -3,15 +3,22 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, derivative, evaluate, simplify, sampleExpr, Node } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { order: number; center: number }> = {
+  "Linear (N=1)": { order: 1, center: 0 },
+  "Quadratic (N=2)": { order: 2, center: 0 },
+  "Order 5": { order: 5, center: 0 },
+  "High order (N=12)": { order: 12, center: 0 },
+};
 
 export function TaylorStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [expr, setExpr] = useState("sin(x)");
-  const [order, setOrder] = useState(5);
-  const [center, setCenter] = useState(0);
+  const [{ order, center }, update] = useShareableNumbers({ order: 5, center: 0 });
   const [err, setErr] = useState("");
 
   const taylor = useMemo(() => {
@@ -40,17 +47,38 @@ export function TaylorStudio() {
     ctx.font = "12px system-ui"; ctx.fillStyle = "#22d3ee"; ctx.fillText("f(x)", pad, 22); ctx.fillStyle = "#a3e635"; ctx.fillText(`Taylor (order ${order})`, pad + 60, 22);
   }, [expr, taylor, order, center]);
 
+  const explain = `The order-${order} Taylor polynomial of ${expr} is built about the center a = ${center}. ` +
+    (order <= 1
+      ? "At order 1 it is just the tangent line at a — it matches the value and slope of f at a, but nothing else, so it drifts away quickly."
+      : order <= 3
+      ? `Each of the ${order} added terms pins down another derivative at a, so the curve now hugs f through a small neighborhood before separating.`
+      : `With ${order} terms the fit near a is excellent and tracks f across a wider window, though it still degrades outside the radius of convergence.`) +
+    " Every extra term improves the local fit near a, but the approximation is only trustworthy inside that radius.";
+
+  const code = `import numpy as np, sympy as sp
+x = sp.symbols('x')
+f = sp.sympify("${expr}")
+a, N = ${center}, ${order}
+# Taylor partial sum to order N about a
+p = sp.series(f, x, a, N + 1).removeO()
+print(sp.simplify(p))
+P = sp.lambdify(x, p, "numpy")
+xs = np.linspace(a - 5, a + 5, 500)
+print("max local error near a:", np.max(np.abs(P(xs) - sp.lambdify(x, f, "numpy")(xs))))`;
+
   return (
     <StudioChrome title="Taylor Series Visualizer" tagline="polynomial approximation via the CAS"
       controls={<div>
         <label className="mb-1 block text-xs text-slate-500">f(x)</label>
         <input value={expr} onChange={(e) => setExpr(e.target.value)} className="mb-3 w-full rounded border border-slate-300 bg-white px-2 py-1 font-mono text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100" />
         <div className="flex flex-wrap gap-1 mb-3">{["sin(x)", "exp(x)", "cos(x)", "ln(x+2)", "1/(1+x*x)"].map((ex) => <button key={ex} onClick={() => setExpr(ex)} className="rounded-md border border-slate-300 px-2 py-0.5 font-mono text-[10px] text-slate-600 dark:border-slate-700 dark:text-slate-400">{ex}</button>)}</div>
-        <Slider label="Order" value={order} min={1} max={15} step={1} onChange={setOrder} />
-        <Slider label="Center a" value={center} min={-6} max={6} step={0.5} onChange={setCenter} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Order" value={order} min={1} max={15} step={1} onChange={(v) => update({ order: v })} />
+        <Slider label="Center a" value={center} min={-6} max={6} step={0.5} onChange={(v) => update({ center: v })} />
         {err && <p className="text-xs text-red-500">{err}</p>}
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Order" value={String(order)} /><Stat label="Center" value={String(center)} /><Stat label="Method" value="symbolic derivatives" /></div>}
+      inspector={<div><Stat label="Order" value={String(order)} /><Stat label="Center" value={String(center)} /><Stat label="Method" value="symbolic derivatives" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

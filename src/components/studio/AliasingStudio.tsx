@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { signalF: number; sampleF: number }> = {
+  "Well-sampled": { signalF: 3, sampleF: 40 },
+  "At Nyquist": { signalF: 10, sampleF: 20 },
+  "Undersampled (aliased)": { signalF: 15, sampleF: 20 },
+  "Severe aliasing": { signalF: 19, sampleF: 20 },
+};
 
 // Sampling & aliasing: Nyquist demonstration.
 export function AliasingStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [signalF, setSignalF] = useState(3); // Hz
-  const [sampleF, setSampleF] = useState(20); // Hz
+  const [{ signalF, sampleF }, update] = useShareableNumbers({ signalF: 3, sampleF: 20 });
 
   const nyquist = sampleF / 2;
   const aliased = signalF > nyquist;
@@ -29,14 +36,31 @@ export function AliasingStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("true signal (gray) · samples (pink) · reconstructed (cyan)", ox, H - 12);
   }, [signalF, sampleF]);
 
+  const explain = !aliased
+    ? `Sampling at ${sampleF} Hz puts the Nyquist limit at ${nyquist.toFixed(1)} Hz. The ${signalF} Hz signal sits below that, so it is captured faithfully and reconstructs at its true frequency.`
+    : `The ${signalF} Hz signal exceeds the ${nyquist.toFixed(1)} Hz Nyquist limit, so it aliases: sampling at ${sampleF} Hz folds it down to |f - round(f/fs)*fs| = ${apparent.toFixed(1)} Hz. It masquerades as that slower tone and cannot be recovered.`;
+
+  const code = `import numpy as np
+f, fs = ${signalF}, ${sampleF}          # signal & sample rate (Hz)
+t = np.arange(0, 1, 1/fs)     # sample instants over 1 s
+x = np.sin(2*np.pi*f*t)       # sampled sinusoid
+nyq = fs/2
+alias = f if f <= nyq else abs(f - fs*round(f/fs))
+print("Nyquist", nyq, "Hz | alias", alias, "Hz")`;
+
   return (
     <StudioChrome title="Sampling & Aliasing" tagline="the Nyquist theorem"
       controls={<div>
-        <Slider label="Signal frequency (Hz)" value={signalF} min={1} max={30} step={0.5} onChange={setSignalF} />
-        <Slider label="Sample rate (Hz)" value={sampleF} min={4} max={60} step={1} onChange={setSampleF} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Signal frequency (Hz)" value={signalF} min={1} max={30} step={0.5} onChange={(v) => update({ signalF: v })} />
+        <Slider label="Sample rate (Hz)" value={sampleF} min={4} max={60} step={1} onChange={(v) => update({ sampleF: v })} />
         <p className="mt-3 text-xs text-slate-500">To capture a signal faithfully you must sample above twice its highest frequency — the Nyquist rate. Sample too slowly and a high frequency masquerades as a lower one: aliasing. Push the signal frequency above half the sample rate and watch the reconstructed wave collapse to a false, slower tone.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Nyquist frequency" value={`${nyquist.toFixed(1)} Hz`} /><Stat label="Status" value={aliased ? "ALIASED" : "properly sampled"} /><Stat label="Apparent frequency" value={`${apparent.toFixed(1)} Hz`} /></div>}
+      inspector={<div><Stat label="Nyquist frequency" value={`${nyquist.toFixed(1)} Hz`} /><Stat label="Status" value={aliased ? "ALIASED" : "properly sampled"} /><Stat label="Apparent frequency" value={`${apparent.toFixed(1)} Hz`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,14 +3,22 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
+
+const PRESETS: Record<string, { nRect: number }> = {
+  "Coarse (n=4)": { nRect: 4 },
+  "Medium (n=20)": { nRect: 20 },
+  "Fine (n=60)": { nRect: 60 },
+  "Very fine (n=100)": { nRect: 100 },
+};
 
 export function RiemannStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [expr, setExpr] = useState("x*x*0.3 + 1");
-  const [nRect, setNRect] = useState(12);
+  const [{ nRect }, update] = useShareableNumbers({ nRect: 12 });
   const [mode, setMode] = useState<"left" | "mid" | "right">("mid");
   const a = -4, b = 4;
 
@@ -35,6 +43,24 @@ export function RiemannStudio() {
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(pad, sy(0)); ctx.lineTo(W - pad, sy(0)); ctx.stroke();
   }, [tree, nRect, mode]);
 
+  const dxNow = (b - a) / nRect;
+  const off = mode === "left" ? "0" : mode === "right" ? "1" : "0.5";
+  const explain =
+    `With n=${nRect} ${mode === "mid" ? "midpoint" : mode} rectangles the step is dx = ${dxNow.toFixed(3)}. ` +
+    (mode === "left" || mode === "right"
+      ? "Left and right sums bracket the true integral from opposite sides. "
+      : "The midpoint rule already cancels much of the error at each rectangle. ") +
+    `Adding subintervals shrinks the error toward the exact integral; midpoint and trapezoid rules converge fastest (error ~1/n²), so from n=${nRect} the estimate tightens quickly as you push toward n=100.`;
+
+  const code = `import numpy as np
+a, b, n = ${a}, ${b}, ${nRect}
+f = lambda x: ${expr}
+dx = (b - a) / n
+# ${mode} Riemann sum
+x = a + (np.arange(n) + ${off}) * dx
+approx = np.sum(f(x) * dx)
+print(approx)`;
+
   return (
     <StudioChrome title="Riemann Sums" tagline="approximating the definite integral"
       controls={<div>
@@ -42,9 +68,14 @@ export function RiemannStudio() {
         <input value={expr} onChange={(e) => setExpr(e.target.value)} className="mb-2 w-full rounded border border-slate-300 bg-white px-2 py-1 font-mono text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100" />
         <div className="mb-3 flex gap-2">{(["left", "mid", "right"] as const).map((m) => <button key={m} onClick={() => setMode(m)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold capitalize ${mode === m ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{m}</button>)}</div>
         <p className="mb-3 text-xs text-slate-500">Rectangles approximate the area under the curve. Add more and the Riemann sum converges to the true integral.</p>
-        <Slider label="Rectangles" value={nRect} min={2} max={100} step={1} onChange={setNRect} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Rectangles" value={nRect} min={2} max={100} step={1} onChange={(v) => update({ nRect: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Riemann sum" value={sum.toFixed(4)} /><Stat label="Exact integral" value={exact.toFixed(4)} /><Stat label="Error" value={Math.abs(sum - exact).toFixed(4)} /></div>}
+      inspector={<div><Stat label="Riemann sum" value={sum.toFixed(4)} /><Stat label="Exact integral" value={exact.toFixed(4)} /><Stat label="Error" value={Math.abs(sum - exact).toFixed(4)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

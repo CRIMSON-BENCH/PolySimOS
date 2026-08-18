@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { w: number; b: number; thresh: number }> = {
+  "Well-separated": { w: 6, b: -3, thresh: 0.5 },
+  "Overlapping classes": { w: 1, b: -0.5, thresh: 0.5 },
+  "Sharp boundary": { w: 8, b: -4, thresh: 0.5 },
+  "Cautious threshold": { w: 3, b: -1.5, thresh: 0.7 },
+};
 
 export function LogisticRegressionStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [w, setW] = useState(3), [b, setB] = useState(-1.5), [thresh, setThresh] = useState(0.5);
+  const [{ w, b, thresh }, update] = useShareableNumbers({ w: 3, b: -1.5, thresh: 0.5 });
   const sigmoid = (x: number) => 1 / (1 + Math.exp(-(w * x + b)));
   const boundary = (Math.log(thresh / (1 - thresh)) - b) / w;
 
@@ -21,18 +29,44 @@ export function LogisticRegressionStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("logistic curve maps input → probability", ox + 6, oy - ph + 12); ctx.fillText("decision boundary", bx + 4, 40);
   }, [w, b, thresh, boundary]);
 
+  const explain =
+    w >= 6
+      ? `Steep sigmoid (w=${w}): logistic regression has driven cross-entropy loss low, giving a hard, confident split. The boundary sits at x=${boundary.toFixed(2)} — well-separated classes let gradient descent push weights this high.`
+      : w <= 1.5
+      ? `Shallow sigmoid (w=${w}): the classes overlap, so cross-entropy can't be minimized further and accuracy is capped. The boundary at x=${boundary.toFixed(2)} stays soft and uncertain no matter how long you train.`
+      : `Logistic regression fits this sigmoid by gradient descent on cross-entropy. Weight w=${w} sets steepness, bias b=${b} shifts the curve, placing the decision boundary at x=${boundary.toFixed(2)} for threshold ${thresh}.`;
+
+  const code = `import numpy as np
+# logistic regression via gradient descent on cross-entropy
+X = np.array([-1.5,-0.9,-0.4,0.2,0.6,1.1,1.4,1.9,2.4,3.1])
+y = np.array([0,0,0,0,1,0,1,1,1,1])
+w, b, lr = ${w}, ${b}, 0.1
+for _ in range(2000):
+    p = 1/(1+np.exp(-(w*X+b)))
+    w -= lr*np.mean((p-y)*X)
+    b -= lr*np.mean(p-y)
+thresh = ${thresh}
+boundary = (np.log(thresh/(1-thresh)) - b)/w
+print("decision boundary at x =", boundary)`;
+
   return (
     <StudioChrome title="Logistic Regression" tagline="probability from a straight line"
       controls={<div>
-        <Slider label="Weight w (steepness)" value={w} min={0.5} max={8} step={0.5} onChange={setW} />
-        <Slider label="Bias b (shift)" value={b} min={-5} max={2} step={0.25} onChange={setB} />
-        <Slider label="Decision threshold" value={thresh} min={0.1} max={0.9} step={0.05} onChange={setThresh} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Weight w (steepness)" value={w} min={0.5} max={8} step={0.5} onChange={(v) => update({ w: v })} />
+        <Slider label="Bias b (shift)" value={b} min={-5} max={2} step={0.25} onChange={(v) => update({ b: v })} />
+        <Slider label="Decision threshold" value={thresh} min={0.1} max={0.9} step={0.05} onChange={(v) => update({ thresh: v })} />
         <p className="mt-3 text-xs text-slate-500">Logistic regression squashes a linear score through the sigmoid to output a probability between 0 and 1. Predictions above the threshold become one class, below it the other. Raising the weight sharpens the S-curve into a harder decision. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Decision boundary at x" value={boundary.toFixed(2)} />
         <Stat label="P(class 1 | x=1)" value={sigmoid(1).toFixed(2)} />
         <Stat label="Threshold" value={thresh.toFixed(2)} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
