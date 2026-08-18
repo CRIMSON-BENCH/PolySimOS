@@ -21,9 +21,17 @@ export async function GET(req: Request) {
       const { createClient } = await import("@supabase/supabase-js");
       const db = createClient(url!, key!);
       const { error } = await db.from("entitlements").select("grant_key", { count: "exact", head: true });
-      return NextResponse.json({ configured: true, table: error ? "unreachable" : "ok" });
-    } catch {
-      return NextResponse.json({ configured: true, table: "unreachable" });
+      // Surface the provider's own error text so setup problems are self-diagnosing.
+      // These messages describe schema/permission state ("relation does not exist",
+      // "Invalid API key", "permission denied") and never echo the key itself.
+      return NextResponse.json({
+        configured: true,
+        table: error ? "unreachable" : "ok",
+        ...(error ? { reason: error.message, code: error.code ?? null } : {}),
+        keyKind: key!.startsWith("sb_secret_") ? "secret" : key!.startsWith("sb_publishable_") ? "PUBLISHABLE (wrong key!)" : key!.startsWith("eyJ") ? "legacy-jwt" : "unrecognized",
+      });
+    } catch (e) {
+      return NextResponse.json({ configured: true, table: "unreachable", reason: (e as Error).message });
     }
   }
 
