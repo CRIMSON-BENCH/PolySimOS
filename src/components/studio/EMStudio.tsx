@@ -5,7 +5,7 @@ import { Charge, potentialAt, traceFieldLine } from "@/lib/engines/em";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi } from "@/lib/studioKit";
+import { hidpi, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 640, H = 480;
 
@@ -13,6 +13,26 @@ export function EMStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [charges, setCharges] = useState<Charge[]>([{ x: 220, y: 240, q: 1 }, { x: 420, y: 240, q: -1 }]);
   const [sign, setSign] = useState<1 | -1>(1);
+  const dragIdx = useRef(-1);
+  const didDrag = useRef(false);
+
+  // Grab a nearby charge and drag it; if the press isn't on a charge, the click handler adds one.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (x, y) => {
+      const i = charges.findIndex((c) => Math.hypot(c.x - x, c.y - y) < 18);
+      dragIdx.current = i;
+      didDrag.current = false;
+      return i >= 0;
+    },
+    move: (x, y) => {
+      const i = dragIdx.current;
+      if (i < 0) return;
+      didDrag.current = true;
+      const cx = Math.max(0, Math.min(W, x)), cy = Math.max(0, Math.min(H, y));
+      setCharges((cs) => cs.map((c, j) => (j === i ? { ...c, x: cx, y: cy } : c)));
+    },
+    up: () => { dragIdx.current = -1; },
+  });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
@@ -41,6 +61,7 @@ export function EMStudio() {
   }, [charges]);
 
   const addCharge = (e: React.MouseEvent<HTMLCanvasElement>) => {
+    if (didDrag.current) { didDrag.current = false; return; } // a drag just ended — don't also drop a charge
     const r = e.currentTarget.getBoundingClientRect();
     const x = ((e.clientX - r.left) / r.width) * W, y = ((e.clientY - r.top) / r.height) * H;
     setCharges((cs) => [...cs, { x, y, q: sign }]);
@@ -68,7 +89,7 @@ print("potential range:", V.min(), V.max())`;
       tagline="superposition · potential + field lines"
       controls={
         <div>
-          <p className="mb-3 text-xs text-slate-500">Click to place a charge. Red = potential from +, blue = −. White lines are the electric field.</p>
+          <p className="mb-3 text-xs text-slate-500">Click to place a charge, or drag one to move it. Red = potential from +, blue = −. White lines are the electric field.</p>
           <div className="mb-3 flex gap-2">
             <button onClick={() => setSign(1)} className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-semibold ${sign === 1 ? "bg-red-500 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>+ charge</button>
             <button onClick={() => setSign(-1)} className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-semibold ${sign === -1 ? "bg-blue-500 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>− charge</button>
