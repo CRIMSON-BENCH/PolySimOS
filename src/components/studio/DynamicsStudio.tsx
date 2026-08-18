@@ -10,9 +10,17 @@ import {
   GrayScottState,
 } from "@/lib/engines/dynamics";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const GS_PRESETS: Record<string, { feed: number; kill: number }> = {
+  "Spots (mitosis)": { feed: 0.03, kill: 0.062 },
+  "Mazes": { feed: 0.029, kill: 0.057 },
+  "Coral growth": { feed: 0.055, kill: 0.062 },
+  "Stripes": { feed: 0.022, kill: 0.051 },
+};
 
 export function DynamicsStudio() {
   const [systemId, setSystemId] = useState("lorenz");
@@ -172,8 +180,7 @@ function GrayScott() {
   const rafRef = useRef<number>(0);
   const N = 140;
   const [running, setRunning] = useState(true);
-  const [feed, setFeed] = useState(0.055);
-  const [kill, setKill] = useState(0.062);
+  const [{ feed, kill }, update] = useShareableNumbers({ feed: 0.055, kill: 0.062 });
 
   useEffect(() => {
     stateRef.current = grayScottInit(N, 1);
@@ -200,6 +207,22 @@ function GrayScott() {
     return () => cancelAnimationFrame(rafRef.current);
   }, [running, feed, kill]);
 
+  const explain =
+    feed < 0.03
+      ? `Low feed rate starves the reaction, so the activator can’t spread into stripes — expect isolated spots or a slowly-shifting maze.`
+      : kill > 0.063
+      ? `High kill rate removes the activator quickly, fragmenting the field into small dots that split mitosis-style.`
+      : feed > 0.05
+      ? `High feed with moderate kill grows connected, coral-like fronts that steadily fill the domain.`
+      : `Feed and kill sit in the labyrinthine regime — winding stripes and maze walls, the classic fingerprint-like Turing pattern.`;
+
+  const code = `import numpy as np
+feed, kill, du, dv = ${feed}, ${kill}, 0.16, 0.08
+# u, v are N×N grids on a periodic lattice; lap() is the 5-point Laplacian
+uvv = u * v * v
+u += du * lap(u) - uvv + feed * (1 - u)
+v += dv * lap(v) + uvv - (kill + feed) * v`;
+
   return (
     <StudioChrome
       title="Dynamics — Gray–Scott Reaction–Diffusion (PDE)"
@@ -215,8 +238,13 @@ function GrayScott() {
             </button>
           </div>
           <p className="mb-3 text-xs text-slate-500">Feed &amp; kill rates select the Turing pattern regime — spots, stripes, or mazes.</p>
-          <Slider label="Feed rate" value={feed} min={0.01} max={0.09} step={0.001} onChange={setFeed} />
-          <Slider label="Kill rate" value={kill} min={0.045} max={0.07} step={0.001} onChange={setKill} />
+          <Presets
+            presets={Object.keys(GS_PRESETS).map((label) => ({ label }))}
+            onApply={(label) => update(GS_PRESETS[label])}
+          />
+          <Slider label="Feed rate" value={feed} min={0.01} max={0.09} step={0.001} onChange={(v) => update({ feed: v })} />
+          <Slider label="Kill rate" value={kill} min={0.045} max={0.07} step={0.001} onChange={(v) => update({ kill: v })} />
+          <ShareBar code={code} />
         </div>
       }
       inspector={
@@ -224,6 +252,7 @@ function GrayScott() {
           <Stat label="Grid" value={`${N}×${N}`} />
           <Stat label="Scheme" value="Explicit FD" />
           <Stat label="Iterations/frame" value="6" />
+          <ExplainResult text={explain} />
         </div>
       }
     >

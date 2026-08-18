@@ -2,17 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 480, H = 400;
 
+const PRESETS: Record<string, { count: number; exits: number; speed: number }> = {
+  "Small office": { count: 40, exits: 2, speed: 1.4 },
+  "Packed hall": { count: 300, exits: 2, speed: 1.1 },
+  "Wide egress": { count: 250, exits: 5, speed: 1.3 },
+  "Single door": { count: 200, exits: 1, speed: 1.0 },
+};
+
 export function EvacuationStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [count, setCount] = useState(150);
-  const [exits, setExits] = useState(2);
-  const [speed, setSpeed] = useState(1.3);
+  const [{ count, exits, speed }, update] = useShareableNumbers({ count: 150, exits: 2, speed: 1.3 });
   const [running, setRunning] = useState(true);
-  const [seed, setSeed] = useState(1);
+  const [seed] = useState(1);
   const [evac, setEvac] = useState(0);
   const [time, setTime] = useState(0);
   const agents = useRef<{ x: number; y: number; out: boolean }[]>([]);
@@ -50,16 +56,32 @@ export function EvacuationStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, speed, exits]);
 
+  const perExit = Math.round(Math.round(count) / Math.round(exits));
+  const explain =
+    perExit > 100
+      ? `About ${perExit} people per exit — the doorways become the bottleneck, so clearance time is set by exit capacity rather than how fast people walk.`
+      : perExit < 40
+      ? `Only about ${perExit} per exit — crowds clear freely and walking speed, not the doors, sets the pace.`
+      : `Around ${perExit} per exit — congestion starts to build at the doors, and adding an exit usually helps more than speeding people up.`;
+
+  const code = `count, exits, speed = ${Math.round(count)}, ${Math.round(exits)}, ${speed}
+per_exit = count / exits
+flow = speed * 1.0            # persons per second per exit when congested
+clear_s = per_exit / flow
+print("occupants per exit", round(per_exit, 1), "~clear seconds", round(clear_s, 1))`;
+
   return (
     <StudioChrome title="Building Evacuation / Egress" tagline="crowd flow through exits"
       controls={<div>
-        <Slider label="Occupants" value={count} min={20} max={300} step={10} onChange={setCount} />
-        <Slider label="Exits" value={exits} min={1} max={5} step={1} onChange={setExits} />
-        <Slider label="Walk speed" value={speed} min={0.6} max={2.5} step={0.1} onChange={setSpeed} />
+        <Presets presets={Object.keys(PRESETS).map((l) => ({ label: l }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Occupants" value={count} min={20} max={300} step={10} onChange={(v) => update({ count: v })} />
+        <Slider label="Exits" value={exits} min={1} max={5} step={1} onChange={(v) => update({ exits: v })} />
+        <Slider label="Walk speed" value={speed} min={0.6} max={2.5} step={0.1} onChange={(v) => update({ speed: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">Occupants head for the nearest exit while pushing apart in crowds, so bottlenecks and congestion form at doorways — the effect that drives real egress times. Add or remove exits to see how total clearance time responds. Planning aid only.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Evacuated" value={`${evac} / ${Math.round(count)}`} /><Stat label="Clear time" value={`${time.toFixed(1)} s`} /><Stat label="Exits" value={String(Math.round(exits))} /></div>}
+      inspector={<div><Stat label="Evacuated" value={`${evac} / ${Math.round(count)}`} /><Stat label="Clear time" value={`${time.toFixed(1)} s`} /><Stat label="Exits" value={String(Math.round(exits))} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

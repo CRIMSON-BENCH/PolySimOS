@@ -1,16 +1,22 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
+const PRESETS: Record<string, { d: number; a: number; lambda: number }> = {
+  "Interference-dominated": { d: 70, a: 4, lambda: 20 },
+  "Diffraction-dominated": { d: 15, a: 24, lambda: 20 },
+  "Red light (wide fringes)": { d: 40, a: 8, lambda: 38 },
+  "Blue light (tight fringes)": { d: 40, a: 8, lambda: 10 },
+};
+
 export function DoubleSlitStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [d, setD] = useState(40);       // slit separation
-  const [a, setA] = useState(8);        // slit width
-  const [lambda, setLambda] = useState(20); // wavelength
+  const [{ d, a, lambda }, update] = useShareableNumbers({ d: 40, a: 8, lambda: 20 });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
@@ -31,15 +37,45 @@ export function DoubleSlitStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("intensity on screen", 16, 168); ctx.fillText("interference + diffraction envelope", 16, H - 10);
   }, [d, a, lambda]);
 
+  const fringes = Math.max(1, Math.round((2 * d) / a));
+  const explain =
+    d <= a
+      ? `Slit width a rivals the separation d, so the diffraction envelope is wider than the fringe spacing — the pattern reads as one broad diffraction blob, not clean fringes.`
+      : lambda >= 34
+      ? `Long wavelength: fringe spacing scales as λ/d, so this red-end light spreads the bright bands far apart — about ${fringes} fringes sit under the central envelope.`
+      : lambda <= 12
+      ? `Short wavelength: fringe spacing (∝ λ/d) is tight, packing roughly ${fringes} closely-spaced bright bands under the central diffraction envelope.`
+      : `Two-slit interference sets the fine fringe spacing (∝ λ/d) while single-slit diffraction sets the envelope (∝ λ/a); here about ${fringes} bright fringes fit under the central peak.`;
+
+  const code = `import numpy as np
+d, a, lam, L = ${d}, ${a}, ${lambda}, 800.0
+y = np.linspace(-260, 260, 800)
+theta = np.arctan2(y, L)
+beta = np.pi*a*np.sin(theta)/lam
+alpha = np.pi*d*np.sin(theta)/lam
+sinc = np.where(beta==0, 1.0, np.sin(beta)/beta)
+I = sinc**2 * np.cos(alpha)**2
+print("peak intensity", I.max())`;
+
   return (
     <StudioChrome title="Double-Slit Experiment" tagline="wave interference + diffraction"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">The iconic experiment: two slits create interference fringes, modulated by each slit&apos;s diffraction envelope.</p>
-        <Slider label="Slit separation d" value={d} min={15} max={80} step={1} onChange={setD} />
-        <Slider label="Slit width a" value={a} min={2} max={30} step={1} onChange={setA} />
-        <Slider label="Wavelength λ" value={lambda} min={8} max={40} step={1} onChange={setLambda} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Slit separation d" value={d} min={15} max={80} step={1} onChange={(v) => update({ d: v })} />
+        <Slider label="Slit width a" value={a} min={2} max={30} step={1} onChange={(v) => update({ a: v })} />
+        <Slider label="Wavelength λ" value={lambda} min={8} max={40} step={1} onChange={(v) => update({ lambda: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fringe spacing" value={`∝ λ/d`} /><Stat label="Envelope" value={`∝ λ/a`} /><Stat label="Regime" value={d > a ? "interference-dominated" : "diffraction-dominated"} /></div>}
+      inspector={<div>
+        <Stat label="Fringe spacing" value={`∝ λ/d`} />
+        <Stat label="Envelope" value={`∝ λ/a`} />
+        <Stat label="Regime" value={d > a ? "interference-dominated" : "diffraction-dominated"} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

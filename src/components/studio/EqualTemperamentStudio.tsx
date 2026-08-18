@@ -1,15 +1,32 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"];
 const JUST: [number, number][] = [[1, 1], [16, 15], [9, 8], [6, 5], [5, 4], [4, 3], [45, 32], [3, 2], [8, 5], [5, 3], [16, 9], [15, 8], [2, 1]];
 
+const PRESETS: Record<string, { root: number }> = {
+  "A2 (110)": { root: 110 },
+  "C4 middle": { root: 261.63 },
+  "F4": { root: 349.23 },
+  "A4 concert": { root: 440 },
+};
+
 export function EqualTemperamentStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [root, setRoot] = useState(261.63);
+  const [{ root }, update] = useShareableNumbers({ root: 261.63 });
+
+  const etFifth = root * Math.pow(2, 7 / 12);
+  const justFifth = root * 1.5;
+  const explain = `The equal-tempered fifth sits at ${etFifth.toFixed(1)} Hz versus the pure 3:2 fifth at ${justFifth.toFixed(1)} Hz — only about 2 cents flat, which the ear forgives; the major third, however, runs a far more audible 14 cents sharp, the price of making every key playable.`;
+
+  const code = `root = ${root}
+for n, name in [(7, "fifth"), (4, "major 3rd")]:
+    et = root * 2 ** (n / 12)          # equal temperament
+    print(name, round(et, 2), "Hz")`;
 
   useEffect(() => {
     const W = 540, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
@@ -24,11 +41,12 @@ export function EqualTemperamentStudio() {
   return (
     <StudioChrome title="Equal Temperament vs Just Intonation" tagline="the compromise of tuning"
       controls={<div>
-        <Slider label="Root frequency (Hz)" value={root} min={110} max={523} step={1} onChange={setRoot} />
-        <div className="mt-3 flex flex-wrap gap-1">{[["A2", 110], ["C4", 261.63], ["A4", 440]].map(([n, f]) => <button key={n as string} onClick={() => setRoot(f as number)} className="rounded-lg border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">{n}</button>)}</div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Root frequency (Hz)" value={root} min={110} max={523} step={1} onChange={(v) => update({ root: v })} />
         <p className="mt-3 text-xs text-slate-500">Just intonation tunes intervals to pure whole-number frequency ratios, which sound perfectly consonant but only in one key. Equal temperament divides the octave into 12 identical steps so every key works, at the cost of every interval except the octave being slightly out of tune. The bars show that compromise in cents.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equal-temp fifth" value={`${(root * Math.pow(2, 7 / 12)).toFixed(1)} Hz`} /><Stat label="Just fifth (3:2)" value={`${(root * 1.5).toFixed(1)} Hz`} /><Stat label="Fifth error" value="−2 cents" /><Stat label="Major 3rd error" value="+14 cents" /></div>}
+      inspector={<div><Stat label="Equal-temp fifth" value={`${etFifth.toFixed(1)} Hz`} /><Stat label="Just fifth (3:2)" value={`${justFifth.toFixed(1)} Hz`} /><Stat label="Fifth error" value="−2 cents" /><Stat label="Major 3rd error" value="+14 cents" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

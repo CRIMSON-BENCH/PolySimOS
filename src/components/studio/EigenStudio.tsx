@@ -1,14 +1,22 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 520, H = 480;
 
+const PRESETS: Record<string, { a: number; b: number; c: number; d: number }> = {
+  "Symmetric stretch": { a: 2, b: 1, c: 1, d: 2 },
+  "Pure shear": { a: 1, b: 1, c: 0, d: 1 },
+  "Reflection": { a: 0, b: 1, c: 1, d: 0 },
+  "Rotation (complex λ)": { a: 0, b: -1, c: 1, d: 0 },
+};
+
 export function EigenStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [a, setA] = useState(2), [b, setB] = useState(1), [c, setC] = useState(1), [d, setD] = useState(2);
+  const [{ a, b, c, d }, update] = useShareableNumbers({ a: 2, b: 1, c: 1, d: 2 });
 
   const eig = useMemo(() => {
     const tr = a + d, det = a * d - b * c; const disc = tr * tr - 4 * det;
@@ -32,18 +40,37 @@ export function EigenStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("unit circle → ellipse; eigenvectors are the invariant directions", 12, 20);
   }, [a, b, c, d, eig]);
 
+  const explain = !eig.real
+    ? "Complex eigenvalues: the transform rotates every vector, so no real direction stays fixed — the ellipse has no invariant axis."
+    : Math.abs(b - c) < 1e-6
+    ? "Symmetric matrix (b = c): its eigenvectors meet at right angles, so the ellipse axes line up exactly with the green and pink lines."
+    : Math.abs(eig.l1 - eig.l2) < 1e-6
+    ? "Repeated eigenvalue: the two invariant directions collapse toward one — a shear-like map with a single eigenline."
+    : `Eigenvalues ${eig.l1.toFixed(2)} and ${eig.l2.toFixed(2)}: along each colored line the matrix only stretches, never rotates.`;
+
+  const code = `import numpy as np
+A = np.array([[${a}, ${b}], [${c}, ${d}]])
+w, v = np.linalg.eig(A)
+print("eigenvalues", w)
+print("eigenvectors (columns)", v)`;
+
   return (
     <StudioChrome title="Eigenvector Visualizer" tagline="2×2 linear transformation"
       controls={<div>
         <p className="mb-3 text-xs text-slate-500">A matrix warps the unit circle into an ellipse. Eigenvectors are the special directions that only stretch — never rotate — by their eigenvalue.</p>
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
         <div className="grid grid-cols-2 gap-2">
-          <Slider label="a" value={a} min={-3} max={3} step={0.1} onChange={setA} />
-          <Slider label="b" value={b} min={-3} max={3} step={0.1} onChange={setB} />
-          <Slider label="c" value={c} min={-3} max={3} step={0.1} onChange={setC} />
-          <Slider label="d" value={d} min={-3} max={3} step={0.1} onChange={setD} />
+          <Slider label="a" value={a} min={-3} max={3} step={0.1} onChange={(v) => update({ a: v })} />
+          <Slider label="b" value={b} min={-3} max={3} step={0.1} onChange={(v) => update({ b: v })} />
+          <Slider label="c" value={c} min={-3} max={3} step={0.1} onChange={(v) => update({ c: v })} />
+          <Slider label="d" value={d} min={-3} max={3} step={0.1} onChange={(v) => update({ d: v })} />
         </div>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="det" value={(a * d - b * c).toFixed(2)} /><Stat label="trace" value={(a + d).toFixed(2)} /><Stat label="λ₁" value={eig.real ? eig.l1.toFixed(2) : "complex"} /><Stat label="λ₂" value={eig.real ? eig.l2.toFixed(2) : "complex"} /></div>}
+      inspector={<div><Stat label="det" value={(a * d - b * c).toFixed(2)} /><Stat label="trace" value={(a + d).toFixed(2)} /><Stat label="λ₁" value={eig.real ? eig.l1.toFixed(2) : "complex"} /><Stat label="λ₂" value={eig.real ? eig.l2.toFixed(2) : "complex"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

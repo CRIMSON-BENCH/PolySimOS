@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 // Free expansion of a gas: entropy increase, particles fill the box.
@@ -32,14 +33,28 @@ export function EntropyStudio() {
   }, [running, released]);
 
   const dS = released ? 8.314 * Math.log(2) : 0; // per mole for doubling volume
+
+  const explain = !released
+    ? "All 120 particles are trapped in the left half — entropy is at its lowest. Remove the partition to watch it climb."
+    : leftFrac > 0.6
+    ? `Just released: ${(leftFrac * 100).toFixed(0)}% of the gas is still on the left, but collisions are already spreading it rightward and will not reverse.`
+    : "The gas has spread evenly across both halves. Entropy rose by nR·ln2, and the reverse — every particle crowding back into one half — never spontaneously happens.";
+
+  const code = `import numpy as np
+R = 8.314  # J/mol/K
+# free expansion: gas doubles its volume, no work, no heat
+dS = R * np.log(2)
+print("entropy change per mole:", dS, "J/K")`;
+
   return (
     <StudioChrome title="Entropy & Free Expansion" tagline="the second law in action"
       controls={<div>
         <button onClick={() => setReleased(true)} disabled={released} className="w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white disabled:opacity-40">Remove partition</button>
         <div className="mt-2 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">Gas confined to one half rushes to fill the whole box the instant the partition is removed — and never spontaneously crowds back. That irreversibility is the second law: entropy, a measure of disorder, always increases. For doubling the volume the entropy rises by nR·ln2, purely because there are vastly more ways to be spread out than packed in.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fraction on left" value={`${(leftFrac * 100).toFixed(0)}%`} /><Stat label="ΔS (per mole)" value={`${dS.toFixed(2)} J/K`} /><Stat label="State" value={released ? "expanded" : "confined"} /></div>}
+      inspector={<div><Stat label="Fraction on left" value={`${(leftFrac * 100).toFixed(0)}%`} /><Stat label="ΔS (per mole)" value={`${dS.toFixed(2)} J/K`} /><Stat label="State" value={released ? "expanded" : "confined"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,15 +2,22 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { p1: number; p2: number }> = {
+  "Standard normal": { p1: 0, p2: 1 },
+  "Wide spread": { p1: 0, p2: 3 },
+  "Shifted +2": { p1: 2, p2: 1 },
+  "Tight peak": { p1: 0, p2: 0.4 },
+};
 
 export function DistributionsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [dist, setDist] = useState<"normal" | "exponential" | "poisson" | "binomial">("normal");
-  const [p1, setP1] = useState(0);
-  const [p2, setP2] = useState(1);
+  const [{ p1, p2 }, update] = useShareableNumbers({ p1: 0, p2: 1 });
 
   const { xs, ys, mean, variance, discrete } = useMemo(() => {
     const xs: number[] = [], ys: number[] = [];
@@ -32,14 +39,53 @@ export function DistributionsStudio() {
     else { ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2.5; ctx.beginPath(); xs.forEach((x, i) => i ? ctx.lineTo(sx(x), sy(ys[i])) : ctx.moveTo(sx(x), sy(ys[i]))); ctx.stroke(); ctx.lineTo(sx(maxX), H - pad); ctx.lineTo(sx(minX), H - pad); ctx.closePath(); ctx.fillStyle = "rgba(34,211,238,0.15)"; ctx.fill(); }
   }, [xs, ys, discrete]);
 
+  const explain =
+    dist === "normal"
+      ? `The mean μ only slides the bell sideways while σ sets its width — variance is σ² = ${variance.toFixed(2)}, so doubling σ quadruples the spread.`
+      : dist === "exponential"
+      ? `The exponential is memoryless: its mean 1/λ = ${mean.toFixed(2)} equals its own standard deviation, so it always keeps this same right-skewed shape.`
+      : dist === "poisson"
+      ? `Poisson's fingerprint is mean = variance = λ = ${mean.toFixed(2)} — the spread grows lockstep with the average count, so rarer events cluster tighter.`
+      : `Binomial variance np(1−p) = ${variance.toFixed(2)} peaks at p = 0.5 and shrinks toward the extremes, where outcomes become near-certain.`;
+
+  const code = (() => {
+    if (dist === "normal") return `import numpy as np
+from scipy import stats
+d = stats.norm(loc=${p1}, scale=${Math.max(0.1, p2)})
+x = np.linspace(${p1} - 5 * ${Math.max(0.1, p2)}, ${p1} + 5 * ${Math.max(0.1, p2)}, 200)
+y = d.pdf(x)
+print("mean", d.mean(), "var", d.var())`;
+    if (dist === "exponential") return `import numpy as np
+from scipy import stats
+d = stats.expon(scale=1 / ${Math.max(0.1, p2)})   # rate lambda = ${Math.max(0.1, p2)}
+x = np.linspace(0, 10 / ${Math.max(0.1, p2)}, 200)
+y = d.pdf(x)
+print("mean", d.mean(), "var", d.var())`;
+    if (dist === "poisson") return `import numpy as np
+from scipy import stats
+d = stats.poisson(mu=${Math.max(0.1, p2 * 3)})     # lambda
+k = np.arange(0, 21)
+pmf = d.pmf(k)
+print("mean", d.mean(), "var", d.var())`;
+    const pp = Math.min(0.99, Math.max(0.01, p2 / 4));
+    return `import numpy as np
+from scipy import stats
+d = stats.binom(n=20, p=${pp})
+k = np.arange(0, 21)
+pmf = d.pmf(k)
+print("mean", d.mean(), "var", d.var())`;
+  })();
+
   return (
     <StudioChrome title="Probability Distributions" tagline="PDF / PMF explorer"
       controls={<div>
         <div className="mb-3 grid grid-cols-2 gap-1.5">{(["normal", "exponential", "poisson", "binomial"] as const).map((d) => <button key={d} onClick={() => setDist(d)} className={`rounded-lg px-2 py-1 text-xs font-semibold capitalize ${dist === d ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{d}</button>)}</div>
-        {dist === "normal" && <Slider label="Mean μ" value={p1} min={-5} max={5} step={0.5} onChange={setP1} />}
-        <Slider label={dist === "normal" ? "Std dev σ" : dist === "exponential" ? "Rate λ" : dist === "poisson" ? "λ (×3)" : "p (×4)"} value={p2} min={0.2} max={4} step={0.1} onChange={setP2} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        {dist === "normal" && <Slider label="Mean μ" value={p1} min={-5} max={5} step={0.5} onChange={(v) => update({ p1: v })} />}
+        <Slider label={dist === "normal" ? "Std dev σ" : dist === "exponential" ? "Rate λ" : dist === "poisson" ? "λ (×3)" : "p (×4)"} value={p2} min={0.2} max={4} step={0.1} onChange={(v) => update({ p2: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Distribution" value={dist} /><Stat label="Mean" value={mean.toFixed(3)} /><Stat label="Variance" value={variance.toFixed(3)} /><Stat label="Std dev" value={Math.sqrt(variance).toFixed(3)} /></div>}
+      inspector={<div><Stat label="Distribution" value={dist} /><Stat label="Mean" value={mean.toFixed(3)} /><Stat label="Variance" value={variance.toFixed(3)} /><Stat label="Std dev" value={Math.sqrt(variance).toFixed(3)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

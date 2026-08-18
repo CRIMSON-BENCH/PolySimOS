@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -30,6 +31,24 @@ export function DirectionFieldStudio() {
 
   const onClick = (e: React.MouseEvent<HTMLCanvasElement>) => { const r = e.currentTarget.getBoundingClientRect(); const span = 6; const x = ((e.clientX - r.left) / r.width * W - W / 2) / (W / 2) * span; const y = -((e.clientY - r.top) / r.height * H - H / 2) / (H / 2) * span; seeds.current = [...seeds.current, [x, y]]; };
 
+  const explain = err
+    ? "Fix the expression above — dy/dx must be a valid function of x and y before a field can be drawn."
+    : seeds.current.length === 0
+    ? "Every tick shows the slope dy/dx = f(x,y) at that point; click anywhere to drop a start point and RK2 threads a solution curve that stays tangent to the arrows."
+    : "This curve stays tangent to every arrow it crosses — that is what solving dy/dx = f(x,y) means: the field fixes the direction at each point, and the start point alone picks which one curve you get.";
+
+  const code = `import numpy as np
+from numpy import sin, cos, tan, exp, log, sqrt
+f = lambda x, y: ${expr}          # dy/dx = f(x, y)
+x, y, dx = 0.0, 1.0, 0.02         # start point + step
+xs, ys = [x], [y]
+for _ in range(400):              # RK2 (midpoint) integration
+    k1 = f(x, y)
+    k2 = f(x + dx / 2, y + dx / 2 * k1)
+    x += dx; y += dx * k2
+    xs.append(x); ys.append(y)
+print(xs[-1], ys[-1])`;
+
   return (
     <StudioChrome title="Direction Field / Slope Field" tagline="dy/dx = f(x, y) · click for solutions"
       controls={<div>
@@ -38,8 +57,9 @@ export function DirectionFieldStudio() {
         <div className="flex flex-wrap gap-1">{["y - x", "-x/y", "x*y", "sin(x) - y", "1 - y*y"].map((ex) => <button key={ex} onClick={() => { setExpr(ex); seeds.current = []; }} className="rounded-md border border-slate-300 px-2 py-0.5 font-mono text-[10px] text-slate-600 dark:border-slate-700 dark:text-slate-400">{ex}</button>)}</div>
         <button onClick={() => (seeds.current = [])} className="mt-3 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Clear curves</button>
         {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equation" value="dy/dx = f(x,y)" /><Stat label="Curves" value={String(seeds.current.length)} /><Stat label="Integrator" value="RK2" /></div>}
+      inspector={<div><Stat label="Equation" value="dy/dx = f(x,y)" /><Stat label="Curves" value={String(seeds.current.length)} /><Stat label="Integrator" value="RK2" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} onClick={onClick} className="mx-auto h-auto max-h-[460px] cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }

@@ -1,18 +1,39 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { battery: number; speed: number; mass: number }> = {
+  "City commuter": { battery: 60, speed: 50, mass: 1600 },
+  "Highway cruise": { battery: 75, speed: 120, mass: 1900 },
+  "Compact EV": { battery: 40, speed: 90, mass: 1300 },
+  "Heavy SUV": { battery: 100, speed: 110, mass: 2600 },
+};
 
 export function EVEfficiencyStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [battery, setBattery] = useState(60); // kWh
-  const [speed, setSpeed] = useState(100); // km/h
-  const [mass, setMass] = useState(1800); // kg
+  const [{ battery, speed, mass }, update] = useShareableNumbers({ battery: 60, speed: 100, mass: 1800 });
 
   const cd = 0.28, A = 2.3, rho = 1.225, crr = 0.01, g = 9.81, drivetrain = 0.88;
   const consumption = (v: number) => { const vm = v / 3.6; const drag = 0.5 * rho * cd * A * vm * vm; const roll = crr * mass * g; const force = drag + roll; const Wperkm = force / drivetrain; return Wperkm / 1000; }; // kWh/km
   const cons = consumption(speed); const range = battery / cons;
+
+  const explain =
+    speed >= 110
+      ? `At ${speed} km/h aerodynamic drag — which climbs with the square of speed — dominates, so range drops to about ${range.toFixed(0)} km; easing off the throttle is the biggest lever you have.`
+      : speed <= 60
+      ? `At a gentle ${speed} km/h rolling resistance sets the pace and drag stays small, so you get near the best possible range, about ${range.toFixed(0)} km.`
+      : `Around ${speed} km/h drag is overtaking rolling resistance, so every extra 10 km/h now costs disproportionately more energy, holding range near ${range.toFixed(0)} km.`;
+
+  const code = `cd, A, rho, crr, g, eff = 0.28, 2.3, 1.225, 0.01, 9.81, 0.88
+battery, speed, mass = ${battery}, ${speed}, ${mass}
+vm = speed / 3.6
+force = 0.5*rho*cd*A*vm*vm + crr*mass*g
+cons = (force / eff) / 1000  # kWh per km
+print("consumption kWh/100km", round(cons*100, 1))
+print("range km", round(battery / cons))`;
 
   useEffect(() => {
     const W = 500, H = 300; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
@@ -26,12 +47,14 @@ export function EVEfficiencyStudio() {
   return (
     <StudioChrome title="EV Range & Efficiency" tagline="why speed kills range"
       controls={<div>
-        <Slider label="Battery (kWh)" value={battery} min={20} max={120} step={5} onChange={setBattery} />
-        <Slider label="Cruising speed (km/h)" value={speed} min={30} max={160} step={5} onChange={setSpeed} />
-        <Slider label="Vehicle mass (kg)" value={mass} min={1000} max={3000} step={50} onChange={setMass} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Battery (kWh)" value={battery} min={20} max={120} step={5} onChange={(v) => update({ battery: v })} />
+        <Slider label="Cruising speed (km/h)" value={speed} min={30} max={160} step={5} onChange={(v) => update({ speed: v })} />
+        <Slider label="Vehicle mass (kg)" value={mass} min={1000} max={3000} step={50} onChange={(v) => update({ mass: v })} />
         <p className="mt-3 text-xs text-slate-500">An electric car&apos;s range is its battery divided by its energy use per kilometer. At low speed rolling resistance dominates; at highway speed aerodynamic drag — which grows with the square of speed — takes over, so consumption climbs steeply. That is why an EV goes much farther in the city than on the motorway, the opposite of a gasoline car.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Consumption" value={`${(cons * 100).toFixed(1)} kWh/100km`} /><Stat label="Range" value={`${range.toFixed(0)} km`} /><Stat label="Efficiency" value={`${(1 / cons).toFixed(1)} km/kWh`} /></div>}
+      inspector={<div><Stat label="Consumption" value={`${(cons * 100).toFixed(1)} kWh/100km`} /><Stat label="Range" value={`${range.toFixed(0)} km`} /><Stat label="Efficiency" value={`${(1 / cons).toFixed(1)} km/kWh`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
