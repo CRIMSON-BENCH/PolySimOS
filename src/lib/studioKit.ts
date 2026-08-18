@@ -32,6 +32,8 @@ export function hidpi(canvas: HTMLCanvasElement, w: number, h: number): CanvasRe
 // simulation is a linkable, bookmarkable page. Drop-in replacement for useState({...numbers}).
 export function useShareableNumbers<T extends Record<string, number>>(defaults: T) {
   const [state, setState] = useState<T>(defaults);
+  const stateRef = useRef<T>(state);
+  stateRef.current = state;
   const loaded = useRef(false);
 
   useEffect(() => {
@@ -55,20 +57,92 @@ export function useShareableNumbers<T extends Record<string, number>>(defaults: 
   }, [defaults]);
 
   const update = (patch: Partial<T>) => {
-    setState((s) => {
-      const next = { ...s, ...patch };
-      try {
-        const p = new URLSearchParams(window.location.search);
-        for (const k of Object.keys(next)) p.set(k, String((next as Record<string, number>)[k]));
-        window.history.replaceState(null, "", `${window.location.pathname}?${p.toString()}`);
-      } catch {
-        /* ignore */
-      }
-      return next;
-    });
+    const next = { ...stateRef.current, ...patch };
+    stateRef.current = next;
+    setState(next);
+    // Mirror into the URL from the event handler (never during React's render phase).
+    try {
+      const p = new URLSearchParams(window.location.search);
+      for (const k of Object.keys(next)) p.set(k, String((next as Record<string, number>)[k]));
+      window.history.replaceState(null, "", `${window.location.pathname}?${p.toString()}`);
+    } catch {
+      /* ignore */
+    }
   };
 
   return [state, update, setState] as const;
+}
+
+// Direct-canvas manipulation. Wires pointer events on a canvas and reports positions in the
+// solver's LOGICAL W×H coordinate space (independent of hi-DPI backing store or CSS scaling).
+// `pick(x,y)` runs on press — return true to begin dragging that point; `move(x,y)` runs on drag.
+// Handles mouse + touch (via Pointer Events), disables page scroll while dragging, and shows a
+// grab/grabbing cursor. Returns { dragging } for optional visual feedback.
+export function useCanvasDrag(
+  canvasRef: React.RefObject<HTMLCanvasElement | null>,
+  W: number,
+  H: number,
+  handlers: { pick: (x: number, y: number) => boolean; move: (x: number, y: number) => void; up?: () => void },
+) {
+  const [dragging, setDragging] = useState(false);
+  const h = useRef(handlers);
+  h.current = handlers;
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    let active = false;
+
+    const toLogical = (e: PointerEvent) => {
+      const r = canvas.getBoundingClientRect();
+      return {
+        x: ((e.clientX - r.left) / r.width) * W,
+        y: ((e.clientY - r.top) / r.height) * H,
+      };
+    };
+
+    const onDown = (e: PointerEvent) => {
+      const { x, y } = toLogical(e);
+      if (h.current.pick(x, y)) {
+        active = true;
+        setDragging(true);
+        canvas.setPointerCapture(e.pointerId);
+        e.preventDefault();
+      }
+    };
+    const onMove = (e: PointerEvent) => {
+      if (!active) return;
+      const { x, y } = toLogical(e);
+      h.current.move(x, y);
+      e.preventDefault();
+    };
+    const onUp = (e: PointerEvent) => {
+      if (!active) return;
+      active = false;
+      setDragging(false);
+      try {
+        canvas.releasePointerCapture(e.pointerId);
+      } catch {
+        /* ignore */
+      }
+      h.current.up?.();
+    };
+
+    canvas.style.touchAction = "none";
+    canvas.style.cursor = "grab";
+    canvas.addEventListener("pointerdown", onDown);
+    canvas.addEventListener("pointermove", onMove);
+    canvas.addEventListener("pointerup", onUp);
+    canvas.addEventListener("pointercancel", onUp);
+    return () => {
+      canvas.removeEventListener("pointerdown", onDown);
+      canvas.removeEventListener("pointermove", onMove);
+      canvas.removeEventListener("pointerup", onUp);
+      canvas.removeEventListener("pointercancel", onUp);
+    };
+  }, [canvasRef, W, H]);
+
+  return { dragging };
 }
 
 // Copy the current (parameterized) page URL to the clipboard.

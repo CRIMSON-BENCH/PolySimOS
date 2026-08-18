@@ -4,9 +4,10 @@ import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { PALETTE, hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { PALETTE, hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+const ORIGIN_X = 52, ORIGIN_Y = H - 52, VSCALE = 3; // px per m/s for the launch-velocity vector
 
 const PRESETS: Record<string, { angle: number; speed: number; drag: number }> = {
   "Vacuum 45°": { angle: 45, speed: 60, drag: 0 },
@@ -37,6 +38,17 @@ export function ProjectileStudio() {
 
   const range = Math.max(...traj.map((p) => p[0]), 0);
   const apex = Math.max(...traj.map((p) => p[1]), 0);
+
+  // Drag anywhere on the plot to aim the launch: the vector from the origin sets angle & speed.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (x, y) => x >= 40 && x <= W - 40 && y >= 40 && y <= H - 40,
+    move: (x, y) => {
+      const dx = x - ORIGIN_X, dy = ORIGIN_Y - y;
+      const sp = Math.max(10, Math.min(120, Math.hypot(dx, dy) / VSCALE));
+      const ang = Math.max(5, Math.min(85, (Math.atan2(Math.max(0, dy), Math.max(0, dx)) * 180) / Math.PI));
+      update({ angle: Math.round(ang), speed: Math.round(sp / 5) * 5 });
+    },
+  });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
@@ -99,7 +111,22 @@ export function ProjectileStudio() {
     ctx.setLineDash([4, 4]);
     ctx.beginPath(); ctx.moveTo(sx(apexPt[0]), sy(apexPt[1])); ctx.lineTo(sx(apexPt[0]), H - pad); ctx.stroke();
     ctx.setLineDash([]);
-  }, [traj, range, apex]);
+
+    // draggable launch-velocity vector (drag it to aim)
+    const rad0 = (angle * Math.PI) / 180;
+    const tipX = ORIGIN_X + Math.cos(rad0) * speed * VSCALE;
+    const tipY = ORIGIN_Y - Math.sin(rad0) * speed * VSCALE;
+    ctx.strokeStyle = PALETTE.accent;
+    ctx.lineWidth = 2;
+    ctx.setLineDash([3, 3]);
+    ctx.beginPath(); ctx.moveTo(ORIGIN_X, ORIGIN_Y); ctx.lineTo(tipX, tipY); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.fillStyle = PALETTE.accent;
+    ctx.beginPath(); ctx.arc(tipX, tipY, 6, 0, 7); ctx.fill();
+    ctx.font = "10px ui-monospace, monospace";
+    ctx.textAlign = "left";
+    ctx.fillText("drag to aim", tipX + 9, tipY + 3);
+  }, [traj, range, apex, angle, speed]);
 
   const explain =
     drag < 0.005
