@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const COLS = 48, ROWS = 30, CELL = 15;
 
@@ -27,7 +28,7 @@ export function PathfindingStudio() {
   };
 
   useEffect(() => {
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, COLS * CELL, ROWS * CELL);
     const { visited, path } = run();
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, COLS * CELL, ROWS * CELL);
     for (let i = 0; i < COLS * ROWS; i++) { const x = (i % COLS) * CELL, y = ((i / COLS) | 0) * CELL; let col = "#0b1220"; if (walls.current.has(i)) col = "#475569"; else if (path.has(i)) col = "#a3e635"; else if (visited.has(i)) col = "rgba(34,211,238,0.35)"; if (i === 0) col = "#22d3ee"; if (i === COLS * ROWS - 1) col = "#f472b6"; ctx.fillStyle = col; ctx.fillRect(x, y, CELL - 1, CELL - 1); }

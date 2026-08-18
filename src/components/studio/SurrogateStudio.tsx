@@ -16,6 +16,7 @@ import {
   particleMetrics,
 } from "@/lib/engines/particles";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Ground-truth solver: run the real particle sim to a fixed horizon and return
 // the final kinetic energy for a given (gravity, restitution) parameter pair.
@@ -148,7 +149,7 @@ function SurrogateHeatmap({ trained, gx, rx }: { trained: { model: SurrogateMode
   useMemo(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = hidpi(canvas, W, H);
     ctx.fillStyle = "#020617";
     ctx.fillRect(0, 0, W, H);
     if (!trained) {

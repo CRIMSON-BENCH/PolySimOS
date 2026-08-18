@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const NODES = [[280, 50], [150, 130], [410, 130], [90, 230], [210, 230], [350, 230], [470, 230], [210, 320], [350, 320]].map(([x, y]) => ({ x, y }));
 const EDGES: [number, number][] = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5], [2, 6], [4, 7], [5, 8], [4, 5]];
@@ -21,7 +22,7 @@ export function GraphTraversalStudio() {
     const loop = () => {
       frame++; if (running && frame % 30 === 0 && step < order.length) step++;
       const visited = new Set(order.slice(0, step)); const current = order[step - 1];
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 560, 360);
+      const ctx = hidpi(canvasRef.current!, 560, 360); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 560, 360);
       EDGES.forEach(([u, v]) => { ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(NODES[u].x, NODES[u].y); ctx.lineTo(NODES[v].x, NODES[v].y); ctx.stroke(); });
       NODES.forEach((n, i) => { const vi = order.indexOf(i); const isV = visited.has(i); ctx.fillStyle = i === current ? "#f472b6" : isV ? "#22d3ee" : "#1e293b"; ctx.strokeStyle = "#64748b"; ctx.beginPath(); ctx.arc(n.x, n.y, 17, 0, 7); ctx.fill(); ctx.stroke(); ctx.fillStyle = isV ? "#0b1220" : "#94a3b8"; ctx.font = "bold 11px sans-serif"; if (isV && vi >= 0 && vi < step) ctx.fillText(String(vi + 1), n.x - 4, n.y + 4); });
       ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`${mode.toUpperCase()} visit order (numbers)`, 12, 20);

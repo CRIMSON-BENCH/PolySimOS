@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Differential-drive (unicycle) robot kinematics.
 export function DifferentialDriveStudio() {
@@ -16,12 +17,13 @@ export function DifferentialDriveStudio() {
 
   useEffect(() => {
     if (!running) return; let raf = 0; const b = 20; // wheelbase
+    const ctx = hidpi(canvasRef.current!, 540, 400);
     const loop = () => {
       const s = state.current; const v = (vR + vL) / 2 * 1.5; const w = (vR - vL) / b * 1.5;
       s.th += w; s.x += v * Math.cos(s.th); s.y += v * Math.sin(s.th);
       if (s.x < 10) s.x = 10; if (s.x > 530) s.x = 530; if (s.y < 10) s.y = 10; if (s.y > 390) s.y = 390;
       trail.current.push([s.x, s.y]); if (trail.current.length > 900) trail.current.shift();
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 400);
+      ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 400);
       ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 1.5; ctx.beginPath(); trail.current.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.stroke();
       // robot body
       ctx.save(); ctx.translate(s.x, s.y); ctx.rotate(s.th); ctx.fillStyle = "#f472b6"; ctx.fillRect(-14, -11, 28, 22); ctx.fillStyle = "#334155"; ctx.fillRect(-14, -14, 28, 4); ctx.fillRect(-14, 10, 28, 4);

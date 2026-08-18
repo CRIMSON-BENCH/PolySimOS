@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -25,7 +26,7 @@ export function ClothStudio() {
   useEffect(() => { reset(); /* eslint-disable-next-line */ }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, W, H);
     const idx = (x: number, y: number) => y * cols + x;
     const rest = spacing;
     const onDown = (e: PointerEvent) => { const r = canvas.getBoundingClientRect(); const mx = (e.clientX - r.left) * (W / r.width), my = (e.clientY - r.top) * (H / r.height); let best = -1, bd = 400; pts.current.forEach((p, i) => { const dd = (p.x - mx) ** 2 + (p.y - my) ** 2; if (dd < bd) { bd = dd; best = i; } }); grab.current = best; };

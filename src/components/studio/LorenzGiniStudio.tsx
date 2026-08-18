@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Lorenz curve + Gini from a lognormal-ish income distribution.
 export function LorenzGiniStudio() {
@@ -18,7 +19,7 @@ export function LorenzGiniStudio() {
   const gini = 1 - 2 * area;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const S = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, S, S);
+    const S = 340; const ctx = hidpi(canvasRef.current!, S, S); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, S, S);
     const ox = 40, oy = S - 35, sz = S - 70; const X = (p: number) => ox + p * sz; const Y = (p: number) => oy - p * sz;
     ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(ox + sz, oy); ctx.moveTo(ox, oy); ctx.lineTo(ox, oy - sz); ctx.stroke();
     // equality line

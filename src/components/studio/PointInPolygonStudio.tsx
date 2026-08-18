@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const POLY = [[100, 60], [360, 40], [440, 200], [300, 320], [120, 280], [60, 160]];
 
@@ -12,7 +13,7 @@ export function PointInPolygonStudio() {
   const inside = (() => { let c = false; for (let i = 0, j = POLY.length - 1; i < POLY.length; j = i++) { const [xi, yi] = POLY[i], [xj, yj] = POLY[j]; if (((yi > pt[1]) !== (yj > pt[1])) && (pt[0] < (xj - xi) * (pt[1] - yi) / (yj - yi) + xi)) c = !c; } return c; })();
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 500, 360);
+    const ctx = hidpi(canvasRef.current!, 500, 360); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 500, 360);
     ctx.beginPath(); POLY.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath();
     ctx.fillStyle = "rgba(34,211,238,0.12)"; ctx.fill(); ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.stroke();
     // ray from point

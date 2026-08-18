@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Maximum bipartite matching (Hungarian augmenting-path).
 export function BipartiteMatchingStudio() {
@@ -18,7 +19,7 @@ export function BipartiteMatchingStudio() {
     const tryKuhn = (u: number, seen: boolean[]): boolean => { for (const v of adj[u]) if (!seen[v]) { seen[v] = true; if (matchR[v] < 0 || tryKuhn(matchR[v], seen)) { matchR[v] = u; return true; } } return false; };
     let m = 0; for (let u = 0; u < L; u++) { const seen = new Array(R).fill(false); if (tryKuhn(u, seen)) m++; }
     setMatched(m);
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 460, 340);
+    const ctx = hidpi(canvasRef.current!, 460, 340); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 460, 340);
     const lx = 120, rx = 340; const ly = (i: number) => 50 + i * 48, ry = (i: number) => 50 + i * 48;
     const matchSet = new Set(matchR.map((u, v) => u >= 0 ? `${u}-${v}` : "").filter(Boolean));
     allEdges.forEach(([u, v]) => { const on = matchSet.has(`${u}-${v}`); ctx.strokeStyle = on ? "#a3e635" : "#334155"; ctx.lineWidth = on ? 3 : 1; ctx.beginPath(); ctx.moveTo(lx, ly(u)); ctx.lineTo(rx, ry(v)); ctx.stroke(); });

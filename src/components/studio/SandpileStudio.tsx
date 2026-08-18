@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 101, CELL = 5;
 const COLORS = ["#0b1220", "#1e3a8a", "#0891b2", "#a3e635"];
@@ -28,7 +29,7 @@ export function SandpileStudio() {
         for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) { const i = y * N + x; if (g[i] >= 4) { const n4 = (g[i] / 4) | 0; g[i] -= n4 * 4; toppled += n4 * 4; unstable = true;
           if (x > 0) g[i - 1] += n4; if (x < N - 1) g[i + 1] += n4; if (y > 0) g[i - N] += n4; if (y < N - 1) g[i + N] += n4; } } }
       setGrains(total.current); setAvalanche(toppled);
-      const ctx = canvasRef.current!.getContext("2d")!;
+      const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL);
       for (let i = 0; i < N * N; i++) { ctx.fillStyle = COLORS[Math.min(3, g[i])]; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL, CELL); }
       raf = requestAnimationFrame(loop);
     };

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Charge, potentialAt, traceFieldLine } from "@/lib/engines/em";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
 
@@ -12,8 +13,10 @@ export function EMStudio() {
   const [sign, setSign] = useState<1 | -1>(1);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
-    const img = ctx.createImageData(W, H);
+    const ctx = hidpi(canvasRef.current!, W, H);
+    const buf = document.createElement("canvas"); buf.width = W; buf.height = H;
+    const bctx = buf.getContext("2d")!;
+    const img = bctx.createImageData(W, H);
     // potential heatmap (coarse for speed)
     const step = 2;
     let minV = Infinity, maxV = -Infinity;
@@ -24,7 +27,7 @@ export function EMStudio() {
       const t = (grid[gi++] - minV) / rng; const r = t > 0.5 ? (t - 0.5) * 2 * 255 : 0; const b = t < 0.5 ? (0.5 - t) * 2 * 255 : 0;
       for (let dy = 0; dy < step; dy++) for (let dx = 0; dx < step; dx++) { const i = ((y + dy) * W + (x + dx)) * 4; img.data[i] = r * 0.7 + 10; img.data[i + 1] = 20; img.data[i + 2] = b * 0.7 + 10; img.data[i + 3] = 255; }
     }
-    ctx.putImageData(img, 0, 0);
+    bctx.putImageData(img, 0, 0); ctx.drawImage(buf, 0, 0, W, H);
     // field lines from positive charges
     ctx.strokeStyle = "rgba(226,232,240,0.6)"; ctx.lineWidth = 1;
     for (const c of charges) {

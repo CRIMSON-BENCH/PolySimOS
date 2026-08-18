@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 120, CELL = 4;
 
@@ -35,7 +36,7 @@ export function FireSpreadStudio() {
             const p = 0.28 * windBoost * slopeBoost; if (rnd() < p) next[ni] = 1; } }
       }
       grid.current = next; setBurned(bc);
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
+      const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
       for (let i = 0; i < N * N; i++) { const v = next[i]; let col = ""; if (v === 0) col = "#166534"; else if (v === 1) col = "#f97316"; else if (v === 2) col = "#3f3f46"; else col = "#1e293b"; ctx.fillStyle = col; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL, CELL); }
       // wind arrow
       ctx.strokeStyle = "#e2e8f0"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(30, 30); ctx.lineTo(30 + wx * 22, 30 + wy * 22); ctx.stroke();

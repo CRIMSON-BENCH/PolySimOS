@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Heat3D, heat3dInit, heat3dStep, heat3dSlice, heat3dHotVoxels } from "@/lib/engines/heat3d";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 40, W = 760, H = 480;
 
@@ -21,7 +22,7 @@ export function Heat3DStudio() {
   useEffect(() => { fRef.current = heat3dInit(N); }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, W, H);
     const onDown = (e: PointerEvent) => (drag.current = { x: e.clientX, y: e.clientY });
     const onMove = (e: PointerEvent) => { if (!drag.current) return; cam.current.yaw += (e.clientX - drag.current.x) * 0.01; cam.current.pitch = Math.max(-1.3, Math.min(1.3, cam.current.pitch + (e.clientY - drag.current.y) * 0.01)); drag.current = { x: e.clientX, y: e.clientY }; };
     const onUp = () => (drag.current = null);

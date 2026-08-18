@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
-import { useShareableNumbers } from "@/lib/studioKit";
+import { useShareableNumbers, hidpi } from "@/lib/studioKit";
 
 const W = 760, N = 256;
 
@@ -27,7 +27,7 @@ export function FFTStudio() {
   }, [f1, f2, f3, noise]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const H = 440;
+    const H = 440; const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const pad = 30;
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 1.6; ctx.beginPath();

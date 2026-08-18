@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 80, CELL = 6;
 
@@ -29,7 +30,7 @@ export function SchellingStudio() {
       for (let i = 0; i < N * N; i++) { if (g[i] < 0) continue; occupied++; if (contentAt(g, i)) { happyCount++; continue; }
         if (empties.length) { const e = empties[(rnd() * empties.length) | 0]; g[e] = g[i]; g[i] = -1; empties[empties.indexOf(e)] = i; } }
       setHappy(occupied ? happyCount / occupied : 0);
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
+      const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
       for (let i = 0; i < N * N; i++) { const v = g[i]; if (v < 0) continue; ctx.fillStyle = v === 0 ? "#22d3ee" : "#f472b6"; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL - 1, CELL - 1); }
       raf = requestAnimationFrame(loop);
     };

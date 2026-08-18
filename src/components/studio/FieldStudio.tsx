@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { heatInit, heatStep, heatHotspot, HeatField, waveInit, waveStep, WaveField } from "@/lib/engines/fields";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function FieldStudio() {
   const [mode, setMode] = useState<"heat" | "wave">("heat");
@@ -90,7 +91,7 @@ function Wave() {
 
   useEffect(() => { fieldRef.current = waveInit(N); }, []);
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     const loop = () => {
       const f = fieldRef.current!;
       if (running) waveStep(f, speed, 0.9995, 2);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Seismic base shear (equivalent lateral force) + vertical distribution.
 export function BaseShearStudio() {
@@ -21,7 +22,7 @@ export function BaseShearStudio() {
   const forces = heights.map((h) => V * (wPer * h) / denom);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const Wc = 460, Hc = 340; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, Wc, Hc);
+    const Wc = 460, Hc = 340; const ctx = hidpi(canvasRef.current!, Wc, Hc); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, Wc, Hc);
     const bx = 140, base = Hc - 30, sh = Math.min(38, (Hc - 60) / n), bw = 90;
     const fMax = Math.max(...forces);
     for (let i = 0; i < n; i++) { const y = base - (i + 1) * sh; ctx.fillStyle = "#334155"; ctx.strokeStyle = "#64748b"; ctx.fillRect(bx, y, bw, sh - 2); ctx.strokeRect(bx, y, bw, sh - 2);

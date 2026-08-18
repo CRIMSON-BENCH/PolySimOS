@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Explosive overpressure via cube-root (Hopkinson-Cranz) scaling. Z = R / W^(1/3).
 // Simplified Kingery-Bulmash style fit for incident overpressure (kPa) vs scaled distance (m/kg^1/3).
@@ -34,7 +35,7 @@ export function BlastStandoffStudio() {
   const safeDist = zSafe * W13;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const S = 340; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, S, S);
+    const S = 340; const ctx = hidpi(canvasRef.current!, S, S); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, S, S);
     const cx = S / 2, cy = S / 2; const maxR = Math.min(cx, cy) - 10;
     // scale: map safeDist*1.2 to maxR
     const scale = maxR / (safeDist * 1.25 || 1);

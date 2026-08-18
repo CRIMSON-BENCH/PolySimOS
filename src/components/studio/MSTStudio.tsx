@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MSTStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -21,7 +22,7 @@ export function MSTStudio() {
     const mst = new Set<number>(); let tot = 0;
     edges.forEach(([u, v, w], idx) => { const ru = find(u), rv = find(v); if (ru !== rv) { par[ru] = rv; mst.add(idx); tot += w; } });
     setTotal(tot);
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 360);
+    const ctx = hidpi(canvasRef.current!, 540, 360); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 360);
     edges.forEach(([u, v], idx) => { const on = mst.has(idx); ctx.strokeStyle = on ? "#a3e635" : "#1e293b"; ctx.lineWidth = on ? 2.5 : 1; ctx.beginPath(); ctx.moveTo(nodes[u].x, nodes[u].y); ctx.lineTo(nodes[v].x, nodes[v].y); ctx.stroke(); });
     nodes.forEach((n) => { ctx.fillStyle = "#22d3ee"; ctx.beginPath(); ctx.arc(n.x, n.y, 7, 0, 7); ctx.fill(); });
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("minimum spanning tree (green)", 12, 20);

@@ -10,6 +10,7 @@ import {
   GrayScottState,
 } from "@/lib/engines/dynamics";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -62,7 +63,7 @@ function OdePlot({ systemId }: { systemId: string }) {
   }, [systemId, JSON.stringify(params)]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617";
     ctx.fillRect(0, 0, W, H);
 
@@ -162,7 +163,7 @@ function OdePlot({ systemId }: { systemId: string }) {
 function label(ctx: CanvasRenderingContext2D, text: string) {
   ctx.fillStyle = "#475569";
   ctx.font = "11px system-ui";
-  ctx.fillText(text, ctx.canvas.width - 8 - ctx.measureText(text).width, ctx.canvas.height - 12);
+  ctx.fillText(text, W - 8 - ctx.measureText(text).width, H - 12);
 }
 
 function GrayScott() {

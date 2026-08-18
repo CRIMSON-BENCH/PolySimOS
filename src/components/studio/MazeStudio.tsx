@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MazeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -11,7 +12,8 @@ export function MazeStudio() {
 
   useEffect(() => {
     const N = Math.round(size); const CELL = Math.floor(560 / N);
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const CW = 600, CH = 600;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, CW, CH);
     // deterministic PRNG seeded by `seed`
     let s = seed * 2654435761 >>> 0; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
     // walls[i] = {N,E,S,W} present
@@ -38,8 +40,8 @@ export function MazeStudio() {
         for (const [ok, ni] of mv) { if (ok && !prev.has(ni)) { prev.set(ni, c); q.push(ni); } } }
       let c = N * N - 1; while (c !== undefined && c !== -1) { path.push(c); c = prev.get(c)!; }
     }
-    ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    const OX = (canvas.width - N * CELL) / 2, OY = (canvas.height - N * CELL) / 2;
+    ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, CW, CH);
+    const OX = (CW - N * CELL) / 2, OY = (CH - N * CELL) / 2;
     if (solve) { ctx.strokeStyle = "#a3e635"; ctx.lineWidth = Math.max(2, CELL * 0.35); ctx.lineJoin = "round"; ctx.beginPath();
       path.forEach((c, i) => { const px = OX + (c % N) * CELL + CELL / 2, py = OY + ((c / N) | 0) * CELL + CELL / 2; if (i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py); }); ctx.stroke(); }
     ctx.strokeStyle = "#e2e8f0"; ctx.lineWidth = 1.5;

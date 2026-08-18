@@ -1,4 +1,3 @@
-import Link from "next/link";
 import type { Metadata } from "next";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclaimer } from "@/components/Disclaimer";
@@ -6,6 +5,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { softwareAppLd } from "@/lib/seo";
 import { ProductGrid } from "@/components/ProductCard";
 import { contextualProducts } from "@/lib/products";
+import { StudioBrowser } from "@/components/studio/StudioBrowser";
 
 export const metadata: Metadata = {
   title: "PolySim Studio — Run Real Simulations in Your Browser",
@@ -403,22 +403,7 @@ export default function StudioIndex() {
         Pick an engine and start exploring.
       </p>
 
-      <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {SIMS.map((s) => (
-          <Link
-            key={s.slug}
-            href={`/studio/${s.slug}`}
-            className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-cyan-400 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-cyan-500"
-          >
-            <span className="text-xs font-bold uppercase tracking-wide text-cyan-600 dark:text-cyan-400">{s.tag}</span>
-            <h2 className="mt-1 text-lg font-bold text-slate-900 group-hover:text-cyan-600 dark:text-slate-100 dark:group-hover:text-cyan-400">
-              {s.name}
-            </h2>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{s.desc}</p>
-            <span className="mt-3 inline-block text-sm font-semibold text-cyan-600 dark:text-cyan-400">Launch →</span>
-          </Link>
-        ))}
-      </div>
+      <StudioBrowser sims={SIMS} />
 
       <ProductGrid products={contextualProducts("studio", 6)} title="Power up your workspace" />
       <Disclaimer />

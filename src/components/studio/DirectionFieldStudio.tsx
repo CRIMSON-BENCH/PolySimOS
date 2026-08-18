@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
 
@@ -13,7 +14,7 @@ export function DirectionFieldStudio() {
   const seeds = useRef<[number, number][]>([]);
 
   useEffect(() => {
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, W, H);
     let tree; try { tree = parse(expr); setErr(""); } catch (e) { setErr((e as Error).message); return; }
     const span = 6; const toX = (x: number) => W / 2 + (x / span) * (W / 2); const toY = (y: number) => H / 2 - (y / span) * (H / 2);
     const f = (x: number, y: number) => { try { return evaluate(tree, { x, y }); } catch { return 0; } };

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const NODES = [[90, 90], [250, 60], [420, 100], [130, 250], [300, 230], [440, 250]].map(([x, y]) => ({ x, y }));
 const LINKS: [number, number][] = [[0, 1], [1, 2], [2, 4], [3, 0], [3, 4], [4, 1], [5, 4], [4, 3], [1, 3], [2, 5]];
@@ -17,7 +18,7 @@ export function PageRankStudio() {
   const maxPr = Math.max(...pr);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 320);
+    const ctx = hidpi(canvasRef.current!, 540, 320); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 320);
     LINKS.forEach(([u, v]) => { const a = NODES[u], b = NODES[v]; ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
       const ang = Math.atan2(b.y - a.y, b.x - a.x); const ex = b.x - Math.cos(ang) * 20, ey = b.y - Math.sin(ang) * 20; ctx.fillStyle = "#475569"; ctx.beginPath(); ctx.moveTo(ex, ey); ctx.lineTo(ex - Math.cos(ang - 0.4) * 8, ey - Math.sin(ang - 0.4) * 8); ctx.lineTo(ex - Math.cos(ang + 0.4) * 8, ey - Math.sin(ang + 0.4) * 8); ctx.fill(); });
     NODES.forEach((n, i) => { const r = 8 + (pr[i] / maxPr) * 22; ctx.fillStyle = "#22d3ee"; ctx.globalAlpha = 0.4 + 0.6 * pr[i] / maxPr; ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 7); ctx.fill(); ctx.globalAlpha = 1; ctx.fillStyle = "#e2e8f0"; ctx.font = "10px sans-serif"; ctx.fillText(`${(pr[i] * 100).toFixed(0)}%`, n.x - 10, n.y + 3); });

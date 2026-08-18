@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 130, CELL = 4;
 
@@ -14,14 +15,14 @@ export function LangtonStudio() {
   const ant = useRef({ x: (N / 2) | 0, y: (N / 2) | 0, dir: 0 }); // 0 up,1 right,2 down,3 left
 
   const reset = () => { grid.current = new Uint8Array(N * N); ant.current = { x: (N / 2) | 0, y: (N / 2) | 0, dir: 0 }; setSteps(0);
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL); };
+    const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL); };
   useEffect(reset, []);
 
   useEffect(() => {
     if (!running) return; let raf = 0;
     const dx = [0, 1, 0, -1], dy = [-1, 0, 1, 0];
     const loop = () => {
-      const g = grid.current; const a = ant.current; const ctx = canvasRef.current!.getContext("2d")!;
+      const g = grid.current; const a = ant.current; const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL);
       for (let k = 0; k < speed; k++) {
         const i = a.y * N + a.x;
         if (g[i] === 0) { a.dir = (a.dir + 1) & 3; g[i] = 1; } else { a.dir = (a.dir + 3) & 3; g[i] = 0; }

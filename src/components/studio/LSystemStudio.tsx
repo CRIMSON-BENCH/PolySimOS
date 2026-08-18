@@ -2,6 +2,9 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
+
+const CW = 560, CH = 480;
 
 const PRESETS: Record<string, { axiom: string; rules: Record<string, string>; angle: number; iter: number }> = {
   "Fractal plant": { axiom: "X", rules: { X: "F+[[X]-X]-F[-FX]+X", F: "FF" }, angle: 25, iter: 5 },
@@ -22,12 +25,12 @@ export function LSystemStudio() {
     const p = PRESETS[preset]; let str = p.axiom; const N = Math.round(iter);
     for (let i = 0; i < N; i++) { let next = ""; for (const ch of str) next += p.rules[ch] ?? ch; str = next; if (str.length > 400000) break; }
     setLen(str.length);
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, CW, CH); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, CW, CH);
     // measure bounds first
     const rad = (p.angle * Math.PI) / 180; let x = 0, y = 0, a = -Math.PI / 2; const stack: [number, number, number][] = [];
     let minX = 0, maxX = 0, minY = 0, maxY = 0;
     for (const ch of str) { if (ch === "F" || ch === "G") { x += Math.cos(a); y += Math.sin(a); minX = Math.min(minX, x); maxX = Math.max(maxX, x); minY = Math.min(minY, y); maxY = Math.max(maxY, y); } else if (ch === "+") a += rad; else if (ch === "-") a -= rad; else if (ch === "[") stack.push([x, y, a]); else if (ch === "]") { [x, y, a] = stack.pop()!; } }
-    const scale = Math.min((canvas.width - 40) / (maxX - minX || 1), (canvas.height - 40) / (maxY - minY || 1));
+    const scale = Math.min((CW - 40) / (maxX - minX || 1), (CH - 40) / (maxY - minY || 1));
     const ox = 20 - minX * scale, oy = 20 - minY * scale;
     x = 0; y = 0; a = -Math.PI / 2; ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 1; ctx.beginPath();
     let px = ox, py = oy;

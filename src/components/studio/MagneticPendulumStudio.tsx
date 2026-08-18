@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
-import { useShareableNumbers } from "@/lib/studioKit";
+import { useShareableNumbers, hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
 
@@ -26,7 +26,7 @@ export function MagneticPendulumStudio() {
   const drop = (x: number, y: number) => { st.current = { x, y, vx: 0, vy: 0 }; trail.current = []; };
 
   useEffect(() => {
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, W, H);
     const onClick = (e: MouseEvent) => { const r = canvas.getBoundingClientRect(); drop((e.clientX - r.left) * (W / r.width), (e.clientY - r.top) * (H / r.height)); };
     canvas.addEventListener("click", onClick);
     const loop = () => {

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 120, CELL = 4;
 
@@ -31,7 +32,7 @@ export function ForestFireStudio() {
         if (next[i] === 1) {}
       }
       grid.current = next; setTrees(tc);
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
+      const ctx = hidpi(canvasRef.current!, N * CELL, N * CELL); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, N * CELL, N * CELL);
       for (let i = 0; i < N * N; i++) { const v = next[i]; if (!v) continue; ctx.fillStyle = v === 2 ? "#f97316" : "#22c55e"; ctx.fillRect((i % N) * CELL, ((i / N) | 0) * CELL, CELL, CELL); }
       raf = requestAnimationFrame(loop);
     };

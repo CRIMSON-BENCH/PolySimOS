@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Watts-Strogatz small-world network.
 export function SmallWorldStudio() {
@@ -21,7 +22,7 @@ export function SmallWorldStudio() {
     // avg path length via BFS
     let pSum = 0, cnt = 0; for (let src = 0; src < N; src++) { const d = new Array(N).fill(-1); d[src] = 0; const q = [src]; while (q.length) { const u = q.shift()!; for (const v of adj[u]) if (d[v] < 0) { d[v] = d[u] + 1; q.push(v); } } for (let t = 0; t < N; t++) if (t !== src && d[t] > 0) { pSum += d[t]; cnt++; } }
     setStats({ cluster: cSum / N, pathLen: pSum / cnt });
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 400, 360);
+    const ctx = hidpi(canvasRef.current!, 400, 360); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 400, 360);
     const cx = 200, cy = 180, R = 140; const pos = Array.from({ length: N }, (_, i) => ({ x: cx + Math.cos(i / N * 6.283) * R, y: cy + Math.sin(i / N * 6.283) * R }));
     for (let i = 0; i < N; i++) for (const j of adj[i]) if (j > i) { const long = Math.min((j - i + N) % N, (i - j + N) % N) > K / 2; ctx.strokeStyle = long ? "#f472b6" : "#334155"; ctx.lineWidth = long ? 1.5 : 1; ctx.beginPath(); ctx.moveTo(pos[i].x, pos[i].y); ctx.lineTo(pos[j].x, pos[j].y); ctx.stroke(); }
     pos.forEach((pp) => { ctx.fillStyle = "#22d3ee"; ctx.beginPath(); ctx.arc(pp.x, pp.y, 6, 0, 7); ctx.fill(); });

@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { starterFrame, solveSpaceFrame } from "@/lib/engines/fea3d";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -22,7 +23,7 @@ export function FEA3DStudio() {
   }, [base, loadX]);
 
   useEffect(() => {
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, W, H);
     const onDown = (e: PointerEvent) => { drag.current = { x: e.clientX, y: e.clientY }; cam.current.auto = false; };
     const onMove = (e: PointerEvent) => { if (!drag.current) return; cam.current.yaw += (e.clientX - drag.current.x) * 0.01; cam.current.pitch = Math.max(-1.3, Math.min(1.3, cam.current.pitch + (e.clientY - drag.current.y) * 0.01)); drag.current = { x: e.clientX, y: e.clientY }; };
     const onUp = () => (drag.current = null);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // 2D planar quadcopter with PID position + attitude control to a target.
 export function QuadcopterStudio() {
@@ -28,7 +29,7 @@ export function QuadcopterStudio() {
       p.vx += (T * Math.sin(p.th) + rnd() * wind) * dt; p.vy += (-T * Math.cos(p.th) + g) * dt;
       p.x += p.vx * dt; p.y += p.vy * dt;
       if (p.y > 380) { p.y = 380; p.vy = 0; } if (p.y < 20) { p.y = 20; p.vy = 0; }
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 400);
+      const ctx = hidpi(canvasRef.current!, 540, 400); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 400);
       // target
       ctx.strokeStyle = "#fbbf24"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(tx, ty, 10, 0, 7); ctx.stroke();
       // drone

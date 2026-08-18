@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const CELLS = 160, MAXV = 5, W = 760, H = 300;
 
@@ -19,7 +20,7 @@ export function TrafficStudio() {
   useEffect(() => { seed(); /* eslint-disable-next-line */ }, [density]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; let moved = 0, cars = 0;
+    const ctx = hidpi(canvasRef.current!, W, H); let moved = 0, cars = 0;
     const step = () => {
       const l = lane.current; const gap = (i: number) => { let d = 1; while (l[(i + d) % CELLS] < 0 && d <= MAXV + 1) d++; return d - 1; };
       const nv = new Array(CELLS).fill(-1); moved = 0; cars = 0;

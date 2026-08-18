@@ -2,8 +2,10 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const COLORS = ["#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#c084fc", "#fb7185", "#34d399", "#60a5fa"];
+const CW = 420, CH = 420;
 
 export function KMeansStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -35,8 +37,8 @@ export function KMeansStudio() {
         st.cen = st.cen.map((_, j) => { const mem = st.pts.filter((_, i) => st.asg[i] === j); if (!mem.length) return st.cen[j]; return [mem.reduce((s2, p) => s2 + p[0], 0) / mem.length, mem.reduce((s2, p) => s2 + p[1], 0) / mem.length]; });
         setIter((n) => n + 1);
       }
-      const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!; const st = state.current!;
-      ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const canvas = canvasRef.current!; const ctx = hidpi(canvas, CW, CH); const st = state.current!;
+      ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, CW, CH);
       st.pts.forEach(([x, y], i) => { ctx.beginPath(); ctx.arc(x, y, 3, 0, 7); ctx.fillStyle = COLORS[st.asg[i] % COLORS.length]; ctx.globalAlpha = 0.6; ctx.fill(); ctx.globalAlpha = 1; });
       st.cen.forEach(([x, y], j) => { ctx.beginPath(); ctx.arc(x, y, 9, 0, 7); ctx.fillStyle = COLORS[j % COLORS.length]; ctx.fill(); ctx.strokeStyle = "#fff"; ctx.lineWidth = 2.5; ctx.stroke(); });
       raf = requestAnimationFrame(loop);

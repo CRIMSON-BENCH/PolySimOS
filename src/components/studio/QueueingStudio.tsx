@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // M/M/1 queue metrics + live simulation.
 export function QueueingStudio() {
@@ -22,7 +23,7 @@ export function QueueingStudio() {
       if (queue.current > 0 && rnd() < mu * 0.05) queue.current--;
       if (queue.current > 60) queue.current = 60;
       setDisplay(queue.current);
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 240);
+      const ctx = hidpi(canvasRef.current!, 540, 240); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 240);
       // server
       ctx.fillStyle = "#a3e635"; ctx.fillRect(460, 100, 50, 50); ctx.fillStyle = "#0b1220"; ctx.font = "11px sans-serif"; ctx.fillText("server", 468, 128);
       // queue of customers

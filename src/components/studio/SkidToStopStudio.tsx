@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Accident reconstruction: v = sqrt(30 * D * f * n)  (mph, ft)
 export function SkidToStopStudio() {
@@ -16,7 +17,7 @@ export function SkidToStopStudio() {
   const kmh = speed * 1.60934;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, Hh = 200; ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, Hh);
+    const W = 520, Hh = 200; const ctx = hidpi(canvasRef.current!, W, Hh); ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, W, Hh);
     // road
     ctx.fillStyle = "#1e293b"; ctx.fillRect(0, 120, W, 50);
     const maxD = 300; const px = Math.min(W - 90, (dist / maxD) * (W - 90));

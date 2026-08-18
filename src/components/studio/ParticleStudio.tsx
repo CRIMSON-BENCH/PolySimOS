@@ -11,6 +11,7 @@ import {
   particleMetrics,
 } from "@/lib/engines/particles";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -47,7 +48,7 @@ export function ParticleStudio() {
 
   useEffect(() => {
     const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
+    const ctx = hidpi(canvas, W, H);
     let last = 0;
     let frame = 0;
 

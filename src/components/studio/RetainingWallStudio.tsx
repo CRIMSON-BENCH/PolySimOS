@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Rankine active earth pressure + wall stability.
 export function RetainingWallStudio() {
@@ -21,7 +22,7 @@ export function RetainingWallStudio() {
   const mu = Math.tan(phi * Math.PI / 180 * 0.67); const FS_slide = (wallW * mu) / Pa;
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 480, Hc = 320; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, Hc);
+    const W = 480, Hc = 320; const ctx = hidpi(canvasRef.current!, W, Hc); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, Hc);
     const ox = 120, base = Hc - 40; const scale = 45;
     // soil
     ctx.fillStyle = "#3f2d1e"; ctx.fillRect(ox + 30, base - H * scale, W - ox - 40, H * scale);

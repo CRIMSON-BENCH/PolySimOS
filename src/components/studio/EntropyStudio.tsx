@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Free expansion of a gas: entropy increase, particles fill the box.
 export function EntropyStudio() {
@@ -21,7 +22,7 @@ export function EntropyStudio() {
       const wall = released ? 520 : 250; let left = 0;
       for (const p of parts.current) { p.x += p.vx; p.y += p.vy; if (p.x < 12 || p.x > wall - 12) p.vx *= -1; if (p.y < 12 || p.y > 288) p.vy *= -1; p.x = Math.max(12, Math.min(wall - 12, p.x)); p.y = Math.max(12, Math.min(288, p.y)); if (p.x < 260) left++; }
       setLeftFrac(left / parts.current.length);
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 300);
+      const ctx = hidpi(canvasRef.current!, 540, 300); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 300);
       ctx.strokeStyle = "#334155"; ctx.strokeRect(10, 10, 520, 280);
       if (!released) { ctx.strokeStyle = "#64748b"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(250, 10); ctx.lineTo(250, 290); ctx.stroke(); }
       for (const p of parts.current) { ctx.beginPath(); ctx.arc(p.x, p.y, 3, 0, 7); ctx.fillStyle = "#22d3ee"; ctx.fill(); }

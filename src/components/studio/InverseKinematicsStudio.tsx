@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function InverseKinematicsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -16,7 +17,7 @@ export function InverseKinematicsStudio() {
   const t1 = Math.atan2(y, x) - Math.atan2(L2 * Math.sin(t2), L1 + L2 * Math.cos(t2));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 480, H = 380; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const W = 480, H = 380; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const ox = W / 2, oy = H / 2 + 60;
     // reachable annulus
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.arc(ox, oy, L1 + L2, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.arc(ox, oy, Math.abs(L1 - L2), 0, 7); ctx.stroke();

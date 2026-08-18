@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Expected goals (xG) from shot location.
 export function XGStudio() {
@@ -15,7 +16,7 @@ export function XGStudio() {
   const z = 0.6 - 0.11 * dist + 0.06 * angle; const xg = 1 / (1 + Math.exp(-z));
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 540, H = 400; ctx.fillStyle = "#0b2818"; ctx.fillRect(0, 0, W, H);
+    const W = 540, H = 400; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#0b2818"; ctx.fillRect(0, 0, W, H);
     // pitch markings (attacking half toward right)
     ctx.strokeStyle = "#2a6a3e"; ctx.lineWidth = 2; ctx.strokeRect(10, 10, W - 20, H - 20);
     ctx.strokeRect(goalX - 130, 90, 130, 220); ctx.strokeRect(goalX - 55, 150, 55, 100); // penalty & 6-yard box

@@ -3,8 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Fluid3D } from "@/lib/engines/fluid3d";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const N = 24;
+const CW = 760, CH = 480;
 
 export function CFD3DStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,7 +19,7 @@ export function CFD3DStudio() {
   useEffect(() => { fRef.current = new Fluid3D(N); }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current!; const ctx = canvas.getContext("2d")!;
+    const canvas = canvasRef.current!; const ctx = hidpi(canvas, CW, CH);
     const s = N + 2;
     const img = ctx.createImageData(s, s);
     let frame = 0;
@@ -31,9 +33,9 @@ export function CFD3DStudio() {
       const sl = f.slice(zslice);
       for (let i = 0; i < s * s; i++) { const d = Math.min(255, sl[i] * 255); img.data[i * 4] = d * 0.2; img.data[i * 4 + 1] = d * 0.75; img.data[i * 4 + 2] = d; img.data[i * 4 + 3] = 255; }
       const tmp = document.createElement("canvas"); tmp.width = s; tmp.height = s; tmp.getContext("2d")!.putImageData(img, 0, 0);
-      ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.imageSmoothingEnabled = true; ctx.drawImage(tmp, (canvas.width - 440) / 2, 20, 440, 440);
-      ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`z-slice ${zslice}/${N} — rising 3D plume`, 16, canvas.height - 12);
+      ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, CW, CH);
+      ctx.imageSmoothingEnabled = true; ctx.drawImage(tmp, (CW - 440) / 2, 20, 440, 440);
+      ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`z-slice ${zslice}/${N} — rising 3D plume`, 16, CH - 12);
       frame++;
       rafRef.current = requestAnimationFrame(loop);
     };

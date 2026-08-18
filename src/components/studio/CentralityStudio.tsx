@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 type Metric = "degree" | "betweenness" | "closeness";
 const NODES = [[80, 180], [180, 80], [180, 280], [300, 180], [420, 90], [420, 270], [500, 180]].map(([x, y]) => ({ x, y }));
@@ -24,7 +25,7 @@ export function CentralityStudio() {
   const vals = metric === "degree" ? degree : metric === "betweenness" ? bet : closeness; const maxV = Math.max(...vals, 1e-9);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 560, 340);
+    const ctx = hidpi(canvasRef.current!, 560, 340); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 560, 340);
     EDGES.forEach(([u, v]) => { ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(NODES[u].x, NODES[u].y); ctx.lineTo(NODES[v].x, NODES[v].y); ctx.stroke(); });
     NODES.forEach((n, i) => { const r = 10 + (vals[i] / maxV) * 22; ctx.fillStyle = "#22d3ee"; ctx.globalAlpha = 0.35 + 0.65 * vals[i] / maxV; ctx.beginPath(); ctx.arc(n.x, n.y, r, 0, 7); ctx.fill(); ctx.globalAlpha = 1; ctx.fillStyle = "#e2e8f0"; ctx.font = "bold 11px sans-serif"; ctx.fillText(String.fromCharCode(65 + i), n.x - 4, n.y + 4); });
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(`node size ∝ ${metric} centrality`, 12, 20);

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function GPSTrilaterationStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -19,7 +20,7 @@ export function GPSTrilaterationStudio() {
     for (let i = 1; i < 3; i++) { const [xi, yi] = sats[i]; A.push([2 * (xi - x1), 2 * (yi - y1)]); b.push(dists[0] ** 2 - dists[i] ** 2 - x1 * x1 - y1 * y1 + xi * xi + yi * yi); }
     const det = A[0][0] * A[1][1] - A[0][1] * A[1][0]; const px = (b[0] * A[1][1] - b[1] * A[0][1]) / det; const py = (A[0][0] * b[1] - A[1][0] * b[0]) / det;
     setErr(Math.hypot(px - trueP[0], py - trueP[1]));
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 380);
+    const ctx = hidpi(canvasRef.current!, 540, 380); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 380);
     sats.forEach(([x, y], i) => { ctx.strokeStyle = "rgba(34,211,238,0.4)"; ctx.beginPath(); ctx.arc(x, y, dists[i], 0, 7); ctx.stroke(); ctx.fillStyle = "#22d3ee"; ctx.beginPath(); ctx.arc(x, y, 6, 0, 7); ctx.fill(); ctx.fillStyle = "#94a3b8"; ctx.font = "10px sans-serif"; ctx.fillText(`sat ${i + 1}`, x + 8, y); });
     ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(trueP[0], trueP[1], 5, 0, 7); ctx.fill();
     ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(px, py, 6, 0, 7); ctx.fill();

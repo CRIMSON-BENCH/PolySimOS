@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Atom, DEFAULT_MD, seedAtoms, stepMD, temperature, thermostat } from "@/lib/engines/md";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 export function MDStudio() {
   const box = DEFAULT_MD.box;
@@ -17,7 +18,7 @@ export function MDStudio() {
   useEffect(() => { atomsRef.current = seedAtoms({ ...DEFAULT_MD, n }); }, [n]);
 
   useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+    const ctx = hidpi(canvasRef.current!, box, box);
     let frame = 0;
     const loop = () => {
       const atoms = atomsRef.current; const p = { ...DEFAULT_MD, n };

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Needleman-Wunsch global alignment of two DNA sequences.
 export function SequenceAlignmentStudio() {
@@ -28,7 +29,7 @@ export function SequenceAlignmentStudio() {
     let id = 0; for (let k = 0; k < alnA.length; k++) if (alnA[k] === alnB[k]) id++;
     setResult({ score: H[n][m], a: alnA, b: alnB, identity: id / alnA.length });
     // draw DP matrix heatmap
-    const ctx = canvasRef.current!.getContext("2d")!; const W = 520, Hc = 300; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, Hc);
+    const W = 520, Hc = 300; const ctx = hidpi(canvasRef.current!, W, Hc); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, Hc);
     const cw = Math.min(30, (W - 60) / (m + 1)), ch = Math.min(26, (Hc - 40) / (n + 1));
     let mn = Infinity, mx = -Infinity; for (let a = 0; a <= n; a++) for (let b = 0; b <= m; b++) { mn = Math.min(mn, H[a][b]); mx = Math.max(mx, H[a][b]); }
     for (let a = 0; a <= n; a++) for (let b = 0; b <= m; b++) { const t = (H[a][b] - mn) / (mx - mn || 1); ctx.fillStyle = `rgb(${11 + t * 30},${18 + t * 190},${60 + t * 120})`; ctx.fillRect(40 + b * cw, 30 + a * ch, cw - 1, ch - 1); }

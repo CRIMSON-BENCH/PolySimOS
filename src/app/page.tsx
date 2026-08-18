@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { softwareAppLd } from "@/lib/seo";
 import { DISCLAIMER_SHORT } from "@/lib/disclaimer";
 import { PRODUCT_COUNT } from "@/lib/products";
+import { IdleFinderPrompt } from "@/components/IdleFinderPrompt";
 
 export const metadata: Metadata = {
   title: "PolySim OS — The Everything Engine for Simulation",
@@ -156,6 +157,8 @@ export default function Home() {
         </Link>
         <p className="mx-auto mt-10 max-w-3xl text-xs text-slate-400">{DISCLAIMER_SHORT}</p>
       </section>
+
+      <IdleFinderPrompt />
     </div>
   );
 }

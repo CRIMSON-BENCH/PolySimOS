@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 const COLORS = ["#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#c084fc", "#fb7185"];
 
@@ -20,7 +21,7 @@ export function GraphColoringStudio() {
     const color = new Array(N).fill(-1);
     for (let i = 0; i < N; i++) { const forbidden = new Set<number>(); for (let j = 0; j < N; j++) if (adj[i][j] && color[j] >= 0) forbidden.add(color[j]); let c = 0; while (forbidden.has(c)) c++; color[i] = c; }
     setUsed(Math.max(...color) + 1);
-    const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 360);
+    const ctx = hidpi(canvasRef.current!, 540, 360); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 360);
     edges.forEach(([u, v]) => { ctx.strokeStyle = "#334155"; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.moveTo(nodes[u].x, nodes[u].y); ctx.lineTo(nodes[v].x, nodes[v].y); ctx.stroke(); });
     nodes.forEach((n, i) => { ctx.fillStyle = COLORS[color[i] % COLORS.length]; ctx.beginPath(); ctx.arc(n.x, n.y, 13, 0, 7); ctx.fill(); ctx.strokeStyle = "#0b1220"; ctx.lineWidth = 2; ctx.stroke(); });
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("no two connected nodes share a color", 12, 20);

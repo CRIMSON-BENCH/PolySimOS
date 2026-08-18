@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { hidpi } from "@/lib/studioKit";
 
 // Coriolis deflection on a rotating planet (rotating-frame view).
 export function CoriolisStudio() {
@@ -13,9 +14,10 @@ export function CoriolisStudio() {
   useEffect(() => {
     if (!running) return; let raf = 0; const f = 2 * 0.02 * Math.sin(latitude * Math.PI / 180) * hemisphere; // Coriolis param scaled
     let x = 270, y = 340, vx = 0, vy = -3; const trail: [number, number][] = [];
+    const ctx = hidpi(canvasRef.current!, 540, 380);
     const loop = () => {
       for (let k = 0; k < 2; k++) { const ax = f * vy, ay = -f * vx; vx += ax; vy += ay; x += vx; y += vy; if (x < 10 || x > 530 || y < 10 || y > 370) { x = 270; y = 340; vx = 0; vy = -3; trail.length = 0; } trail.push([x, y]); if (trail.length > 400) trail.shift(); }
-      const ctx = canvasRef.current!.getContext("2d")!; ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 380);
+      ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, 540, 380);
       ctx.strokeStyle = "#334155"; ctx.setLineDash([4, 4]); ctx.beginPath(); ctx.moveTo(270, 340); ctx.lineTo(270, 10); ctx.stroke(); ctx.setLineDash([]);
       ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath(); trail.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.stroke();
       ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fill();
