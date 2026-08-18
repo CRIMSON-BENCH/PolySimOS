@@ -2,11 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { noise: number }> = {
+  "Perfect ranges": { noise: 0 },
+  "Consumer GPS": { noise: 6 },
+  "Urban canyon": { noise: 20 },
+  "Degraded signal": { noise: 40 },
+};
 
 export function GPSTrilaterationStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [noise, setNoise] = useState(0);
+  const [{ noise }, update] = useShareableNumbers({ noise: 0 });
   const [seed, setSeed] = useState(1);
   const [err, setErr] = useState(0);
 
@@ -27,14 +35,28 @@ export function GPSTrilaterationStudio() {
     ctx.font = "11px sans-serif"; ctx.fillStyle = "#bef264"; ctx.fillText("true position", trueP[0] + 8, trueP[1]); ctx.fillStyle = "#f9a8d4"; ctx.fillText("computed fix", px + 8, py + 4);
   }, [noise, seed]);
 
+  const explain = noise === 0
+    ? "With zero ranging noise the three distance circles meet at exactly one point, so the computed fix lands on the true position."
+    : `Each meter of timing noise smears where the circles cross, giving a ~${err.toFixed(0)} m fix error — this is why real receivers fuse many satellites with least-squares to average the error down.`;
+
+  const code = `import numpy as np
+sats = np.array([[100, 90], [420, 120], [250, 320]])
+d = np.array([...])  # measured ranges (m), ranging noise = ${noise}
+A = 2 * (sats[1:] - sats[0])
+b = d[0]**2 - d[1:]**2 - (sats[0]**2).sum() + (sats[1:]**2).sum(1)
+px, py = np.linalg.lstsq(A, b, rcond=None)[0]
+print("fix", px, py)`;
+
   return (
     <StudioChrome title="GPS Trilateration" tagline="position from distances"
       controls={<div>
-        <Slider label="Ranging noise (m)" value={noise} min={0} max={40} step={2} onChange={setNoise} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Ranging noise (m)" value={noise} min={0} max={40} step={2} onChange={(v) => update({ noise: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">Resample noise</button>
         <p className="mt-3 text-xs text-slate-500">A GPS receiver knows its distance to several satellites from signal travel time. Each distance places it on a circle (a sphere in 3D); where three circles intersect is the fix. With perfect ranges they meet at one point, but timing noise blurs the intersection into a small region — which is why GPS uses many satellites and least-squares to pin down position.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Satellites" value="3" /><Stat label="Ranging noise" value={`${noise} m`} /><Stat label="Position error" value={`${err.toFixed(1)} m`} /></div>}
+      inspector={<div><Stat label="Satellites" value="3" /><Stat label="Ranging noise" value={`${noise} m`} /><Stat label="Position error" value={`${err.toFixed(1)} m`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

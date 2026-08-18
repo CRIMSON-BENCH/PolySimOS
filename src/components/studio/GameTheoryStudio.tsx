@@ -1,6 +1,7 @@
 "use client";
 
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { useState } from "react";
 
 // 2x2 game: find pure Nash equilibria.
@@ -22,13 +23,34 @@ export function GameTheoryStudio() {
   }
   const labels = { "Prisoner's Dilemma": ["Cooperate", "Defect"], "Stag Hunt": ["Stag", "Hare"], "Matching Pennies": ["Heads", "Tails"], Chicken: ["Swerve", "Straight"] }[game]!;
 
+  const explain =
+    nash.length === 0
+      ? "No cell is stable — from every outcome one player wants to switch, so the only equilibrium is a randomized mix (here, 50/50)."
+      : game === "Prisoner's Dilemma"
+      ? "The lone equilibrium has both players defect, even though mutual cooperation pays more — individually rational, collectively worse."
+      : nash.length >= 2
+      ? "Two pure equilibria coexist, so the outcome hinges on coordination and trust — players can get locked into the safer but worse one."
+      : "A single dominant equilibrium: neither player can gain by deviating, so rational play converges straight to it.";
+
+  const code = `import itertools
+# payoff[r][c] = (row_payoff, col_payoff)
+payoff = ${JSON.stringify(P)}
+nash = []
+for r, c in itertools.product((0, 1), repeat=2):
+    row_best = payoff[r][c][0] >= payoff[1 - r][c][0]
+    col_best = payoff[r][c][1] >= payoff[r][1 - c][1]
+    if row_best and col_best:
+        nash.append((r, c))
+print("pure Nash equilibria:", nash)`;
+
   return (
     <StudioChrome title="Game Theory (Nash)" tagline="2×2 strategic games"
       controls={<div>
         <div className="mb-3 grid gap-2">{Object.keys(GAMES).map((k) => <button key={k} onClick={() => setGame(k)} className={`rounded-lg px-2 py-1.5 text-xs font-semibold ${game === k ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{k}</button>)}</div>
         <p className="mt-3 text-xs text-slate-500">A Nash equilibrium is a pair of strategies where neither player can do better by unilaterally changing — the cornerstone of game theory. In the Prisoner&apos;s Dilemma both defect even though cooperating pays more; Matching Pennies has no pure equilibrium at all. Highlighted cells are the pure-strategy Nash equilibria.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Game" value={game} /><Stat label="Pure Nash equilibria" value={String(nash.length)} /><Stat label="Type" value={nash.length === 0 ? "mixed only" : nash.length === 1 ? "dominant" : "multiple"} /></div>}
+      inspector={<div><Stat label="Game" value={game} /><Stat label="Pure Nash equilibria" value={String(nash.length)} /><Stat label="Type" value={nash.length === 0 ? "mixed only" : nash.length === 1 ? "dominant" : "multiple"} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center py-6">
         <div className="mb-2 text-xs uppercase tracking-widest text-slate-500">Row player vs Column player</div>
         <table className="border-collapse">

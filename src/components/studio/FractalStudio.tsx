@@ -2,13 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { useShareableNumbers } from "@/lib/studioKit";
 
 const W = 640, H = 480;
+
+const PRESETS: Record<string, { maxIter: number }> = {
+  "Fast draft": { maxIter: 50 },
+  "Standard": { maxIter: 150 },
+  "Deep detail": { maxIter: 350 },
+  "Max filaments": { maxIter: 500 },
+};
 
 export function FractalStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [mode, setMode] = useState<"mandelbrot" | "julia">("mandelbrot");
-  const [maxIter, setMaxIter] = useState(150);
+  const [{ maxIter }, update] = useShareableNumbers({ maxIter: 150 });
   const view = useRef({ cx: -0.5, cy: 0, scale: 3 });
   const julia = useRef({ x: -0.8, y: 0.156 });
   const [, force] = useState(0);
@@ -39,6 +48,23 @@ export function FractalStudio() {
     force((n) => n + 1);
   };
 
+  const explain =
+    mode === "mandelbrot"
+      ? `In Mandelbrot mode every pixel is a candidate c; a point counts as inside only if z stays bounded through all ${maxIter} iterations, so raising the cap sharpens the boundary filaments.`
+      : `In Julia mode c is held fixed at (${julia.current.x}, ${julia.current.y}) while the start point varies, so the same z→z²+c rule carves the plane into escaping and trapped regions whose fractal edge depends entirely on that c.`;
+
+  const code = `import numpy as np
+W, H, max_iter = ${W}, ${H}, ${maxIter}
+cx, cy, scale = -0.5, 0.0, 3.0
+px = cx + (np.arange(W) / W - 0.5) * scale
+py = cy + (np.arange(H) / H - 0.5) * scale * (H / W)
+C = px[None, :] + 1j * py[:, None]
+Z = np.zeros_like(C); it = np.zeros(C.shape, int)
+for k in range(max_iter):
+    m = np.abs(Z) <= 2
+    Z[m] = Z[m] ** 2 + C[m]; it[m] += 1
+print("points inside", int((it == max_iter).sum()))`;
+
   return (
     <StudioChrome title="Fractal Explorer" tagline="Mandelbrot & Julia sets · escape-time"
       controls={<div>
@@ -46,14 +72,16 @@ export function FractalStudio() {
           {(["mandelbrot", "julia"] as const).map((m) => <button key={m} onClick={() => setMode(m)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold capitalize ${mode === m ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{m}</button>)}
         </div>
         <p className="mb-3 text-xs text-slate-500">Left-click to zoom in, right-click to zoom out.</p>
-        <Slider label="Max iterations" value={maxIter} min={50} max={500} step={25} onChange={setMaxIter} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Max iterations" value={maxIter} min={50} max={500} step={25} onChange={(v) => update({ maxIter: v })} />
         {mode === "julia" && <>
           <Slider label="Julia c (real)" value={julia.current.x} min={-1} max={1} step={0.01} onChange={(v) => { julia.current.x = v; force((n) => n + 1); }} />
           <Slider label="Julia c (imag)" value={julia.current.y} min={-1} max={1} step={0.01} onChange={(v) => { julia.current.y = v; force((n) => n + 1); }} />
         </>}
         <button onClick={() => { view.current = { cx: mode === "mandelbrot" ? -0.5 : 0, cy: 0, scale: 3 }; force((n) => n + 1); }} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset view</button>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Set" value={mode} /><Stat label="Zoom" value={`${(3 / view.current.scale).toFixed(1)}×`} /><Stat label="Iterations" value={String(maxIter)} /></div>}
+      inspector={<div><Stat label="Set" value={mode} /><Stat label="Zoom" value={`${(3 / view.current.scale).toFixed(1)}×`} /><Stat label="Iterations" value={String(maxIter)} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} onClick={(e) => zoom(e, 0.5)} onContextMenu={(e) => { e.preventDefault(); zoom(e, 2); }} className="mx-auto h-auto max-h-[460px] cursor-crosshair rounded-lg" />
     </StudioChrome>

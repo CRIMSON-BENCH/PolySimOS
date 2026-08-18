@@ -1,17 +1,24 @@
 "use client";
 
-import { useMemo, useRef, useState, useEffect } from "react";
+import { useMemo, useRef, useEffect } from "react";
 import { starterTruss, solveTruss } from "@/lib/engines/fea";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { load: number; scale: number }> = {
+  "No load": { load: 0, scale: 20 },
+  "Light tip load": { load: -10, scale: 40 },
+  "Heavy tip load": { load: -46, scale: 12 },
+  "Overload view": { load: -60, scale: 8 },
+};
 
 export function FEAStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const base = useMemo(() => starterTruss(), []);
-  const [load, setLoad] = useState(-20);
-  const [scale, setScale] = useState(20);
+  const [{ load, scale }, update] = useShareableNumbers({ load: -20, scale: 20 });
 
   const result = useMemo(() => {
     const nodes = base.nodes.map((n, i) => (i === 3 ? { ...n, fy: load } : { ...n }));
@@ -49,6 +56,18 @@ export function FEAStudio() {
   const maxDisp = result.res.ok ? Math.max(...result.res.disp.map(Math.abs)) : 0;
   const maxForce = result.res.ok ? Math.max(...result.res.memberForce.map(Math.abs)) : 0;
 
+  const explain =
+    load === 0
+      ? "No applied load, so the truss rests in its undeformed reference shape and every member force is zero."
+      : `A ${Math.abs(load)}-unit tip load drives a peak member force of ${maxForce.toFixed(1)}. Linear FEA is linear: double the load and both the deflection and every member force double exactly. The ${scale}x slider only magnifies the true (tiny) displacement so you can see it.`;
+
+  const code = `# 2D truss - direct stiffness method (linear FEA)
+tip_load = ${load}       # downward force at the right tip
+deform_scale = ${scale}  # visual exaggeration only
+# assemble global K, apply supports, solve  K u = f
+# member axial force  f_i = (EA/L) * (u_j - u_i) projected on the member axis
+print("max displacement", ${maxDisp.toFixed(3)}, "peak member force", ${maxForce.toFixed(1)})`;
+
   return (
     <StudioChrome
       title="FEA — 2D Truss Studio"
@@ -56,11 +75,13 @@ export function FEAStudio() {
       controls={
         <div>
           <p className="mb-3 text-xs text-slate-500">A finite-element truss under a tip load. Members are colored by axial force; the shape shows the (scaled) deformation.</p>
-          <Slider label="Tip load (down)" value={load} min={-60} max={0} step={2} onChange={setLoad} />
-          <Slider label="Deformation ×" value={scale} min={0} max={60} step={2} onChange={setScale} />
+          <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+          <Slider label="Tip load (down)" value={load} min={-60} max={0} step={2} onChange={(v) => update({ load: v })} />
+          <Slider label="Deformation ×" value={scale} min={0} max={60} step={2} onChange={(v) => update({ scale: v })} />
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /><Stat label="Max axial force" value={maxForce.toFixed(1)} /></div>}
+      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /><Stat label="Max axial force" value={maxForce.toFixed(1)} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>

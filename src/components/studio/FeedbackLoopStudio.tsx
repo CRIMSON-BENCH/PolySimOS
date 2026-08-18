@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { gain: number; plantDrift: number; disturbance: number }> = {
+  "Thermostat": { gain: 150, plantDrift: 40, disturbance: 30 },
+  "Cruise control": { gain: 100, plantDrift: 20, disturbance: 25 },
+  "Low gain (sloppy)": { gain: 5, plantDrift: 45, disturbance: 45 },
+  "Op-amp (huge gain)": { gain: 200, plantDrift: 55, disturbance: 55 },
+};
 
 export function FeedbackLoopStudio() {
   const c = useRef<HTMLCanvasElement>(null);
-  const [gain, setGain] = useState(50), [plantDrift, setPlantDrift] = useState(30), [disturbance, setDisturbance] = useState(20);
+  const [{ gain, plantDrift, disturbance }, update] = useShareableNumbers({ gain: 50, plantDrift: 30, disturbance: 20 });
   const G = gain; const closedGain = G / (1 + G);
   const openError = plantDrift; const closedError = plantDrift / (1 + G);
   const openDist = disturbance; const closedDist = disturbance / (1 + G);
@@ -26,18 +34,39 @@ export function FeedbackLoopStudio() {
     ctx.fillStyle = "#e2e8f0"; ctx.fillText(`open-loop error ${openError.toFixed(0)}%`, 100 + openError * 3, 281); ctx.fillText(`closed-loop error ${closedError.toFixed(1)}%`, 100 + closedError * 3, 301);
   }, [gain, plantDrift, disturbance, G, openError, closedError]);
 
+  const explain =
+    G >= 100
+      ? `Very high loop gain: error and disturbances both shrink by 1+G ≈ ${(1 + G).toFixed(0)}×, so the output tracks the setpoint almost perfectly — this is why op-amps and precision controllers run enormous gain.`
+      : G >= 20
+      ? `Moderate gain divides both tracking error and disturbance by 1+G = ${(1 + G).toFixed(0)}×, cutting the ${openError.toFixed(0)}% open-loop error down to ${closedError.toFixed(1)}%.`
+      : `Low gain means weak correction: dividing by just 1+G = ${(1 + G).toFixed(0)}× leaves a large ${closedError.toFixed(1)}% residual error. Raise the gain to tighten tracking.`;
+
+  const code = `G, plant_drift, disturbance = ${gain}, ${plantDrift}, ${disturbance}
+closed_gain = G / (1 + G)
+closed_error = plant_drift / (1 + G)
+closed_dist = disturbance / (1 + G)
+print("closed-loop gain", round(closed_gain, 3))
+print("error", round(closed_error, 2), "%  (was", plant_drift, "%)")
+print("disturbance rejected", round(100 - closed_dist / disturbance * 100), "%")`;
+
   return (
     <StudioChrome title="Feedback Loop" tagline="why feedback beats open-loop"
       controls={<div>
-        <Slider label="Loop gain G" value={gain} min={1} max={200} step={1} onChange={setGain} />
-        <Slider label="Plant drift (%)" value={plantDrift} min={0} max={60} step={1} onChange={setPlantDrift} />
-        <Slider label="Disturbance (%)" value={disturbance} min={0} max={60} step={1} onChange={setDisturbance} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Loop gain G" value={gain} min={1} max={200} step={1} onChange={(v) => update({ gain: v })} />
+        <Slider label="Plant drift (%)" value={plantDrift} min={0} max={60} step={1} onChange={(v) => update({ plantDrift: v })} />
+        <Slider label="Disturbance (%)" value={disturbance} min={0} max={60} step={1} onChange={(v) => update({ disturbance: v })} />
         <p className="mt-3 text-xs text-slate-500">Feedback measures the output, compares it to the target, and corrects the difference. High loop gain shrinks both tracking error and the effect of disturbances by a factor of 1+G — which is why feedback control is everywhere, from thermostats to cruise control. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Closed-loop gain" value={closedGain.toFixed(3)} />
         <Stat label="Error reduction" value={`${(1 + G).toFixed(0)}×`} />
         <Stat label="Disturbance rejected" value={`${(100 - closedDist / openDist * 100).toFixed(0)}%`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

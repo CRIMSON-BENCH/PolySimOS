@@ -1,15 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { density: number; tau: number; temp: number }> = {
+  "Sub-ignition": { density: 1, tau: 1, temp: 15 },
+  "Break-even": { density: 2, tau: 1, temp: 15 },
+  "Tokamak (ITER)": { density: 1.5, tau: 2, temp: 20 },
+  "Inertial (laser)": { density: 9, tau: 0.2, temp: 30 },
+};
 
 // Lawson criterion / triple product for fusion ignition.
 export function FusionLawsonStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [density, setDensity] = useState(1); // 10^20 /m^3
-  const [tau, setTau] = useState(1); // s confinement time
-  const [temp, setTemp] = useState(15); // keV
+  const [{ density, tau, temp }, update] = useShareableNumbers({ density: 1, tau: 1, temp: 15 });
 
   const n = density * 1e20; const triple = n * tau * temp; // n T tau in 10^21 keV s/m^3-ish
   const ignition = 3e21; // approx D-T triple product threshold
@@ -28,15 +34,28 @@ export function FusionLawsonStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("ignition boundary (green) — nτ vs temperature", ox + 6, oy - ph + 12); ctx.fillText("temperature (keV) →", ox + pw - 130, oy + 16);
   }, [density, tau, temp, ignited]);
 
+  const explain = ignited
+    ? `Above threshold — the triple product ${triple.toExponential(1)} clears the Lawson minimum, so fusion self-heating can sustain the burn without external power.`
+    : temp < 12 || temp > 40
+    ? "Off the ~25 keV sweet spot where D-T reactivity peaks — nudging temperature toward 25 keV cuts the density and confinement you need to ignite."
+    : `Sub-ignition at ${(ratio * 100).toFixed(0)}% — the plasma leaks heat faster than fusion replaces it, so raise density, confinement time, or temperature to close the gap.`;
+
+  const code = `n0, tau, T = ${density}e20, ${tau}, ${temp}  # /m^3, s, keV
+triple = n0 * tau * T
+ignition = 3e21  # approx D-T threshold
+print("triple", triple, "fraction of ignition", triple / ignition)`;
+
   return (
     <StudioChrome title="Fusion (Lawson Criterion)" tagline="the recipe for a star on Earth"
       controls={<div>
-        <Slider label="Density (10²⁰ /m³)" value={density} min={0.1} max={10} step={0.1} onChange={setDensity} />
-        <Slider label="Confinement time (s)" value={tau} min={0.1} max={5} step={0.1} onChange={setTau} />
-        <Slider label="Temperature (keV)" value={temp} min={5} max={50} step={1} onChange={setTemp} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Density (10²⁰ /m³)" value={density} min={0.1} max={10} step={0.1} onChange={(v) => update({ density: v })} />
+        <Slider label="Confinement time (s)" value={tau} min={0.1} max={5} step={0.1} onChange={(v) => update({ tau: v })} />
+        <Slider label="Temperature (keV)" value={temp} min={5} max={50} step={1} onChange={(v) => update({ temp: v })} />
         <p className="mt-3 text-xs text-slate-500">To get more fusion energy out than you put in, a plasma must be hot enough, dense enough, and confined long enough — captured together in the triple product n·τ·T. The Lawson criterion sets the threshold for ignition, where the fusion self-heats. Crossing it, at over 100 million degrees, is the decades-long goal of tokamaks and laser fusion.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Triple product" value={`${triple.toExponential(2)}`} /><Stat label="Fraction of ignition" value={`${(ratio * 100).toFixed(0)}%`} /><Stat label="Status" value={ignited ? "IGNITION" : "sub-ignition"} /></div>}
+      inspector={<div><Stat label="Triple product" value={`${triple.toExponential(2)}`} /><Stat label="Fraction of ignition" value={`${(ratio * 100).toFixed(0)}%`} /><Stat label="Status" value={ignited ? "IGNITION" : "sub-ignition"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

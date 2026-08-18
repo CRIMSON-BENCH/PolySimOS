@@ -1,18 +1,25 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { starterFrame, solveSpaceFrame } from "@/lib/engines/fea3d";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+
+const PRESETS: Record<string, { loadX: number; scale: number }> = {
+  "Pure gravity": { loadX: 0, scale: 12 },
+  "Gentle sway": { loadX: 6, scale: 20 },
+  "Design load": { loadX: 20, scale: 10 },
+  "Strong wind": { loadX: 40, scale: 6 },
+};
 
 export function FEA3DStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const base = useMemo(() => starterFrame(), []);
-  const [loadX, setLoadX] = useState(15);
-  const [scale, setScale] = useState(8);
+  const [{ loadX, scale }, update] = useShareableNumbers({ loadX: 15, scale: 8 });
   const cam = useRef({ yaw: 0.7, pitch: -0.3, auto: true });
   const drag = useRef<{ x: number; y: number } | null>(null);
   const rafRef = useRef(0);
@@ -54,6 +61,20 @@ export function FEA3DStudio() {
 
   const maxDisp = result.res.ok ? Math.max(...result.res.disp.map(Math.abs)) : 0;
 
+  const explain =
+    loadX === 0
+      ? "Purely vertical load: the tower compresses almost straight down with negligible sway, because a frame is far stiffer along its axis than in bending."
+      : loadX >= 30
+      ? `Lateral load (${loadX}) now rivals the vertical, so bending dominates: the tower leans, windward members go into tension (cyan) and leeward into compression (pink), and peak node displacement climbs to ${maxDisp.toFixed(3)}.`
+      : `Combined lateral ${loadX} and vertical load bends the frame; peak node displacement is ${maxDisp.toFixed(3)}, and members recolor by axial force, cyan for tension and pink for compression.`;
+
+  const code = `# 3D space frame - direct stiffness method (3 DOF per node)
+load_x = ${loadX}       # lateral load at the top node
+load_y = -25            # vertical load at the top node
+deform_scale = ${scale} # visual exaggeration only
+# assemble the 3N x 3N global K, apply fixed supports, solve  K u = f
+print("max node displacement", ${maxDisp.toFixed(3)})`;
+
   return (
     <StudioChrome
       title="3D FEA — Space Frame Studio"
@@ -61,12 +82,14 @@ export function FEA3DStudio() {
       controls={
         <div>
           <p className="mb-3 text-xs text-slate-500">A 3D tower under a lateral + vertical load at the top. Drag to orbit. Members colored by axial force.</p>
-          <Slider label="Lateral load" value={loadX} min={0} max={40} step={2} onChange={setLoadX} />
-          <Slider label="Deformation ×" value={scale} min={0} max={30} step={1} onChange={setScale} />
+          <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+          <Slider label="Lateral load" value={loadX} min={0} max={40} step={2} onChange={(v) => update({ loadX: v })} />
+          <Slider label="Deformation ×" value={scale} min={0} max={30} step={1} onChange={(v) => update({ scale: v })} />
           <button onClick={() => (cam.current.auto = !cam.current.auto)} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">Toggle auto-rotate</button>
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="DOF" value={String(base.nodes.length * 3)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /></div>}
+      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="DOF" value={String(base.nodes.length * 3)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" />
     </StudioChrome>

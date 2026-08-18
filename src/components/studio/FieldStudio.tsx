@@ -3,7 +3,22 @@
 import { useEffect, useRef, useState } from "react";
 import { heatInit, heatStep, heatHotspot, HeatField, waveInit, waveStep, WaveField } from "@/lib/engines/fields";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const HEAT_PRESETS: Record<string, { alpha: number }> = {
+  "Slow diffusion": { alpha: 0.05 },
+  "Balanced": { alpha: 0.15 },
+  "Fast spread": { alpha: 0.20 },
+  "Max stable": { alpha: 0.24 },
+};
+
+const WAVE_PRESETS: Record<string, { speed: number }> = {
+  "Slow ripple": { speed: 0.14 },
+  "Moderate": { speed: 0.36 },
+  "Fast": { speed: 0.54 },
+  "Near CFL limit": { speed: 0.70 },
+};
 
 export function FieldStudio() {
   const [mode, setMode] = useState<"heat" | "wave">("heat");
@@ -28,7 +43,7 @@ function Heat() {
   const fieldRef = useRef<HeatField | null>(null);
   const rafRef = useRef(0);
   const [running, setRunning] = useState(true);
-  const [alpha, setAlpha] = useState(0.2);
+  const [{ alpha }, update] = useShareableNumbers({ alpha: 0.2 });
 
   useEffect(() => { fieldRef.current = heatInit(N); }, []);
   useEffect(() => {
@@ -59,6 +74,22 @@ function Heat() {
     heatHotspot(fieldRef.current!, x, y, 6);
   };
 
+  const explain =
+    alpha >= 0.22
+      ? `Diffusivity α = ${alpha.toFixed(2)} sits right at the 0.25 stability ceiling for this explicit scheme: heat blurs outward in just a few steps, but nudge α higher and the finite-difference update would oscillate and blow up.`
+      : alpha <= 0.08
+      ? `Small diffusivity α = ${alpha.toFixed(2)}: heat creeps outward slowly and the explicit scheme is rock-solid, but sharp hotspots stay visible for many frames.`
+      : `Diffusivity α = ${alpha.toFixed(2)} spreads heat at a moderate rate while staying well under the 0.25 explicit-stability limit — hotspots smooth into a gentle gradient within a second or two.`;
+
+  const code = `import numpy as np
+alpha, N, steps = ${alpha}, ${N}, 2
+u = np.zeros((N, N)); u[N // 2, N // 2] = 1.0
+for _ in range(steps):
+    lap = (np.roll(u, 1, 0) + np.roll(u, -1, 0)
+           + np.roll(u, 1, 1) + np.roll(u, -1, 1) - 4 * u)
+    u += alpha * lap
+print("stable" if alpha <= 0.25 else "unstable", "peak", round(u.max(), 4))`;
+
   return (
     <StudioChrome
       title="Field — 2D Heat Equation"
@@ -70,10 +101,15 @@ function Heat() {
             <button onClick={() => (fieldRef.current = heatInit(N))} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Reset</button>
           </div>
           <p className="mb-3 text-xs text-slate-500">Click the field to add heat.</p>
-          <Slider label="Diffusivity α" value={alpha} min={0.05} max={0.24} step={0.01} onChange={setAlpha} />
+          <Presets
+            presets={Object.keys(HEAT_PRESETS).map((label) => ({ label }))}
+            onApply={(label) => update(HEAT_PRESETS[label])}
+          />
+          <Slider label="Diffusivity α" value={alpha} min={0.05} max={0.24} step={0.01} onChange={(v) => update({ alpha: v })} />
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Scheme" value="Explicit FD" /><Stat label="Stability" value={alpha <= 0.25 ? "stable" : "risky"} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Scheme" value="Explicit FD" /><Stat label="Stability" value={alpha <= 0.25 ? "stable" : "risky"} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={N} height={N} onClick={onClick} className="mx-auto h-auto max-h-[440px] cursor-crosshair rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} />
     </StudioChrome>
@@ -86,7 +122,7 @@ function Wave() {
   const fieldRef = useRef<WaveField | null>(null);
   const rafRef = useRef(0);
   const [running, setRunning] = useState(true);
-  const [speed, setSpeed] = useState(0.5);
+  const [{ speed }, update] = useShareableNumbers({ speed: 0.5 });
   const W = 760, H = 360;
 
   useEffect(() => { fieldRef.current = waveInit(N); }, []);
@@ -117,6 +153,23 @@ function Wave() {
     for (let d = -12; d <= 12; d++) { const i = x + d; if (i > 0 && i < N - 1) { const v = Math.exp(-(d * d) / 40); f.u[i] += v; f.uPrev[i] += v; } }
   };
 
+  const explain =
+    speed >= 0.6
+      ? `Wave speed c = ${speed.toFixed(2)} runs the pulse nearly a full grid cell per step — close to the CFL limit where this explicit scheme stops being stable. Reflections race back and forth fast.`
+      : speed <= 0.2
+      ? `Low wave speed c = ${speed.toFixed(2)}: the pluck crawls along the string, so the scheme is very stable but you wait longer to watch it reflect off the ends.`
+      : `Wave speed c = ${speed.toFixed(2)} keeps the pulse comfortably inside the CFL stability window — reflections bounce off both fixed ends and interfere to form standing-wave patterns.`;
+
+  const code = `import numpy as np
+c, N = ${speed}, ${N}
+u = np.zeros(N); u_prev = np.zeros(N); u[N // 2] = 1.0
+for _ in range(2):
+    lap = np.roll(u, 1) + np.roll(u, -1) - 2 * u
+    u_next = 2 * u - u_prev + c * c * lap
+    u_next[0] = u_next[-1] = 0.0  # fixed ends
+    u_prev, u = u, u_next
+print("CFL", "ok" if c <= 1 else "risky")`;
+
   return (
     <StudioChrome
       title="Field — 1D Wave Equation"
@@ -128,10 +181,15 @@ function Wave() {
             <button onClick={() => (fieldRef.current = waveInit(N))} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Reset</button>
           </div>
           <p className="mb-3 text-xs text-slate-500">Click the string to pluck it.</p>
-          <Slider label="Wave speed c" value={speed} min={0.1} max={0.7} step={0.02} onChange={setSpeed} />
+          <Presets
+            presets={Object.keys(WAVE_PRESETS).map((label) => ({ label }))}
+            onApply={(label) => update(WAVE_PRESETS[label])}
+          />
+          <Slider label="Wave speed c" value={speed} min={0.1} max={0.7} step={0.02} onChange={(v) => update({ speed: v })} />
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Points" value={String(N)} /><Stat label="Scheme" value="Explicit FD" /><Stat label="CFL" value={speed <= 0.7 ? "ok" : "risky"} /></div>}
+      inspector={<div><Stat label="Points" value={String(N)} /><Stat label="Scheme" value="Explicit FD" /><Stat label="CFL" value={speed <= 0.7 ? "ok" : "risky"} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} onClick={pluck} className="h-auto w-full cursor-crosshair rounded-lg" />
     </StudioChrome>

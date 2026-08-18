@@ -2,16 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const N = 120, CELL = 4;
 
+const PRESETS: Record<string, { windSpeed: number; windDir: number; slope: number; fuel: number }> = {
+  "Calm & flat": { windSpeed: 2, windDir: 90, slope: 0, fuel: 0.7 },
+  "Wind-driven blowup": { windSpeed: 38, windDir: 90, slope: 5, fuel: 0.9 },
+  "Steep canyon run": { windSpeed: 10, windDir: 90, slope: 45, fuel: 0.85 },
+  "Sparse fuel": { windSpeed: 15, windDir: 90, slope: 10, fuel: 0.45 },
+};
+
 export function FireSpreadStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [windSpeed, setWindSpeed] = useState(15);
-  const [windDir, setWindDir] = useState(90); // degrees, 0 = east
-  const [slope, setSlope] = useState(10);
-  const [fuel, setFuel] = useState(0.75);
+  const [{ windSpeed, windDir, slope, fuel }, update] = useShareableNumbers({ windSpeed: 15, windDir: 90, slope: 10, fuel: 0.75 });
   const [running, setRunning] = useState(true);
   const [seed, setSeed] = useState(1);
   const [burned, setBurned] = useState(0);
@@ -45,17 +50,48 @@ export function FireSpreadStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, windSpeed, windDir, slope]);
 
+  const explain =
+    windSpeed >= 25
+      ? `Strong ${windDir}° wind dominates: the fire front elongates sharply downwind and rate-of-spread climbs fast.`
+      : slope >= 30
+      ? "Steep slope: flames lean into and preheat the fuel above them, so the fire races uphill far faster than across flat ground."
+      : fuel < 0.55
+      ? "Sparse fuel: gaps between burnable cells starve the front, and the fire can self-extinguish before spreading far."
+      : "Moderate wind and slope: the fire spreads roughly outward, with a gentle bias downwind and uphill.";
+
+  const code = `import numpy as np
+wind_speed, wind_dir, slope, fuel = ${windSpeed}, ${windDir}, ${slope}, ${fuel}
+N = 120
+rng = np.random.default_rng(1)
+g = np.where(rng.random((N, N)) < fuel, 0, 3)  # 0=fuel, 3=no-fuel
+g[N // 2, N // 2] = 1                           # ignition (1=burning, 2=burned)
+wx, wy = np.cos(np.radians(wind_dir)), np.sin(np.radians(wind_dir))
+for _ in range(200):
+    for y, x in np.argwhere(g == 1):
+        g[y, x] = 2
+        for dy in (-1, 0, 1):
+            for dx in (-1, 0, 1):
+                ny, nx = y + dy, x + dx
+                if 0 <= ny < N and 0 <= nx < N and g[ny, nx] == 0:
+                    align = (dx * wx + dy * wy) / (np.hypot(dx, dy) or 1)
+                    p = 0.28 * (1 + wind_speed / 25 * align) * (1 + slope / 45 * max(0, -dy) * 0.6)
+                    if rng.random() < p:
+                        g[ny, nx] = 1
+print("cells burned", int((g == 2).sum()))`;
+
   return (
     <StudioChrome title="Wildfire / Fire Spread" tagline="wind + slope driven spread"
       controls={<div>
-        <Slider label="Wind speed" value={windSpeed} min={0} max={40} step={1} onChange={setWindSpeed} />
-        <Slider label="Wind direction" value={windDir} min={0} max={360} step={15} onChange={setWindDir} />
-        <Slider label="Slope" value={slope} min={0} max={45} step={1} onChange={setSlope} />
-        <Slider label="Fuel density" value={fuel} min={0.4} max={1} step={0.05} onChange={setFuel} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Wind speed" value={windSpeed} min={0} max={40} step={1} onChange={(v) => update({ windSpeed: v })} />
+        <Slider label="Wind direction" value={windDir} min={0} max={360} step={15} onChange={(v) => update({ windDir: v })} />
+        <Slider label="Slope" value={slope} min={0} max={45} step={1} onChange={(v) => update({ slope: v })} />
+        <Slider label="Fuel density" value={fuel} min={0.4} max={1} step={0.05} onChange={(v) => update({ fuel: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reignite</button></div>
         <p className="mt-3 text-xs text-slate-500">Fire spreads cell to cell, biased downwind and uphill — the two dominant drivers of real wildfire rate-of-spread. Rotate the wind and raise the slope to see how a fire front elongates and races upslope. For training and situational awareness only.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cells burned" value={burned.toLocaleString()} /><Stat label="Wind" value={`${windSpeed} @ ${windDir}°`} /><Stat label="Slope" value={`${slope}°`} /></div>}
+      inspector={<div><Stat label="Cells burned" value={burned.toLocaleString()} /><Stat label="Wind" value={`${windSpeed} @ ${windDir}°`} /><Stat label="Slope" value={`${slope}°`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

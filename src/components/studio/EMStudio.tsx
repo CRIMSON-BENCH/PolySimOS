@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Charge, potentialAt, traceFieldLine } from "@/lib/engines/em";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -44,6 +45,22 @@ export function EMStudio() {
     setCharges((cs) => [...cs, { x, y, q: sign }]);
   };
 
+  const chargeList = charges.map((c) => `(${Math.round(c.x)}, ${Math.round(c.y)}, ${c.q})`).join(", ");
+  const code = `import numpy as np
+K = 5000.0
+charges = [${chargeList}]  # (x, y, q)
+xs = np.linspace(0, ${W}, 160)
+ys = np.linspace(0, ${H}, 120)
+V = np.zeros((ys.size, xs.size))
+for cx, cy, q in charges:
+    for j, y in enumerate(ys):
+        d = np.hypot(xs - cx, y - cy)
+        V[j] += K * q / np.maximum(6.0, d)  # each charge adds k*q/r
+print("potential range:", V.min(), V.max())`;
+
+  const explain =
+    "The potential at any point is the superposition of every charge's k·q/r term, so overlapping fields simply add. Field lines run from high potential to low — out of + charges and into − charges — always crossing the equipotentials at right angles.";
+
   return (
     <StudioChrome
       title="Electromagnetics — Electrostatics Studio"
@@ -56,9 +73,10 @@ export function EMStudio() {
             <button onClick={() => setSign(-1)} className={`flex-1 rounded-lg px-3 py-1.5 text-sm font-semibold ${sign === -1 ? "bg-blue-500 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>− charge</button>
           </div>
           <button onClick={() => setCharges([{ x: 220, y: 240, q: 1 }, { x: 420, y: 240, q: -1 }])} className="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Reset (dipole)</button>
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Charges" value={String(charges.length)} /><Stat label="Net charge" value={String(charges.reduce((a, c) => a + c.q, 0))} /><Stat label="Method" value="Superposition" /></div>}
+      inspector={<div><Stat label="Charges" value={String(charges.length)} /><Stat label="Net charge" value={String(charges.reduce((a, c) => a + c.q, 0))} /><Stat label="Method" value="Superposition" /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} onClick={addCharge} className="mx-auto h-auto max-h-[460px] cursor-crosshair rounded-lg" />
     </StudioChrome>

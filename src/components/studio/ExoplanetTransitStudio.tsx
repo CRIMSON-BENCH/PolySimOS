@@ -2,12 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { ratio: number; impact: number }> = {
+  "Hot Jupiter": { ratio: 0.15, impact: 0.1 },
+  "Earth analog": { ratio: 0.02, impact: 0.2 },
+  "Grazing transit": { ratio: 0.1, impact: 0.95 },
+  "Super-Earth": { ratio: 0.04, impact: 0.3 },
+};
 
 export function ExoplanetTransitStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [ratio, setRatio] = useState(0.1); // Rp/Rs
-  const [impact, setImpact] = useState(0.2); // impact parameter b (0..1)
+  const [{ ratio, impact }, update] = useShareableNumbers({ ratio: 0.1, impact: 0.2 });
   const [running, setRunning] = useState(true);
   const phase = useRef(0);
   const curve = useRef<number[]>([]);
@@ -44,15 +51,28 @@ export function ExoplanetTransitStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, ratio, impact]);
 
+  const code = `import numpy as np
+ratio, impact = ${ratio}, ${impact}   # Rp/Rs, impact parameter b
+depth = ratio**2                       # fractional dip when fully overlapped
+t = np.linspace(-1.6, 1.6, 400)        # sky-projected separation (stellar radii)
+d = np.hypot(t, impact)                # planet-star center distance
+flux = np.where(d < 1 - ratio, 1 - depth, 1.0)  # simple box transit
+print("transit depth:", depth)`;
+
+  const explain =
+    "The dip depth is almost exactly (Rp/Rs)², so measuring how much light is blocked directly gives the planet's size relative to its star. The width of the dip is the transit duration, which — combined with how often it repeats — follows from the planet's orbital period and speed across the disk.";
+
   return (
     <StudioChrome title="Exoplanet Transit" tagline="the transit method · light curves"
       controls={<div>
-        <Slider label="Planet/star radius (Rp/Rs)" value={ratio} min={0.02} max={0.3} step={0.01} onChange={setRatio} />
-        <Slider label="Impact parameter b" value={impact} min={0} max={1} step={0.05} onChange={setImpact} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Planet/star radius (Rp/Rs)" value={ratio} min={0.02} max={0.3} step={0.01} onChange={(v) => update({ ratio: v })} />
+        <Slider label="Impact parameter b" value={impact} min={0} max={1} step={0.05} onChange={(v) => update({ impact: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">As a planet crosses its star, it blocks a tiny fraction of the light — a dip of depth (Rp/Rs)². This is how Kepler and TESS have found thousands of exoplanets. Impact parameter sets how centrally the planet crosses, changing the transit shape and duration.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Transit depth" value={`${(depth * 100).toFixed(2)}%`} /><Stat label="Rp/Rs" value={ratio.toFixed(2)} /><Stat label="Impact b" value={impact.toFixed(2)} /></div>}
+      inspector={<div><Stat label="Transit depth" value={`${(depth * 100).toFixed(2)}%`} /><Stat label="Rp/Rs" value={ratio.toFixed(2)} /><Stat label="Impact b" value={impact.toFixed(2)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

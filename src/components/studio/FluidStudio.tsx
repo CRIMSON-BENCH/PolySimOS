@@ -3,10 +3,19 @@
 import { useEffect, useRef, useState } from "react";
 import { FluidField, DEFAULT_FLUID } from "@/lib/engines/fluid";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = DEFAULT_FLUID.n;
 const SCALE = 5;
 const PX = (N + 2) * SCALE;
+
+const PRESETS: Record<string, { viscosity: number; force: number; dye: number }> = {
+  "Thin & wild": { viscosity: 0, force: 18, dye: 200 },
+  "Thick & syrupy": { viscosity: 20e-7, force: 8, dye: 180 },
+  "Ink drop": { viscosity: 2e-7, force: 4, dye: 300 },
+  "Wispy smoke": { viscosity: 5e-7, force: 12, dye: 60 },
+};
 
 export function FluidStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -17,9 +26,7 @@ export function FluidStudio() {
   });
 
   const [running, setRunning] = useState(true);
-  const [viscosity, setViscosity] = useState(0.0000001);
-  const [force, setForce] = useState(6);
-  const [dye, setDye] = useState(120);
+  const [{ viscosity, force, dye }, update] = useShareableNumbers({ viscosity: 0.0000001, force: 6, dye: 120 });
   const [metrics, setMetrics] = useState({ totalDensity: 0, meanSpeed: 0, maxSpeed: 0, enstrophy: 0 });
 
   useEffect(() => {
@@ -106,6 +113,23 @@ export function FluidStudio() {
     };
   }, [running, force, dye]);
 
+  const explain =
+    viscosity * 1e7 < 2
+      ? "Near-zero viscosity: momentum barely dissipates, so vortices persist and the flow tips into turbulent, chaotic mixing."
+      : viscosity * 1e7 > 12
+      ? "High viscosity: internal friction damps the field fast — swirls decay into a slow, laminar drift."
+      : force > 14
+      ? "Strong injection force: each stroke drives fast jets that roll up into distinct, long-lived vortex pairs."
+      : "Moderate viscosity: dye plumes billow and mix, with eddies that linger a while before diffusing away.";
+
+  const code = `import numpy as np
+# 2D stable-fluids (Stam) config
+viscosity, force, dye = ${viscosity}, ${force}, ${dye}
+N, dt = ${N}, 0.1
+# per-step diffusion strength for the velocity field (Gauss-Seidel relaxation):
+a = dt * viscosity * N * N
+print("diffusion coefficient a =", a)`;
+
   return (
     <StudioChrome
       title="2D Fluid (CFD) Studio"
@@ -127,9 +151,11 @@ export function FluidStudio() {
             </button>
           </div>
           <p className="mb-3 text-xs text-slate-500">Click and drag on the canvas to inject dye and velocity.</p>
-          <Slider label="Viscosity" value={viscosity * 1e7} min={0} max={20} step={0.5} onChange={(v) => setViscosity(v / 1e7)} />
-          <Slider label="Injection force" value={force} min={1} max={20} step={1} onChange={setForce} />
-          <Slider label="Dye amount" value={dye} min={20} max={300} step={10} onChange={setDye} />
+          <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+          <Slider label="Viscosity" value={viscosity * 1e7} min={0} max={20} step={0.5} onChange={(v) => update({ viscosity: v / 1e7 })} />
+          <Slider label="Injection force" value={force} min={1} max={20} step={1} onChange={(v) => update({ force: v })} />
+          <Slider label="Dye amount" value={dye} min={20} max={300} step={10} onChange={(v) => update({ dye: v })} />
+          <ShareBar code={code} />
         </div>
       }
       inspector={
@@ -139,6 +165,7 @@ export function FluidStudio() {
           <Stat label="Mean speed" value={metrics.meanSpeed.toFixed(3)} />
           <Stat label="Max speed" value={metrics.maxSpeed.toFixed(3)} />
           <Stat label="Enstrophy" value={metrics.enstrophy.toExponential(2)} />
+          <ExplainResult text={explain} />
         </div>
       }
     >
