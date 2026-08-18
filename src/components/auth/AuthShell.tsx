@@ -12,16 +12,27 @@ const appearance = {
     colorPrimary: "#06b6d4",
     colorBackground: "#0b1220",
     colorInputBackground: "#0f172a",
+    // Explicit light text so nothing renders dark-on-dark.
+    colorText: "#f1f5f9",          // near-white body text
+    colorTextSecondary: "#cbd5e1", // labels / subtitles (was too dark)
+    colorInputText: "#f8fafc",
     borderRadius: "0.65rem",
     fontFamily: "inherit",
   },
   elements: {
     card: "shadow-2xl border border-white/10 bg-[#0b1220]",
-    headerTitle: "text-slate-100",
-    headerSubtitle: "text-slate-400",
-    socialButtonsBlockButton: "border-white/10",
-    formFieldInput: "border-white/10",
+    headerTitle: "text-white",
+    headerSubtitle: "text-slate-300",
+    // Give the Google button a visible tinted background + light label.
+    socialButtonsBlockButton: "border border-white/20 bg-white/[0.06] text-slate-100 hover:bg-white/[0.12]",
+    socialButtonsBlockButtonText: "text-slate-100 font-medium",
+    dividerLine: "bg-white/15",
+    dividerText: "text-slate-400",
+    formFieldLabel: "text-slate-200",
+    formFieldInput: "border-white/10 text-slate-100",
+    footerActionText: "text-slate-400",
     footerActionLink: "text-cyan-400 hover:text-cyan-300",
+    footer: "text-slate-400",
   },
 };
 
