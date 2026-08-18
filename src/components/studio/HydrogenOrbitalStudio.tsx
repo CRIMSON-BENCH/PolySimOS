@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const ORBITALS: Record<string, { n: number; label: string; psi: (r: number, ct: number) => number }> = {
@@ -93,6 +94,7 @@ print("grid", density.shape, "peak |psi|^2", density.max())`;
         <Stat label="Quantum numbers" value={`n=${n}, l=${L}, m=${M}`} />
         <Stat label="Energy" value={`${(-13.6 / (n * n)).toFixed(2)} eV`} />
         <Stat label="Nodes" value={`${radialNodes} radial, ${L} angular`} />
+        <Equation tex={`E_{${n}} = -\\dfrac{13.6}{${n}^2}\\ \\text{eV} = ${(-13.6 / (n * n)).toFixed(2)}\\ \\text{eV}\\quad(${orb})`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={400} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 // Fireground hydraulics: friction loss FL = C * (Q/100)^2 * (L/100)
@@ -60,7 +61,7 @@ print("pump discharge pressure", round(PDP), "psi")`;
         <p className="mt-3 text-xs text-slate-500">Friction loss uses the fireground formula FL = C·(Q/100)²·(L/100), added to nozzle pressure and elevation head to give the required pump discharge pressure. Coefficients are standard single-line values. Verify against your department&apos;s charts.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Friction loss" value={`${FL.toFixed(0)} psi`} /><Stat label="Elevation" value={`${EP.toFixed(0)} psi`} /><Stat label="Coefficient C" value={String(C)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Friction loss" value={`${FL.toFixed(0)} psi`} /><Stat label="Elevation" value={`${EP.toFixed(0)} psi`} /><Stat label="Coefficient C" value={String(C)} /><Equation tex={`\\mathrm{PDP} = \\mathrm{NP} + C\\!\\left(\\tfrac{Q}{100}\\right)^{2}\\tfrac{L}{100} + 0.434\\,h = ${nozzle} + ${FL.toFixed(0)} + ${EP.toFixed(0)} = ${PDP.toFixed(0)}\\ \\mathrm{psi}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Required pump discharge pressure</div>
         <div className="mt-3 text-6xl font-black text-cyan-500">{PDP.toFixed(0)}<span className="ml-2 text-2xl text-slate-400">psi</span></div>

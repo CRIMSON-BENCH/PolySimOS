@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { pressure: number }> = {
@@ -63,7 +64,7 @@ print("deficit", deficit, "mbar | max wind", round(mph), "mph")`;
         <p className="mt-3 text-xs text-slate-500">A hurricane is a giant heat engine whose winds are driven by the pressure drop at its center — the deeper the low, the fiercer the winds, roughly as the square root of the pressure deficit. The calm eye sits in the middle, ringed by the eyewall of strongest wind. Central pressure is the single best predictor of a storm&apos;s intensity.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Pressure deficit" value={`${deficit} mbar`} /><Stat label="Max wind" value={`${kmh.toFixed(0)} km/h`} /><Stat label="Max wind (mph)" value={`${mph.toFixed(0)} mph`} /><Stat label="Saffir-Simpson" value={cat === 0 ? "tropical storm" : `Category ${cat}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Pressure deficit" value={`${deficit} mbar`} /><Stat label="Max wind" value={`${kmh.toFixed(0)} km/h`} /><Stat label="Max wind (mph)" value={`${mph.toFixed(0)} mph`} /><Stat label="Saffir-Simpson" value={cat === 0 ? "tropical storm" : `Category ${cat}`} /><Equation tex={`v_{\\max} = 6.3\\sqrt{p_{env}-p_c} = 6.3\\sqrt{1013-${pressure}} = ${maxWind.toFixed(1)}\\ \\mathrm{m/s}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={400} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

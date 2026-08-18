@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Helmholtz resonator: f = (c/2pi) sqrt(A/(V*Leff)).
@@ -53,7 +54,7 @@ print("frequency_Hz", round(f))`;
         <p className="mt-3 text-xs text-slate-500">Blow across a bottle and it sings at its Helmholtz frequency. The plug of air in the neck acts as a mass and the air in the cavity as a spring, giving f = (c/2π)√(A/VL). Bigger cavities and longer necks lower the pitch — the principle behind bass ports, mufflers, and ocarinas.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Resonant frequency" value={`${f.toFixed(0)} Hz`} /><Stat label="Wavelength" value={`${(C / f).toFixed(2)} m`} /><Stat label="Cavity" value={`${volume} cm³`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Resonant frequency" value={`${f.toFixed(0)} Hz`} /><Stat label="Wavelength" value={`${(C / f).toFixed(2)} m`} /><Stat label="Cavity" value={`${volume} cm³`} /><Equation tex={`f = \\frac{c}{2\\pi}\\sqrt{\\frac{A}{V\\,L_{\\mathrm{eff}}}} = \\frac{343}{2\\pi}\\sqrt{\\frac{${A.toExponential(2)}}{${V.toExponential(2)} \\cdot ${Leff.toFixed(3)}}} = ${f.toFixed(0)}\\ \\mathrm{Hz}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

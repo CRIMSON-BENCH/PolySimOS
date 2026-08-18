@@ -2,6 +2,7 @@
 
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useState } from "react";
 
 type Node = { ch?: string; freq: number; l?: Node; r?: Node };
@@ -52,7 +53,7 @@ print(codes)`;
         <p className="mt-3 text-xs text-slate-500">Huffman coding gives frequent symbols short codes and rare ones long codes, minimizing the total bits — the optimal prefix code. It builds a tree by repeatedly merging the two least frequent nodes, so no code is a prefix of another and decoding is unambiguous. It is the compression step inside ZIP, JPEG, MP3, and countless file formats.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Symbols" value={String(entries.length)} /><Stat label="Huffman bits" value={String(huffBits)} /><Stat label="Fixed-length bits" value={String(fixedBits)} /><Stat label="Compression" value={`${(ratio * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Symbols" value={String(entries.length)} /><Stat label="Huffman bits" value={String(huffBits)} /><Stat label="Fixed-length bits" value={String(fixedBits)} /><Stat label="Compression" value={`${(ratio * 100).toFixed(0)}%`} /><Equation tex={`L = \\sum_i p_i \\ell_i = ${(huffBits / (text.length || 1)).toFixed(2)}\\ \\text{bits/sym} \\;\\ge\\; H = -\\sum_i p_i \\log_2 p_i`} /><ExplainResult text={explain} /></div>}
     ><div className="p-4">
         <div className="mb-3 text-center text-xs uppercase tracking-widest text-slate-500">Codebook (shorter = more frequent)</div>
         <div className="mx-auto max-w-md space-y-1 font-mono text-sm">

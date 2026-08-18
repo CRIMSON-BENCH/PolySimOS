@@ -5,6 +5,7 @@ import { Heat3D, heat3dInit, heat3dStep, heat3dSlice, heat3dHotVoxels } from "@/
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -104,7 +105,7 @@ print("peak", round(u.max(), 4))`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Grid" value={`${N}³`} /><Stat label="Cells" value={(N * N * N).toLocaleString()} /><Stat label="Scheme" value="Explicit FD" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}³`} /><Stat label="Cells" value={(N * N * N).toLocaleString()} /><Stat label="Scheme" value="Explicit FD" /><Equation tex={`\\frac{\\partial u}{\\partial t} = ${alpha}\\,\\nabla^2 u = ${alpha}\\left(u_{xx} + u_{yy} + u_{zz}\\right)`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" />
     </StudioChrome>

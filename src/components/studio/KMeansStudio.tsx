@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const COLORS = ["#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#c084fc", "#fb7185", "#34d399", "#60a5fa"];
@@ -79,7 +80,7 @@ print("iterations:", km.n_iter_, " inertia:", km.inertia_)`;
         <p className="mt-3 text-xs text-slate-500">Lloyd&apos;s algorithm: assign each point to its nearest centroid, then move each centroid to the mean of its members. Repeat until stable. Try setting k different from the true cluster count.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Iteration" value={String(iter)} /><Stat label="Inertia" value={inertia.toExponential(2)} /><Stat label="k" value={String(Math.round(k))} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Iteration" value={String(iter)} /><Stat label="Inertia" value={inertia.toExponential(2)} /><Stat label="k" value={String(Math.round(k))} /><Equation tex={`J = \\sum_{k=1}^{${kR}} \\sum_{x \\in C_k} \\lVert x - \\mu_k \\rVert^2,\\quad \\mu_k = \\frac{1}{|C_k|}\\sum_{x \\in C_k} x`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={420} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

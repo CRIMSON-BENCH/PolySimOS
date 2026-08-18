@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Star color from temperature (approx blackbody)
@@ -70,6 +71,7 @@ print("class", cls, "luminosity", round(L, 3), "L_sun")`;
         <Stat label="Spectral class" value={SPECTRAL(temp)} />
         <Stat label="Luminosity" value={`${L.toFixed(2)} L☉`} />
         <Stat label="Temperature" value={`${temp.toLocaleString()} K`} />
+        <Equation tex={`\\frac{L}{L_\\odot} = \\left(\\frac{T}{T_\\odot}\\right)^{4} = \\left(\\frac{${temp}}{5778}\\right)^{4} = ${L.toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={500} height={420} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

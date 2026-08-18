@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { thi: number; tho: number; tci: number; UA: number }> = {
@@ -63,6 +64,7 @@ print("LMTD", lmtd, "Q_kW", UA * lmtd / 1000)`;
         <Stat label="LMTD" value={`${lmtd.toFixed(1)} K`} />
         <Stat label="Heat duty Q" value={`${Q.toFixed(2)} kW`} />
         <Stat label="Arrangement" value={counter ? "counter-flow" : "parallel-flow"} />
+        <Equation tex={`Q = ${UA}\\cdot\\Delta T_{lm},\\quad \\Delta T_{lm} = \\frac{${dt1.toFixed(1)} - ${dt2.toFixed(1)}}{\\ln(${dt1.toFixed(1)}/${dt2.toFixed(1)})} = ${lmtd.toFixed(1)}\\ \\text{K}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -2,6 +2,7 @@
 
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useState } from "react";
 
 // Toy 32-bit hash to demonstrate the avalanche effect.
@@ -42,7 +43,7 @@ print(f"{a:08x}", f"{b:08x}", bin(a ^ b).count("1"), "bits differ")`;
         <p className="mt-3 text-xs text-slate-500">A good cryptographic hash maps any input to a fixed-size fingerprint, and flipping a single input bit flips about half the output bits — the avalanche effect. This makes the output look random and unrelated to the input, so you cannot nudge your way from one hash to a target. It is why hashes protect passwords, verify files, and anchor blockchains.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Bits changed" value={`${diff} / 32`} /><Stat label="Avalanche" value={`${(diff / 32 * 100).toFixed(0)}%`} /><Stat label="Ideal" value="~50%" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Bits changed" value={`${diff} / 32`} /><Stat label="Avalanche" value={`${(diff / 32 * 100).toFixed(0)}%`} /><Stat label="Ideal" value="~50%" /><Equation tex={`\\frac{d_H(h_1, h_2)}{32} = \\frac{${diff}}{32} = ${(diff / 32).toFixed(2)} \\approx 0.5`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center gap-3 py-10 font-mono text-sm">
         <div className="text-slate-500">hash(&quot;{text}&quot;)</div>
         <div className="text-2xl font-bold text-cyan-300">{hex(h1)}</div>

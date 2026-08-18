@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { head: number; flow: number; eff: number }> = {
@@ -58,7 +59,7 @@ print("power kW", round(power / 1000), "| annual MWh", round(annual))`;
         <p className="mt-3 text-xs text-slate-500">Hydroelectric power is beautifully simple: P = ρ·g·Q·H·η, the weight of water falling per second times the height it drops, times turbine efficiency. High-head mountain schemes need little water; low-head river plants need enormous flow. It is the most efficient and dispatchable of the major renewables.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Power output" value={power > 1e6 ? `${(power / 1e6).toFixed(2)} MW` : `${(power / 1000).toFixed(0)} kW`} /><Stat label="Annual energy" value={`${annual.toFixed(0)} MWh`} /><Stat label="Homes powered" value={(annual * 1000 / 10000).toFixed(0)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Power output" value={power > 1e6 ? `${(power / 1e6).toFixed(2)} MW` : `${(power / 1000).toFixed(0)} kW`} /><Stat label="Annual energy" value={`${annual.toFixed(0)} MWh`} /><Stat label="Homes powered" value={(annual * 1000 / 10000).toFixed(0)} /><Equation tex={`P = \\rho g Q H \\eta = 1000 \\cdot 9.81 \\cdot ${flow} \\cdot ${head} \\cdot ${(eff / 100).toFixed(2)} = ${(power / 1000).toFixed(0)}\\ \\text{kW}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

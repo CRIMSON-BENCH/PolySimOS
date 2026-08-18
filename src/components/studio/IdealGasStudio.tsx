@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { n: number; T: number; V: number }> = {
@@ -54,6 +55,7 @@ print(P / 1000.0, "kPa", "|", P / 101325.0, "atm")`;
         <Stat label="≈ atm" value={(P / 101.325).toFixed(2)} />
         <Stat label="Mean speed vs 300 K" value={`${vRel.toFixed(2)}x`} />
         <Stat label="Law" value="PV = nRT" />
+        <Equation tex={`PV = nRT:\\quad ${P.toFixed(1)}\\,\\text{kPa}\\times ${V}\\,\\text{L} = ${n}\\,\\text{mol}\\times 8.314\\times ${T}\\,\\text{K}`} />
         <ExplainResult text={explain} />
       </div>}
     >

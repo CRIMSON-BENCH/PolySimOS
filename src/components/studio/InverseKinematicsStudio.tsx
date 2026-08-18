@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { L1: number; L2: number; elbowUp: boolean }> = {
@@ -87,6 +88,7 @@ print("tip", forward(theta)[-1], "reach", L.sum())`;
         <Stat label="Target dist" value={d.toFixed(0)} />
         <Stat label="Total reach" value={`${reach}`} />
         <Stat label="Reachable" value={reachable ? "yes" : "out of reach"} />
+        <Equation tex={`\\theta_2=\\arccos\\frac{x^2+y^2-${L1}^2-${L2}^2}{2\\cdot${L1}\\cdot${L2}}=${(t2 * 180 / Math.PI).toFixed(1)}^\\circ,\\quad \\theta_1=\\operatorname{atan2}(${y},${x})-\\operatorname{atan2}(${L2}\\sin\\theta_2,\\,${L1}+${L2}\\cos\\theta_2)=${(t1 * 180 / Math.PI).toFixed(1)}^\\circ`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={480} height={380} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); const sx = 480 / r.width, sy = 380 / r.height; setTarget([(e.clientX - r.left) * sx - 240, -((e.clientY - r.top) * sy - 250)]); }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>

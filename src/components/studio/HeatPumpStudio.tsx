@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { indoor: number; outdoor: number; effFrac: number }> = {
@@ -46,7 +47,7 @@ print("COP", round(cop, 2), "Carnot_max", round(carnot, 1))`;
         <p className="mt-3 text-xs text-slate-500">A heat pump does not make heat — it moves it, so it can deliver several kilowatts of warmth per kilowatt of electricity. The coefficient of performance is that ratio, capped by the Carnot limit T_hot/(T_hot − T_cold). The colder it gets outside, the harder the pump works and the lower the COP — but even at freezing it beats a resistance heater several times over.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="COP" value={cop.toFixed(2)} /><Stat label="Carnot max COP" value={carnotCOP.toFixed(1)} /><Stat label="Heat per kW power" value={`${cop.toFixed(1)} kW`} /><Stat label="vs resistance heater" value={`${cop.toFixed(1)}× better`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="COP" value={cop.toFixed(2)} /><Stat label="Carnot max COP" value={carnotCOP.toFixed(1)} /><Stat label="Heat per kW power" value={`${cop.toFixed(1)} kW`} /><Stat label="vs resistance heater" value={`${cop.toFixed(1)}× better`} /><Equation tex={`\\mathrm{COP}_{\\text{Carnot}} = \\frac{T_h}{T_h - T_c} = \\frac{${Th.toFixed(1)}}{${Th.toFixed(1)} - ${Tc.toFixed(1)}} = ${carnotCOP.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

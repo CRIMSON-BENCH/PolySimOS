@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const INTERVAL = ["", "unison", "octave", "fifth", "octave", "major 3rd", "fifth", "min 7th", "octave"];
@@ -64,7 +65,7 @@ print("peak", wave.max(), "trough", wave.min())`;
         <p className="mt-3 text-xs text-slate-500">Every musical note is a stack of harmonics — integer multiples of the fundamental. Their relative strengths (the rolloff) define timbre: why a violin and a flute playing the same pitch sound different. The intervals between harmonics also spell out the octave, fifth, and major third that ground Western harmony.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fundamental" value={`${f0} Hz`} /><Stat label="2nd harmonic" value={`${f0 * 2} Hz (${INTERVAL[2]})`} /><Stat label="3rd harmonic" value={`${f0 * 3} Hz (${INTERVAL[3]})`} /><Stat label="Harmonics" value={String(N)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Fundamental" value={`${f0} Hz`} /><Stat label="2nd harmonic" value={`${f0 * 2} Hz (${INTERVAL[2]})`} /><Stat label="3rd harmonic" value={`${f0 * 3} Hz (${INTERVAL[3]})`} /><Stat label="Harmonics" value={String(N)} /><Equation tex={`f_n = n\\,f_0 = n \\times ${f0}\\ \\text{Hz},\\quad n = 1 \\dots ${N}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

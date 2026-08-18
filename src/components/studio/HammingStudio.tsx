@@ -2,6 +2,7 @@
 
 import { StudioChrome, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 import { useState } from "react";
 
@@ -53,7 +54,7 @@ print("syndrome", s, "-> error at", s or "none")`;
         <p className="mt-3 text-xs text-slate-500">The Hamming(7,4) code adds three parity bits to four data bits so any single-bit error can be found and fixed. Each parity bit checks a different overlapping group; after transmission, recomputing them gives a syndrome whose binary value points straight at the corrupted position. Error-correcting codes like this protect RAM, deep-space links, and QR codes.</p>
         <ShareBar code={pyCode} />
       </div>}
-      inspector={<div><Stat label="Parity bits" value={`${p1}${p2}${p3}`} /><Stat label="Syndrome" value={String(syndrome)} /><Stat label="Error at" value={syndrome === 0 ? "none" : `position ${syndrome}`} /><Stat label="Corrected?" value={syndrome === errorPos ? "yes ✓" : syndrome === 0 && errorPos === 0 ? "clean" : "—"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Parity bits" value={`${p1}${p2}${p3}`} /><Stat label="Syndrome" value={String(syndrome)} /><Stat label="Error at" value={syndrome === 0 ? "none" : `position ${syndrome}`} /><Stat label="Corrected?" value={syndrome === errorPos ? "yes ✓" : syndrome === 0 && errorPos === 0 ? "clean" : "—"} /><Equation tex={`d_{\\min}=3,\\quad R=\\tfrac{k}{n}=\\tfrac{4}{7},\\quad s=(${s3}${s2}${s1})_2=${syndrome}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center gap-4 py-10 font-mono">
         <div className="text-xs text-slate-500">transmitted codeword (7 bits)</div>
         <div className="flex gap-1">{code.map((b, i) => <span key={i} className="flex h-9 w-9 items-center justify-center rounded border border-slate-700 bg-slate-900 text-cyan-300">{b}</span>)}</div>

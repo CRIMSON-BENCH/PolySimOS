@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const C = 299792; // km/s
@@ -59,7 +60,7 @@ print("Hubble time", round(hubble_time_Gyr, 1), "Gyr")`;
         <p className="mt-3 text-xs text-slate-500">Every distant galaxy recedes at a velocity proportional to its distance: v = H₀·d. This uniform expansion is the same seen from any galaxy — there is no center. The inverse of H₀ gives the Hubble time, a rough estimate of the age of the universe.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="H₀" value={`${H0} km/s/Mpc`} /><Stat label="Hubble time" value={`${ageGyr.toFixed(1)} Gyr`} /><Stat label="v at 100 Mpc" value={`${(H0 * 100).toLocaleString()} km/s`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="H₀" value={`${H0} km/s/Mpc`} /><Stat label="Hubble time" value={`${ageGyr.toFixed(1)} Gyr`} /><Stat label="v at 100 Mpc" value={`${(H0 * 100).toLocaleString()} km/s`} /><Equation tex={`v = H_0\\,d = ${H0}\\times 100 = ${(H0 * 100).toLocaleString()}\\ \\mathrm{km/s},\\quad t_H = \\tfrac{1}{H_0} \\approx ${ageGyr.toFixed(1)}\\ \\mathrm{Gyr}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

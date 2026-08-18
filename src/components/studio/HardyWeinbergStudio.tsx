@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { p0: number; wAA: number; wAa: number; waa: number }> = {
@@ -62,7 +63,7 @@ print("final p", round(p, 3))`;
         <p className="mt-3 text-xs text-slate-500">Without selection, allele frequencies stay put and genotypes settle at p², 2pq, q² — Hardy-Weinberg equilibrium. Give the genotypes different fitness and selection shifts the allele frequency each generation. Heterozygote advantage (high Aa fitness) can hold both alleles in a stable balance.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Final freq A" value={pEnd.toFixed(3)} /><Stat label="Outcome" value={pEnd > 0.98 ? "A fixed" : pEnd < 0.02 ? "A lost" : "polymorphic"} /><Stat label="Mean fitness" value={(p0 * p0 * wAA + 2 * p0 * (1 - p0) * wAa + (1 - p0) ** 2 * waa).toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Final freq A" value={pEnd.toFixed(3)} /><Stat label="Outcome" value={pEnd > 0.98 ? "A fixed" : pEnd < 0.02 ? "A lost" : "polymorphic"} /><Stat label="Mean fitness" value={(p0 * p0 * wAA + 2 * p0 * (1 - p0) * wAa + (1 - p0) ** 2 * waa).toFixed(2)} /><Equation tex={`p^2 + 2pq + q^2 = ${(p0 * p0).toFixed(2)} + ${(2 * p0 * (1 - p0)).toFixed(2)} + ${((1 - p0) ** 2).toFixed(2)} = 1\\quad(p=${p0},\\; q=${(1 - p0).toFixed(2)})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

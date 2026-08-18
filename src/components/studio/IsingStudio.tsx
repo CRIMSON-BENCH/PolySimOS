@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 // 2D Ising model — Metropolis Monte Carlo. Tune temperature through the
@@ -82,7 +83,7 @@ print("magnetization", abs(s.sum()) / (N * N))`;
         <Slider label="Temperature (J/k_B)" value={temp} min={0.5} max={4} step={0.05} onChange={(v) => update({ temp: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Lattice" value={`${N}×${N}`} /><Stat label="Magnetization" value={mag.toFixed(3)} /><Stat label="T_critical" value="≈ 2.27" /><Stat label="Phase" value={temp < TC ? "ordered" : "disordered"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Lattice" value={`${N}×${N}`} /><Stat label="Magnetization" value={mag.toFixed(3)} /><Stat label="T_critical" value="≈ 2.27" /><Stat label="Phase" value={temp < TC ? "ordered" : "disordered"} /><Equation tex={`H = -J\\!\\!\\sum_{\\langle ij\\rangle}\\! s_i s_j - h\\sum_i s_i,\\quad P_{\\text{accept}} = e^{-\\Delta E / k_B T} = e^{-\\Delta E / ${temp.toFixed(2)}}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} />
     </StudioChrome>

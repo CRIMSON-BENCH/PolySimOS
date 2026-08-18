@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Gaussian plume dispersion (Pasquill-Gifford). Ground-level centerline concentration.
@@ -82,6 +83,7 @@ print([round(conc(x), 2) for x in (100, 500, 1000)])`;
         <Stat label="Protective distance" value={pad > 0 ? `${(pad).toLocaleString()} m` : ">20 km"} />
         <Stat label="Stability" value={STABILITY[stab].label} />
         <Stat label="Wind" value={`${wind} m/s`} />
+        <Equation tex={`C(x,y) = \\frac{${rate}}{2\\pi\\,${Math.max(0.5, wind)}\\,\\sigma_y\\sigma_z}\\,\\exp\\!\\left(-\\frac{y^2}{2\\sigma_y^2}\\right)`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

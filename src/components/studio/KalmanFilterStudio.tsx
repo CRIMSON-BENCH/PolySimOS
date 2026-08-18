@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { measNoise: number; procNoise: number }> = {
@@ -72,7 +73,7 @@ print("estimate:", xh, " gain:", K)`;
         <p className="mt-3 text-xs text-slate-500">The Kalman filter fuses a motion model with noisy measurements to track a hidden state optimally. Each step it predicts, then corrects using the Kalman gain — trusting the measurement more when the model is uncertain, and vice versa. It smooths the jittery sensor (gray) into a clean estimate (cyan) that hugs the truth. The math behind GPS, radar, and spacecraft navigation.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Measurement RMSE" value={rmse.meas.toFixed(1)} /><Stat label="Kalman RMSE" value={rmse.kf.toFixed(1)} /><Stat label="Noise reduction" value={`${(100 * (1 - rmse.kf / rmse.meas)).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Measurement RMSE" value={rmse.meas.toFixed(1)} /><Stat label="Kalman RMSE" value={rmse.kf.toFixed(1)} /><Stat label="Noise reduction" value={`${(100 * (1 - rmse.kf / rmse.meas)).toFixed(0)}%`} /><Equation tex={`\\hat{x} \\leftarrow \\hat{x} + K(z - H\\hat{x}),\\quad K = \\frac{P H^{\\mathsf{T}}}{H P H^{\\mathsf{T}} + R},\\quad R = ${(measNoise * measNoise).toFixed(0)},\\; Q = ${(procNoise * procNoise).toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

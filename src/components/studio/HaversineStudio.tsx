@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { lat1: number; lon1: number; lat2: number; lon2: number }> = {
@@ -71,6 +72,7 @@ print("distance km", round(dist, 1))`;
         <Stat label="Distance" value={`${dist.toFixed(0)} km`} />
         <Stat label="In miles" value={`${(dist * 0.621).toFixed(0)} mi`} />
         <Stat label="Initial bearing" value={`${bearing.toFixed(0)}°`} />
+        <Equation tex={`d = 2R\\,\\arcsin\\!\\sqrt{\\sin^2\\tfrac{\\Delta\\varphi}{2} + \\cos\\varphi_1\\cos\\varphi_2\\sin^2\\tfrac{\\Delta\\lambda}{2}} = ${dist.toFixed(0)}\\ \\text{km}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={280} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

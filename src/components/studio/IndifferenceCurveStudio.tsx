@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { alpha: number; income: number; px: number; py: number }> = {
@@ -52,7 +53,7 @@ print("x:", x, "y:", y, "U:", U)`;
         <p className="mt-3 text-xs text-slate-500">A consumer maximizes utility subject to a budget. Indifference curves connect equally-satisfying bundles; the budget line shows what income affords. The best choice is where the budget line just touches the highest reachable indifference curve — the tangency where the marginal rate of substitution equals the price ratio. Change a price and watch the optimal bundle move.</p>
         <ShareBar code={pyCode} />
       </div>}
-      inspector={<div><Stat label="Optimal X" value={x.toFixed(1)} /><Stat label="Optimal Y" value={y.toFixed(1)} /><Stat label="Utility" value={U.toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Optimal X" value={x.toFixed(1)} /><Stat label="Optimal Y" value={y.toFixed(1)} /><Stat label="Utility" value={U.toFixed(1)} /><Equation tex={`U(x,y)=x^{${alpha}}y^{${(1 - alpha).toFixed(2)}},\\quad ${px}\\,x+${py}\\,y=${income},\\quad \\text{MRS}=\\frac{${alpha}}{${(1 - alpha).toFixed(2)}}\\frac{y}{x}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

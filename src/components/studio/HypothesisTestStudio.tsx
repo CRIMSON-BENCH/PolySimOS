@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 function normCDF(x: number) { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.3989423 * Math.exp(-x * x / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x > 0 ? 1 - p : p; }
@@ -70,7 +71,7 @@ print("z", round(z, 3), "| p", round(p, 4))`;
         <p className="mt-3 text-xs text-slate-500">A hypothesis test asks whether a sample mean is far enough from the null value to be surprising by chance alone. The test statistic z measures that distance in standard errors; if it falls in the red rejection region (p below 0.05) we reject the null. Larger samples shrink the standard error and sharpen the test.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Standard error" value={se.toFixed(3)} /><Stat label="z-statistic" value={z.toFixed(3)} /><Stat label="p-value" value={p.toFixed(4)} /><Stat label="Decision" value={reject ? "reject H₀" : "fail to reject"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Standard error" value={se.toFixed(3)} /><Stat label="z-statistic" value={z.toFixed(3)} /><Stat label="p-value" value={p.toFixed(4)} /><Stat label="Decision" value={reject ? "reject H₀" : "fail to reject"} /><Equation tex={`z = \\dfrac{\\bar{x} - \\mu_0}{\\sigma/\\sqrt{n}} = \\dfrac{${mean} - ${mu0}}{${sd}/\\sqrt{${n}}} = ${z.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
