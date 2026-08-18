@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const ISO: Record<string, { hl: number; unit: string; use: string }> = {
@@ -61,7 +62,7 @@ print("estimated age:", age, "${ISO[iso].unit}")`;
         <p className="mt-3 text-xs text-slate-500">Radioactive isotopes decay at a fixed half-life, so the fraction remaining in a sample is a clock. Measure it and you can read the age: t = half-life × log₂(1/fraction). Carbon-14 dates organic material up to ~50,000 years; uranium-238, with a 4.5-billion-year half-life, dates the oldest rocks and the age of the Earth itself.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Half-life" value={`${hl.toExponential(2)} ${ISO[iso].unit}`} /><Stat label="Estimated age" value={ageStr} /><Stat label="Best for" value={ISO[iso].use} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Half-life" value={`${hl.toExponential(2)} ${ISO[iso].unit}`} /><Stat label="Estimated age" value={ageStr} /><Stat label="Best for" value={ISO[iso].use} /><Equation tex={`t = t_{1/2}\\,\\log_2\\!\\frac{1}{${fraction.toFixed(2)}} = ${(Math.log(1 / fraction) / Math.LN2).toFixed(2)}\\;t_{1/2}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

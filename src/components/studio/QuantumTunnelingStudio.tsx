@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { E: number; V: number; width: number }> = {
   "Thin barrier": { E: 3, V: 5, width: 0.2 },
@@ -65,7 +66,7 @@ print("T", T, "R", 1-T)`;
         <p className="mt-3 text-xs text-slate-500">Classically a particle with less energy than a barrier is trapped. Quantum mechanically its wavefunction decays inside the barrier but does not vanish, so there is a finite chance it appears on the other side — tunneling. The probability falls off exponentially with barrier width and height, the principle behind scanning tunneling microscopes and nuclear fusion.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Transmission T" value={T.toExponential(2)} /><Stat label="Reflection R" value={(1 - T).toFixed(3)} /><Stat label="Regime" value={E < V ? "tunneling" : "over-barrier"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Transmission T" value={T.toExponential(2)} /><Stat label="Reflection R" value={(1 - T).toFixed(3)} /><Stat label="Regime" value={E < V ? "tunneling" : "over-barrier"} /><Equation tex={`T\\approx e^{-2\\kappa a}=${T.toExponential(2)},\\quad \\kappa=\\frac{\\sqrt{2m(V-E)}}{\\hbar}=\\frac{\\sqrt{2m(${V.toFixed(1)}-${E.toFixed(1)})}}{\\hbar},\\ a=${width.toFixed(2)}\\,\\text{nm}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { bits: number; freq: number }> = {
   "Telephone (8-bit)": { bits: 8, freq: 2 },
@@ -65,6 +66,7 @@ print("levels", levels, "ideal SNR dB", round(snr, 1),
         <Stat label="Levels" value={`${levels}`} />
         <Stat label="Ideal SNR" value={`${snr.toFixed(1)} dB`} />
         <Stat label="Step size" value={`${(2 / levels).toFixed(4)}`} />
+        <Equation tex={`\\mathrm{SNR}=6.02N+1.76=${snr.toFixed(1)}\\,\\text{dB},\\quad \\Delta=\\frac{FS}{2^{${bits}}}=${(2 / levels).toFixed(4)},\\quad \\overline{n^2}=\\frac{\\Delta^2}{12}=${((2 / levels) ** 2 / 12).toExponential(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

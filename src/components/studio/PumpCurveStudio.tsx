@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { h0: number; k: number; hs: number; cs: number }> = {
@@ -61,6 +62,7 @@ print("operating head", round(Hop, 1), "m")`;
       inspector={<div>
         <Stat label="Operating flow" value={`${Qop.toFixed(3)} m³/s`} />
         <Stat label="Operating head" value={`${Hop.toFixed(1)} m`} />
+        <Equation tex={`H_p = H_0 - kQ^2 = ${h0} - ${k}\\,Q^2,\\quad Q^\\ast=\\sqrt{\\tfrac{H_0-h_s}{k+c_s}}=\\sqrt{\\tfrac{${h0}-${hs}}{${k}+${cs}}}\\approx ${Qop.toFixed(3)}\\ \\tfrac{\\text{m}^3}{\\text{s}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

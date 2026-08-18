@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const N = 6;
@@ -85,6 +86,7 @@ print(V.round(2))`;
         <Stat label="Discount γ" value={gamma.toFixed(2)} />
         <Stat label="Start-cell value" value={V[0][N - 1].toFixed(2)} />
         <Stat label="Behavior" value={step < -0.1 ? "rushes to goal" : "cautious path"} />
+        <Equation tex={`Q(s,a) \\leftarrow Q(s,a) + \\alpha\\left[\\,r + ${gamma.toFixed(2)}\\,\\max_{a'} Q(s',a') - Q(s,a)\\right]`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

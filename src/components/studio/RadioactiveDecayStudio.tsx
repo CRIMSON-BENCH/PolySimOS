@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -65,7 +66,7 @@ print("remaining at t=24:", frac[-1] * 100, "%")`;
         <Slider label="Half-life" value={halfLife} min={1} max={10} step={0.5} onChange={(v) => update({ halfLife: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Half-life" value={halfLife.toFixed(1)} /><Stat label="Time" value={t.current.toFixed(1)} /><Stat label="Remaining" value={`${remaining.toFixed(1)}%`} /><Stat label="Half-lives" value={(t.current / halfLife).toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Half-life" value={halfLife.toFixed(1)} /><Stat label="Time" value={t.current.toFixed(1)} /><Stat label="Remaining" value={`${remaining.toFixed(1)}%`} /><Stat label="Half-lives" value={(t.current / halfLife).toFixed(2)} /><Equation tex={`N(t) = N_0\\,e^{-\\lambda t},\\quad \\lambda = \\frac{\\ln 2}{${halfLife.toFixed(1)}} = ${(Math.LN2 / halfLife).toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

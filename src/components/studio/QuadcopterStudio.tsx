@@ -5,6 +5,7 @@ import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { kp: number; kd: number; wind: number }> = {
   "Snappy": { kp: 2.5, kd: 1.8, wind: 0.3 },
@@ -98,6 +99,7 @@ print("final pos", round(x, 1), round(y, 1))`;
         <Stat label="Tilt angle" value={`${(st.current.th * 180 / Math.PI).toFixed(1)}°`} />
         <Stat label="Speed" value={Math.hypot(st.current.vx, st.current.vy).toFixed(2)} />
         <Stat label="Control" value="nested PID" />
+        <Equation tex={`m\\,\\ddot z = T - mg,\\quad T = mg + K_p\\,e_z + K_d\\,\\dot e_z,\\ \\ K_p=${kp.toFixed(1)},\\ K_d=${kd.toFixed(1)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={400} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); target.current = [(e.clientX - r.left) * 540 / r.width, (e.clientY - r.top) * 400 / r.height]; }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>

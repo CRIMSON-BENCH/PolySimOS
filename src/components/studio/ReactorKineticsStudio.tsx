@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { reactivity: number }> = {
@@ -69,7 +70,7 @@ print("power", n)`;
         <p className="mt-3 text-xs text-slate-500">A small step in reactivity does not blow the power up instantly, because a fraction of neutrons are released with a delay. Those delayed neutrons slow the response to a controllable timescale — the reactor period. But push reactivity past the delayed fraction β and it goes prompt-critical, growing on the neutron lifetime — millisecond-fast and uncontrollable.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Reactivity" value={`${(reactivity / beta).toFixed(2)} $`} /><Stat label="Regime" value={prompt ? "PROMPT-CRITICAL" : reactivity > 0 ? "delayed (controllable)" : "subcritical"} /><Stat label="Power" value={state.current.n.toExponential(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Reactivity" value={`${(reactivity / beta).toFixed(2)} $`} /><Stat label="Regime" value={prompt ? "PROMPT-CRITICAL" : reactivity > 0 ? "delayed (controllable)" : "subcritical"} /><Stat label="Power" value={state.current.n.toExponential(2)} /><Equation tex={`\\frac{dn}{dt}=\\frac{\\rho-\\beta}{\\Lambda}\\,n+\\sum_i\\lambda_i C_i\\;\\;(\\rho=${reactivity.toFixed(4)},\\,\\beta=${beta})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

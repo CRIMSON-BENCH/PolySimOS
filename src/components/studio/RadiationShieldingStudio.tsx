@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const MAT: Record<string, number> = { Water: 0.0086, Concrete: 0.022, Aluminum: 0.024, Iron: 0.058, Lead: 0.113 }; // mu (1/mm) for ~1 MeV gamma
@@ -57,7 +58,7 @@ print(f"{transmitted*100:.2f}% through, HVL {hvl:.1f} mm, TVL {tvl:.1f} mm")`;
         <p className="mt-3 text-xs text-slate-500">Gamma rays are not stopped abruptly — they are attenuated exponentially, I = I₀·e^(−μx). The half-value layer is the thickness that cuts intensity in half, and it takes about ten of them to reach 0.1%. Dense, high-atomic-number materials like lead have the largest μ, which is why they make the most compact shields.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Transmitted" value={`${(transmitted * 100).toFixed(2)}%`} /><Stat label="Half-value layer" value={`${hvl.toFixed(1)} mm`} /><Stat label="Tenth-value layer" value={`${tvl.toFixed(1)} mm`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Transmitted" value={`${(transmitted * 100).toFixed(2)}%`} /><Stat label="Half-value layer" value={`${hvl.toFixed(1)} mm`} /><Stat label="Tenth-value layer" value={`${tvl.toFixed(1)} mm`} /><Equation tex={`I = I_0\\,e^{-\\mu x} = I_0\\,e^{-${mu}\\cdot ${thickness}} = ${(transmitted * 100).toFixed(1)}\\%\\,I_0,\\quad \\mathrm{HVL} = \\frac{\\ln 2}{\\mu} = ${hvl.toFixed(1)}\\ \\text{mm}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

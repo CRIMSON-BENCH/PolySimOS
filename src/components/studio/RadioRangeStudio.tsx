@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { htx: number; hrx: number; power: number; freq: number; sens: number }> = {
@@ -68,7 +69,7 @@ print(f"range {range_mi:.1f} mi, horizon {horizon:.1f} mi")`;
         <p className="mt-3 text-xs text-slate-500">Combines the radio horizon (1.23·(√h₁+√h₂), feet→miles) with a free-space link budget (EIRP minus path loss vs receiver sensitivity). Actual range depends on terrain, foliage, and buildings — treat this as a best-case planning estimate.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Radio horizon" value={`${horizon.toFixed(1)} mi`} /><Stat label="Link budget" value={`${allowed.toFixed(0)} dB`} /><Stat label="Limited by" value={limited} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Radio horizon" value={`${horizon.toFixed(1)} mi`} /><Stat label="Link budget" value={`${allowed.toFixed(0)} dB`} /><Stat label="Limited by" value={limited} /><Equation tex={`\\text{FSPL} = 20\\log_{10}\\!\\left(\\frac{4\\pi d}{\\lambda}\\right) = ${allowed.toFixed(0)}\\ \\text{dB} \\quad (d=${range.toFixed(1)}\\ \\text{mi},\\ f=${freq}\\ \\text{MHz})`} /><ExplainResult text={explain} /></div>}
     ><div>
         <canvas ref={canvasRef} width={520} height={240} className="mx-auto h-auto max-w-full rounded-lg" />
         <div className="mt-6 flex flex-col items-center"><div className="text-xs uppercase tracking-widest text-slate-500">Estimated usable range</div>

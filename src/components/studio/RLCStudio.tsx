@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -88,6 +89,7 @@ print("zeta", zeta, "w0", w0)`;
         <Stat label="Damping ζ" value={zeta.toFixed(3)} />
         <Stat label="Regime" value={zeta < 1 ? "underdamped" : zeta > 1 ? "overdamped" : "critical"} />
         <Stat label="ω₀" value={w0.toFixed(3)} />
+        <Equation tex={`${L}\\,\\ddot q+${R}\\,\\dot q+\\frac{q}{${C}}=V_0,\\quad \\omega_0=\\frac{1}{\\sqrt{LC}}=${w0.toFixed(3)},\\ \\zeta=\\frac{R}{2}\\sqrt{\\frac{C}{L}}=${zeta.toFixed(3)}`} />
         <ExplainResult text={explain} />
       </div>}
     >

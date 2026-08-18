@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { activity: number; distance: number; time: number }> = {
@@ -48,7 +49,7 @@ print(f"dose rate {dose_rate:.4f} mSv/hr, total {dose:.3f} mSv")`;
         <p className="mt-3 text-xs text-slate-500">The three ways to reduce radiation dose are time, distance, and shielding. Dose builds with exposure time but falls with the square of distance — doubling your distance quarters the dose. Effective dose in millisieverts lets you compare any exposure to everyday references like a chest X-ray or the annual background dose. Educational estimate only.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Dose rate" value={`${doseRate.toFixed(4)} mSv/hr`} /><Stat label="Total dose" value={`${dose.toFixed(3)} mSv`} /><Stat label="≈ bananas" value={bananas.toFixed(0)} /><Stat label="Risk level" value={risk} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Dose rate" value={`${doseRate.toFixed(4)} mSv/hr`} /><Stat label="Total dose" value={`${dose.toFixed(3)} mSv`} /><Stat label="≈ bananas" value={bananas.toFixed(0)} /><Stat label="Risk level" value={risk} /><Equation tex={`D = \\frac{\\Gamma A}{r^2}\\,t = \\frac{8.4\\times10^{-5}\\cdot ${activity}}{${distance}^2}\\cdot ${time} = ${dose.toFixed(3)}\\ \\text{mSv}`} /><ExplainResult text={explain} /></div>}
     ><div className="p-4">
         <div className="mb-3 text-center text-xs uppercase tracking-widest text-slate-500">Your dose vs common references (mSv, log scale)</div>
         {[["Your exposure", dose] as const, ...refs].map(([n, d]) => (

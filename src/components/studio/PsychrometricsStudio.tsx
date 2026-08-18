@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { T: number; rh: number }> = {
@@ -54,7 +55,7 @@ print("dew", round(dew, 1), "wet_bulb", round(wb, 1), "mixing", round(w, 1))`;
         <p className="mt-3 text-xs text-slate-500">Relative humidity alone is misleading. The dew point — the temperature at which air saturates — is the honest measure of how muggy it feels and where clouds or condensation form. The wet-bulb temperature, always between dew point and air temperature, is what evaporative cooling can reach and a key limit for human survivability in extreme heat.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Dew point" value={`${dew.toFixed(1)} °C`} /><Stat label="Wet-bulb temp" value={`${wb.toFixed(1)} °C`} /><Stat label="Mixing ratio" value={`${w.toFixed(1)} g/kg`} /><Stat label="Comfort" value={comfort} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Dew point" value={`${dew.toFixed(1)} °C`} /><Stat label="Wet-bulb temp" value={`${wb.toFixed(1)} °C`} /><Stat label="Mixing ratio" value={`${w.toFixed(1)} g/kg`} /><Stat label="Comfort" value={comfort} /><Equation tex={`W = 622\\,\\frac{p_w}{p-p_w} = 622\\times\\frac{${e.toFixed(1)}}{1013-${e.toFixed(1)}} \\approx ${w.toFixed(1)}\\ \\text{g/kg}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center gap-6 py-12">
         <div className="grid grid-cols-3 gap-6 text-center">
           <div><div className="text-4xl font-black text-cyan-400">{T.toFixed(0)}°</div><div className="mt-1 text-xs text-slate-500">dry bulb</div></div>

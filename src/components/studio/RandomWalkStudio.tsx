@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -72,7 +73,7 @@ print("rms distance:", rms)`;
         <Slider label="Step size" value={step} min={1} max={6} step={0.5} onChange={(v) => update({ step: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Walkers" value={String(n)} /><Stat label="Steps" value={String(stepCount.current)} /><Stat label="RMS distance" value={rms.toFixed(1)} /><Stat label="Law" value="⟨r²⟩ ∝ t" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Walkers" value={String(n)} /><Stat label="Steps" value={String(stepCount.current)} /><Stat label="RMS distance" value={rms.toFixed(1)} /><Stat label="Law" value="⟨r²⟩ ∝ t" /><Equation tex={`\\langle x\\rangle = 0,\\quad \\sqrt{\\langle x^2\\rangle} = d\\sqrt{N} = ${step}\\sqrt{${stepCount.current}} \\approx ${(step * Math.sqrt(stepCount.current)).toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

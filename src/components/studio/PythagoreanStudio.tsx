@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const SPORT: Record<string, { exp: number; games: number }> = { Baseball: { exp: 1.83, games: 162 }, Basketball: { exp: 13.9, games: 82 }, "Am. Football": { exp: 2.37, games: 17 }, Soccer: { exp: 1.35, games: 38 } };
@@ -55,7 +56,7 @@ print("projected wins", round(wins))`;
         <p className="mt-3 text-xs text-slate-500">Bill James discovered that a team&apos;s win percentage tracks the ratio of points scored to points allowed, raised to a sport-specific exponent — the Pythagorean expectation. It predicts records better than actual wins early in a season, exposing teams that are lucky or unlucky and due to regress. The exponent varies from ~1.8 in baseball to ~14 in basketball.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Expected win %" value={`${(winPct * 100).toFixed(1)}%`} /><Stat label="Projected wins" value={`${wins.toFixed(0)} of ${SPORT[sport].games}`} /><Stat label="Exponent" value={exp.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Expected win %" value={`${(winPct * 100).toFixed(1)}%`} /><Stat label="Projected wins" value={`${wins.toFixed(0)} of ${SPORT[sport].games}`} /><Stat label="Exponent" value={exp.toFixed(2)} /><Equation tex={`\\text{Win\\%} = \\dfrac{${pf}^{${exp.toFixed(2)}}}{${pf}^{${exp.toFixed(2)}} + ${pa}^{${exp.toFixed(2)}}} = ${(winPct * 100).toFixed(1)}\\%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

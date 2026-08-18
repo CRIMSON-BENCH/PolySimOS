@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { coreR: number; maxWind: number }> = {
@@ -67,7 +68,7 @@ print("peak", v.max(), "m/s at r =", core_r, "m")`;
         <p className="mt-3 text-xs text-slate-500">A tornado&apos;s winds follow the Rankine vortex model: inside the core the air spins like a solid disk, with speed rising straight out to a peak at the core edge; outside, the wind falls off as 1/r. The fastest, most destructive winds ring the core, not the very center — which is why the eye of a vortex is deceptively calm.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Peak wind" value={`${maxWind} m/s`} /><Stat label="Peak (mph)" value={`${ef.toFixed(0)} mph`} /><Stat label="EF rating" value={efScale} /><Stat label="Peak at" value={`r = ${coreR} m`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Peak wind" value={`${maxWind} m/s`} /><Stat label="Peak (mph)" value={`${ef.toFixed(0)} mph`} /><Stat label="EF rating" value={efScale} /><Stat label="Peak at" value={`r = ${coreR} m`} /><Equation tex={`v_\\theta = \\Omega r\\ (r \\le ${coreR}),\\quad v_\\theta = \\frac{\\Omega R^2}{r}\\ (r > ${coreR}),\\quad \\Omega = ${(maxWind / coreR).toFixed(2)}\\ \\mathrm{s^{-1}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

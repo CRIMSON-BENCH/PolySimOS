@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { power: number; diameter: number; airspeed: number }> = {
@@ -66,7 +67,7 @@ print("thrust", round(T), "eff", round(eff, 3), "static", round(static))`;
         <p className="mt-3 text-xs text-slate-500">Momentum theory treats a propeller as a disk that accelerates the air passing through it, and the reaction is thrust. For a given power, a bigger disk moves more air more gently — producing more thrust at higher efficiency. That is why efficient props and helicopter rotors are large and slow, while jets accept lower efficiency for compactness and speed.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Thrust" value={`${T.toFixed(0)} N`} /><Stat label="Static thrust" value={`${staticThrust.toFixed(0)} N`} /><Stat label="Induced velocity" value={`${vi.toFixed(1)} m/s`} /><Stat label="Propulsive eff." value={`${(eff * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Thrust" value={`${T.toFixed(0)} N`} /><Stat label="Static thrust" value={`${staticThrust.toFixed(0)} N`} /><Stat label="Induced velocity" value={`${vi.toFixed(1)} m/s`} /><Stat label="Propulsive eff." value={`${(eff * 100).toFixed(0)}%`} /><Equation tex={`T = 2\\rho A\\,(V+v_i)\\,v_i \\approx ${T.toFixed(0)}\\ \\text{N},\\quad A=\\tfrac{\\pi}{4}(${diameter.toFixed(1)})^2=${A.toFixed(2)}\\ \\text{m}^2`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

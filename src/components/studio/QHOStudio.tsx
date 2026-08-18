@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { n: number }> = {
@@ -62,7 +63,7 @@ print("energy", E, "hbar*omega ; nodes", n)`;
         <p className="mt-3 text-xs text-slate-500">The quantum harmonic oscillator — a particle in a parabolic well — has energy levels evenly spaced by ħω, starting at a nonzero zero-point energy of ½ħω. Its wavefunctions are Hermite polynomials times a Gaussian. It models molecular vibrations, phonons, and quantum fields, making it the most important solvable system in physics.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Energy" value={`${(nLevel + 0.5).toFixed(1)} ħω`} /><Stat label="Level n" value={String(nLevel)} /><Stat label="Zero-point" value="½ ħω" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Energy" value={`${(nLevel + 0.5).toFixed(1)} ħω`} /><Stat label="Level n" value={String(nLevel)} /><Stat label="Zero-point" value="½ ħω" /><Equation tex={`E_{${nLevel}} = \\left(${nLevel} + \\tfrac{1}{2}\\right)\\hbar\\omega = ${(nLevel + 0.5).toFixed(1)}\\,\\hbar\\omega,\\quad \\psi_{${nLevel}}(x) \\propto H_{${nLevel}}(x)\\,e^{-x^2/2}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

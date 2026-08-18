@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = 160;
@@ -105,6 +106,7 @@ print("U range", U.min(), U.max())`;
         <Stat label="Feed F" value={feed.toFixed(4)} />
         <Stat label="Kill k" value={kill.toFixed(4)} />
         <Stat label="Steps" value={String(iter)} />
+        <Equation tex={`\\frac{\\partial u}{\\partial t}=D_u\\nabla^2 u-uv^2+F(1-u),\\;\\frac{\\partial v}{\\partial t}=D_v\\nabla^2 v+uv^2-(F+k)v\\;\\;(F=${feed.toFixed(4)},\\,k=${kill.toFixed(4)})`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-w-full rounded-lg" style={{ imageRendering: "pixelated", width: 480, height: 480 }} /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
@@ -80,7 +81,7 @@ print("image dist", round(v, 1), "mag", round(mag, 2), "real" if v > 0 else "vir
         <Slider label="Object height" value={objH} min={30} max={120} step={5} onChange={(v) => update({ objH: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Lens" value={converging ? "converging" : "diverging"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Magnification" value={`${magImg.toFixed(2)}×`} /><Stat label="Equation" value="1/v − 1/u = 1/f" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Lens" value={converging ? "converging" : "diverging"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Magnification" value={`${magImg.toFixed(2)}×`} /><Stat label="Equation" value="1/v − 1/u = 1/f" /><Equation tex={`\\frac{1}{v} - \\frac{1}{u} = \\frac{1}{f} = \\frac{1}{${Fsign}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

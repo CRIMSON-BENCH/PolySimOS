@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { K: number; a0: number; b0: number }> = {
@@ -57,6 +58,7 @@ print("extent", round(x, 3), "[A]", round(a0-x, 3), "[B]", round(b0-x, 3))`;
         <Stat label="Extent of reaction x" value={x.toFixed(3)} />
         <Stat label="[A], [B] at eq." value={`${aeq.toFixed(3)}, ${beq.toFixed(3)} M`} />
         <Stat label="[C], [D] at eq." value={`${x.toFixed(3)} M`} />
+        <Equation tex={`K_{eq}=\\frac{[C][D]}{[A][B]}=\\frac{(${x.toFixed(3)})^2}{(${aeq.toFixed(3)})(${beq.toFixed(3)})}=${K}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

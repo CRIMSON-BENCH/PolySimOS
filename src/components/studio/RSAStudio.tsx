@@ -3,6 +3,7 @@
 import { StudioChrome, Stat } from "./StudioChrome";
 import { useState } from "react";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 function modpow(b: number, e: number, m: number): number { let r = 1; b %= m; while (e > 0) { if (e & 1) r = (r * b) % m; e = Math.floor(e / 2); b = (b * b) % m; } return r; }
@@ -55,7 +56,7 @@ print("public (n,e)", (n, e), "cipher", cipher, "recovered", recovered)`;
         <p className="mt-3 text-xs text-slate-500">RSA rests on a one-way street: multiplying two big primes is easy, but factoring the product back apart is practically impossible. The public key (n, e) encrypts by raising the message to the power e mod n; only the private key d — computable only from the secret primes — can undo it. Real keys use 600-digit primes; these tiny ones just show the machinery.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Modulus n = p·q" value={String(n)} /><Stat label="φ(n)" value={String(phi)} /><Stat label="Public key e" value={String(e)} /><Stat label="Private key d" value={String(d)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Modulus n = p·q" value={String(n)} /><Stat label="φ(n)" value={String(phi)} /><Stat label="Public key e" value={String(e)} /><Stat label="Private key d" value={String(d)} /><Equation tex={`n = pq = ${p}\\cdot ${q} = ${n},\\quad c = m^e \\bmod n = ${cipher},\\quad m = c^d \\bmod n = ${decrypted}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center gap-4 py-10 font-mono">
         <div className="rounded-lg border border-slate-700 bg-slate-900/60 px-6 py-3 text-center"><div className="text-xs text-slate-500">message</div><div className="text-2xl font-bold text-cyan-300">{msg}</div></div>
         <div className="text-slate-500">↓ encrypt: {msg}^{e} mod {n}</div>

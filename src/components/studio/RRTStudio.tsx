@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { step: number }> = {
@@ -84,7 +85,7 @@ print("nodes", len(nodes), "found", gi>=0)`;
         <p className="mt-3 text-xs text-slate-500">A Rapidly-exploring Random Tree grows toward random points in free space, quickly filling the map and snaking around obstacles to connect start (blue) to goal (yellow). It is a cornerstone of motion planning for robot arms, self-driving cars, and drones — fast even in high dimensions where grid search fails.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Tree nodes" value={String(stats.nodes)} /><Stat label="Path found" value={stats.found ? "yes" : "no"} /><Stat label="Path length" value={stats.len.toFixed(0)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Tree nodes" value={String(stats.nodes)} /><Stat label="Path found" value={stats.found ? "yes" : "no"} /><Stat label="Path length" value={stats.len.toFixed(0)} /><Equation tex={`x_{new}=x_{near}+\\varepsilon\\,\\frac{x_{rand}-x_{near}}{\\lVert x_{rand}-x_{near}\\rVert},\\quad \\varepsilon=${step},\\ N=${stats.nodes}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

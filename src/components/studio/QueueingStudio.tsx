@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -87,6 +88,7 @@ else:
         <Stat label="Avg in queue Lq" value={stable ? Lq.toFixed(2) : "∞"} />
         <Stat label="Avg wait W" value={stable ? `${W.toFixed(2)}` : "∞"} />
         <Stat label="Live count" value={String(display)} />
+        <Equation tex={`\\rho=\\frac{\\lambda}{\\mu}=\\frac{${lambda}}{${mu}}=${rho.toFixed(2)},\\quad L=\\frac{\\rho}{1-\\rho}=${stable ? L.toFixed(2) : "\\infty"},\\quad W=\\frac{1}{\\mu-\\lambda}=${stable ? W.toFixed(2) : "\\infty"}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
