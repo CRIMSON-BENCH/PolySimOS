@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -108,7 +109,7 @@ print(p.mean(0))`;
         <Slider label="Wind" value={wind} min={-1} max={1} step={0.05} onChange={(v) => update({ wind: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Nodes" value={`${cols}×${rows}`} /><Stat label="Integrator" value="Verlet" /><Stat label="Constraints" value="distance (×3/frame)" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Nodes" value={`${cols}×${rows}`} /><Stat label="Integrator" value="Verlet" /><Stat label="Constraints" value="distance (×3/frame)" /><Equation tex={`x' = 2x - x_{prev} + a\\,\\Delta t^2,\\quad |p_i - p_j| = ${spacing}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" /></StudioChrome>
   );
 }

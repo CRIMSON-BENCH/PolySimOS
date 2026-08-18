@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { k: number; kc: number; m: number }> = {
@@ -64,6 +65,7 @@ print("beat (Hz)", (w2 - w1) / (2*np.pi))`;
         <Stat label="Mode 1 (in-phase)" value={`${(w1 / (2 * Math.PI)).toFixed(3)} Hz`} />
         <Stat label="Mode 2 (out-of-phase)" value={`${(w2 / (2 * Math.PI)).toFixed(3)} Hz`} />
         <Stat label="Beat frequency" value={`${beat.toFixed(3)} Hz`} />
+        <Equation tex={`\\omega_1 = \\sqrt{\\tfrac{k}{m}} = ${w1.toFixed(2)},\\quad \\omega_2 = \\sqrt{\\tfrac{k + 2k_c}{m}} = ${w2.toFixed(2)}\\ \\text{rad/s}\\quad (k=${k},\\ k_c=${kc},\\ m=${m})`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

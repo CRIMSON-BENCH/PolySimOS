@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const KERNELS: Record<string, number[]> = {
@@ -105,6 +106,7 @@ out = np.clip(out, 0, 255).astype(np.uint8)`;
         <Stat label="Window" value="3×3" />
         <Stat label="Smoothing sigma" value={sigma.toFixed(1)} />
         <Stat label="Sum" value={sum.toFixed(2)} />
+        <Equation tex={`(f * g)(t) = \\int_{-\\infty}^{\\infty} f(\\tau)\\, g(t - \\tau)\\, d\\tau \\quad (\\sigma = ${sigma.toFixed(1)},\\ \\text{taps} = ${width})`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={280} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

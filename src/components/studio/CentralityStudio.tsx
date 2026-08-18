@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 type Metric = "degree" | "betweenness" | "closeness";
@@ -34,6 +35,12 @@ export function CentralityStudio() {
 
   const topI = vals.indexOf(Math.max(...vals));
   const topLabel = String.fromCharCode(65 + topI);
+  const metricTex =
+    metric === "degree"
+      ? `C_D(x) = \\deg(x)`
+      : metric === "betweenness"
+      ? `C_B(x) = \\sum_{s \\neq t \\neq x} \\frac{\\sigma_{st}(x)}{\\sigma_{st}}`
+      : `C_C(x) = \\frac{N-1}{\\sum_y d(x,y)}`;
   const explain =
     metric === "degree"
       ? `By degree, node ${topLabel} leads simply because it has the most direct links — a raw popularity count that ignores the wider network.`
@@ -55,7 +62,7 @@ print(c)`;
         <p className="mt-3 text-xs text-slate-500">Centrality measures which nodes are most important in a network. Degree counts direct connections; betweenness counts how often a node lies on shortest paths (a bridge or broker); closeness measures how near a node is to all others. Switching metrics changes who matters — a key insight for social networks, infrastructure, and epidemiology.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Metric" value={metric} /><Stat label="Most central" value={String.fromCharCode(65 + topI)} /><Stat label="Nodes" value={String(NODES.length)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Metric" value={metric} /><Stat label="Most central" value={String.fromCharCode(65 + topI)} /><Stat label="Nodes" value={String(NODES.length)} /><Equation tex={metricTex} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={560} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

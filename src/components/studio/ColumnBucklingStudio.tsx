@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const ENDS: Record<string, { K: number; label: string }> = {
@@ -72,7 +73,7 @@ print("Pcr kN", Pcr, "KL/r", slenderness)`;
         <p className="mt-3 text-xs text-slate-500">A slender column fails not by crushing but by buckling sideways at the Euler critical load Pcr = π²EI/(KL)². The effective-length factor K depends on the end restraints — fixing both ends quadruples the capacity versus pinned. Educational tool, not a substitute for code-based design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Critical load Pcr" value={`${Pcr.toFixed(0)} kN`} /><Stat label="Effective length" value={`${Le.toFixed(2)} m`} /><Stat label="Slenderness KL/r" value={slenderness.toFixed(0)} /><Stat label="Critical stress" value={`${criticalStress.toFixed(0)} MPa`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Critical load Pcr" value={`${Pcr.toFixed(0)} kN`} /><Stat label="Effective length" value={`${Le.toFixed(2)} m`} /><Stat label="Slenderness KL/r" value={slenderness.toFixed(0)} /><Stat label="Critical stress" value={`${criticalStress.toFixed(0)} MPa`} /><Equation tex={`P_{cr}=\\dfrac{\\pi^2 E I}{(KL)^2}=\\dfrac{\\pi^2 (${E}\\,\\text{GPa})(${I}\\times10^6\\,\\text{mm}^4)}{(${K}\\times${L}\\,\\text{m})^2}=${Pcr.toFixed(0)}\\,\\text{kN}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={360} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

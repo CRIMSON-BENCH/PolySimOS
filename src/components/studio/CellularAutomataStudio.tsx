@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const RULE_PRESETS: Record<string, { rule: number }> = {
@@ -76,7 +77,7 @@ print(np.array(grid))  # ROWS x N evolution`;
         <Slider label="Rule number" value={rule} min={0} max={255} step={1} onChange={(v) => update({ rule: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Rule" value={String(rule)} /><Stat label="Cells" value={String(N)} /><Stat label="Class" value={rule === 30 || rule === 110 ? "chaotic/complex" : "structured"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Rule" value={String(rule)} /><Stat label="Cells" value={String(N)} /><Stat label="Class" value={rule === 30 || rule === 110 ? "chaotic/complex" : "structured"} /><Equation tex={`s_i' = f(s_{i-1},\\,s_i,\\,s_{i+1}),\\quad \\text{rule} = ${rule}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N} height={ROWS} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} /></StudioChrome>
   );
 }
@@ -130,7 +131,7 @@ print(g.sum(), "live cells after 100 generations")`;
         <p className="text-xs text-slate-500">Four simple rules produce gliders, oscillators, and endless emergent structure.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Generation" value={String(gen)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Generation" value={String(gen)} /><Equation tex={`\\text{B3/S23:}\\quad \\text{birth if } n=3,\\ \\text{survive if } n\\in\\{2,3\\}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} /></StudioChrome>
   );
 }

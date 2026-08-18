@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 import { useState } from "react";
 
@@ -58,7 +59,7 @@ print(out)`;
         <p className="mt-3 text-xs text-slate-500">The Caesar cipher shifts every letter by a fixed amount — trivially broken by trying all 25 shifts or by letter-frequency analysis. The Vigenère cipher uses a repeating keyword so each letter shifts differently, defeating simple frequency attacks for centuries until the key length could be found. Both are insecure today but perfect for learning how ciphers work.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cipher" value={mode === "caesar" ? `Caesar +${shift}` : "Vigenère"} /><Stat label="Keyspace" value={mode === "caesar" ? "26" : `26^${keyLen}`} /><Stat label="Letters" value={String(text.replace(/[^A-Za-z]/g, "").length)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cipher" value={mode === "caesar" ? `Caesar +${shift}` : "Vigenère"} /><Stat label="Keyspace" value={mode === "caesar" ? "26" : `26^${keyLen}`} /><Stat label="Letters" value={String(text.replace(/[^A-Za-z]/g, "").length)} /><Equation tex={mode === "caesar" ? `E(x)=(x+${shift})\\bmod 26` : `E_i=(x_i+k_i)\\bmod 26,\\quad |k|=${keyLen}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center gap-4 py-12 font-mono">
         <div className="w-full max-w-md rounded-lg border border-slate-700 bg-slate-900/60 p-4 text-center"><div className="text-xs text-slate-500">plaintext</div><div className="mt-1 break-words text-lg text-cyan-300">{text.toUpperCase()}</div></div>
         <div className="text-slate-500">↓ encrypt</div>

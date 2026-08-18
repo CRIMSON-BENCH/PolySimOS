@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -69,7 +70,7 @@ print(f"UCL={UCL} LCL={LCL}  out-of-control points: {viol}/40")`;
         <p className="mt-3 text-xs text-slate-500">Statistical process control watches a process over time against control limits set at three standard deviations from the target. Points inside are normal random variation — leave them alone. A point beyond the limits, or a run trending one way, signals a real change worth investigating. Nudge the process shift and watch points breach the limits.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Center line" value={String(target)} /><Stat label="Control limits" value={`±3σ (${LCL}–${UCL})`} /><Stat label="Out of control" value={String(violations)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Center line" value={String(target)} /><Stat label="Control limits" value={`±3σ (${LCL}–${UCL})`} /><Stat label="Out of control" value={String(violations)} /><Equation tex={`\\text{UCL},\\text{LCL} = \\mu \\pm 3\\sigma = ${target} \\pm 3(${sigma}) = ${UCL},\\,${LCL}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

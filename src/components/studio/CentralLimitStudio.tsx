@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type Dist = "uniform" | "exponential" | "bimodal";
@@ -80,7 +81,7 @@ print("mean of means", means.mean(), "std", means.std())`;
         <p className="mt-3 text-xs text-slate-500">The central limit theorem is why the normal distribution is everywhere: no matter how skewed or lumpy the source distribution, the distribution of sample means becomes bell-shaped as the sample size grows. Try a heavily skewed exponential at n=1, then raise n and watch it turn normal.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Samples drawn" value={count.toLocaleString()} /><Stat label="Sample size" value={String(Math.round(n))} /><Stat label="Source" value={dist} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Samples drawn" value={count.toLocaleString()} /><Stat label="Sample size" value={String(Math.round(n))} /><Stat label="Source" value={dist} /><Equation tex={`\\bar{x} \\sim \\mathcal{N}\\!\\left(\\mu,\\ \\frac{\\sigma^2}{${nn}}\\right)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

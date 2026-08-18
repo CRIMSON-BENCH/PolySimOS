@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 // Critical Path Method on a small fixed project network.
 type Task = { id: string; dur: number; deps: string[]; x: number; y: number };
@@ -72,7 +73,7 @@ print("duration", proj, "critical", critical)`;
         <p className="mt-3 text-xs text-slate-500">The Critical Path Method finds the longest chain of dependent tasks through a project — the sequence that sets the minimum completion time. Tasks on it have zero slack: delay any one and the whole project slips. Tasks off it can float. Stretch task B or D and watch the critical path re-route. The backbone of project management.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Project duration" value={`${projDur} days`} /><Stat label="Critical tasks" value={[...critical].join(", ")} /><Stat label="Tasks" value={String(tasks.length)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Project duration" value={`${projDur} days`} /><Stat label="Critical tasks" value={[...critical].join(", ")} /><Stat label="Tasks" value={String(tasks.length)} /><ExplainResult text={explain} /><Equation tex={`T = \\max_{\\text{paths}} \\sum_i d_i = ${projDur}\\ \\text{days}, \\quad \\text{slack}_i = LS_i - ES_i`} /></div>}
     ><canvas ref={canvasRef} width={540} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

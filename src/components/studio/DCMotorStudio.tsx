@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { V: number; R: number; load: number; ke: number }> = {
   "No-load spin": { V: 12, R: 2, load: 0, ke: 0.05 },
@@ -70,7 +71,7 @@ print("stall", stall_torque, "current", current_ss)`;
         <p className="mt-3 text-xs text-slate-500">A DC motor speeds up until back-EMF balances the applied voltage, giving a first-order step response. Its steady speed drops linearly with load along the speed-torque line: maximum speed at no load, maximum (stall) torque at zero speed. The green dot is the operating point where motor and load torque match.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="No-load speed" value={`${noLoadSpeed.toFixed(0)} rad/s`} /><Stat label="Steady speed" value={`${omegaSS.toFixed(0)} rad/s`} /><Stat label="Stall torque" value={`${stallTorque.toFixed(2)} N·m`} /><Stat label="Current draw" value={`${currentSS.toFixed(1)} A`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="No-load speed" value={`${noLoadSpeed.toFixed(0)} rad/s`} /><Stat label="Steady speed" value={`${omegaSS.toFixed(0)} rad/s`} /><Stat label="Stall torque" value={`${stallTorque.toFixed(2)} N·m`} /><Stat label="Current draw" value={`${currentSS.toFixed(1)} A`} /><ExplainResult text={explain} /><Equation tex={`\\omega = \\frac{V - IR}{k_e} = \\frac{${V} - ${currentSS.toFixed(1)}\\cdot ${R}}{${ke}} = ${omegaSS.toFixed(0)}\\ \\text{rad/s}, \\quad \\tau = k_t I = ${(Kt * currentSS).toFixed(3)}\\ \\text{N·m}`} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

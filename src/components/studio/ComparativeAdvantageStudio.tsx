@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { aWine: number; aCloth: number; bWine: number; bCloth: number }> = {
@@ -54,7 +55,7 @@ print("A specializes in", "wine" if a_opp < b_opp else "cloth")`;
         <p className="mt-3 text-xs text-slate-500">David Ricardo&apos;s great insight: even if one country is worse at making everything, both still gain from trade. Each should specialize in the good it gives up the least to produce — its comparative advantage — measured by the slope of its production-possibility frontier. Trade then lets both consume beyond their own frontiers.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="A opp. cost (wine)" value={`${aOppWine.toFixed(2)} cloth`} /><Stat label="B opp. cost (wine)" value={`${bOppWine.toFixed(2)} cloth`} /><Stat label="A should make" value={aAdv} /><Stat label="B should make" value={bAdv} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="A opp. cost (wine)" value={`${aOppWine.toFixed(2)} cloth`} /><Stat label="B opp. cost (wine)" value={`${bOppWine.toFixed(2)} cloth`} /><Stat label="A should make" value={aAdv} /><Stat label="B should make" value={bAdv} /><Equation tex={`\\text{opp}_A=\\dfrac{${aCloth}}{${aWine}}=${aOppWine.toFixed(2)},\\quad \\text{opp}_B=\\dfrac{${bCloth}}{${bWine}}=${bOppWine.toFixed(2)}\\;\\Rightarrow\\; A\\to\\text{${aAdv}},\\; B\\to\\text{${bAdv}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { g: number; pr: number }> = {
@@ -56,6 +57,7 @@ print("exit Mach", round(Me, 3), "| area ratio Ae/A*", round(AeAstar, 3))`;
         <Stat label="Exit Mach number" value={Me.toFixed(2)} />
         <Stat label="Area ratio Aₑ/A*" value={AeAstar.toFixed(2)} />
         <Stat label="Flow regime" value={Me > 1 ? "supersonic" : "subsonic"} />
+        <Equation tex={`\\frac{A_e}{A^*} = \\frac{1}{${Me.toFixed(2)}}\\left[\\frac{2}{${g}+1}\\left(1+\\frac{${g}-1}{2}\\,${Me.toFixed(2)}^2\\right)\\right]^{\\frac{${g}+1}{2(${g}-1)}} = ${AeAstar.toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

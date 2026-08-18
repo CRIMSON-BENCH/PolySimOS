@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -73,7 +74,7 @@ def resolve(a, b):
         <Slider label="Restitution" value={restitution} min={0.5} max={1} step={0.05} onChange={(v) => update({ restitution: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Balls" value={String(n)} /><Stat label="Total KE" value={ke.toExponential(2)} /><Stat label="Collisions" value={restitution === 1 ? "elastic" : "inelastic"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Balls" value={String(n)} /><Stat label="Total KE" value={ke.toExponential(2)} /><Stat label="Collisions" value={restitution === 1 ? "elastic" : "inelastic"} /><Equation tex={`j = \\frac{-(1+e)\\,(\\vec v_b - \\vec v_a)\\cdot\\hat n}{1/m_a + 1/m_b},\\quad e = ${restitution.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

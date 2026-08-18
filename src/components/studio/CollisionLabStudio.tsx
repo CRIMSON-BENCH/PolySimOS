@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { m1: number; m2: number; u1: number; u2: number; e: number }> = {
@@ -75,6 +76,7 @@ print("v1", v1, "v2", v2, "energy lost %", 100*(1 - keF/keI))`;
         <Stat label="KE before" value={`${keI.toFixed(1)} J`} />
         <Stat label="KE after" value={`${keF.toFixed(1)} J`} />
         <Stat label="Energy lost" value={keI > 0 ? `${(100 * (1 - keF / keI)).toFixed(0)}%` : "0%"} />
+        <Equation tex={`v_1' = \\frac{m_1 u_1 + m_2 u_2 - m_2 e\\,(u_1 - u_2)}{m_1 + m_2} = ${v1.toFixed(2)},\\quad v_2' = \\frac{m_1 u_1 + m_2 u_2 + m_1 e\\,(u_1 - u_2)}{m_1 + m_2} = ${v2.toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

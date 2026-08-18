@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { m: number; n: number }> = {
@@ -55,7 +56,7 @@ plt.imshow(np.abs(val) < 0.02, cmap="hot"); plt.axis("off"); plt.show()`;
         <p className="mt-3 text-xs text-slate-500">Bow or drive a metal plate at a resonant frequency and sand sprinkled on top dances away from the moving areas and settles along the still nodal lines — Chladni figures. Each pair of mode numbers gives a different symmetric pattern, a direct, physical picture of a two-dimensional standing wave.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mode" value={`(${Math.round(n)}, ${Math.round(m)})`} /><Stat label="Symmetry" value={(Math.round(m) + Math.round(n)) % 2 === 0 ? "even" : "odd"} /><Stat label="Pattern" value="nodal lines" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Mode" value={`(${Math.round(n)}, ${Math.round(m)})`} /><Stat label="Symmetry" value={(Math.round(m) + Math.round(n)) % 2 === 0 ? "even" : "odd"} /><Stat label="Pattern" value="nodal lines" /><Equation tex={`\\cos\\frac{${N}\\pi x}{L}\\cos\\frac{${M}\\pi y}{L}-\\cos\\frac{${M}\\pi x}{L}\\cos\\frac{${N}\\pi y}{L}=0`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={400} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

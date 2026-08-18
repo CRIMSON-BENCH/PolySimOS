@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -72,6 +73,7 @@ print("final position", x, y)`;
         <Stat label="Latitude" value={`${latitude}°`} />
         <Stat label="Deflection" value={hemisphere === 1 ? "to the right" : "to the left"} />
         <Stat label="Strength" value={latitude === 0 ? "zero (equator)" : `${strengthPct.toFixed(0)}%`} />
+        <Equation tex={`\\vec{a}_C = -2\\,\\vec{\\Omega} \\times \\vec{v}, \\quad f = 2\\Omega \\sin\\varphi \\propto \\sin(${latitude}^\\circ) = ${Math.sin(latitude * Math.PI / 180).toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

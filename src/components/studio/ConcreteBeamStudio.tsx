@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { b: number; d: number; As: number; fc: number; fy: number }> = {
@@ -61,7 +62,7 @@ print(f"a={a:.0f} mm  Mn={Mn:.0f}  phiMn={phiMn:.0f} kN*m")`;
         <p className="mt-3 text-xs text-slate-500">A reinforced concrete beam resists bending through a compression block in the concrete and tension in the steel. Setting these forces equal gives the stress-block depth a, and the moment capacity Mn = As·fy·(d − a/2). A tension-controlled section (steel yields first) fails gradually — the ductile behavior codes require. Educational tool, not a design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Stress block a" value={`${a.toFixed(0)} mm`} /><Stat label="Nominal Mn" value={`${Mn.toFixed(0)} kN·m`} /><Stat label="Design φMn" value={`${phiMn.toFixed(0)} kN·m`} /><Stat label="Behavior" value={tension ? "tension-controlled" : "check ductility"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Stress block a" value={`${a.toFixed(0)} mm`} /><Stat label="Nominal Mn" value={`${Mn.toFixed(0)} kN·m`} /><Stat label="Design φMn" value={`${phiMn.toFixed(0)} kN·m`} /><Stat label="Behavior" value={tension ? "tension-controlled" : "check ductility"} /><Equation tex={`a=\\frac{A_s f_y}{0.85 f'_c b}=${a.toFixed(0)}\\,\\text{mm},\\quad M_n = A_s f_y\\left(d-\\tfrac{a}{2}\\right)=${As}\\cdot${fy}\\left(${d}-\\tfrac{${a.toFixed(0)}}{2}\\right)=${Mn.toFixed(0)}\\,\\text{kN·m}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={340} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

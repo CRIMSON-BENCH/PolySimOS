@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const CW = 540, CH = 460;
@@ -78,6 +79,7 @@ print("hull vertices", len(hull))`;
         <Stat label="Points" value={String(nRound)} />
         <Stat label="Hull vertices" value={String(hullSize)} />
         <Stat label="Complexity" value="O(n log n)" />
+        <Equation tex={`(\\mathbf{a}-\\mathbf{o})\\times(\\mathbf{b}-\\mathbf{o}) \\le 0 \\;\\Rightarrow\\; \\text{pop};\\quad h = ${hullSize}\\text{ of }${nRound}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={460} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

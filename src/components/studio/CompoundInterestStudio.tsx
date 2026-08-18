@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { principal: number; monthly: number; rate: number; years: number }> = {
@@ -66,7 +67,7 @@ print("years to double (rule of 72)", round(72 / (rate * 100), 1))`;
         <p className="mt-3 text-xs text-slate-500">Compounding means earning returns on your past returns, so growth accelerates over time. The gap between the balance line and your total contributions is pure compound interest — and it widens dramatically in the final years. Educational tool, not investment advice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Final balance" value={`$${final.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Total contributed" value={`$${totalContrib.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Interest earned" value={`$${interest.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Final balance" value={`$${final.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Total contributed" value={`$${totalContrib.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Interest earned" value={`$${interest.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Equation tex={`A = ${principal.toLocaleString()}\\left(1+\\tfrac{${rate.toFixed(3)}}{12}\\right)^{${months}} + ${monthly}\\cdot\\frac{\\left(1+\\tfrac{${rate.toFixed(3)}}{12}\\right)^{${months}}-1}{${(rate/12).toFixed(5)}} = \\$${final.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

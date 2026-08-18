@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const Z: Record<number, number> = { 80: 1.2816, 90: 1.6449, 95: 1.96, 99: 2.5758 };
@@ -60,7 +61,7 @@ print(f"coverage {100 * hits / trials:.0f}% (nominal {conf}%)")`;
         <p className="mt-3 text-xs text-slate-500">A confidence interval is often misread. It does not mean the true value has a 95% chance of being in one interval — it means that if you repeated the experiment many times, about 95% of the intervals would contain the true mean. The red intervals here are the unlucky ones that miss it.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Confidence level" value={`${conf}%`} /><Stat label="Observed coverage" value={`${coverage.toFixed(0)}%`} /><Stat label="Intervals shown" value="50" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Confidence level" value={`${conf}%`} /><Stat label="Observed coverage" value={`${coverage.toFixed(0)}%`} /><Stat label="Intervals shown" value="50" /><Equation tex={`\\bar{x} \\pm z\\,\\frac{\\sigma}{\\sqrt{n}} = 50 \\pm ${Z[conf].toFixed(2)}\\cdot\\frac{10}{\\sqrt{${Math.round(n)}}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { alpha: number; budget: number; r: number; w: number }> = {
@@ -53,7 +54,7 @@ print("K", K, "L", L, "Q", Q)`;
         <p className="mt-3 text-xs text-slate-500">The Cobb-Douglas function Q = A·Kᵅ·L¹⁻ᵅ describes how capital and labor combine to make output. Isoquants show input mixes yielding the same output; the budget line shows what you can afford. Production is maximized where the budget line just touches the highest isoquant — the cost-minimizing input mix, splitting spending by the exponents.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Optimal capital K" value={K.toFixed(1)} /><Stat label="Optimal labor L" value={L.toFixed(1)} /><Stat label="Output Q" value={Q.toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Optimal capital K" value={K.toFixed(1)} /><Stat label="Optimal labor L" value={L.toFixed(1)} /><Stat label="Output Q" value={Q.toFixed(1)} /><Equation tex={`Q = A\\,K^{${alpha.toFixed(2)}}L^{${(1 - alpha).toFixed(2)}} = ${Q.toFixed(1)},\\quad K^{*}=\\frac{\\alpha B}{r}=${K.toFixed(1)},\\quad L^{*}=\\frac{(1-\\alpha)B}{w}=${L.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
