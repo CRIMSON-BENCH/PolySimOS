@@ -328,11 +328,14 @@ The "make them look pro / take the solvers up a notch" program. Built a reusable
 - **Retina** migrated across 264 solvers (`scratchpad/retinafy.mjs`).
 - **Depth** (presets + explain-this-result + copy-as-Python + shareable URLs) on 33 flagships (4 subagent batches of 8).
 
+## ✅ Also done (this session, continued)
+- **G1. Universal retina** — ~52 more solvers migrated via the retina-finish fan-out; **316 solvers** now use `hidpi()`. The rest are `putImageData` pixel-buffer sims (fractals, cellular grids, fluid density fields) where retina doesn't apply without rewriting their render loop — correctly left alone.
+- **G2. Killed the last dumps** — `StudioBrowser` (search + curated domain chips + "What do you want to calculate?" modal that keyword-routes plain English → solver) replaced the /studio wall; `IdleFinderPrompt` fires a gentle finder prompt after 30s idle on the home page (deep-links `/studio?find=1`).
+- **G3. Transport controls** — shared `useTransport` hook + `TransportBar` (play/pause/**step**/reset/**speed**); DoublePendulum converted as the reference. (Rollout to other animated solvers still per-solver.)
+- **G4. Depth — COMPLETE across ALL solvers.** Presets + explain-this-result + copy-as-Python + shareable URLs on every solver (364/365; EmbeddedStudio is a routing wrapper). Done via 14 parallel-subagent batches (A–N), each build-gated + committed.
+
 ## ⏳ Remaining — in logical order
-- **G1. Finish universal retina** — the ~72 solvers skipped by `retinafy.mjs` (non-standard `W/H`, or they read `canvas.width`). Hand/targeted-script per file. Completes the #1 visual win everywhere. *(cheap, global — do first)*
-- **G2. Kill the last dumps — `/studio` finder + home idle prompt** — type-ahead search over all solvers + domain filter chips + a "What do you want to calculate?" modal that routes plain-English → solver; a 30s-idle prompt on the home page that opens it. *(global, one-time; high UX value)*
-- **G3. Transport controls (#4)** — shared `useTransport` hook (play / pause / step / reset / speed); roll across animated solvers in batches.
-- **G4. Depth rollout continues** — presets/explain/copy-as-code/share-URL on the remaining solvers, batches of 8 (parallel subagents, ProjectileStudio as pattern), prioritized by traffic, until all are covered.
+- **G3b. Transport rollout** — apply `useTransport`/`TransportBar` to the remaining animated solvers (per-solver loop refactor).
 - **G5. Live KaTeX equations (#11)** — governing equation with current values substituted, in the inspector; per-solver, top solvers first (adds `katex`).
 - **G6. Direct-canvas manipulation (#6)** — drag the pendulum bob / place a charge / move a load / drag graph nodes; highest-wow, per-solver on flagships.
 - **G7. Save named scenarios to account (#15)** — persist `useShareableNumbers` param sets to the logged-in user (Clerk + entitlements store); retention + sign-up reason.
