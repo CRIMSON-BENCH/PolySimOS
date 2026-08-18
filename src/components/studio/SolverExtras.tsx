@@ -63,6 +63,16 @@ export function ShareBar({ code, codeLabel = "Copy as Python" }: { code?: string
           {"</>"} {codeMsg}
         </button>
       )}
+      {code && (
+        <a
+          href="/console"
+          onClick={() => { try { sessionStorage.setItem("polysim:pycode", code); } catch { /* ignore */ } }}
+          title="Open this snippet in the in-browser Python console"
+          className="rounded-md border border-slate-300 px-2.5 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-cyan-400 hover:text-cyan-700 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-300"
+        >
+          ▶ Run in Python
+        </a>
+      )}
     </div>
   );
 }

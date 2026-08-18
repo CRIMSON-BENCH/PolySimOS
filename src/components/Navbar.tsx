@@ -168,6 +168,9 @@ export function Navbar() {
               )}
             </div>
           ))}
+          <Link href="/console" className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
+            Console
+          </Link>
           <Link href="/developers" className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800">
             Developers
           </Link>
