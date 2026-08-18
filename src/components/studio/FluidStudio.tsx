@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { FluidField, DEFAULT_FLUID } from "@/lib/engines/fluid";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = DEFAULT_FLUID.n;
@@ -20,13 +21,15 @@ const PRESETS: Record<string, { viscosity: number; force: number; dye: number }>
 export function FluidStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const fieldRef = useRef<FluidField | null>(null);
-  const rafRef = useRef<number>(0);
+  const imgRef = useRef<ImageData | null>(null);
+  const frameRef = useRef(0);
   const pointer = useRef<{ x: number; y: number; px: number; py: number; down: boolean }>({
     x: 0, y: 0, px: 0, py: 0, down: false,
   });
 
-  const [running, setRunning] = useState(true);
   const [{ viscosity, force, dye }, update] = useShareableNumbers({ viscosity: 0.0000001, force: 6, dye: 120 });
+  const forceRef = useRef(force); forceRef.current = force;
+  const dyeRef = useRef(dye); dyeRef.current = dye;
   const [metrics, setMetrics] = useState({ totalDensity: 0, meanSpeed: 0, maxSpeed: 0, enstrophy: 0 });
 
   useEffect(() => {
@@ -37,19 +40,16 @@ export function FluidStudio() {
     if (fieldRef.current) fieldRef.current.cfg.visc = viscosity;
   }, [viscosity]);
 
+  // Pointer stirring — inject dye and velocity where the user drags.
   useEffect(() => {
-    const canvas = canvasRef.current!;
-    const ctx = canvas.getContext("2d")!;
-    const img = ctx.createImageData(PX, PX);
-    let frame = 0;
-
+    const canvas = canvasRef.current;
+    if (!canvas) return;
     const toGrid = (clientX: number, clientY: number) => {
       const rect = canvas.getBoundingClientRect();
       const gx = Math.floor(((clientX - rect.left) / rect.width) * (N + 2));
       const gy = Math.floor(((clientY - rect.top) / rect.height) * (N + 2));
       return { gx, gy };
     };
-
     const onMove = (e: PointerEvent) => {
       const { gx, gy } = toGrid(e.clientX, e.clientY);
       pointer.current.px = pointer.current.x;
@@ -67,51 +67,59 @@ export function FluidStudio() {
     canvas.addEventListener("pointermove", onMove);
     canvas.addEventListener("pointerdown", onDown);
     window.addEventListener("pointerup", onUp);
-
-    const loop = () => {
-      const f = fieldRef.current!;
-      const p = pointer.current;
-      if (p.down) {
-        const amtX = (p.x - p.px) * force;
-        const amtY = (p.y - p.py) * force;
-        f.addVelocity(p.x, p.y, amtX, amtY);
-        f.addDensity(p.x, p.y, dye);
-      } else {
-        // gentle continuous plume from the bottom-center so it's alive on load
-        const cx = Math.floor((N + 2) / 2);
-        f.addDensity(cx, N - 2, dye * 0.35);
-        f.addVelocity(cx, N - 2, Math.sin(frame * 0.05) * force * 0.6, -force * 0.9);
-      }
-      if (running) f.step();
-
-      // render density to image
-      for (let y = 0; y < N + 2; y++) {
-        for (let x = 0; x < N + 2; x++) {
-          const d = Math.min(255, f.density[x + y * (N + 2)] * 255);
-          for (let sy = 0; sy < SCALE; sy++) {
-            for (let sx = 0; sx < SCALE; sx++) {
-              const px = (y * SCALE + sy) * PX + (x * SCALE + sx);
-              const i = px * 4;
-              img.data[i] = d * 0.15;
-              img.data[i + 1] = d * 0.75;
-              img.data[i + 2] = d;
-              img.data[i + 3] = 255;
-            }
-          }
-        }
-      }
-      ctx.putImageData(img, 0, 0);
-      if (frame++ % 12 === 0) setMetrics(f.metrics());
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
     return () => {
-      cancelAnimationFrame(rafRef.current);
       canvas.removeEventListener("pointermove", onMove);
       canvas.removeEventListener("pointerdown", onDown);
       window.removeEventListener("pointerup", onUp);
     };
-  }, [running, force, dye]);
+  }, []);
+
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const f = fieldRef.current;
+    if (!f) return;
+    const ctx = canvas.getContext("2d")!;
+    if (!imgRef.current) imgRef.current = ctx.createImageData(PX, PX);
+    const img = imgRef.current;
+    const p = pointer.current;
+    for (let s = 0; s < steps; s++) {
+      if (p.down) {
+        const amtX = (p.x - p.px) * forceRef.current;
+        const amtY = (p.y - p.py) * forceRef.current;
+        f.addVelocity(p.x, p.y, amtX, amtY);
+        f.addDensity(p.x, p.y, dyeRef.current);
+      } else {
+        // gentle continuous plume from the bottom-center so it's alive on load
+        const cx = Math.floor((N + 2) / 2);
+        f.addDensity(cx, N - 2, dyeRef.current * 0.35);
+        f.addVelocity(cx, N - 2, Math.sin(frameRef.current * 0.05) * forceRef.current * 0.6, -forceRef.current * 0.9);
+      }
+      f.step();
+      frameRef.current++;
+    }
+
+    // render density to image
+    for (let y = 0; y < N + 2; y++) {
+      for (let x = 0; x < N + 2; x++) {
+        const d = Math.min(255, f.density[x + y * (N + 2)] * 255);
+        for (let sy = 0; sy < SCALE; sy++) {
+          for (let sx = 0; sx < SCALE; sx++) {
+            const px = (y * SCALE + sy) * PX + (x * SCALE + sx);
+            const i = px * 4;
+            img.data[i] = d * 0.15;
+            img.data[i + 1] = d * 0.75;
+            img.data[i + 2] = d;
+            img.data[i + 3] = 255;
+          }
+        }
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+    if (frameRef.current % 12 === 0) setMetrics(f.metrics());
+  };
+
+  const t = useTransport(frame);
 
   const explain =
     viscosity * 1e7 < 2
@@ -136,20 +144,14 @@ print("diffusion coefficient a =", a)`;
       tagline="Stam stable-fluids · Navier–Stokes"
       controls={
         <div>
-          <div className="mb-3 flex gap-2">
-            <button
-              onClick={() => setRunning((v) => !v)}
-              className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700"
-            >
-              {running ? "Pause" : "Play"}
-            </button>
-            <button
-              onClick={() => (fieldRef.current = new FluidField({ ...DEFAULT_FLUID, visc: viscosity }))}
-              className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
-            >
-              Clear
-            </button>
-          </div>
+          <TransportBar
+            playing={t.playing}
+            onToggle={t.toggle}
+            onStep={t.step}
+            onReset={() => { fieldRef.current = new FluidField({ ...DEFAULT_FLUID, visc: viscosity }); t.step(); }}
+            speed={t.speed}
+            onSpeed={t.setSpeed}
+          />
           <p className="mb-3 text-xs text-slate-500">Click and drag on the canvas to inject dye and velocity.</p>
           <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
           <Slider label="Viscosity" value={viscosity * 1e7} min={0} max={20} step={0.5} onChange={(v) => update({ viscosity: v / 1e7 })} />

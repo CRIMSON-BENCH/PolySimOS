@@ -11,6 +11,7 @@ import {
 } from "@/lib/engines/dynamics";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -177,35 +178,35 @@ function label(ctx: CanvasRenderingContext2D, text: string) {
 function GrayScott() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const stateRef = useRef<GrayScottState | null>(null);
-  const rafRef = useRef<number>(0);
   const N = 140;
-  const [running, setRunning] = useState(true);
   const [{ feed, kill }, update] = useShareableNumbers({ feed: 0.055, kill: 0.062 });
+  const feedRef = useRef(feed); feedRef.current = feed;
+  const killRef = useRef(kill); killRef.current = kill;
 
   useEffect(() => {
     stateRef.current = grayScottInit(N, 1);
   }, []);
 
-  useEffect(() => {
-    const ctx = canvasRef.current!.getContext("2d")!;
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const st = stateRef.current;
+    if (!st) return;
+    const ctx = canvas.getContext("2d")!;
     const img = ctx.createImageData(N, N);
-    const loop = () => {
-      const st = stateRef.current!;
-      if (running) grayScottStep(st, { feed, kill, du: 0.16, dv: 0.08 }, 6);
-      for (let i = 0; i < N * N; i++) {
-        const v = Math.min(1, Math.max(0, st.v[i]));
-        const c = Math.floor(v * 255);
-        img.data[i * 4] = c * 0.2;
-        img.data[i * 4 + 1] = c;
-        img.data[i * 4 + 2] = 120 + c * 0.5;
-        img.data[i * 4 + 3] = 255;
-      }
-      ctx.putImageData(img, 0, 0);
-      rafRef.current = requestAnimationFrame(loop);
-    };
-    rafRef.current = requestAnimationFrame(loop);
-    return () => cancelAnimationFrame(rafRef.current);
-  }, [running, feed, kill]);
+    for (let s = 0; s < steps; s++) grayScottStep(st, { feed: feedRef.current, kill: killRef.current, du: 0.16, dv: 0.08 }, 6);
+    for (let i = 0; i < N * N; i++) {
+      const v = Math.min(1, Math.max(0, st.v[i]));
+      const c = Math.floor(v * 255);
+      img.data[i * 4] = c * 0.2;
+      img.data[i * 4 + 1] = c;
+      img.data[i * 4 + 2] = 120 + c * 0.5;
+      img.data[i * 4 + 3] = 255;
+    }
+    ctx.putImageData(img, 0, 0);
+  };
+
+  const t = useTransport(frame);
 
   const explain =
     feed < 0.03
@@ -229,14 +230,10 @@ v += dv * lap(v) + uvv - (kill + feed) * v`;
       tagline="explicit finite difference · Turing patterns"
       controls={
         <div>
-          <div className="mb-3 flex gap-2">
-            <button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">
-              {running ? "Pause" : "Play"}
-            </button>
-            <button onClick={() => (stateRef.current = grayScottInit(N, (Math.floor(feed * 1000) % 97) + 1))} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
-              Reseed
-            </button>
-          </div>
+          <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} speed={t.speed} onSpeed={t.setSpeed} />
+          <button onClick={() => { stateRef.current = grayScottInit(N, (Math.floor(feed * 1000) % 97) + 1); t.step(); }} className="mb-3 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">
+            Reseed
+          </button>
           <p className="mb-3 text-xs text-slate-500">Feed &amp; kill rates select the Turing pattern regime — spots, stripes, or mazes.</p>
           <Presets
             presets={Object.keys(GS_PRESETS).map((label) => ({ label }))}

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 
 // Machines: rule table state,read -> [write, move(+1/-1), nextState]. "H" halts.
 type Rule = Record<string, [number, number, string]>;
@@ -15,8 +16,7 @@ const MACHINES: Record<string, { rules: Rule; start: string; desc: string }> = {
 
 export function TuringStudio() {
   const [machine, setMachine] = useState("3-state busy beaver");
-  const [running, setRunning] = useState(true);
-  const [speed, setSpeed] = useState(8);
+  const machineRef = useRef(machine); machineRef.current = machine;
   const tape = useRef<Map<number, number>>(new Map());
   const head = useRef(0); const st = useRef("A"); const steps = useRef(0);
   const [, force] = useState(0);
@@ -25,22 +25,20 @@ export function TuringStudio() {
   const reset = () => { tape.current = new Map(); head.current = 0; st.current = MACHINES[machine].start; steps.current = 0; halted.current = false; force((n) => n + 1); };
   useEffect(reset, [machine]);
 
-  useEffect(() => {
-    if (!running) return; let raf = 0; let acc = 0;
-    const loop = () => {
-      acc += speed;
-      while (acc >= 10 && !halted.current) {
-        acc -= 10; const m = MACHINES[machine]; const read = tape.current.get(head.current) ?? 0;
-        const key = `${st.current},${read}`; const ruleKey = m.rules[key] ? key : `${st.current},_`;
-        const rule = m.rules[ruleKey]; if (!rule) { halted.current = true; break; }
-        const [w, mv, next] = rule; tape.current.set(head.current, w); head.current += mv; st.current = next; steps.current++;
-        if (next === "H") halted.current = true;
-      }
-      force((n) => n + 1);
-      if (!halted.current) raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
-  }, [running, speed, machine]);
+  const frame = (n: number) => {
+    if (halted.current) return;
+    const m = MACHINES[machineRef.current];
+    for (let s = 0; s < n && !halted.current; s++) {
+      const read = tape.current.get(head.current) ?? 0;
+      const key = `${st.current},${read}`; const ruleKey = m.rules[key] ? key : `${st.current},_`;
+      const rule = m.rules[ruleKey]; if (!rule) { halted.current = true; break; }
+      const [w, mv, next] = rule; tape.current.set(head.current, w); head.current += mv; st.current = next; steps.current++;
+      if (next === "H") halted.current = true;
+    }
+    force((c) => c + 1);
+  };
+
+  const t = useTransport(frame);
 
   const cells = []; for (let i = head.current - 14; i <= head.current + 14; i++) cells.push(i);
 
@@ -71,9 +69,7 @@ print("steps:", steps, "ones:", sum(1 for v in tape.values() if v == 1))`;
     <StudioChrome title="Turing Machine" tagline="the model of all computation"
       controls={<div>
         <div className="mb-3 grid gap-2">{Object.keys(MACHINES).map((k) => <button key={k} onClick={() => setMachine(k)} className={`rounded-lg px-2 py-1.5 text-xs font-semibold ${machine === k ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{k}</button>)}</div>
-        <label className="text-xs text-slate-500">Speed</label>
-        <input type="range" min={1} max={40} value={speed} onChange={(e) => setSpeed(+e.target.value)} className="w-full" />
-        <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
+        <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { reset(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
         <p className="mt-3 text-xs text-slate-500">{MACHINES[machine].desc} A finite state machine plus an infinite tape — the abstract computer that defines what is computable at all.</p>
         <ShareBar code={code} />
       </div>}

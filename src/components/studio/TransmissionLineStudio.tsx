@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Z0: number; RL: number; XL: number }> = {
@@ -16,7 +17,6 @@ const PRESETS: Record<string, { Z0: number; RL: number; XL: number }> = {
 export function TransmissionLineStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [{ Z0, RL, XL }, update] = useShareableNumbers({ Z0: 50, RL: 75, XL: 0 });
-  const [running, setRunning] = useState(true);
   const phase = useRef(0);
 
   // reflection coefficient
@@ -25,26 +25,28 @@ export function TransmissionLineStudio() {
   const gPhase = Math.atan2(num_im, num_re) - Math.atan2(den_im, den_re);
   const VSWR = (1 + gMag) / (1 - gMag);
   const returnLoss = -20 * Math.log10(gMag || 1e-6);
+  const gMagRef = useRef(gMag); gMagRef.current = gMag;
+  const gPhaseRef = useRef(gPhase); gPhaseRef.current = gPhase;
 
-  useEffect(() => {
-    if (!running) return; let raf = 0;
-    const loop = () => {
-      phase.current += 0.05; const t = phase.current; const W = 540, H = 300;
-      const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-      const ox = 30, mid = H / 2, len = W - 60;
-      // incident + reflected -> standing wave envelope
-      ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();
-      for (let i = 0; i <= len; i++) { const x = i / len; const beta = 2 * Math.PI * 3; // 3 wavelengths
-        const inc = Math.sin(beta * x - t); const refl = gMag * Math.sin(beta * x + t + gPhase);
-        const v = inc + refl; const y = mid - v * 50; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke();
-      // envelope
-      ctx.strokeStyle = "rgba(244,114,182,0.6)"; ctx.setLineDash([4, 3]);
-      for (const sgn of [1, -1]) { ctx.beginPath(); for (let i = 0; i <= len; i++) { const x = i / len; const beta = 2 * Math.PI * 3; const env = Math.sqrt(1 + gMag * gMag + 2 * gMag * Math.cos(2 * beta * x + gPhase)); const y = mid - sgn * env * 50; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke(); } ctx.setLineDash([]);
-      ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("source", ox, mid + 70); ctx.fillText("load", ox + len - 26, mid + 70); ctx.fillStyle = "#f9a8d4"; ctx.fillText("standing-wave envelope", ox + 6, 20);
-      raf = requestAnimationFrame(loop);
-    };
-    raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
-  }, [running, Z0, RL, XL, gMag, gPhase]);
+  const frame = (steps: number) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const gMag = gMagRef.current, gPhase = gPhaseRef.current;
+    phase.current += 0.05 * steps; const t = phase.current; const W = 540, H = 300;
+    const ctx = hidpi(canvas, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const ox = 30, mid = H / 2, len = W - 60;
+    // incident + reflected -> standing wave envelope
+    ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();
+    for (let i = 0; i <= len; i++) { const x = i / len; const beta = 2 * Math.PI * 3; // 3 wavelengths
+      const inc = Math.sin(beta * x - t); const refl = gMag * Math.sin(beta * x + t + gPhase);
+      const v = inc + refl; const y = mid - v * 50; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke();
+    // envelope
+    ctx.strokeStyle = "rgba(244,114,182,0.6)"; ctx.setLineDash([4, 3]);
+    for (const sgn of [1, -1]) { ctx.beginPath(); for (let i = 0; i <= len; i++) { const x = i / len; const beta = 2 * Math.PI * 3; const env = Math.sqrt(1 + gMag * gMag + 2 * gMag * Math.cos(2 * beta * x + gPhase)); const y = mid - sgn * env * 50; i ? ctx.lineTo(ox + i, y) : ctx.moveTo(ox + i, y); } ctx.stroke(); } ctx.setLineDash([]);
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("source", ox, mid + 70); ctx.fillText("load", ox + len - 26, mid + 70); ctx.fillStyle = "#f9a8d4"; ctx.fillText("standing-wave envelope", ox + 6, 20);
+  };
+
+  const tr = useTransport(frame);
 
   const explain =
     gMag < 0.05
@@ -65,11 +67,11 @@ print("|Gamma|", round(mag, 3), " VSWR", round(vswr, 2))`;
   return (
     <StudioChrome title="Transmission Line & VSWR" tagline="impedance matching · reflections"
       controls={<div>
+        <TransportBar playing={tr.playing} onToggle={tr.toggle} onStep={tr.step} speed={tr.speed} onSpeed={tr.setSpeed} />
         <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
         <Slider label="Line impedance Z₀ (Ω)" value={Z0} min={25} max={150} step={5} onChange={(v) => update({ Z0: v })} />
         <Slider label="Load resistance RL (Ω)" value={RL} min={0} max={300} step={5} onChange={(v) => update({ RL: v })} />
         <Slider label="Load reactance XL (Ω)" value={XL} min={-150} max={150} step={5} onChange={(v) => update({ XL: v })} />
-        <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">When a transmission line meets a load that does not match its impedance, part of the wave reflects. Incident and reflected waves combine into a standing-wave pattern measured by the VSWR. A perfect match (RL = Z₀, XL = 0) gives VSWR 1 and no reflection — the goal of every antenna and RF design.</p>
         <ShareBar code={code} />
       </div>}
