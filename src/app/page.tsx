@@ -5,6 +5,7 @@ import { softwareAppLd } from "@/lib/seo";
 import { DISCLAIMER_SHORT } from "@/lib/disclaimer";
 import { PRODUCT_COUNT } from "@/lib/products";
 import { IdleFinderPrompt } from "@/components/IdleFinderPrompt";
+import { SolverMarquee } from "@/components/SolverMarquee";
 
 export const metadata: Metadata = {
   title: "PolySim OS — The Everything Engine for Simulation",
@@ -20,12 +21,6 @@ const FEATURES = [
   { title: "Symbolic Math", desc: "Differentiate, simplify, solve, and plot — a real CAS.", href: "/studio/cas" },
   { title: "AI Surrogate", desc: "Instant ML predictions trained on our own solvers.", href: "/studio/surrogate" },
   { title: "AI Copilot", desc: "Describe a system in plain English; get a runnable graph.", href: "/product/ai-copilot" },
-];
-
-// Replace these with real customer/partner logos when you have them.
-// Kept as an editable strip so the section is ready the moment you do.
-const TRUSTED_BY = [
-  "Research Labs", "Universities", "Aerospace Teams", "Biotech Startups", "Independent Researchers", "Classrooms",
 ];
 
 export default function Home() {
@@ -58,19 +53,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trusted by strip (drop in real logos when ready) */}
-      <section className="border-b border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
-        <div className="mx-auto max-w-6xl px-4 py-8">
-          <p className="text-center text-xs font-semibold uppercase tracking-widest text-slate-400">
-            Built for researchers, engineers &amp; students worldwide
-          </p>
-          <div className="mt-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            {TRUSTED_BY.map((t) => (
-              <span key={t} className="text-sm font-semibold text-slate-400 dark:text-slate-500">{t}</span>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Honest social proof: a scrolling wall of the REAL simulators (no fabricated logos) */}
+      <SolverMarquee count={370} />
 
       {/* Unified canvas */}
       <section className="mx-auto max-w-6xl px-4 py-16">
@@ -135,7 +119,7 @@ export default function Home() {
       <section className="border-y border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 text-center sm:grid-cols-4">
           {[
-            ["5", "real solver engines"],
+            ["370+", "live simulators"],
             [`${PRODUCT_COUNT}+`, "products & plans"],
             ["100%", "runs in-browser"],
             ["$0", "to start"],
