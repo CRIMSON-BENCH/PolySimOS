@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { aperture: number; focalObj: number; focalEye: number; wavelength: number }> = {
@@ -60,7 +61,7 @@ print(resolution, magnification, light_gain, limiting_mag)`;
         <p className="mt-3 text-xs text-slate-500">Aperture rules everything: resolving power is θ = 1.22·λ/D (Rayleigh criterion), light-gathering scales as D², and the faintest visible star climbs with aperture. Magnification is just objective focal length divided by eyepiece focal length — and is useless beyond what the aperture can resolve.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Resolution" value={`${resolutionArcsec.toFixed(2)}″`} /><Stat label="Magnification" value={`${magnification.toFixed(0)}×`} /><Stat label="Light vs eye" value={`${lightGain.toFixed(0)}×`} /><Stat label="Limiting mag" value={limitingMag.toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Resolution" value={`${resolutionArcsec.toFixed(2)}″`} /><Stat label="Magnification" value={`${magnification.toFixed(0)}×`} /><Stat label="Light vs eye" value={`${lightGain.toFixed(0)}×`} /><Stat label="Limiting mag" value={limitingMag.toFixed(1)} /><Equation tex={`M=\\frac{f_o}{f_e}=${magnification.toFixed(0)}\\times,\\quad \\theta=\\frac{1.22\\,\\lambda}{D}=${resolutionArcsec.toFixed(2)}''\\!,\\quad \\text{grasp}\\propto D^{2}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

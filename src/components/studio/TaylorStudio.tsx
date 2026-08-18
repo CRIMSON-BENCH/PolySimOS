@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { parse, derivative, evaluate, simplify, sampleExpr, Node } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -78,7 +79,7 @@ print("max local error near a:", np.max(np.abs(P(xs) - sp.lambdify(x, f, "numpy"
         {err && <p className="text-xs text-red-500">{err}</p>}
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Order" value={String(order)} /><Stat label="Center" value={String(center)} /><Stat label="Method" value="symbolic derivatives" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Order" value={String(order)} /><Stat label="Center" value={String(center)} /><Stat label="Method" value="symbolic derivatives" /><Equation tex={`f(x)\\approx\\sum_{n=0}^{${order}}\\frac{f^{(n)}(${center})}{n!}\\,(x-${center})^{n}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

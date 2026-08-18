@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { power: number }> = {
@@ -58,7 +59,7 @@ def idw(px, py, samples):
         <p className="mt-3 text-xs text-slate-500">Given scattered measurements — rainfall gauges, soil samples, air-quality sensors — inverse-distance weighting estimates values everywhere in between. Each sample&apos;s influence falls off with distance raised to a power: a low power gives smooth, blended surfaces; a high power makes each sample dominate its neighborhood in sharp bull&apos;s-eyes. The workhorse of GIS mapping.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Samples" value="8" /><Stat label="Power p" value={power.toFixed(1)} /><Stat label="Character" value={power < 1.5 ? "smooth" : power > 3 ? "bull's-eyes" : "balanced"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Samples" value="8" /><Stat label="Power p" value={power.toFixed(1)} /><Stat label="Character" value={power < 1.5 ? "smooth" : power > 3 ? "bull's-eyes" : "balanced"} /><Equation tex={`\\hat z(x) = \\frac{\\sum_i w_i z_i}{\\sum_i w_i},\\quad w_i = \\frac{1}{d_i^{${power.toFixed(1)}}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={440} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const MAT: Record<string, { E: number; yield: number; uts: number; strain: number; label: string }> = {
@@ -71,7 +72,7 @@ print("stress", round(stress, 1), "MPa")`;
         <p className="mt-3 text-xs text-slate-500">Pull on a material and its stress-strain curve tells its story: a straight elastic region with slope equal to Young&apos;s modulus, a yield point where permanent deformation begins, a peak at the ultimate tensile strength, and finally fracture. Ductile metals stretch far; brittle ones like cast iron snap with almost no warning.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Young's modulus" value={`${m.E} GPa`} /><Stat label="Current stress" value={`${curStress.toFixed(0)} MPa`} /><Stat label="UTS" value={`${m.uts} MPa`} /><Stat label="Region" value={region} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Young's modulus" value={`${m.E} GPa`} /><Stat label="Current stress" value={`${curStress.toFixed(0)} MPa`} /><Stat label="UTS" value={`${m.uts} MPa`} /><Stat label="Region" value={region} /><Equation tex={`\\sigma=E\\,\\varepsilon,\\quad E=${m.E}\\,\\text{GPa},\\ \\varepsilon=${strain.toFixed(3)},\\ \\sigma\\approx${curStress.toFixed(0)}\\,\\text{MPa}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

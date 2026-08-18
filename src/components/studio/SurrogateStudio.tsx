@@ -17,6 +17,7 @@ import {
 } from "@/lib/engines/particles";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { gridSteps: number; gravity: number; restitution: number }> = {
@@ -163,7 +164,13 @@ print("surrogate prediction", model([[gravity, restitution]]))`;
           ) : (
             <p className="text-xs text-slate-500">Train the surrogate to see accuracy metrics.</p>
           )}
-          <ExplainResult text={explain} />
+          <Equation
+            tex={
+              trained
+                ? `\\hat{y}(x) = \\sum_{i=1}^{${trained.trainSamples.length}} w_i\\,\\phi\\!\\left(\\lVert x - x_i \\rVert\\right),\\quad \\mathrm{RMSE} = ${trained.rmse.toFixed(4)}`
+                : `\\hat{y}(x) = \\sum_{i=1}^{N} w_i\\,\\phi\\!\\left(\\lVert x - x_i \\rVert\\right)`
+            }
+          />
         </div>
       }
     >

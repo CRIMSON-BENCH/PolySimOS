@@ -5,6 +5,7 @@ import { parse, evaluate } from "@/lib/engines/cas";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -81,7 +82,7 @@ plt.show()`;
         <button onClick={() => (cam.current.auto = !cam.current.auto)} className="mt-3 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">Toggle auto-rotate</button>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Surface" value="wireframe" /><Stat label="Grid" value="34×34" /><Stat label="Variables" value="x, y" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Surface" value="wireframe" /><Stat label="Grid" value="34×34" /><Stat label="Variables" value="x, y" /><Equation tex={`z = f(x, y) = \\text{${expr}}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" />
     </StudioChrome>

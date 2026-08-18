@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { s0: number; slope: number; temp: number; amount: number }> = {
@@ -63,6 +64,7 @@ print("solubility", sol_now, "dissolved", dissolved, "solid", undissolved)`;
         <Stat label="Dissolved" value={`${dissolved.toFixed(0)} g`} />
         <Stat label="Undissolved solid" value={`${undissolved.toFixed(0)} g`} />
         <Stat label="State" value={undissolved > 0 ? "saturated + solid" : "unsaturated"} />
+        <Equation tex={`S(T) = S_0 + kT = ${s0} + ${slope}\\times ${temp} = ${solNow.toFixed(0)}\\ \\text{g/100mL}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

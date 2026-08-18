@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { zeta: number; wn: number }> = {
@@ -59,6 +60,7 @@ print("peak", y.max(), "final", y[-1])`;
         <Stat label="Settling time (2%)" value={`${settling.toFixed(2)} s`} />
         <Stat label="Peak time" value={zeta < 1 ? `${tpeak.toFixed(2)} s` : "—"} />
         <Stat label="Regime" value={zeta < 1 ? "underdamped" : zeta === 1 ? "critical" : "overdamped"} />
+        <Equation tex={`y(t)=1-e^{-\\zeta\\omega_n t}\\left(\\cos\\omega_d t+\\tfrac{\\zeta}{\\sqrt{1-\\zeta^2}}\\sin\\omega_d t\\right),\\quad \\zeta=${zeta},\\ \\omega_n=${wn}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

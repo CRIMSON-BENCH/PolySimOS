@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { area: number; eff: number; peakSun: number; tilt: number }> = {
@@ -58,7 +59,7 @@ print("rating kW", rating / 1000, "daily kWh", daily, "annual kWh", annual)`;
         <p className="mt-3 text-xs text-slate-500">A solar array&apos;s output is its rated power (area × efficiency at 1000 W/m²) multiplied by the peak sun hours your location receives — the equivalent full-intensity hours per day. Tilt matters too: aiming the panels near your latitude maximizes annual yield. Real systems lose a bit more to heat, wiring, and inverters.</p>
         <ShareBar code={pyCode} />
       </div>}
-      inspector={<div><Stat label="System rating" value={`${(rating / 1000).toFixed(1)} kW`} /><Stat label="Daily energy" value={`${daily.toFixed(1)} kWh`} /><Stat label="Annual energy" value={`${annual.toFixed(0)} kWh`} /><Stat label="Homes powered" value={(annual / 10000).toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="System rating" value={`${(rating / 1000).toFixed(1)} kW`} /><Stat label="Daily energy" value={`${daily.toFixed(1)} kWh`} /><Stat label="Annual energy" value={`${annual.toFixed(0)} kWh`} /><Stat label="Homes powered" value={(annual / 10000).toFixed(1)} /><Equation tex={`P = \\eta A G = ${(eff / 100).toFixed(2)}\\times ${area}\\times 1000 = ${rating.toFixed(0)}\\ \\text{W}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

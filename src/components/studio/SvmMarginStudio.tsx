@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { angle: number; offset: number }> = {
@@ -62,6 +63,7 @@ print("max margin", margin)`;
       inspector={<div>
         <Stat label="Margin width" value={margin.toFixed(3)} />
         <Stat label="Separates classes?" value={correct ? "yes ✓" : "no — misclassified"} />
+        <Equation tex={`\\min_{w,b}\\ \\tfrac{1}{2}\\lVert w\\rVert^{2}\\ \\text{ s.t. }\\ y_i(w\\cdot x_i+b)\\ge 1,\\quad \\text{margin}=\\frac{2}{\\lVert w\\rVert}=${margin.toFixed(3)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

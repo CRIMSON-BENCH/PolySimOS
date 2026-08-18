@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { c: number; phi: number; gamma: number; B: number; depth: number; FS: number }> = {
@@ -53,7 +54,7 @@ print("qult", qult, "qallow", qult / FS)`;
         <p className="mt-3 text-xs text-slate-500">Terzaghi&apos;s equation predicts the ultimate bearing capacity of a shallow footing as the sum of cohesion, surcharge, and self-weight terms, each with a bearing-capacity factor that grows sharply with the soil friction angle. Dividing by a factor of safety gives the allowable pressure. Educational tool, not a geotechnical design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Nc" value={Nc.toFixed(1)} /><Stat label="Nq" value={Nq.toFixed(1)} /><Stat label="Nγ" value={Ngamma.toFixed(1)} /><Stat label="Ultimate qult" value={`${qult.toFixed(0)} kPa`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Nc" value={Nc.toFixed(1)} /><Stat label="Nq" value={Nq.toFixed(1)} /><Stat label="Nγ" value={Ngamma.toFixed(1)} /><Stat label="Ultimate qult" value={`${qult.toFixed(0)} kPa`} /><Equation tex={`q_u = cN_c + \\gamma D_f N_q + \\tfrac12\\gamma B N_\\gamma = ${c}(${Nc.toFixed(1)}) + ${(gamma * depth).toFixed(0)}(${Nq.toFixed(1)}) + \\tfrac12(${gamma})(${B})(${Ngamma.toFixed(1)}) = ${qult.toFixed(0)}\\ \\text{kPa}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Allowable bearing pressure</div>
         <div className="mt-3 text-6xl font-black text-cyan-500">{qallow.toFixed(0)}<span className="ml-2 text-2xl text-slate-400">kPa</span></div>

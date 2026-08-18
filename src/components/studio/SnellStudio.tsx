@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 640, H = 460;
@@ -67,7 +68,7 @@ else:
         <Slider label="Index n₂ (bottom)" value={n2} min={1} max={2.5} step={0.05} onChange={(v) => update({ n2: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="n₁ → n₂" value={`${n1} → ${n2}`} /><Stat label="Critical angle" value={critical} /><Stat label="Snell" value="n₁sinθ₁ = n₂sinθ₂" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="n₁ → n₂" value={`${n1} → ${n2}`} /><Stat label="Critical angle" value={critical} /><Stat label="Snell" value="n₁sinθ₁ = n₂sinθ₂" /><Equation tex={`n_1\\sin\\theta_1 = n_2\\sin\\theta_2:\\quad ${n1}\\,\\sin ${angle}^\\circ = ${n2}\\,\\sin\\theta_2,\\quad \\theta_c = \\arcsin\\tfrac{n_2}{n_1} = \\text{${critical}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

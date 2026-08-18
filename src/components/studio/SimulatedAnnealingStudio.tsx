@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -83,7 +84,7 @@ print("best x", bestx, "best f", bestf)`;
         <p className="mt-3 text-xs text-slate-500">Simulated annealing borrows from metallurgy: at high temperature it accepts worse moves freely, letting it jump out of local minima; as it cools, it settles into the best valley it found. The acceptance probability exp(−ΔE/T) is the key. Cool too fast and it gets stuck; cool slowly and it finds the global optimum.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Temperature" value={state.T.toFixed(2)} /><Stat label="Current value" value={f(state.x).toFixed(3)} /><Stat label="Best found" value={state.bestF.toFixed(3)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Temperature" value={state.T.toFixed(2)} /><Stat label="Current value" value={f(state.x).toFixed(3)} /><Stat label="Best found" value={state.bestF.toFixed(3)} /><Equation tex={`P=e^{-\\Delta E/T},\\quad T\\leftarrow \\alpha T,\\quad \\alpha=${coolRate},\\ T=${state.T.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

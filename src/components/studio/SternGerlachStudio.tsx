@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { angle: number }> = {
@@ -80,7 +81,7 @@ print("P(up) theory", p_up, "measured", draws.mean())`;
         <p className="mt-3 text-xs text-slate-500">Atoms prepared spin-up are measured along an axis tilted by θ. Quantum mechanics says each atom randomly comes out up or down, with probability cos²(θ/2) for up — never a fraction. At 90° it is a perfect coin flip; at 180° it always flips. The running tally converges to the Born-rule probability.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="P(up) theory" value={pUp.toFixed(3)} /><Stat label="Measured up" value={`${(counts.current.up / tot * 100).toFixed(1)}%`} /><Stat label="Atoms" value={tot.toLocaleString()} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="P(up) theory" value={pUp.toFixed(3)} /><Stat label="Measured up" value={`${(counts.current.up / tot * 100).toFixed(1)}%`} /><Stat label="Atoms" value={tot.toLocaleString()} /><Equation tex={`P(\\uparrow)=\\cos^2\\tfrac{\\theta}{2}=${pUp.toFixed(3)},\\quad P(\\downarrow)=\\sin^2\\tfrac{\\theta}{2}=${(1 - pUp).toFixed(3)},\\quad \\theta=${angle}^\\circ`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

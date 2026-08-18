@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -78,6 +79,7 @@ print("antinodes", n, "nodes", n + 1, "freq", f)`;
         <Stat label="Nodes" value={String(mode + 1)} />
         <Stat label="Antinodes" value={String(mode)} />
         <Stat label="Wavelength" value={`2L/${mode}`} />
+        <Equation tex={`y = 2A\\sin(kx)\\cos(\\omega t),\\quad f_{${mode}} = \\frac{${mode}v}{2L} = ${harmonicFreq.toFixed(0)}\\,\\text{Hz}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>

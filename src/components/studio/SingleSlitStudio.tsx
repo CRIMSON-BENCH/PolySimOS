@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { slit: number; wavelength: number }> = {
@@ -55,7 +56,7 @@ print("first minimum (deg)", first_min)`;
         <p className="mt-3 text-xs text-slate-500">Send light through a narrow slit and it fans out into a bright central band flanked by dimmer fringes — diffraction. The pattern follows a sinc-squared curve, with the first dark fringe where the path difference across the slit equals one wavelength. Narrower slits spread the light more, the diffraction limit that caps every lens and telescope&apos;s sharpness.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="First minimum" value={`${firstMin.toFixed(1)}°`} /><Stat label="Central width" value={`${(2 * firstMin).toFixed(1)}°`} /><Stat label="Slit/λ" value={(a / lam).toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="First minimum" value={`${firstMin.toFixed(1)}°`} /><Stat label="Central width" value={`${(2 * firstMin).toFixed(1)}°`} /><Stat label="Slit/λ" value={(a / lam).toFixed(1)} /><Equation tex={`I=I_0\\,\\operatorname{sinc}^2\\!\\beta,\\quad \\beta=\\frac{\\pi a\\sin\\theta}{\\lambda},\\quad a=${slit}\\,\\mu\\text{m},\\ \\lambda=${wavelength}\\,\\text{nm}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

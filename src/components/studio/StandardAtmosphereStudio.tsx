@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { alt: number }> = {
@@ -63,7 +64,7 @@ print("T", round(T-273.15,1), "P_kPa", round(P/1000,1), "rho", round(rho,3))`;
         <p className="mt-3 text-xs text-slate-500">The International Standard Atmosphere is the reference model all aircraft and instruments are calibrated against. Temperature falls steadily through the troposphere at 6.5 °C/km, then holds constant in the stratosphere above the tropopause. Pressure and density decay roughly exponentially — at airliner altitude the air is only a quarter as dense as at sea level.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Temperature" value={`${(cur.T - 273.15).toFixed(1)} °C`} /><Stat label="Pressure" value={`${(cur.P / 1000).toFixed(1)} kPa`} /><Stat label="Density" value={`${cur.rho.toFixed(3)} kg/m³`} /><Stat label="% sea-level ρ" value={`${(cur.rho / 1.225 * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Temperature" value={`${(cur.T - 273.15).toFixed(1)} °C`} /><Stat label="Pressure" value={`${(cur.P / 1000).toFixed(1)} kPa`} /><Stat label="Density" value={`${cur.rho.toFixed(3)} kg/m³`} /><Stat label="% sea-level ρ" value={`${(cur.rho / 1.225 * 100).toFixed(0)}%`} /><Equation tex={`T = T_0 - Lh = 288.15 - 0.0065\\cdot${alt} = ${cur.T.toFixed(1)}\\,\\text{K},\\quad p = p_0\\left(\\frac{T}{T_0}\\right)^{g/(LR)} = ${(cur.P / 1000).toFixed(1)}\\,\\text{kPa}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

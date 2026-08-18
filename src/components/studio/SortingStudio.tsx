@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -95,7 +96,7 @@ print(${algo}_sort([${size} random values]))`;
         <Slider label="Speed" value={speed} min={1} max={20} step={1} onChange={setSpeed} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Algorithm" value={algo} /><Stat label="Elements" value={String(size)} /><Stat label="Complexity" value={algo === "quick" ? "O(n log n) avg" : "O(n²)"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Algorithm" value={algo} /><Stat label="Elements" value={String(size)} /><Stat label="Complexity" value={algo === "quick" ? "O(n log n) avg" : "O(n²)"} /><Equation tex={`T(n) \\approx ${algo === "quick" ? `n\\log_2 n = ${size}\\log_2 ${size} \\approx ${Math.round(size * Math.log2(size))}` : `n^2 = ${size}^2 = ${size * size}`}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

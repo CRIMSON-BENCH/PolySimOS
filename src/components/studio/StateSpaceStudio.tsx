@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { a11: number; a12: number; a21: number; a22: number }> = {
@@ -67,6 +68,7 @@ print("eigenvalues", eig)`;
         <Stat label="Trace / Det" value={`${tr.toFixed(2)} / ${det.toFixed(2)}`} />
         <Stat label="Eigenvalues" value={imLam ? `${reLam.toFixed(2)} ± ${imLam.toFixed(2)}j` : `${(reLam + Math.sqrt(Math.max(0, disc))).toFixed(2)}, ${(reLam - Math.sqrt(Math.max(0, disc))).toFixed(2)}`} />
         <Stat label="Classification" value={kind} />
+        <Equation tex={`\\dot{x} = Ax + Bu,\\quad y = Cx + Du,\\quad A = \\begin{bmatrix} ${a11.toFixed(1)} & ${a12.toFixed(1)} \\\\ ${a21.toFixed(1)} & ${a22.toFixed(1)} \\end{bmatrix}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

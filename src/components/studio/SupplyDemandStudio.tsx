@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { demShift: number; supShift: number; tax: number }> = {
@@ -63,7 +64,7 @@ print("P*", round(p_star, 1), "Q*", round(q_star, 1), "CS", round(cs), "PS", rou
         <p className="mt-3 text-xs text-slate-500">Where the downward demand curve crosses the upward supply curve, the market clears: that price and quantity are the equilibrium. Shifting either curve moves it. The shaded triangles are consumer and producer surplus — the total gains from trade. A per-unit tax lifts the supply curve, raising price, cutting quantity, and creating deadweight loss.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equilibrium price" value={`$${pStar.toFixed(1)}`} /><Stat label="Equilibrium qty" value={qStar.toFixed(1)} /><Stat label="Consumer surplus" value={cs.toFixed(0)} /><Stat label="Producer surplus" value={ps.toFixed(0)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Equilibrium price" value={`$${pStar.toFixed(1)}`} /><Stat label="Equilibrium qty" value={qStar.toFixed(1)} /><Stat label="Consumer surplus" value={cs.toFixed(0)} /><Stat label="Producer surplus" value={ps.toFixed(0)} /><Equation tex={`P_d = ${a} - ${b}\\,Q,\\quad P_s = ${c} + ${d}\\,Q \\;\\Rightarrow\\; Q^{*} = \\frac{a - c}{b + d} = ${qStar.toFixed(1)},\\quad P^{*} = ${pStar.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

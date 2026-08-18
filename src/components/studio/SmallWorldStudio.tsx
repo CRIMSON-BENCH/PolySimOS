@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { p: number }> = {
@@ -60,7 +61,7 @@ print("avg path length", nx.average_shortest_path_length(G))`;
         <p className="mt-3 text-xs text-slate-500">Start with an orderly ring where everyone knows their neighbors, then randomly rewire a few connections. Even a handful of long-range shortcuts collapses the average path length — the six-degrees-of-separation effect — while keeping high local clustering. This small-world structure appears in social networks, the brain, and power grids.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Rewiring p" value={p.toFixed(2)} /><Stat label="Clustering" value={stats.cluster.toFixed(3)} /><Stat label="Avg path length" value={stats.pathLen.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Rewiring p" value={p.toFixed(2)} /><Stat label="Clustering" value={stats.cluster.toFixed(3)} /><Stat label="Avg path length" value={stats.pathLen.toFixed(2)} /><Equation tex={`L \\sim \\frac{\\ln N}{\\ln k} = \\frac{\\ln 24}{\\ln 4} \\approx ${stats.pathLen.toFixed(2)},\\quad C \\approx ${stats.cluster.toFixed(3)},\\quad p = ${p.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={400} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

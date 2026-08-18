@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { dist: number; drag: number; braking: number; grade: number }> = {
@@ -58,7 +59,7 @@ print("min speed (mph)", round(speed_mph, 1), "| km/h", round(speed_mph*1.60934,
         <p className="mt-3 text-xs text-slate-500">The minimum speed at the start of a skid follows v = √(30·D·f·n), where D is skid distance, f the surface drag factor, and n braking efficiency. Uphill grade adds to f, downhill subtracts. Estimation aid — a formal reconstruction requires scene measurement and a drag-factor test.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Effective f" value={f.toFixed(2)} /><Stat label="Speed (km/h)" value={kmh.toFixed(0)} /><Stat label="Formula" value="√(30·D·f·n)" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Effective f" value={f.toFixed(2)} /><Stat label="Speed (km/h)" value={kmh.toFixed(0)} /><Stat label="Formula" value="√(30·D·f·n)" /><Equation tex={`v = \\sqrt{30\\,D\\,f\\,n} = \\sqrt{30 \\cdot ${dist} \\cdot ${f.toFixed(2)} \\cdot ${braking.toFixed(2)}} = ${speed.toFixed(0)}\\ \\text{mph}`} /><ExplainResult text={explain} /></div>}
     ><div>
         <canvas ref={canvasRef} width={520} height={200} className="mx-auto h-auto max-w-full rounded-lg" />
         <div className="mt-6 flex flex-col items-center"><div className="text-xs uppercase tracking-widest text-slate-500">Minimum speed at start of skid</div>

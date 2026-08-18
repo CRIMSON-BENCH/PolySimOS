@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { level: number; sources: number; distance: number }> = {
@@ -56,7 +57,7 @@ print("combined", round(combined, 1), "at_dist", round(at_dist, 1))`;
         <p className="mt-3 text-xs text-slate-500">Decibels are logarithmic, so loudness does not add the way you expect: two identical sources are only 3 dB louder than one, and ten are 10 dB. Meanwhile a point source drops 6 dB every time the distance doubles (the inverse-square law). Sustained exposure above 85 dB risks hearing damage.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Combined at 1 m" value={`${combined.toFixed(1)} dB`} /><Stat label={`At ${distance} m`} value={`${atDist.toFixed(1)} dB`} /><Stat label="Doubling sources" value="+3 dB" /><Stat label="Risk" value={atDist >= 85 ? "above 85 dB" : "safe range"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Combined at 1 m" value={`${combined.toFixed(1)} dB`} /><Stat label={`At ${distance} m`} value={`${atDist.toFixed(1)} dB`} /><Stat label="Doubling sources" value="+3 dB" /><Stat label="Risk" value={atDist >= 85 ? "above 85 dB" : "safe range"} /><Equation tex={`L = ${combined.toFixed(1)} - 20\\log_{10}(${distance}) = ${atDist.toFixed(1)}\\ \\text{dB}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

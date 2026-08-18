@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { distance: number; releaseH: number; angle: number }> = {
@@ -66,7 +67,7 @@ print("required speed", round(v, 2), "entry angle", round(entry, 1))`;
         <p className="mt-3 text-xs text-slate-500">A basketball shot must arrive at the rim from above to have a chance of dropping in. Too flat and the ball meets the front rim; too steep and it needs excess speed. Coaches prize an entry angle around 43–47°, which maximizes the effective size of the hoop the ball sees. Higher release points let shorter players shoot flatter and still score.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Required speed" value={isNaN(v) ? "—" : `${v.toFixed(1)} m/s`} /><Stat label="Entry angle" value={isNaN(entryAngle) ? "—" : `${entryAngle.toFixed(0)}°`} /><Stat label="Arc quality" value={good ? "ideal" : entryAngle > 55 ? "too steep" : "too flat"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Required speed" value={isNaN(v) ? "—" : `${v.toFixed(1)} m/s`} /><Stat label="Entry angle" value={isNaN(entryAngle) ? "—" : `${entryAngle.toFixed(0)}°`} /><Stat label="Arc quality" value={good ? "ideal" : entryAngle > 55 ? "too steep" : "too flat"} /><Equation tex={`v=\\sqrt{\\dfrac{g\\,d^{2}}{2\\cos^{2}\\theta\\,(d\\tan\\theta-\\Delta h)}},\\quad \\theta=${angle}^\\circ,\\ \\theta_{\\text{entry}}\\approx ${isNaN(entryAngle) ? "-" : entryAngle.toFixed(0)}^\\circ`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
