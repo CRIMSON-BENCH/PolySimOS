@@ -65,7 +65,7 @@ export function SpecializedPackages() {
   const total = groups.reduce((n, g) => n + g.items.length, 0);
 
   return (
-    <div className="mt-14">
+    <div data-hide-in-app className="mt-14">
       <h2 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Specialized packages</h2>
       <p className="mt-2 max-w-2xl text-sm text-slate-600 dark:text-slate-400">
         No subscription needed — {total} one-time packs, credits, kits, reports, and services. Buy exactly what a single project needs.

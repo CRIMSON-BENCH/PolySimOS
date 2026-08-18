@@ -57,3 +57,18 @@ html {
 .cl-dividerLine { background-color: rgba(255, 255, 255, 0.15) !important; }
 .cl-footerActionLink { color: #22d3ee !important; }
 .cl-footerActionLink:hover { color: #67e8f9 !important; }
+
+/* ------------------------------------------------------------------ */
+/* iOS App "free companion" mode (App Store Guideline 3.1.1)          */
+/* When running inside the Capacitor iOS WebView, data-app="ios" is    */
+/* set on <html> (see layout.tsx). Hide every purchase / pricing       */
+/* surface so the app sells nothing in-app.                            */
+/* ------------------------------------------------------------------ */
+html[data-app="ios"] [data-hide-in-app] { display: none !important; }
+/* Catch every link to the pricing page anywhere (nav, footer, menus). */
+html[data-app="ios"] a[href="/pricing"],
+html[data-app="ios"] a[href^="/pricing?"],
+html[data-app="ios"] a[href^="/pricing#"] { display: none !important; }
+/* Content shown ONLY inside the iOS app (e.g. the free-in-app notice). */
+.only-in-app { display: none; }
+html[data-app="ios"] .only-in-app { display: block; }

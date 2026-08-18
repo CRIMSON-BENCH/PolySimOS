@@ -52,7 +52,7 @@ function CheckoutCTA({ sku, label, sublabel, next, cycle }: { sku: string; label
 function Card({ children, tone = "cyan" }: { children: React.ReactNode; tone?: "cyan" | "slate" }) {
   const border = tone === "cyan" ? "border-cyan-300/50" : "border-slate-200 dark:border-slate-800";
   const bg = tone === "cyan" ? "bg-gradient-to-br from-cyan-500/10 to-transparent" : "bg-slate-50 dark:bg-slate-900/40";
-  return <div className={`rounded-2xl border ${border} ${bg} p-5`}>{children}</div>;
+  return <div data-hide-in-app className={`rounded-2xl border ${border} ${bg} p-5`}>{children}</div>;
 }
 
 /** (1) Unlock this single solver for $2 — hides itself once unlocked. */
@@ -153,7 +153,7 @@ export function MonetizationBar({ kind, slug, name, next }: { kind: "solver" | "
   // Pro/Team members: no upsell at all — they already have everything.
   if (hasPlan) return null;
   return (
-    <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+    <div data-hide-in-app className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
       {unlocked ? (
         <span className="font-medium text-emerald-600 dark:text-emerald-400">✓ Unlocked — thanks!</span>
       ) : (

@@ -27,6 +27,13 @@ export default function PricingPage() {
       title="Simple, transparent pricing"
       lede="Local rendering is free forever. Scale to the cloud only when reality gets heavy — no quotes, no sales calls."
     >
+      {/* iOS free-companion notice — shown ONLY inside the app (see globals.css). */}
+      <div className="only-in-app rounded-2xl border border-cyan-300/40 bg-cyan-500/10 p-6 text-center">
+        <p className="text-lg font-bold text-slate-900 dark:text-slate-100">Everything in the app is free.</p>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">All 370+ simulators run at no cost, with no account required. Enjoy exploring.</p>
+      </div>
+
+      <div data-hide-in-app>
       <div className="mt-8"><PricingTiers /></div>
 
       <SpecializedPackages />
@@ -69,6 +76,7 @@ export default function PricingPage() {
             <div className="pb-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{f.a}</div>
           </details>
         ))}
+      </div>
       </div>
     </PageShell>
   );

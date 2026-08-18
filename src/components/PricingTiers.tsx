@@ -30,7 +30,7 @@ export function PricingTiers() {
   }
 
   return (
-    <div>
+    <div data-hide-in-app>
       <div className="mb-8 flex items-center justify-center">
         <div className="inline-flex rounded-lg border border-slate-300 p-0.5 text-sm dark:border-slate-700">
           <button onClick={() => setCycle("month")} className={cycle === "month" ? "rounded-md bg-cyan-600 px-4 py-1.5 font-semibold text-white" : "px-4 py-1.5 font-medium text-slate-600 dark:text-slate-300"}>Monthly</button>

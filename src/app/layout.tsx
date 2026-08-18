@@ -48,6 +48,15 @@ function Shell({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body className="bg-white text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100">
+        {/* iOS App detection: the Capacitor WebView appends "PolySimiOS" to its
+            user-agent (see capacitor.config.ts). Setting data-app="ios" before
+            paint lets globals.css hide all purchase/pricing UI, so the iOS build
+            is a free companion with no in-app purchases (App Store Guideline 3.1.1). */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `try{if(/PolySimiOS/.test(navigator.userAgent)){document.documentElement.setAttribute('data-app','ios')}}catch(e){}`,
+          }}
+        />
         <AuthProvider>
           <ChromeGate><Navbar /></ChromeGate>
           <main className="min-h-screen">{children}</main>

@@ -18,6 +18,10 @@ const config: CapacitorConfig = {
   ios: {
     backgroundColor: "#020617",
     contentInset: "always",
+    // Tag the WebView user-agent so the site can detect it's running inside the
+    // iOS app and switch to free-companion mode (hides all purchase/pricing UI
+    // for App Store Guideline 3.1.1). See src/app/layout.tsx + globals.css.
+    appendUserAgent: "PolySimiOS",
   },
 };
 

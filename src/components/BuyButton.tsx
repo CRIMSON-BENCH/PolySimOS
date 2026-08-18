@@ -31,7 +31,7 @@ export function BuyButton({ slug, label, price }: { slug: string; label: string;
   }
 
   return (
-    <div>
+    <div data-hide-in-app>
       <button
         onClick={checkout}
         disabled={loading}

@@ -1,136 +1,289 @@
-# PolySim OS — App Store Submission Walkthrough
+# PolySim OS — Complete App Store Submission Package
 
-Zero-jargon, step-by-step. The iOS project is already created (Capacitor + Swift Package Manager, no CocoaPods needed), the icon is installed, Info.plist is configured, and Xcode is open.
+Everything you need to submit to the Apple App Store, field by field, **including every optional field.**
+Copy-paste values are in code blocks. Anything only you can supply is marked **[YOU PROVIDE]**.
 
-**Bundle ID:** `com.polysimos.app` · **App name:** PolySim OS
+- **Bundle ID:** `com.polysimos.app`
+- **App name:** PolySim OS
+- **Version:** 1.0.0  ·  **Build:** 1
+- **Your Apple ID / developer account email:** hirenode.io@gmail.com *(confirm this is the Apple Developer account)*
 
 ---
 
-## Part A — In Xcode
+## ⚠️ READ FIRST — approval blockers (don't skip)
+
+This app is a WebView that loads **polysimos.com**, which sells subscriptions via **Stripe**. Two Apple rules:
+
+1. **Guideline 3.1.1 – In-App Purchase.** Digital subscriptions consumed in-app must use Apple IAP. Selling
+   via Stripe in-app, or linking out to buy, = rejection.
+2. **Guideline 4.2 – Minimum Functionality.** "A website in a wrapper" can be rejected. Ours is defensible
+   (on-device interactive solvers) but it's a real risk.
+
+**Recommended fix for v1 (fastest approval): "free companion" mode.** Make the site hide all upgrade / pricing /
+Stripe UI when it detects it's inside the iOS app (via a custom WebView user-agent token). Then Apple sees a
+free, functional tool with no external payments. Everything below is written for this approach.
+*(Long-term: add Apple IAP with StoreKit/RevenueCat mapped to the tiers. Bigger build — do it in v1.1.)*
+
+> If you submit **with** Stripe purchase UI visible in the app, expect a 3.1.1 rejection. Ask me to add the
+> free-companion gating first — it's a small change.
+
+---
+
+## FILES TO UPLOAD (all exist, correct sizes)
+
+| Asset | Path | Size | Where it goes |
+|---|---|---|---|
+| App icon | `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` | 1024×1024 | Built into the app (already installed) |
+| iPhone screenshots (5) | `~/Downloads/AppStoreAssets/PolySim/iPhone-0X-*.png` | 1284×2778 | **iPhone 6.7"** slot |
+| iPad screenshots (3) | `~/Downloads/AppStoreAssets/PolySim/iPad-0X-*.png` | 2048×2732 | **iPad Pro 12.9"** slot |
+| Apple Watch (6) | `~/Downloads/AppStoreAssets/PolySim/Watch-*.png` | — | Only if you add a Watch target (skip for now) |
+
+The icon must have **no alpha channel and no rounded corners** (Apple rounds it). If Xcode complains about
+transparency, tell me and I'll flatten it.
+
+---
+
+# PART A — In Xcode (build & upload)
 
 ### 1. Sign the app
-1. In the left sidebar, click the blue **App** project at the top.
-2. Select the **App** target, then the **Signing & Capabilities** tab.
-3. Check **Automatically manage signing**.
-4. **Team:** choose your Apple Developer team (log in with your Apple ID under Xcode ▸ Settings ▸ Accounts if it's not listed — a paid Apple Developer Program membership, $99/yr, is required to publish).
-5. Confirm **Bundle Identifier** is `com.polysimos.app`. If Xcode says it's taken, change it to something unique like `com.<yourname>.polysimos` and use that everywhere below.
+1. Left sidebar → click the blue **App** project → **App** target → **Signing & Capabilities** tab.
+2. Check **Automatically manage signing.**
+3. **Team:** **[YOU PROVIDE]** — your Apple Developer team (Xcode ▸ Settings ▸ Accounts to add your Apple ID;
+   requires the paid **Apple Developer Program**, $99/yr).
+4. Confirm **Bundle Identifier** = `com.polysimos.app`. If it says it's taken, use `com.<yourname>.polysimos`
+   and use that everywhere below.
 
-### 2. Set version & build number
-1. Same screen, **General** tab.
-2. **Version:** `1.0.0`  ·  **Build:** `1`.
+### 2. Version & build
+**General** tab → **Version:** `1.0.0` · **Build:** `1`.
 
-### 3. Pick the build destination
-1. In the top toolbar device dropdown (next to the ▶ button), choose **Any iOS Device (arm64)**. (You cannot archive while a simulator is selected.)
+### 3. Encryption compliance (already handled)
+`Info.plist` has `ITSAppUsesNonExemptEncryption = NO`, so App Store Connect won't ask the export-compliance
+question. Nothing to do.
 
-### 4. Archive
-1. Menu bar: **Product ▸ Archive**. Wait for the build (a few minutes).
-2. The **Organizer** window opens with your archive listed.
+### 4. Destination → Archive
+1. Top toolbar device dropdown → **Any iOS Device (arm64)** (can't archive on a simulator).
+2. Menu → **Product ▸ Archive.** Wait a few minutes → **Organizer** opens.
 
-### 5. Upload to App Store Connect
-1. In Organizer, select the archive ▸ **Distribute App**.
-2. Choose **App Store Connect** ▸ **Upload** ▸ keep defaults ▸ **Next** through the prompts ▸ **Upload**.
-3. Wait for "Upload Successful." The build takes ~5–15 min to finish processing before it appears in App Store Connect.
+### 5. Upload
+Organizer → select archive → **Distribute App** → **App Store Connect** → **Upload** → keep defaults →
+**Next** through → **Upload.** Wait for "Upload Successful." Processing takes ~5–15 min before the build
+appears in App Store Connect.
 
 ---
 
-## Part B — In App Store Connect (appstoreconnect.apple.com)
+# PART B — App Store Connect (appstoreconnect.apple.com)
 
-### 6. Create the app listing
-1. **My Apps ▸ + ▸ New App.**
-2. **Platform:** iOS · **Name:** `PolySim OS` · **Primary language:** English (U.S.) · **Bundle ID:** select `com.polysimos.app` · **SKU:** `polysim-os-001` · **User access:** Full.
+## 6. Register the Bundle ID (if not already)
+developer.apple.com → **Certificates, IDs & Profiles ▸ Identifiers ▸ +** → **App IDs ▸ App** →
+Description `PolySim OS`, Bundle ID (explicit) `com.polysimos.app`. (Xcode usually creates this for you during archive.)
 
-### 7. Fill in every field (copy-paste below)
+## 7. Create the app
+**My Apps ▸ + ▸ New App:**
+- **Platforms:** ☑ iOS
+- **Name:** `PolySim OS`
+- **Primary Language:** `English (U.S.)`
+- **Bundle ID:** select `com.polysimos.app`
+- **SKU:** `polysim-os-001`  *(internal only, never shown)*
+- **User Access:** `Full Access`
 
-**Subtitle** (30 char max):
+---
+
+## 8. "App Information" page (left sidebar)
+
+**Name:**
 ```
-Simulation in your browser
+PolySim OS
 ```
-
-**Promotional text** (170 char max):
+**Subtitle** (30 char max — pick one):
 ```
-Run real physics, fluid, math, and AI simulations right on your device. Free to start — no install, no license. Turn your equations into living, running reality.
+Interactive science simulators
 ```
+*(alternates: `Physics, math & science sims` · `The everything engine for sims`)*
 
-**Description:**
+**Privacy Policy URL:**
 ```
-PolySim OS is the everything engine for simulation — physics, biology, chemistry, and math in one AI-powered workspace, running right in the app. Built for the brilliant minds who can see the equations and want to turn them into running reality.
-
-Real, working simulation engines:
-- Visual Node Graph — wire blocks into a live dataflow and watch it recompute
-- Particle / N-Body — gravity, orbits, and collisions
-- 2D Fluid (CFD) — a real Navier-Stokes fluid you can stir
-- Dynamical Systems — Lorenz chaos, SIR epidemics, reaction-diffusion
-- Heat & Wave — the classic PDEs, solved live
-- Symbolic Math — differentiate, integrate, simplify, and plot
-- AI Surrogate — train a fast machine-learning model on a real solver
-
-Everything runs locally on your device for free. Scale to the cloud only when reality gets heavy.
-
-Also included:
-- AI Copilot that turns plain-English descriptions into runnable models
-- 2,250+ guides across methods, materials, equations, and glossary terms
-- Transparent pricing: free locally, plans from $5/month (COMSOL starts around $3,495/yr; Ansys is quote-only)
-
-Subscriptions:
-- Student: $5/month
-- Independent Researcher: $24/month
-- Team & institution plans available
-
-PolySim OS is a simulation and modeling tool, not a certified engineering, scientific, or professional-advisory service. Simulation results are for research, educational, and informational purposes only and are not a substitute for physical testing, professional judgment, or regulatory certification.
+https://www.polysimos.com/privacy
+```
+**Privacy Choices URL** (optional):
+```
+https://www.polysimos.com/cookies
 ```
 
-**Keywords** (100 char max, comma-separated):
+**Category:**
+- **Primary:** `Education`
+- **Secondary:** `Developer Tools`  *(or `Productivity`)*
+
+**Content Rights** (Does it contain third-party content?):
 ```
-simulation,physics,cfd,fluid,fea,calculus,math,engineering,science,webgpu,chaos,ode,solver,stem
+No — it does not contain, show, or access third-party content.
 ```
 
-**Support URL:** `https://www.polysimos.com/community`
-**Marketing URL:** `https://www.polysimos.com`
-**Privacy Policy URL:** `https://www.polysimos.com/privacy`
+**Age Rating** → click **Edit/Set Up** → answer **None / No** to every question:
+- Cartoon/Fantasy Violence: None · Realistic Violence: None · Sexual Content/Nudity: None
+- Profanity/Crude Humor: None · Alcohol/Tobacco/Drugs: None · Mature/Suggestive: None
+- Horror/Fear: None · Medical/Treatment Info: None · Gambling: **No** · Contests: No
+- Unrestricted Web Access: **No** *(the WebView is scoped to your own domains — see capacitor.config allowNavigation)*
+- Made for Kids: **No**
+→ Result: **4+**
 
-### 8. Category & content rights
-- **Primary category:** Education  ·  **Secondary category:** Developer Tools (or Productivity).
-- **Content rights:** check "No, it does not contain, show, or access third-party content."
+**License Agreement:** use **Apple's Standard EULA** (default). No custom EULA needed.
 
-### 9. Age rating
-- Answer **None** to every content question (violence, mature themes, etc.). Result: **4+**.
+---
 
-### 10. Upload screenshots
-From `~/Downloads/AppStoreAssets/PolySim/`:
-- **iPhone 6.7"** slot → the five `iPhone-0X-*.png` (1284×2778).
-- **iPad Pro 12.9"** slot → the three `iPad-0X-*.png` (2048×2732).
-- (Apple Watch slots, if you add a watch target later) → the `Watch-*.png`.
-iPhone and iPad screenshots are required; Watch is optional.
+## 9. "Pricing and Availability" page
 
-### 11. App privacy
-- **Data collection:** if you enable accounts/analytics, declare Email and Usage Data; mark not used for tracking. If you ship with no accounts yet, you may select "Data Not Collected." Update this when you wire Supabase.
+- **Price:** `Free` (USD 0 / Tier 0)
+- **Availability:** `All countries and regions` *(or deselect any you want to exclude)*
+- **Pre-Orders:** Off
+- **Distribution:** ☑ Public on the App Store · leave Custom/Unlisted/B2B off
+- **Volume Purchase (Business/Education):** leave **off** unless you want VPP bulk sales
 
-### 12. App Review information
-- **Sign-in required:** No (browsing is free; accounts optional).
-- **Contact:** your name, phone, and email.
-- **Notes for the reviewer** (paste):
+---
+
+## 10. "App Privacy" page  → **Get Started**
+
+The app loads the full site (accounts + analytics active), so declare the following. For each, answer
+**Used to Track you? → No** (you don't share data with data brokers or use it for cross-app ad tracking).
+
+| Data type | Collected? | Linked to identity? | Purpose |
+|---|---|---|---|
+| **Contact Info → Email Address** | Yes | Yes | App Functionality (accounts) |
+| **Identifiers → User ID** | Yes | Yes | App Functionality (accounts) |
+| **Purchases → Purchase History** | Yes | Yes | App Functionality (subscriptions) |
+| **Usage Data → Product Interaction** | Yes | No | Analytics |
+| **Diagnostics → Crash Data + Performance Data** | Yes | No | App Functionality, Analytics |
+| **User Content → Other User Content** *(saved projects)* | Yes | Yes | App Functionality |
+
+- **Tracking:** No, this app does **not** track users. (Do **not** add an ATT prompt / IDFA.)
+- If you ship the **free-companion** build with accounts + purchases disabled in-app, you may drop
+  "Purchases" and could simplify — but Email/Usage/Diagnostics still apply because the site can sign in and
+  runs analytics. When in doubt, over-declare; under-declaring is what gets flagged.
+
+---
+
+## 11. Version page — "1.0 Prepare for Submission"
+
+### Screenshots
+- **iPhone 6.7" Display:** upload the five `~/Downloads/AppStoreAssets/PolySim/iPhone-0X-*.png` (1284×2778).
+- **iPad Pro (12.9") Display:** upload the three `~/Downloads/AppStoreAssets/PolySim/iPad-0X-*.png` (2048×2732).
+- iPhone + iPad are required (universal app). You can drag to reorder; the first is the hero.
+
+### App Previews (optional video)
+- Optional. If you want one, the video session can produce a 15–30s portrait preview (1080×1920, ≤30s,
+  H.264/HEVC). Skip for v1 if you want to ship faster.
+
+### Promotional Text (170 char max — editable anytime without review)
 ```
-This app is a WebView wrapper for our web application at https://www.polysimos.com. It provides browser-native scientific simulation tools (physics, fluid dynamics, dynamical systems, symbolic math, and an AI surrogate) that run locally on the device. All content can be browsed for free with no login. Optional paid features (subscriptions and compute packs) are processed through Stripe. Account creation is optional and only needed to save projects and manage subscriptions.
+Run real physics, fluid, chaos and math simulations right on your device — free, no install, no license. Turn the equations you see into living, running reality.
+```
+
+### Description (4000 char max)
+```
+PolySim OS is a free, browser-native workspace for interactive science — physics, math, engineering, chemistry, biology, and more — running right on your device. If you can see the equation, you can watch it come alive.
+
+370+ real, runnable simulators, including:
+- Double pendulum, Lorenz attractor, and other chaotic systems
+- 2D fluid (Navier–Stokes) you can stir with your finger
+- N-body gravity, orbits, and collisions
+- Reaction–diffusion and Turing patterns
+- Heat and wave equations, solved live
+- SIR epidemics — slide R0 and watch herd immunity appear
+- Electromagnetic fields, quantum states, and more
+
+Why people use it:
+- Touch the math. Drag sliders — and on many solvers, drag objects directly on the canvas — and watch the system respond instantly.
+- See the real equations. The governing math renders like a textbook and updates as you change parameters.
+- Runs on your device. Everything runs locally, free — no install, no license, no account required to start.
+- Built for students, educators, researchers, and engineers.
+
+PolySim OS is a simulation and modeling tool, not a certified engineering, scientific, or professional-advisory service. Results are for research, educational, and informational purposes only and are not a substitute for physical testing, professional judgment, or regulatory certification.
+```
+> Note: this description intentionally does **not** list subscription prices or push external purchases —
+> that keeps it clean under Guideline 3.1.1. Add IAP-based pricing language only once you ship Apple IAP.
+
+### Keywords (100 char max, comma-separated, NO spaces)
+```
+physics,simulation,cfd,fluid,fea,calculus,chaos,ode,pde,solver,stem,engineering,science,math,quantum
+```
+
+### Support URL
+```
+https://www.polysimos.com/community
+```
+### Marketing URL (optional)
+```
+https://www.polysimos.com
+```
+
+### Version
+```
+1.0
+```
+### Copyright
+```
+© 2026 PolySim OS
+```
+*(use your registered legal entity name if you have one, e.g. "© 2026 PolySim OS Labs")*
+
+### Routing App Coverage File (optional)
+Leave blank — that's only for maps/navigation apps.
+
+---
+
+## 12. "App Review Information" (bottom of the version page)
+
+- **Sign-In required?** `No` — all simulators run free without an account.
+- **Demo account** (optional but recommended so the reviewer can test account features):
+  - Username: **[YOU PROVIDE]** *(create a throwaway account on the site, e.g. reviewer@polysimos.com)*
+  - Password: **[YOU PROVIDE]**
+  - *(Leave blank only if nothing behind login matters for review.)*
+- **Contact Information:**
+  - First name / Last name: **[YOU PROVIDE]**
+  - Phone: **[YOU PROVIDE]**
+  - Email: `hirenode.io@gmail.com` *(or your preferred contact)*
+- **Notes** (paste — free-companion version):
+```
+PolySim OS is a WebView client for our web app at https://www.polysimos.com. It provides interactive scientific simulators (physics, fluid dynamics, dynamical systems, symbolic math, and more) that run locally in the device's browser engine.
+
+All simulators are free and require no login to use. In the iOS build, upgrade/subscription UI is disabled — there are no in-app purchases and no external purchase links; the app is a free experience. Account sign-in (optional) is only used to sync saved work.
 
 To test:
 1. Open the app — it loads polysimos.com.
-2. Tap "Launch Studio" and open any simulator (e.g. the Node Graph or 2D Fluid) — they run without payment.
-3. Paid plans open Stripe Checkout.
+2. Tap "Launch Studio," open any simulator (e.g. Double Pendulum or 2D Fluid) — it runs immediately, no payment.
+3. Drag sliders / drag objects on the canvas to see the model respond.
 
-No native device APIs are used beyond the WebView. ITSAppUsesNonExemptEncryption is set to NO. The app does not provide certified professional advice; disclaimers appear throughout.
+No native device APIs are used beyond the WebView. ITSAppUsesNonExemptEncryption is NO. This is a simulation/education tool and does not provide certified professional advice; disclaimers appear throughout.
 ```
+- **Attachment** (optional): none needed.
 
-### 13. Select build & submit
-1. In the app version page, scroll to **Build** ▸ **+** ▸ pick the build you uploaded (once it finishes processing).
-2. Set **Version release** to "Automatically release after approval" (or manual).
-3. Click **Add for Review** ▸ **Submit for Review**.
+---
 
-That's it. Review typically takes 24–48 hours.
+## 13. "Version Release" (bottom of the version page)
+
+Choose one:
+- ☑ **Automatically release this version** — goes live right after approval, **or**
+- **Manually release** — you press the button after approval, **or**
+- **Phased release for automatic updates** — (only affects future updates; fine to enable)
+
+**Advertising Identifier (IDFA):** when asked "Does this app use the Advertising Identifier?" → **No.**
+
+---
+
+## 14. Attach the build & submit
+1. Version page → **Build** section → **+** → select the build you uploaded (once it finishes processing).
+2. **Save** (top right).
+3. **Add for Review** → **Submit for Review.**
+
+Review is typically 24–48 hours. If rejected, the reason appears in **App Store Connect ▸ your app ▸ the
+version**, and you reply in **Resolution Center**.
 
 ---
 
 ## Quick reference
-- Assets folder: `~/Downloads/AppStoreAssets/PolySim/`
-- App icon (1024): installed at `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` (Option 3)
-- To swap to icon Option 5: `cp ~/Downloads/AppStoreAssets/icon-option-5.png ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` then re-archive.
-- Rebuild web + resync after any site change: `npm run build` (site auto-deploys via Vercel) — the app always loads the live site, so you rarely need to resubmit the app itself.
+- Bundle ID: `com.polysimos.app` · SKU: `polysim-os-001` · Version 1.0.0 / Build 1
+- Icon: `ios/App/App/Assets.xcassets/AppIcon.appiconset/AppIcon-512@2x.png` (1024², installed)
+- Screenshots: `~/Downloads/AppStoreAssets/PolySim/` (iPhone 1284×2778, iPad 2048×2732)
+- The app loads the live site, so most content updates ship via the website (Vercel) with **no resubmission**.
+  You only resubmit the app itself for native changes (icon, capabilities, the IAP work, etc.).
+- **Before you submit:** decide on the free-companion gating (recommended) or Apple IAP. Ask me to wire it.
+```
