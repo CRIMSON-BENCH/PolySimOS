@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 
 // Shared visual shell for every live Studio simulation.
@@ -18,13 +18,42 @@ export function StudioChrome({
   inspector?: React.ReactNode;
 }) {
   const stageRef = useRef<HTMLDivElement>(null);
+  const recRef = useRef<MediaRecorder | null>(null);
+  const [recording, setRecording] = useState(false);
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
   const exportPng = () => {
     const cv = stageRef.current?.querySelector("canvas");
     if (!cv) return;
     const a = document.createElement("a");
     a.href = cv.toDataURL("image/png");
-    a.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")}.png`;
+    a.download = `${slug}.png`;
     a.click();
+  };
+
+  // Record the live animation to a downloadable video (native MediaRecorder — no deps).
+  const record = () => {
+    if (recording) { recRef.current?.stop(); return; }
+    const cv = stageRef.current?.querySelector("canvas") as (HTMLCanvasElement & { captureStream?: (fps: number) => MediaStream }) | null;
+    if (!cv || typeof cv.captureStream !== "function" || typeof MediaRecorder === "undefined") return;
+    let stream: MediaStream;
+    try { stream = cv.captureStream(30); } catch { return; }
+    const mime = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"].find((m) => MediaRecorder.isTypeSupported(m)) || "video/webm";
+    const rec = new MediaRecorder(stream, { mimeType: mime });
+    const chunks: BlobPart[] = [];
+    rec.ondataavailable = (e) => { if (e.data.size) chunks.push(e.data); };
+    rec.onstop = () => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob(chunks, { type: "video/webm" }));
+      a.download = `${slug}.webm`;
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      setRecording(false);
+    };
+    recRef.current = rec;
+    rec.start();
+    setRecording(true);
+    setTimeout(() => { if (rec.state === "recording") rec.stop(); }, 8000); // auto-stop at 8s
   };
   return (
     <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm ring-1 ring-black/[0.02] dark:border-slate-800 dark:bg-slate-900">
@@ -38,7 +67,8 @@ export function StudioChrome({
           <span className="rounded-full bg-cyan-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-cyan-600 dark:bg-cyan-950/60 dark:text-cyan-400">Live</span>
         </div>
         <div className="flex items-center gap-3">
-          <span className="hidden text-xs text-slate-400 md:block">{tagline}</span>
+          <span className="hidden text-xs text-slate-400 lg:block">{tagline}</span>
+          <button onClick={record} title={recording ? "Stop recording" : "Record the animation to a video (max 8s)"} className={recording ? "rounded-md border border-red-400 bg-red-50 px-2 py-1 text-[11px] font-semibold text-red-600 transition dark:border-red-500/50 dark:bg-red-950/40 dark:text-red-400" : "rounded-md border border-slate-300 px-2 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-cyan-400 hover:text-cyan-700 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-300"}>{recording ? "■ Stop" : "● REC"}</button>
           <button onClick={exportPng} title="Download this view as PNG" className="rounded-md border border-slate-300 px-2 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-cyan-400 hover:text-cyan-700 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-300">⤓ PNG</button>
         </div>
       </div>

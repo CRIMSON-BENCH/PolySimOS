@@ -348,7 +348,7 @@ export function StudioPageShell({
       <MonetizationBar kind="solver" slug={slug} name={name} next={`/studio/${slug}`} />
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
-        <EmbedButton slug={slug} />
+        <EmbedButton slug={slug} name={name} />
         <span className="text-xs text-slate-400">Drop this simulation into your own site, docs, or course page.</span>
       </div>
 

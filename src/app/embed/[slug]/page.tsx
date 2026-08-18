@@ -1,7 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { STUDIO_COMPONENTS, STUDIO_SLUGS } from "@/components/studio/registry";
+import { EmbeddedStudio } from "@/components/studio/EmbeddedStudio";
+import { STUDIO_SLUGS } from "@/components/studio/registry";
+import { SIMS } from "@/app/studio/page";
+
+export const dynamicParams = true;
 
 export function generateStaticParams() {
   return STUDIO_SLUGS.map((slug) => ({ slug }));
@@ -9,20 +12,28 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  return { title: `PolySim ${slug} — embed`, robots: { index: false }, alternates: { canonical: `/embed/${slug}` } };
+  const sim = SIMS.find((s) => s.slug === slug);
+  return {
+    title: `${sim?.name ?? "Simulation"} — embedded`,
+    robots: { index: false, follow: false }, // embeds shouldn't be indexed; the /studio page is canonical
+  };
 }
 
-// Chromeless, embeddable single-studio view for iframes on any site.
 export default async function EmbedPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const Studio = STUDIO_COMPONENTS[slug];
-  if (!Studio) notFound();
+  const sim = SIMS.find((s) => s.slug === slug);
+
   return (
-    <div className="min-h-screen bg-white p-3 dark:bg-slate-950">
-      <Studio />
-      <div className="mt-2 text-center">
-        <Link href={`/studio/${slug}`} target="_blank" className="text-xs text-slate-400 hover:text-cyan-500">
-          Powered by PolySim OS ↗
+    <div className="min-h-screen bg-slate-950 p-2">
+      <EmbeddedStudio slug={slug} kind="solver" />
+      <div className="mt-1.5 px-1 text-right text-[11px] text-slate-500">
+        <Link
+          href={`https://www.polysimos.com/studio/${slug}`}
+          target="_blank"
+          rel="noopener"
+          className="transition hover:text-cyan-400"
+        >
+          {sim?.name ?? "Live simulation"} · made with <span className="font-semibold">PolySim OS</span> ↗
         </Link>
       </div>
     </div>
