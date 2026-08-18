@@ -22,7 +22,7 @@ export function AiSolverAssist({ name, keyword }: { name: string; keyword: strin
   }
 
   return (
-    <section className="mt-10 max-w-3xl rounded-2xl border border-cyan-300/40 bg-gradient-to-br from-cyan-500/[0.07] via-transparent to-transparent p-5">
+    <section className="mt-8 rounded-2xl border border-cyan-300/40 bg-gradient-to-br from-cyan-500/[0.07] via-transparent to-transparent p-5">
       <div className="flex items-center gap-2">
         <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-400 to-cyan-500 text-xs font-black text-white">✦</span>
         <h2 className="text-lg font-bold text-slate-900 dark:text-slate-100">Ask the AI about this model</h2>

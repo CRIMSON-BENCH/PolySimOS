@@ -1,9 +1,7 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclaimer } from "@/components/Disclaimer";
 import { JsonLd } from "@/components/JsonLd";
-import { PremiumCTA } from "@/components/PremiumCTA";
 import { CrossLinks } from "@/components/CrossLinks";
-import { premiumUpsell } from "@/lib/products";
 import { softwareAppLd, faqLd } from "@/lib/seo";
 import { EmbedButton } from "./EmbedButton";
 import { MonetizationBar } from "@/components/monetization/Slots";
@@ -321,6 +319,7 @@ export function StudioPageShell({
   lede,
   about,
   keyword,
+  details,
   children,
 }: {
   slug: string;
@@ -328,6 +327,7 @@ export function StudioPageShell({
   lede: string;
   about: string;
   keyword: string;
+  details?: { q: string; a: string }[];
   children: React.ReactNode;
 }) {
   const faqs = [
@@ -352,16 +352,25 @@ export function StudioPageShell({
         <span className="text-xs text-slate-400">Drop this simulation into your own site, docs, or course page.</span>
       </div>
 
-      <section className="mt-12 max-w-3xl">
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">How it works</h2>
-        <p className="mt-3 text-slate-600 dark:text-slate-400">{about}</p>
+        <p className="mt-3 max-w-4xl text-slate-600 dark:text-slate-400">{about}</p>
+        {details && details.length > 0 && (
+          <div className="mt-5 divide-y divide-slate-200 border-t border-slate-200 dark:divide-slate-800 dark:border-slate-800">
+            {details.map((d) => (
+              <details key={d.q} className="group py-1">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-2.5 text-sm font-semibold text-slate-800 hover:text-cyan-700 dark:text-slate-200 dark:hover:text-cyan-300">
+                  <span>{d.q}</span>
+                  <span className="shrink-0 text-slate-400 transition group-open:rotate-180">▾</span>
+                </summary>
+                <div className="whitespace-pre-line pb-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{d.a}</div>
+              </details>
+            ))}
+          </div>
+        )}
       </section>
 
       <AiSolverAssist name={name} keyword={keyword} />
-
-      <ProGatedUpsell>
-        <PremiumCTA product={premiumUpsell(slug)} />
-      </ProGatedUpsell>
 
       {(() => {
         const myTag = SIMS.find((s) => s.slug === slug)?.tag ?? "";
@@ -371,16 +380,19 @@ export function StudioPageShell({
         return <CrossLinks title={title} links={related} />;
       })()}
 
-      <section className="mt-12 max-w-3xl">
+      <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
-        <dl className="mt-4 space-y-4">
+        <div className="mt-3 divide-y divide-slate-200 border-t border-slate-200 dark:divide-slate-800 dark:border-slate-800">
           {faqs.map((f) => (
-            <div key={f.q}>
-              <dt className="font-semibold text-slate-800 dark:text-slate-200">{f.q}</dt>
-              <dd className="mt-1 text-sm text-slate-600 dark:text-slate-400">{f.a}</dd>
-            </div>
+            <details key={f.q} className="group py-1">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-2.5 text-sm font-semibold text-slate-800 hover:text-cyan-700 dark:text-slate-200 dark:hover:text-cyan-300">
+                <span>{f.q}</span>
+                <span className="shrink-0 text-slate-400 transition group-open:rotate-180">▾</span>
+              </summary>
+              <div className="pb-3 text-sm leading-relaxed text-slate-600 dark:text-slate-400">{f.a}</div>
+            </details>
           ))}
-        </dl>
+        </div>
       </section>
 
       <Disclaimer />
