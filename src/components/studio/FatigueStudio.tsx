@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { uts: number; stress: number }> = {
@@ -63,7 +64,7 @@ print("cycles to failure", N)`;
         <p className="mt-3 text-xs text-slate-500">Repeated loading well below the ultimate strength can still break a part — metal fatigue. The S-N curve plots stress amplitude against cycles to failure. Steels have an endurance limit: below it they last essentially forever, but aluminum has none and eventually fails at any stress. Cause of many catastrophic aircraft and bridge failures.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Endurance limit" value={`${Se.toFixed(0)} MPa`} /><Stat label="Cycles to failure" value={isFinite(N) ? N.toExponential(2) : "infinite"} /><Stat label="Verdict" value={isFinite(N) ? "finite life" : "safe (below Se)"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Endurance limit" value={`${Se.toFixed(0)} MPa`} /><Stat label="Cycles to failure" value={isFinite(N) ? N.toExponential(2) : "infinite"} /><Stat label="Verdict" value={isFinite(N) ? "finite life" : "safe (below Se)"} /><Equation tex={`N = \\left(\\dfrac{\\sigma_a}{\\sigma_f'}\\right)^{1/b},\\quad \\sigma_a = ${stress.toFixed(0)}\\text{ MPa}\\ \\Rightarrow\\ N = ${isFinite(N) ? `${N.toExponential(2)}\\text{ cycles}` : "\\infty"}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

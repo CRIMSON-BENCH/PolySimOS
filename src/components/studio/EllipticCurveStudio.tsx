@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { a: number; b: number; px: number; qx: number }> = {
@@ -65,7 +66,7 @@ print("P+Q =", (rx, ry))`;
         <p className="mt-3 text-xs text-slate-500">On an elliptic curve y² = x³ + ax + b, you &quot;add&quot; two points with a geometric rule: draw the line through P and Q, find where it meets the curve again, and reflect that point over the x-axis. Repeating this addition is easy, but reversing it — the elliptic-curve discrete log — is brutally hard, which is what makes ECC secure with far smaller keys than RSA.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Slope" value={isFinite(m) ? m.toFixed(2) : "∞"} /><Stat label="P+Q (x)" value={isNaN(rx) ? "—" : rx.toFixed(2)} /><Stat label="P+Q (y)" value={isNaN(ry) ? "—" : ry.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Slope" value={isFinite(m) ? m.toFixed(2) : "∞"} /><Stat label="P+Q (x)" value={isNaN(rx) ? "—" : rx.toFixed(2)} /><Stat label="P+Q (y)" value={isNaN(ry) ? "—" : ry.toFixed(2)} /><Equation tex={`y^2 = x^3 ${a >= 0 ? "+" : "-"} ${Math.abs(a).toFixed(1)}x + ${b.toFixed(1)},\\quad \\lambda = \\frac{y_2 - y_1}{x_2 - x_1} = ${isFinite(m) ? m.toFixed(2) : "\\infty"}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

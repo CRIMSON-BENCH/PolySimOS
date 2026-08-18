@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Vmax: number; Km: number; inhibitor: number }> = {
@@ -63,7 +64,7 @@ print("v at [S]=10*Km:", round(v(10 * Km), 1))`;
         <p className="mt-3 text-xs text-slate-500">Michaelis-Menten kinetics describe how reaction rate rises with substrate and saturates at Vmax. Km is the substrate concentration giving half-maximal rate — a measure of enzyme affinity. A competitive inhibitor raises the apparent Km without changing Vmax, seen as a shift in the double-reciprocal Lineweaver-Burk line.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Vmax" value={String(Vmax)} /><Stat label="Apparent Km" value={KmApp.toFixed(1)} /><Stat label="v at [S]=Km" value={v(Km).toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Vmax" value={String(Vmax)} /><Stat label="Apparent Km" value={KmApp.toFixed(1)} /><Stat label="v at [S]=Km" value={v(Km).toFixed(1)} /><Equation tex={`v = \\frac{V_{max}\\,[S]}{K_m + [S]} = \\frac{${Vmax}\\,[S]}{${KmApp.toFixed(1)} + [S]}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

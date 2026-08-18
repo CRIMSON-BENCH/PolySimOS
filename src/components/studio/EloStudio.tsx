@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { ratingA: number; ratingB: number; k: number }> = {
@@ -36,7 +37,7 @@ print(f"A win prob: {expA*100:.1f}%")`;
         <p className="mt-3 text-xs text-slate-500">The Elo system, born in chess and now everywhere from tennis to video games, turns a rating gap into a win probability. Every 400 points means a tenfold odds advantage. After each game, ratings shift by the K-factor times the surprise — beating a much stronger opponent gains far more than beating a weaker one, and an upset costs the favorite dearly.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="A win probability" value={`${(expA * 100).toFixed(1)}%`} /><Stat label="B win probability" value={`${(expB * 100).toFixed(1)}%`} /><Stat label="A rating if win" value={`+${(winA - ratingA).toFixed(0)}`} /><Stat label="A rating if loss" value={`${(lossA - ratingA).toFixed(0)}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="A win probability" value={`${(expA * 100).toFixed(1)}%`} /><Stat label="B win probability" value={`${(expB * 100).toFixed(1)}%`} /><Stat label="A rating if win" value={`+${(winA - ratingA).toFixed(0)}`} /><Stat label="A rating if loss" value={`${(lossA - ratingA).toFixed(0)}`} /><Equation tex={`E_A = \\frac{1}{1 + 10^{(${ratingB} - ${ratingA})/400}} = ${expA.toFixed(3)},\\quad R_A' = R_A + ${k}(S - E_A)`} /><ExplainResult text={explain} /></div>}
     ><div className="flex items-center justify-center gap-6 py-16">
         <div className="text-center"><div className="text-xs text-slate-500">Player A</div><div className="text-4xl font-black text-cyan-400">{ratingA}</div><div className="mt-2 text-2xl font-bold text-slate-200">{(expA * 100).toFixed(0)}%</div></div>
         <div className="text-3xl text-slate-600">vs</div>

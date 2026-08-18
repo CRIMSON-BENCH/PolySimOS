@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const G = 6.674e-11;
@@ -50,7 +51,7 @@ print("escape km/s", round(v_esc / 1000, 2), "orbit km/s", round(v_orb / 1000, 2
         <p className="mt-3 text-xs text-slate-500">Escape velocity v = √(2GM/R) is the speed needed to break free of a body&apos;s gravity from its surface, ignoring air resistance. Circular orbital velocity is √(GM/R) — a factor of √2 smaller. Both depend only on mass and radius, not on the mass of the escaping object.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Escape velocity" value={`${(vEsc / 1000).toFixed(2)} km/s`} /><Stat label="Orbital velocity" value={`${(vOrb / 1000).toFixed(2)} km/s`} /><Stat label="Surface gravity" value={`${gSurf.toFixed(2)} m/s²`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Escape velocity" value={`${(vEsc / 1000).toFixed(2)} km/s`} /><Stat label="Orbital velocity" value={`${(vOrb / 1000).toFixed(2)} km/s`} /><Stat label="Surface gravity" value={`${gSurf.toFixed(2)} m/s²`} /><Equation tex={`v_e = \\sqrt{\\dfrac{2GM}{R}} = \\sqrt{\\dfrac{2\\,(6.674\\times10^{-11})\\,(${M.toExponential(2)})}{${R.toExponential(2)}}} = ${(vEsc / 1000).toFixed(2)}\\ \\text{km/s}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Escape velocity — {custom ? "custom body" : body}</div>
         <div className="mt-3 text-6xl font-black text-cyan-500">{(vEsc / 1000).toFixed(2)}<span className="ml-2 text-2xl text-slate-400">km/s</span></div>

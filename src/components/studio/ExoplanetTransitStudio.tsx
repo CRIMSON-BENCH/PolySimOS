@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -79,7 +80,7 @@ print("transit depth:", depth)`;
         <p className="mt-3 text-xs text-slate-500">As a planet crosses its star, it blocks a tiny fraction of the light — a dip of depth (Rp/Rs)². This is how Kepler and TESS have found thousands of exoplanets. Impact parameter sets how centrally the planet crosses, changing the transit shape and duration.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Transit depth" value={`${(depth * 100).toFixed(2)}%`} /><Stat label="Rp/Rs" value={ratio.toFixed(2)} /><Stat label="Impact b" value={impact.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Transit depth" value={`${(depth * 100).toFixed(2)}%`} /><Stat label="Rp/Rs" value={ratio.toFixed(2)} /><Stat label="Impact b" value={impact.toFixed(2)} /><Equation tex={`\\dfrac{\\Delta F}{F} = \\left(\\dfrac{R_p}{R_\\star}\\right)^2 = (${ratio.toFixed(2)})^2 = ${(depth * 100).toFixed(2)}\\%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

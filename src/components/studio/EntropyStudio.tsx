@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi } from "@/lib/studioKit";
 
@@ -58,7 +59,7 @@ print("entropy change per mole:", dS, "J/K")`;
         <p className="mt-3 text-xs text-slate-500">Gas confined to one half rushes to fill the whole box the instant the partition is removed — and never spontaneously crowds back. That irreversibility is the second law: entropy, a measure of disorder, always increases. For doubling the volume the entropy rises by nR·ln2, purely because there are vastly more ways to be spread out than packed in.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fraction on left" value={`${(leftFrac * 100).toFixed(0)}%`} /><Stat label="ΔS (per mole)" value={`${dS.toFixed(2)} J/K`} /><Stat label="State" value={released ? "expanded" : "confined"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Fraction on left" value={`${(leftFrac * 100).toFixed(0)}%`} /><Stat label="ΔS (per mole)" value={`${dS.toFixed(2)} J/K`} /><Stat label="State" value={released ? "expanded" : "confined"} /><Equation tex={`\\Delta S = nR\\ln\\frac{V_f}{V_i} = R\\ln 2 = ${dS.toFixed(2)}\\ \\text{J/K}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

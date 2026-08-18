@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers, hidpi } from "@/lib/studioKit";
 
 const W = 760, N = 256;
@@ -70,7 +71,7 @@ print("dominant bins", sorted(peaks))`;
         <Slider label="Noise" value={noise} min={0} max={1} step={0.05} onChange={(v) => update({ noise: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Samples" value={String(N)} /><Stat label="Peaks at" value={tones.join(", ") || "—"} /><Stat label="Transform" value="DFT" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Samples" value={String(N)} /><Stat label="Peaks at" value={tones.join(", ") || "—"} /><Stat label="Transform" value="DFT" /><Equation tex={`X_k = \\sum_{n=0}^{N-1} x_n\\, e^{-2\\pi i k n / N}\\quad (N = ${N},\\ \\mathcal{O}(N\\log N))`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={440} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

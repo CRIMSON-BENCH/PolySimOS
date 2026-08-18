@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { n1: number; n2: number; coreD: number }> = {
@@ -62,7 +63,7 @@ print("V", round(V, 2), "->", "single-mode" if modes <= 1 else f"multimode ~{mod
         <p className="mt-3 text-xs text-slate-500">An optical fiber traps light in a high-index core surrounded by lower-index cladding: rays hitting the boundary above the critical angle undergo total internal reflection and bounce down the fiber for kilometers. The numerical aperture sets the acceptance cone, and the core size decides whether it carries one mode (single-mode, for long-haul) or many (multimode).</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Critical angle" value={`${critical.toFixed(1)}°`} /><Stat label="Numerical aperture" value={NA.toFixed(3)} /><Stat label="Acceptance angle" value={`${acceptance.toFixed(1)}°`} /><Stat label="Fiber type" value={modes <= 1 ? "single-mode" : `multimode (~${modes})`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Critical angle" value={`${critical.toFixed(1)}°`} /><Stat label="Numerical aperture" value={NA.toFixed(3)} /><Stat label="Acceptance angle" value={`${acceptance.toFixed(1)}°`} /><Stat label="Fiber type" value={modes <= 1 ? "single-mode" : `multimode (~${modes})`} /><Equation tex={`NA = \\sqrt{n_1^2 - n_2^2} = \\sqrt{${n1.toFixed(3)}^2 - ${n2.toFixed(3)}^2} = ${NA.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

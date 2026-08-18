@@ -5,6 +5,7 @@ import { heatInit, heatStep, heatHotspot, HeatField, waveInit, waveStep, WaveFie
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const HEAT_PRESETS: Record<string, { alpha: number }> = {
@@ -107,7 +108,7 @@ print("stable" if alpha <= 0.25 else "unstable", "peak", round(u.max(), 4))`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Scheme" value="Explicit FD" /><Stat label="Stability" value={alpha <= 0.25 ? "stable" : "risky"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Scheme" value="Explicit FD" /><Stat label="Stability" value={alpha <= 0.25 ? "stable" : "risky"} /><Equation tex={`\\frac{\\partial u}{\\partial t} = ${alpha.toFixed(2)}\\,\\nabla^2 u`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={N} height={N} onClick={onClick} className="mx-auto h-auto max-h-[440px] cursor-crosshair rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} />
     </StudioChrome>
@@ -184,7 +185,7 @@ print("CFL", "ok" if c <= 1 else "risky")`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Points" value={String(N)} /><Stat label="Scheme" value="Explicit FD" /><Stat label="CFL" value={speed <= 0.7 ? "ok" : "risky"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Points" value={String(N)} /><Stat label="Scheme" value="Explicit FD" /><Stat label="CFL" value={speed <= 0.7 ? "ok" : "risky"} /><Equation tex={`\\frac{\\partial^2 u}{\\partial t^2} = (${speed.toFixed(2)})^2\\,\\frac{\\partial^2 u}{\\partial x^2}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} onClick={pluck} className="h-auto w-full cursor-crosshair rounded-lg" />
     </StudioChrome>

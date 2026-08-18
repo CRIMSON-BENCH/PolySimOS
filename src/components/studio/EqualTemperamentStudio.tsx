@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const NOTES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B", "C"];
@@ -46,7 +47,7 @@ for n, name in [(7, "fifth"), (4, "major 3rd")]:
         <p className="mt-3 text-xs text-slate-500">Just intonation tunes intervals to pure whole-number frequency ratios, which sound perfectly consonant but only in one key. Equal temperament divides the octave into 12 identical steps so every key works, at the cost of every interval except the octave being slightly out of tune. The bars show that compromise in cents.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equal-temp fifth" value={`${etFifth.toFixed(1)} Hz`} /><Stat label="Just fifth (3:2)" value={`${justFifth.toFixed(1)} Hz`} /><Stat label="Fifth error" value="−2 cents" /><Stat label="Major 3rd error" value="+14 cents" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Equal-temp fifth" value={`${etFifth.toFixed(1)} Hz`} /><Stat label="Just fifth (3:2)" value={`${justFifth.toFixed(1)} Hz`} /><Stat label="Fifth error" value="−2 cents" /><Stat label="Major 3rd error" value="+14 cents" /><Equation tex={`f_n = f_0 \\cdot 2^{n/12} = ${root.toFixed(2)} \\cdot 2^{7/12} \\approx ${etFifth.toFixed(1)}\\ \\text{Hz}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

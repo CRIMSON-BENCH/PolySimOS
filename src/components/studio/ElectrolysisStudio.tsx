@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const METALS = [{ n: "Copper", M: 63.5, z: 2 }, { n: "Silver", M: 107.9, z: 1 }, { n: "Aluminum", M: 27, z: 3 }, { n: "Gold", M: 197, z: 3 }, { n: "Nickel", M: 58.7, z: 2 }];
@@ -58,6 +59,7 @@ print(f"{grams:.3f} g deposited")`;
         <Stat label="Charge passed" value={`${Q.toFixed(0)} C`} />
         <Stat label="Moles deposited" value={`${moles.toFixed(4)} mol`} />
         <Stat label="Mass deposited" value={`${grams.toFixed(3)} g`} />
+        <Equation tex={`m = \\frac{I\\,t\\,M}{nF} = \\frac{${current}\\cdot ${(minutes * 60).toFixed(0)}\\cdot ${m.M}}{${m.z}\\cdot 96485} = ${grams.toFixed(3)}\\ \\text{g}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

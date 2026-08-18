@@ -4,6 +4,7 @@ import { useMemo, useRef, useEffect } from "react";
 import { starterTruss, solveTruss } from "@/lib/engines/fea";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -81,7 +82,7 @@ print("max displacement", ${maxDisp.toFixed(3)}, "peak member force", ${maxForce
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /><Stat label="Max axial force" value={maxForce.toFixed(1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /><Stat label="Max axial force" value={maxForce.toFixed(1)} /><Equation tex={`\\mathbf{K}\\,\\mathbf{u} = \\mathbf{F},\\quad k_e = \\frac{EA}{L},\\quad F_y = ${load}\\ (${base.members.length}\\ \\text{members})`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>

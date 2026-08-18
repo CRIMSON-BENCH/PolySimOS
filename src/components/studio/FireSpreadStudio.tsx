@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -99,7 +100,7 @@ print("cells burned", int((g == 2).sum()))`;
         <p className="mt-3 text-xs text-slate-500">Fire spreads cell to cell, biased downwind and uphill — the two dominant drivers of real wildfire rate-of-spread. Rotate the wind and raise the slope to see how a fire front elongates and races upslope. For training and situational awareness only.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cells burned" value={burned.toLocaleString()} /><Stat label="Wind" value={`${windSpeed} @ ${windDir}°`} /><Stat label="Slope" value={`${slope}°`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cells burned" value={burned.toLocaleString()} /><Stat label="Wind" value={`${windSpeed} @ ${windDir}°`} /><Stat label="Slope" value={`${slope}°`} /><Equation tex={`R = R_0\\left(1 + \\phi_w + \\phi_s\\right),\\quad \\phi_w = ${(windSpeed / 25).toFixed(2)},\\ \\phi_s = ${(slope / 45).toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

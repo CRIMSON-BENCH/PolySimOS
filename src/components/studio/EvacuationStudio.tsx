@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -87,7 +88,7 @@ print("occupants per exit", round(per_exit, 1), "~clear seconds", round(clear_s,
         <p className="mt-3 text-xs text-slate-500">Occupants head for the nearest exit while pushing apart in crowds, so bottlenecks and congestion form at doorways — the effect that drives real egress times. Add or remove exits to see how total clearance time responds. Planning aid only.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Evacuated" value={`${evac} / ${Math.round(count)}`} /><Stat label="Clear time" value={`${time.toFixed(1)} s`} /><Stat label="Exits" value={String(Math.round(exits))} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Evacuated" value={`${evac} / ${Math.round(count)}`} /><Stat label="Clear time" value={`${time.toFixed(1)} s`} /><Stat label="Exits" value={String(Math.round(exits))} /><Equation label="Social-force velocity" tex={`\\vec{v} = ${speed.toFixed(1)}\\,\\hat{e}_{\\text{exit}} + 2.2\\sum_{j}\\vec{f}_{ij},\\quad \\dfrac{N}{\\text{exits}} = \\dfrac{${Math.round(count)}}{${Math.round(exits)}} = ${perExit}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

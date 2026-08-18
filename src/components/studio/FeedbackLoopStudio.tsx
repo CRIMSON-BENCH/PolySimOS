@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { gain: number; plantDrift: number; disturbance: number }> = {
@@ -66,6 +67,7 @@ print("disturbance rejected", round(100 - closed_dist / disturbance * 100), "%")
         <Stat label="Closed-loop gain" value={closedGain.toFixed(3)} />
         <Stat label="Error reduction" value={`${(1 + G).toFixed(0)}×`} />
         <Stat label="Disturbance rejected" value={`${(100 - closedDist / openDist * 100).toFixed(0)}%`} />
+        <Equation tex={`T = \\dfrac{G}{1+GH} = \\dfrac{${G.toFixed(0)}}{1+${G.toFixed(0)}\\cdot 1} = ${closedGain.toFixed(3)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

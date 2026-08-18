@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { k: number; h: number; t: number; L: number; Tb: number }> = {
@@ -62,6 +63,7 @@ print("eff", round(eff, 3), "q_W", round(q, 2), "Ttip_C", round(Ttip, 1))`;
         <Stat label="Tip temperature" value={`${Ttip.toFixed(1)} °C`} />
         <Stat label="Fin efficiency" value={`${(eff * 100).toFixed(0)}%`} />
         <Stat label="Heat dissipated" value={`${q.toFixed(1)} W`} />
+        <Equation tex={`\\frac{\\theta}{\\theta_b} = \\frac{\\cosh(${m.toFixed(1)}\\,(${L}-x))}{\\cosh(${mL.toFixed(2)})},\\quad m=\\sqrt{\\frac{2h}{kt}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

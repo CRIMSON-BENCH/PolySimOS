@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -71,7 +72,7 @@ for gen in range(60):
         <p className="mt-3 text-xs text-slate-500">Each fission releases neutrons that can trigger more fissions. The multiplication factor k is how many of those neutrons cause a new fission on average. Below 1 the chain dies out; exactly 1 sustains steady power — a running reactor; above 1 it grows exponentially. Control rods nudge k around 1 to hold a reactor critical.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="k factor" value={k.toFixed(3)} /><Stat label="Generation" value={String(gen)} /><Stat label="State" value={state} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="k factor" value={k.toFixed(3)} /><Stat label="Generation" value={String(gen)} /><Stat label="State" value={state} /><Equation tex={`n_{i+1} = k\\,n_i,\\quad k = ${k.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

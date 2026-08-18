@@ -3,6 +3,7 @@
 import { useMemo } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { keq: number; addReactant: number; temp: number }> = {
@@ -47,7 +48,7 @@ print("[A]", round(a, 3), "[B]", round(b, 3), "favored", "B" if b > a else "A")`
         <Slider label="Temperature factor" value={temp} min={0.3} max={2.5} step={0.1} onChange={(v) => update({ temp: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="K (effective)" value={(keq * temp).toFixed(2)} /><Stat label="[A]" value={a.toFixed(2)} /><Stat label="[B]" value={b.toFixed(2)} /><Stat label="Favored" value={b > a ? "products" : "reactants"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="K (effective)" value={(keq * temp).toFixed(2)} /><Stat label="[A]" value={a.toFixed(2)} /><Stat label="[B]" value={b.toFixed(2)} /><Stat label="Favored" value={b > a ? "products" : "reactants"} /><Equation tex={`K_{eq} = \\frac{[B]}{[A]} = \\frac{${b.toFixed(2)}}{${a.toFixed(2)}} \\approx ${(a > 0 ? b / a : 0).toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     >
       <div className="flex h-full min-h-[360px] items-end justify-center gap-16 p-8">
         <div className="flex flex-col items-center">

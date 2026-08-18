@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const SIGMA = 5.670374e-8;
@@ -54,7 +55,7 @@ print("surface C", T_surf-273.15, "greenhouse C", T_surf-T_noatm)`;
         <p className="mt-3 text-xs text-slate-500">A planet warms until it radiates away exactly the sunlight it absorbs. Balancing absorbed power S(1−α)/4 against εσT⁴ gives the equilibrium temperature. An emissivity below 1 represents greenhouse gases trapping outgoing infrared, raising the surface temperature.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Absorbed power" value={`${absorbed.toFixed(0)} W/m²`} /><Stat label="No-greenhouse T" value={`${(Tnoatm - 273.15).toFixed(1)} °C`} /><Stat label="Greenhouse warming" value={`+${greenhouseC.toFixed(1)} °C`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Absorbed power" value={`${absorbed.toFixed(0)} W/m²`} /><Stat label="No-greenhouse T" value={`${(Tnoatm - 273.15).toFixed(1)} °C`} /><Stat label="Greenhouse warming" value={`+${greenhouseC.toFixed(1)} °C`} /><Equation tex={`\\frac{(1-${albedo})\\,${solar}}{4} = ${emissivity}\\,\\sigma T^4 \\;\\Rightarrow\\; T_{eq} = ${Tsurf.toFixed(1)}\\ \\text{K}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Equilibrium surface temperature</div>
         <div className="mt-3 text-7xl font-black" style={{ color }}>{tC.toFixed(1)}<span className="ml-2 text-3xl text-slate-400">°C</span></div>

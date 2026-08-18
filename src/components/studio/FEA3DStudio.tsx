@@ -5,6 +5,7 @@ import { starterFrame, solveSpaceFrame } from "@/lib/engines/fea3d";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -89,7 +90,7 @@ print("max node displacement", ${maxDisp.toFixed(3)})`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="DOF" value={String(base.nodes.length * 3)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Nodes" value={String(base.nodes.length)} /><Stat label="Members" value={String(base.members.length)} /><Stat label="DOF" value={String(base.nodes.length * 3)} /><Stat label="Solve" value={result.res.ok ? "converged" : "singular"} /><Stat label="Max displacement" value={maxDisp.toFixed(3)} /><Equation tex={`\\mathbf{K}\\,\\mathbf{u} = \\mathbf{F},\\quad k_e = \\frac{EA}{L},\\quad F_x = ${loadX}\\ (${base.members.length}\\ \\text{members})`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" />
     </StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type FType = "lowpass" | "highpass" | "bandpass";
@@ -72,7 +73,7 @@ print("fc", round(fc), "f0", round(f0), "Q", round(Q, 2))`;
         <p className="mt-3 text-xs text-slate-500">Passive filters shape a signal&apos;s frequency content with resistors, capacitors, and inductors. An RC low-pass or high-pass has a cutoff at 1/(2πRC) where the response drops 3 dB; an RLC bandpass resonates at 1/(2π√(LC)) with sharpness set by its quality factor Q.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cutoff fc" value={fc > 1000 ? `${(fc / 1000).toFixed(1)} kHz` : `${fc.toFixed(0)} Hz`} /><Stat label="Resonance f₀" value={f0 > 1000 ? `${(f0 / 1000).toFixed(1)} kHz` : `${f0.toFixed(0)} Hz`} /><Stat label="Quality factor Q" value={Q.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cutoff fc" value={fc > 1000 ? `${(fc / 1000).toFixed(1)} kHz` : `${fc.toFixed(0)} Hz`} /><Stat label="Resonance f₀" value={f0 > 1000 ? `${(f0 / 1000).toFixed(1)} kHz` : `${f0.toFixed(0)} Hz`} /><Stat label="Quality factor Q" value={Q.toFixed(2)} /><Equation tex={ftype === "lowpass" ? `|H(f)| = \\frac{1}{\\sqrt{1+(f/${Math.round(fc)})^2}}` : ftype === "highpass" ? `|H(f)| = \\frac{f/${Math.round(fc)}}{\\sqrt{1+(f/${Math.round(fc)})^2}}` : `|H(f)| = \\frac{1}{\\sqrt{1+(${Q.toFixed(1)})^2\\left(\\frac{f}{${Math.round(f0)}}-\\frac{${Math.round(f0)}}{f}\\right)^2}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

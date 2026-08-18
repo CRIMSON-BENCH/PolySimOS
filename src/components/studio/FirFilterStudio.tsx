@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { taps: number; fc: number }> = {
@@ -59,6 +60,7 @@ print("passband gain", round(float(H[0]), 3), "delay", M)`;
         <Stat label="Taps" value={`${taps}`} />
         <Stat label="Cutoff" value={`${(fc * 2).toFixed(2)} × Nyquist`} />
         <Stat label="Group delay" value={`${((taps - 1) / 2).toFixed(0)} samples`} />
+        <Equation tex={`y[n] = \\sum_{k=0}^{${taps - 1}} b_k\\,x[n-k],\\quad f_c = ${(fc * 2).toFixed(2)}\\,f_{\\mathrm{Nyq}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

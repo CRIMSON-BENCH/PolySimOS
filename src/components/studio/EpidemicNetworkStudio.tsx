@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -85,7 +86,7 @@ print("total ever infected:", round(R))`;
         <Slider label="Contact radius" value={radius} min={30} max={90} step={5} onChange={(v) => update({ radius: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Susceptible" value={String(counts.s)} /><Stat label="Infected" value={String(counts.i)} /><Stat label="Recovered" value={String(counts.r)} /><Stat label="Edges" value={String(edges.current.length)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Susceptible" value={String(counts.s)} /><Stat label="Infected" value={String(counts.i)} /><Stat label="Recovered" value={String(counts.r)} /><Stat label="Edges" value={String(edges.current.length)} /><Equation tex={`R_0 = \\frac{\\beta \\langle k \\rangle}{\\gamma} = \\frac{${beta} \\times ${(edges.current.length ? (2 * edges.current.length) / 220 : 0).toFixed(1)}}{${gamma}} \\approx ${(gamma > 0 ? (beta * (edges.current.length ? (2 * edges.current.length) / 220 : 0)) / gamma : 0).toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }
