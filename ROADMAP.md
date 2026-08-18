@@ -311,3 +311,31 @@ Turn the existing Notebook into a **curated library of ready-to-run notebooks** 
 - **Expand "How it works"** into a real explainer: equations, algorithm, assumptions, references per solver (content fill = the retroactive-polish pass across all 373).
 
 **Priority:** F3 (shared-component fixes hit all 373 pages at once) → F1 pricing + studio finder → F2 system polish. This is the "retroactive polish" pass.
+
+---
+
+# PART G — Solver Engine v2 + Polish: execution order (LIVE PLAN)
+
+The "make them look pro / take the solvers up a notch" program. Built a reusable kit so most of this is now cheap per solver:
+- `src/lib/studioKit.ts` — `hidpi()` (retina canvas), `PALETTE` (color-blind-safe series), `useShareableNumbers()` (URL-mirrored params), `copyCurrentLink`/`copyText`.
+- `src/components/studio/SolverExtras.tsx` — `Presets`, `ExplainResult`, `ShareBar` (copy-link + copy-as-code).
+- `src/components/studio/ProjectileStudio.tsx` — the reference/template for the per-solver "depth" pass.
+
+## ✅ Already shipped
+- Pricing → 4 tiers (`PricingTiers.tsx`), monthly/annual toggle.
+- `StudioChrome` modernized (no traffic-light dots; live indicator); fake reviews removed site-wide; Pro no-nag; same-domain related solvers; static "How it works" dropdowns.
+- **Universal (all solvers):** type-in numeric sliders, keyboard/ARIA, Export-PNG.
+- **Retina** migrated across 264 solvers (`scratchpad/retinafy.mjs`).
+- **Depth** (presets + explain-this-result + copy-as-Python + shareable URLs) on 33 flagships (4 subagent batches of 8).
+
+## ⏳ Remaining — in logical order
+- **G1. Finish universal retina** — the ~72 solvers skipped by `retinafy.mjs` (non-standard `W/H`, or they read `canvas.width`). Hand/targeted-script per file. Completes the #1 visual win everywhere. *(cheap, global — do first)*
+- **G2. Kill the last dumps — `/studio` finder + home idle prompt** — type-ahead search over all solvers + domain filter chips + a "What do you want to calculate?" modal that routes plain-English → solver; a 30s-idle prompt on the home page that opens it. *(global, one-time; high UX value)*
+- **G3. Transport controls (#4)** — shared `useTransport` hook (play / pause / step / reset / speed); roll across animated solvers in batches.
+- **G4. Depth rollout continues** — presets/explain/copy-as-code/share-URL on the remaining solvers, batches of 8 (parallel subagents, ProjectileStudio as pattern), prioritized by traffic, until all are covered.
+- **G5. Live KaTeX equations (#11)** — governing equation with current values substituted, in the inspector; per-solver, top solvers first (adds `katex`).
+- **G6. Direct-canvas manipulation (#6)** — drag the pendulum bob / place a charge / move a load / drag graph nodes; highest-wow, per-solver on flagships.
+- **G7. Save named scenarios to account (#15)** — persist `useShareableNumbers` param sets to the logged-in user (Clerk + entitlements store); retention + sign-up reason.
+- **G8. Tableau-style nav + dashboard polish (F2)** — top-bar dropdown menus, card/filter system, restrained color.
+
+**Order rationale:** finish the two remaining *global* wins first (G1 retina, G2 finder) so every page benefits, then the shared *instrument* upgrade (G3 transport), then grind *per-solver depth* (G4), then the advanced per-solver features (G5–G7), then system-wide visual polish (G8).
