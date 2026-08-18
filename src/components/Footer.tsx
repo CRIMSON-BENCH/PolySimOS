@@ -65,6 +65,9 @@ const COLUMNS: { title: string; links: { name: string; href: string }[] }[] = [
     links: [
       { name: "Terms", href: "/terms" },
       { name: "Privacy", href: "/privacy" },
+      { name: "Security", href: "/security" },
+      { name: "Cookies", href: "/cookies" },
+      { name: "DPA", href: "/dpa" },
       { name: "Refund Policy", href: "/refund" },
       { name: "Acceptable Use", href: "/acceptable-use" },
     ],

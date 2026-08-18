@@ -6,6 +6,8 @@ import { ChromeGate } from "@/components/ChromeGate";
 import { ChatWidget } from "@/components/ChatWidget";
 import { AuthProvider } from "@/lib/auth";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const clerkConfigured = !!process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
@@ -52,6 +54,8 @@ function Shell({ children }: { children: React.ReactNode }) {
           <ChromeGate><Footer /></ChromeGate>
           <ChromeGate><ChatWidget /></ChromeGate>
         </AuthProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

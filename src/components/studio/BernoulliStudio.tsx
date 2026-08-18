@@ -31,7 +31,7 @@ export function BernoulliStudio() {
   }, [v1, a1, a2, rho]);
 
   const areaRatio = a1 / a2;
-  const explain = `Continuity pushes the fluid through the ${areaRatio.toFixed(1)}× narrower throat, speeding it from ${v1.toFixed(1)} to ${v2.toFixed(1)} m/s; Bernoulli’s constant p + ½ρv² then makes the throat pressure ${p2rel >= 0 ? "drop" : "rise"} by ${Math.abs(p2rel / 1000).toFixed(2)} kPa — faster flow always sits at lower pressure.`;
+  const explain = `Continuity pushes the fluid through the ${areaRatio.toFixed(1)}× narrower throat, speeding it from ${v1.toFixed(1)} to ${v2.toFixed(1)} m/s; Bernoulli’s constant p + ½ρv² then makes the throat pressure ${p2rel >= 0 ? "rise" : "drop"} by ${Math.abs(p2rel / 1000).toFixed(2)} kPa — faster flow always sits at lower pressure.`;
 
   const code = `v1, a1, a2, rho = ${v1}, ${a1}, ${a2}, ${rho}
 v2 = v1 * a1 / a2                    # continuity

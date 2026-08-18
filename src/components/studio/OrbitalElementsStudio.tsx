@@ -39,8 +39,12 @@ export function OrbitalElementsStudio() {
     const a = sma * scale, b = a * Math.sqrt(1 - ecc * ecc), cshift = a * ecc; const w = argp * Math.PI / 180;
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 1.5; ctx.beginPath();
     for (let e = 0; e <= 6.29; e += 0.05) { const x = a * Math.cos(e) - cshift, y = b * Math.sin(e); const rx = x * Math.cos(w) - y * Math.sin(w), ry = x * Math.sin(w) + y * Math.cos(w); e === 0 ? ctx.moveTo(cx + rx, cy + ry) : ctx.lineTo(cx + rx, cy + ry); } ctx.closePath(); ctx.stroke();
-    // satellite position
-    const e = theta.current; const x = a * Math.cos(e) - cshift, y = b * Math.sin(e); const rx = x * Math.cos(w) - y * Math.sin(w), ry = x * Math.sin(w) + y * Math.cos(w);
+    // satellite position — advance MEAN anomaly uniformly in time (Kepler's 2nd law),
+    // then solve Kepler's equation M = E − e·sinE for the eccentric anomaly E via Newton.
+    const M = theta.current;
+    let e = M + ecc * Math.sin(M); // good initial guess
+    for (let k = 0; k < 8; k++) e = e - (e - ecc * Math.sin(e) - M) / (1 - ecc * Math.cos(e));
+    const x = a * Math.cos(e) - cshift, y = b * Math.sin(e); const rx = x * Math.cos(w) - y * Math.sin(w), ry = x * Math.sin(w) + y * Math.cos(w);
     ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(cx + rx, cy + ry, 5, 0, 7); ctx.fill();
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("orbit (focus = Earth center)", 12, 20);
   };

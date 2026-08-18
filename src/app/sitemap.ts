@@ -39,6 +39,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/templates", 0.6), u("/about", 0.5), u("/for-business", 0.6), u("/custom-solvers", 0.8), u("/developers", 0.6), u("/multi", 0.9), u("/use-cases", 0.9),
     u("/developers/sdk", 0.4), u("/developers/webhooks", 0.4), u("/login", 0.3), u("/signup", 0.4), u("/dashboard", 0.3),
     u("/terms", 0.3), u("/privacy", 0.3), u("/refund", 0.3), u("/acceptable-use", 0.3),
+    u("/security", 0.3), u("/cookies", 0.3), u("/dpa", 0.3),
     u("/studio/graph", 0.9), u("/studio/particles", 0.8), u("/studio/fluid", 0.8), u("/studio/dynamics", 0.8), u("/studio/fields", 0.8), u("/studio/cas", 0.8), u("/studio/surrogate", 0.8),
     u("/studio/3d", 0.8), u("/studio/fea", 0.8), u("/studio/electromagnetics", 0.8), u("/studio/molecular-dynamics", 0.8), u("/studio/mesh", 0.8), u("/studio/vector-field", 0.8), u("/studio/optimize", 0.8), u("/studio/notebook", 0.8),
     u("/studio/gpu", 0.9), u("/studio/fea-3d", 0.8), u("/studio/gpu-fluid", 0.9), u("/studio/gpu-nbody", 0.9), u("/studio/heat-3d", 0.8), u("/studio/gpu-pde", 0.9), u("/studio/cfd-3d", 0.8), u("/studio/gpu-fluid-3d", 0.9), u("/studio/gpu-nbody-pm", 0.9), u("/marketplace", 0.7),
