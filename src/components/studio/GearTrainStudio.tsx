@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { t1: number; t2: number; rpm: number; torque: number }> = {
@@ -65,6 +66,7 @@ print("ratio", ratio, "out_rpm", out_rpm, "out_torque", out_torque)`;
         <Stat label="Gear ratio" value={`${ratio.toFixed(2)} : 1`} />
         <Stat label="Output speed" value={`${outRpm.toFixed(1)} rpm`} />
         <Stat label="Output torque" value={`${outTorque.toFixed(1)} N·m`} />
+        <Equation tex={`\\frac{\\omega_{out}}{\\omega_{in}}=-\\frac{N_{in}}{N_{out}}=-\\frac{${t1}}{${t2}},\\quad \\tau_{out}=\\tau_{in}\\cdot\\frac{N_{out}}{N_{in}}=${outTorque.toFixed(1)}\\,\\text{N·m}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

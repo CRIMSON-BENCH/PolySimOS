@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const COLORS = ["#22d3ee", "#f472b6", "#a3e635", "#fbbf24", "#c084fc", "#fb7185"];
@@ -65,7 +66,7 @@ print("colors used", max(color)+1)`;
         <p className="mt-3 text-xs text-slate-500">Graph coloring assigns colors to nodes so that no edge connects two of the same color, using as few colors as possible. The greedy algorithm colors nodes in order, picking the lowest color not used by a neighbor. It models scheduling exams, assigning radio frequencies, and register allocation in compilers — all cases where conflicting items must be separated.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Nodes" value={String(Math.round(nNodes))} /><Stat label="Colors used" value={String(used)} /><Stat label="Method" value="greedy" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Nodes" value={String(Math.round(nNodes))} /><Stat label="Colors used" value={String(used)} /><Stat label="Method" value="greedy" /><Equation tex={`c(u)\\neq c(v)\\ \\ \\forall\\,(u,v)\\in E,\\quad \\chi(G)\\le ${used}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

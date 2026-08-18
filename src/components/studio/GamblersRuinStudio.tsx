@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { stake: number; target: number; pWin: number }> = {
   "Fair coin": { stake: 20, target: 50, pWin: 0.5 },
@@ -60,7 +61,7 @@ print("P(ruin)", ruin)`;
         <p className="mt-3 text-xs text-slate-500">A gambler betting against a rich casino faces gambler&apos;s ruin: even a nearly fair game (49% odds) almost always ends in bankruptcy before hitting a big target, because the house has effectively unlimited funds. The tiny edge compounds relentlessly over many bets — which is exactly how casinos stay in business.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="P(ruin) theory" value={`${(ruinTheory * 100).toFixed(1)}%`} /><Stat label="Ruined (this run)" value={`${ruined} / 30`} /><Stat label="Edge per bet" value={`${((pWin - 0.5) * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="P(ruin) theory" value={`${(ruinTheory * 100).toFixed(1)}%`} /><Stat label="Ruined (this run)" value={`${ruined} / 30`} /><Stat label="Edge per bet" value={`${((pWin - 0.5) * 100).toFixed(0)}%`} /><Equation tex={`P_{\\text{ruin}} = \\frac{(q/p)^{i}-(q/p)^{N}}{1-(q/p)^{N}},\\quad p=${pWin},\\ i=${stake},\\ N=${target}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

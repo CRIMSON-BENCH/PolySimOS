@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const N = 120, CELL = 4;
@@ -86,7 +87,7 @@ print("living trees", int((g == 1).sum()))`;
         <p className="mt-3 text-xs text-slate-500">Trees grow at rate p; lightning ignites one at rate f; fire spreads to neighbors. The ratio p/f self-organizes to a critical state where fire sizes follow a power law — a classic model of self-organized criticality.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Living trees" value={String(trees)} /><Stat label="Grid" value={`${N}²`} /><Stat label="p / f" value={(growth / ignite).toFixed(0)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Living trees" value={String(trees)} /><Stat label="Grid" value={`${N}²`} /><Stat label="p / f" value={(growth / ignite).toFixed(0)} /><Equation tex={`P(\\text{grow}) = ${growth},\\quad P(\\text{ignite}) = ${ignite},\\quad \\frac{p}{f} = ${(growth / ignite).toFixed(0)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

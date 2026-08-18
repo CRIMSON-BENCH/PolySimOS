@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { t1: number; t2: number; t3: number }> = {
@@ -60,7 +61,7 @@ print("end effector", round(x, 1), round(y, 1))`;
         <p className="mt-3 text-xs text-slate-500">Forward kinematics computes where a robot arm&apos;s tip ends up from its joint angles. Each link rotates relative to the previous one, so the transforms chain together. It is fast and unique — every set of angles gives exactly one end-effector position — which is why controllers use it constantly.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="End X" value={tip[0].toFixed(1)} /><Stat label="End Y" value={tip[1].toFixed(1)} /><Stat label="Reach" value={reach.toFixed(1)} /><Stat label="Links" value="3" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="End X" value={tip[0].toFixed(1)} /><Stat label="End Y" value={tip[1].toFixed(1)} /><Stat label="Reach" value={reach.toFixed(1)} /><Stat label="Links" value="3" /><Equation tex={`x = \\sum_i L_i\\cos\\!\\Big(\\sum_{j\\le i}\\theta_j\\Big) = ${tip[0].toFixed(1)},\\quad y = \\sum_i L_i\\sin\\!\\Big(\\sum_{j\\le i}\\theta_j\\Big) = ${tip[1].toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

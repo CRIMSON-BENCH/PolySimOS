@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { spin: number; mass: number; radius: number; pivot: number }> = {
@@ -70,6 +71,7 @@ print("precession period", round(2*np.pi/Omega, 2), "s")`;
         <Stat label="Precession rate Ω" value={`${precession.toFixed(2)} rad/s`} />
         <Stat label="Precession period" value={`${precPeriod.toFixed(1)} s`} />
         <Stat label="Spin inertia I" value={`${I.toExponential(2)} kg·m²`} />
+        <Equation tex={`\\Omega = \\frac{mgr}{I\\omega} = \\frac{${mass}\\cdot 9.81\\cdot ${pivot}}{I\\cdot ${spin}} = ${precession.toFixed(2)}\\ \\text{rad/s}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

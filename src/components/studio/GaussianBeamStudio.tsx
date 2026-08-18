@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { waist: number; wavelength: number }> = {
@@ -58,7 +59,7 @@ print("divergence (mrad):", div)`;
         <p className="mt-3 text-xs text-slate-500">A real laser beam is not a perfect ray — it narrows to a minimum waist then spreads. Within one Rayleigh range of the waist it stays roughly collimated; beyond, it diverges at an angle set by wavelength over waist size. Tighter focus means faster spreading — the fundamental diffraction trade-off behind every laser and telescope.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Rayleigh range" value={zR < 0.01 ? `${(zR * 1000).toFixed(2)} mm` : `${zR.toFixed(3)} m`} /><Stat label="Divergence" value={`${div.toFixed(2)} mrad`} /><Stat label="Waist" value={`${waist} µm`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Rayleigh range" value={zR < 0.01 ? `${(zR * 1000).toFixed(2)} mm` : `${zR.toFixed(3)} m`} /><Stat label="Divergence" value={`${div.toFixed(2)} mrad`} /><Stat label="Waist" value={`${waist} µm`} /><Equation tex={`w(z)=w_0\\sqrt{1+(z/z_R)^2},\\ z_R=\\frac{\\pi w_0^2}{\\lambda}=${(zR * 1000).toFixed(1)}\\,\\text{mm}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={280} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

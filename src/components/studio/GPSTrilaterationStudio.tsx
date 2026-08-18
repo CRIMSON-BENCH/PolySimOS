@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { noise: number }> = {
   "Perfect ranges": { noise: 0 },
@@ -56,7 +57,7 @@ print("fix", px, py)`;
         <p className="mt-3 text-xs text-slate-500">A GPS receiver knows its distance to several satellites from signal travel time. Each distance places it on a circle (a sphere in 3D); where three circles intersect is the fix. With perfect ranges they meet at one point, but timing noise blurs the intersection into a small region — which is why GPS uses many satellites and least-squares to pin down position.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Satellites" value="3" /><Stat label="Ranging noise" value={`${noise} m`} /><Stat label="Position error" value={`${err.toFixed(1)} m`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Satellites" value="3" /><Stat label="Ranging noise" value={`${noise} m`} /><Stat label="Position error" value={`${err.toFixed(1)} m`} /><Equation tex={`(x-x_i)^2 + (y-y_i)^2 = r_i^2,\\quad \\sigma_r = ${noise}\\ \\text{m}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

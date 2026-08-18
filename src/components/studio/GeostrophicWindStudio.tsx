@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { gradient: number; latitude: number }> = {
@@ -60,7 +61,7 @@ print("geostrophic wind", round(vg, 1), "m/s")`;
         <p className="mt-3 text-xs text-slate-500">Away from the ground, wind does not blow from high to low pressure — it blows along the isobars. The pressure-gradient force pushing air toward low pressure is balanced by the Coriolis force, and the result, the geostrophic wind, runs parallel to the pressure lines. Tighter isobar spacing means stronger wind. This is why you can read wind straight off a weather map.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Geostrophic wind" value={isFinite(vg) ? `${vg.toFixed(1)} m/s` : "∞ (equator)"} /><Stat label="In km/h" value={isFinite(vg) ? `${(vg * 3.6).toFixed(0)} km/h` : "—"} /><Stat label="Coriolis f" value={`${(f * 1e4).toFixed(2)}×10⁻⁴`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Geostrophic wind" value={isFinite(vg) ? `${vg.toFixed(1)} m/s` : "∞ (equator)"} /><Stat label="In km/h" value={isFinite(vg) ? `${(vg * 3.6).toFixed(0)} km/h` : "—"} /><Stat label="Coriolis f" value={`${(f * 1e4).toFixed(2)}×10⁻⁴`} /><Equation tex={`v_g = \\frac{1}{\\rho f}\\frac{\\partial p}{\\partial n} = ${isFinite(vg) ? vg.toFixed(1) : "\\infty"}\\ \\text{m/s}, \\quad f = 2\\Omega\\sin(${latitude}°) = ${(f * 1e4).toFixed(2)}\\times10^{-4}\\ \\text{s}^{-1}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { project } from "@/lib/engines/threeD";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -80,7 +81,7 @@ print("final position", x, z)`;
         <button onClick={() => (body.current = { x: 90, z: 0, vx: 0, vz: 1.4 })} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset orbit</button>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Central mass" value={String(mass)} /><Stat label="Well depth" value="∝ M/r" /><Stat label="View" value="3D orbit" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Central mass" value={String(mass)} /><Stat label="Well depth" value="∝ M/r" /><Stat label="View" value="3D orbit" /><Equation tex={`\\Phi = -\\frac{GM}{r} = -\\frac{${mass}\\,G}{r}, \\quad F = \\frac{GMm}{r^2}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full cursor-grab rounded-lg" /></StudioChrome>
   );
 }

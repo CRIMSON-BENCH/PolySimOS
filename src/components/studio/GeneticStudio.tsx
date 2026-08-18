@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -90,7 +91,7 @@ print("best", max(fit(*p) for p in pop))`;
         <p className="mt-3 text-xs text-slate-500">A population of candidate solutions is scored by fitness (bright = high). The fittest are selected, crossed over, and mutated each generation. Watch the swarm climb toward the global peak while dodging local optima.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Generation" value={String(gen)} /><Stat label="Best fitness" value={best.toFixed(3)} /><Stat label="Population" value={String(Math.round(popSize))} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Generation" value={String(gen)} /><Stat label="Best fitness" value={best.toFixed(3)} /><Stat label="Population" value={String(Math.round(popSize))} /><Equation tex={`P_i = \\frac{f_i}{\\sum_j f_j}, \\quad \\mu = ${mutation}, \\quad f_{\\max} = ${best.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

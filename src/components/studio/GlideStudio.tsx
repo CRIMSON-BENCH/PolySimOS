@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { ld: number; altitude: number; speed: number }> = {
@@ -56,7 +57,7 @@ print("range", round(range_km, 1), "km; angle", round(glide_angle, 1), "deg")`;
         <p className="mt-3 text-xs text-slate-500">An unpowered aircraft trades height for distance. Its glide ratio, L/D, is exactly how many meters forward it travels per meter of descent — a modern glider does 50:1. The shallow glide angle is set only by L/D, not weight, while the sink rate and time aloft depend on speed. Vital knowledge after an engine failure.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Glide range" value={`${(range / 1000).toFixed(1)} km`} /><Stat label="Glide angle" value={`${glideAngle.toFixed(1)}°`} /><Stat label="Sink rate" value={`${sinkRate.toFixed(1)} m/s`} /><Stat label="Time aloft" value={`${(time / 60).toFixed(1)} min`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Glide range" value={`${(range / 1000).toFixed(1)} km`} /><Stat label="Glide angle" value={`${glideAngle.toFixed(1)}°`} /><Stat label="Sink rate" value={`${sinkRate.toFixed(1)} m/s`} /><Stat label="Time aloft" value={`${(time / 60).toFixed(1)} min`} /><Equation tex={`\\gamma=\\arctan\\frac{1}{L/D}=\\arctan\\frac{1}{${ld}}=${glideAngle.toFixed(1)}^\\circ,\\quad v_s=\\frac{V}{L/D}=${sinkRate.toFixed(1)}\\,\\mathrm{m/s}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

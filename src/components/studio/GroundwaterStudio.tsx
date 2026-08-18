@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Q: number; T: number; R: number }> = {
@@ -66,6 +67,7 @@ print("drawdown at 50 m", round(s(50), 3), "m")`;
         <Stat label="Drawdown at well" value={`${sWell.toFixed(1)} m`} />
         <Stat label="Drawdown at 50 m" value={`${drawdownAt(50).toFixed(2)} m`} />
         <Stat label="Radius of influence" value={`${R} m`} />
+        <Equation tex={`s(r) = \\frac{Q}{2\\pi T}\\ln\\frac{R}{r} = \\frac{${Q}}{2\\pi\\cdot${T}}\\ln\\frac{${R}}{r}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

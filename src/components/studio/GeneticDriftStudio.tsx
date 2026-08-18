@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { popSize: number; p0: number; reps: number }> = {
@@ -67,7 +68,7 @@ for _ in range(reps):
         <p className="mt-3 text-xs text-slate-500">Even with no selection, allele frequencies wander purely by chance as each generation is randomly sampled from the last. In small populations this genetic drift is fast and alleles quickly fix or vanish; in large populations it is slow. Each colored line is an independent population starting from the same frequency.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fixed (reached 1)" value={String(fixed)} /><Stat label="Lost (reached 0)" value={String(lost)} /><Stat label="Population size" value={String(N)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Fixed (reached 1)" value={String(fixed)} /><Stat label="Lost (reached 0)" value={String(lost)} /><Stat label="Population size" value={String(N)} /><Equation tex={`\\mathrm{Var}(p) = \\frac{p_0(1-p_0)}{2N} = \\frac{${p0}(1-${p0})}{2 \\cdot ${N}} = ${(p0 * (1 - p0) / (2 * N)).toFixed(4)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

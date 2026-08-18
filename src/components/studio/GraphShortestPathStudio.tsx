@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const NODES = [[70, 90], [200, 50], [200, 180], [340, 80], [340, 220], [470, 130]].map(([x, y]) => ({ x, y }));
@@ -92,6 +93,7 @@ print(dijkstra(0))`;
         <Stat label="Shortest distance" value={dist[target] === Infinity ? "∞" : String(dist[target])} />
         <Stat label="Graph size" value={`${nInt} nodes`} />
         <Stat label="Est. edges" value={`${estEdges} (${(density * 100).toFixed(0)}%)`} />
+        <Equation tex={`d(v)=\\min\\!\\bigl(d(v),\\,d(u)+w(u,v)\\bigr),\\quad d(\\text{${String.fromCharCode(65 + target)}})=${dist[target] === Infinity ? "\\infty" : dist[target]}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={280} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); const x = (e.clientX - r.left) * 540 / r.width, y = (e.clientY - r.top) * 280 / r.height; let best = target, bd = 900; NODES.forEach((n, i) => { const d = (n.x - x) ** 2 + (n.y - y) ** 2; if (d < bd && i !== 0) { bd = d; best = i; } }); setTarget(best); }} className="mx-auto h-auto max-w-full cursor-pointer rounded-lg" /></StudioChrome>

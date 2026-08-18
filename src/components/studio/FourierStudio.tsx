@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -74,7 +75,7 @@ print("partial sum with", harmonics, "harmonics")`;
         <Slider label="Harmonics" value={harmonics} min={1} max={50} step={1} onChange={(v) => update({ harmonics: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Wave" value={wave} /><Stat label="Harmonics" value={String(harmonics)} /><Stat label="Basis" value="sine" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Wave" value={wave} /><Stat label="Harmonics" value={String(harmonics)} /><Stat label="Basis" value="sine" /><Equation tex={`f(t)=\\frac{a_0}{2}+\\sum_{n=1}^{${harmonics}}\\left(a_n\\cos n\\omega t+b_n\\sin n\\omega t\\right)`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>

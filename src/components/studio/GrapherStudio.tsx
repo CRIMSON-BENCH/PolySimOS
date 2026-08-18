@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -54,7 +55,7 @@ for e in exprs:
           <input type="range" min={2} max={50} step={1} value={range} onChange={(e) => setRange(parseFloat(e.target.value))} className="w-full accent-cyan-500" /></div>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Functions" value={String(exprs.filter(Boolean).length)} /><Stat label="Samples" value="600" /><Stat label="Engine" value="PolySim CAS" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Functions" value={String(exprs.filter(Boolean).length)} /><Stat label="Samples" value="600" /><Stat label="Engine" value="PolySim CAS" /><Equation tex={`y=${exprs.filter(Boolean).join(",\\quad y=")}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" />
     </StudioChrome>

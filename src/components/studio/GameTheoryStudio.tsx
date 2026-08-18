@@ -2,6 +2,7 @@
 
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useState } from "react";
 
 // 2x2 game: find pure Nash equilibria.
@@ -50,7 +51,7 @@ print("pure Nash equilibria:", nash)`;
         <p className="mt-3 text-xs text-slate-500">A Nash equilibrium is a pair of strategies where neither player can do better by unilaterally changing — the cornerstone of game theory. In the Prisoner&apos;s Dilemma both defect even though cooperating pays more; Matching Pennies has no pure equilibrium at all. Highlighted cells are the pure-strategy Nash equilibria.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Game" value={game} /><Stat label="Pure Nash equilibria" value={String(nash.length)} /><Stat label="Type" value={nash.length === 0 ? "mixed only" : nash.length === 1 ? "dominant" : "multiple"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Game" value={game} /><Stat label="Pure Nash equilibria" value={String(nash.length)} /><Stat label="Type" value={nash.length === 0 ? "mixed only" : nash.length === 1 ? "dominant" : "multiple"} /><Equation tex={`\\begin{pmatrix} (${P[0][0][0]},${P[0][0][1]}) & (${P[0][1][0]},${P[0][1][1]}) \\\\ (${P[1][0][0]},${P[1][0][1]}) & (${P[1][1][0]},${P[1][1][1]}) \\end{pmatrix},\\quad u_i(s_i^*,s_{-i}) \\ge u_i(s_i,s_{-i})`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center py-6">
         <div className="mb-2 text-xs uppercase tracking-widest text-slate-500">Row player vs Column player</div>
         <table className="border-collapse">

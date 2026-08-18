@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -81,7 +82,7 @@ print("points inside", int((it == max_iter).sum()))`;
         <button onClick={() => { view.current = { cx: mode === "mandelbrot" ? -0.5 : 0, cy: 0, scale: 3 }; force((n) => n + 1); }} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset view</button>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Set" value={mode} /><Stat label="Zoom" value={`${(3 / view.current.scale).toFixed(1)}×`} /><Stat label="Iterations" value={String(maxIter)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Set" value={mode} /><Stat label="Zoom" value={`${(3 / view.current.scale).toFixed(1)}×`} /><Stat label="Iterations" value={String(maxIter)} /><Equation tex={`z_{n+1}=z_n^{2}+c,\\quad |z_n|\\le 2,\\; n\\le ${maxIter}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} onClick={(e) => zoom(e, 0.5)} onContextMenu={(e) => { e.preventDefault(); zoom(e, 2); }} className="mx-auto h-auto max-h-[460px] cursor-crosshair rounded-lg" />
     </StudioChrome>

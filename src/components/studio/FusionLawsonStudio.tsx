@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { density: number; tau: number; temp: number }> = {
@@ -55,7 +56,7 @@ print("triple", triple, "fraction of ignition", triple / ignition)`;
         <p className="mt-3 text-xs text-slate-500">To get more fusion energy out than you put in, a plasma must be hot enough, dense enough, and confined long enough — captured together in the triple product n·τ·T. The Lawson criterion sets the threshold for ignition, where the fusion self-heats. Crossing it, at over 100 million degrees, is the decades-long goal of tokamaks and laser fusion.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Triple product" value={`${triple.toExponential(2)}`} /><Stat label="Fraction of ignition" value={`${(ratio * 100).toFixed(0)}%`} /><Stat label="Status" value={ignited ? "IGNITION" : "sub-ignition"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Triple product" value={`${triple.toExponential(2)}`} /><Stat label="Fraction of ignition" value={`${(ratio * 100).toFixed(0)}%`} /><Stat label="Status" value={ignited ? "IGNITION" : "sub-ignition"} /><Equation tex={`n\\,\\tau_E\\,T = ${triple.toExponential(1)} ${ignited ? "\\ge" : "<"} 3\\times10^{21}\\ \\text{keV·s·m}^{-3}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -82,7 +83,7 @@ print("wall impulse / step ~ pressure:", wall / steps)`;
         <Slider label="Temperature" value={temp} min={0.5} max={7} step={0.5} onChange={(v) => update({ temp: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Particles" value={String(n)} /><Stat label="Temperature" value={temp.toFixed(1)} /><Stat label="Pressure (wall)" value={pressure.toFixed(0)} /><Stat label="Law" value="PV = nRT" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Particles" value={String(n)} /><Stat label="Temperature" value={temp.toFixed(1)} /><Stat label="Pressure (wall)" value={pressure.toFixed(0)} /><Stat label="Law" value="PV = nRT" /><Equation tex={`P\\,V = N k_B T,\\quad N=${n},\\ T=${temp.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[440px] rounded-lg" /></StudioChrome>
   );
 }

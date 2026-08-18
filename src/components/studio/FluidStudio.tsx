@@ -5,6 +5,7 @@ import { FluidField, DEFAULT_FLUID } from "@/lib/engines/fluid";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = DEFAULT_FLUID.n;
@@ -167,6 +168,7 @@ print("diffusion coefficient a =", a)`;
           <Stat label="Mean speed" value={metrics.meanSpeed.toFixed(3)} />
           <Stat label="Max speed" value={metrics.maxSpeed.toFixed(3)} />
           <Stat label="Enstrophy" value={metrics.enstrophy.toExponential(2)} />
+          <Equation tex={`\\frac{\\partial \\mathbf{u}}{\\partial t} + (\\mathbf{u}\\cdot\\nabla)\\mathbf{u} = -\\frac{\\nabla p}{\\rho} + ${viscosity.toExponential(1)}\\,\\nabla^2\\mathbf{u},\\quad \\nabla\\cdot\\mathbf{u} = 0`} />
           <ExplainResult text={explain} />
         </div>
       }

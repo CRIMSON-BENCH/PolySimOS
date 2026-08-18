@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi } from "@/lib/studioKit";
 
@@ -67,7 +68,7 @@ print(${mode}(adj))`;
         <p className="mt-3 text-xs text-slate-500">The two ways to explore a graph. Breadth-first search fans out level by level using a queue, visiting all near nodes before far ones — ideal for shortest paths. Depth-first search plunges as deep as possible using a stack, backtracking when stuck — ideal for cycle detection and topological sorting. Watch the numbered visit order differ.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mode" value={mode.toUpperCase()} /><Stat label="Structure" value={mode === "bfs" ? "queue (FIFO)" : "stack (LIFO)"} /><Stat label="Nodes" value={String(NODES.length)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Mode" value={mode.toUpperCase()} /><Stat label="Structure" value={mode === "bfs" ? "queue (FIFO)" : "stack (LIFO)"} /><Stat label="Nodes" value={String(NODES.length)} /><Equation tex={`u\\leftarrow\\text{${mode === "bfs" ? "dequeue" : "pop"}},\\quad S\\gets S\\cup\\{\\,v\\in\\mathrm{adj}(u):v\\notin S\\,\\},\\quad |V|=${NODES.length}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={560} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -101,7 +102,7 @@ print("final", path[-1], "loss", f(x, y))`;
         <Slider label="Momentum" value={momentum} min={0} max={0.95} step={0.05} onChange={(v) => update({ momentum: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Surface" value={surface} /><Stat label="Step" value={`${Math.min(tick, 200)}/200`} /><Stat label="Optimizer" value="momentum GD" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Surface" value={surface} /><Stat label="Step" value={`${Math.min(tick, 200)}/200`} /><Stat label="Optimizer" value="momentum GD" /><Equation tex={`x_{k+1}=x_k-\\eta\\,\\nabla f(x_k),\\quad \\eta=${lr}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }
