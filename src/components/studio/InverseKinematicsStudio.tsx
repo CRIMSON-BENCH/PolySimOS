@@ -4,7 +4,9 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
+
+const W = 480, H = 380, OX = W / 2, OY = H / 2 + 60;
 
 const PRESETS: Record<string, { L1: number; L2: number; elbowUp: boolean }> = {
   "2-link arm": { L1: 100, L2: 80, elbowUp: true },
@@ -18,6 +20,7 @@ export function InverseKinematicsStudio() {
   const [target, setTarget] = useState<[number, number]>([120, 40]);
   const [elbowUp, setElbowUp] = useState(true);
   const [{ L1, L2 }, update] = useShareableNumbers({ L1: 100, L2: 80 });
+  const didDrag = useRef(false);
 
   // 2-link analytic IK
   const [x, y] = target; const d = Math.hypot(x, y); const reachable = d <= L1 + L2 && d >= Math.abs(L1 - L2);
@@ -25,9 +28,14 @@ export function InverseKinematicsStudio() {
   const t2 = (elbowUp ? 1 : -1) * Math.acos(cos2);
   const t1 = Math.atan2(y, x) - Math.atan2(L2 * Math.sin(t2), L1 + L2 * Math.cos(t2));
 
+  // Drag the target marker directly; click-elsewhere-to-teleport (below) still works.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (px, py) => { didDrag.current = false; return Math.hypot(OX + x - px, OY - y - py) < 16; },
+    move: (px, py) => { didDrag.current = true; setTarget([px - OX, OY - py]); },
+  });
+
   useEffect(() => {
-    const W = 480, H = 380; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-    const ox = W / 2, oy = H / 2 + 60;
+    const ox = OX, oy = OY; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // reachable annulus
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.arc(ox, oy, L1 + L2, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.arc(ox, oy, Math.abs(L1 - L2), 0, 7); ctx.stroke();
     const j1 = [ox + L1 * Math.cos(t1), oy - L1 * Math.sin(t1)]; const tip = [ox + x, oy - y];
@@ -36,7 +44,7 @@ export function InverseKinematicsStudio() {
     [[ox, oy], j1].forEach((p) => { ctx.beginPath(); ctx.arc(p[0], p[1], 5, 0, 7); ctx.fillStyle = "#e2e8f0"; ctx.fill(); });
     // target
     ctx.strokeStyle = "#fbbf24"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(tip[0], tip[1], 8, 0, 7); ctx.stroke(); ctx.beginPath(); ctx.moveTo(tip[0] - 12, tip[1]); ctx.lineTo(tip[0] + 12, tip[1]); ctx.moveTo(tip[0], tip[1] - 12); ctx.lineTo(tip[0], tip[1] + 12); ctx.stroke();
-    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("click to move the target", 12, 20);
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("drag the target, or click elsewhere to move it", 12, 20);
   }, [target, elbowUp, t1, t2, reachable, x, y]);
 
   const reach = L1 + L2;
@@ -79,7 +87,7 @@ print("tip", forward(theta)[-1], "reach", L.sum())`;
         <Slider label="Link 1 length" value={L1} min={30} max={150} step={5} onChange={(v) => update({ L1: v })} />
         <Slider label="Link 2 length" value={L2} min={30} max={150} step={5} onChange={(v) => update({ L2: v })} />
         <label className="flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400"><input type="checkbox" checked={elbowUp} onChange={(e) => setElbowUp(e.target.checked)} /> Elbow-up solution</label>
-        <p className="mt-3 text-xs text-slate-500">Inverse kinematics is the hard direction: given where you want the tip, find the joint angles. For a 2-link arm the law of cosines gives a clean closed form — but with two solutions (elbow-up or elbow-down) and none at all when the target is out of reach. Click anywhere to set the target.</p>
+        <p className="mt-3 text-xs text-slate-500">Inverse kinematics is the hard direction: given where you want the tip, find the joint angles. For a 2-link arm the law of cosines gives a clean closed form — but with two solutions (elbow-up or elbow-down) and none at all when the target is out of reach. Drag the target, or click anywhere to move it there.</p>
         <ShareBar code={code} />
       </div>}
       inspector={<div>
@@ -91,6 +99,9 @@ print("tip", forward(theta)[-1], "reach", L.sum())`;
         <Equation tex={`\\theta_2=\\arccos\\frac{x^2+y^2-${L1}^2-${L2}^2}{2\\cdot${L1}\\cdot${L2}}=${(t2 * 180 / Math.PI).toFixed(1)}^\\circ,\\quad \\theta_1=\\operatorname{atan2}(${y},${x})-\\operatorname{atan2}(${L2}\\sin\\theta_2,\\,${L1}+${L2}\\cos\\theta_2)=${(t1 * 180 / Math.PI).toFixed(1)}^\\circ`} />
         <ExplainResult text={explain} />
       </div>}
-    ><canvas ref={canvasRef} width={480} height={380} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); const sx = 480 / r.width, sy = 380 / r.height; setTarget([(e.clientX - r.left) * sx - 240, -((e.clientY - r.top) * sy - 250)]); }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
+    ><canvas ref={canvasRef} width={480} height={380} onClick={(e) => {
+        if (didDrag.current) { didDrag.current = false; return; } // a drag just ended — don't also teleport
+        const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); const sx = 480 / r.width, sy = 380 / r.height; setTarget([(e.clientX - r.left) * sx - 240, -((e.clientY - r.top) * sy - 250)]);
+      }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }
