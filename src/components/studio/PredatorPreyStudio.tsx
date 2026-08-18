@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = 140; // grid
@@ -80,7 +81,7 @@ print("seed:", (g==PREY).sum(), "prey", (g==PRED).sum(), "predators")`;
         <Slider label="Predator starvation" value={predStarve} min={0.005} max={0.08} step={0.005} onChange={(v) => update({ predStarve: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Prey" value={counts.prey.toLocaleString()} /><Stat label="Predators" value={counts.pred.toLocaleString()} /><Stat label="Grid" value={`${N}×${N}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Prey" value={counts.prey.toLocaleString()} /><Stat label="Predators" value={counts.pred.toLocaleString()} /><Stat label="Grid" value={`${N}×${N}`} /><Equation tex={`\\frac{dx}{dt} = ${preyRepro.toFixed(2)}\\,x - \\beta xy,\\quad \\frac{dy}{dt} = \\delta xy - ${predStarve.toFixed(3)}\\,y`} label="Lotka–Volterra (mean field)" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} /></StudioChrome>
   );
 }

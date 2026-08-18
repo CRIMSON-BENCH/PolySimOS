@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { parse, evaluate } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 560, H = 480;
@@ -60,7 +61,7 @@ plt.plot(x, y); plt.gca().set_aspect("equal"); plt.show()`;
         {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="x(t)" value="param" /><Stat label="y(t)" value="param" /><Stat label="t range" value={`0…${tMax.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="x(t)" value="param" /><Stat label="y(t)" value="param" /><Stat label="t range" value={`0…${tMax.toFixed(1)}`} /><Equation tex={`x(t) = \\text{${xt}}, \\quad y(t) = \\text{${yt}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

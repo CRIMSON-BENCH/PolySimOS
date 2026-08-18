@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { poleR: number; poleAng: number; zeroAng: number }> = {
@@ -69,6 +70,7 @@ print("peak gain", H.max(), "stable", poleR < 1)`;
         <Stat label="Pole radius" value={poleR.toFixed(2)} />
         <Stat label="Resonance at" value={`${poleAng}° (ω)`} />
         <Stat label="Stability" value={poleR < 1 ? "stable ✓" : "unstable ⚠"} />
+        <Equation tex={`H(z) = \\dfrac{(z - e^{j\\,${zeroAng}^\\circ})(z - e^{-j\\,${zeroAng}^\\circ})}{(z - ${poleR.toFixed(2)}e^{j\\,${poleAng}^\\circ})(z - ${poleR.toFixed(2)}e^{-j\\,${poleAng}^\\circ})},\\quad \\text{stable} \\iff |p| = ${poleR.toFixed(2)} < 1`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

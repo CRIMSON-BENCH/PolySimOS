@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { n: number; L: number }> = {
@@ -62,7 +63,7 @@ print(f"E_{n} = {E:.3f} eV, nodes = {n - 1}")`;
         <p className="mt-3 text-xs text-slate-500">Confine a quantum particle to a box and its energy can only take discrete values, E_n = n²h²/8mL². The wavefunctions are standing waves with n humps; squaring them gives the probability of finding the particle at each point. Narrowing the box pushes the energy levels dramatically higher — quantum confinement.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Energy Eₙ" value={`${energy.toFixed(3)} eV`} /><Stat label="Level n" value={String(N)} /><Stat label="Nodes" value={String(N - 1)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Energy Eₙ" value={`${energy.toFixed(3)} eV`} /><Stat label="Level n" value={String(N)} /><Stat label="Nodes" value={String(N - 1)} /><Equation tex={`E_{${N}} = \\frac{${N}^2 h^2}{8mL^2} = ${energy.toFixed(3)}\\ \\text{eV}, \\quad \\psi_{${N}} = \\sqrt{\\tfrac{2}{L}}\\,\\sin\\!\\frac{${N}\\pi x}{L}, \\; L = ${L}\\ \\text{nm}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

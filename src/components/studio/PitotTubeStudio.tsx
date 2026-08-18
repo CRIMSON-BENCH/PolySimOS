@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { dp: number; alt: number }> = {
@@ -65,6 +66,7 @@ print("rho", rho, "TAS", v_true, "IAS", v_ias, "Mach", mach)`;
         <Stat label="True airspeed" value={`${vTrue.toFixed(1)} m/s`} />
         <Stat label="Indicated airspeed" value={`${vIAS.toFixed(1)} m/s`} />
         <Stat label="Mach number" value={mach.toFixed(3)} />
+        <Equation tex={`v = \\sqrt{\\dfrac{2\\,(p_0 - p_s)}{\\rho}} = \\sqrt{\\dfrac{2\\cdot ${dp}}{${rho.toFixed(3)}}} = ${vTrue.toFixed(1)}\\ \\text{m/s}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
@@ -76,6 +77,7 @@ print("weights", w, "bias", b, "accuracy", acc)`;
       inspector={<div>
         <Stat label="Model" value="linear classifier" />
         <Stat label="Converges?" value={sep > 1 ? "yes (separable)" : "struggles (overlap)"} />
+        <Equation tex={`\\hat y=\\operatorname{step}(\\mathbf{w}\\cdot\\mathbf{x}+b),\\quad \\mathbf{w}\\leftarrow\\mathbf{w}+${lr.toFixed(2)}\\,(y-\\hat y)\\,\\mathbf{x}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

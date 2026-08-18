@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { length: number; diffs: number }> = {
@@ -44,6 +45,7 @@ print('p', round(p, 3), 'JC distance', round(jc, 3))`;
         <Stat label="Raw distance p" value={p.toFixed(3)} />
         <Stat label="Jukes–Cantor distance" value={isFinite(jc) ? jc.toFixed(3) : "saturated"} />
         <Stat label="Est. divergence" value={isFinite(mya) ? `${mya.toFixed(0)} (relative)` : "—"} />
+        <Equation tex={`d = -\\tfrac{3}{4}\\ln\\!\\left(1 - \\tfrac{4}{3}\\cdot ${p.toFixed(3)}\\right) = ${isFinite(jc) ? `${jc.toFixed(3)}\\ \\text{subs/site}` : "\\infty"}`} />
         <ExplainResult text={explain} />
       </div>}
     ><div className="flex h-[320px] flex-col items-center justify-center gap-6 rounded-lg bg-slate-950">

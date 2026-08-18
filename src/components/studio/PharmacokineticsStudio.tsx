@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { dose: number; Vd: number; thalf: number; ka: number }> = {
@@ -65,6 +66,7 @@ print("Cmax", C.max(), "tmax", tmax, "ke", ke)`;
         <Stat label="Peak concentration" value={`${cmax.toFixed(2)} mg/L`} />
         <Stat label="Time to peak" value={oral ? `${tmax.toFixed(1)} h` : "immediate"} />
         <Stat label="Elimination rate ke" value={`${ke.toFixed(3)} /h`} />
+        <Equation tex={`C(t) = \\frac{${dose}}{${Vd}}\\,e^{-${ke.toFixed(3)}\\,t},\\quad t_{1/2} = \\frac{\\ln 2}{k_e} = ${thalf}\\,\\text{h}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

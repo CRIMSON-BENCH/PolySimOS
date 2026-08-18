@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const N = 120;
@@ -77,6 +78,7 @@ print("clusters:", n, "| percolates:", bool(spanning))`;
         <Stat label="p" value={p.toFixed(2)} />
         <Stat label="Percolates?" value={percolates ? "yes ✓" : "no"} />
         <Stat label="p_critical" value="≈ 0.593" />
+        <Equation tex={`P(\\text{open}) = ${p.toFixed(2)},\\quad p_c \\approx ${P_C}\\ \\Rightarrow\\ ${p >= P_C ? "\\text{spanning cluster}" : "\\text{no spanning cluster}"}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} /></StudioChrome>

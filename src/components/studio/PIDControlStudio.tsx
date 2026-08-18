@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Kp: number; Ki: number; Kd: number }> = {
@@ -69,7 +70,7 @@ print("final output", round(y, 4))`;
         <p className="mt-3 text-xs text-slate-500">A PID controller drives a system to its setpoint using three terms: proportional reacts to the current error, integral eliminates steady-state offset, and derivative damps overshoot. Tuning the three gains trades off speed, overshoot, and stability — the workhorse of industrial control.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Overshoot" value={`${metrics.overshoot.toFixed(0)}%`} /><Stat label="Settling time" value={`${metrics.settle.toFixed(2)} s`} /><Stat label="Steady-state error" value={metrics.ess.toFixed(3)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Overshoot" value={`${metrics.overshoot.toFixed(0)}%`} /><Stat label="Settling time" value={`${metrics.settle.toFixed(2)} s`} /><Stat label="Steady-state error" value={metrics.ess.toFixed(3)} /><Equation tex={`u(t) = ${Kp.toFixed(1)}\\,e(t) + ${Ki.toFixed(2)}\\int e\\,dt + ${Kd.toFixed(1)}\\frac{de}{dt}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

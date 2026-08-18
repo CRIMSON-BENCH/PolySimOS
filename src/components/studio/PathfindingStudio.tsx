@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const COLS = 48, ROWS = 30, CELL = 15;
@@ -89,7 +90,7 @@ print("path length", len(path))`;
         <button onClick={() => { walls.current.clear(); setTick((t) => t + 1); }} className="w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Clear walls</button>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Algorithm" value={algo === "astar" ? "A*" : "Dijkstra"} /><Stat label="Grid" value={`${COLS}×${ROWS}`} /><Stat label="Heuristic" value={algo === "astar" ? "Manhattan" : "none"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Algorithm" value={algo === "astar" ? "A*" : "Dijkstra"} /><Stat label="Grid" value={`${COLS}×${ROWS}`} /><Stat label="Heuristic" value={algo === "astar" ? "Manhattan" : "none"} /><Equation tex={`f(n)=g(n)+h(n),\\quad h(n)=${algo === "astar" ? "|\\Delta x|+|\\Delta y|" : "0"}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={COLS * CELL} height={ROWS * CELL} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }

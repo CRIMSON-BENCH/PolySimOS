@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -63,7 +64,7 @@ print(round(dist_pc, 2), "pc", round(dist_ly, 2), "ly")`;
         <p className="mt-3 text-xs text-slate-500">As Earth orbits the Sun, a nearby star appears to shift against the distant background. Half that annual shift is the parallax angle p, and distance in parsecs is simply 1/p (with p in arcseconds). One parsec is the distance giving a one-arcsecond parallax.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Distance" value={`${distPc.toFixed(1)} pc`} /><Stat label="Light years" value={`${distLy.toFixed(1)} ly`} /><Stat label="Parallax" value={`${parallax.toFixed(3)}″`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Distance" value={`${distPc.toFixed(1)} pc`} /><Stat label="Light years" value={`${distLy.toFixed(1)} ly`} /><Stat label="Parallax" value={`${parallax.toFixed(3)}″`} /><Equation tex={`d = \\frac{1}{p} = \\frac{1}{${parallax.toFixed(3)}} = ${distPc.toFixed(1)}\\ \\text{pc}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

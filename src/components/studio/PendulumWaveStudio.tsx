@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
@@ -87,6 +88,7 @@ print("re-sync at t = 60 (all phases align)")`;
         <Stat label="Slowest period" value={`${basePeriod.toFixed(2)} s`} />
         <Stat label="Fastest period" value={`${fastPeriod.toFixed(2)} s`} />
         <Stat label="Effect" value="phase waves" />
+        <Equation tex={`T_i=2\\pi\\sqrt{L_i/g},\\quad T_0\\approx ${basePeriod.toFixed(2)}\\,\\text{s},\\ N=${n}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>

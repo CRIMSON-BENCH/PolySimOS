@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { T: number; logP: number }> = {
@@ -75,7 +76,7 @@ print(phase, round(P), 'kPa')`;
         <p className="mt-3 text-xs text-slate-500">A phase diagram maps which state — solid, liquid, or gas — a substance takes at each temperature and pressure. The lines are phase boundaries; cross one and the material transforms. All three meet at the triple point, and the liquid-gas line ends at the critical point beyond which liquid and gas become indistinguishable.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Phase" value={phase} /><Stat label="Temperature" value={`${T} °C`} /><Stat label="Pressure" value={`${Math.pow(10, logP).toFixed(0)} kPa`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Phase" value={phase} /><Stat label="Temperature" value={`${T} °C`} /><Stat label="Pressure" value={`${Math.pow(10, logP).toFixed(0)} kPa`} /><Equation tex={`\\frac{dP}{dT} = \\frac{L}{T\\,\\Delta V},\\quad T = ${(T + 273.15).toFixed(1)}\\,\\text{K},\\ P = ${Math.pow(10, logP).toFixed(0)}\\,\\text{kPa}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

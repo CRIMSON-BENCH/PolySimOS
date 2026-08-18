@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const PRESETS: Record<string, number[]> = {
@@ -53,7 +54,7 @@ print("final intensity", I)`;
         <p className="mt-3 text-xs text-slate-500">A polarizer only passes the light-wave component aligned with its axis. Malus&apos;s law says the transmitted intensity is I₀·cos²θ, where θ is the angle between successive filters. Two crossed polarizers block everything — but slip a third at 45° between them and light reappears, a striking quantum-like result of projection.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Final intensity" value={`${(intensity * 100).toFixed(1)}%`} /><Stat label="Polarizers" value={String(angles.length)} /><Stat label="Crossed?" value={Math.abs(angles[angles.length - 1] - angles[0]) === 90 && angles.length === 2 ? "yes (dark)" : "no"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Final intensity" value={`${(intensity * 100).toFixed(1)}%`} /><Stat label="Polarizers" value={String(angles.length)} /><Stat label="Crossed?" value={Math.abs(angles[angles.length - 1] - angles[0]) === 90 && angles.length === 2 ? "yes (dark)" : "no"} /><Equation tex={`I = I_0\\cos^2\\theta,\\quad \\theta = ${Math.abs(angles[angles.length - 1] - angles[angles.length - 2])}^\\circ \\;\\Rightarrow\\; I \\approx ${(intensity * 100).toFixed(1)}\\%\\,I_0`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={220} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

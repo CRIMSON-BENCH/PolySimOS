@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const POLY = [[100, 60], [360, 40], [440, 200], [300, 320], [120, 280], [60, 160]];
@@ -47,7 +48,7 @@ print(inside(poly, ${pt[0].toFixed(0)}, ${pt[1].toFixed(0)}))`;
         <p className="mt-1 text-xs text-slate-500">Is a point inside a shape? The ray-casting algorithm shoots a ray from the point in any direction and counts how many polygon edges it crosses: an odd number means inside, an even number means outside. It is the math behind geofencing — triggering an alert when a phone or vehicle enters or leaves a region — and behind hit-testing in graphics. Click anywhere to test a point.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Location" value={inside ? "INSIDE" : "outside"} /><Stat label="Polygon vertices" value={String(POLY.length)} /><Stat label="Algorithm" value="ray casting" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Location" value={inside ? "INSIDE" : "outside"} /><Stat label="Polygon vertices" value={String(POLY.length)} /><Stat label="Algorithm" value="ray casting" /><Equation tex={`\\text{inside} \\iff \\Big(\\#\\{\\text{ray} \\cap \\text{edges}\\}\\Big) \\bmod 2 = 1, \\quad n = ${POLY.length}\\ \\text{vertices}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); setPt([(e.clientX - r.left) * 500 / r.width, (e.clientY - r.top) * 360 / r.height]); }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }

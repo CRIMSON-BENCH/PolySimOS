@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 720, H = 440;
@@ -55,7 +56,7 @@ print("exit angles (deg):", np.degrees(bends).round(2))`;
         <Slider label="Exit angle" value={angle} min={10} max={60} step={1} onChange={(v) => update({ angle: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Colors" value="7 (ROYGBIV)" /><Stat label="Cause" value="n(λ) dispersion" /><Stat label="Most bent" value="violet" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Colors" value="7 (ROYGBIV)" /><Stat label="Cause" value="n(λ) dispersion" /><Stat label="Most bent" value="violet" /><Equation tex={`n_1\\sin\\theta_1 = n_2\\sin\\theta_2:\\quad 1.00\\,\\sin ${angle}^{\\circ} = ${(1.5 + 0.05 * dispersion).toFixed(2)}\\,\\sin\\theta_2 \\Rightarrow \\theta_2 = ${(Math.asin(Math.min(1, Math.sin(angle * Math.PI / 180) / (1.5 + 0.05 * dispersion))) * 180 / Math.PI).toFixed(1)}^{\\circ}`} label="Snell's law of refraction" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

@@ -2,6 +2,7 @@
 
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useState } from "react";
 
 const HANDS = [
@@ -40,7 +41,7 @@ print(name, counts[name], f"{p:.4%}", f"1 in {round(1/p)}")`;
         <p className="mt-3 text-xs text-slate-500">There are exactly 2,598,960 distinct five-card poker hands. Ranking them by rarity gives the hand hierarchy: a royal flush occurs once in about 650,000 deals, while nearly half of all hands are just a pair or high card. The odds are pure combinatorics — counting how many of the C(52,5) hands match each pattern.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label={HANDS[hi].name} value={`${HANDS[hi].count.toLocaleString()} hands`} /><Stat label="Probability" value={`${pct.toFixed(4)}%`} /><Stat label="Odds" value={`1 in ${Math.round(TOTAL / HANDS[hi].count).toLocaleString()}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label={HANDS[hi].name} value={`${HANDS[hi].count.toLocaleString()} hands`} /><Stat label="Probability" value={`${pct.toFixed(4)}%`} /><Stat label="Odds" value={`1 in ${Math.round(TOTAL / HANDS[hi].count).toLocaleString()}`} /><Equation tex={`P = \\dfrac{${HANDS[hi].count.toLocaleString()}}{\\binom{52}{5}} = \\dfrac{${HANDS[hi].count.toLocaleString()}}{2{,}598{,}960} \\approx ${pct.toFixed(4)}\\%`} /><ExplainResult text={explain} /></div>}
     ><div className="p-4">
         <div className="mb-2 text-center text-xs uppercase tracking-widest text-slate-500">Poker hands by probability (log scale)</div>
         {HANDS.map((h, i) => (

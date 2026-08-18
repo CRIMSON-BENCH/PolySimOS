@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const NODES = [[90, 90], [250, 60], [420, 100], [130, 250], [300, 230], [440, 250]].map(([x, y]) => ({ x, y }));
@@ -68,7 +69,7 @@ print("PageRank", pr / pr.sum())`;
         <p className="mt-3 text-xs text-slate-500">PageRank ranks nodes by importance: a page is important if important pages link to it. It is computed by imagining a random surfer who follows links with probability d and jumps randomly otherwise, then finding where they spend the most time. This eigenvector of the link matrix launched Google and now ranks everything from proteins to social influence.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Damping" value={damping.toFixed(2)} /><Stat label="Top node" value={`${(maxPr * 100).toFixed(1)}%`} /><Stat label="Method" value="power iteration" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Damping" value={damping.toFixed(2)} /><Stat label="Top node" value={`${(maxPr * 100).toFixed(1)}%`} /><Stat label="Method" value="power iteration" /><Equation tex={`PR(p) = \\frac{1 - ${damping.toFixed(2)}}{${N}} + ${damping.toFixed(2)}\\sum_{q} \\frac{PR(q)}{L(q)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { D: number; L: number; Q: number; eps: number }> = {
@@ -63,6 +64,7 @@ print("v", v, "Re", Re, "f", f, "head loss m", hf, "dp kPa", dp)`;
         <Stat label="Friction factor f" value={f.toFixed(4)} />
         <Stat label="Head loss" value={`${hf.toFixed(2)} m`} />
         <Stat label="Pressure drop" value={`${dp.toFixed(1)} kPa`} />
+        <Equation tex={`h_f = f\\,\\dfrac{L}{D}\\,\\dfrac{v^2}{2g} = ${f.toFixed(3)}\\cdot\\dfrac{${L}}{${D.toFixed(2)}}\\cdot\\dfrac{${v.toFixed(2)}^2}{2\\cdot 9.81} = ${hf.toFixed(2)}\\ \\text{m},\\quad Re = \\dfrac{\\rho v D}{\\mu} = ${Re.toExponential(1)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

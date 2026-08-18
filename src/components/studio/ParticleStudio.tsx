@@ -13,6 +13,7 @@ import {
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -146,6 +147,7 @@ print(count, "bodies; G", G, "gy", gy, "restitution", e)`;
           <Stat label="Kinetic energy" value={metrics.kineticEnergy.toExponential(2)} />
           <Stat label="Mean speed" value={metrics.meanSpeed.toFixed(1)} />
           <Stat label="Max speed" value={metrics.maxSpeed.toFixed(1)} />
+          <Equation tex={`F = \\frac{G\\,m_1 m_2}{r^2}, \\quad G = ${pairwiseG}, \\; N = ${count}`} />
           <ExplainResult text={explain} />
         </div>
       }

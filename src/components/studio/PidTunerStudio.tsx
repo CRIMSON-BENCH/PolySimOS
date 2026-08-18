@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Kp: number; Ki: number; Kd: number }> = {
@@ -66,6 +67,7 @@ print("overshoot %", (max(out) - 1)*100, "final", out[-1])`;
         <Stat label="Peak overshoot" value={`${overshoot.toFixed(0)}%`} />
         <Stat label="Settling time" value={settleT > 0 ? `${settleT.toFixed(1)} s` : "not settled"} />
         <Stat label="Final value" value={out[out.length - 1].toFixed(3)} />
+        <Equation tex={`u(t) = ${Kp}\\,e(t) + ${Ki}\\!\\int\\! e\\,dt + ${Kd}\\,\\frac{de}{dt}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

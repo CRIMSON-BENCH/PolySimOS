@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 function normCDF(x: number) { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.3989423 * Math.exp(-x * x / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x > 0 ? 1 - p : p; }
@@ -65,7 +66,7 @@ print("Cp", round(Cp, 3), "Cpk", round(Cpk, 3), "ppm", round(ppm))`;
         <p className="mt-3 text-xs text-slate-500">Cp compares the spec width to the process spread — can the process fit inside the tolerances at all? Cpk also accounts for how well-centered it is. A Cpk of 1.33 is the usual bar for capable; 2.0 is Six Sigma quality with just 3.4 defects per million. Widen the spread or push the mean off-center and defects climb fast.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cp" value={Cp.toFixed(2)} /><Stat label="Cpk" value={Cpk.toFixed(2)} /><Stat label="Defects" value={`${defectPPM.toFixed(0)} ppm`} /><Stat label="Rating" value={verdict} /><Stat label="Sigma level" value={`${sigmaLevel.toFixed(1)}σ`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cp" value={Cp.toFixed(2)} /><Stat label="Cpk" value={Cpk.toFixed(2)} /><Stat label="Defects" value={`${defectPPM.toFixed(0)} ppm`} /><Stat label="Rating" value={verdict} /><Stat label="Sigma level" value={`${sigmaLevel.toFixed(1)}σ`} /><Equation tex={`C_p = \\frac{USL - LSL}{6\\sigma} = \\frac{${USL.toFixed(1)} - ${LSL.toFixed(1)}}{6(${sigma.toFixed(1)})} = ${Cp.toFixed(2)},\\quad C_{pk} = \\min\\!\\left(\\tfrac{USL-\\mu}{3\\sigma},\\ \\tfrac{\\mu-LSL}{3\\sigma}\\right) = ${Cpk.toFixed(2)}`} label="Capability indices" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Photoelectric effect: KEmax = h f - phi.
@@ -56,7 +57,7 @@ print('KEmax', round(KE, 3) if KE > 0 else 'no emission')`;
         <p className="mt-3 text-xs text-slate-500">Light ejects electrons from a metal only if each photon carries enough energy — no matter how bright a below-threshold beam is. Einstein explained it with KEmax = hf − φ: energy comes in photon packets of hf, and the work function φ is the escape cost. Below the threshold frequency, nothing happens. This won him the Nobel Prize.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Photon energy" value={`${photonE.toFixed(2)} eV`} /><Stat label="Max KE" value={emits ? `${KE.toFixed(2)} eV` : "no emission"} /><Stat label="Stopping voltage" value={emits ? `${KE.toFixed(2)} V` : "—"} /><Stat label="Emission" value={emits ? "yes" : "below threshold"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Photon energy" value={`${photonE.toFixed(2)} eV`} /><Stat label="Max KE" value={emits ? `${KE.toFixed(2)} eV` : "no emission"} /><Stat label="Stopping voltage" value={emits ? `${KE.toFixed(2)} V` : "—"} /><Stat label="Emission" value={emits ? "yes" : "below threshold"} /><Equation tex={`K_{\\max} = hf - \\varphi = ${photonE.toFixed(2)} - ${work} = ${KE.toFixed(2)}\\ \\text{eV}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
