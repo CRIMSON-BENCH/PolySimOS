@@ -2,15 +2,22 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Shallow-water wave: speed v = sqrt(g h); amplitude shoals as h^(-1/4) (Green's law).
 const G = 9.81;
 
+const PRESETS: Record<string, { deepDepth: number; deepAmp: number }> = {
+  "Deep Pacific": { deepDepth: 6000, deepAmp: 0.5 },
+  "Shallow shelf": { deepDepth: 1000, deepAmp: 0.8 },
+  "Large source": { deepDepth: 4000, deepAmp: 1.8 },
+  "Small ripple": { deepDepth: 3000, deepAmp: 0.2 },
+};
+
 export function TsunamiStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [deepDepth, setDeepDepth] = useState(4000); // m
-  const [deepAmp, setDeepAmp] = useState(0.5); // m
+  const [{ deepDepth, deepAmp }, update] = useShareableNumbers({ deepDepth: 4000, deepAmp: 0.5 });
   const [running, setRunning] = useState(true);
   const pos = useRef(0);
   const [speed, setSpeed] = useState(0);
@@ -39,15 +46,39 @@ export function TsunamiStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running, deepDepth, deepAmp]);
 
+  const deepV = Math.sqrt(G * deepDepth) * 3.6; // km/h
+  const explain =
+    deepDepth > 5000
+      ? `In ${deepDepth} m of open ocean the wave races at ~${deepV.toFixed(0)} km/h — jetliner speed — yet stays barely a metre tall until it reaches the coast.`
+      : deepDepth < 1500
+      ? `Over a shallow ${deepDepth} m shelf the wave travels slower but shoals sooner, so its ${deepAmp.toFixed(1)} m deep-water height builds into a coastal wall earlier along the approach.`
+      : `At ${deepDepth} m depth the pulse moves at ~${deepV.toFixed(0)} km/h; Green law shoaling then amplifies its ${deepAmp.toFixed(1)} m deep-water height as it nears the coast.`;
+
+  const code = `import numpy as np
+g, deep_depth, deep_amp = 9.81, ${deepDepth}, ${deepAmp}
+def depth_at(f): return max(10.0, deep_depth*(1-f) + 10*f)  # f in [0,1] toward coast
+for f in np.linspace(0, 1, 6):
+    h = depth_at(f)
+    v = np.sqrt(g*h)                       # shallow-water wave speed (m/s)
+    amp = deep_amp*(deep_depth/h)**0.25    # Green's law shoaling
+    print(f"{h:7.0f} m  {v*3.6:6.0f} km/h  {amp:.2f} m")`;
+
   return (
     <StudioChrome title="Tsunami Propagation" tagline="shallow-water waves · shoaling"
       controls={<div>
-        <Slider label="Ocean depth (m)" value={deepDepth} min={500} max={7000} step={100} onChange={setDeepDepth} />
-        <Slider label="Deep-water amplitude (m)" value={deepAmp} min={0.1} max={2} step={0.1} onChange={setDeepAmp} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Ocean depth (m)" value={deepDepth} min={500} max={7000} step={100} onChange={(v) => update({ deepDepth: v })} />
+        <Slider label="Deep-water amplitude (m)" value={deepAmp} min={0.1} max={2} step={0.1} onChange={(v) => update({ deepAmp: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">A tsunami is a shallow-water wave even in the deep ocean, travelling at √(g·h). Over 4 km of water that is roughly 700 km/h — jet speed — yet only tens of centimeters high. As it reaches shallow coast it slows and its amplitude grows as h^(−1/4) (Green&apos;s law), piling into a destructive wall.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Current speed" value={`${(speed * 3.6).toFixed(0)} km/h`} /><Stat label="Deep amplitude" value={`${deepAmp.toFixed(1)} m`} /><Stat label="Coastal amplitude" value={`${shoreAmp.toFixed(1)} m`} /></div>}
+      inspector={<div>
+        <Stat label="Current speed" value={`${(speed * 3.6).toFixed(0)} km/h`} />
+        <Stat label="Deep amplitude" value={`${deepAmp.toFixed(1)} m`} />
+        <Stat label="Coastal amplitude" value={`${shoreAmp.toFixed(1)} m`} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

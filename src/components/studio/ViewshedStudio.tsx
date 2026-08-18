@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { obsX: number; obsHeight: number }> = {
+  "Ground scout": { obsX: 60, obsHeight: 2 },
+  "Watchtower": { obsX: 270, obsHeight: 40 },
+  "Ridge post": { obsX: 450, obsHeight: 20 },
+  "Tall mast": { obsX: 150, obsHeight: 60 },
+};
 
 // Line-of-sight viewshed over a 1D terrain profile.
 export function ViewshedStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [obsX, setObsX] = useState(60);
-  const [obsHeight, setObsHeight] = useState(10);
+  const [{ obsX, obsHeight }, update] = useShareableNumbers({ obsX: 60, obsHeight: 10 });
   const [seed, setSeed] = useState(1);
   const [visible, setVisible] = useState(0);
 
@@ -32,15 +39,40 @@ export function ViewshedStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("green = visible from observer", 10, 18);
   }, [obsX, obsHeight, seed]);
 
+  const coverage = visible / 540 * 100;
+  const explain =
+    obsHeight >= 40
+      ? `A ${obsHeight} m vantage clears most intervening ridges, so line of sight reaches far down the profile and coverage climbs toward ${coverage.toFixed(0)}%.`
+      : obsHeight <= 5
+      ? `Down near ground level the nearest ridges throw long shadows, hiding the far field and holding coverage around ${coverage.toFixed(0)}%.`
+      : `At ${obsHeight} m the observer sees over closer bumps but taller ridges still cast blind spots — coverage lands near ${coverage.toFixed(0)}%.`;
+
+  const code = `import numpy as np
+obs_x, obs_h = ${obsX}, ${obsHeight}
+ground = terrain_height  # H - profile at each x
+oy = ground[obs_x] - obs_h
+visible = 0
+for direction in (1, -1):
+    max_slope = -np.inf
+    x = obs_x + direction
+    while 0 <= x < len(ground):
+        slope = (ground[x] - oy) / abs(x - obs_x)
+        if slope >= max_slope:
+            visible += 1; max_slope = slope
+        x += direction
+print("visible cells", visible)`;
+
   return (
     <StudioChrome title="Viewshed / Line of Sight" tagline="what can you see from here?"
       controls={<div>
-        <Slider label="Observer position" value={obsX} min={10} max={530} step={5} onChange={setObsX} />
-        <Slider label="Observer height (m)" value={obsHeight} min={0} max={60} step={2} onChange={setObsHeight} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Observer position" value={obsX} min={10} max={530} step={5} onChange={(v) => update({ obsX: v })} />
+        <Slider label="Observer height (m)" value={obsHeight} min={0} max={60} step={2} onChange={(v) => update({ obsHeight: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New terrain</button>
         <p className="mt-3 text-xs text-slate-500">A viewshed marks every point visible from an observer, hidden behind intervening ridges. Scanning outward, a point is seen only if its angle above the horizontal exceeds every closer obstacle — so terrain shadows fall behind hills. Raising the observer reveals far more. It is essential for siting cell towers, wind turbines, scenic overlooks, and military positions.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Visible cells" value={String(visible)} /><Stat label="Coverage" value={`${(visible / 540 * 100).toFixed(0)}%`} /><Stat label="Observer height" value={`${obsHeight} m`} /></div>}
+      inspector={<div><Stat label="Visible cells" value={String(visible)} /><Stat label="Coverage" value={`${coverage.toFixed(0)}%`} /><Stat label="Observer height" value={`${obsHeight} m`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

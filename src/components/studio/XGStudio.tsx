@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 // Expected goals (xG) from shot location.
@@ -30,12 +31,33 @@ export function XGStudio() {
     ctx.fillStyle = "#e2e8f0"; ctx.font = "11px sans-serif"; ctx.fillText("click to place a shot — color = xG", 14, 28);
   }, [shot, xg]);
 
+  const explain =
+    xg > 0.4
+      ? "A high-value chance: close range and a wide view of the goal mean even an average player buries this more often than not."
+      : angle < 12
+      ? "The shooting angle is tight — the goal is nearly edge-on from here, so most of the frame is blocked and the chance is speculative."
+      : dist > 22
+      ? "Long range dominates here: distance shrinks xG faster than anything else, so this is a low-probability effort."
+      : "A middling chance — decent position but neither close enough nor open enough to be a clear-cut opportunity.";
+
+  const code = `import numpy as np
+sx, sy = ${shot[0].toFixed(0)}, ${shot[1].toFixed(0)}
+gx, gy1, gy2, gyc = 500, 150, 250, 200
+dist = np.hypot(gx - sx, gyc - sy) / 8
+a1 = np.arctan2(gy1 - sy, gx - sx)
+a2 = np.arctan2(gy2 - sy, gx - sx)
+angle = abs(a1 - a2) * 180 / np.pi
+z = 0.6 - 0.11 * dist + 0.06 * angle
+xg = 1 / (1 + np.exp(-z))
+print(round(xg, 2))`;
+
   return (
     <StudioChrome title="Expected Goals (xG)" tagline="the quality of a chance"
       controls={<div>
         <p className="mt-1 text-xs text-slate-500">Expected goals rates every shot by the probability an average player would score from that spot, learned from thousands of historical shots. The two biggest drivers are distance and angle to goal — a tap-in near the six-yard box is worth 0.8 xG, a long-range effort barely 0.03. Summing xG over a match reveals who truly deserved to win, beyond the scoreline. Click to place a shot.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Expected goals" value={xg.toFixed(2)} /><Stat label="Distance" value={`${dist.toFixed(0)} m`} /><Stat label="Angle to goal" value={`${angle.toFixed(0)}°`} /><Stat label="Rating" value={xg > 0.4 ? "big chance" : xg > 0.1 ? "decent" : "speculative"} /></div>}
+      inspector={<div><Stat label="Expected goals" value={xg.toFixed(2)} /><Stat label="Distance" value={`${dist.toFixed(0)} m`} /><Stat label="Angle to goal" value={`${angle.toFixed(0)}°`} /><Stat label="Rating" value={xg > 0.4 ? "big chance" : xg > 0.1 ? "decent" : "speculative"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={400} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); setShot([(e.clientX - r.left) * 540 / r.width, (e.clientY - r.top) * 400 / r.height]); }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }

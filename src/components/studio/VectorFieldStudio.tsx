@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { sampleVectorField } from "@/lib/engines/fieldmath";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -40,6 +41,24 @@ export function VectorFieldStudio() {
 
   const presets: [string, string, string][] = [["Rotation", "-y", "x"], ["Source", "x", "y"], ["Saddle", "x", "-y"], ["Shear", "y", "0"], ["Spiral", "-y-0.2*x", "x-0.2*y"]];
 
+  const explain = (() => {
+    const u = fx.replace(/\s/g, ""), v = fy.replace(/\s/g, "");
+    if (err) return "The current expressions could not be parsed — fix the typo or unsupported function before reading the plot.";
+    if (u === "-y" && v === "x") return "A pure rotation field: every arrow is perpendicular to the radius, so the flow circles the origin with zero divergence and constant curl.";
+    if (u === "x" && v === "y") return "A radial source: arrows point straight out from the origin, giving positive divergence everywhere and no rotation.";
+    if (u === "x" && v === "-y") return "A saddle: flow is pushed out along the x-axis and pulled in along the y-axis — the classic hyperbolic fixed point.";
+    if (u.includes("y") && v === "0") return "A shear field: horizontal flow whose speed grows with height, so a dropped particle drifts sideways faster the higher it starts.";
+    return "Arrow direction shows the flow at each point and color encodes speed (warm = fast). Where arrows fan apart the divergence is positive; where they swirl the field has curl.";
+  })();
+
+  const code = `import numpy as np
+import matplotlib.pyplot as plt
+x, y = np.meshgrid(np.linspace(-5, 5, 22), np.linspace(-5, 5, 17))
+# F(x, y) = (u, v)
+u = ${fx}
+v = ${fy}
+plt.quiver(x, y, u, v); plt.gca().set_aspect("equal"); plt.show()`;
+
   return (
     <StudioChrome
       title="Vector Field Studio"
@@ -56,9 +75,10 @@ export function VectorFieldStudio() {
             ))}
           </div>
           {err && <p className="mt-2 text-xs text-red-500">{err}</p>}
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Arrows" value={String(arrows.length)} /><Stat label="Domain" value="[-5,5]²" /><Stat label="Variables" value="x, y" /></div>}
+      inspector={<div><Stat label="Arrows" value={String(arrows.length)} /><Stat label="Domain" value="[-5,5]²" /><Stat label="Variables" value="x, y" /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" />
     </StudioChrome>

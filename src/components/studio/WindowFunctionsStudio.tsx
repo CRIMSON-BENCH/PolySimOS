@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 const WINDOWS: Record<string, (n: number, N: number) => number> = {
@@ -28,16 +29,36 @@ export function WindowFunctionsStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.fillText("spectral leakage (dB) — lower side lobes = less leakage", 40, 148);
   }, [win]);
 
+  const explain =
+    win === "Rectangular"
+      ? "The rectangular window is just a hard cut: the narrowest main lobe, but tall side lobes leak energy across the whole spectrum."
+      : win === "Blackman"
+      ? "The Blackman window pushes side lobes very low for minimal leakage, at the cost of the widest main lobe (the poorest frequency resolution)."
+      : `The ${win} window drops side lobes well below the rectangular case, trading a slightly wider main lobe for far cleaner spectral separation.`;
+
+  const code = `import numpy as np
+N = 64
+n = np.arange(N)
+win = ${JSON.stringify(win)}
+w = {"Rectangular": np.ones(N),
+     "Hann": 0.5 - 0.5 * np.cos(2 * np.pi * n / (N - 1)),
+     "Hamming": 0.54 - 0.46 * np.cos(2 * np.pi * n / (N - 1)),
+     "Blackman": 0.42 - 0.5 * np.cos(2 * np.pi * n / (N - 1)) + 0.08 * np.cos(4 * np.pi * n / (N - 1))}[win]
+spec = np.abs(np.fft.rfft(w, 512))
+print("side-lobe (dB)", 20 * np.log10(spec / spec.max())[:10])`;
+
   return (
     <StudioChrome title="Window Functions" tagline="taming spectral leakage"
       controls={<div>
         <label className="mb-2 block text-xs text-slate-400">Window</label>
         <select value={win} onChange={(e) => setWin(e.target.value)} className="mb-3 w-full rounded-md border border-slate-300 bg-white px-2 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100">{Object.keys(WINDOWS).map((k) => <option key={k} value={k}>{k}</option>)}</select>
         <p className="mt-3 text-xs text-slate-500">Chopping a signal into a finite chunk smears its spectrum — spectral leakage. Tapering the chunk with a window (Hann, Hamming, Blackman) trades a wider main lobe for much lower side lobes, cleaning up the spectrum. Educational tool.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Window" value={win} />
         <Stat label="Trade-off" value={win === "Rectangular" ? "sharp but leaky" : win === "Blackman" ? "low leakage, wide lobe" : "balanced"} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
