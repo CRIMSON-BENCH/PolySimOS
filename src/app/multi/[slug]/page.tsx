@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { MULTIS, multiBySlug } from "@/lib/multi";
 import { MultiStudioSteps } from "@/components/studio/MultiStudioSteps";
-import { UnlockMultiSlot, UpgradeSlot, ExportSlot, CloudRunSlot, CustomBuildSlot } from "@/components/monetization/Slots";
+import { MonetizationBar, CustomBuildSlot } from "@/components/monetization/Slots";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclaimer } from "@/components/Disclaimer";
 import { JsonLd } from "@/components/JsonLd";
@@ -39,12 +39,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
         </ol>
       </section>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        <UnlockMultiSlot slug={m.s} name={m.n} />
-        <UpgradeSlot next={`/multi/${m.s}`} />
-        <ExportSlot next={`/multi/${m.s}`} />
-        <CloudRunSlot next={`/multi/${m.s}`} />
-      </div>
+      <MonetizationBar kind="multi" slug={m.s} name={m.n} next={`/multi/${m.s}`} />
 
       <div className="mt-10"><MultiStudioSteps steps={m.steps} /></div>
 

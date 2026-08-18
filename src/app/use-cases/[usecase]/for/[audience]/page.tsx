@@ -9,7 +9,7 @@ import { Disclaimer } from "@/components/Disclaimer";
 import { JsonLd } from "@/components/JsonLd";
 import { CrossLinks } from "@/components/CrossLinks";
 import { softwareAppLd, faqLd } from "@/lib/seo";
-import { UnlockSolverSlot, UnlockMultiSlot, UpgradeSlot, ExportSlot } from "@/components/monetization/Slots";
+import { MonetizationBar } from "@/components/monetization/Slots";
 
 // ISR: seed a small cross of featured use cases × audiences; rest on-demand.
 export const dynamicParams = true;
@@ -50,11 +50,7 @@ export default async function Page({ params }: { params: Promise<{ usecase: stri
 
       <div className="mt-8"><EmbeddedStudio slug={u.toolSlug} kind={u.kind} /></div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {u.kind === "multi" ? <UnlockMultiSlot slug={u.toolSlug} name={u.toolName} /> : <UnlockSolverSlot slug={u.toolSlug} name={u.toolName} />}
-        <UpgradeSlot next={`/use-cases/${u.slug}/for/${a.slug}`} />
-        <ExportSlot next={`/use-cases/${u.slug}/for/${a.slug}`} />
-      </div>
+      <MonetizationBar kind={u.kind} slug={u.toolSlug} name={u.toolName} next={`/use-cases/${u.slug}/for/${a.slug}`} />
 
       <div className="mt-8 flex flex-wrap gap-2 text-sm">
         <span className="text-slate-500">Also for:</span>

@@ -139,6 +139,37 @@ export function ExportSlot({ next }: { next: string }) {
   );
 }
 
+/** Compact, low-key monetization line — replaces the big 4-card grid.
+ * One small contextual unlock button + a quiet link to full pricing. */
+export function MonetizationBar({ kind, slug, name, next }: { kind: "solver" | "multi"; slug: string; name: string; next: string }) {
+  const { user } = useAuth();
+  const unlocked = useEntitlement(kind === "multi" ? entKey.multi(slug) : entKey.solver(slug));
+  const [loading, setLoading] = useState(false);
+  const [err, setErr] = useState("");
+  const price = kind === "multi" ? MULTI_UNLOCK_PRICE : SOLVER_UNLOCK_PRICE;
+  const sku = `${kind === "multi" ? MULTI_UNLOCK_PREFIX : SOLVER_UNLOCK_PREFIX}${slug}`;
+  void name;
+  return (
+    <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
+      {unlocked ? (
+        <span className="font-medium text-emerald-600 dark:text-emerald-400">✓ Unlocked — thanks!</span>
+      ) : (
+        <button
+          onClick={async () => { setLoading(true); setErr(""); try { await startCheckout(sku, next, undefined, user?.email); } catch (e) { setErr((e as Error).message); } finally { setLoading(false); } }}
+          disabled={loading}
+          className="rounded-lg bg-cyan-600 px-4 py-2 font-semibold text-white transition hover:bg-cyan-700 disabled:opacity-60"
+        >
+          {loading ? "…" : `Unlock this ${kind === "multi" ? "workflow" : "solver"} — $${price}`}
+        </button>
+      )}
+      <span className="text-slate-500 dark:text-slate-400">
+        or <Link href="/pricing" className="font-medium text-cyan-700 hover:underline dark:text-cyan-300">unlock everything with Pro →</Link>
+      </span>
+      {err && <span className="text-xs text-amber-600 dark:text-amber-400">{err}</span>}
+    </div>
+  );
+}
+
 /** (6) Build me a custom / private version. */
 export function CustomBuildSlot() {
   return (

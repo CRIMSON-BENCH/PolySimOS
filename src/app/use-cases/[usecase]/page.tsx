@@ -9,7 +9,7 @@ import { Disclaimer } from "@/components/Disclaimer";
 import { JsonLd } from "@/components/JsonLd";
 import { CrossLinks } from "@/components/CrossLinks";
 import { softwareAppLd, faqLd } from "@/lib/seo";
-import { UnlockSolverSlot, UnlockMultiSlot, UpgradeSlot, ExportSlot, DataUploadSlot } from "@/components/monetization/Slots";
+import { MonetizationBar } from "@/components/monetization/Slots";
 
 // ISR: pre-build a seed at build time; the rest render on first visit + cache.
 export const dynamicParams = true;
@@ -58,12 +58,7 @@ export default async function Page({ params }: { params: Promise<{ usecase: stri
 
       <div className="mt-8"><EmbeddedStudio slug={u.toolSlug} kind={u.kind} /></div>
 
-      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {u.kind === "multi" ? <UnlockMultiSlot slug={u.toolSlug} name={u.toolName} /> : <UnlockSolverSlot slug={u.toolSlug} name={u.toolName} />}
-        <UpgradeSlot next={`/use-cases/${u.slug}`} />
-        <DataUploadSlot next={`/use-cases/${u.slug}`} />
-        <ExportSlot next={`/use-cases/${u.slug}`} />
-      </div>
+      <MonetizationBar kind={u.kind} slug={u.toolSlug} name={u.toolName} next={`/use-cases/${u.slug}`} />
 
       <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">About this simulation</h2>
