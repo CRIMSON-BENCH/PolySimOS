@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -76,7 +77,7 @@ for step in range(500):
         <Slider label="Separation" value={separate} min={0} max={3} step={0.1} onChange={(v) => update({ separate: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Boids" value={String(n)} /><Stat label="Rules" value="align · cohere · separate" /><Stat label="Behavior" value="emergent flocking" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Boids" value={String(n)} /><Stat label="Rules" value="align · cohere · separate" /><Stat label="Behavior" value="emergent flocking" /><Equation tex={`\\vec{v}_i \\leftarrow \\vec{v}_i + ${align.toFixed(1)}\\,(\\bar{\\vec{v}} - \\vec{v}_i) + ${cohere.toFixed(1)}\\,(\\bar{\\vec{p}} - \\vec{p}_i) + ${separate.toFixed(1)}\\!\\sum_{j}(\\vec{p}_i - \\vec{p}_j)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

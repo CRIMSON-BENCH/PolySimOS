@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -88,7 +89,7 @@ print("final pole angle (deg)", np.degrees(th))`;
         <p className="mt-3 text-xs text-slate-500">Balancing a pole on a moving cart is the classic control benchmark. A state-feedback controller senses the pole angle and cart position and pushes the cart to keep the pole upright. Turn the controller off and it topples instantly; add disturbance to test how hard it can fight back.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Pole angle" value={`${(st.current.th * 180 / Math.PI).toFixed(1)}°`} /><Stat label="Cart position" value={st.current.x.toFixed(2)} /><Stat label="Status" value={balanced ? "balanced" : "fallen"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Pole angle" value={`${(st.current.th * 180 / Math.PI).toFixed(1)}°`} /><Stat label="Cart position" value={st.current.x.toFixed(2)} /><Stat label="Status" value={balanced ? "balanced" : "fallen"} /><Equation tex={`F = -Kx = ${control ? gain.toFixed(1) : "0"}\\,(55\\,\\theta + 12\\,\\dot{\\theta} + 1.5\\,x + 3\\,\\dot{x})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

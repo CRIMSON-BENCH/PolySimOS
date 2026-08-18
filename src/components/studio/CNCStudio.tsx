@@ -3,6 +3,7 @@
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 import { useState } from "react";
 
 const MAT: Record<string, number> = { Aluminum: 300, "Mild steel": 90, "Stainless": 55, Titanium: 40, Brass: 200 };
@@ -49,7 +50,7 @@ print("rpm", round(rpm), "feed", round(feed), "mrr", round(mrr, 1))`;
         <p className="mt-3 text-xs text-slate-500">Machining a part right means matching spindle speed and feed to the material. The cutting speed (surface meters per minute) sets the RPM for a given tool diameter; the feed rate is RPM times chip load per tooth times the number of teeth. Too fast burns the tool; too slow rubs and work-hardens. The material removal rate is your productivity.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Spindle speed" value={`${rpm.toFixed(0)} RPM`} /><Stat label="Feed rate" value={`${feedRate.toFixed(0)} mm/min`} /><Stat label="Cutting speed" value={`${Vc} m/min`} /><Stat label="Material removal" value={`${mrr.toFixed(1)} cm³/min`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Spindle speed" value={`${rpm.toFixed(0)} RPM`} /><Stat label="Feed rate" value={`${feedRate.toFixed(0)} mm/min`} /><Stat label="Cutting speed" value={`${Vc} m/min`} /><Stat label="Material removal" value={`${mrr.toFixed(1)} cm³/min`} /><Equation tex={`n=\\frac{1000\\,V_c}{\\pi D}=\\frac{1000\\cdot${Vc}}{\\pi\\cdot${diameter}}=${rpm.toFixed(0)}\\ \\text{rpm},\\quad v_f=n\\,z\\,f_z=${feedRate.toFixed(0)}\\ \\tfrac{\\text{mm}}{\\text{min}}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center gap-6 py-16">
         <div className="grid grid-cols-2 gap-x-12 gap-y-6 text-center">
           <div><div className="text-4xl font-black text-cyan-400">{rpm.toFixed(0)}</div><div className="mt-1 text-xs text-slate-500">spindle RPM</div></div>

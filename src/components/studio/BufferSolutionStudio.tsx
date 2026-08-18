@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { pKa: number; ratio: number; addAcid: number }> = {
@@ -61,6 +62,7 @@ print("buffered pH", round(pH, 2))`;
         <Stat label="Buffer pH" value={pH.toFixed(2)} />
         <Stat label="Same acid, no buffer" value={pHUnbuffered.toFixed(1)} />
         <Stat label="pH change resisted" value={`${Math.max(0, pHUnbuffered - pH).toFixed(1)} units`} />
+        <Equation tex={`\\text{pH} = \\text{p}K_a + \\log_{10}\\!\\frac{[A^-]}{[HA]} = ${pKa.toFixed(2)} + \\log_{10}\\!\\frac{${Math.max(1e-6, nb).toFixed(2)}}{${Math.max(1e-6, na).toFixed(2)}} = ${pH.toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

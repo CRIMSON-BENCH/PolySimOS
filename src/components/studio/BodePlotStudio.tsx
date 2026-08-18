@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { fn: number; zeta: number }> = {
@@ -72,6 +73,7 @@ print("resonant peak dB", peak)`;
         <Stat label="Damping ζ" value={zeta.toFixed(2)} />
         <Stat label="Resonant peak" value={peak > 0.01 ? `+${peak.toFixed(1)} dB` : "none"} />
         <Stat label="Roll-off" value="−40 dB/dec" />
+        <Equation tex={`H(s) = \\frac{\\omega_n^2}{s^2 + 2\\zeta\\omega_n s + \\omega_n^2} = \\frac{${Math.round(wn).toLocaleString()}^2}{s^2 + ${(2 * zeta * wn).toFixed(0)}\\,s + ${Math.round(wn).toLocaleString()}^2}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 640, H = 440;
@@ -57,7 +58,7 @@ print("fraction submerged", round(frac, 3), state)`;
         <Slider label="Object size" value={size} min={60} max={180} step={10} onChange={(v) => update({ size: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fraction submerged" value={`${Math.round(submerged * 100)}%`} /><Stat label="State" value={objDensity < fluidDensity ? "floats" : objDensity > fluidDensity ? "sinks" : "neutral"} /><Stat label="ρ ratio" value={(objDensity / fluidDensity).toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Fraction submerged" value={`${Math.round(submerged * 100)}%`} /><Stat label="State" value={objDensity < fluidDensity ? "floats" : objDensity > fluidDensity ? "sinks" : "neutral"} /><Stat label="ρ ratio" value={(objDensity / fluidDensity).toFixed(2)} /><Equation tex={`\\frac{V_{sub}}{V} = \\frac{\\rho_{obj}}{\\rho_{fluid}} = \\frac{${objDensity.toFixed(0)}}{${fluidDensity.toFixed(0)}} = ${submerged.toFixed(2)} \\qquad F_b = \\rho_{fluid}\\,g\\,V`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

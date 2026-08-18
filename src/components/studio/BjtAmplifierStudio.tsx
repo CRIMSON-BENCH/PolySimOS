@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { vcc: number; rc: number; re: number; ib: number; beta: number }> = {
   "Mid-bias (active)": { vcc: 12, rc: 2.2, re: 0.47, ib: 20, beta: 150 },
@@ -67,6 +68,7 @@ print("Ic", round(Ic, 3), "mA  Vce", round(Vce, 3), "V  gain", round(gain, 2))`;
         <Stat label="V_CE (bias)" value={`${Vce.toFixed(2)} V`} />
         <Stat label="Voltage gain" value={`${gain.toFixed(1)} ×`} />
         <Stat label="Region" value={saturated ? "saturated ⚠" : cutoff ? "cutoff ⚠" : "active ✓"} />
+        <Equation tex={`V_{CE} = V_{CC} - I_C(R_C + R_E) = ${vcc} - ${Ic.toFixed(2)}\\,(${rc} + ${re}) = ${Vce.toFixed(2)}\\ \\text{V}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

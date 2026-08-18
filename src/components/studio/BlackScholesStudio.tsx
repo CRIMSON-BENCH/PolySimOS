@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 function normCDF(x: number) { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.3989423 * Math.exp(-x * x / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x > 0 ? 1 - p : p; }
 function normPDF(x: number) { return 0.3989423 * Math.exp(-x * x / 2); }
@@ -77,7 +78,7 @@ print("call", round(call, 2), "put", round(put, 2))`;
         <p className="mt-3 text-xs text-slate-500">The Black-Scholes formula prices a European option from spot, strike, time, rate, and volatility. The Greeks measure sensitivity: delta to price, gamma to delta, vega to volatility, theta to time decay. Educational tool — not investment advice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Call price" value={`$${call.toFixed(2)}`} /><Stat label="Put price" value={`$${put.toFixed(2)}`} /><Stat label="Delta (call)" value={delta.toFixed(3)} /><Stat label="Gamma" value={gamma.toFixed(4)} /><Stat label="Vega (per 1%)" value={vega.toFixed(3)} /><Stat label="Theta (per day)" value={theta.toFixed(3)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Call price" value={`$${call.toFixed(2)}`} /><Stat label="Put price" value={`$${put.toFixed(2)}`} /><Stat label="Delta (call)" value={delta.toFixed(3)} /><Stat label="Gamma" value={gamma.toFixed(4)} /><Stat label="Vega (per 1%)" value={vega.toFixed(3)} /><Stat label="Theta (per day)" value={theta.toFixed(3)} /><Equation tex={`C = S\\,N(d_1) - K\\,e^{-rT}N(d_2) = ${S}\\cdot ${normCDF(d1).toFixed(3)} - ${K}\\,e^{-${(r * T).toFixed(3)}}\\cdot ${normCDF(d2).toFixed(3)} = \\$${call.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

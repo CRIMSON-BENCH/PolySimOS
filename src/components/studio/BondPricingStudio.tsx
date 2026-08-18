@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { face: number; coupon: number; yield_: number; yearsN: number }> = {
   "Premium bond": { face: 1000, coupon: 0.06, yield_: 0.04, yearsN: 10 },
@@ -64,7 +65,7 @@ print("price", round(price, 2), "macaulay", round(dur, 2), "modified", round(mod
         <p className="mt-3 text-xs text-slate-500">A bond&apos;s price is the present value of its coupons and face value, discounted at the yield. Price moves inversely to yield along a convex curve. Duration measures that sensitivity — a modified duration of 8 means roughly an 8% price drop per 1% rise in yield. Educational tool, not investment advice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Price" value={`$${price.toFixed(2)}`} /><Stat label="Premium/discount" value={price > face ? "premium" : price < face ? "discount" : "par"} /><Stat label="Macaulay duration" value={`${dur.toFixed(2)} yr`} /><Stat label="Modified duration" value={modDur.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Price" value={`$${price.toFixed(2)}`} /><Stat label="Premium/discount" value={price > face ? "premium" : price < face ? "discount" : "par"} /><Stat label="Macaulay duration" value={`${dur.toFixed(2)} yr`} /><Stat label="Modified duration" value={modDur.toFixed(2)} /><Equation tex={`P=\\sum_{t=1}^{${n}}\\frac{${c.toFixed(2)}}{(1+${per.toFixed(4)})^{t}}+\\frac{${face}}{(1+${per.toFixed(4)})^{${n}}}=\\$${price.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

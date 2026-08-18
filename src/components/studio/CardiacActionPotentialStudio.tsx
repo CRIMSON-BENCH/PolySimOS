@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { bpm: number; plateau: number; amp: number }> = {
@@ -67,6 +68,7 @@ print("cycle", round(period * 1000), "ms; APD", round(apd * 1000), "ms")`;
         <Stat label="Cycle length" value={`${(period * 1000).toFixed(0)} ms`} />
         <Stat label="Action-potential duration" value={`${(apd * 1000).toFixed(0)} ms`} />
         <Stat label="Peak potential" value={`+${(amp - 90).toFixed(0)} mV`} />
+        <Equation tex={`C_m\\frac{dV}{dt} = -I_{ion},\\quad \\left.\\frac{dV}{dt}\\right|_{max} = \\frac{${amp.toFixed(0)}\\,\\text{mV}}{10\\,\\text{ms}} = ${(amp / 10).toFixed(0)}\\ \\text{mV/ms}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

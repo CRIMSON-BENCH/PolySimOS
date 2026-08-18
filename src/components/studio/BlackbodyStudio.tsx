@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const W = 760, H = 460;
 
@@ -60,6 +61,7 @@ print("peak", round(peak_nm), "nm")`;
         <Stat label="Temperature" value={`${T} K`} />
         <Stat label="Peak wavelength" value={`${peakNm.toFixed(0)} nm`} />
         <Stat label="Color" value={peakNm < 450 ? "blue-white" : peakNm < 600 ? "white/yellow" : peakNm < 750 ? "red" : "infrared"} />
+        <Equation tex={`\\lambda_{\\max} = \\frac{b}{T} = \\frac{2.898\\times 10^{6}}{${T}} = ${peakNm.toFixed(0)}\\ \\text{nm}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>

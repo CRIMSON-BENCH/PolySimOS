@@ -6,6 +6,7 @@ import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const N = 24;
 const CW = 760, CH = 480;
@@ -86,7 +87,7 @@ print("grid", f"{N}^3", "cells", (N + 2) ** 3, "plume force", force)`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Grid" value={`${N}³`} /><Stat label="Cells" value={((N + 2) ** 3).toLocaleString()} /><Stat label="Scheme" value="Stam Stable Fluids" /><Stat label="Incompressible" value="Jacobi projection" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}³`} /><Stat label="Cells" value={((N + 2) ** 3).toLocaleString()} /><Stat label="Scheme" value="Stam Stable Fluids" /><Stat label="Incompressible" value="Jacobi projection" /><Equation tex={`\\frac{\\partial \\mathbf{u}}{\\partial t}+(\\mathbf{u}\\cdot\\nabla)\\mathbf{u}=-\\frac{\\nabla p}{\\rho}+\\nu\\nabla^2\\mathbf{u}+\\mathbf{f},\\quad \\nabla\\cdot\\mathbf{u}=0,\\ \\ |\\mathbf{f}|=${force}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={760} height={480} className="h-auto w-full rounded-lg" />
     </StudioChrome>

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 // Explosive overpressure via cube-root (Hopkinson-Cranz) scaling. Z = R / W^(1/3).
 // Simplified Kingery-Bulmash style fit for incident overpressure (kPa) vs scaled distance (m/kg^1/3).
@@ -83,6 +84,7 @@ print("Z", round(Z, 2), "  P", round(max(P, 0), 1), "kPa")`;
         <Stat label="Overpressure" value={`${P.toFixed(1)} kPa`} />
         <Stat label="In psi" value={psi.toFixed(2)} />
         <Stat label="Window-safe standoff" value={`${safeDist.toFixed(0)} m`} />
+        <Equation tex={`Z = \\frac{R}{W^{1/3}} = \\frac{${distance}}{${charge}^{1/3}} = ${Z.toFixed(2)}\\ \\mathrm{m/kg^{1/3}} \\;\\Rightarrow\\; P_{so} \\approx ${P.toFixed(1)}\\ \\mathrm{kPa}`} />
         <ExplainResult text={explain} />
       </div>}
     ><div>

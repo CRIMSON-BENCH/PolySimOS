@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { emission: number }> = {
@@ -81,7 +82,7 @@ print("atmosphere GtC", round(atm), "ppm", round(atm*0.469))`;
         <p className="mt-3 text-xs text-slate-500">Carbon moves between four great reservoirs — atmosphere, surface ocean, deep ocean, and biosphere — through exchange fluxes. Add fossil emissions to the atmosphere box and watch how slowly the oceans and land can draw it back down. The deep ocean is huge but exchanges slowly.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Year" value={String(year)} /><Stat label="Atmosphere" value={`${atm.toFixed(0)} GtC`} /><Stat label="CO₂" value={`${(atm * 0.469).toFixed(0)} ppm`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Year" value={String(year)} /><Stat label="Atmosphere" value={`${atm.toFixed(0)} GtC`} /><Stat label="CO₂" value={`${(atm * 0.469).toFixed(0)} ppm`} /><Equation tex={`\\frac{dC_{atm}}{dt} = E - F_{as} - F_{ab} = ${emission.toFixed(1)} - ${(0.09 * atm - 0.08 * box.current.surf).toFixed(1)} - ${(0.03 * atm - 0.013 * box.current.bio).toFixed(1)}\\ \\text{GtC/yr}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

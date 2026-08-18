@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { coupon: number; ytm: number; years: number; face: number }> = {
@@ -60,6 +61,7 @@ print("price", round(price, 2), "macaulay", round(mac, 2), "modified", round(mod
         <Stat label="Macaulay duration" value={`${mac.toFixed(2)} yr`} />
         <Stat label="Modified duration" value={`${modDur.toFixed(2)}`} />
         <Stat label="≈ price change / +1% yield" value={`${(-modDur).toFixed(2)}%`} />
+        <Equation tex={`D_{mod} = \\frac{D_{mac}}{1 + y} = \\frac{${mac.toFixed(2)}}{1 + ${(ytm / 100).toFixed(2)}} = ${modDur.toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { vin: number; duty: number; L: number; fsw: number; iout: number }> = {
@@ -61,6 +62,7 @@ print("Vout", vout, "ripple A", dIL, "ripple %", dIL / iout * 100)`;
         <Stat label="Inductor ripple ΔIL" value={`${dIL.toFixed(2)} A`} />
         <Stat label="Ripple / load" value={`${ripplePct.toFixed(0)}%`} />
         <Stat label="Mode" value={dIL / 2 > iout ? "discontinuous" : "continuous"} />
+        <Equation tex={`V_{out} = D \\cdot V_{in} = ${duty.toFixed(2)} \\cdot ${vin.toFixed(0)}\\,\\text{V} = ${vout.toFixed(2)}\\,\\text{V} \\qquad \\Delta I_L = \\frac{(V_{in}-V_{out})\\,D}{L\\,f_{sw}} = ${dIL.toFixed(2)}\\,\\text{A}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

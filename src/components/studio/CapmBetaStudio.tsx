@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { rf: number; rm: number; beta: number }> = {
   "Defensive utility": { rf: 3, rm: 9, beta: 0.5 },
@@ -54,6 +55,7 @@ print("expected return %", round(expected, 2), "premium %", round(premium, 2))`;
         <Stat label="Expected return" value={`${expected.toFixed(2)}%`} />
         <Stat label="Risk premium" value={`${(beta * (rm - rf)).toFixed(2)}%`} />
         <Stat label="Risk profile" value={beta > 1 ? "aggressive" : beta < 1 ? "defensive" : "market"} />
+        <Equation tex={`E[R]=R_f+\\beta\\,(R_m-R_f)=${rf}+${beta}\\,(${rm}-${rf})=${expected.toFixed(2)}\\%`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { pairs: number; nH: number; nL: number }> = {
   "Titania stack": { pairs: 8, nH: 2.3, nL: 1.45 },
@@ -68,6 +69,7 @@ print("peak reflectivity %", R*100)`;
         <Stat label="Layer pairs" value={String(Math.round(pairs))} />
         <Stat label="Index contrast" value={contrast.toFixed(2)} />
         <Stat label="Stopband width" value={`${stopband.toFixed(0)} nm`} />
+        <Equation tex={`R=\\left(\\frac{n_0 n_H^{2N}-n_s n_L^{2N}}{n_0 n_H^{2N}+n_s n_L^{2N}}\\right)^{2}=\\left(\\frac{${nH}^{${2 * N}}-1.5\\cdot${nL}^{${2 * N}}}{${nH}^{${2 * N}}+1.5\\cdot${nL}^{${2 * N}}}\\right)^{2}=${(R * 100).toFixed(3)}\\%`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

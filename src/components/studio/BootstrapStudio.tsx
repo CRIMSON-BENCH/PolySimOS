@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { sampleSize: number; B: number }> = {
   "Tiny sample (n=10)": { sampleSize: 10, B: 2000 },
@@ -67,6 +68,7 @@ print("mean", data.mean(), "95% CI", lo, hi)`;
         <Stat label="95% CI low" value={ci.lo.toFixed(2)} />
         <Stat label="95% CI high" value={ci.hi.toFixed(2)} />
         <Stat label="CI width" value={width.toFixed(2)} />
+        <Equation tex={`\\hat{\\theta}^{*}=\\frac{1}{${Math.round(sampleSize)}}\\sum_{i=1}^{${Math.round(sampleSize)}}x_i^{*},\\quad \\mathrm{CI}_{95\\%}=[\\hat{\\theta}^{*}_{(2.5\\%)},\\,\\hat{\\theta}^{*}_{(97.5\\%)}]=[${ci.lo.toFixed(2)},\\,${ci.hi.toFixed(2)}]`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

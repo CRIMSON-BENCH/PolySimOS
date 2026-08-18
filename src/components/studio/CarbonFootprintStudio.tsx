@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 import { useState } from "react";
 
@@ -51,7 +52,7 @@ print(round(total, 1), "t CO2/yr")`;
         <p className="mt-3 text-xs text-slate-500">Your carbon footprint is the sum of the greenhouse gases your lifestyle emits each year. The big levers are usually flying, driving, home energy, and diet. The global average is about 4.7 tonnes per person, but a livable-planet target is closer to 2 tonnes. Estimates use typical emission factors and will vary by region.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Total footprint" value={`${total.toFixed(1)} t CO₂/yr`} /><Stat label="vs global avg" value={`${(total / 4.7).toFixed(1)}×`} /><Stat label="vs 2t target" value={total <= 2 ? "on target" : `${(total / 2).toFixed(1)}× over`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Total footprint" value={`${total.toFixed(1)} t CO₂/yr`} /><Stat label="vs global avg" value={`${(total / 4.7).toFixed(1)}×`} /><Stat label="vs 2t target" value={total <= 2 ? "on target" : `${(total / 2).toFixed(1)}× over`} /><Equation tex={`E_{total} = \\sum_i a_i f_i = ${elec.toFixed(1)} + ${car.toFixed(1)} + ${air.toFixed(1)} + ${dietT.toFixed(1)} = ${total.toFixed(1)}\\ \\text{t CO}_2\\text{/yr}`} /><ExplainResult text={explain} /></div>}
     ><div className="p-4">
         <div className="mb-4 text-center"><div className="text-5xl font-black text-cyan-400">{total.toFixed(1)}</div><div className="text-xs text-slate-500">tonnes CO₂ per year</div></div>
         {parts.map(([n, v, c]) => (

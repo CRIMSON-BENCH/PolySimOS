@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Th: number; Tc: number; ratio: number }> = {
@@ -64,7 +65,7 @@ print("efficiency", round(eff * 100, 1), "%")`;
         <p className="mt-3 text-xs text-slate-500">The Carnot cycle — two isothermal and two adiabatic steps — is the most efficient possible heat engine between two temperatures. Its efficiency depends only on the reservoir temperatures: η = 1 − Tc/Th. No real engine can beat it, which is why raising the hot temperature or lowering the cold one is the only path to higher efficiency.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Efficiency" value={`${(eff * 100).toFixed(1)}%`} /><Stat label="Tₕ / Tc" value={(Th / Tc).toFixed(2)} /><Stat label="Carnot limit" value={`${(eff * 100).toFixed(1)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Efficiency" value={`${(eff * 100).toFixed(1)}%`} /><Stat label="Tₕ / Tc" value={(Th / Tc).toFixed(2)} /><Stat label="Carnot limit" value={`${(eff * 100).toFixed(1)}%`} /><Equation tex={`\\eta = 1 - \\frac{T_c}{T_h} = 1 - \\frac{${Tc}}{${Th}} = ${eff.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

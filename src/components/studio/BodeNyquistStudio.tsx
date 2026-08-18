@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { K: number; p1: number; p2: number }> = {
   "Well-damped": { K: 1, p1: 1, p2: 10 },
@@ -67,6 +68,7 @@ print("crossover", wc, "phase margin", 180 + phase[np.argmax(mag_db < 0)])`;
         <Stat label="Gain crossover" value={`${wc.toFixed(2)} rad/s`} />
         <Stat label="Phase margin" value={`${pm.toFixed(0)}°`} />
         <Stat label="Stability" value={pm > 0 ? "stable ✓" : "marginal ⚠"} />
+        <Equation tex={`H(j\\omega)=\\frac{${K}}{\\left(1+j\\frac{\\omega}{${p1}}\\right)\\left(1+j\\frac{\\omega}{${p2}}\\right)} \\;\\Rightarrow\\; |H|=${magdb(wc).toFixed(1)}\\,\\mathrm{dB},\\; \\angle H=${phase(wc).toFixed(0)}^{\\circ}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

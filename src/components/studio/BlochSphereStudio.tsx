@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { theta: number; phi: number }> = {
   "|0⟩ north pole": { theta: 0, phi: 0 },
@@ -66,6 +67,7 @@ print("P(0)", abs(alpha) ** 2, "P(1)", abs(beta) ** 2)`;
         <Stat label="P(|1⟩)" value={p1.toFixed(3)} />
         <Stat label="Amplitude α" value={a.toFixed(3)} />
         <Stat label="Amplitude β" value={`${Math.hypot(bRe, bIm).toFixed(2)}∠${phi}°`} />
+        <Equation tex={`|\\psi\\rangle = \\cos\\tfrac{\\theta}{2}\\,|0\\rangle + e^{i\\phi}\\sin\\tfrac{\\theta}{2}\\,|1\\rangle = ${a.toFixed(2)}\\,|0\\rangle + e^{i(${phi}^{\\circ})}${Math.hypot(bRe, bIm).toFixed(2)}\\,|1\\rangle`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={400} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
