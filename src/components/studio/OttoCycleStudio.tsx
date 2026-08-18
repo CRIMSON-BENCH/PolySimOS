@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { ratio: number; gamma: number }> = {
+  "Economy (r=8)": { ratio: 8, gamma: 1.4 },
+  "Sports (r=11)": { ratio: 11, gamma: 1.4 },
+  "Race (r=13)": { ratio: 13, gamma: 1.4 },
+  "Monatomic γ": { ratio: 9, gamma: 1.67 },
+};
 
 // Otto cycle (gasoline engine) efficiency vs compression ratio.
 export function OttoCycleStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [ratio, setRatio] = useState(9);
-  const [gamma, setGamma] = useState(1.4);
+  const [{ ratio, gamma }, update] = useShareableNumbers({ ratio: 9, gamma: 1.4 });
 
   const eff = 1 - 1 / Math.pow(ratio, gamma - 1);
 
@@ -26,14 +33,33 @@ export function OttoCycleStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("Otto cycle (P-V)", ox + 6, oy - ph + 12); ctx.fillText("volume →", ox + pw - 60, oy + 18);
   }, [ratio, gamma]);
 
+  const explain =
+    ratio >= 12
+      ? `At a ${ratio}:1 compression ratio efficiency reaches ${(eff * 100).toFixed(0)}%, but engines this aggressive demand high-octane fuel to keep from knocking.`
+      : ratio <= 6
+      ? `Low compression (${ratio}:1) keeps efficiency modest at ${(eff * 100).toFixed(0)}%, but tolerates cheap low-octane fuel without pre-ignition.`
+      : `Efficiency (${(eff * 100).toFixed(0)}%) depends only on the ${ratio}:1 compression ratio and γ, not on how much fuel you burn — adding heat gives more power at the same efficiency ceiling.`;
+
+  const code = `import numpy as np
+ratio, gamma = ${ratio}, ${gamma}
+eff = 1 - 1 / ratio**(gamma - 1)   # Otto-cycle thermal efficiency
+print(f"compression {ratio}:1  ->  efficiency {eff*100:.1f}%")`;
+
   return (
     <StudioChrome title="Otto Cycle (Engine)" tagline="gasoline engine efficiency"
       controls={<div>
-        <Slider label="Compression ratio" value={ratio} min={4} max={14} step={0.5} onChange={setRatio} />
-        <Slider label="Heat capacity ratio γ" value={gamma} min={1.3} max={1.67} step={0.01} onChange={setGamma} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Compression ratio" value={ratio} min={4} max={14} step={0.5} onChange={(v) => update({ ratio: v })} />
+        <Slider label="Heat capacity ratio γ" value={gamma} min={1.3} max={1.67} step={0.01} onChange={(v) => update({ gamma: v })} />
         <p className="mt-3 text-xs text-slate-500">The Otto cycle idealizes a gasoline engine: adiabatic compression, constant-volume combustion, adiabatic expansion (the power stroke), and exhaust. Its efficiency, η = 1 − 1/r^(γ−1), depends only on the compression ratio. Higher compression means more efficiency — until the fuel pre-ignites and knocks, which is why octane rating matters.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Efficiency" value={`${(eff * 100).toFixed(1)}%`} /><Stat label="Compression ratio" value={`${ratio}:1`} /><Stat label="γ" value={gamma.toFixed(2)} /></div>}
+      inspector={<div>
+        <Stat label="Efficiency" value={`${(eff * 100).toFixed(1)}%`} />
+        <Stat label="Compression ratio" value={`${ratio}:1`} />
+        <Stat label="γ" value={gamma.toFixed(2)} />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={500} height={330} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

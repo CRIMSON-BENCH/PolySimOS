@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 export function MontyHallStudio() {
@@ -30,13 +31,27 @@ export function MontyHallStudio() {
   }, [running]);
 
   const g = stats.current.games || 1;
+  const swRate = stats.current.switchWins / g * 100;
+  const explain = stats.current.games < 200
+    ? "Early on the two rates jitter around 50% because the sample is tiny — let it run and the switch rate climbs toward its true 66.7%."
+    : `Across ${stats.current.games.toLocaleString()} games the switch rate is holding near 2/3 (${swRate.toFixed(1)}%): your first pick is right only 1/3 of the time, so once the host reveals a losing door the remaining 2/3 of the probability piles onto the door you did not choose.`;
+  const code = `import random
+switch_wins = stay_wins = 0
+N = 100_000
+for _ in range(N):
+    car = random.randrange(3)
+    pick = random.randrange(3)
+    stay_wins += (pick == car)      # keeping the first pick
+    switch_wins += (pick != car)    # switching after a losing door opens
+print("switch", switch_wins / N, "stay", stay_wins / N)`;
   return (
     <StudioChrome title="Monty Hall Problem" tagline="always switch"
       controls={<div>
         <div className="flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">Pick one of three doors; the host, who knows where the car is, opens a losing door and offers a switch. Should you? Yes — switching wins two times out of three. Your first pick is right only 1/3 of the time, so the other 2/3 of the probability collapses onto the remaining door. The simulation converges to exactly that, however stubborn intuition is.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Games" value={stats.current.games.toLocaleString()} /><Stat label="Switch win rate" value={`${(stats.current.switchWins / g * 100).toFixed(1)}%`} /><Stat label="Stay win rate" value={`${(stats.current.stayWins / g * 100).toFixed(1)}%`} /></div>}
+      inspector={<div><Stat label="Games" value={stats.current.games.toLocaleString()} /><Stat label="Switch win rate" value={`${(stats.current.switchWins / g * 100).toFixed(1)}%`} /><Stat label="Stay win rate" value={`${(stats.current.stayWins / g * 100).toFixed(1)}%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={240} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

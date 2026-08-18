@@ -4,15 +4,22 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { minimize1D, monteCarloUQ } from "@/lib/engines/fieldmath";
 import { sampleExpr } from "@/lib/engines/cas";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 720, H = 460;
+
+const PRESETS: Record<string, { x0: number; sd: number }> = {
+  "Right basin": { x0: 2.5, sd: 0.4 },
+  "Left basin": { x0: -2, sd: 0.4 },
+  "Near the hump": { x0: 0.2, sd: 0.3 },
+  "High uncertainty": { x0: 1.5, sd: 1.2 },
+};
 
 export function OptimizeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [expr, setExpr] = useState("x^4 - 3*x^2 + x");
-  const [x0, setX0] = useState(2.5);
-  const [sd, setSd] = useState(0.4);
+  const [{ x0, sd }, update] = useShareableNumbers({ x0: 2.5, sd: 0.4 });
   const [err, setErr] = useState("");
 
   const opt = useMemo(() => { try { setErr(""); return minimize1D(expr, -3, 3, x0); } catch (e) { setErr((e as Error).message); return null; } }, [expr, x0]);
@@ -32,6 +39,23 @@ export function OptimizeStudio() {
     }
   }, [expr, opt]);
 
+  const explain = !opt
+    ? "Enter a valid expression in x (for example x^4 - 3*x^2 + x) to run the optimizer."
+    : uq
+    ? `Descent from x₀ = ${x0} settled at x ≈ ${opt.x.toFixed(2)}. With input σ = ${sd}, the output spreads to about ${uq.sd.toFixed(2)} — uncertainty stays tight near a flat minimum but gets amplified where the curve is steep.`
+    : `Gradient descent from x₀ = ${x0} converged to x ≈ ${opt.x.toFixed(2)}. Change the start point — a nonconvex f(x) can trap descent in whichever local minimum is nearest.`;
+
+  const code = `import numpy as np
+f = lambda x: ${expr.replace(/\^/g, "**")}
+x, lr = ${x0}, 0.01
+for _ in range(500):
+    g = (f(x + 1e-5) - f(x - 1e-5)) / 2e-5
+    x -= lr * g
+print("min x", x, "f", f(x))
+# Monte-Carlo uncertainty propagation
+s = np.random.normal(x, ${sd}, 4000)
+print("out mean", f(s).mean(), "out sd", f(s).std())`;
+
   return (
     <StudioChrome
       title="Optimization + Uncertainty Studio"
@@ -40,9 +64,11 @@ export function OptimizeStudio() {
         <div>
           <label className="mb-1 block text-xs text-slate-500">Objective f(x)</label>
           <input value={expr} onChange={(e) => setExpr(e.target.value)} className="mb-3 w-full rounded border border-slate-300 bg-white px-2 py-1 font-mono text-sm dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100" />
-          <Slider label="Start x₀" value={x0} min={-3} max={3} step={0.1} onChange={setX0} />
-          <Slider label="Input σ (uncertainty)" value={sd} min={0.05} max={1.5} step={0.05} onChange={setSd} />
+          <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+          <Slider label="Start x₀" value={x0} min={-3} max={3} step={0.1} onChange={(v) => update({ x0: v })} />
+          <Slider label="Input σ (uncertainty)" value={sd} min={0.05} max={1.5} step={0.05} onChange={(v) => update({ sd: v })} />
           {err && <p className="text-xs text-red-500">{err}</p>}
+          <ShareBar code={code} />
         </div>
       }
       inspector={
@@ -54,6 +80,7 @@ export function OptimizeStudio() {
             <Stat label="Output σ" value={uq.sd.toFixed(3)} />
             <Stat label="5–95%" value={`${uq.p05.toFixed(2)} … ${uq.p95.toFixed(2)}`} />
           </>}
+          <ExplainResult text={explain} />
         </div>
       }
     >

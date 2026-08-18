@@ -2,14 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { sma: number; ecc: number; argp: number }> = {
+  "LEO (circular)": { sma: 7000, ecc: 0, argp: 0 },
+  "GEO": { sma: 42000, ecc: 0, argp: 0 },
+  "Molniya (elliptic)": { sma: 26000, ecc: 0.74, argp: 270 },
+  "GTO transfer": { sma: 24000, ecc: 0.72, argp: 180 },
+};
 
 // Visualize an orbit from semi-major axis and eccentricity.
 export function OrbitalElementsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [sma, setSma] = useState(10000); // km
-  const [ecc, setEcc] = useState(0.4);
-  const [argp, setArgp] = useState(30); // arg of periapsis deg
+  const [{ sma, ecc, argp }, update] = useShareableNumbers({ sma: 10000, ecc: 0.4, argp: 30 });
   const [running, setRunning] = useState(true);
   const theta = useRef(0);
 
@@ -37,16 +43,36 @@ export function OrbitalElementsStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [sma, ecc, argp, running]);
 
+  const explain =
+    ecc < 0.05
+      ? `Near-circular orbit: apogee and perigee are almost equal, so the satellite holds a steady altitude and speed all the way around.`
+      : ecc > 0.6
+      ? `Highly elliptical: the satellite crawls near its ${apo.toFixed(0)} km apogee and whips through its ${peri.toFixed(0)} km perigee — long dwell time high up, which is why Molniya orbits look like this.`
+      : `Moderate eccentricity stretches the ellipse; the ${(period / 60).toFixed(0)} min period is fixed by the semi-major axis alone, independent of how elongated the shape is.`;
+
+  const code = `import numpy as np
+mu, Re = 398600.0, 6371.0   # km^3/s^2, km
+sma, ecc, argp = ${sma}, ${ecc}, ${argp}
+period = 2 * np.pi * np.sqrt(sma**3 / mu)          # s
+apogee = sma * (1 + ecc) - Re                       # km altitude
+perigee = sma * (1 - ecc) - Re
+print("period (min)", period / 60, "apogee", apogee, "perigee", perigee)`;
+
   return (
     <StudioChrome title="Orbital Elements" tagline="the shape of an orbit"
       controls={<div>
-        <Slider label="Semi-major axis (km)" value={sma} min={7000} max={42000} step={500} onChange={setSma} />
-        <Slider label="Eccentricity" value={ecc} min={0} max={0.85} step={0.02} onChange={setEcc} />
-        <Slider label="Arg. of periapsis (°)" value={argp} min={0} max={360} step={10} onChange={setArgp} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Semi-major axis (km)" value={sma} min={7000} max={42000} step={500} onChange={(v) => update({ sma: v })} />
+        <Slider label="Eccentricity" value={ecc} min={0} max={0.85} step={0.02} onChange={(v) => update({ ecc: v })} />
+        <Slider label="Arg. of periapsis (°)" value={argp} min={0} max={360} step={10} onChange={(v) => update({ argp: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">An orbit&apos;s size and shape come from two numbers: the semi-major axis sets the period (and average altitude), and the eccentricity sets how elongated the ellipse is. Earth sits at one focus, so the satellite races through its low perigee and crawls at its high apogee — Kepler&apos;s second law in motion. The argument of periapsis rotates the ellipse.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Period" value={`${(period / 60).toFixed(0)} min`} /><Stat label="Apogee alt." value={`${apo.toFixed(0)} km`} /><Stat label="Perigee alt." value={`${peri.toFixed(0)} km`} /><Stat label="Eccentricity" value={ecc.toFixed(2)} /></div>}
+      inspector={<div><Stat label="Period" value={`${(period / 60).toFixed(0)} min`} /><Stat label="Apogee alt." value={`${apo.toFixed(0)} km`} /><Stat label="Perigee alt." value={`${peri.toFixed(0)} km`} /><Stat label="Eccentricity" value={ecc.toFixed(2)} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

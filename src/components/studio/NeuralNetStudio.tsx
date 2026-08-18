@@ -2,8 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { useShareableNumbers } from "@/lib/studioKit";
 
 type DS = "circle" | "xor" | "spiral";
+
+const PRESETS: Record<string, { hidden: number; lr: number }> = {
+  "Gentle (lr 0.03)": { hidden: 8, lr: 0.03 },
+  "Balanced": { hidden: 8, lr: 0.1 },
+  "Aggressive (lr 0.4)": { hidden: 6, lr: 0.4 },
+  "Wide (16 units)": { hidden: 16, lr: 0.1 },
+};
 
 function makeData(kind: DS): [number, number, number][] {
   const pts: [number, number, number][] = [];
@@ -21,8 +30,7 @@ function makeData(kind: DS): [number, number, number][] {
 export function NeuralNetStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [dataset, setDataset] = useState<DS>("circle");
-  const [hidden, setHidden] = useState(8);
-  const [lr, setLr] = useState(0.1);
+  const [{ hidden, lr }, update] = useShareableNumbers({ hidden: 8, lr: 0.1 });
   const [running, setRunning] = useState(true);
   const [epoch, setEpoch] = useState(0);
   const [loss, setLoss] = useState(0);
@@ -72,16 +80,41 @@ export function NeuralNetStudio() {
     raf = requestAnimationFrame(step); return () => cancelAnimationFrame(raf);
   }, [running, lr]);
 
+  const explain =
+    lr > 0.3
+      ? "A high learning rate trains fast but overshoots — expect the loss to bounce and the boundary to jitter before it settles."
+      : lr < 0.05
+      ? "A low learning rate is stable but slow: the decision boundary tightens gradually over many epochs."
+      : `With ${Math.round(hidden)} hidden units the net bends the boundary into curves — more units capture finer shapes like the spiral, but too many can overfit.`;
+
+  const code = `import numpy as np
+hidden, lr = ${Math.round(hidden)}, ${lr}
+# 2 -> hidden -> 1 MLP, tanh + sigmoid, trained by backprop
+rng = np.random.default_rng(0)
+W1 = rng.normal(0, .5, (hidden, 2)); b1 = np.zeros(hidden)
+W2 = rng.normal(0, .5, hidden); b2 = 0.
+# X: Nx2 features, y: N labels in {0,1}
+for epoch in range(500):
+    for x, t in zip(X, y):
+        a1 = np.tanh(W1 @ x + b1)
+        out = 1/(1+np.exp(-(a1 @ W2 + b2)))
+        dz2 = out - t
+        W2 -= lr*dz2*a1; b2 -= lr*dz2
+        dz1 = dz2*W2*(1-a1**2)
+        W1 -= lr*np.outer(dz1, x); b1 -= lr*dz1`;
+
   return (
     <StudioChrome title="Neural Network Playground" tagline="2-layer MLP · live backprop"
       controls={<div>
         <div className="mb-3 grid grid-cols-3 gap-2">{(["circle", "xor", "spiral"] as DS[]).map((d) => <button key={d} onClick={() => setDataset(d)} className={`rounded-lg px-2 py-1 text-xs font-semibold capitalize ${dataset === d ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{d}</button>)}</div>
-        <Slider label="Hidden neurons" value={hidden} min={2} max={16} step={1} onChange={setHidden} />
-        <Slider label="Learning rate" value={lr} min={0.01} max={0.5} step={0.01} onChange={setLr} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Hidden neurons" value={hidden} min={2} max={16} step={1} onChange={(v) => update({ hidden: v })} />
+        <Slider label="Learning rate" value={lr} min={0.01} max={0.5} step={0.01} onChange={(v) => update({ lr: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Train"}</button><button onClick={init} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">A tiny multilayer perceptron trained by real backpropagation. The background shows its learned decision boundary; dots are the training data, colored by true class.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Epoch" value={String(epoch)} /><Stat label="Loss" value={loss.toFixed(4)} /><Stat label="Architecture" value={`2→${Math.round(hidden)}→1`} /></div>}
+      inspector={<div><Stat label="Epoch" value={String(epoch)} /><Stat label="Loss" value={loss.toFixed(4)} /><Stat label="Architecture" value={`2→${Math.round(hidden)}→1`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={420} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

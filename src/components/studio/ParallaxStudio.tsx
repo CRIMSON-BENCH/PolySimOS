@@ -2,16 +2,31 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { parallax: number }> = {
+  "Proxima Cen": { parallax: 0.7687 },
+  Sirius: { parallax: 0.379 },
+  Vega: { parallax: 0.130 },
+  Betelgeuse: { parallax: 0.0055 },
+};
 
 export function ParallaxStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [parallax, setParallax] = useState(0.1); // arcsec
+  const [{ parallax }, update] = useShareableNumbers({ parallax: 0.1 }); // arcsec
   const [running, setRunning] = useState(true);
   const phase = useRef(0);
 
   const distPc = 1 / parallax; // parsecs
   const distLy = distPc * 3.26156;
+
+  const explain = `A parallax of ${parallax.toFixed(3)}″ puts this star ${distPc.toFixed(1)} pc (${distLy.toFixed(1)} ly) away — because distance is 1/p, halving the angle would double the distance, so the tiniest angles mark the most distant stars.`;
+
+  const code = `parallax = ${parallax}  # arcseconds
+dist_pc = 1 / parallax
+dist_ly = dist_pc * 3.26156
+print(round(dist_pc, 2), "pc", round(dist_ly, 2), "ly")`;
 
   useEffect(() => {
     if (!running) return; let raf = 0;
@@ -39,12 +54,16 @@ export function ParallaxStudio() {
   return (
     <StudioChrome title="Stellar Parallax" tagline="the first rung of the distance ladder"
       controls={<div>
-        <Slider label="Parallax angle (arcsec)" value={parallax} min={0.005} max={0.8} step={0.005} onChange={setParallax} />
-        <div className="mt-3 flex flex-wrap gap-1">{[["Proxima", 0.7687], ["Sirius", 0.379], ["Vega", 0.130], ["Betelgeuse", 0.0055]].map(([n, p]) => <button key={n} onClick={() => setParallax(p as number)} className="rounded-lg border border-slate-300 px-2 py-1 text-xs font-semibold text-slate-600 dark:border-slate-700 dark:text-slate-400">{n}</button>)}</div>
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Parallax angle (arcsec)" value={parallax} min={0.005} max={0.8} step={0.005} onChange={(v) => update({ parallax: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">As Earth orbits the Sun, a nearby star appears to shift against the distant background. Half that annual shift is the parallax angle p, and distance in parsecs is simply 1/p (with p in arcseconds). One parsec is the distance giving a one-arcsecond parallax.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Distance" value={`${distPc.toFixed(1)} pc`} /><Stat label="Light years" value={`${distLy.toFixed(1)} ly`} /><Stat label="Parallax" value={`${parallax.toFixed(3)}″`} /></div>}
+      inspector={<div><Stat label="Distance" value={`${distPc.toFixed(1)} pc`} /><Stat label="Light years" value={`${distLy.toFixed(1)} ly`} /><Stat label="Parallax" value={`${parallax.toFixed(3)}″`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,12 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { mfp: number }> = {
+  "Dense fuel": { mfp: 12 },
+  "Water moderator": { mfp: 30 },
+  "Graphite pile": { mfp: 52 },
+  "Leaky small core": { mfp: 74 },
+};
 
 // Neutron random walk / moderation.
 export function NeutronTransportStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mfp, setMfp] = useState(30); // mean free path px
+  const [{ mfp }, update] = useShareableNumbers({ mfp: 30 }); // mean free path px
   const [seed, setSeed] = useState(1);
   const [escaped, setEscaped] = useState(0);
 
@@ -24,14 +32,44 @@ export function NeutronTransportStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("neutron paths — scatter, slow, absorb or escape", 44, 30);
   }, [mfp, seed]);
 
+  const leakage = escaped / 40 * 100;
+  const explain =
+    mfp <= 18
+      ? "Short mean free path: neutrons scatter often and stay bound inside the core — dense material contains the chain reaction and pushes toward criticality."
+      : mfp >= 60
+      ? "Long mean free path: neutrons stride far between collisions and leak out the boundary before absorption, so this geometry is too small or too sparse to sustain fission."
+      : "A moderate mean free path balances moderation against leakage — enough scattering to thermalize neutrons, but geometry still governs whether the core goes critical.";
+
+  const code = `import numpy as np
+mfp = ${mfp}   # mean free path (px), W = H = 400
+rng = np.random.default_rng(${seed})
+esc = 0
+for _ in range(40):
+    x, y, energy = 200.0, 200.0, 2e6
+    for _ in range(40):
+        ang = rng.random() * 2 * np.pi
+        d = -mfp * np.log(rng.random())
+        x += np.cos(ang) * d; y += np.sin(ang) * d
+        energy *= 0.6
+        if not (40 < x < 360 and 40 < y < 360):
+            esc += 1; break
+        if energy < 0.025 and rng.random() < 0.3:
+            break
+print("leakage %", esc / 40 * 100)`;
+
   return (
     <StudioChrome title="Neutron Transport" tagline="random walk & moderation"
       controls={<div>
-        <Slider label="Mean free path (px)" value={mfp} min={8} max={80} step={2} onChange={setMfp} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Mean free path (px)" value={mfp} min={8} max={80} step={2} onChange={(v) => update({ mfp: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New neutrons</button>
         <p className="mt-3 text-xs text-slate-500">Neutrons do not travel straight — they random-walk through matter, scattering every mean free path and losing energy at each collision. This moderation slows fast neutrons to thermal speeds where they fission efficiently. A short mean free path (dense material) keeps them inside; a long one lets them leak out, which is why reactor size and geometry set criticality.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mean free path" value={`${mfp} px`} /><Stat label="Escaped" value={`${escaped} / 40`} /><Stat label="Leakage" value={`${(escaped / 40 * 100).toFixed(0)}%`} /></div>}
+      inspector={<div><Stat label="Mean free path" value={`${mfp} px`} /><Stat label="Escaped" value={`${escaped} / 40`} /><Stat label="Leakage" value={`${leakage.toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={400} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }
