@@ -334,8 +334,10 @@ The "make them look pro / take the solvers up a notch" program. Built a reusable
 - **G3. Transport controls** — shared `useTransport` hook + `TransportBar` (play/pause/**step**/reset/**speed**); DoublePendulum converted as the reference. (Rollout to other animated solvers still per-solver.)
 - **G4. Depth — COMPLETE across ALL solvers.** Presets + explain-this-result + copy-as-Python + shareable URLs on every solver (364/365; EmbeddedStudio is a routing wrapper). Done via 14 parallel-subagent batches (A–N), each build-gated + committed.
 
+## ✅ G3b — DONE. Transport on EVERY animated solver.
+`useTransport`/`TransportBar` (play/pause/step/reset/speed) rolled out to **67 solvers** across batches T1–T3 (build-gated + live-verified on Particle). Zero animated solvers remain without it. DoublePendulum was the reference; the recipe moved each rAF loop body into `frame(steps)` with params mirrored into refs, preserving physics/draw byte-identical.
+
 ## ⏳ Remaining — in logical order
-- **G3b. Transport rollout** — apply `useTransport`/`TransportBar` to the remaining animated solvers (per-solver loop refactor).
 - **G5. Live KaTeX equations (#11)** — governing equation with current values substituted, in the inspector; per-solver, top solvers first (adds `katex`).
 - **G6. Direct-canvas manipulation (#6)** — drag the pendulum bob / place a charge / move a load / drag graph nodes; highest-wow, per-solver on flagships.
 - **G7. Save named scenarios to account (#15)** — persist `useShareableNumbers` param sets to the logged-in user (Clerk + entitlements store); retention + sign-up reason.
