@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { mach: number }> = {
+  "Airliner (0.85)": { mach: 0.85 },
+  "Just supersonic (1.2)": { mach: 1.2 },
+  "Concorde (2.0)": { mach: 2.0 },
+  "Hypersonic (5.0)": { mach: 5.0 },
+};
 
 export function MachConeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mach, setMach] = useState(2);
+  const [{ mach }, update] = useShareableNumbers({ mach: 2 });
 
   const coneAngle = mach > 1 ? Math.asin(1 / mach) * 180 / Math.PI : 90;
 
@@ -21,15 +29,32 @@ export function MachConeStudio() {
     // aircraft
     ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.moveTo(acx + 14, cy); ctx.lineTo(acx - 12, cy - 7); ctx.lineTo(acx - 12, cy + 7); ctx.fill();
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(mach > 1 ? `Mach cone half-angle ${coneAngle.toFixed(1)}°` : "subsonic — sound outruns the aircraft", 16, 24);
-  }, [mach]);
+  }, [mach, coneAngle]);
+
+  const explain =
+    mach < 0.8
+      ? `At Mach ${mach.toFixed(1)} the aircraft is subsonic — its pressure waves race ahead, so no shock cone forms and there is no boom.`
+      : mach < 1.2
+      ? `Near Mach ${mach.toFixed(1)} the flow is transonic: shocks are just forming and drag spikes sharply through the sound barrier.`
+      : `At Mach ${mach.toFixed(1)} the half-angle is arcsin(1/M) = ${coneAngle.toFixed(1)}° — faster flight sweeps the Mach cone tighter around the flight path.`;
+
+  const code = `import numpy as np
+mach = ${mach}
+half_angle = np.degrees(np.arcsin(1/mach)) if mach > 1 else 90.0
+print("Mach cone half-angle (deg):", round(half_angle, 2))`;
 
   return (
     <StudioChrome title="Mach Cone & Sonic Boom" tagline="supersonic shock geometry"
       controls={<div>
-        <Slider label="Mach number" value={mach} min={0.3} max={5} step={0.1} onChange={setMach} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Mach number" value={mach} min={0.3} max={5} step={0.1} onChange={(v) => update({ mach: v })} />
         <p className="mt-3 text-xs text-slate-500">Below the speed of sound, pressure waves race ahead of an aircraft. At and above Mach 1 the aircraft outruns its own sound, and the waves pile into a cone-shaped shock — the sonic boom. The faster it flies, the more sharply swept the Mach cone: its half-angle is arcsin(1/M). This geometry governs supersonic and hypersonic vehicle design.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mach" value={mach.toFixed(1)} /><Stat label="Regime" value={mach < 0.8 ? "subsonic" : mach < 1.2 ? "transonic" : mach < 5 ? "supersonic" : "hypersonic"} /><Stat label="Cone half-angle" value={mach > 1 ? `${coneAngle.toFixed(1)}°` : "—"} /></div>}
+      inspector={<div><Stat label="Mach" value={mach.toFixed(1)} /><Stat label="Regime" value={mach < 0.8 ? "subsonic" : mach < 1.2 ? "transonic" : mach < 5 ? "supersonic" : "hypersonic"} /><Stat label="Cone half-angle" value={mach > 1 ? `${coneAngle.toFixed(1)}°` : "—"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,11 +2,19 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { size: number }> = {
+  "Tiny (10)": { size: 10 },
+  "Classic (25)": { size: 25 },
+  "Large (32)": { size: 32 },
+  "Dense (40)": { size: 40 },
+};
 
 export function MazeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [size, setSize] = useState(25);
+  const [{ size }, update] = useShareableNumbers({ size: 25 });
   const [seed, setSeed] = useState(1);
   const [solve, setSolve] = useState(true);
 
@@ -50,15 +58,42 @@ export function MazeStudio() {
       if (w.s) { ctx.moveTo(x, y + CELL); ctx.lineTo(x + CELL, y + CELL); } if (w.w) { ctx.moveTo(x, y); ctx.lineTo(x, y + CELL); } ctx.stroke(); }
   }, [size, seed, solve]);
 
+  const cells = Math.round(size) ** 2;
+  const explain =
+    size <= 14
+      ? `Small grids solve almost instantly — with only ${cells} cells the single valid route is short and easy to trace by eye.`
+      : size >= 34
+      ? `At ${cells} cells the backtracker carves long, twisting corridors, yet BFS still guarantees the shortest route through the one solution.`
+      : `A perfect maze has exactly one path between any two cells, so BFS from corner to corner always finds it — here across ${cells} cells.`;
+
+  const code = `# perfect maze via recursive backtracker (N x N)
+import random
+N, seed = ${Math.round(size)}, ${seed}
+random.seed(seed)
+wall = [[True]*4 for _ in range(N*N)]        # per cell: N, E, S, W
+seen = [False]*(N*N); stack = [0]; seen[0] = True
+while stack:
+    c = stack[-1]; x, y = c % N, c // N; opt = []
+    if y > 0     and not seen[c-N]: opt.append((c-N, 0, 2))
+    if x < N-1   and not seen[c+1]: opt.append((c+1, 1, 3))
+    if y < N-1   and not seen[c+N]: opt.append((c+N, 2, 0))
+    if x > 0     and not seen[c-1]: opt.append((c-1, 3, 1))
+    if not opt: stack.pop(); continue
+    nx, a, b = random.choice(opt)
+    wall[c][a] = wall[nx][b] = False; seen[nx] = True; stack.append(nx)
+print("carved", N*N, "cells")`;
+
   return (
     <StudioChrome title="Maze Generator & Solver" tagline="recursive backtracker · BFS solve"
       controls={<div>
-        <Slider label="Grid size" value={size} min={10} max={40} step={1} onChange={setSize} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Grid size" value={size} min={10} max={40} step={1} onChange={(v) => update({ size: v })} />
         <label className="mt-3 flex items-center gap-2 text-sm text-slate-600 dark:text-slate-400"><input type="checkbox" checked={solve} onChange={(e) => setSolve(e.target.checked)} /> Show solution path</label>
         <button onClick={() => setSeed((n) => n + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New maze</button>
         <p className="mt-3 text-xs text-slate-500">A perfect maze (exactly one path between any two cells) carved by depth-first backtracking, then solved top-left to bottom-right with breadth-first search.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cells" value={`${Math.round(size)}²`} /><Stat label="Algorithm" value="DFS carve" /><Stat label="Solver" value="BFS shortest" /></div>}
+      inspector={<div><Stat label="Cells" value={`${Math.round(size)}²`} /><Stat label="Algorithm" value="DFS carve" /><Stat label="Solver" value="BFS shortest" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={600} height={600} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

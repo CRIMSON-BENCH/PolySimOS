@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { throughput: number; leadTime: number }> = {
+  "Lean cell": { throughput: 12, leadTime: 1 },
+  "Hospital ED": { throughput: 4, leadTime: 3 },
+  "Backlogged team": { throughput: 2, leadTime: 10 },
+  "Fast checkout": { throughput: 15, leadTime: 0.5 },
+};
 
 // Little's Law: WIP = throughput x lead time.
 export function LittlesLawStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [throughput, setThroughput] = useState(5); // units/hr
-  const [leadTime, setLeadTime] = useState(4); // hr
+  const [{ throughput, leadTime }, update] = useShareableNumbers({ throughput: 5, leadTime: 4 });
   const [running, setRunning] = useState(true);
 
   const wip = throughput * leadTime;
@@ -28,15 +35,24 @@ export function LittlesLawStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [throughput, leadTime, running]);
 
+  const explain = `At ${throughput}/hr throughput and a ${leadTime} hr lead time, about ${wip.toFixed(0)} items sit in progress at once — so the only ways to cut lead time are to raise throughput or shrink work-in-progress; you cannot move one without the others following.`;
+
+  const code = `throughput, lead_time = ${throughput}, ${leadTime}  # units/hr, hr
+wip = throughput * lead_time
+print("work-in-progress:", wip, "units")
+# rearranged: lead_time = wip / throughput`;
+
   return (
     <StudioChrome title="Little's Law" tagline="the law of flow"
       controls={<div>
-        <Slider label="Throughput (units/hr)" value={throughput} min={1} max={20} step={1} onChange={setThroughput} />
-        <Slider label="Lead time (hr)" value={leadTime} min={0.5} max={12} step={0.5} onChange={setLeadTime} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Throughput (units/hr)" value={throughput} min={1} max={20} step={1} onChange={(v) => update({ throughput: v })} />
+        <Slider label="Lead time (hr)" value={leadTime} min={0.5} max={12} step={0.5} onChange={(v) => update({ leadTime: v })} />
         <button onClick={() => setRunning((r) => !r)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">Little&apos;s Law is deceptively simple and astonishingly general: the average work-in-progress equals throughput times lead time. It holds for any stable queue — a factory, a hospital, a software backlog, a checkout line — regardless of the details. It means the only ways to cut lead time are to raise throughput or reduce work-in-progress, the core insight of lean and agile.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Work in progress" value={`${wip.toFixed(1)} units`} /><Stat label="Throughput" value={`${throughput}/hr`} /><Stat label="Lead time" value={`${leadTime} hr`} /></div>}
+      inspector={<div><Stat label="Work in progress" value={`${wip.toFixed(1)} units`} /><Stat label="Throughput" value={`${throughput}/hr`} /><Stat label="Lead time" value={`${leadTime} hr`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

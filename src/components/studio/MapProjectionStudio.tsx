@@ -1,12 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { latitude: number }> = {
+  "Equator (0°)": { latitude: 0 },
+  "London (50°)": { latitude: 50 },
+  "Greenland (70°)": { latitude: 70 },
+  "Arctic (80°)": { latitude: 80 },
+};
 
 export function MapProjectionStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [latitude, setLatitude] = useState(60);
+  const [{ latitude }, update] = useShareableNumbers({ latitude: 60 });
 
   const areaDistortion = 1 / Math.cos(latitude * Math.PI / 180) ** 2;
 
@@ -24,13 +32,32 @@ export function MapProjectionStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("Mercator — circles are truly equal-sized on the globe", 8, 18);
   }, [latitude]);
 
+  const absLat = Math.abs(latitude);
+  const explain =
+    absLat < 10
+      ? "Near the equator the Mercator projection is almost honest — area distortion is about 1×, so shapes and sizes here are trustworthy."
+      : absLat >= 70
+      ? `At ${absLat}° the map inflates area by roughly ${areaDistortion.toFixed(0)}× — this is why Greenland looks as large as Africa despite being 14× smaller.`
+      : `At ${absLat}° each Tissot circle covers about ${areaDistortion.toFixed(1)}× its true area, because Mercator stretches by 1/cos²(latitude) as you move poleward.`;
+
+  const code = `import math
+latitude = ${latitude}
+length_distortion = 1 / math.cos(math.radians(latitude))
+area_distortion = length_distortion ** 2
+print(f"length {length_distortion:.2f}x, area {area_distortion:.1f}x")`;
+
   return (
     <StudioChrome title="Map Projection Distortion" tagline="why Greenland looks huge"
       controls={<div>
-        <Slider label="Latitude" value={latitude} min={-80} max={80} step={5} onChange={setLatitude} />
+        <Presets
+          presets={Object.keys(PRESETS).map((label) => ({ label }))}
+          onApply={(label) => update(PRESETS[label])}
+        />
+        <Slider label="Latitude" value={latitude} min={-80} max={80} step={5} onChange={(v) => update({ latitude: v })} />
         <p className="mt-3 text-xs text-slate-500">You cannot flatten a sphere without distortion. The Mercator projection preserves angles for navigation but inflates area toward the poles by 1/cos²(latitude) — so Greenland appears as big as Africa though it is 14 times smaller. The Tissot circles are all the same true size on the globe; watch them balloon at high latitudes.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Area distortion" value={`${areaDistortion.toFixed(1)}×`} /><Stat label="Length distortion" value={`${(1 / Math.cos(latitude * Math.PI / 180)).toFixed(2)}×`} /><Stat label="Latitude" value={`${latitude}°`} /></div>}
+      inspector={<div><Stat label="Area distortion" value={`${areaDistortion.toFixed(1)}×`} /><Stat label="Length distortion" value={`${(1 / Math.cos(latitude * Math.PI / 180)).toFixed(2)}×`} /><Stat label="Latitude" value={`${latitude}°`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

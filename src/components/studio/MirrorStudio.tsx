@@ -2,14 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
 
+const PRESETS: Record<string, { f: number; objDist: number }> = {
+  "Beyond C (real, small)": { f: 120, objDist: 320 },
+  "Between F and C (magnified)": { f: 100, objDist: 150 },
+  "At the focus (rays parallel)": { f: 120, objDist: 120 },
+  "Inside F (virtual, upright)": { f: 120, objDist: 60 },
+};
+
 export function MirrorStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [f, setF] = useState(120);
-  const [objDist, setObjDist] = useState(220);
+  const [{ f, objDist }, update] = useShareableNumbers({ f: 120, objDist: 220 });
   const [concave, setConcave] = useState(true);
 
   useEffect(() => {
@@ -31,15 +38,39 @@ export function MirrorStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`${concave ? "concave" : "convex"} mirror · magnification ${mag.toFixed(2)}×`, 14, 24);
   }, [f, objDist, concave]);
 
+  // Image characteristics from the mirror equation (component scope; distinct names from the draw effect).
+  const F0 = concave ? f : -f;
+  const v0 = 1 / (1 / F0 - 1 / objDist);
+  const mag0 = -v0 / objDist;
+  const explain = !concave
+    ? `A convex mirror always forms an upright, reduced virtual image behind it (magnification ${mag0.toFixed(2)}×) — the wide field of view that makes it a car wing mirror.`
+    : Math.abs(objDist - f) < 6
+    ? "The object sits almost exactly at the focal point, so reflected rays leave nearly parallel and the image forms far away and enormous — the searchlight/collimator regime."
+    : objDist < f
+    ? `Object inside the focal length: the concave mirror gives an upright, magnified virtual image behind it (${mag0.toFixed(2)}×) — the shaving/makeup-mirror regime.`
+    : objDist < 2 * f
+    ? `Object between F and C: the image is real, inverted, and magnified (${mag0.toFixed(2)}×), projected in front of the mirror.`
+    : `Object beyond the centre of curvature: the real image is inverted and smaller than the object (${mag0.toFixed(2)}×).`;
+
+  const code = `f = ${f}          # focal length (px), concave = ${concave}
+F = ${concave ? "f" : "-f"}
+u = ${objDist}        # object distance
+v = 1 / (1/F - 1/u)   # mirror equation: 1/v + 1/u = 1/f
+mag = -v / u
+print("image distance v =", round(v, 1))
+print("magnification =", round(mag, 2))`;
+
   return (
     <StudioChrome title="Mirror Ray Tracing" tagline="concave & convex · mirror equation"
       controls={<div>
-        <div className="mb-3 flex gap-2">{[true, false].map((c) => <button key={String(c)} onClick={() => setConcave(c)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold ${concave === c ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{c ? "Concave" : "Convex"}</button>)}</div>
+        <div className="mb-3 flex gap-2">{[true, false].map((cc) => <button key={String(cc)} onClick={() => setConcave(cc)} className={`flex-1 rounded-lg px-2 py-1 text-xs font-semibold ${concave === cc ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{cc ? "Concave" : "Convex"}</button>)}</div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
         <p className="mb-3 text-xs text-slate-500">Trace principal rays off a curved mirror to find the image. Concave mirrors focus and can flip the image; convex mirrors always give a small upright virtual image.</p>
-        <Slider label="Focal length" value={f} min={60} max={220} step={10} onChange={setF} />
-        <Slider label="Object distance" value={objDist} min={60} max={340} step={10} onChange={setObjDist} />
+        <Slider label="Focal length" value={f} min={60} max={220} step={10} onChange={(val) => update({ f: val })} />
+        <Slider label="Object distance" value={objDist} min={60} max={340} step={10} onChange={(val) => update({ objDist: val })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mirror" value={concave ? "concave" : "convex"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Equation" value="1/v + 1/u = 1/f" /></div>}
+      inspector={<div><Stat label="Mirror" value={concave ? "concave" : "convex"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Equation" value="1/v + 1/u = 1/f" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

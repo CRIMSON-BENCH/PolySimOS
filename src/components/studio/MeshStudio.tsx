@@ -3,6 +3,15 @@
 import { useEffect, useRef, useState } from "react";
 import { MeshDomain, meshInit, meshPaint, meshSolve } from "@/lib/engines/mesh";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { brush: number }> = {
+  "Fine (1)": { brush: 1 },
+  "Medium (4)": { brush: 4 },
+  "Broad (8)": { brush: 8 },
+  "Flood (12)": { brush: 12 },
+};
 
 export function MeshStudio() {
   const N = 100;
@@ -11,7 +20,7 @@ export function MeshStudio() {
   const rafRef = useRef(0);
   const painting = useRef(false);
   const [tool, setTool] = useState<"hot" | "cold" | "wall" | "clear">("hot");
-  const [brush, setBrush] = useState(4);
+  const [{ brush }, update] = useShareableNumbers({ brush: 4 });
   const [res, setRes] = useState(0);
 
   useEffect(() => { domRef.current = meshInit(N); }, []);
@@ -45,6 +54,21 @@ export function MeshStudio() {
     return () => { cancelAnimationFrame(rafRef.current); canvas.removeEventListener("pointerdown", onDown); canvas.removeEventListener("pointermove", onMove); window.removeEventListener("pointerup", onUp); };
   }, [tool, brush]);
 
+  const explain =
+    brush >= 9
+      ? `A broad brush stamps large fixed-temperature regions, so the Laplace solution is dominated by those plateaus and relaxes with gentle gradients.`
+      : brush <= 2
+      ? `A fine brush sets pinpoint sources — steep local gradients form, and Gauss-Seidel needs more sweeps to smooth them into steady state.`
+      : `At steady state ∇²u=0 means every interior cell equals the average of its four neighbors, so heat spreads smoothly between the fixed hot and cold edges.`;
+
+  const code = `import numpy as np
+# steady heat: Laplace via Gauss-Seidel relaxation on an N x N grid
+N, brush = ${N}, ${brush}
+u = np.zeros((N, N)); u[:, 0] = 1.0          # hot left edge, cold right
+for _ in range(500):
+    u[1:-1, 1:-1] = 0.25*(u[:-2, 1:-1] + u[2:, 1:-1] + u[1:-1, :-2] + u[1:-1, 2:])
+print("mean temperature", u.mean())`;
+
   return (
     <StudioChrome
       title="Meshing + BC Editor — Steady Heat"
@@ -57,11 +81,13 @@ export function MeshStudio() {
               <button key={t} onClick={() => setTool(t)} className={`rounded-lg px-2 py-1 text-xs font-semibold capitalize ${tool === t ? "bg-cyan-600 text-white" : "border border-slate-300 text-slate-600 dark:border-slate-700 dark:text-slate-400"}`}>{t}</button>
             ))}
           </div>
-          <Slider label="Brush size" value={brush} min={1} max={12} step={1} onChange={setBrush} />
+          <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+          <Slider label="Brush size" value={brush} min={1} max={12} step={1} onChange={(v) => update({ brush: v })} />
           <button onClick={() => (domRef.current = meshInit(N))} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">Reset domain</button>
+          <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Solver" value="Gauss-Seidel" /><Stat label="Residual" value={res.toExponential(2)} /><Stat label="Status" value={res < 1e-4 ? "steady" : "relaxing"} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Solver" value="Gauss-Seidel" /><Stat label="Residual" value={res.toExponential(2)} /><Stat label="Status" value={res < 1e-4 ? "steady" : "relaxing"} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] cursor-crosshair rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} />
     </StudioChrome>
