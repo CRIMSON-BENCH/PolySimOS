@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Atom, DEFAULT_MD, seedAtoms, stepMD, temperature, thermostat } from "@/lib/engines/md";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -76,7 +77,7 @@ print("T", 0.5 * (vel**2).sum() / n)`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Atoms" value={String(n)} /><Stat label="Temperature" value={T.toFixed(1)} /><Stat label="Potential" value="Lennard-Jones" /><Stat label="Integrator" value="Velocity-Verlet" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Atoms" value={String(n)} /><Stat label="Temperature" value={T.toFixed(1)} /><Stat label="Potential" value="Lennard-Jones" /><Stat label="Integrator" value="Velocity-Verlet" /><Equation tex={`V(r) = 4\\varepsilon\\left[\\left(\\tfrac{\\sigma}{r}\\right)^{12} - \\left(\\tfrac{\\sigma}{r}\\right)^{6}\\right],\\quad F = -\\dfrac{dV}{dr} = m\\ddot r \\;\\; (N=${n},\\; T=${T.toFixed(1)})`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={box} height={box} className="mx-auto h-auto max-h-[460px] w-auto max-w-full rounded-lg" />
     </StudioChrome>

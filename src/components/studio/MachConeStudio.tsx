@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { mach: number }> = {
@@ -54,7 +55,7 @@ print("Mach cone half-angle (deg):", round(half_angle, 2))`;
         <p className="mt-3 text-xs text-slate-500">Below the speed of sound, pressure waves race ahead of an aircraft. At and above Mach 1 the aircraft outruns its own sound, and the waves pile into a cone-shaped shock — the sonic boom. The faster it flies, the more sharply swept the Mach cone: its half-angle is arcsin(1/M). This geometry governs supersonic and hypersonic vehicle design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mach" value={mach.toFixed(1)} /><Stat label="Regime" value={mach < 0.8 ? "subsonic" : mach < 1.2 ? "transonic" : mach < 5 ? "supersonic" : "hypersonic"} /><Stat label="Cone half-angle" value={mach > 1 ? `${coneAngle.toFixed(1)}°` : "—"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Mach" value={mach.toFixed(1)} /><Stat label="Regime" value={mach < 0.8 ? "subsonic" : mach < 1.2 ? "transonic" : mach < 5 ? "supersonic" : "hypersonic"} /><Stat label="Cone half-angle" value={mach > 1 ? `${coneAngle.toFixed(1)}°` : "—"} /><Equation tex={`\\mu = \\arcsin\\frac{1}{M} = \\arcsin\\frac{a}{v} = \\arcsin\\frac{1}{${mach.toFixed(1)}} = ${mach > 1 ? coneAngle.toFixed(1) : "90.0"}^\\circ`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

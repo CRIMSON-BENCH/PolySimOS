@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers, hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -103,6 +104,7 @@ print("settles on magnet", final_magnet(120, 80))`;
         <Stat label="Damping" value={`${damping.toFixed(1)}% / step`} />
         <Stat label="Magnet strength" value={pull.toFixed(2)} />
         <Stat label="Basins" value="fractal" />
+        <Equation tex={`\\ddot{\\mathbf{p}} = -\\sum_{i=1}^{3}\\frac{${pull.toFixed(2)}\\,(\\mathbf{p}-\\mathbf{m}_i)}{|\\mathbf{p}-\\mathbf{m}_i|^{3}} - ${(1 - friction).toFixed(3)}\\,\\dot{\\mathbf{p}} - k(\\mathbf{p}-\\mathbf{c})`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] cursor-crosshair rounded-lg" /></StudioChrome>

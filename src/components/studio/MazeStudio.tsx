@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { size: number }> = {
@@ -93,7 +94,7 @@ print("carved", N*N, "cells")`;
         <p className="mt-3 text-xs text-slate-500">A perfect maze (exactly one path between any two cells) carved by depth-first backtracking, then solved top-left to bottom-right with breadth-first search.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cells" value={`${Math.round(size)}²`} /><Stat label="Algorithm" value="DFS carve" /><Stat label="Solver" value="BFS shortest" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cells" value={`${Math.round(size)}²`} /><Stat label="Algorithm" value="DFS carve" /><Stat label="Solver" value="BFS shortest" /><Equation tex={`\\text{perfect maze}=\\text{spanning tree}:\\ E=N^2-1=${Math.round(size)}^2-1=${cells - 1}\\ \\text{passages}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={600} height={600} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

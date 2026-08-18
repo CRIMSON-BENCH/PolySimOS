@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { wE: number; wO: number; wP: number }> = {
@@ -60,7 +61,7 @@ print("insolation range:", insolation.min(), insolation.max())`;
         <p className="mt-3 text-xs text-slate-500">Three slow changes in Earth&apos;s orbit — the stretch of its ellipse (eccentricity), the tilt of its axis (obliquity), and the wobble of that axis (precession) — combine to modulate summer sunlight at high latitudes. That insolation rhythm paces the glacial-interglacial cycles recorded in ice and ocean cores.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Eccentricity" value="~100 kyr" /><Stat label="Obliquity" value="~41 kyr" /><Stat label="Precession" value="~23 kyr" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Eccentricity" value="~100 kyr" /><Stat label="Obliquity" value="~41 kyr" /><Stat label="Precession" value="~23 kyr" /><Equation tex={`Q = ${(wE * 0.5).toFixed(2)}\\,e(t) + ${wO.toFixed(1)}\\,\\varepsilon(t) + ${(wP * 0.7).toFixed(2)}\\,p(t)`} label="Insolation forcing" /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

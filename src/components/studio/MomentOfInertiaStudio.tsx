@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const SHAPES = [{ n: "Solid disk", c: 0.5 }, { n: "Hoop / ring", c: 1 }, { n: "Solid sphere", c: 0.4 }, { n: "Rod (center)", c: 1 / 12 }];
@@ -60,6 +61,7 @@ print("Icm", Icm, "total I", I)`;
         <Stat label="I about center" value={`${Icm.toFixed(4)} kg·m²`} />
         <Stat label="Parallel-axis term" value={`${(mass * d * d).toFixed(4)} kg·m²`} />
         <Stat label="Total I" value={`${I.toFixed(4)} kg·m²`} />
+        <Equation tex={`I=${c.toFixed(3)}\\,M R^2+M d^2=${Icm.toFixed(4)}+${(mass * d * d).toFixed(4)}=${I.toFixed(4)}\\ \\text{kg}\\cdot\\text{m}^2`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

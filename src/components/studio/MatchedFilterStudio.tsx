@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { noise: number; pos: number }> = {
@@ -61,6 +62,7 @@ print("detected position", corr.argmax()/N, "x length")`;
       inspector={<div>
         <Stat label="Detected position" value={`${(peakIdx / N).toFixed(2)} × length`} />
         <Stat label="Detection" value={detected ? "pulse found ✓" : "lost in noise"} />
+        <Equation tex={`h(t)=s(T-t),\\quad y(t)=\\int x(\\tau)\\,s(\\tau-t)\\,d\\tau,\\quad \\hat t=${(peakIdx / N).toFixed(2)}\\,T`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

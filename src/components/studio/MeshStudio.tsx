@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { MeshDomain, meshInit, meshPaint, meshSolve } from "@/lib/engines/mesh";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { brush: number }> = {
@@ -87,7 +88,7 @@ print("mean temperature", u.mean())`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Solver" value="Gauss-Seidel" /><Stat label="Residual" value={res.toExponential(2)} /><Stat label="Status" value={res < 1e-4 ? "steady" : "relaxing"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Grid" value={`${N}×${N}`} /><Stat label="Solver" value="Gauss-Seidel" /><Stat label="Residual" value={res.toExponential(2)} /><Stat label="Status" value={res < 1e-4 ? "steady" : "relaxing"} /><Equation tex={`\\nabla^2 u=0\\ \\Rightarrow\\ u_{i,j}=\\tfrac{1}{4}\\left(u_{i-1,j}+u_{i+1,j}+u_{i,j-1}+u_{i,j+1}\\right),\\quad ${N}\\times${N}\\text{ grid},\\ r=${res.toExponential(2)}`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={N} height={N} className="mx-auto h-auto max-h-[440px] cursor-crosshair rounded-lg" style={{ imageRendering: "pixelated", width: "440px" }} />
     </StudioChrome>

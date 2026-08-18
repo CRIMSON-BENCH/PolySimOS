@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { w: number; b: number; thresh: number }> = {
@@ -66,6 +67,7 @@ print("decision boundary at x =", boundary)`;
         <Stat label="Decision boundary at x" value={boundary.toFixed(2)} />
         <Stat label="P(class 1 | x=1)" value={sigmoid(1).toFixed(2)} />
         <Stat label="Threshold" value={thresh.toFixed(2)} />
+        <Equation tex={`p(x)=\\dfrac{1}{1+e^{-(${b.toFixed(2)}+${w.toFixed(1)}x)}}=0.5\\ \\Rightarrow\\ x^{*}=${boundary.toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -67,7 +68,7 @@ print("lateral deflection (px):", round(y, 1))`;
         <p className="mt-3 text-xs text-slate-500">A spinning ball drags air around with it, moving faster on one side and slower on the other. The pressure difference pushes the ball sideways — the Magnus force — bending its flight. It is what curves a free kick around a wall, hooks a golf drive, and makes a curveball break. More spin means a sharper curve.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Spin" value={`${Math.abs(spin)} rev/s`} /><Stat label="Direction" value={spin > 0 ? "curves down/right" : spin < 0 ? "curves up/left" : "straight"} /><Stat label="Speed" value={`${speed} m/s`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Spin" value={`${Math.abs(spin)} rev/s`} /><Stat label="Direction" value={spin > 0 ? "curves down/right" : spin < 0 ? "curves up/left" : "straight"} /><Stat label="Speed" value={`${speed} m/s`} /><Equation tex={`F_M = \\tfrac{1}{2}\\rho\\,C_L A v^2 \\;\\propto\\; \\omega\\,v = ${Math.abs(spin)}\\times${speed} = ${Math.abs(spin) * speed}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

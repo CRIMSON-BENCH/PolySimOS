@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { pool: number; picks: number; ticket: number }> = {
@@ -38,7 +39,7 @@ print("expected loss per $%d ticket: $%.2f" % (ticket, ticket))`;
         <p className="mt-3 text-xs text-slate-500">Winning a jackpot means matching every drawn number, and the odds are the number of possible combinations, C(pool, picks). Adding just a few numbers to the pool multiplies the odds dramatically — a 6-from-49 draw is 1 in 14 million, 6-from-59 nearly 1 in 45 million. You are far likelier to be struck by lightning, which is why lotteries are so profitable.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Combinations" value={combos.toLocaleString(undefined, { maximumFractionDigits: 0 })} /><Stat label="Jackpot odds" value={`1 in ${odds.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Tickets to expect a win" value={`~${odds.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Combinations" value={combos.toLocaleString(undefined, { maximumFractionDigits: 0 })} /><Stat label="Jackpot odds" value={`1 in ${odds.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Tickets to expect a win" value={`~${odds.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Equation tex={`P(\\text{jackpot}) = \\dfrac{1}{\\binom{${pool}}{${picks}}} = \\dfrac{1}{${combos.toLocaleString("en-US", { maximumFractionDigits: 0 }).replace(/,/g, "{,}")}}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Odds of the jackpot</div>
         <div className="mt-3 text-center text-5xl font-black text-cyan-400">1 in {combos.toLocaleString(undefined, { maximumFractionDigits: 0 })}</div>

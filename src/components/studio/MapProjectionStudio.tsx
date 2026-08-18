@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { latitude: number }> = {
@@ -57,7 +58,7 @@ print(f"length {length_distortion:.2f}x, area {area_distortion:.1f}x")`;
         <p className="mt-3 text-xs text-slate-500">You cannot flatten a sphere without distortion. The Mercator projection preserves angles for navigation but inflates area toward the poles by 1/cos²(latitude) — so Greenland appears as big as Africa though it is 14 times smaller. The Tissot circles are all the same true size on the globe; watch them balloon at high latitudes.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Area distortion" value={`${areaDistortion.toFixed(1)}×`} /><Stat label="Length distortion" value={`${(1 / Math.cos(latitude * Math.PI / 180)).toFixed(2)}×`} /><Stat label="Latitude" value={`${latitude}°`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Area distortion" value={`${areaDistortion.toFixed(1)}×`} /><Stat label="Length distortion" value={`${(1 / Math.cos(latitude * Math.PI / 180)).toFixed(2)}×`} /><Stat label="Latitude" value={`${latitude}°`} /><Equation tex={`x=\\lambda,\\quad y=\\ln\\tan\\!\\left(\\tfrac{\\pi}{4}+\\tfrac{\\phi}{2}\\right),\\quad \\tfrac{1}{\\cos^2\\phi}=${areaDistortion.toFixed(1)}\\times\\ (\\phi=${latitude}^\\circ)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

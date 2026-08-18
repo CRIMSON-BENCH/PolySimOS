@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { capSA: number; capBT: number }> = {
@@ -72,7 +73,7 @@ print("max flow", mf)`;
         <p className="mt-3 text-xs text-slate-500">The max-flow problem asks how much can be pushed from a source to a sink through a network of capacity-limited edges. Edmonds-Karp repeatedly finds an augmenting path and saturates it until none remain. By the max-flow min-cut theorem, the answer equals the capacity of the cheapest set of edges that, if cut, disconnects source from sink — the bottleneck.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Maximum flow" value={String(maxflow)} /><Stat label="Nodes" value={String(N)} /><Stat label="Bottleneck" value="min cut" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Maximum flow" value={String(maxflow)} /><Stat label="Nodes" value={String(N)} /><Stat label="Bottleneck" value="min cut" /><Equation tex={`|f|=\\sum_{v}f(s,v)=${maxflow}=\\min_{\\text{cut}}c(S,T)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

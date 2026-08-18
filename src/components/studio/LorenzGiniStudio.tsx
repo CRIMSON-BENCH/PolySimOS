@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { inequality: number }> = {
@@ -63,7 +64,7 @@ print("gini", round(float(gini), 3))`;
         <p className="mt-3 text-xs text-slate-500">The Lorenz curve plots the cumulative share of income against the cumulative share of population, from poorest to richest. Perfect equality is the diagonal; the more the curve bows below it, the more unequal the distribution. The Gini coefficient is twice the area between them — 0 is total equality, 1 is one person owning everything.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Gini coefficient" value={gini.toFixed(3)} /><Stat label="Inequality" value={level} /><Stat label="Top 10% share" value={`${top10.toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Gini coefficient" value={gini.toFixed(3)} /><Stat label="Inequality" value={level} /><Stat label="Top 10% share" value={`${top10.toFixed(0)}%`} /><Equation tex={`G=1-2\\int_0^1 L(p)\\,dp=\\dfrac{A}{A+B}=${gini.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={340} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

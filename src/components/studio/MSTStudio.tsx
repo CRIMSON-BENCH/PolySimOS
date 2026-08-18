@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { nNodes: number }> = {
@@ -60,7 +61,7 @@ print("tree edges:", used, "total weight:", total)`;
         <p className="mt-3 text-xs text-slate-500">A minimum spanning tree connects every node with the least possible total edge weight and no cycles. Kruskal&apos;s algorithm sorts all edges and adds the cheapest that does not form a cycle, using a union-find structure to detect them. It designs efficient road, power, and network layouts that reach everywhere for the lowest cost.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Nodes" value={String(Math.round(nNodes))} /><Stat label="Tree edges" value={String(Math.round(nNodes) - 1)} /><Stat label="Total weight" value={String(total)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Nodes" value={String(Math.round(nNodes))} /><Stat label="Tree edges" value={String(Math.round(nNodes) - 1)} /><Stat label="Total weight" value={String(total)} /><Equation tex={`W(T) = \\sum_{e \\in T} w(e) = ${total} \\quad (|T| = ${Math.round(nNodes) - 1}\\ \\text{edges})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

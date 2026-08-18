@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { mc: number }> = {
@@ -51,7 +52,7 @@ print("Pm", pm, "Qm", qm, "DWL", dwl, "profit", profit)`;
         <p className="mt-3 text-xs text-slate-500">A monopolist maximizes profit where marginal revenue equals marginal cost — then charges the price the demand curve allows. Because MR lies below demand, the monopoly produces less and charges more than a competitive market (where price equals MC). The red triangle is the deadweight loss: mutually beneficial trades that never happen.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Monopoly price" value={`$${pm.toFixed(1)}`} /><Stat label="Monopoly qty" value={qm.toFixed(1)} /><Stat label="Competitive qty" value={qc.toFixed(1)} /><Stat label="Deadweight loss" value={dwl.toFixed(0)} /><Stat label="Profit" value={profit.toFixed(0)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Monopoly price" value={`$${pm.toFixed(1)}`} /><Stat label="Monopoly qty" value={qm.toFixed(1)} /><Stat label="Competitive qty" value={qc.toFixed(1)} /><Stat label="Deadweight loss" value={dwl.toFixed(0)} /><Stat label="Profit" value={profit.toFixed(0)} /><Equation tex={`MR=${a}-2Q=MC=${mc}\\ \\Rightarrow\\ Q_m=${qm.toFixed(1)},\\ P_m=\\$${pm.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

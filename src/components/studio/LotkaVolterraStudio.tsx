@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { a: number; b: number; c: number; d: number }> = {
@@ -65,7 +66,7 @@ print("prey equilibrium", c/d, "predator equilibrium", a/b)`;
         <p className="mt-3 text-xs text-slate-500">Two coupled equations produce the classic boom-and-bust cycle: prey multiply, predators feast and multiply, prey crash, predators starve, and the cycle repeats. The phase portrait shows the closed orbit — populations forever chasing each other, never settling.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Prey equilibrium" value={preyEq.toFixed(1)} /><Stat label="Predator equilibrium" value={predEq.toFixed(1)} /><Stat label="Dynamics" value="limit cycle" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Prey equilibrium" value={preyEq.toFixed(1)} /><Stat label="Predator equilibrium" value={predEq.toFixed(1)} /><Stat label="Dynamics" value="limit cycle" /><Equation tex={`\\dfrac{dx}{dt}=${a}x-${b}xy,\\quad \\dfrac{dy}{dt}=${d}xy-${c}y`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

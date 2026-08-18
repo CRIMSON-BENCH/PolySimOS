@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { distance: number; targetMin: number }> = {
@@ -61,7 +62,7 @@ for i in range(n):
         <p className="mt-3 text-xs text-slate-500">Race pace is simply your goal time divided by the distance, but how you distribute it matters. A negative split — starting conservatively and finishing faster — is how nearly every marathon world record is run, because going out too hard burns glycogen and invites the dreaded wall. Even pacing is the safe default.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Average pace" value={`${paceMin}:${paceSec.toString().padStart(2, "0")}/km`} /><Stat label="Speed" value={`${kmh.toFixed(1)} km/h`} /><Stat label="Finish time" value={`${Math.floor(targetMin / 60)}h ${(targetMin % 60).toFixed(0)}m`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Average pace" value={`${paceMin}:${paceSec.toString().padStart(2, "0")}/km`} /><Stat label="Speed" value={`${kmh.toFixed(1)} km/h`} /><Stat label="Finish time" value={`${Math.floor(targetMin / 60)}h ${(targetMin % 60).toFixed(0)}m`} /><Equation tex={`\\text{pace}=\\dfrac{T}{d}=\\dfrac{${targetMin}\\,\\text{min}}{${distance}\\,\\text{km}}=${pace.toFixed(2)}\\,\\text{min/km}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

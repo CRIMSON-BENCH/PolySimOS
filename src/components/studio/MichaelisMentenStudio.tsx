@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Vmax: number; Km: number; S: number }> = {
@@ -57,6 +58,7 @@ print("fraction of Vmax =", round(100 * S / (Km + S)), "%")`;
         <Stat label="Reaction rate v" value={`${v.toFixed(1)} µmol/min`} />
         <Stat label="Fraction of Vmax" value={`${(v / Vmax * 100).toFixed(0)}%`} />
         <Stat label="Km (half-Vmax [S])" value={`${Km} mM`} />
+        <Equation tex={`v = \\frac{V_{max}\\,[S]}{K_m + [S]} = \\frac{${Vmax}\\cdot${S}}{${Km} + ${S}} = ${v.toFixed(1)}\\ \\mu\\text{mol/min}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

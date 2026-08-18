@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
@@ -70,7 +71,7 @@ print("magnification =", round(mag, 2))`;
         <Slider label="Object distance" value={objDist} min={60} max={340} step={10} onChange={(val) => update({ objDist: val })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Mirror" value={concave ? "concave" : "convex"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Equation" value="1/v + 1/u = 1/f" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Mirror" value={concave ? "concave" : "convex"} /><Stat label="Focal length" value={`${f}px`} /><Stat label="Equation" value="1/v + 1/u = 1/f" /><Equation tex={`\\frac{1}{f}=\\frac{1}{d_o}+\\frac{1}{d_i},\\quad M=-\\frac{d_i}{d_o}=${mag0.toFixed(2)}\\ \\ (f=${F0},\\ d_o=${objDist})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

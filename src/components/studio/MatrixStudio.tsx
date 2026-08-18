@@ -4,6 +4,7 @@ import { useState } from "react";
 import { parseMatrix, multiply, transpose, determinant, inverse, formatMatrix } from "@/lib/engines/linalg";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 
 export function MatrixStudio() {
   const [a, setA] = useState("2 1\n1 3");
@@ -61,7 +62,19 @@ print("A^T\\n", A.T)`;
         </div>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Engine" value="Gauss-Jordan" /><Stat label="Result" value={label || "—"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Engine" value="Gauss-Jordan" /><Stat label="Result" value={label || "—"} />{(() => {
+        let tex = "A\\mathbf{x}=\\mathbf{b}";
+        try {
+          const A = parseMatrix(a);
+          if (A.length === 2 && A[0].length === 2) {
+            const d = Math.round(determinant(A) * 1e6) / 1e6;
+            tex = `\\det(A)=ad-bc=(${A[0][0]})(${A[1][1]})-(${A[0][1]})(${A[1][0]})=${d}`;
+          } else if (A.length === A[0].length) {
+            tex = `\\det(A)=${Math.round(determinant(A) * 1e6) / 1e6}`;
+          }
+        } catch { /* fall back to Ax=b */ }
+        return <Equation tex={tex} />;
+      })()}<ExplainResult text={explain} /></div>}
     >
       <div className="grid gap-4 p-2 md:grid-cols-2">
         <div><label className="mb-1 block text-xs font-semibold text-slate-400">Matrix A</label><textarea value={a} onChange={(e) => setA(e.target.value)} className={box} spellCheck={false} /></div>

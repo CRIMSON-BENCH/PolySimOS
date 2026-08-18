@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 740, H = 440;
@@ -62,7 +63,7 @@ print("v_mp", vmp, "v_avg", vavg, "v_rms", vrms)`;
         <Slider label="Molar mass (g/mol)" value={mass} min={2} max={132} step={2} onChange={(v) => update({ mass: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Most probable" value={`${data.vmp.toFixed(0)} m/s`} /><Stat label="Average" value={`${data.vavg.toFixed(0)} m/s`} /><Stat label="RMS" value={`${data.vrms.toFixed(0)} m/s`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Most probable" value={`${data.vmp.toFixed(0)} m/s`} /><Stat label="Average" value={`${data.vavg.toFixed(0)} m/s`} /><Stat label="RMS" value={`${data.vrms.toFixed(0)} m/s`} /><Equation tex={`f(v)=4\\pi\\left(\\frac{m}{2\\pi kT}\\right)^{3/2}v^2 e^{-mv^2/2kT},\\quad v_p=\\sqrt{\\tfrac{2kT}{m}}=${data.vmp.toFixed(0)}\\,\\text{m/s at }T=${temp}\\,\\text{K}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

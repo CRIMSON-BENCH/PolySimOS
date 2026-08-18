@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { sx: number; sy: number; txy: number }> = {
@@ -61,7 +62,7 @@ print("s1", s1, "s2", s2, "tmax", R, "angle", theta)`;
         <p className="mt-3 text-xs text-slate-500">Mohr&apos;s circle is a graphical way to transform a 2D stress state to any rotated axis. The circle&apos;s center is the average normal stress and its radius is the maximum shear. Where it crosses the horizontal axis gives the principal stresses — the orientation with zero shear. Educational tool.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="σ₁ (max principal)" value={`${s1.toFixed(1)} MPa`} /><Stat label="σ₂ (min principal)" value={`${s2.toFixed(1)} MPa`} /><Stat label="τmax" value={`${tmax.toFixed(1)} MPa`} /><Stat label="Principal angle" value={`${theta.toFixed(1)}°`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="σ₁ (max principal)" value={`${s1.toFixed(1)} MPa`} /><Stat label="σ₂ (min principal)" value={`${s2.toFixed(1)} MPa`} /><Stat label="τmax" value={`${tmax.toFixed(1)} MPa`} /><Stat label="Principal angle" value={`${theta.toFixed(1)}°`} /><Equation tex={`\\sigma_{1,2}=\\frac{${sx}+${sy}}{2}\\pm\\sqrt{\\left(\\frac{${sx}-${sy}}{2}\\right)^2+${txy}^2}=${s1.toFixed(1)},\\,${s2.toFixed(1)}\\ \\text{MPa}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

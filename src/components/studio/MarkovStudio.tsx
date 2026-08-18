@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { pAA: number; pBB: number; pCC: number }> = {
@@ -65,7 +66,7 @@ print("stationary", v.round(3))`;
         <button onClick={() => setStep(0)} className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Restart from A</button>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Step" value={String(step)} /><Stat label="P(A)" value={dist[0].toFixed(3)} /><Stat label="P(B)" value={dist[1].toFixed(3)} /><Stat label="P(C)" value={dist[2].toFixed(3)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Step" value={String(step)} /><Stat label="P(A)" value={dist[0].toFixed(3)} /><Stat label="P(B)" value={dist[1].toFixed(3)} /><Stat label="P(C)" value={dist[2].toFixed(3)} /><Equation tex={`x_{t+1}=Px_t,\\ \\pi P=\\pi,\\quad P=\\begin{pmatrix}${pAA}&${((1 - pAA) / 2).toFixed(2)}&${((1 - pAA) / 2).toFixed(2)}\\\\${((1 - pBB) / 2).toFixed(2)}&${pBB}&${((1 - pBB) / 2).toFixed(2)}\\\\${((1 - pCC) / 2).toFixed(2)}&${((1 - pCC) / 2).toFixed(2)}&${pCC}\\end{pmatrix}`} /><ExplainResult text={explain} /></div>}
     >
       <div className="flex h-full min-h-[360px] items-end justify-center gap-16 p-10">
         {dist.map((p, i) => (
