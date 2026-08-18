@@ -5,7 +5,7 @@ import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 // Double pendulum — the textbook chaotic system. Exact equations of motion,
 // integrated with RK4, with a fading trail of the lower bob.
@@ -51,27 +51,64 @@ export function DoublePendulumStudio() {
 
   const reset = () => { stateRef.current = [Math.PI / 2 + (Math.random() - 0.5) * 0.02, Math.PI / 2, 0, 0]; trail.current = []; };
 
-  const frame = (steps: number) => {
+  const ox = W / 2, oy = H / 2 - 60, l1 = 120, l2 = 120;
+
+  // Render only — reads stateRef.current, never advances it. Shared by the physics
+  // tick (after it integrates) and by drag-move (which repositions a bob directly).
+  const draw = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = hidpi(canvas, W, H);
-    const l1 = 120, l2 = 120;
-    const p = { m1: 10, m2: m2Ref.current, l1: 1.2, l2: 1.2, g: gRef.current };
-    for (let s = 0; s < steps; s++) for (let i = 0; i < 4; i++) stateRef.current = rk4(stateRef.current, 0.02, p);
     const [t1, t2] = stateRef.current;
-    const ox = W / 2, oy = H / 2 - 60;
     const x1 = ox + l1 * Math.sin(t1), y1 = oy + l1 * Math.cos(t1);
     const x2 = x1 + l2 * Math.sin(t2), y2 = y1 + l2 * Math.cos(t2);
-    trail.current.push([x2, y2]); if (trail.current.length > 400) trail.current.shift();
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     ctx.lineWidth = 1.5;
     for (let i = 1; i < trail.current.length; i++) { const a = i / trail.current.length; ctx.strokeStyle = `hsla(${190 - a * 120},90%,60%,${a})`; ctx.beginPath(); ctx.moveTo(...trail.current[i - 1]); ctx.lineTo(...trail.current[i]); ctx.stroke(); }
     ctx.strokeStyle = "#e2e8f0"; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(ox, oy); ctx.lineTo(x1, y1); ctx.lineTo(x2, y2); ctx.stroke();
     ctx.fillStyle = "#22d3ee"; ctx.beginPath(); ctx.arc(x1, y1, 8, 0, 7); ctx.fill();
     ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(x2, y2, 6 + m2Ref.current * 0.3, 0, 7); ctx.fill();
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("drag either bob to set a new start", 12, 20);
+  };
+
+  const frame = (steps: number) => {
+    const p = { m1: 10, m2: m2Ref.current, l1: 1.2, l2: 1.2, g: gRef.current };
+    for (let s = 0; s < steps; s++) for (let i = 0; i < 4; i++) stateRef.current = rk4(stateRef.current, 0.02, p);
+    const [t1, t2] = stateRef.current;
+    const x1 = ox + l1 * Math.sin(t1), y1 = oy + l1 * Math.cos(t1);
+    const x2 = x1 + l2 * Math.sin(t2), y2 = y1 + l2 * Math.cos(t2);
+    trail.current.push([x2, y2]); if (trail.current.length > 400) trail.current.shift();
+    draw();
   };
 
   const t = useTransport(frame);
+
+  // Grab a bob to pause playback and set a new starting angle by hand; releasing
+  // leaves it there (velocities zeroed) until Play is pressed again.
+  const dragBob = useRef<0 | 1 | 2>(0);
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (px, py) => {
+      const [th1, th2] = stateRef.current;
+      const x1 = ox + l1 * Math.sin(th1), y1 = oy + l1 * Math.cos(th1);
+      const x2 = x1 + l2 * Math.sin(th2), y2 = y1 + l2 * Math.cos(th2);
+      if (Math.hypot(x2 - px, y2 - py) < 14) { dragBob.current = 2; t.pause(); return true; }
+      if (Math.hypot(x1 - px, y1 - py) < 14) { dragBob.current = 1; t.pause(); return true; }
+      return false;
+    },
+    move: (px, py) => {
+      if (dragBob.current === 1) {
+        const th1 = Math.atan2(px - ox, py - oy);
+        stateRef.current = [th1, stateRef.current[1], 0, 0];
+      } else if (dragBob.current === 2) {
+        const [th1] = stateRef.current;
+        const x1 = ox + l1 * Math.sin(th1), y1 = oy + l1 * Math.cos(th1);
+        const th2 = Math.atan2(px - x1, py - y1);
+        stateRef.current = [th1, th2, 0, 0];
+      }
+      draw();
+    },
+    up: () => { dragBob.current = 0; },
+  });
 
   const heavy = m2 >= 20;
   const energetic = g >= 15;
@@ -107,7 +144,7 @@ print("theta1, theta2, w1, w2 =", s)`;
     <StudioChrome title="Double Pendulum Studio" tagline="chaotic dynamics · RK4"
       controls={<div>
         <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { reset(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
-        <p className="mb-3 text-xs text-slate-500">Tiny changes in the start explode into totally different motion — deterministic chaos.</p>
+        <p className="mb-3 text-xs text-slate-500">Tiny changes in the start explode into totally different motion — deterministic chaos. Drag either bob to set a new starting position; it pauses playback automatically.</p>
         <Presets
           presets={Object.keys(PRESETS).map((label) => ({ label }))}
           onApply={(label) => update(PRESETS[label])}
