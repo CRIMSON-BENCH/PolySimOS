@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { useEntitlement } from "@/lib/entitlements";
+import { useEntitlement, useHasPlan } from "@/lib/entitlements";
 import { useAuth } from "@/lib/auth";
 import {
   SOLVER_UNLOCK_PREFIX,
@@ -143,12 +143,15 @@ export function ExportSlot({ next }: { next: string }) {
  * One small contextual unlock button + a quiet link to full pricing. */
 export function MonetizationBar({ kind, slug, name, next }: { kind: "solver" | "multi"; slug: string; name: string; next: string }) {
   const { user } = useAuth();
+  const hasPlan = useHasPlan();
   const unlocked = useEntitlement(kind === "multi" ? entKey.multi(slug) : entKey.solver(slug));
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const price = kind === "multi" ? MULTI_UNLOCK_PRICE : SOLVER_UNLOCK_PRICE;
   const sku = `${kind === "multi" ? MULTI_UNLOCK_PREFIX : SOLVER_UNLOCK_PREFIX}${slug}`;
   void name;
+  // Pro/Team members: no upsell at all — they already have everything.
+  if (hasPlan) return null;
   return (
     <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
       {unlocked ? (
@@ -162,9 +165,11 @@ export function MonetizationBar({ kind, slug, name, next }: { kind: "solver" | "
           {loading ? "…" : `Unlock this ${kind === "multi" ? "workflow" : "solver"} — $${price}`}
         </button>
       )}
-      <span className="text-slate-500 dark:text-slate-400">
-        or <Link href="/pricing" className="font-medium text-cyan-700 hover:underline dark:text-cyan-300">unlock everything with Pro →</Link>
-      </span>
+      {!unlocked && (
+        <span className="text-slate-500 dark:text-slate-400">
+          or <Link href="/pricing" className="font-medium text-cyan-700 hover:underline dark:text-cyan-300">unlock everything with Pro →</Link>
+        </span>
+      )}
       {err && <span className="text-xs text-amber-600 dark:text-amber-400">{err}</span>}
     </div>
   );

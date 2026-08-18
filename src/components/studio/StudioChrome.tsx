@@ -15,15 +15,17 @@ export function StudioChrome({
   inspector?: React.ReactNode;
 }) {
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
-      <div className="flex items-center justify-between border-b border-slate-200 px-4 py-2.5 dark:border-slate-800">
-        <div className="flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-400" />
-          <span className="h-2.5 w-2.5 rounded-full bg-lime-400" />
-          <span className="ml-3 text-sm font-semibold text-slate-700 dark:text-slate-300">{title}</span>
+    <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm ring-1 ring-black/[0.02] dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex items-center justify-between border-b border-slate-200/70 bg-gradient-to-r from-slate-50 to-white px-4 py-3 dark:border-slate-800 dark:from-slate-900 dark:to-slate-900">
+        <div className="flex items-center gap-2.5">
+          <span className="relative flex h-2 w-2" aria-hidden>
+            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cyan-400 opacity-60" />
+            <span className="relative inline-flex h-2 w-2 rounded-full bg-cyan-500" />
+          </span>
+          <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">{title}</span>
+          <span className="rounded-full bg-cyan-50 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-cyan-600 dark:bg-cyan-950/60 dark:text-cyan-400">Live</span>
         </div>
-        <span className="text-xs text-slate-400">{tagline}</span>
+        <span className="hidden text-xs text-slate-400 sm:block">{tagline}</span>
       </div>
       <div className="grid gap-0 lg:grid-cols-[1fr_18rem]">
         <div className="grid-bg relative min-h-[360px] overflow-hidden bg-slate-950 p-3">{children}</div>

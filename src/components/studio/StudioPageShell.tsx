@@ -1,13 +1,15 @@
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclaimer } from "@/components/Disclaimer";
 import { JsonLd } from "@/components/JsonLd";
-import { ProductGrid } from "@/components/ProductCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { CrossLinks } from "@/components/CrossLinks";
-import { contextualProducts, premiumUpsell } from "@/lib/products";
+import { premiumUpsell } from "@/lib/products";
 import { softwareAppLd, faqLd } from "@/lib/seo";
 import { EmbedButton } from "./EmbedButton";
 import { MonetizationBar } from "@/components/monetization/Slots";
+import { ProGatedUpsell } from "@/components/monetization/ProGatedUpsell";
+import { AiSolverAssist } from "./AiSolverAssist";
+import { SIMS } from "@/app/studio/page";
 
 const OTHER_SIMS = [
   { name: "Visual Node Graph", href: "/studio/graph" },
@@ -355,9 +357,19 @@ export function StudioPageShell({
         <p className="mt-3 text-slate-600 dark:text-slate-400">{about}</p>
       </section>
 
-      <PremiumCTA product={premiumUpsell(slug)} />
-      <ProductGrid products={contextualProducts(slug, 6)} title="Related products & compute" />
-      <CrossLinks title="More live simulations" links={OTHER_SIMS.filter((s) => s.href !== `/studio/${slug}`)} />
+      <AiSolverAssist name={name} keyword={keyword} />
+
+      <ProGatedUpsell>
+        <PremiumCTA product={premiumUpsell(slug)} />
+      </ProGatedUpsell>
+
+      {(() => {
+        const myTag = SIMS.find((s) => s.slug === slug)?.tag ?? "";
+        const sameDomain = SIMS.filter((s) => s.tag === myTag && s.slug !== slug).slice(0, 8).map((s) => ({ name: s.name, href: `/studio/${s.slug}` }));
+        const related = sameDomain.length >= 3 ? sameDomain : OTHER_SIMS.filter((s) => s.href !== `/studio/${slug}`).slice(0, 8);
+        const title = sameDomain.length >= 3 ? `More ${myTag} simulations` : "Related live simulations";
+        return <CrossLinks title={title} links={related} />;
+      })()}
 
       <section className="mt-12 max-w-3xl">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">Frequently asked questions</h2>
