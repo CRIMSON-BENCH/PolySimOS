@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
+import { ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi } from "@/lib/studioKit";
 
 // Watson-Lovelock Daisyworld: self-regulating planetary temperature.
@@ -50,13 +51,35 @@ export function DaisyworldStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [running]);
 
+  const explain =
+    temp > 45
+      ? `A bright sun (L=${lum.toFixed(2)}) is held in check: reflective white daisies (${(white * 100).toFixed(0)}%) now dominate, dumping heat to keep the surface near the growth optimum.`
+      : temp < 8
+      ? `Under a dim sun (L=${lum.toFixed(2)}), dark black daisies (${(black * 100).toFixed(0)}%) take over and absorb sunlight, warming the planet toward the temperature life prefers.`
+      : `White ${(white * 100).toFixed(0)}% vs black ${(black * 100).toFixed(0)}% daisies balance to pin temperature near the ~22 °C growth optimum at L=${lum.toFixed(2)} — homeostasis emerges with no foresight or control.`;
+
+  const code = `import numpy as np
+Aw, Ab, Ag = 0.75, 0.25, 0.5
+SIGMA, S0, L = 5.67e-8, 917, ${lum.toFixed(3)}
+w, b = 0.2, 0.2
+for _ in range(400):
+    bare = max(0.0, 1 - w - b)
+    A = w*Aw + b*Ab + bare*Ag
+    Te = (S0*L*(1 - A)/SIGMA)**0.25
+    g = lambda x: max(0.0, 1 - 0.003265*(295.5 - (Te + 20*(A - x)))**2)
+    w += w*(bare*g(Aw) - 0.3)*0.4
+    b += b*(bare*g(Ab) - 0.3)*0.4
+    w = min(1.0, max(0.001, w)); b = min(1.0, max(0.001, b))
+print("T", round(Te - 273.15, 1), "white", round(w, 2), "black", round(b, 2))`;
+
   return (
     <StudioChrome title="Daisyworld" tagline="planetary self-regulation (Gaia)"
       controls={<div>
         <button onClick={() => setRunning((r) => !r)} className="w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button>
         <p className="mt-3 text-xs text-slate-500">Watson and Lovelock&apos;s Daisyworld shows how life can regulate a planet. Black daisies warm a cold world by absorbing sunlight; white daisies cool a hot one by reflecting it. As the sun brightens, the daisy mix shifts to hold the temperature nearly constant — biological homeostasis with no foresight.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Luminosity" value={lum.toFixed(2)} /><Stat label="Temperature" value={`${temp.toFixed(1)} °C`} /><Stat label="White / black" value={`${(white * 100).toFixed(0)}% / ${(black * 100).toFixed(0)}%`} /></div>}
+      inspector={<div><Stat label="Luminosity" value={lum.toFixed(2)} /><Stat label="Temperature" value={`${temp.toFixed(1)} °C`} /><Stat label="White / black" value={`${(white * 100).toFixed(0)}% / ${(black * 100).toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

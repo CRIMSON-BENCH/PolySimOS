@@ -1,16 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { m1: number; m2: number; u1: number; u2: number; e: number }> = {
+  "Elastic swap": { m1: 2, m2: 2, u1: 3, u2: 0, e: 1 },
+  "Perfectly inelastic": { m1: 2, m2: 1, u1: 3, u2: -1, e: 0 },
+  "Heavy vs light": { m1: 6, m2: 0.5, u1: 4, u2: 0, e: 1 },
+  "Head-on elastic": { m1: 2, m2: 1, u1: 4, u2: -4, e: 1 },
+};
 
 export function CollisionLabStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [m1, setM1] = useState(2);
-  const [m2, setM2] = useState(1);
-  const [u1, setU1] = useState(3);
-  const [u2, setU2] = useState(-1);
-  const [e, setE] = useState(1);
+  const [{ m1, m2, u1, u2, e }, update] = useShareableNumbers({ m1: 2, m2: 1, u1: 3, u2: -1, e: 1 });
 
   const v1 = (m1 * u1 + m2 * u2 - m2 * e * (u1 - u2)) / (m1 + m2);
   const v2 = (m1 * u1 + m2 * u2 + m1 * e * (u1 - u2)) / (m1 + m2);
@@ -36,15 +40,34 @@ export function CollisionLabStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [m1, m2, u1, u2, e, v1, v2]);
 
+  const lostPct = keI > 0 ? (100 * (1 - keF / keI)).toFixed(0) : "0";
+  const explain =
+    e >= 0.99
+      ? Math.abs(m1 - m2) < 0.01
+        ? "Equal masses in an elastic collision simply exchange velocities — each cart leaves with the other cart old speed."
+        : "This collision is elastic (e=1), so kinetic energy is fully conserved; momentum-sharing only redistributes the speeds between the two masses."
+      : e <= 0.01
+      ? `Perfectly inelastic (e=0): the carts stick and move as one, losing ${lostPct}% of the kinetic energy to heat and sound while momentum stays conserved.`
+      : `Partially inelastic (e=${e.toFixed(2)}): momentum is conserved but ${lostPct}% of the kinetic energy is lost — the higher e, the bouncier the rebound.`;
+
+  const code = `m1, m2, u1, u2, e = ${m1}, ${m2}, ${u1}, ${u2}, ${e}
+v1 = (m1*u1 + m2*u2 - m2*e*(u1 - u2)) / (m1 + m2)
+v2 = (m1*u1 + m2*u2 + m1*e*(u1 - u2)) / (m1 + m2)
+keI = 0.5*m1*u1**2 + 0.5*m2*u2**2
+keF = 0.5*m1*v1**2 + 0.5*m2*v2**2
+print("v1", v1, "v2", v2, "energy lost %", 100*(1 - keF/keI))`;
+
   return (
     <StudioChrome title="Collision Lab (1D)" tagline="momentum is always conserved"
       controls={<div>
-        <Slider label="Mass 1 (kg)" value={m1} min={0.5} max={6} step={0.5} onChange={setM1} />
-        <Slider label="Mass 2 (kg)" value={m2} min={0.5} max={6} step={0.5} onChange={setM2} />
-        <Slider label="Velocity 1 (m/s)" value={u1} min={-5} max={5} step={0.5} onChange={setU1} />
-        <Slider label="Velocity 2 (m/s)" value={u2} min={-5} max={5} step={0.5} onChange={setU2} />
-        <Slider label="Restitution e" value={e} min={0} max={1} step={0.05} onChange={setE} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Mass 1 (kg)" value={m1} min={0.5} max={6} step={0.5} onChange={(v) => update({ m1: v })} />
+        <Slider label="Mass 2 (kg)" value={m2} min={0.5} max={6} step={0.5} onChange={(v) => update({ m2: v })} />
+        <Slider label="Velocity 1 (m/s)" value={u1} min={-5} max={5} step={0.5} onChange={(v) => update({ u1: v })} />
+        <Slider label="Velocity 2 (m/s)" value={u2} min={-5} max={5} step={0.5} onChange={(v) => update({ u2: v })} />
+        <Slider label="Restitution e" value={e} min={0} max={1} step={0.05} onChange={(v) => update({ e: v })} />
         <p className="mt-3 text-xs text-slate-500">Momentum is conserved in every collision. Kinetic energy is conserved only when e=1 (perfectly elastic); at e=0 the carts stick together and the lost energy becomes heat and sound.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Final v₁" value={`${v1.toFixed(2)} m/s`} />
@@ -52,6 +75,7 @@ export function CollisionLabStudio() {
         <Stat label="KE before" value={`${keI.toFixed(1)} J`} />
         <Stat label="KE after" value={`${keF.toFixed(1)} J`} />
         <Stat label="Energy lost" value={keI > 0 ? `${(100 * (1 - keF / keI)).toFixed(0)}%` : "0%"} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );

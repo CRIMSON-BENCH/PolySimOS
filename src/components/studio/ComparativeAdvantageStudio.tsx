@@ -1,20 +1,37 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { aWine: number; aCloth: number; bWine: number; bCloth: number }> = {
+  "Ricardo classic": { aWine: 6, aCloth: 3, bWine: 2, bCloth: 4 },
+  "A better at both": { aWine: 8, aCloth: 6, bWine: 2, bCloth: 4 },
+  "Strong specialization": { aWine: 8, aCloth: 2, bWine: 2, bCloth: 8 },
+  "Symmetric (no gains)": { aWine: 4, aCloth: 4, bWine: 4, bCloth: 4 },
+};
 
 // Two countries, two goods: PPF + comparative advantage.
 export function ComparativeAdvantageStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [aWine, setAWine] = useState(6); // country A wine max
-  const [aCloth, setACloth] = useState(3);
-  const [bWine, setBWine] = useState(2);
-  const [bCloth, setBCloth] = useState(4);
+  const [{ aWine, aCloth, bWine, bCloth }, update] = useShareableNumbers({ aWine: 6, aCloth: 3, bWine: 2, bCloth: 4 });
 
   const aOppWine = aCloth / aWine; // cloth given up per wine
   const bOppWine = bCloth / bWine;
   const aAdv = aOppWine < bOppWine ? "wine" : "cloth"; const bAdv = aOppWine < bOppWine ? "cloth" : "wine";
+
+  const explain =
+    Math.abs(aOppWine - bOppWine) < 0.05
+      ? "Both frontiers share the same slope, so opportunity costs match — no comparative advantage exists and trade brings no gains."
+      : `Country A gives up ${aOppWine.toFixed(2)} cloth per wine versus B at ${bOppWine.toFixed(2)}, so A specializes in ${aAdv} and B in ${bAdv} — trade then lets both consume beyond their own frontiers.`;
+
+  const code = `aWine, aCloth = ${aWine}, ${aCloth}
+bWine, bCloth = ${bWine}, ${bCloth}
+a_opp = aCloth / aWine   # cloth given up per wine
+b_opp = bCloth / bWine
+print("A opp cost (wine)", round(a_opp, 2), "| B", round(b_opp, 2))
+print("A specializes in", "wine" if a_opp < b_opp else "cloth")`;
 
   useEffect(() => {
     const W = 500, H = 320; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
@@ -29,13 +46,15 @@ export function ComparativeAdvantageStudio() {
   return (
     <StudioChrome title="Comparative Advantage" tagline="the gains from trade"
       controls={<div>
-        <Slider label="A max wine" value={aWine} min={1} max={8} step={1} onChange={setAWine} />
-        <Slider label="A max cloth" value={aCloth} min={1} max={8} step={1} onChange={setACloth} />
-        <Slider label="B max wine" value={bWine} min={1} max={8} step={1} onChange={setBWine} />
-        <Slider label="B max cloth" value={bCloth} min={1} max={8} step={1} onChange={setBCloth} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="A max wine" value={aWine} min={1} max={8} step={1} onChange={(v) => update({ aWine: v })} />
+        <Slider label="A max cloth" value={aCloth} min={1} max={8} step={1} onChange={(v) => update({ aCloth: v })} />
+        <Slider label="B max wine" value={bWine} min={1} max={8} step={1} onChange={(v) => update({ bWine: v })} />
+        <Slider label="B max cloth" value={bCloth} min={1} max={8} step={1} onChange={(v) => update({ bCloth: v })} />
         <p className="mt-3 text-xs text-slate-500">David Ricardo&apos;s great insight: even if one country is worse at making everything, both still gain from trade. Each should specialize in the good it gives up the least to produce — its comparative advantage — measured by the slope of its production-possibility frontier. Trade then lets both consume beyond their own frontiers.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="A opp. cost (wine)" value={`${aOppWine.toFixed(2)} cloth`} /><Stat label="B opp. cost (wine)" value={`${bOppWine.toFixed(2)} cloth`} /><Stat label="A should make" value={aAdv} /><Stat label="B should make" value={bAdv} /></div>}
+      inspector={<div><Stat label="A opp. cost (wine)" value={`${aOppWine.toFixed(2)} cloth`} /><Stat label="B opp. cost (wine)" value={`${bOppWine.toFixed(2)} cloth`} /><Stat label="A should make" value={aAdv} /><Stat label="B should make" value={bAdv} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,13 +2,20 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { vL: number; vR: number }> = {
+  "Straight ahead": { vL: 3, vR: 3 },
+  "Gentle arc": { vL: 2.2, vR: 2.8 },
+  "Spin in place": { vL: -2, vR: 2 },
+  "Sharp turn": { vL: 1, vR: 3.5 },
+};
 
 // Differential-drive (unicycle) robot kinematics.
 export function DifferentialDriveStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [vL, setVL] = useState(2.2);
-  const [vR, setVR] = useState(2.8);
+  const [{ vL, vR }, update] = useShareableNumbers({ vL: 2.2, vR: 2.8 });
   const [running, setRunning] = useState(true);
   const state = useRef({ x: 270, y: 200, th: 0 });
   const trail = useRef<[number, number][]>([]);
@@ -35,15 +42,30 @@ export function DifferentialDriveStudio() {
 
   const R = vL !== vR ? ((vR + vL) / 2) / ((vR - vL) / 20) : Infinity;
 
+  const explain =
+    vL === vR
+      ? "Both wheels match, so the robot rolls dead straight — turn rate is zero and the turn radius is infinite."
+      : vL === -vR
+      ? "The wheels spin equal and opposite, so the robot pivots in place about its center — zero forward travel, pure rotation."
+      : `The faster ${vR > vL ? "right" : "left"} wheel pushes the robot into an arc that curves toward the slower ${vR > vL ? "left" : "right"} side, with radius set by how close the two speeds are.`;
+
+  const code = `vL, vR, b = ${vL}, ${vR}, 20.0
+v = (vR + vL) / 2          # forward speed
+w = (vR - vL) / b          # turn rate per step
+R = float('inf') if vL == vR else v / w
+print("forward", v, "omega", w, "radius", R)`;
+
   return (
     <StudioChrome title="Differential Drive Robot" tagline="wheel speeds → path"
       controls={<div>
-        <Slider label="Left wheel speed" value={vL} min={-4} max={4} step={0.1} onChange={setVL} />
-        <Slider label="Right wheel speed" value={vR} min={-4} max={4} step={0.1} onChange={setVR} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Left wheel speed" value={vL} min={-4} max={4} step={0.1} onChange={(v) => update({ vL: v })} />
+        <Slider label="Right wheel speed" value={vR} min={-4} max={4} step={0.1} onChange={(v) => update({ vR: v })} />
         <div className="mt-3 flex gap-2"><button onClick={() => setRunning((r) => !r)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">{running ? "Pause" : "Run"}</button><button onClick={reset} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
         <p className="mt-3 text-xs text-slate-500">A differential-drive robot steers by spinning its two wheels at different speeds — like a tank. Equal speeds go straight, a difference curves the path, and opposite speeds spin in place. Its forward speed is the average of the wheels and its turn rate is their difference over the wheelbase.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Forward v" value={((vR + vL) / 2).toFixed(2)} /><Stat label="Turn rate ω" value={((vR - vL) / 20).toFixed(3)} /><Stat label="Turn radius" value={isFinite(R) ? R.toFixed(0) : "straight"} /></div>}
+      inspector={<div><Stat label="Forward v" value={((vR + vL) / 2).toFixed(2)} /><Stat label="Turn rate ω" value={((vR - vL) / 20).toFixed(3)} /><Stat label="Turn radius" value={isFinite(R) ? R.toFixed(0) : "straight"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,13 +2,21 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const CW = 540, CH = 460;
 
+const PRESETS: Record<string, { n: number }> = {
+  "Sparse (8)": { n: 8 },
+  "Handful (30)": { n: 30 },
+  "Dense (60)": { n: 60 },
+  "Crowd (120)": { n: 120 },
+};
+
 export function ConvexHullStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [n, setN] = useState(30);
+  const [{ n }, update] = useShareableNumbers({ n: 30 });
   const [seed, setSeed] = useState(1);
   const pts = useRef<[number, number][]>([]);
   const [hullSize, setHullSize] = useState(0);
@@ -32,14 +40,46 @@ export function ConvexHullStudio() {
     for (const [x, y] of hull) { ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fillStyle = "#f472b6"; ctx.fill(); }
   }, [n, seed]);
 
+  const nRound = Math.round(n);
+  const interior = Math.max(nRound - hullSize, 0);
+  const explain =
+    hullSize === 0
+      ? "Add points and a boundary polygon appears — the hull is the smallest convex shape wrapping them all."
+      : `Of ${nRound} points, only ${hullSize} lie on the hull while ${interior} sit inside and never touch the boundary — for random points the vertex count grows roughly like log n, far slower than n itself.`;
+
+  const code = `import numpy as np
+n = ${nRound}
+rng = np.random.default_rng(${seed})
+P = rng.uniform([40, 40], [500, 420], size=(n, 2))
+P = P[np.lexsort((P[:, 1], P[:, 0]))]
+def cross(o, a, b):
+    return (a[0]-o[0])*(b[1]-o[1]) - (a[1]-o[1])*(b[0]-o[0])
+lower = []
+for p in P:
+    while len(lower) >= 2 and cross(lower[-2], lower[-1], p) <= 0: lower.pop()
+    lower.append(tuple(p))
+upper = []
+for p in P[::-1]:
+    while len(upper) >= 2 and cross(upper[-2], upper[-1], p) <= 0: upper.pop()
+    upper.append(tuple(p))
+hull = lower[:-1] + upper[:-1]
+print("hull vertices", len(hull))`;
+
   return (
     <StudioChrome title="Convex Hull" tagline="Andrew's monotone chain"
       controls={<div>
-        <Slider label="Points" value={n} min={5} max={120} step={1} onChange={setN} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Points" value={n} min={5} max={120} step={1} onChange={(v) => update({ n: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New points</button>
         <p className="mt-3 text-xs text-slate-500">The convex hull is the smallest convex polygon containing every point — the shape a rubber band snaps to. Computed here with Andrew&apos;s monotone-chain algorithm in O(n log n).</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Points" value={String(Math.round(n))} /><Stat label="Hull vertices" value={String(hullSize)} /><Stat label="Complexity" value="O(n log n)" /></div>}
+      inspector={<div>
+        <Stat label="Points" value={String(nRound)} />
+        <Stat label="Hull vertices" value={String(hullSize)} />
+        <Stat label="Complexity" value="O(n log n)" />
+        <ExplainResult text={explain} />
+      </div>}
     ><canvas ref={canvasRef} width={540} height={460} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

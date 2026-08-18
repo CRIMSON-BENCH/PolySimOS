@@ -2,18 +2,25 @@
 
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 420;
 interface Ball { x: number; y: number; vx: number; vy: number; r: number; m: number; }
+
+const PRESETS: Record<string, { n: number; restitution: number }> = {
+  "Perfectly elastic": { n: 12, restitution: 1 },
+  "Energy draining": { n: 12, restitution: 0.7 },
+  "Dense gas": { n: 30, restitution: 1 },
+  "Two-body": { n: 2, restitution: 1 },
+};
 
 export function CollisionsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const balls = useRef<Ball[]>([]);
   const rafRef = useRef(0);
   const [running, setRunning] = useState(true);
-  const [n, setN] = useState(12);
-  const [restitution, setRestitution] = useState(1);
+  const [{ n, restitution }, update] = useShareableNumbers({ n: 12, restitution: 1 });
   const [ke, setKe] = useState(0);
 
   const seed = () => { balls.current = Array.from({ length: n }, () => { const r = 12 + Math.random() * 18; return { x: r + Math.random() * (W - 2 * r), y: r + Math.random() * (H - 2 * r), vx: (Math.random() - 0.5) * 8, vy: (Math.random() - 0.5) * 8, r, m: r * r }; }); };
@@ -35,15 +42,38 @@ export function CollisionsStudio() {
     rafRef.current = requestAnimationFrame(loop); return () => cancelAnimationFrame(rafRef.current);
   }, [running, restitution]);
 
+  const explain =
+    restitution >= 0.99
+      ? `With restitution 1 every bounce is perfectly elastic, so the total kinetic energy of all ${n} balls stays constant forever — a 2D model of an ideal gas.`
+      : `At restitution ${restitution.toFixed(2)} each collision returns less energy than it receives, so the ${n} balls steadily lose kinetic energy and drift toward rest.`;
+
+  const code = `import numpy as np
+e = ${restitution}  # coefficient of restitution
+# impulse-based resolution between two circles a, b (positions p, velocities v, mass m)
+def resolve(a, b):
+    d = b["p"] - a["p"]; dist = np.linalg.norm(d)
+    if dist == 0 or dist >= a["r"] + b["r"]:
+        return
+    nrm = d / dist
+    rv = np.dot(b["v"] - a["v"], nrm)
+    if rv < 0:
+        im = 1/a["m"] + 1/b["m"]
+        j = -(1 + e) * rv / im
+        a["v"] -= j * nrm / a["m"]
+        b["v"] += j * nrm / b["m"]
+# total KE = sum(0.5 * b["m"] * |b["v"]|**2 for b in balls)`;
+
   return (
     <StudioChrome title="Elastic Collisions" tagline="momentum & energy conservation"
       controls={<div>
         <div className="mb-3 flex gap-2"><button onClick={() => setRunning((v) => !v)} className="flex-1 rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-cyan-700">{running ? "Pause" : "Play"}</button><button onClick={seed} className="flex-1 rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-700 dark:border-slate-700 dark:text-slate-300">Reset</button></div>
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
         <p className="mb-3 text-xs text-slate-500">Balls collide with impulse-based physics. At restitution 1, kinetic energy is conserved; below 1, collisions are inelastic and energy drains away.</p>
-        <Slider label="Balls" value={n} min={2} max={30} step={1} onChange={setN} />
-        <Slider label="Restitution" value={restitution} min={0.5} max={1} step={0.05} onChange={setRestitution} />
+        <Slider label="Balls" value={n} min={2} max={30} step={1} onChange={(v) => update({ n: v })} />
+        <Slider label="Restitution" value={restitution} min={0.5} max={1} step={0.05} onChange={(v) => update({ restitution: v })} />
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Balls" value={String(n)} /><Stat label="Total KE" value={ke.toExponential(2)} /><Stat label="Collisions" value={restitution === 1 ? "elastic" : "inelastic"} /></div>}
+      inspector={<div><Stat label="Balls" value={String(n)} /><Stat label="Total KE" value={ke.toExponential(2)} /><Stat label="Collisions" value={restitution === 1 ? "elastic" : "inelastic"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

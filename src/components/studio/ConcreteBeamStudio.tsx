@@ -1,17 +1,21 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { b: number; d: number; As: number; fc: number; fy: number }> = {
+  "Typical floor beam": { b: 300, d: 500, As: 1500, fc: 30, fy: 420 },
+  "Under-reinforced (ductile)": { b: 300, d: 550, As: 900, fc: 30, fy: 420 },
+  "Over-reinforced (check)": { b: 300, d: 400, As: 3500, fc: 25, fy: 420 },
+  "High-strength concrete": { b: 350, d: 600, As: 2500, fc: 50, fy: 500 },
+};
 
 // Reinforced concrete beam flexural capacity (Whitney stress block, ACI).
 export function ConcreteBeamStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [b, setB] = useState(300); // mm
-  const [d, setD] = useState(500); // mm effective depth
-  const [As, setAs] = useState(1500); // mm^2 steel area
-  const [fc, setFc] = useState(30); // MPa
-  const [fy, setFy] = useState(420); // MPa
+  const [{ b, d, As, fc, fy }, update] = useShareableNumbers({ b: 300, d: 500, As: 1500, fc: 30, fy: 420 });
 
   const a = As * fy / (0.85 * fc * b); // mm depth of stress block
   const Mn = As * fy * (d - a / 2) / 1e6; // kN·m
@@ -32,17 +36,32 @@ export function ConcreteBeamStudio() {
     ctx.fillStyle = "#e2e8f0"; ctx.font = "11px sans-serif"; ctx.fillText("compression block a", ox + 4, oy + a * scale + 14); ctx.fillText("tension steel", ox + 4, oy + d * scale + 22); ctx.fillText(`b = ${b}`, ox + b * scale / 2 - 16, oy - 8);
   }, [b, d, As, fc, fy]);
 
+  const explain = !tension
+    ? `Over-reinforced: ρ ≈ ${rho.toFixed(4)} exceeds 0.75·ρ_bal ≈ ${(0.75 * rhoBal).toFixed(4)}, so the concrete may crush before the steel yields — a brittle failure codes steer you away from by adding depth or trimming steel.`
+    : a > d / 3
+    ? `The stress block a ≈ ${a.toFixed(0)} mm is deep, shrinking the lever arm d − a/2, so each extra bar of steel adds less capacity than the last — depth d is the stronger lever than area.`
+    : `Tension-controlled: with ρ ≈ ${rho.toFixed(4)} well under 0.75·ρ_bal the steel yields first and the beam warns before it fails, while Mn = As·fy·(d − a/2) rises almost linearly with steel here.`;
+
+  const code = `# Reinforced concrete beam flexural capacity (Whitney block, ACI)
+b, d, As, fc, fy = ${b}, ${d}, ${As}, ${fc}, ${fy}  # mm, mm, mm^2, MPa, MPa
+a = As * fy / (0.85 * fc * b)        # stress-block depth (mm)
+Mn = As * fy * (d - a / 2) / 1e6     # nominal moment (kN*m)
+phiMn = 0.9 * Mn                     # design moment
+print(f"a={a:.0f} mm  Mn={Mn:.0f}  phiMn={phiMn:.0f} kN*m")`;
+
   return (
     <StudioChrome title="Reinforced Concrete Beam" tagline="flexural capacity (ACI)"
       controls={<div>
-        <Slider label="Width b (mm)" value={b} min={200} max={600} step={10} onChange={setB} />
-        <Slider label="Effective depth d (mm)" value={d} min={300} max={900} step={10} onChange={setD} />
-        <Slider label="Steel area As (mm²)" value={As} min={500} max={4000} step={100} onChange={setAs} />
-        <Slider label="Concrete f'c (MPa)" value={fc} min={20} max={50} step={1} onChange={setFc} />
-        <Slider label="Steel fy (MPa)" value={fy} min={300} max={550} step={10} onChange={setFy} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(l) => update(PRESETS[l])} />
+        <Slider label="Width b (mm)" value={b} min={200} max={600} step={10} onChange={(v) => update({ b: v })} />
+        <Slider label="Effective depth d (mm)" value={d} min={300} max={900} step={10} onChange={(v) => update({ d: v })} />
+        <Slider label="Steel area As (mm²)" value={As} min={500} max={4000} step={100} onChange={(v) => update({ As: v })} />
+        <Slider label="Concrete f'c (MPa)" value={fc} min={20} max={50} step={1} onChange={(v) => update({ fc: v })} />
+        <Slider label="Steel fy (MPa)" value={fy} min={300} max={550} step={10} onChange={(v) => update({ fy: v })} />
         <p className="mt-3 text-xs text-slate-500">A reinforced concrete beam resists bending through a compression block in the concrete and tension in the steel. Setting these forces equal gives the stress-block depth a, and the moment capacity Mn = As·fy·(d − a/2). A tension-controlled section (steel yields first) fails gradually — the ductile behavior codes require. Educational tool, not a design.</p>
+        <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Stress block a" value={`${a.toFixed(0)} mm`} /><Stat label="Nominal Mn" value={`${Mn.toFixed(0)} kN·m`} /><Stat label="Design φMn" value={`${phiMn.toFixed(0)} kN·m`} /><Stat label="Behavior" value={tension ? "tension-controlled" : "check ductility"} /></div>}
+      inspector={<div><Stat label="Stress block a" value={`${a.toFixed(0)} mm`} /><Stat label="Nominal Mn" value={`${Mn.toFixed(0)} kN·m`} /><Stat label="Design φMn" value={`${phiMn.toFixed(0)} kN·m`} /><Stat label="Behavior" value={tension ? "tension-controlled" : "check ductility"} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={340} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

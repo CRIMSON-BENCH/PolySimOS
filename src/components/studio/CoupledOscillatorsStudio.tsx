@@ -1,14 +1,20 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
-import { hidpi } from "@/lib/studioKit";
+import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+
+const PRESETS: Record<string, { k: number; kc: number; m: number }> = {
+  "Weak coupling": { k: 20, kc: 2, m: 1 },
+  "Strong coupling": { k: 20, kc: 30, m: 1 },
+  "Heavy masses": { k: 20, kc: 8, m: 3 },
+  "Stiff springs": { k: 45, kc: 8, m: 1 },
+};
 
 export function CoupledOscillatorsStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [k, setK] = useState(20);
-  const [kc, setKc] = useState(8);
-  const [m, setM] = useState(1);
+  const [{ k, kc, m }, update] = useShareableNumbers({ k: 20, kc: 8, m: 1 });
 
   const w1 = Math.sqrt(k / m), w2 = Math.sqrt((k + 2 * kc) / m);
   const st = useRef({ x1: 1, x2: -0.3, v1: 0, v2: 0 });
@@ -30,18 +36,35 @@ export function CoupledOscillatorsStudio() {
     raf = requestAnimationFrame(loop); return () => cancelAnimationFrame(raf);
   }, [k, kc, m]);
 
+  const beat = (w2 - w1) / (2 * Math.PI);
+  const explain =
+    kc === 0
+      ? "With zero coupling the two masses are independent — no energy passes between them and no beating appears."
+      : `The beat frequency is set by the coupling: at kc=${kc} versus k=${k}, energy fully sloshes from one mass to the other every ${beat > 0 ? (0.5 / beat).toFixed(1) : "∞"} s, and stiffer coupling speeds that exchange up.`;
+
+  const code = `import numpy as np
+k, kc, m = ${k}, ${kc}, ${m}
+w1 = np.sqrt(k / m)          # in-phase (slow) mode
+w2 = np.sqrt((k + 2*kc) / m) # out-of-phase (fast) mode
+print("mode 1 (Hz)", w1 / (2*np.pi))
+print("mode 2 (Hz)", w2 / (2*np.pi))
+print("beat (Hz)", (w2 - w1) / (2*np.pi))`;
+
   return (
     <StudioChrome title="Coupled Oscillators" tagline="normal modes & beating"
       controls={<div>
-        <Slider label="Outer spring k (N/m)" value={k} min={2} max={50} step={1} onChange={setK} />
-        <Slider label="Coupling spring (N/m)" value={kc} min={0} max={40} step={1} onChange={setKc} />
-        <Slider label="Mass (kg)" value={m} min={0.5} max={4} step={0.1} onChange={setM} />
+        <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
+        <Slider label="Outer spring k (N/m)" value={k} min={2} max={50} step={1} onChange={(v) => update({ k: v })} />
+        <Slider label="Coupling spring (N/m)" value={kc} min={0} max={40} step={1} onChange={(v) => update({ kc: v })} />
+        <Slider label="Mass (kg)" value={m} min={0.5} max={4} step={0.1} onChange={(v) => update({ m: v })} />
         <p className="mt-3 text-xs text-slate-500">Two masses linked by a spring exchange energy. Any motion is a mix of two normal modes: in-phase (slow) and out-of-phase (fast). Their beat produces the sloshing you see.</p>
+        <ShareBar code={code} />
       </div>}
       inspector={<div>
         <Stat label="Mode 1 (in-phase)" value={`${(w1 / (2 * Math.PI)).toFixed(3)} Hz`} />
         <Stat label="Mode 2 (out-of-phase)" value={`${(w2 / (2 * Math.PI)).toFixed(3)} Hz`} />
-        <Stat label="Beat frequency" value={`${((w2 - w1) / (2 * Math.PI)).toFixed(3)} Hz`} />
+        <Stat label="Beat frequency" value={`${beat.toFixed(3)} Hz`} />
+        <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
