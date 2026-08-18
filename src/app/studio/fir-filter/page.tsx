@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { FirFilterStudio } from "@/components/studio/FirFilterStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "FIR Filter Designer & Frequency Response (Browser)", description: "Design a windowed-sinc FIR low-pass filter and see its magnitude response as you change taps and cutoff. Free, interactive DSP tool.", alternates: { canonical: "/studio/fir-filter" } };
+export default function Page() { return <StudioPageShell slug="fir-filter" name="FIR Filter Designer" keyword="fir filter designer" lede="Design a digital low-pass filter from scratch. Add taps to sharpen the cutoff and watch the frequency response tighten in real time." about="A finite-impulse-response filter convolves a signal with a set of coefficients. Truncating an ideal sinc and applying a window yields a practical low-pass filter; more taps give a narrower transition band at the cost of computation and delay. Educational tool."><FirFilterStudio /></StudioPageShell>; }

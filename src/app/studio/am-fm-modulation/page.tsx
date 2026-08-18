@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { AmFmModulationStudio } from "@/components/studio/AmFmModulationStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "AM / FM Modulation Simulator (Browser)", description: "See how a message rides a high-frequency carrier via amplitude (AM) or frequency (FM) modulation, with adjustable modulation index. Free.", alternates: { canonical: "/studio/am-fm-modulation" } };
+export default function Page() { return <StudioPageShell slug="am-fm-modulation" name="AM / FM Modulation" keyword="am fm modulation simulator" lede="How does a song travel through the air? By hitching a ride on a radio carrier. Watch a message modulate the amplitude or frequency of a carrier wave." about="Modulation encodes a low-frequency message onto a high-frequency carrier. AM varies the carrier's amplitude in step with the message; FM varies its instantaneous frequency. FM shrugs off amplitude noise, which is why it delivers cleaner audio than AM. Educational tool."><AmFmModulationStudio /></StudioPageShell>; }

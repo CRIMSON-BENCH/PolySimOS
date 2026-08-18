@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PoleZeroStudio } from "@/components/studio/PoleZeroStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Pole–Zero Plot & Frequency Response Simulator", description: "Drag poles and zeros in the z-plane and watch the digital filter's frequency response reshape — poles peak, zeros notch. Free, interactive.", alternates: { canonical: "/studio/pole-zero" } };
+export default function Page() { return <StudioPageShell slug="pole-zero" name="Pole–Zero & Frequency Response" keyword="pole zero plot filter" lede="A digital filter's whole character lives in a handful of poles and zeros. Move them around the z-plane and watch the frequency response morph." about="In the z-plane, a pole near the unit circle produces a resonant peak in the frequency response at its angle, while a zero on the circle carves a notch. Poles must stay inside the unit circle for stability. This geometric view is central to digital filter design. Educational tool."><PoleZeroStudio /></StudioPageShell>; }

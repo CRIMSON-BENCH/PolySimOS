@@ -372,6 +372,14 @@ export const SIMS = [
   { slug: "lead-lag", name: "Lead–Lag Compensator", desc: "Shaping phase for stability.", tag: "Robotics" },
   { slug: "feedback-loop", name: "Feedback Loop", desc: "Why feedback beats open-loop.", tag: "Robotics" },
   { slug: "second-order-response", name: "Damping Regimes", desc: "Under, critical & overdamped.", tag: "Robotics" },
+  { slug: "fir-filter", name: "FIR Filter Designer", desc: "Windowed-sinc low-pass.", tag: "Signals" },
+  { slug: "dft-analysis", name: "DFT Spectrum Analysis", desc: "Find hidden frequencies.", tag: "Signals" },
+  { slug: "window-functions", name: "Window Functions", desc: "Taming spectral leakage.", tag: "Signals" },
+  { slug: "quantization-noise", name: "ADC Quantization", desc: "Bits, levels & SNR.", tag: "Signals" },
+  { slug: "am-fm-modulation", name: "AM / FM Modulation", desc: "How radio carries sound.", tag: "Signals" },
+  { slug: "matched-filter", name: "Matched Filter", desc: "Pull signal out of noise.", tag: "Signals" },
+  { slug: "sampling-theorem", name: "Sampling & Nyquist", desc: "Aliasing and the Nyquist rate.", tag: "Signals" },
+  { slug: "pole-zero", name: "Pole–Zero Response", desc: "Poles peak, zeros notch.", tag: "Signals" },
 ];
 
 export default function StudioIndex() {

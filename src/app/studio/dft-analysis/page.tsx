@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { DftAnalysisStudio } from "@/components/studio/DftAnalysisStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "DFT Spectrum Analyzer Simulator (Browser)", description: "Build a signal from sinusoids and noise, then see the Discrete Fourier Transform reveal its frequencies as clean spectral peaks. Free.", alternates: { canonical: "/studio/dft-analysis" } };
+export default function Page() { return <StudioPageShell slug="dft-analysis" name="DFT Spectrum Analysis" keyword="dft spectrum analyzer" lede="A tangle of overlapping waves hides simple frequencies inside. Watch the DFT untangle a messy signal into sharp spectral peaks." about="The Discrete Fourier Transform expresses a sampled signal as a sum of sinusoids, revealing which frequencies are present and how strong. It powers spectrum analyzers, audio equalizers, image compression, and countless measurement tools. Educational tool."><DftAnalysisStudio /></StudioPageShell>; }

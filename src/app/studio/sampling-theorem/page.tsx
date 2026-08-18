@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SamplingTheoremStudio } from "@/components/studio/SamplingTheoremStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Nyquist Sampling & Aliasing Simulator (Browser)", description: "See the Nyquist–Shannon sampling theorem in action: sample too slowly and a high frequency aliases into a false low one. Free, interactive.", alternates: { canonical: "/studio/sampling-theorem" } };
+export default function Page() { return <StudioPageShell slug="sampling-theorem" name="Sampling & Nyquist" keyword="nyquist sampling aliasing" lede="Sample a wave too slowly and it lies to you — appearing as a completely different, slower wave. Watch aliasing happen and see the Nyquist limit." about="The Nyquist–Shannon theorem states a signal must be sampled at more than twice its highest frequency to be reconstructed. Below that rate, high frequencies fold down into false low ones — aliasing — the reason every digital system uses an anti-alias filter before sampling. Educational tool."><SamplingTheoremStudio /></StudioPageShell>; }

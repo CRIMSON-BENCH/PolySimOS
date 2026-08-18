@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { WindowFunctionsStudio } from "@/components/studio/WindowFunctionsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Window Functions & Spectral Leakage Simulator", description: "Compare rectangular, Hann, Hamming, and Blackman windows and see how each trades main-lobe width for side-lobe leakage. Free, interactive.", alternates: { canonical: "/studio/window-functions" } };
+export default function Page() { return <StudioPageShell slug="window-functions" name="Window Functions" keyword="window functions dsp" lede="Analyzing a finite slice of a signal smears its spectrum. See how tapering windows clean up the mess — and what they cost." about="Because a real measurement is finite, its spectrum leaks energy into neighboring bins. Window functions taper the signal at the edges to suppress this leakage: Blackman crushes side lobes but widens the main lobe, while a rectangular window is sharp but leaky. Educational tool."><WindowFunctionsStudio /></StudioPageShell>; }

@@ -188,6 +188,14 @@ import { StateSpaceStudio } from "./StateSpaceStudio";
 import { LeadLagStudio } from "./LeadLagStudio";
 import { FeedbackLoopStudio } from "./FeedbackLoopStudio";
 import { SecondOrderResponseStudio } from "./SecondOrderResponseStudio";
+import { FirFilterStudio } from "./FirFilterStudio";
+import { DftAnalysisStudio } from "./DftAnalysisStudio";
+import { WindowFunctionsStudio } from "./WindowFunctionsStudio";
+import { QuantizationNoiseStudio } from "./QuantizationNoiseStudio";
+import { AmFmModulationStudio } from "./AmFmModulationStudio";
+import { MatchedFilterStudio } from "./MatchedFilterStudio";
+import { SamplingTheoremStudio } from "./SamplingTheoremStudio";
+import { PoleZeroStudio } from "./PoleZeroStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -716,6 +724,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "lead-lag": LeadLagStudio,
   "feedback-loop": FeedbackLoopStudio,
   "second-order-response": SecondOrderResponseStudio,
+  "fir-filter": FirFilterStudio,
+  "dft-analysis": DftAnalysisStudio,
+  "window-functions": WindowFunctionsStudio,
+  "quantization-noise": QuantizationNoiseStudio,
+  "am-fm-modulation": AmFmModulationStudio,
+  "matched-filter": MatchedFilterStudio,
+  "sampling-theorem": SamplingTheoremStudio,
+  "pole-zero": PoleZeroStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

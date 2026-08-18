@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MatchedFilterStudio } from "@/components/studio/MatchedFilterStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Matched Filter Detection Simulator (Browser)", description: "Bury a pulse in noise and watch a matched filter correlate it out into a sharp detection peak. Free, interactive DSP tool.", alternates: { canonical: "/studio/matched-filter" } };
+export default function Page() { return <StudioPageShell slug="matched-filter" name="Matched Filter" keyword="matched filter detection" lede="A radar echo can be drowned in noise, yet still be found. See how a matched filter concentrates a hidden pulse into one clear peak." about="A matched filter correlates the incoming signal with a known template of the pulse, coherently adding the pulse energy while noise averages out. It maximizes signal-to-noise ratio for detection in white noise — the backbone of radar, sonar, GPS, and digital receivers. Educational tool."><MatchedFilterStudio /></StudioPageShell>; }

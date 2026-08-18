@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { QuantizationNoiseStudio } from "@/components/studio/QuantizationNoiseStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "ADC Quantization Noise & SNR Simulator (Browser)", description: "See how an analog-to-digital converter's bit depth sets the quantization staircase and signal-to-noise ratio (6.02N + 1.76 dB). Free.", alternates: { canonical: "/studio/quantization-noise" } };
+export default function Page() { return <StudioPageShell slug="quantization-noise" name="ADC Quantization Noise" keyword="adc quantization snr" lede="Every digital recording is a staircase approximation of a smooth wave. See how bit depth sets the step size — and the noise floor." about="An analog-to-digital converter rounds each sample to one of 2ᴺ levels, injecting quantization noise. Each additional bit halves the step size and raises the signal-to-noise ratio by about 6 dB, giving the classic SNR ≈ 6.02N + 1.76 dB. Educational tool."><QuantizationNoiseStudio /></StudioPageShell>; }
