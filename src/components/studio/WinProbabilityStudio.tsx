@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { lead: number; minsLeft: number; scoreSigma: number }> = {
@@ -55,7 +56,7 @@ print("win probability", round(win_prob * 100, 1), "%")`;
         <p className="mt-3 text-xs text-slate-500">Win probability turns the score and clock into a live percentage. Early on, even a big lead is fragile because plenty of scoring remains; late in the game, the same lead is nearly safe because the uncertainty has shrunk. Modeling the remaining margin as a shrinking random variable produces the classic curve that broadcasts now show on screen.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Win probability" value={`${pct.toFixed(1)}%`} /><Stat label="Lead" value={`${lead > 0 ? "+" : ""}${lead}`} /><Stat label="Time left" value={`${minsLeft} min`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Win probability" value={`${pct.toFixed(1)}%`} /><Stat label="Lead" value={`${lead > 0 ? "+" : ""}${lead}`} /><Stat label="Time left" value={`${minsLeft} min`} /><Equation tex={`P=\\dfrac{1}{1+e^{-1.7\\,\\ell/\\sigma_r}}=\\dfrac{1}{1+e^{-1.7\\cdot(${lead})/${(scoreSigma * Math.sqrt(Math.max(0.001, minsLeft) / 48)).toFixed(1)}}}=${pct.toFixed(1)}\\%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

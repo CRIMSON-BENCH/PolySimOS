@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { R: number; C: number; hr: number; sv: number }> = {
@@ -72,6 +73,7 @@ print("approx pressure", P)`;
         <Stat label="Approx. pressure" value={`${map.toFixed(0)} mmHg`} />
         <Stat label="Time constant RC" value={`${(R * C).toFixed(2)} s`} />
         <Stat label="Cardiac output" value={`${(hr * sv / 1000).toFixed(1)} L/min`} />
+        <Equation tex={`${C.toFixed(1)}\\,\\frac{dP}{dt} + \\frac{P}{${R.toFixed(1)}} = Q(t)`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

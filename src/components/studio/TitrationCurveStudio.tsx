@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Ca: number; Va: number; Cb: number }> = {
@@ -59,6 +60,7 @@ print("Veq", round(Veq, 1), "mL  pH_start", round(pH(0), 2))`;
         <Stat label="Equivalence volume" value={`${Veq.toFixed(1)} mL`} />
         <Stat label="pH at start" value={pHat(0).toFixed(2)} />
         <Stat label="pH at equivalence" value="7.00" />
+        <Equation tex={`C_a V_a = C_b V_{eq}\\;\\Rightarrow\\; V_{eq} = \\frac{${Ca}\\times ${Va}}{${Cb}} = ${Veq.toFixed(1)}\\ \\text{mL}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

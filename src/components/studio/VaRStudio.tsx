@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 function normPDF(x: number) { return 0.3989423 * Math.exp(-x * x / 2); }
 const Z: Record<number, number> = { 90: 1.2816, 95: 1.6449, 97.5: 1.9600, 99: 2.3263, 99.9: 3.0902 };
@@ -69,7 +70,7 @@ print("VaR", round(VaR), "CVaR", round(CVaR))`;
         <p className="mt-3 text-xs text-slate-500">Value at Risk estimates the loss a portfolio will not exceed over a horizon at a confidence level. Parametric VaR assumes normally distributed returns and scales volatility by √time. Expected shortfall (CVaR) is the average loss in the tail beyond VaR. Educational tool, not investment advice.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label={`VaR (${conf}%)`} value={`$${VaR.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Expected shortfall" value={`$${CVaR.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Horizon vol" value={`${(horizonVol * 100).toFixed(2)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label={`VaR (${conf}%)`} value={`$${VaR.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Expected shortfall" value={`$${CVaR.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} /><Stat label="Horizon vol" value={`${(horizonVol * 100).toFixed(2)}%`} /><Equation tex={`\\mathrm{VaR}_{${conf}\\%} = z\\,\\sigma - \\mu = ${z.toFixed(2)}\\times${horizonVol.toFixed(4)} - ${horizonRet.toFixed(4)} = ${varFrac.toFixed(4)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 401, ROWS = 200, CELL = 2;
@@ -67,7 +68,7 @@ for _ in range(200):
         <p className="mt-3 text-xs text-slate-500">Each cell&apos;s next state depends only on itself and its two neighbors, giving 256 possible rules. Rule 30 is chaotic (used as a random generator); Rule 110 is proven Turing-complete; Rule 90 draws a Sierpinski triangle.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Rule" value={String(rNum)} /><Stat label="Binary" value={rNum.toString(2).padStart(8, "0")} /><Stat label="Class" value={[30, 90, 110].includes(rNum) ? "complex" : "—"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Rule" value={String(rNum)} /><Stat label="Binary" value={rNum.toString(2).padStart(8, "0")} /><Stat label="Class" value={[30, 90, 110].includes(rNum) ? "complex" : "—"} /><Equation tex={`s_i' = f(s_{i-1},\\,s_i,\\,s_{i+1}),\\quad \\text{rule} = ${rNum}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W * CELL} height={ROWS * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

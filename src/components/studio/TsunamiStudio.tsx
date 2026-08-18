@@ -4,6 +4,7 @@ import { useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Shallow-water wave: speed v = sqrt(g h); amplitude shoals as h^(-1/4) (Green's law).
@@ -79,6 +80,7 @@ for f in np.linspace(0, 1, 6):
         <Stat label="Current speed" value={`${(speed * 3.6).toFixed(0)} km/h`} />
         <Stat label="Deep amplitude" value={`${deepAmp.toFixed(1)} m`} />
         <Stat label="Coastal amplitude" value={`${shoreAmp.toFixed(1)} m`} />
+        <Equation tex={`v=\\sqrt{g\\,h}=\\sqrt{9.81\\cdot ${deepDepth}}=${Math.sqrt(G * deepDepth).toFixed(0)}\\ \\tfrac{\\text{m}}{\\text{s}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

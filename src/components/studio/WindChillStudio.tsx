@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { tempC: number; wind: number; humidity: number }> = {
@@ -55,7 +56,7 @@ print("feels like", round((app_f - 32) * 5 / 9, 1), "C")`;
         <p className="mt-3 text-xs text-slate-500">The thermometer only tells half the story. In the cold, wind strips away the thin warm layer around your skin, making it feel far colder — wind chill. In the heat, humidity blocks sweat from evaporating, making it feel hotter — the heat index. Both estimate the apparent temperature your body actually experiences.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Feels like" value={`${apparentC.toFixed(1)} °C`} /><Stat label="Difference" value={`${diff >= 0 ? "+" : ""}${diff.toFixed(1)} °C`} /><Stat label="Mode" value={mode} /><Stat label="Warning" value={risk} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Feels like" value={`${apparentC.toFixed(1)} °C`} /><Stat label="Difference" value={`${diff >= 0 ? "+" : ""}${diff.toFixed(1)} °C`} /><Stat label="Mode" value={mode} /><Stat label="Warning" value={risk} /><Equation tex={`T_{wc}=13.12+0.6215(${tempC})-11.37(${wind})^{0.16}+0.3965(${tempC})(${wind})^{0.16}=${apparentC.toFixed(1)}\\,^\\circ\\text{C}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Apparent temperature</div>
         <div className="mt-3 text-7xl font-black" style={{ color: apparentC < 0 ? "#60a5fa" : apparentC > 32 ? "#f97316" : "#a3e635" }}>{apparentC.toFixed(0)}<span className="ml-2 text-3xl text-slate-400">°C</span></div>

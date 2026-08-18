@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Composite-wall heat conduction: series thermal resistances, R-value.
@@ -63,7 +64,7 @@ print("Rtot", Rtot, "U", U, "Q(W/m^2)", Q)`;
         <p className="mt-3 text-xs text-slate-500">Heat flows through a wall like current through resistors in series. Each layer&apos;s thermal resistance is its thickness over its conductivity; adding them gives the total R-value, and the heat flux is the temperature difference divided by it. Insulation, with very low conductivity, dominates the R-value — the steep temperature drop shows where it does its work.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Total R-value" value={`${Rtot.toFixed(2)} m²K/W`} /><Stat label="U-value" value={`${U.toFixed(2)} W/m²K`} /><Stat label="Heat flux" value={`${Q.toFixed(1)} W/m²`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Total R-value" value={`${Rtot.toFixed(2)} m²K/W`} /><Stat label="U-value" value={`${U.toFixed(2)} W/m²K`} /><Stat label="Heat flux" value={`${Q.toFixed(1)} W/m²`} /><Equation tex={`R = \\sum \\frac{L_i}{k_i A} = ${Rtot.toFixed(2)}\\,\\tfrac{\\text{m}^2\\text{K}}{\\text{W}},\\quad Q = \\frac{\\Delta T}{R} = ${Q.toFixed(1)}\\,\\tfrac{\\text{W}}{\\text{m}^2}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { vLine: number; current: number; pf: number }> = {
@@ -76,6 +77,7 @@ print("V_phase", round(v_phase, 1), "P", round(P, 1), "S", round(S, 1), "Q", rou
         <Stat label="Real power P" value={`${P.toFixed(1)} kW`} />
         <Stat label="Apparent S" value={`${S.toFixed(1)} kVA`} />
         <Stat label="Reactive Q" value={`${Q.toFixed(1)} kVAR`} />
+        <Equation tex={`P = \\sqrt{3}\\,V_L I\\cos\\varphi = \\sqrt{3}\\times ${vLine}\\times ${current}\\times ${pf} = ${P.toFixed(1)}\\ \\text{kW}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

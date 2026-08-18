@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 740, H = 440;
@@ -76,7 +77,7 @@ print("equivalence mL:", acid_conc * acid_vol / base_conc)`;
         <Slider label="Acid volume (mL)" value={acidVol} min={20} max={80} step={5} onChange={(v) => update({ acidVol: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Equivalence" value={`${equivVol.toFixed(1)} mL`} /><Stat label="Type" value="strong acid + strong base" /><Stat label="pH at eq." value="7.0" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Equivalence" value={`${equivVol.toFixed(1)} mL`} /><Stat label="Type" value="strong acid + strong base" /><Stat label="pH at eq." value="7.0" /><Equation tex={`C_a V_a = C_b V_b \\;\\Rightarrow\\; V_{eq} = \\frac{${acidConc}\\times${acidVol}}{${baseConc}} = ${equivVol.toFixed(1)}\\ \\text{mL}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const MAT: Record<string, number> = { Steel: 12, Aluminum: 23, Copper: 17, Glass: 9, Concrete: 12, Invar: 1.2 };
@@ -56,7 +57,7 @@ print("dL(mm)", dL * 1000, "dA(m^2)", dA, "dV(m^3)", dV)`;
         <p className="mt-3 text-xs text-slate-500">Heat a material and it expands: ΔL = α·L·ΔT, where α is the coefficient of linear expansion. Area grows at twice that rate and volume at three times. It is why bridges have expansion joints, why rails buckle in heat, and why Invar — with almost zero expansion — is prized for precision instruments.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="α" value={`${MAT[mat]} µm/m·°C`} /><Stat label="Length change" value={`${(dL * 1000).toFixed(1)} mm`} /><Stat label="Area change" value={`${dA.toFixed(3)} m²`} /><Stat label="Volume change" value={`${dV.toFixed(3)} m³`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="α" value={`${MAT[mat]} µm/m·°C`} /><Stat label="Length change" value={`${(dL * 1000).toFixed(1)} mm`} /><Stat label="Area change" value={`${dA.toFixed(3)} m²`} /><Stat label="Volume change" value={`${dV.toFixed(3)} m³`} /><Equation tex={`\\Delta L = \\alpha\\,L_0\\,\\Delta T = (${MAT[mat]}\\times10^{-6})(${L0})(${dT}) = ${(dL * 1000).toFixed(1)}\\,\\text{mm}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={220} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

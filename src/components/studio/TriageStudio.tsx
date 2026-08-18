@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 type Cat = { code: string; label: string; color: string };
@@ -87,7 +88,7 @@ print(cat)`;
         <p className="mt-3 text-xs text-slate-500">Simple Triage And Rapid Treatment sorts mass-casualty patients in under 60 seconds each using RPM: Respirations, Perfusion, Mental status. Training reference only — follow your agency protocol and medical direction.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="RR trigger" value=">30/min" /><Stat label="Perfusion" value="cap refill 2s" /><Stat label="Standard" value="START adult" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="RR trigger" value=">30/min" /><Stat label="Perfusion" value="cap refill 2s" /><Stat label="Standard" value="START adult" /><Equation label="Triage criterion" tex={`\\text{RR}=${resp}\\;${resp > 30 ? ">" : "\\leq"}\\;30\\ \\Rightarrow\\ \\text{${resp > 30 ? "RED (immediate)" : "not RED by RR"}}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="text-xs uppercase tracking-widest text-slate-500">Triage category</div>
         <div className="mt-4 flex h-40 w-64 flex-col items-center justify-center rounded-2xl" style={{ backgroundColor: cat.color }}>

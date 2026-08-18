@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { r1: number; r2: number; cap: number }> = {
@@ -60,6 +61,7 @@ print("t_high", round(t_high * 1000, 3), "ms  t_low", round(t_low * 1000, 3), "m
         <Stat label="Duty cycle" value={`${(duty * 100).toFixed(0)}%`} />
         <Stat label="High time" value={`${(thigh * 1000).toFixed(2)} ms`} />
         <Stat label="Low time" value={`${(tlow * 1000).toFixed(2)} ms`} />
+        <Equation tex={`f = \\frac{1.44}{(R_1+2R_2)\\,C} = ${f.toFixed(1)}\\ \\text{Hz},\\quad D = \\frac{R_1+R_2}{R_1+2R_2} = ${(duty * 100).toFixed(0)}\\%`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Z0: number; RL: number; XL: number }> = {
@@ -75,7 +76,7 @@ print("|Gamma|", round(mag, 3), " VSWR", round(vswr, 2))`;
         <p className="mt-3 text-xs text-slate-500">When a transmission line meets a load that does not match its impedance, part of the wave reflects. Incident and reflected waves combine into a standing-wave pattern measured by the VSWR. A perfect match (RL = Z₀, XL = 0) gives VSWR 1 and no reflection — the goal of every antenna and RF design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Reflection |Γ|" value={gMag.toFixed(3)} /><Stat label="VSWR" value={VSWR > 99 ? "∞" : `${VSWR.toFixed(2)} : 1`} /><Stat label="Return loss" value={`${returnLoss.toFixed(1)} dB`} /><Stat label="Match" value={gMag < 0.05 ? "excellent" : gMag < 0.2 ? "good" : "poor"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Reflection |Γ|" value={gMag.toFixed(3)} /><Stat label="VSWR" value={VSWR > 99 ? "∞" : `${VSWR.toFixed(2)} : 1`} /><Stat label="Return loss" value={`${returnLoss.toFixed(1)} dB`} /><Stat label="Match" value={gMag < 0.05 ? "excellent" : gMag < 0.2 ? "good" : "poor"} /><Equation tex={`|\\Gamma| = \\left|\\frac{Z_L - Z_0}{Z_L + Z_0}\\right| = ${gMag.toFixed(3)},\\quad \\mathrm{VSWR} = ${VSWR > 99 ? "\\infty" : VSWR.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

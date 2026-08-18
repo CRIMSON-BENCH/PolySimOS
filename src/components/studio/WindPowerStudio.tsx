@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { diameter: number; windSpeed: number; cp: number }> = {
@@ -65,6 +66,7 @@ print("power MW", P / 1e6)`;
         <Stat label="Rated power" value={`${(ratedP / 1e6).toFixed(2)} MW`} />
         <Stat label="Swept area" value={`${A.toFixed(0)} m²`} />
         <Stat label="% of Betz limit" value={`${(betz * 100).toFixed(0)}%`} />
+        <Equation tex={`P=\\tfrac12\\,\\rho A v^3 C_p=\\tfrac12(1.225)(${A.toFixed(0)})(${windSpeed})^3(${cp})=${(P / 1e6).toFixed(2)}\\,\\text{MW}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

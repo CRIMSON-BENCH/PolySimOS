@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { a: number; b: number; T: number }> = {
   "CO₂ (warm)": { a: 3.64, b: 0.0427, T: 320 },
@@ -60,6 +61,7 @@ print("P_vdw at V=0.3:", R * T / (0.3 - b) - a / 0.3**2)`;
         <Stat label="P at V=0.3 L (vdW)" value={`${Pvdw(0.3).toFixed(1)} bar`} />
         <Stat label="P at V=0.3 L (ideal)" value={`${Pideal(0.3).toFixed(1)} bar`} />
         <Stat label="Deviation" value={`${dev.toFixed(0)}%`} />
+        <Equation tex={`\\left(P + \\frac{a}{V^2}\\right)(V - b) = RT, \\quad a=${a},\\ b=${b},\\ RT=${(R * T).toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

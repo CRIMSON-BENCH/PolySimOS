@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { N0: number; K: number; b: number }> = {
@@ -62,6 +63,7 @@ for t in [0, 25, 50, 100, 200]:
         <Stat label="Size at day 100" value={`${f(100).toFixed(0)}`} />
         <Stat label="Time to half-max" value={`${halfT} days`} />
         <Stat label="Carrying capacity" value={`${K}`} />
+        <Equation tex={model ? `\\frac{dV}{dt}=rV\\left(1-\\frac{V}{K}\\right),\\quad K=${K}` : `\\frac{dV}{dt}=bV\\ln\\!\\frac{K}{V},\\quad b=${b},\\ K=${K}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const WINDOWS: Record<string, (n: number, N: number) => number> = {
@@ -36,6 +37,15 @@ export function WindowFunctionsStudio() {
       ? "The Blackman window pushes side lobes very low for minimal leakage, at the cost of the widest main lobe (the poorest frequency resolution)."
       : `The ${win} window drops side lobes well below the rectangular case, trading a slightly wider main lobe for far cleaner spectral separation.`;
 
+  const winTex =
+    win === "Rectangular"
+      ? `w(n) = 1,\\quad 0 \\le n \\le ${N - 1}`
+      : win === "Hamming"
+      ? `w(n) = 0.54 - 0.46\\,\\cos\\!\\left(\\frac{2\\pi n}{${N - 1}}\\right)`
+      : win === "Blackman"
+      ? `w(n) = 0.42 - 0.5\\,\\cos\\!\\left(\\frac{2\\pi n}{${N - 1}}\\right) + 0.08\\,\\cos\\!\\left(\\frac{4\\pi n}{${N - 1}}\\right)`
+      : `w(n) = 0.5\\left[1 - \\cos\\!\\left(\\frac{2\\pi n}{${N - 1}}\\right)\\right]`;
+
   const code = `import numpy as np
 N = 64
 n = np.arange(N)
@@ -58,6 +68,7 @@ print("side-lobe (dB)", 20 * np.log10(spec / spec.max())[:10])`;
       inspector={<div>
         <Stat label="Window" value={win} />
         <Stat label="Trade-off" value={win === "Rectangular" ? "sharp but leaky" : win === "Blackman" ? "low leakage, wide lobe" : "balanced"} />
+        <Equation tex={winTex} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

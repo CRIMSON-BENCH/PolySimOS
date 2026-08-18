@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 
 // Machines: rule table state,read -> [write, move(+1/-1), nextState]. "H" halts.
 type Rule = Record<string, [number, number, string]>;
@@ -73,7 +74,7 @@ print("steps:", steps, "ones:", sum(1 for v in tape.values() if v == 1))`;
         <p className="mt-3 text-xs text-slate-500">{MACHINES[machine].desc} A finite state machine plus an infinite tape — the abstract computer that defines what is computable at all.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="State" value={st.current} /><Stat label="Steps" value={String(steps.current)} /><Stat label="Status" value={halted.current ? "HALTED" : "running"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="State" value={st.current} /><Stat label="Steps" value={String(steps.current)} /><Stat label="Status" value={halted.current ? "HALTED" : "running"} /><Equation tex={`\\delta(q,\\,s) = (q',\\,s',\\,D), \\quad q = \\text{${st.current}}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-10">
         <div className="mb-2 text-cyan-400">▼</div>
         <div className="flex gap-0.5">{cells.map((i) => { const v = tape.current.get(i) ?? 0; const isHead = i === head.current; return <div key={i} className={`flex h-10 w-10 items-center justify-center rounded border font-mono text-lg ${isHead ? "border-cyan-400 bg-cyan-500/20 text-cyan-200" : "border-slate-700 bg-slate-900 text-slate-400"}`}>{v}</div>; })}</div>

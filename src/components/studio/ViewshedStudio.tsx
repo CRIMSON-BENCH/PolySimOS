@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { obsX: number; obsHeight: number }> = {
@@ -72,7 +73,7 @@ print("visible cells", visible)`;
         <p className="mt-3 text-xs text-slate-500">A viewshed marks every point visible from an observer, hidden behind intervening ridges. Scanning outward, a point is seen only if its angle above the horizontal exceeds every closer obstacle — so terrain shadows fall behind hills. Raising the observer reveals far more. It is essential for siting cell towers, wind turbines, scenic overlooks, and military positions.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Visible cells" value={String(visible)} /><Stat label="Coverage" value={`${coverage.toFixed(0)}%`} /><Stat label="Observer height" value={`${obsHeight} m`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Visible cells" value={String(visible)} /><Stat label="Coverage" value={`${coverage.toFixed(0)}%`} /><Stat label="Observer height" value={`${obsHeight} m`} /><Equation tex={`d_{\\text{horizon}} = \\sqrt{2 R h} = \\sqrt{2 \\cdot 6371\\,\\text{km} \\cdot ${obsHeight}\\,\\text{m}} \\approx ${(Math.sqrt(2 * 6371000 * obsHeight) / 1000).toFixed(1)}\\ \\text{km}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

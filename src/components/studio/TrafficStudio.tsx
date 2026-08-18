@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const CELLS = 160, MAXV = 5, W = 760, H = 300;
@@ -98,7 +99,7 @@ print("avg speed", cars.mean() if cars.size else 0.0)`;
         <Slider label="Random braking" value={pSlow} min={0} max={0.6} step={0.05} onChange={(v) => update({ pSlow: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cells" value={String(CELLS)} /><Stat label="Avg speed" value={flow.toFixed(2)} /><Stat label="Density" value={density.toFixed(2)} /><Stat label="Model" value="Nagel–Schreckenberg" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cells" value={String(CELLS)} /><Stat label="Avg speed" value={flow.toFixed(2)} /><Stat label="Density" value={density.toFixed(2)} /><Stat label="Model" value="Nagel–Schreckenberg" /><Equation tex={`q = \\rho\\,v = ${density.toFixed(2)}\\times${flow.toFixed(2)} = ${(density * flow).toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

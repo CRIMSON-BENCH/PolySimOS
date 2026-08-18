@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Vcc: number; R1: number; R2: number; Rc: number; Re: number; beta: number }> = {
@@ -69,7 +70,7 @@ print("Ic", round(Ic, 3), "mA  Vce", round(Vce, 2), "V")`;
         <p className="mt-3 text-xs text-slate-500">Voltage-divider bias sets a transistor&apos;s operating point (Q-point) stably against variations in β. The base voltage fixes the emitter current, and the collector-emitter voltage falls on the DC load line. For a clean amplifier, the Q-point should sit near the middle of the active region.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Collector current Ic" value={`${Ic.toFixed(2)} mA`} /><Stat label="Vce" value={`${Vce.toFixed(2)} V`} /><Stat label="Base voltage" value={`${Vth.toFixed(2)} V`} /><Stat label="Region" value={region} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Collector current Ic" value={`${Ic.toFixed(2)} mA`} /><Stat label="Vce" value={`${Vce.toFixed(2)} V`} /><Stat label="Base voltage" value={`${Vth.toFixed(2)} V`} /><Stat label="Region" value={region} /><Equation tex={`I_C = \\beta I_B = ${beta}\\times${Ib.toFixed(3)} = ${Ic.toFixed(2)}\\,\\text{mA}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

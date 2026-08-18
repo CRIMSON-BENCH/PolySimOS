@@ -4,6 +4,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { sampleVectorField } from "@/lib/engines/fieldmath";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 const W = 640, H = 480;
@@ -78,7 +79,7 @@ plt.quiver(x, y, u, v); plt.gca().set_aspect("equal"); plt.show()`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Arrows" value={String(arrows.length)} /><Stat label="Domain" value="[-5,5]²" /><Stat label="Variables" value="x, y" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Arrows" value={String(arrows.length)} /><Stat label="Domain" value="[-5,5]²" /><Stat label="Variables" value="x, y" /><Equation tex={`\\mathbf{F}(x,y) = \\big(\\,P,\\ Q\\,\\big) = \\big(\\,${fx.replace(/\*/g, " \\cdot ")},\\ ${fy.replace(/\*/g, " \\cdot ")}\\,\\big)`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" />
     </StudioChrome>

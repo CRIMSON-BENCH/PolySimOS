@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { thickness: number; nf: number }> = {
@@ -59,7 +60,7 @@ print("min reflectance", min(refl(l) for l in lam))`;
         <p className="mt-3 text-xs text-slate-500">Coat glass with a film a quarter-wavelength thick and its two reflections cancel by destructive interference — an anti-reflection coating. It works best at one wavelength (the reflectance dips to near zero there), giving camera lenses and glasses their faint purple sheen. The same physics makes soap bubbles and oil slicks shimmer with color.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Ideal thickness (550nm)" value={`${idealT.toFixed(0)} nm`} /><Stat label="Min reflectance" value={`${(Math.min(...Array.from({ length: 100 }, (_, i) => refl(400 + i * 4))) * 100).toFixed(2)}%`} /><Stat label="Film index" value={nf.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Ideal thickness (550nm)" value={`${idealT.toFixed(0)} nm`} /><Stat label="Min reflectance" value={`${(Math.min(...Array.from({ length: 100 }, (_, i) => refl(400 + i * 4))) * 100).toFixed(2)}%`} /><Stat label="Film index" value={nf.toFixed(2)} /><Equation tex={`2 n_f t = 2(${nf.toFixed(2)})(${thickness}) = ${(2 * nf * thickness).toFixed(0)}\\,\\text{nm} = m\\lambda`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

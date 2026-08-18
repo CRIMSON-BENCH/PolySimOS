@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { nParts: number; tol: number }> = {
@@ -54,7 +55,7 @@ print("RSS tighter by", round((1 - rss / worst_case) * 100), "%")`;
         <p className="mt-3 text-xs text-slate-500">When parts stack in an assembly, their tolerances accumulate. Worst-case analysis simply adds them — safe but pessimistic, since all parts rarely hit their extremes together. Statistical (root-sum-square) analysis adds them in quadrature, giving a much tighter, more realistic range. Choosing between them decides how much precision — and cost — each part really needs.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Worst-case total" value={`±${worstCase.toFixed(2)} mm`} /><Stat label="Statistical (RSS)" value={`±${rss.toFixed(2)} mm`} /><Stat label="RSS savings" value={`${tighter.toFixed(0)}% tighter`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Worst-case total" value={`±${worstCase.toFixed(2)} mm`} /><Stat label="Statistical (RSS)" value={`±${rss.toFixed(2)} mm`} /><Stat label="RSS savings" value={`${tighter.toFixed(0)}% tighter`} /><Equation tex={`T_{wc} = \\sum |t_i| = ${N}\\times${tol} = ${worstCase.toFixed(2)},\\quad T_{rss} = \\sqrt{\\sum t_i^2} = ${tol}\\sqrt{${N}} = ${rss.toFixed(2)}\\ \\text{mm}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { useShareableNumbers } from "@/lib/studioKit";
 
@@ -86,6 +87,7 @@ print("peak intensity", intensity.max())`;
         <Stat label="Wavelength" value={`${wavelength.toFixed(1)} px`} />
         <Stat label="Separation" value={`${spacing} px`} />
         <Stat label="Pattern" value="interference fringes" />
+        <Equation tex={`y = A_1\\sin(k r_1 - \\omega t) + A_2\\sin(k r_2 - \\omega t),\\quad \\Delta r = m\\lambda,\\ \\lambda \\approx ${wavelength.toFixed(1)}\\,\\text{px},\\ \\Delta s = ${spacing}\\,\\text{px}`} />
         <ExplainResult text={explain} />
       </div>}
     >

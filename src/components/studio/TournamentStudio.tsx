@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { spread: number }> = {
@@ -62,7 +63,7 @@ print([round(c / TRIALS, 3) for c in champ])`;
         <p className="mt-3 text-xs text-slate-500">In a single-elimination bracket, the best team is far from guaranteed to win — it must string together several wins, each a fresh chance to be upset. Simulating thousands of tournaments reveals the true championship odds for each seed. With little skill spread the field is wide open; with a big gap the top seed dominates, but even then rarely tops 50%.</p>
         <ShareBar code={pyCode} />
       </div>}
-      inspector={<div><Stat label="Top seed odds" value={`${(champProb[0] * 100).toFixed(0)}%`} /><Stat label="Bottom seed odds" value={`${(champProb[N - 1] * 100).toFixed(1)}%`} /><Stat label="Teams" value={String(N)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Top seed odds" value={`${(champProb[0] * 100).toFixed(0)}%`} /><Stat label="Bottom seed odds" value={`${(champProb[N - 1] * 100).toFixed(1)}%`} /><Stat label="Teams" value={String(N)} /><Equation tex={`P_{win} = \\frac{1}{1+10^{-\\Delta/400}},\\quad \\Delta = ${spread},\\quad \\text{matches} = N-1 = ${N - 1}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

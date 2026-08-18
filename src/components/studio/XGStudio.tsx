@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi } from "@/lib/studioKit";
 
 // Expected goals (xG) from shot location.
@@ -57,7 +58,7 @@ print(round(xg, 2))`;
         <p className="mt-1 text-xs text-slate-500">Expected goals rates every shot by the probability an average player would score from that spot, learned from thousands of historical shots. The two biggest drivers are distance and angle to goal — a tap-in near the six-yard box is worth 0.8 xG, a long-range effort barely 0.03. Summing xG over a match reveals who truly deserved to win, beyond the scoreline. Click to place a shot.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Expected goals" value={xg.toFixed(2)} /><Stat label="Distance" value={`${dist.toFixed(0)} m`} /><Stat label="Angle to goal" value={`${angle.toFixed(0)}°`} /><Stat label="Rating" value={xg > 0.4 ? "big chance" : xg > 0.1 ? "decent" : "speculative"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Expected goals" value={xg.toFixed(2)} /><Stat label="Distance" value={`${dist.toFixed(0)} m`} /><Stat label="Angle to goal" value={`${angle.toFixed(0)}°`} /><Stat label="Rating" value={xg > 0.4 ? "big chance" : xg > 0.1 ? "decent" : "speculative"} /><Equation tex={`\\mathrm{xG} = \\dfrac{1}{1 + e^{-(0.6 - 0.11\\cdot${dist.toFixed(1)} + 0.06\\cdot${angle.toFixed(1)})}} = ${xg.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={400} onClick={(e) => { const r = (e.target as HTMLCanvasElement).getBoundingClientRect(); setShot([(e.clientX - r.left) * 540 / r.width, (e.clientY - r.top) * 400 / r.height]); }} className="mx-auto h-auto max-w-full cursor-crosshair rounded-lg" /></StudioChrome>
   );
 }
