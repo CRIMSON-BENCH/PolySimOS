@@ -76,7 +76,7 @@ const COLUMNS: { title: string; links: { name: string; href: string }[] }[] = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-950">
+    <footer className="border-t border-slate-200 bg-slate-50 pb-24 dark:border-slate-800 dark:bg-slate-950 sm:pb-0">
       <div className="mx-auto max-w-7xl px-4 py-12">
         <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-6">
           {COLUMNS.map((col) => (
