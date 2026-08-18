@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { copyCurrentLink, copyText } from "@/lib/studioKit";
+import { transpile } from "@/lib/transpile";
 
 // A row of preset-scenario chips. Each preset applies a named parameter set.
 export function Presets({ presets, onApply }: { presets: { label: string; hint?: string }[]; onApply: (label: string) => void }) {
@@ -38,6 +39,8 @@ export function ExplainResult({ text }: { text: string }) {
 export function ShareBar({ code, codeLabel = "Copy as Python" }: { code?: string; codeLabel?: string }) {
   const [linkMsg, setLinkMsg] = useState("Copy link");
   const [codeMsg, setCodeMsg] = useState(codeLabel);
+  const [matMsg, setMatMsg] = useState("MATLAB");
+  const [julMsg, setJulMsg] = useState("Julia");
 
   return (
     <div className="mt-4 flex flex-wrap gap-2 border-t border-slate-100 pt-3 dark:border-slate-800">
@@ -72,6 +75,24 @@ export function ShareBar({ code, codeLabel = "Copy as Python" }: { code?: string
         >
           ▶ Run in Python
         </a>
+      )}
+      {code && (
+        <button
+          onClick={async () => { const ok = await copyText(transpile(code, "matlab")); setMatMsg(ok ? "MATLAB ✓" : "⌘C"); setTimeout(() => setMatMsg("MATLAB"), 1600); }}
+          title="Copy as MATLAB (auto-translated — review before running)"
+          className="rounded-md border border-slate-300 px-2.5 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-cyan-400 hover:text-cyan-700 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-300"
+        >
+          {matMsg}
+        </button>
+      )}
+      {code && (
+        <button
+          onClick={async () => { const ok = await copyText(transpile(code, "julia")); setJulMsg(ok ? "Julia ✓" : "⌘C"); setTimeout(() => setJulMsg("Julia"), 1600); }}
+          title="Copy as Julia (auto-translated — review before running)"
+          className="rounded-md border border-slate-300 px-2.5 py-1 text-[11px] font-semibold text-slate-600 transition hover:border-cyan-400 hover:text-cyan-700 dark:border-slate-700 dark:text-slate-300 dark:hover:text-cyan-300"
+        >
+          {julMsg}
+        </button>
       )}
     </div>
   );
