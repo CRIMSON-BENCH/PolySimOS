@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PitotTubeStudio } from "@/components/studio/PitotTubeStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Pitot-Tube Airspeed Calculator (Browser)", description: "Convert dynamic pressure and altitude into true and indicated airspeed and Mach number, the way an aircraft does. Free, interactive.", alternates: { canonical: "/studio/pitot-tube" } };
+export default function Page() { return <StudioPageShell slug="pitot-tube" name="Pitot-Tube Airspeed" keyword="pitot tube airspeed calculator" lede="Aircraft measure speed from air pressure, not a speedometer. See how dynamic pressure becomes airspeed — and why true airspeed climbs with altitude." about="A pitot-static system measures dynamic pressure Δp, and airspeed follows from v = √(2Δp/ρ). Because air density falls with altitude, the same Δp corresponds to a higher true airspeed up high than the indicated value — a crucial distinction in aviation. Educational tool."><PitotTubeStudio /></StudioPageShell>; }

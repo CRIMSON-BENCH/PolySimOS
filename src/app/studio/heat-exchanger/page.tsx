@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { HeatExchangerStudio } from "@/components/studio/HeatExchangerStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Heat Exchanger LMTD Calculator (Browser)", description: "Compute the log-mean temperature difference and heat duty for counter-flow and parallel-flow heat exchangers. Free, interactive.", alternates: { canonical: "/studio/heat-exchanger" } };
+export default function Page() { return <StudioPageShell slug="heat-exchanger" name="Heat Exchanger (LMTD)" keyword="LMTD heat exchanger calculator" lede="Two fluids swap heat across a wall. See how the temperature gap drives the duty — and why counter-flow beats parallel-flow every time." about="Heat-exchanger duty is Q = U·A·ΔT_lm. The log-mean temperature difference (LMTD) correctly averages a temperature gap that varies along the length. Counter-flow keeps the gap more uniform, so it transfers more heat than parallel-flow for the same hardware. Educational tool."><HeatExchangerStudio /></StudioPageShell>; }

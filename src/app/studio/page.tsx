@@ -324,6 +324,14 @@ export const SIMS = [
   { slug: "rocket-equation", name: "Rocket Equation", desc: "Tsiolkovsky Δv and staging.", tag: "Aerospace" },
   { slug: "collision-lab", name: "Collision Lab", desc: "Elastic vs inelastic 1D collisions.", tag: "Physics" },
   { slug: "moment-of-inertia", name: "Moment of Inertia", desc: "Rotational mass & parallel-axis.", tag: "Physics" },
+  { slug: "pipe-flow", name: "Pipe Flow & Head Loss", desc: "Darcy–Weisbach friction.", tag: "Engineering" },
+  { slug: "pump-curve", name: "Pump & System Curves", desc: "Find the operating point.", tag: "Engineering" },
+  { slug: "open-channel", name: "Open-Channel Flow", desc: "Manning's equation for rivers.", tag: "Engineering" },
+  { slug: "heat-exchanger", name: "Heat Exchanger (LMTD)", desc: "Counter vs parallel flow.", tag: "Engineering" },
+  { slug: "compressible-nozzle", name: "Compressible Nozzle Flow", desc: "De Laval nozzle & choking.", tag: "Aerospace" },
+  { slug: "bernoulli", name: "Bernoulli / Venturi", desc: "Faster flow, lower pressure.", tag: "Physics" },
+  { slug: "fin-cooling", name: "Fin Cooling", desc: "Heat sinks & extended surfaces.", tag: "Engineering" },
+  { slug: "pitot-tube", name: "Pitot-Tube Airspeed", desc: "How planes measure speed.", tag: "Aerospace" },
 ];
 
 export default function StudioIndex() {

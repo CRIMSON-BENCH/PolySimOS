@@ -140,6 +140,14 @@ import { RollingMotionStudio } from "./RollingMotionStudio";
 import { RocketEquationStudio } from "./RocketEquationStudio";
 import { CollisionLabStudio } from "./CollisionLabStudio";
 import { MomentOfInertiaStudio } from "./MomentOfInertiaStudio";
+import { PipeFlowStudio } from "./PipeFlowStudio";
+import { PumpCurveStudio } from "./PumpCurveStudio";
+import { OpenChannelStudio } from "./OpenChannelStudio";
+import { HeatExchangerStudio } from "./HeatExchangerStudio";
+import { CompressibleNozzleStudio } from "./CompressibleNozzleStudio";
+import { BernoulliStudio } from "./BernoulliStudio";
+import { FinCoolingStudio } from "./FinCoolingStudio";
+import { PitotTubeStudio } from "./PitotTubeStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -620,6 +628,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "rocket-equation": RocketEquationStudio,
   "collision-lab": CollisionLabStudio,
   "moment-of-inertia": MomentOfInertiaStudio,
+  "pipe-flow": PipeFlowStudio,
+  "pump-curve": PumpCurveStudio,
+  "open-channel": OpenChannelStudio,
+  "heat-exchanger": HeatExchangerStudio,
+  "compressible-nozzle": CompressibleNozzleStudio,
+  bernoulli: BernoulliStudio,
+  "fin-cooling": FinCoolingStudio,
+  "pitot-tube": PitotTubeStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

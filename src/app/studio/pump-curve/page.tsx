@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PumpCurveStudio } from "@/components/studio/PumpCurveStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Pump Curve & System Curve Operating Point", description: "Overlay a pump curve on a system curve and find the operating flow and head where they intersect. Free, interactive.", alternates: { canonical: "/studio/pump-curve" } };
+export default function Page() { return <StudioPageShell slug="pump-curve" name="Pump & System Curves" keyword="pump system curve operating point" lede="A pump and its piping negotiate a single operating point. Overlay the two curves and watch where they cross as you change the pump or the system." about="A pump's head falls as flow rises (H = H₀ − kQ²); a system needs more head as flow rises (H = H_static + cQ²). Their intersection is the only flow and head the installed system can actually deliver — the basis of pump selection. Educational tool."><PumpCurveStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { CompressibleNozzleStudio } from "@/components/studio/CompressibleNozzleStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "De Laval Nozzle & Compressible Flow Simulator", description: "See how a converging–diverging nozzle accelerates gas past Mach 1, with exit Mach number and area ratio from isentropic flow. Free.", alternates: { canonical: "/studio/compressible-nozzle" } };
+export default function Page() { return <StudioPageShell slug="compressible-nozzle" name="Compressible Nozzle Flow" keyword="de laval nozzle simulator" lede="Rocket engines squeeze gas through a converging–diverging nozzle to reach supersonic speeds. Watch flow choke at the throat and go supersonic downstream." about="In a de Laval nozzle, gas accelerates in the converging section to exactly Mach 1 at the throat (choked), then continues accelerating supersonically in the diverging section. The exit Mach number follows from the stagnation-to-back pressure ratio via isentropic relations. Educational tool."><CompressibleNozzleStudio /></StudioPageShell>; }

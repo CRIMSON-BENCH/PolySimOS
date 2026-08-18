@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { OpenChannelStudio } from "@/components/studio/OpenChannelStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Open-Channel Flow Calculator (Manning's Equation)", description: "Compute velocity and discharge in a channel from width, depth, slope, and roughness using Manning's equation. Free, interactive.", alternates: { canonical: "/studio/open-channel" } };
+export default function Page() { return <StudioPageShell slug="open-channel" name="Open-Channel Flow" keyword="mannings equation calculator" lede="How much water can a canal, ditch, or storm drain carry? Set the geometry and slope and Manning's equation gives you the velocity, discharge, and flow regime." about="Manning's equation, V = (1/n)·R^⅔·√S, predicts open-channel velocity from the hydraulic radius R (area ÷ wetted perimeter), bed slope S, and roughness n. The Froude number classifies the flow as subcritical (tranquil) or supercritical (rapid). Educational tool."><OpenChannelStudio /></StudioPageShell>; }

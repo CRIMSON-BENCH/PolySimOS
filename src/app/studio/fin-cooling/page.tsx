@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { FinCoolingStudio } from "@/components/studio/FinCoolingStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Cooling Fin & Heat Sink Simulator (Browser)", description: "See the temperature profile along a cooling fin and its efficiency and heat dissipation, from conductivity, convection, and geometry. Free.", alternates: { canonical: "/studio/fin-cooling" } };
+export default function Page() { return <StudioPageShell slug="fin-cooling" name="Fin Cooling" keyword="cooling fin heat sink calculator" lede="Heat sinks add fins to shed heat into the air. Watch temperature fall along a fin, and see when extra length just wastes metal." about="A fin conducts heat outward while convecting to the surrounding air, giving θ(x)/θ_base = cosh(m(L−x))/cosh(mL) with m = √(2h/kt). Beyond a point the tip runs near ambient and added length barely helps — captured by the fin efficiency. Educational tool."><FinCoolingStudio /></StudioPageShell>; }

@@ -187,3 +187,32 @@ Current state (2026-08): **301 solvers** across ~30 domains · **200 multi-solve
 - + Tier 2 (universities/labs/high schools): **~130k**
 - + Tier 3–4 (comparisons/concepts/careers): **~60k**
 - **→ 220k+ target reachable**, all with real embedded solvers (not thin pages)
+
+---
+
+# PART D — Integrations & Interop (be the interface layer, not the compute host)
+
+**Guiding principle:** PolySim's edge is the interactive front-end + solver library, not raw compute. Integrate by *exporting to* and *being called by* real tools — and only host others' compute at the enterprise tier (BYOC, where they pay). Keeps hosting near-zero.
+
+## D1. Free in-browser math libraries to pull in (all client-side = $0 hosting)
+- **Pyodide** — Python + NumPy/SciPy/SymPy/pandas in WebAssembly, lazy-loaded. The big one: real scientific Python in-browser, makes PolySim a genuine compute environment.
+- **math.js** — expression eval, units, matrices → powers a universal "type any calculation" box.
+- **Nerdamer / Algebrite** — lightweight JS symbolic algebra (differentiate/integrate/solve) when full SymPy is overkill.
+- **MathLive** — WYSIWYG equation input field (type math naturally) — the "easier for people used to such tools" piece.
+- **KaTeX** — render LaTeX everywhere so it reads like real math.
+- **WebR** — R in the browser for the stats crowd.
+- Free *data* APIs (factual, not compute): CODATA constants, USGS earthquakes, NOAA, NASA, arXiv/PubMed (already wired).
+
+## D2. Computational notebooks "as a set"
+Turn the existing Notebook into a **curated library of ready-to-run notebooks** — prose + live LaTeX + editable Python cell (Pyodide) + embedded solver, one per topic. A "set" per domain = textbook-style chapters. Each notebook is **also an SEO page and a monetizable unit**. Highest-leverage feature for power users.
+
+## D3. Bring-your-own-compute & Qiskit (phased)
+| Phase | Pattern | Effort | Notes |
+|---|---|---|---|
+| 1. **Export to code** | Every solver → runnable **Qiskit / Python / MATLAB** snippet; run Python in-browser (Pyodide) | Low | Instant interop, no infra |
+| 2. **They connect to us** | Real **PolySim API + SDK + MCP server** so Jupyter/VS Code/AI agents call our solvers | Medium | Lowest infra burden; API revenue tier (`/developers` already marketed) |
+| 3. **We connect to them (BYOC)** | "Connect your compute": user supplies an endpoint — **IBM Quantum token**, Jupyter kernel gateway, their cloud GPU — PolySim dispatches heavy/quantum jobs there | High | Enterprise; **they** pay for compute |
+
+**Qiskit concretely:** a visual **Quantum Circuit Studio** that (a) simulates small circuits locally, (b) exports Qiskit code, (c) optionally submits to IBM Quantum with the user's own token (BYOC). Builds on existing quantum solvers.
+
+**Build order:** Phase 1 first (Pyodide compute cell + export-to-code) — biggest "feels like a real tool" jump for the least infra, and it unlocks D2.

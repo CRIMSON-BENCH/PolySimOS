@@ -107,7 +107,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...ARTICLES.map((a) => u(`/blog/${a.slug}`, 0.6)),
     ...LISTINGS.map((l) => u(`/marketplace/${l.slug}`, 0.5)),
     ...MULTIS.map((m) => u(`/multi/${m.s}`, 0.7)),
-    ...["gyroscope", "coupled-oscillators", "driven-resonance", "gear-train", "rolling-motion", "rocket-equation", "collision-lab", "moment-of-inertia"].map((s) => u(`/studio/${s}`, 0.8)),
+    ...["gyroscope", "coupled-oscillators", "driven-resonance", "gear-train", "rolling-motion", "rocket-equation", "collision-lab", "moment-of-inertia", "pipe-flow", "pump-curve", "open-channel", "heat-exchanger", "compressible-nozzle", "bernoulli", "fin-cooling", "pitot-tube"].map((s) => u(`/studio/${s}`, 0.8)),
     ...USECASES.map((uc) => u(`/use-cases/${uc.slug}`, 0.6)),
     ...FEATURED.flatMap((uc) => UC_AUDIENCES.map((a) => u(`/use-cases/${uc.slug}/for/${a.slug}`, 0.4))),
   ];

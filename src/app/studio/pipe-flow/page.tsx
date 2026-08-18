@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { PipeFlowStudio } from "@/components/studio/PipeFlowStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Pipe Flow & Head Loss Calculator (Darcy–Weisbach)", description: "Compute pressure drop, velocity, Reynolds number, and friction factor for flow in a pipe. Free, interactive Darcy–Weisbach tool.", alternates: { canonical: "/studio/pipe-flow" } };
+export default function Page() { return <StudioPageShell slug="pipe-flow" name="Pipe Flow & Head Loss" keyword="pipe head loss calculator" lede="Push fluid through a pipe and friction bleeds away pressure. Dial the diameter, flow, and roughness to see the pressure drop and whether the flow is laminar or turbulent." about="The Darcy–Weisbach equation gives head loss h_f = f·(L/D)·v²/2g. The friction factor f comes from 64/Re in laminar flow, or a Colebrook-type correlation in turbulent flow that blends Reynolds number and relative roughness. Educational tool."><PipeFlowStudio /></StudioPageShell>; }

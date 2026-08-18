@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BernoulliStudio } from "@/components/studio/BernoulliStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Bernoulli & Venturi Effect Simulator (Browser)", description: "Squeeze flow through a venturi and watch velocity rise and pressure drop, live. Free, interactive Bernoulli's principle tool.", alternates: { canonical: "/studio/bernoulli" } };
+export default function Page() { return <StudioPageShell slug="bernoulli" name="Bernoulli / Venturi" keyword="bernoulli venturi simulator" lede="Speed a fluid up and its pressure drops — Bernoulli's principle. Narrow the throat of a venturi and watch the trade between velocity and pressure play out." about="Along a streamline, p + ½ρv² + ρgh stays constant (Bernoulli). Continuity forces the fluid to speed up through a narrower area, so its pressure must fall. This underlies venturi meters, carburetors, atomizers, and the lift on a wing. Educational tool."><BernoulliStudio /></StudioPageShell>; }
