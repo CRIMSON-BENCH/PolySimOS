@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const TASKS = [5, 3, 8, 2, 6, 4, 7, 3]; // task times (s)
@@ -66,7 +67,7 @@ print("takt", takt, "stations", len(stations), "eff%", eff)`;
         <p className="mt-3 text-xs text-slate-500">Takt time is the drumbeat of production — the shift length divided by demand, the pace each unit must be finished to meet the order. Tasks are grouped into stations so no station&apos;s work exceeds takt. The theoretical minimum stations is the total work over takt; balancing efficiency measures how little idle time is left. Higher demand shortens takt and needs more stations.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Takt time" value={`${takt.toFixed(1)} s`} /><Stat label="Min stations" value={String(minStations)} /><Stat label="Actual stations" value={String(stations.length)} /><Stat label="Line efficiency" value={`${efficiency.toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Takt time" value={`${takt.toFixed(1)} s`} /><Stat label="Min stations" value={String(minStations)} /><Stat label="Actual stations" value={String(stations.length)} /><Stat label="Line efficiency" value={`${efficiency.toFixed(0)}%`} /><Equation tex={`T_t = \\dfrac{${shiftSec}}{${demand}} = ${takt.toFixed(1)}\\,\\text{s},\\quad \\eta = \\dfrac{${total}}{${stations.length}\\times ${takt.toFixed(1)}} = ${efficiency.toFixed(0)}\\%`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { gap: number }> = {
@@ -46,7 +47,7 @@ print(round(wl), "nm", region)`;
         <p className="mt-3 text-xs text-slate-500">An LED emits light when electrons drop across the semiconductor&apos;s band gap, each releasing a photon of energy equal to that gap. Since photon energy fixes wavelength (λ = 1240/Eg in nm), the band gap directly sets the color — which is why blue LEDs needed a whole new material (gallium nitride) and a Nobel Prize to achieve.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Wavelength" value={`${wl.toFixed(0)} nm`} /><Stat label="Region" value={wl < 380 ? "ultraviolet" : wl > 750 ? "infrared" : "visible"} /><Stat label="Material" value={material} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Wavelength" value={`${wl.toFixed(0)} nm`} /><Stat label="Region" value={wl < 380 ? "ultraviolet" : wl > 750 ? "infrared" : "visible"} /><Stat label="Material" value={material} /><Equation tex={`\\lambda = \\frac{hc}{E_g} = \\frac{1240}{${gap.toFixed(2)}\\ \\text{eV}} = ${wl.toFixed(0)}\\ \\text{nm}`} /><ExplainResult text={explain} /></div>}
     ><div className="flex flex-col items-center justify-center py-16">
         <div className="h-40 w-40 rounded-full" style={{ backgroundColor: visible ? wl2rgb(wl) : "#1e293b", boxShadow: visible ? `0 0 60px ${wl2rgb(wl)}` : "none" }} />
         <div className="mt-6 text-4xl font-black text-slate-100">{wl.toFixed(0)} nm</div>

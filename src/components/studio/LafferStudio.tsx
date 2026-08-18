@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { elasticity: number; rate: number }> = {
@@ -59,7 +60,7 @@ print("revenue", revenue(rate), "peak rate", peak)`;
         <p className="mt-3 text-xs text-slate-500">At a 0% tax rate the government collects nothing; at 100% no one bothers to earn taxable income, so it also collects nothing. Somewhere between lies a revenue-maximizing rate — the peak of the Laffer curve. How responsive people are to taxes (the elasticity) sets where that peak falls. It is descriptive, not a policy prescription.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Revenue at rate" value={revenue(rate).toFixed(3)} /><Stat label="Revenue-max rate" value={`${pk}%`} /><Stat label="Zone" value={rate > peakT ? "above peak" : "below peak"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Revenue at rate" value={revenue(rate).toFixed(3)} /><Stat label="Revenue-max rate" value={`${pk}%`} /><Stat label="Zone" value={rate > peakT ? "above peak" : "below peak"} /><Equation tex={`R(t)=t\\,B(t)=t\\left(1-t^{${elasticity}}\\right),\\quad \\left.\\frac{dR}{dt}\\right|_{t^{*}}=0,\\quad t=${rate.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

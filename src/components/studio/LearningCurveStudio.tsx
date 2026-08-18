@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { firstCost: number; rate: number; units: number }> = {
@@ -48,7 +49,7 @@ print("unit", units, "cost", nth, "reduction_pct", (1 - nth / first_cost) * 100)
         <p className="mt-3 text-xs text-slate-500">Every time cumulative production doubles, the cost per unit falls by a fixed percentage — the learning curve. An 80% curve means the 200th unit costs 80% of the 100th. This steady, predictable decline, first seen in aircraft manufacturing, drives the falling prices of everything from solar panels to microchips, and underpins production planning and pricing.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cost of unit N" value={`$${nthCost.toFixed(1)}`} /><Stat label="Learning rate" value={`${rate}%`} /><Stat label="Cost reduction" value={`${savings.toFixed(0)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cost of unit N" value={`$${nthCost.toFixed(1)}`} /><Stat label="Learning rate" value={`${rate}%`} /><Stat label="Cost reduction" value={`${savings.toFixed(0)}%`} /><Equation tex={`C_n = C_1\\,n^{-b},\\quad b = -\\log_2(${(rate / 100).toFixed(2)}) = ${(-b).toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

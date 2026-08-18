@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const CW = 560, CH = 480;
@@ -62,7 +63,7 @@ print("symbols", len(s))  # F/G draw, +/- turn ${PRESETS[preset].angle} deg, [ ]
         <ExplainResult text={explain} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Angle" value={`${PRESETS[preset].angle}°`} /><Stat label="Symbols" value={len.toLocaleString()} /><Stat label="Axiom" value={PRESETS[preset].axiom} /></div>}
+      inspector={<div><Stat label="Angle" value={`${PRESETS[preset].angle}°`} /><Stat label="Symbols" value={len.toLocaleString()} /><Stat label="Axiom" value={PRESETS[preset].axiom} /><Equation tex={`${Object.entries(PRESETS[preset].rules).map(([k, v]) => `\\texttt{${k}}\\!\\to\\!\\texttt{${v}}`).join(",\\;\\, ")},\\quad \\delta=${PRESETS[preset].angle}^\\circ,\\quad n=${N}`} /></div>}
     ><canvas ref={canvasRef} width={560} height={480} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

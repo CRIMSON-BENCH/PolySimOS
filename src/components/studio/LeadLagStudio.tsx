@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { zero: number; pole: number }> = {
@@ -52,6 +53,7 @@ print("max phase", phase[i], "deg at", w[i], "rad/s")`;
         <Stat label="Type" value={pole > zero ? "lead" : pole < zero ? "lag" : "none"} />
         <Stat label="Max phase shift" value={`${maxPhase.toFixed(0)}°`} />
         <Stat label="At frequency" value={`${wAtMax.toFixed(2)} rad/s`} />
+        <Equation tex={`C(s) = \\dfrac{1 + s/${zero.toFixed(1)}}{1 + s/${pole.toFixed(1)}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { mu: number }> = {
@@ -62,7 +63,7 @@ print(L1, L2, L3, L4, L5)`;
         <p className="mt-3 text-xs text-slate-500">In a two-body system, five points let a small object stay fixed in the rotating frame. L1-L3 sit on the line through the two masses (unstable); L4 and L5 lead and trail the secondary by 60° and are stable for μ below 0.0385 — where Jupiter&apos;s Trojan asteroids live. JWST orbits the Sun-Earth L2.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="μ = m₂/(m₁+m₂)" value={mu.toFixed(3)} /><Stat label="L4/L5 stable?" value={mu < 0.0385 ? "yes" : "no"} /><Stat label="Points" value="5" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="μ = m₂/(m₁+m₂)" value={mu.toFixed(3)} /><Stat label="L4/L5 stable?" value={mu < 0.0385 ? "yes" : "no"} /><Stat label="Points" value="5" /><Equation tex={`\\Omega(x,y)=\\tfrac{1}{2}\\left(x^{2}+y^{2}\\right)+\\frac{1-\\mu}{r_{1}}+\\frac{\\mu}{r_{2}},\\quad \\mu=${mu.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={420} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

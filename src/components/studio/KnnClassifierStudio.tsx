@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
@@ -56,6 +57,7 @@ def knn(train_X, train_y, x):
       inspector={<div>
         <Stat label="Neighbors" value={`${k}`} />
         <Stat label="Boundary" value={k <= 3 ? "jagged (overfit)" : k >= 15 ? "very smooth" : "balanced"} />
+        <Equation tex={`\\hat y = \\operatorname{mode}\\{\\, y_i : x_i \\in N_{${k}}(x) \\,\\}, \\quad d(x, x_i) = \\lVert x - x_i \\rVert`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

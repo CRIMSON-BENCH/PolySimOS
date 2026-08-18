@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { slope: number; noise: number; nPts: number }> = {
@@ -66,7 +67,7 @@ print("slope", m, "intercept", b, "R2", r ** 2)`;
         <p className="mt-3 text-xs text-slate-500">Ordinary least squares finds the line that minimizes the sum of squared vertical residuals (the gray drop-lines). R² measures the fraction of variance the line explains — 1 is perfect, 0 is useless. Add noise or remove points to watch the fit and R² degrade.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Fitted slope" value={fit.m.toFixed(3)} /><Stat label="Intercept" value={fit.b.toFixed(3)} /><Stat label="R²" value={fit.r2.toFixed(3)} /><Stat label="Correlation r" value={(Math.sign(fit.m) * Math.sqrt(Math.max(0, fit.r2))).toFixed(3)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Fitted slope" value={fit.m.toFixed(3)} /><Stat label="Intercept" value={fit.b.toFixed(3)} /><Stat label="R²" value={fit.r2.toFixed(3)} /><Stat label="Correlation r" value={(Math.sign(fit.m) * Math.sqrt(Math.max(0, fit.r2))).toFixed(3)} /><Equation tex={`\\hat y = ${fit.b.toFixed(2)} + ${fit.m.toFixed(2)}\\,x,\\quad \\beta_1 = \\frac{\\sum (x-\\bar x)(y-\\bar y)}{\\sum (x-\\bar x)^2},\\quad R^2 = ${fit.r2.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

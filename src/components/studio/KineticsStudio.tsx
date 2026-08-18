@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 740, H = 440;
@@ -64,7 +65,7 @@ print("final [A]", A, "k_eff", k_eff)`;
         <Slider label="Temperature factor" value={temp} min={0.5} max={2} step={0.1} onChange={(v) => update({ temp: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Order" value={String(order)} /><Stat label="Effective k" value={curve.kEff.toFixed(3)} /><Stat label="Arrhenius" value="k = A·e^(−Ea/RT)" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Order" value={String(order)} /><Stat label="Effective k" value={curve.kEff.toFixed(3)} /><Stat label="Arrhenius" value="k = A·e^(−Ea/RT)" /><Equation tex={`\\text{rate} = k_{\\text{eff}}\\,[A]^{${order}} = ${curve.kEff.toFixed(2)}\\,[A]^{${order}}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

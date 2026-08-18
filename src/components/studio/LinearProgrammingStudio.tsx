@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 // Maximize c1 x + c2 y over a fixed feasible region.
@@ -63,7 +64,7 @@ print("x,y =", res.x, "objective =", -res.fun)`;
         <p className="mt-3 text-xs text-slate-500">Linear programming maximizes a linear objective subject to linear constraints. The constraints carve out a convex feasible region (shaded), and the optimum always sits at a corner. Slide the objective coefficients and watch the optimal vertex jump between corners — the geometric idea behind the simplex algorithm that runs global logistics and finance.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Optimal x" value={best[0].toFixed(2)} /><Stat label="Optimal y" value={best[1].toFixed(2)} /><Stat label="Objective value" value={bestV.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Optimal x" value={best[0].toFixed(2)} /><Stat label="Optimal y" value={best[1].toFixed(2)} /><Stat label="Objective value" value={bestV.toFixed(2)} /><Equation tex={`\\max\\; ${c1}x + ${c2}y \\quad \\text{s.t.}\\; x+y\\le 10,\\; 2x+y\\le 16,\\; x+3y\\le 18,\\; x,y\\ge 0 \\;\\Rightarrow\\; ${bestV.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={420} height={380} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

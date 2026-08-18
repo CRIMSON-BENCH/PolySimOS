@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -81,7 +82,7 @@ print("after 11,000 steps the ant has built its highway")`;
         <p className="mt-3 text-xs text-slate-500">Two rules: on white, turn right and flip the cell; on black, turn left and flip. After about 10,000 steps of apparent chaos, the ant spontaneously builds a periodic highway — order from simplicity.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Steps" value={steps.toLocaleString()} /><Stat label="Highway at" value="~10,000" /><Stat label="Grid" value={`${N}²`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Steps" value={steps.toLocaleString()} /><Stat label="Highway at" value="~10,000" /><Stat label="Grid" value={`${N}²`} /><Equation tex={`s_{n+1}=\\begin{cases}\\text{turn right},\\ c\\to1 & c=0\\ (\\text{white})\\\\[2pt]\\text{turn left},\\ c\\to0 & c=1\\ (\\text{black})\\end{cases}\\quad n=${steps}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={N * CELL} height={N * CELL} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

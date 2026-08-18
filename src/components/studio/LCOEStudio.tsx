@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { capex: number; capFactor: number; discount: number; lifetime: number; opex: number }> = {
@@ -63,7 +64,7 @@ print(round(lcoe), "$/MWh")`;
         <p className="mt-3 text-xs text-slate-500">LCOE spreads a power project&apos;s lifetime cost over every megawatt-hour it produces, letting wildly different technologies be compared fairly. It rewards high capacity factors and cheap capital, and punishes idle plants. The capital-recovery factor discounts future costs to today. It is the number that has made solar and wind the cheapest new power in most of the world.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="LCOE" value={`$${lcoe.toFixed(0)}/MWh`} /><Stat label="Per kWh" value={`${(lcoe / 10).toFixed(1)}¢`} /><Stat label="Capacity factor" value={`${capFactor}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="LCOE" value={`$${lcoe.toFixed(0)}/MWh`} /><Stat label="Per kWh" value={`${(lcoe / 10).toFixed(1)}¢`} /><Stat label="Capacity factor" value={`${capFactor}%`} /><Equation tex={`\\text{LCOE} = \\frac{C\\cdot \\text{CRF} + O}{CF\\cdot 8760}\\times 1000 = \\frac{${capex}\\cdot ${CRF.toFixed(3)} + ${opex}}{${annualGen.toFixed(0)}}\\times 1000 = ${lcoe.toFixed(0)}\\ \\$/\\text{MWh}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={280} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { pHeads: number }> = {
@@ -61,7 +62,7 @@ print("observed", heads / n, "target", p)`;
         <p className="mt-3 text-xs text-slate-500">Flip a coin a few times and the proportion of heads jumps around wildly; flip it thousands of times and it settles onto the true probability. That is the law of large numbers — averages converge even though individual flips stay random. Crucially, it does not mean a run of tails is &quot;due&quot; to reverse; that belief is the gambler&apos;s fallacy.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Flips" value={state.current.n.toLocaleString()} /><Stat label="Observed p" value={obs.toFixed(4)} /><Stat label="Deviation" value={`${((obs - pHeads) * 100).toFixed(2)}%`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Flips" value={state.current.n.toLocaleString()} /><Stat label="Observed p" value={obs.toFixed(4)} /><Stat label="Deviation" value={`${((obs - pHeads) * 100).toFixed(2)}%`} /><Equation tex={`\\bar{x}_n \\to \\mu = ${pHeads} \\ \\text{ as } n \\to \\infty \\quad\\left(n = ${state.current.n},\\ |\\bar{x}_n - \\mu| = ${Math.abs(obs - pHeads).toFixed(4)}\\right)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { r: number; K: number; N0: number }> = {
@@ -61,7 +62,7 @@ print("final", P[-1], "inflection at N =", K / 2)`;
         <p className="mt-3 text-xs text-slate-500">Exponential growth assumes unlimited resources and explodes without bound. Logistic growth adds a carrying capacity K: as the population nears K, growth slows and levels off in a characteristic S-curve. It is the foundation of ecology, epidemiology, and resource management.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Carrying capacity" value={String(K)} /><Stat label="Max growth at" value={`N = ${(K / 2).toFixed(0)}`} /><Stat label="Growth rate r" value={r.toFixed(2)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Carrying capacity" value={String(K)} /><Stat label="Max growth at" value={`N = ${(K / 2).toFixed(0)}`} /><Stat label="Growth rate r" value={r.toFixed(2)} /><Equation tex={`\\frac{dP}{dt} = ${r.toFixed(2)}\\,P\\left(1 - \\frac{P}{${K}}\\right)`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

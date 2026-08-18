@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { pump: number; loss: number }> = {
@@ -55,7 +56,7 @@ print(state, "| output power", round(output, 2))`;
         <p className="mt-3 text-xs text-slate-500">A laser fires only when the optical gain from the pumped medium exceeds the losses of the mirror cavity. Below that threshold it merely glows like a lamp; above it, stimulated emission takes over and output rises steeply and linearly with pump power. This sharp threshold is the defining signature of laser action.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Threshold" value={threshold.toFixed(1)} /><Stat label="Output power" value={output.toFixed(2)} /><Stat label="State" value={lasing ? "lasing" : "below threshold"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Threshold" value={threshold.toFixed(1)} /><Stat label="Output power" value={output.toFixed(2)} /><Stat label="State" value={lasing ? "lasing" : "below threshold"} /><Equation tex={`P_{\\mathrm{out}} = 0.8\\,\\max(P_{\\mathrm{pump}} - P_{\\mathrm{th}},\\,0) = 0.8\\,\\max(${pump} - ${threshold.toFixed(1)},\\,0) = ${output.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

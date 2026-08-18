@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { T0: number; dew: number; lapse: number }> = {
@@ -61,7 +62,7 @@ print("cloud base", round(lcl, 2), "km")`;
         <p className="mt-3 text-xs text-slate-500">Air cools with height at the environmental lapse rate. Rising air cools until it hits its dew point at the lifting condensation level — the cloud base — estimated by (T − Td)/8 km. The pressure falls with altitude following the barometric formula.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Cloud base" value={`${lcl.toFixed(2)} km`} /><Stat label="Pressure at 3 km" value={`${P(3).toFixed(0)} hPa`} /><Stat label="T at 5 km" value={`${(T0 - lapse * 5).toFixed(1)} °C`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Cloud base" value={`${lcl.toFixed(2)} km`} /><Stat label="Pressure at 3 km" value={`${P(3).toFixed(0)} hPa`} /><Stat label="T at 5 km" value={`${(T0 - lapse * 5).toFixed(1)} °C`} /><Equation tex={`T(z) = ${T0} - ${lapse.toFixed(1)}\\,z \\quad [^\\circ\\mathrm{C},\\ z\\text{ in km}]`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

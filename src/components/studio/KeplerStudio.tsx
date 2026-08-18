@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -87,7 +88,7 @@ plt.axis('equal'); plt.show()`;
         <Slider label="Semi-major axis" value={a} min={80} max={200} step={5} onChange={(v) => update({ a: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Eccentricity" value={ecc.toFixed(2)} /><Stat label="Orbit" value={ecc < 0.01 ? "circular" : ecc < 1 ? "elliptical" : "hyperbolic"} /><Stat label="Law" value="Kepler / 1-r²" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Eccentricity" value={ecc.toFixed(2)} /><Stat label="Orbit" value={ecc < 0.01 ? "circular" : ecc < 1 ? "elliptical" : "hyperbolic"} /><Stat label="Law" value="Kepler / 1-r²" /><Equation tex={`r = \\frac{a(1 - e^2)}{1 + e\\cos\\theta} = \\frac{${a}\\,(1 - ${ecc.toFixed(2)}^2)}{1 + ${ecc.toFixed(2)}\\cos\\theta}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

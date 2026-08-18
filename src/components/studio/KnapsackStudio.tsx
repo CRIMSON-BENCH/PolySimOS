@@ -2,6 +2,7 @@
 
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { useShareableNumbers } from "@/lib/studioKit";
 
 const ITEMS = [
@@ -55,7 +56,7 @@ print("best value", dp[len(items)][C])`;
         <p className="mt-3 text-xs text-slate-500">The knapsack problem: pick items to maximize value without exceeding a weight limit. Greedily grabbing the most valuable item fails; the optimal answer needs dynamic programming, which builds a table of best values for every capacity. It models budgeting, cargo loading, and resource allocation — and is a classic NP-hard problem solved efficiently by DP.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Total value" value={`$${totV}`} /><Stat label="Weight used" value={`${totW} / ${C} kg`} /><Stat label="Items packed" value={String(chosen.size)} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Total value" value={`$${totV}`} /><Stat label="Weight used" value={`${totW} / ${C} kg`} /><Stat label="Items packed" value={String(chosen.size)} /><Equation tex={`V[i,w] = \\max\\bigl(V[i-1,w],\\; v_i + V[i-1,\\,w-w_i]\\bigr), \\quad \\max \\sum_i v_i x_i \\;\\text{s.t.}\\; \\sum_i w_i x_i \\le ${C}`} /><ExplainResult text={explain} /></div>}
     ><div className="grid grid-cols-2 gap-3 p-2 sm:grid-cols-4">
         {ITEMS.map((it, i) => (
           <div key={it.name} className={`rounded-xl border p-3 text-center ${chosen.has(i) ? "border-cyan-400 bg-cyan-500/15" : "border-slate-700 bg-slate-900/50 opacity-50"}`}>

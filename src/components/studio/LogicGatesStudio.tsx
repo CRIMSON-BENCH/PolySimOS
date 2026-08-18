@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 
 const GATES: Record<string, (a: number, b: number) => number> = {
   AND: (a, b) => a & b, OR: (a, b) => a | b, NAND: (a, b) => 1 - (a & b), NOR: (a, b) => 1 - (a | b), XOR: (a, b) => a ^ b, XNOR: (a, b) => 1 - (a ^ b),
@@ -19,6 +20,10 @@ const GATE_INSIGHT: Record<string, string> = {
 
 const GATE_EXPR: Record<string, string> = {
   AND: "a & b", OR: "a | b", NAND: "1 - (a & b)", NOR: "1 - (a | b)", XOR: "a ^ b", XNOR: "1 - (a ^ b)",
+};
+
+const GATE_TEX: Record<string, string> = {
+  AND: "A \\cdot B", OR: "A + B", NAND: "\\overline{A \\cdot B}", NOR: "\\overline{A + B}", XOR: "A \\oplus B", XNOR: "\\overline{A \\oplus B}",
 };
 
 export function LogicGatesStudio() {
@@ -55,6 +60,7 @@ for x in (0, 1):
           <div className="mb-1 flex justify-between border-b border-slate-200 pb-1 font-semibold text-slate-500 dark:border-slate-800"><span>A B</span><span>out</span></div>
           {[[0, 0], [0, 1], [1, 0], [1, 1]].map(([x, y]) => <div key={`${x}${y}`} className={`flex justify-between py-0.5 ${x === a && y === b ? "font-bold text-cyan-500" : "text-slate-500"}`}><span>{x} {y}</span><span>{fn(x, y)}</span></div>)}
         </div>
+        <Equation tex={`Y = ${GATE_TEX[gate]} = ${out}`} />
         <ExplainResult text={explain} />
       </div>}
     ><div className="flex h-[320px] items-center justify-center rounded-lg bg-slate-950">

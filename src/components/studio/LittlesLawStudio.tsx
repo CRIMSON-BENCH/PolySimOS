@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { throughput: number; leadTime: number }> = {
@@ -57,7 +58,7 @@ print("work-in-progress:", wip, "units")
         <p className="mt-3 text-xs text-slate-500">Little&apos;s Law is deceptively simple and astonishingly general: the average work-in-progress equals throughput times lead time. It holds for any stable queue — a factory, a hospital, a software backlog, a checkout line — regardless of the details. It means the only ways to cut lead time are to raise throughput or reduce work-in-progress, the core insight of lean and agile.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Work in progress" value={`${wip.toFixed(1)} units`} /><Stat label="Throughput" value={`${throughput}/hr`} /><Stat label="Lead time" value={`${leadTime} hr`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Work in progress" value={`${wip.toFixed(1)} units`} /><Stat label="Throughput" value={`${throughput}/hr`} /><Stat label="Lead time" value={`${leadTime} hr`} /><Equation tex={`L = \\lambda W = ${throughput} \\times ${leadTime} = ${wip.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={520} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

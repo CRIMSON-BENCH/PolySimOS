@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -67,7 +68,7 @@ plt.plot(x, y); plt.axis("equal"); plt.show()`;
         <Slider label="Phase δ (×π)" value={delta} min={0} max={2} step={0.05} onChange={(v) => update({ delta: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Ratio" value={`${a}:${b}`} /><Stat label="Phase" value={`${delta.toFixed(2)}π`} /><Stat label="Closed" value={Number.isInteger(a / b) || Number.isInteger(b / a) ? "yes" : "rational"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Ratio" value={`${a}:${b}`} /><Stat label="Phase" value={`${delta.toFixed(2)}π`} /><Stat label="Closed" value={Number.isInteger(a / b) || Number.isInteger(b / a) ? "yes" : "rational"} /><Equation tex={`x = A\\sin(${a}t + ${delta.toFixed(2)}\\pi),\\quad y = B\\sin(${b}t),\\quad ${a}\\!:\\!${b}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" /></StudioChrome>
   );
 }

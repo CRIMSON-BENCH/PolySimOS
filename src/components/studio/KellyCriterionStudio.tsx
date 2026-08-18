@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { p: number; b: number }> = {
@@ -60,6 +61,7 @@ print("half-Kelly (safer)", kelly/2)`;
         <Stat label="Kelly fraction" value={kelly > 0 ? `${(kelly * 100).toFixed(1)}%` : "do not bet"} />
         <Stat label="Edge (bp − q)" value={(b * p - q).toFixed(3)} />
         <Stat label="Half-Kelly (safer)" value={kelly > 0 ? `${(kelly * 50).toFixed(1)}%` : "—"} />
+        <Equation tex={`f^* = \\frac{bp - q}{b} = \\frac{(${b})(${p}) - ${q.toFixed(2)}}{${b}} = ${kelly.toFixed(3)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

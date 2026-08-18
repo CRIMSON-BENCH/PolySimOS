@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const rnd = (n: number) => ((n * 9301 + 49297) % 233280) / 233280;
@@ -70,6 +71,7 @@ print("inertia", km.inertia_)`;
         <Stat label="Clusters" value={`${k}`} />
         <Stat label="Points" value={`${pts.length}`} />
         <Stat label="Status" value={iters >= 6 ? "converged" : "still moving"} />
+        <Equation tex={`J = \\sum_{k=1}^{${k}} \\sum_{x \\in C_k} \\lVert x - \\mu_k \\rVert^2, \\quad \\mu_k = \\frac{1}{|C_k|}\\sum_{x \\in C_k} x`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
