@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { MotorTorqueSpeedStudio } from "@/components/studio/MotorTorqueSpeedStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "DC Motor Torque–Speed Curve Simulator", description: "Plot a DC motor's torque–speed line and power curve, and find the operating speed and output power at a given load. Free, interactive.", alternates: { canonical: "/studio/motor-torque-speed" } };
+export default function Page() { return <StudioPageShell slug="motor-torque-speed" name="DC Motor Torque–Speed" keyword="dc motor torque speed curve" lede="A DC motor trades torque for speed along a straight line. See where a given load lands you, and where the motor delivers the most power." about="An ideal DC motor follows a linear torque–speed line: maximum torque at stall, maximum speed at no load. Because power is torque times speed, mechanical output peaks at half the no-load speed — the sweet spot for sizing a motor to its load. Educational tool."><MotorTorqueSpeedStudio /></StudioPageShell>; }

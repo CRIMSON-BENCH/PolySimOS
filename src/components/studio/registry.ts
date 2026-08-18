@@ -148,6 +148,14 @@ import { CompressibleNozzleStudio } from "./CompressibleNozzleStudio";
 import { BernoulliStudio } from "./BernoulliStudio";
 import { FinCoolingStudio } from "./FinCoolingStudio";
 import { PitotTubeStudio } from "./PitotTubeStudio";
+import { Timer555Studio } from "./Timer555Studio";
+import { LogicGatesStudio } from "./LogicGatesStudio";
+import { BinaryAdderStudio } from "./BinaryAdderStudio";
+import { BjtAmplifierStudio } from "./BjtAmplifierStudio";
+import { ActiveFilterStudio } from "./ActiveFilterStudio";
+import { BuckConverterStudio } from "./BuckConverterStudio";
+import { AntennaPatternStudio } from "./AntennaPatternStudio";
+import { MotorTorqueSpeedStudio } from "./MotorTorqueSpeedStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -636,6 +644,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   bernoulli: BernoulliStudio,
   "fin-cooling": FinCoolingStudio,
   "pitot-tube": PitotTubeStudio,
+  "timer-555": Timer555Studio,
+  "logic-gates": LogicGatesStudio,
+  "binary-adder": BinaryAdderStudio,
+  "bjt-amplifier": BjtAmplifierStudio,
+  "active-filter": ActiveFilterStudio,
+  "buck-converter": BuckConverterStudio,
+  "antenna-pattern": AntennaPatternStudio,
+  "motor-torque-speed": MotorTorqueSpeedStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

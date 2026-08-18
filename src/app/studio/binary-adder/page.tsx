@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BinaryAdderStudio } from "@/components/studio/BinaryAdderStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Binary Adder Simulator (Ripple-Carry)", description: "Add two 8-bit numbers in binary and watch the carry ripple through each full-adder stage, with overflow detection. Free, interactive.", alternates: { canonical: "/studio/binary-adder" } };
+export default function Page() { return <StudioPageShell slug="binary-adder" name="Binary Ripple-Carry Adder" keyword="binary adder simulator" lede="Computers add exactly the way you learned in grade school — one column at a time, carrying the one. Watch the carry ripple through an 8-bit adder." about="A ripple-carry adder chains full-adders, one per bit. Each stage sums its two input bits plus the carry from below and passes a carry upward. The carry must propagate through every stage, which is why wide ripple adders are comparatively slow. Educational tool."><BinaryAdderStudio /></StudioPageShell>; }

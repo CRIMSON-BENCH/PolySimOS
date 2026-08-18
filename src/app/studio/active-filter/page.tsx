@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ActiveFilterStudio } from "@/components/studio/ActiveFilterStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Active Filter Bode Plot Simulator (Browser)", description: "Plot the frequency response of low-pass and high-pass filters, set the cutoff and order, and see the roll-off in dB per decade. Free.", alternates: { canonical: "/studio/active-filter" } };
+export default function Page() { return <StudioPageShell slug="active-filter" name="Active Filter (Bode Plot)" keyword="active filter bode plot" lede="Filters keep the frequencies you want and reject the rest. Set the cutoff and order and watch the Bode magnitude curve roll off." about="A filter passes a band of frequencies and attenuates the rest. The cutoff fc = 1/(2πRC) marks the −3 dB point; beyond it the magnitude falls at 20 dB per decade per filter order, so higher-order filters cut more sharply at the cost of complexity. Educational tool."><ActiveFilterStudio /></StudioPageShell>; }

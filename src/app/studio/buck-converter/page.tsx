@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BuckConverterStudio } from "@/components/studio/BuckConverterStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Buck Converter Calculator (Step-Down Regulator)", description: "Compute output voltage, inductor ripple current, and operating mode of a buck converter from duty cycle, inductance, and switching frequency. Free.", alternates: { canonical: "/studio/buck-converter" } };
+export default function Page() { return <StudioPageShell slug="buck-converter" name="Buck Converter" keyword="buck converter calculator" lede="Buck converters step voltage down efficiently by switching fast and averaging with an inductor. Set the duty cycle and watch the output and ripple." about="A buck (step-down) converter chops the input at a high switching frequency; the LC filter averages it to Vout = D·Vin. The inductor ripple ΔIL = (Vin−Vout)·D/(L·f) shrinks with larger inductance or faster switching. If ripple exceeds twice the load, the converter enters discontinuous mode. Educational tool."><BuckConverterStudio /></StudioPageShell>; }

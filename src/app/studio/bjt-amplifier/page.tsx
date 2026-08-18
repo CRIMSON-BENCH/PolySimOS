@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BjtAmplifierStudio } from "@/components/studio/BjtAmplifierStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "BJT Common-Emitter Amplifier Simulator", description: "Set the bias of a common-emitter transistor amplifier and see its Q-point on the DC load line, voltage gain, and operating region. Free.", alternates: { canonical: "/studio/bjt-amplifier" } };
+export default function Page() { return <StudioPageShell slug="bjt-amplifier" name="BJT Common-Emitter Amplifier" keyword="common emitter amplifier calculator" lede="A transistor turns a tiny base current into a big collector current. Set the bias, place the Q-point on the load line, and read the voltage gain." about="In a common-emitter amplifier the collector current is Ic = β·Ib, and the operating (Q) point sits on the DC load line Vce = Vcc − Ic(Rc+Re). Centering the Q-point maximizes undistorted swing; pushing it too far drives the transistor into saturation or cutoff. Educational tool."><BjtAmplifierStudio /></StudioPageShell>; }

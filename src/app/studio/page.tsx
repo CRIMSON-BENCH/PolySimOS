@@ -332,6 +332,14 @@ export const SIMS = [
   { slug: "bernoulli", name: "Bernoulli / Venturi", desc: "Faster flow, lower pressure.", tag: "Physics" },
   { slug: "fin-cooling", name: "Fin Cooling", desc: "Heat sinks & extended surfaces.", tag: "Engineering" },
   { slug: "pitot-tube", name: "Pitot-Tube Airspeed", desc: "How planes measure speed.", tag: "Aerospace" },
+  { slug: "timer-555", name: "555 Timer", desc: "Classic astable oscillator.", tag: "Electrical" },
+  { slug: "logic-gates", name: "Logic Gates", desc: "Truth tables for digital gates.", tag: "Electrical" },
+  { slug: "binary-adder", name: "Binary Adder", desc: "Ripple-carry addition.", tag: "Electrical" },
+  { slug: "bjt-amplifier", name: "BJT Amplifier", desc: "Bias point & voltage gain.", tag: "Electrical" },
+  { slug: "active-filter", name: "Active Filter (Bode)", desc: "Frequency response & roll-off.", tag: "Electrical" },
+  { slug: "buck-converter", name: "Buck Converter", desc: "Step-down switching regulator.", tag: "Electrical" },
+  { slug: "antenna-pattern", name: "Antenna Pattern", desc: "Dipole radiation & directivity.", tag: "Electrical" },
+  { slug: "motor-torque-speed", name: "Motor Torque–Speed", desc: "DC motor operating point.", tag: "Electrical" },
 ];
 
 export default function StudioIndex() {

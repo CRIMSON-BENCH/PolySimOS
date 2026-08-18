@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { AntennaPatternStudio } from "@/components/studio/AntennaPatternStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Dipole Antenna Radiation Pattern Simulator", description: "Visualize the radiation pattern of a dipole antenna and see how length in wavelengths shapes the main lobe and directivity. Free, interactive.", alternates: { canonical: "/studio/antenna-pattern" } };
+export default function Page() { return <StudioPageShell slug="antenna-pattern" name="Antenna Radiation Pattern" keyword="dipole antenna pattern simulator" lede="Antennas do not radiate equally in all directions. Grow a dipole and watch its beam narrow and side lobes appear in the polar pattern." about="A dipole radiates most strongly broadside to its axis and nulls off its ends. The E-plane pattern follows [cos(πL·cosθ) − cos(πL)]/sinθ. As length grows past a wavelength the main lobe narrows (higher directivity) but side lobes emerge. Educational tool."><AntennaPatternStudio /></StudioPageShell>; }

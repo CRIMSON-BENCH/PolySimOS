@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { LogicGatesStudio } from "@/components/studio/LogicGatesStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Logic Gate Simulator & Truth Tables (Browser)", description: "Toggle inputs on AND, OR, NAND, NOR, XOR, and XNOR gates and watch the output and truth table update. Free, interactive.", alternates: { canonical: "/studio/logic-gates" } };
+export default function Page() { return <StudioPageShell slug="logic-gates" name="Logic Gates" keyword="logic gate simulator" lede="Every computer is a mountain of tiny logic gates. Flip the inputs and watch each gate decide — and see why NAND alone can build any circuit." about="Logic gates map binary inputs to a binary output. AND/OR/NOT are the basics; XOR detects difference; NAND and NOR are each universal, meaning any Boolean function can be built from just one of them. Educational tool."><LogicGatesStudio /></StudioPageShell>; }

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { Timer555Studio } from "@/components/studio/Timer555Studio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "555 Timer Astable Calculator (Browser)", description: "Compute the frequency and duty cycle of a 555 astable oscillator from R1, R2, and C, and see the output waveform. Free, interactive.", alternates: { canonical: "/studio/timer-555" } };
+export default function Page() { return <StudioPageShell slug="timer-555" name="555 Timer (Astable)" keyword="555 timer astable calculator" lede="The 555 is the most famous chip ever made. Set two resistors and a capacitor and watch it oscillate — the beating heart of blinkers, tones, and clocks." about="In astable mode the 555 charges a capacitor through R1+R2 and discharges through R2, producing a square wave at f = 1.44/((R1+2R2)·C). Because charge and discharge use different paths, the duty cycle always exceeds 50%. Educational tool."><Timer555Studio /></StudioPageShell>; }
