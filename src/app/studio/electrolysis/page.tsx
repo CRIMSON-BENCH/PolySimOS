@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ElectrolysisStudio } from "@/components/studio/ElectrolysisStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Electrolysis & Electroplating Calculator (Faraday)", description: "Compute the mass of metal deposited in electrolysis from current, time, and ion charge using Faraday's laws. Free, interactive.", alternates: { canonical: "/studio/electrolysis" } };
+export default function Page() { return <StudioPageShell slug="electrolysis" name="Electrolysis (Faraday's Laws)" keyword="electrolysis faraday calculator" lede="Electroplating turns electricity into a metal coating. Dial the current and time and see exactly how many grams of copper, silver, or gold plate out." about="Faraday's laws connect charge to chemistry: the mass deposited equals (Q/F)·(M/z), where Q = current × time, F is the Faraday constant, M the molar mass, and z the ion charge. Doubling the current or the time doubles the metal plated — the quantitative basis of electroplating and refining. Educational tool."><ElectrolysisStudio /></StudioPageShell>; }

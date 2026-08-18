@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { TitrationCurveStudio } from "@/components/studio/TitrationCurveStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Acid–Base Titration Curve Simulator (Browser)", description: "Plot pH versus titrant volume for a strong acid–base titration and see the sharp jump at the equivalence point. Free, interactive.", alternates: { canonical: "/studio/titration-curve" } };
+export default function Page() { return <StudioPageShell slug="titration-curve" name="Acid–Base Titration" keyword="titration curve simulator" lede="Add base to an acid and the pH barely budges — until it suddenly leaps at the equivalence point. Watch that dramatic jump form as you change the concentrations." about="A titration tracks pH as one solution is added to another. For a strong acid and strong base, the pH climbs slowly, then jumps almost vertically through pH 7 at the equivalence point where moles of acid equal moles of base — the signal an indicator uses to change color. Educational tool."><TitrationCurveStudio /></StudioPageShell>; }

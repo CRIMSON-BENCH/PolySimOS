@@ -340,6 +340,14 @@ export const SIMS = [
   { slug: "buck-converter", name: "Buck Converter", desc: "Step-down switching regulator.", tag: "Electrical" },
   { slug: "antenna-pattern", name: "Antenna Pattern", desc: "Dipole radiation & directivity.", tag: "Electrical" },
   { slug: "motor-torque-speed", name: "Motor Torque–Speed", desc: "DC motor operating point.", tag: "Electrical" },
+  { slug: "titration-curve", name: "Acid–Base Titration", desc: "The pH jump at equivalence.", tag: "Chemistry" },
+  { slug: "reaction-equilibrium", name: "Chemical Equilibrium", desc: "ICE table & how far it goes.", tag: "Chemistry" },
+  { slug: "nernst-cell", name: "Nernst Equation", desc: "Cell voltage from concentration.", tag: "Chemistry" },
+  { slug: "arrhenius-rate", name: "Arrhenius Rate", desc: "Temperature and reaction speed.", tag: "Chemistry" },
+  { slug: "solubility", name: "Solubility & Saturation", desc: "How much dissolves vs temperature.", tag: "Chemistry" },
+  { slug: "van-der-waals", name: "Van der Waals Gas", desc: "Where the ideal gas law breaks.", tag: "Chemistry" },
+  { slug: "buffer-solution", name: "Buffer Solution", desc: "Henderson–Hasselbalch pH.", tag: "Chemistry" },
+  { slug: "electrolysis", name: "Electrolysis", desc: "Faraday's laws & electroplating.", tag: "Chemistry" },
 ];
 
 export default function StudioIndex() {

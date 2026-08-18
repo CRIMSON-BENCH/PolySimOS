@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { SolubilityStudio } from "@/components/studio/SolubilityStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Solubility & Saturation Simulator (Browser)", description: "Explore how a salt's solubility rises with temperature, find the saturation point, and see undissolved solid form. Free, interactive.", alternates: { canonical: "/studio/solubility" } };
+export default function Page() { return <StudioPageShell slug="solubility" name="Solubility & Saturation" keyword="solubility curve simulator" lede="Why does sugar dissolve better in hot tea? Set a solubility curve and see exactly how much dissolves — and when crystals start to form." about="A solubility curve shows the maximum a solvent can hold at each temperature. Below the curve everything dissolves; above it the excess remains as solid. Cooling a saturated solution pushes it above the curve, forcing crystals out — the principle behind recrystallization and rock candy. Educational tool."><SolubilityStudio /></StudioPageShell>; }

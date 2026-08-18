@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ReactionEquilibriumStudio } from "@/components/studio/ReactionEquilibriumStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Chemical Equilibrium (ICE Table) Simulator", description: "Solve an A + B ⇌ C + D equilibrium from the constant K and initial concentrations, and see the final amounts. Free, interactive.", alternates: { canonical: "/studio/reaction-equilibrium" } };
+export default function Page() { return <StudioPageShell slug="reaction-equilibrium" name="Chemical Equilibrium (ICE)" keyword="equilibrium ICE table calculator" lede="How far does a reaction actually go? Set the equilibrium constant and starting amounts and watch the reaction settle to its balance point." about="At equilibrium, the ratio of product to reactant concentrations equals the constant K. For A + B ⇌ C + D the extent of reaction x solves K = x²/((A₀−x)(B₀−x)). A large K drives the reaction toward products; a small K leaves mostly reactants. Educational tool."><ReactionEquilibriumStudio /></StudioPageShell>; }

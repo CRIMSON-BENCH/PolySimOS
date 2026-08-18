@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { VanDerWaalsStudio } from "@/components/studio/VanDerWaalsStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Van der Waals Real Gas Simulator (Browser)", description: "Compare van der Waals and ideal-gas P–V isotherms and see how molecular attraction and volume make real gases deviate. Free, interactive.", alternates: { canonical: "/studio/van-der-waals" } };
+export default function Page() { return <StudioPageShell slug="van-der-waals" name="Van der Waals Real Gas" keyword="van der waals gas calculator" lede="Real gases aren't ideal. Compare the van der Waals isotherm to PV = nRT and see where — and why — real gases go their own way." about="The van der Waals equation corrects the ideal gas law for two real effects: molecules attract one another (the a term, lowering pressure) and occupy volume themselves (the b term, raising it). Below the critical temperature the isotherm develops a loop that signals condensation. Educational tool."><VanDerWaalsStudio /></StudioPageShell>; }

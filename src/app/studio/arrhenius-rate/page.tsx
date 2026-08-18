@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { ArrheniusRateStudio } from "@/components/studio/ArrheniusRateStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Arrhenius Equation Rate Calculator (Browser)", description: "Compute a reaction rate constant from activation energy and temperature, and see the Arrhenius plot of ln k versus 1/T. Free, interactive.", alternates: { canonical: "/studio/arrhenius-rate" } };
+export default function Page() { return <StudioPageShell slug="arrhenius-rate" name="Arrhenius Reaction Rate" keyword="arrhenius equation calculator" lede="A rough rule says reactions double for every 10°C. See the real relationship — and why a high activation energy makes a reaction so temperature-sensitive." about="The Arrhenius equation k = A·exp(−Ea/RT) explains why heat accelerates reactions: raising the temperature lets more molecules clear the activation-energy barrier. Plotting ln k against 1/T yields a straight line whose slope is −Ea/R. Educational tool."><ArrheniusRateStudio /></StudioPageShell>; }

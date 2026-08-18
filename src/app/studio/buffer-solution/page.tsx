@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { BufferSolutionStudio } from "@/components/studio/BufferSolutionStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Buffer Solution pH Calculator (Henderson–Hasselbalch)", description: "Compute buffer pH from pKa and the base-to-acid ratio, and see how a buffer resists pH change when acid is added. Free, interactive.", alternates: { canonical: "/studio/buffer-solution" } };
+export default function Page() { return <StudioPageShell slug="buffer-solution" name="Buffer Solution" keyword="henderson hasselbalch calculator" lede="Blood, oceans, and cells all rely on buffers to hold pH steady. See how a weak-acid buffer shrugs off added acid that would wreck pure water." about="A buffer pairs a weak acid with its conjugate base, giving pH = pKa + log([base]/[acid]) (Henderson–Hasselbalch). When strong acid is added, the base component neutralizes it, so the pH barely shifts — the resistance that keeps biological systems alive. Educational tool."><BufferSolutionStudio /></StudioPageShell>; }

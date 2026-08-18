@@ -156,6 +156,14 @@ import { ActiveFilterStudio } from "./ActiveFilterStudio";
 import { BuckConverterStudio } from "./BuckConverterStudio";
 import { AntennaPatternStudio } from "./AntennaPatternStudio";
 import { MotorTorqueSpeedStudio } from "./MotorTorqueSpeedStudio";
+import { TitrationCurveStudio } from "./TitrationCurveStudio";
+import { ReactionEquilibriumStudio } from "./ReactionEquilibriumStudio";
+import { NernstCellStudio } from "./NernstCellStudio";
+import { ArrheniusRateStudio } from "./ArrheniusRateStudio";
+import { SolubilityStudio } from "./SolubilityStudio";
+import { VanDerWaalsStudio } from "./VanDerWaalsStudio";
+import { BufferSolutionStudio } from "./BufferSolutionStudio";
+import { ElectrolysisStudio } from "./ElectrolysisStudio";
 import { SIRStudio } from "./SIRStudio";
 import { NeuronHHStudio } from "./NeuronHHStudio";
 import { LotkaVolterraStudio } from "./LotkaVolterraStudio";
@@ -652,6 +660,14 @@ export const STUDIO_COMPONENTS: Record<string, ComponentType> = {
   "buck-converter": BuckConverterStudio,
   "antenna-pattern": AntennaPatternStudio,
   "motor-torque-speed": MotorTorqueSpeedStudio,
+  "titration-curve": TitrationCurveStudio,
+  "reaction-equilibrium": ReactionEquilibriumStudio,
+  "nernst-cell": NernstCellStudio,
+  "arrhenius-rate": ArrheniusRateStudio,
+  solubility: SolubilityStudio,
+  "van-der-waals": VanDerWaalsStudio,
+  "buffer-solution": BufferSolutionStudio,
+  electrolysis: ElectrolysisStudio,
 };
 
 export const STUDIO_SLUGS = Object.keys(STUDIO_COMPONENTS);

@@ -1,0 +1,5 @@
+import type { Metadata } from "next";
+import { NernstCellStudio } from "@/components/studio/NernstCellStudio";
+import { StudioPageShell } from "@/components/studio/StudioPageShell";
+export const metadata: Metadata = { title: "Nernst Equation & Galvanic Cell Calculator", description: "Compute a galvanic cell's voltage from standard EMF, electrons transferred, temperature, and reaction quotient using the Nernst equation. Free.", alternates: { canonical: "/studio/nernst-cell" } };
+export default function Page() { return <StudioPageShell slug="nernst-cell" name="Nernst Equation" keyword="nernst equation calculator" lede="A battery is strongest when fresh and fades as it discharges. The Nernst equation shows exactly how cell voltage depends on concentration." about="The Nernst equation, E = E° − (RT/nF)·lnQ, relates a cell's actual voltage to its standard EMF and the reaction quotient Q. As reactants deplete, Q rises and the voltage falls, reaching zero at equilibrium — the chemistry of a dying battery. Educational tool."><NernstCellStudio /></StudioPageShell>; }
