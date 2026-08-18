@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type Wave = "sawtooth" | "square" | "triangle";
@@ -65,7 +66,7 @@ print("peak", np.abs(y).max())`;
         <p className="mt-3 text-xs text-slate-500">Any periodic waveform is a sum of sine harmonics — the basis of additive synthesis. A sawtooth needs every harmonic falling as 1/k; a square only odd harmonics; a triangle odd harmonics falling as 1/k². Add more harmonics to sharpen the shape, and watch the Gibbs overshoot ripple at the edges.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Waveform" value={wave} /><Stat label="Harmonics" value={String(Math.round(nHarm))} /><Stat label="Content" value={wave === "square" || wave === "triangle" ? "odd only" : "all"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Waveform" value={wave} /><Stat label="Harmonics" value={String(Math.round(nHarm))} /><Stat label="Content" value={wave === "square" || wave === "triangle" ? "odd only" : "all"} /><Equation tex={`x(t) = \\sum_{k=1}^{${N}} a_k \\sin(2\\pi k f t), \\quad a_k = ${wave === "sawtooth" ? "\\frac{1}{k}" : wave === "square" ? "\\frac{1}{k}\\;(k\\text{ odd})" : "\\frac{1}{k^2}\\;(k\\text{ odd})"}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { a: number; b: number }> = {
   "Simple add": { a: 83, b: 58 },
@@ -49,6 +50,7 @@ print(format(result, "08b"), "carry-out", carry)`;
         <Stat label="A + B (decimal)" value={`${a} + ${b} = ${sum}`} />
         <Stat label="8-bit result" value={overflow ? `${bin(sum & 255)} (overflow)` : bin(sum)} />
         <Stat label="Carry out" value={overflow ? "1" : "0"} />
+        <Equation tex={`\\begin{aligned} S &= A \\oplus B \\oplus C_{in} \\\\ C_{out} &= AB + C_{in}(A \\oplus B) = ${overflow ? 1 : 0} \\end{aligned}`} />
         <ExplainResult text={explain} />
       </div>}
     ><div className="flex h-[320px] flex-col items-center justify-center gap-2 rounded-lg bg-slate-950 font-mono text-lg">

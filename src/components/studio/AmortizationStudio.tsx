@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { amount: number; rate: number; years: number }> = {
@@ -77,6 +78,7 @@ print("total paid", round(payment * n, 2))`;
         <Stat label="Monthly payment" value={paymentStr} />
         <Stat label="Total interest" value={interestStr} />
         <Stat label="Total paid" value={`$${totalPaid.toLocaleString(undefined, { maximumFractionDigits: 0 })}`} />
+        <Equation tex={`M = P\\,\\dfrac{i(1+i)^n}{(1+i)^n-1},\\quad P=\\$${amount.toLocaleString()},\\ i=${mr.toFixed(5)},\\ n=${n},\\ M=\\$${Math.round(payment).toLocaleString()}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

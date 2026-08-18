@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { capacity: number; rtEff: number; dod: number; dailyLoad: number }> = {
@@ -51,7 +52,7 @@ print("delivered", delivered, "backup_hr", backup_hr)`;
         <p className="mt-3 text-xs text-slate-500">A battery&apos;s rated capacity is not all usable: depth-of-discharge limits protect its life, and round-trip efficiency means some energy is lost charging and discharging. What actually reaches your home is capacity × depth-of-discharge × round-trip efficiency. Together with cycle life, these set backup duration and the cost per stored kilowatt-hour.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Usable capacity" value={`${usable.toFixed(1)} kWh`} /><Stat label="Delivered / cycle" value={`${delivered.toFixed(1)} kWh`} /><Stat label="Backup time" value={`${hoursBackup.toFixed(1)} hr`} /><Stat label="Lifetime throughput" value={`${(lifetimeThroughput / 1000).toFixed(0)} MWh`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Usable capacity" value={`${usable.toFixed(1)} kWh`} /><Stat label="Delivered / cycle" value={`${delivered.toFixed(1)} kWh`} /><Stat label="Backup time" value={`${hoursBackup.toFixed(1)} hr`} /><Stat label="Lifetime throughput" value={`${(lifetimeThroughput / 1000).toFixed(0)} MWh`} /><Equation tex={`E_{\\text{del}} = C \\cdot \\text{DoD} \\cdot \\eta_{rt} = ${capacity} \\times ${(dod / 100).toFixed(2)} \\times ${(rtEff / 100).toFixed(2)} = ${delivered.toFixed(1)}\\ \\text{kWh}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={260} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

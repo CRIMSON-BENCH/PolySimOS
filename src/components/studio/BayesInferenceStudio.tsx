@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { priorA: number; priorB: number; heads: number; tails: number }> = {
@@ -62,7 +63,7 @@ print("posterior mean", mean, "sd", sd)`;
         <p className="mt-3 text-xs text-slate-500">Bayesian inference updates a prior belief with data to form a posterior. For a coin, a Beta prior combined with binomial coin flips gives a Beta posterior — the conjugate update is just adding heads to α and tails to β. Watch the posterior sharpen and shift as evidence accumulates.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Posterior mean" value={postMean.toFixed(3)} /><Stat label="Posterior SD" value={postSd.toFixed(3)} /><Stat label="Posterior α, β" value={`${postA.toFixed(1)}, ${postB.toFixed(1)}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Posterior mean" value={postMean.toFixed(3)} /><Stat label="Posterior SD" value={postSd.toFixed(3)} /><Stat label="Posterior α, β" value={`${postA.toFixed(1)}, ${postB.toFixed(1)}`} /><Equation tex={`p \\mid \\text{data} \\sim \\text{Beta}(\\alpha + h,\\ \\beta + t) = \\text{Beta}(${postA.toFixed(1)},\\ ${postB.toFixed(1)}),\\quad \\mathbb{E}[p] = \\frac{\\alpha + h}{\\alpha + \\beta + n} = ${postMean.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

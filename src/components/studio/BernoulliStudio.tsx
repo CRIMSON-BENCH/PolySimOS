@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { v1: number; a1: number; a2: number; rho: number }> = {
@@ -52,6 +53,7 @@ print("throat v", v2, "m/s | dp", dp/1000, "kPa")`;
         <Stat label="Throat velocity" value={`${v2.toFixed(2)} m/s`} />
         <Stat label="Pressure change" value={`${(p2rel / 1000).toFixed(2)} kPa`} />
         <Stat label="Throat pressure" value={`${((p0 + p2rel) / 1000).toFixed(1)} kPa`} />
+        <Equation tex={`p + \\tfrac{1}{2}\\rho v^2 + \\rho g h = \\text{const}\\quad\\Rightarrow\\quad \\Delta p = \\tfrac{1}{2}\\rho (v_1^2 - v_2^2) = ${(p2rel / 1000).toFixed(2)}\\ \\text{kPa}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

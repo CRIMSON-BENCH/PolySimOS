@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { density: number; seed: number }> = {
@@ -69,7 +70,7 @@ print("matched", sum(kuhn(u, [False]*R) for u in range(L)))`;
         <p className="mt-3 text-xs text-slate-500">Maximum bipartite matching pairs items from two groups — workers to jobs, students to schools, organs to recipients — so that as many valid pairings as possible are made, with no one assigned twice. Kuhn&apos;s algorithm repeatedly finds augmenting paths that improve the matching. The green edges are the optimal assignment.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Matched pairs" value={String(matched)} /><Stat label="Max possible" value="6" /><Stat label="Method" value="augmenting paths" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Matched pairs" value={String(matched)} /><Stat label="Max possible" value="6" /><Stat label="Method" value="augmenting paths" /><Equation tex={`|M|=\\min_{\\text{cover}}|C|\\;=\\;${matched}\\quad(\\text{König: max matching}=\\text{min vertex cover})`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

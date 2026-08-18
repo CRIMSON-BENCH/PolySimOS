@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 function normCDF(x: number) { const t = 1 / (1 + 0.2316419 * Math.abs(x)); const d = 0.3989423 * Math.exp(-x * x / 2); const p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274)))); return x > 0 ? 1 - p : p; }
@@ -62,7 +63,7 @@ print("lift", (pB - pA) / pA * 100, "p-value", p)`;
         <p className="mt-3 text-xs text-slate-500">An A/B test compares two conversion rates to see if a difference is real or just noise. The two-proportion z-test pools the data to estimate the standard error, then a p-value below 0.05 signals a statistically significant difference. Bigger samples separate the two curves and make small lifts detectable.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Rate A" value={`${(pA * 100).toFixed(2)}%`} /><Stat label="Rate B" value={`${(pB * 100).toFixed(2)}%`} /><Stat label="Lift" value={`${lift > 0 ? "+" : ""}${lift.toFixed(1)}%`} /><Stat label="p-value" value={pVal.toFixed(4)} /><Stat label="Result" value={sig ? "significant" : "not significant"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Rate A" value={`${(pA * 100).toFixed(2)}%`} /><Stat label="Rate B" value={`${(pB * 100).toFixed(2)}%`} /><Stat label="Lift" value={`${lift > 0 ? "+" : ""}${lift.toFixed(1)}%`} /><Stat label="p-value" value={pVal.toFixed(4)} /><Stat label="Result" value={sig ? "significant" : "not significant"} /><Equation tex={`z = \\frac{\\hat p_B - \\hat p_A}{\\sqrt{\\hat p(1-\\hat p)\\left(\\frac{1}{n_A}+\\frac{1}{n_B}\\right)}} = \\frac{${(pB - pA).toFixed(3)}}{\\sqrt{${pPool.toFixed(3)}\\cdot${(1 - pPool).toFixed(3)}\\left(\\frac{1}{${nA}}+\\frac{1}{${nB}}\\right)}} = ${z.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

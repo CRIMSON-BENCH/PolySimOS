@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { len: number }> = {
@@ -63,6 +64,7 @@ print("directivity (dBi)", 10*np.log10(2*peak**2))`;
         <Stat label="Length" value={`${len.toFixed(2)} λ`} />
         <Stat label="Relative directivity" value={`${directivity.toFixed(1)} dB`} />
         <Stat label="Pattern" value={len < 0.75 ? "single broadside lobe" : "multi-lobe"} />
+        <Equation tex={`E(\\theta) = \\left|\\dfrac{\\cos(\\pi L\\cos\\theta) - \\cos(\\pi L)}{\\sin\\theta}\\right|,\\quad L = ${len.toFixed(2)}\\,\\lambda`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

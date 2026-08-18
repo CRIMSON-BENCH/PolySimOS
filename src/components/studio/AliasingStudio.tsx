@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { signalF: number; sampleF: number }> = {
@@ -60,7 +61,7 @@ print("Nyquist", nyq, "Hz | alias", alias, "Hz")`;
         <p className="mt-3 text-xs text-slate-500">To capture a signal faithfully you must sample above twice its highest frequency — the Nyquist rate. Sample too slowly and a high frequency masquerades as a lower one: aliasing. Push the signal frequency above half the sample rate and watch the reconstructed wave collapse to a false, slower tone.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Nyquist frequency" value={`${nyquist.toFixed(1)} Hz`} /><Stat label="Status" value={aliased ? "ALIASED" : "properly sampled"} /><Stat label="Apparent frequency" value={`${apparent.toFixed(1)} Hz`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Nyquist frequency" value={`${nyquist.toFixed(1)} Hz`} /><Stat label="Status" value={aliased ? "ALIASED" : "properly sampled"} /><Stat label="Apparent frequency" value={`${apparent.toFixed(1)} Hz`} /><Equation tex={`f_{\\text{app}} = \\left| f - f_s\\,\\mathrm{round}\\!\\left(\\tfrac{f}{f_s}\\right) \\right| = ${apparent.toFixed(1)}\\ \\text{Hz}, \\quad f_N = \\tfrac{f_s}{2} = ${nyquist.toFixed(1)}\\ \\text{Hz}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

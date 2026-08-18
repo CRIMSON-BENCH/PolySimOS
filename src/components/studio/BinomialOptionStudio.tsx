@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { S: number; K: number; vol: number; T: number; steps: number }> = {
@@ -65,6 +66,7 @@ print("call price", round(vals[0], 2))`;
         <Stat label="Call price" value={`$${price.toFixed(2)}`} />
         <Stat label="Up factor u" value={u.toFixed(3)} />
         <Stat label="Risk-neutral p" value={p.toFixed(3)} />
+        <Equation tex={`p=\\frac{e^{r\\,\\Delta t}-d}{u-d}=\\frac{e^{0.04\\cdot${dt.toFixed(3)}}-${d.toFixed(3)}}{${u.toFixed(3)}-${d.toFixed(3)}}=${p.toFixed(3)},\\quad V_0=e^{-r\\,\\Delta t}\\big[p\\,V_u+(1-p)\\,V_d\\big]=\\$${price.toFixed(2)}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

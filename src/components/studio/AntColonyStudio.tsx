@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
@@ -93,7 +94,7 @@ print("evaporation per round:", evap)`;
         <p className="mt-3 text-xs text-slate-500">Simulated ants lay pheromone (cyan) on short routes; trails evaporate over time so good paths reinforce and bad ones fade. The colony collectively finds near-optimal tours of the Traveling Salesman Problem — the green loop is the best so far.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Iteration" value={String(iter)} /><Stat label="Best tour" value={bestLen.toFixed(0)} /><Stat label="Cities" value={String(Math.round(nCities))} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Iteration" value={String(iter)} /><Stat label="Best tour" value={bestLen.toFixed(0)} /><Stat label="Cities" value={String(Math.round(nCities))} /><Equation tex={`p_{ij} = \\dfrac{\\tau_{ij}^{\\alpha}\\,\\eta_{ij}^{\\beta}}{\\sum_k \\tau_{ik}^{\\alpha}\\,\\eta_{ik}^{\\beta}},\\quad \\tau_{ij} \\leftarrow (1-\\rho)\\,\\tau_{ij} + \\Delta\\tau_{ij},\\quad \\alpha=1,\\ \\beta=3,\\ \\rho=${evap.toFixed(2)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={480} height={400} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

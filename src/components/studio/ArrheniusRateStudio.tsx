@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { Ea: number; logA: number; T: number }> = {
@@ -60,6 +61,7 @@ print("k", k(T), "  speed-up per +10 K", k(T+10)/k(T))`;
         <Stat label="Rate constant k" value={kNow.toExponential(2)} />
         <Stat label="k at T + 10 K" value={kUp.toExponential(2)} />
         <Stat label="Speed-up per +10 K" value={`${speedup.toFixed(1)}×`} />
+        <Equation tex={`k = A\\,e^{-E_a/RT} = 10^{${logA}}\\,e^{-\\frac{${Ea}\\times10^3}{8.314\\times${T}}} = ${kNow.toExponential(2)}\\ \\mathrm{s^{-1}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

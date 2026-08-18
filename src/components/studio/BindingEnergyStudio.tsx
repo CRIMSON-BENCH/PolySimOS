@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const PRESETS: Record<string, { massNum: number }> = {
   "Deuterium (H-2)": { massNum: 2 },
@@ -70,6 +71,7 @@ print("BE per nucleon", BE / A, "MeV")`;
         <Stat label="BE per nucleon" value={`${be.toFixed(2)} MeV`} />
         <Stat label="Total BE" value={`${(be * massNum).toFixed(0)} MeV`} />
         <Stat label="Energy path" value={process} />
+        <Equation tex={`\\frac{B}{A} = a_V - a_S A^{-1/3} - a_C \\frac{Z(Z-1)}{A^{4/3}} - a_A \\frac{(A-2Z)^2}{A^2} + \\frac{\\delta}{A} = ${be.toFixed(2)}\\ \\text{MeV},\\quad A = ${massNum}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

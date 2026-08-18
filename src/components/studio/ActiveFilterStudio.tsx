@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { fc: number; order: number }> = {
@@ -64,6 +65,9 @@ plt.grid(True, which="both"); plt.legend(); plt.show()`;
         <Stat label="Cutoff frequency" value={`${fc >= 1000 ? (fc / 1000).toFixed(1) + " kHz" : fc + " Hz"}`} />
         <Stat label="Roll-off" value={`${order * 20} dB/decade`} />
         <Stat label="At 10×fc" value={`${(20 * Math.log10(mag(type ? fc / 10 : fc * 10))).toFixed(0)} dB`} />
+        <Equation tex={type
+          ? `|H(f)| = \\frac{(f/${fc})^{${order}}}{\\sqrt{1 + (f/${fc})^{${2 * order}}}}`
+          : `|H(f)| = \\frac{1}{\\sqrt{1 + (f/${fc})^{${2 * order}}}}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

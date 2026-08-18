@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { aoa: number; aspect: number }> = {
@@ -67,7 +68,7 @@ print("CL", round(clv, 3), "CD", round(cd, 4), "L/D", round(clv/cd, 1))`;
         <p className="mt-3 text-xs text-slate-500">Lift rises almost linearly with angle of attack — until the airflow separates and the wing stalls, losing lift sharply. Drag has a fixed part plus induced drag that grows with lift squared and shrinks with aspect ratio. The lift-to-drag ratio, peaking at a modest angle, is the single number that governs a wing&apos;s efficiency.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Lift coeff. CL" value={clv.toFixed(2)} /><Stat label="Drag coeff. CD" value={cd.toFixed(3)} /><Stat label="Lift/Drag" value={ld.toFixed(1)} /><Stat label="Status" value={aoa > stallDeg ? "stalled" : "attached"} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Lift coeff. CL" value={clv.toFixed(2)} /><Stat label="Drag coeff. CD" value={cd.toFixed(3)} /><Stat label="Lift/Drag" value={ld.toFixed(1)} /><Stat label="Status" value={aoa > stallDeg ? "stalled" : "attached"} /><Equation tex={`C_D = C_{D0} + \\frac{C_L^2}{\\pi\\, AR\\, e} = 0.020 + \\frac{${clv.toFixed(2)}^2}{\\pi \\cdot ${aspect} \\cdot 0.85} = ${cd.toFixed(3)}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={500} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

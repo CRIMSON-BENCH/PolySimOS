@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 type Beam = "ss-point" | "ss-udl" | "cant-point" | "cant-udl";
@@ -50,6 +51,16 @@ export function BeamDeflectionStudio() {
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("deflected shape (exaggerated)", ox, H - 20);
   }, [type, L, load, EI]);
 
+  const defMM = (defl * 1000).toFixed(2);
+  const tex =
+    type === "ss-point"
+      ? `\\delta = \\frac{PL^3}{48\\,EI} = \\frac{${load}\\cdot${L}^3}{48\\cdot${EI}} = ${defMM}\\ \\text{mm}`
+      : type === "ss-udl"
+      ? `\\delta = \\frac{5wL^4}{384\\,EI} = \\frac{5\\cdot${load}\\cdot${L}^4}{384\\cdot${EI}} = ${defMM}\\ \\text{mm}`
+      : type === "cant-point"
+      ? `\\delta = \\frac{PL^3}{3\\,EI} = \\frac{${load}\\cdot${L}^3}{3\\cdot${EI}} = ${defMM}\\ \\text{mm}`
+      : `\\delta = \\frac{wL^4}{8\\,EI} = \\frac{${load}\\cdot${L}^4}{8\\cdot${EI}} = ${defMM}\\ \\text{mm}`;
+
   const ratio = defl > 0 ? L / defl : Infinity;
   const explain = type.startsWith("cant")
     ? `A cantilever hangs off one support, so it deflects far more than the same simply-supported span — here to ${(defl * 1000).toFixed(1)} mm. Deflection scales with span to the ${type.endsWith("udl") ? "fourth" : "third"} power, so shortening the span beats trimming the load.`
@@ -77,7 +88,7 @@ print("max deflection mm", defl*1000, "| max moment kN*m", mmax)`;
         <p className="mt-3 text-xs text-slate-500">Euler-Bernoulli theory relates a beam&apos;s deflection and internal moment to its load, span, and flexural rigidity EI. Deflection grows with the cube or fourth power of span, which is why doubling a span is far worse than doubling the load. Educational tool — not a substitute for a stamped structural design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Max deflection" value={`${(defl * 1000).toFixed(2)} mm`} /><Stat label="Max moment" value={`${mmax.toFixed(1)} kN·m`} /><Stat label="Span/deflection" value={`L/${(L / defl).toFixed(0)}`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Max deflection" value={`${(defl * 1000).toFixed(2)} mm`} /><Stat label="Max moment" value={`${mmax.toFixed(1)} kN·m`} /><Stat label="Span/deflection" value={`L/${(L / defl).toFixed(0)}`} /><Equation tex={tex} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={540} height={300} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 440;
@@ -57,7 +58,7 @@ print("beat Hz", beat, "| carrier", carrier)`;
         <Slider label="Frequency 2" value={f2} min={5} max={20} step={0.5} onChange={(v) => update({ f2: v })} />
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="f₁, f₂" value={`${f1}, ${f2}`} /><Stat label="Beat frequency" value={beat.toFixed(1)} /><Stat label="Effect" value="amplitude throb" /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="f₁, f₂" value={`${f1}, ${f2}`} /><Stat label="Beat frequency" value={beat.toFixed(1)} /><Stat label="Effect" value="amplitude throb" /><Equation tex={`f_{\\text{beat}} = |f_2 - f_1| = |${f2} - ${f1}| = ${beat.toFixed(1)}\\ \\text{Hz}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>
   );
 }

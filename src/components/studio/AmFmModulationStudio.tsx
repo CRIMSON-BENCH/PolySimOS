@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { fc: number; fm: number; index: number; mode: number }> = {
@@ -70,6 +71,9 @@ print("modulation depth", index*100, "%")`;
         <Stat label="Carrier / message" value={`${fc} / ${fm}`} />
         <Stat label="Modulation index" value={index.toFixed(2)} />
         <Stat label={mode ? "Carson bandwidth" : "Modulation depth"} value={mode ? `${bandwidth.toFixed(0)} Hz` : `${(index * 100).toFixed(0)}%`} />
+        <Equation tex={mode
+          ? `s(t) = \\cos\\!\\left(2\\pi \\cdot ${fc}\\, t + ${beta.toFixed(1)}\\sin(2\\pi \\cdot ${fm}\\, t)\\right),\\quad B = 2(\\beta+1)f_m = ${bandwidth.toFixed(0)}\\ \\text{Hz}`
+          : `s(t) = \\left(1 + ${index.toFixed(2)}\\cos(2\\pi \\cdot ${fm}\\, t)\\right)\\cos(2\\pi \\cdot ${fc}\\, t)`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={c} width={520} height={320} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { stories: number; wPer: number; SDS: number; R: number; I: number }> = {
@@ -64,7 +65,7 @@ print("V", V, "roof force", F[-1])`;
         <p className="mt-3 text-xs text-slate-500">The equivalent lateral force method estimates the total earthquake base shear as V = Cs·W, where the seismic coefficient Cs scales the design acceleration by the structure&apos;s ductility (R) and importance (I). The base shear is distributed up the building, concentrating force at the top. Educational tool, not a code design.</p>
         <ShareBar code={code} />
       </div>}
-      inspector={<div><Stat label="Seismic coeff. Cs" value={Cs.toFixed(3)} /><Stat label="Total weight W" value={`${W.toLocaleString()} kN`} /><Stat label="Base shear V" value={`${V.toFixed(0)} kN`} /><Stat label="Roof force" value={`${forces[n - 1].toFixed(0)} kN`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Seismic coeff. Cs" value={Cs.toFixed(3)} /><Stat label="Total weight W" value={`${W.toLocaleString()} kN`} /><Stat label="Base shear V" value={`${V.toFixed(0)} kN`} /><Stat label="Roof force" value={`${forces[n - 1].toFixed(0)} kN`} /><Equation tex={`V = C_s W = \\min\\!\\left(\\frac{S_{DS}\\,I}{R},\\,0.15\\right) W = ${Cs.toFixed(3)} \\times ${W.toLocaleString()} = ${V.toFixed(0)}\\ \\text{kN}`} /><ExplainResult text={explain} /></div>}
     ><canvas ref={canvasRef} width={460} height={340} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>
   );
 }

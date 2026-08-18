@@ -3,6 +3,7 @@
 import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { surfaceT: number; envLapse: number; moist: number }> = {
@@ -66,6 +67,7 @@ print("CAPE (J/kg)", cape)`;
         <Stat label="CAPE (approx)" value={`${cape.toFixed(0)} J/kg`} />
         <Stat label="Forecast" value={verdict} />
         <Stat label="Lapse rate" value={`${envLapse.toFixed(1)} °C/km`} />
+        <Equation tex={`\\mathrm{CAPE} = \\int_0^{z_t} g\\,\\frac{T_p - T_e}{T_e}\\,dz,\\quad T_p - T_e = (${envLapse.toFixed(1)} - ${moist.toFixed(1)})\\,z \\;\\Rightarrow\\; ${cape.toFixed(0)}\\ \\mathrm{J/kg}`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={460} height={360} className="mx-auto h-auto max-w-full rounded-lg" /></StudioChrome>

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { Equation } from "./Equation";
 
 const W = 760, H = 460;
 
@@ -66,6 +67,7 @@ for px in range(W):
         <Stat label="Map" value="r·x(1−x)" />
         <Stat label="Chaos onset" value="r ≈ 3.57" />
         <Stat label="Feigenbaum δ" value="4.669" />
+        <Equation tex={`x_{n+1} = r\\,x_n(1 - x_n),\\quad r \\in [${rMin}, ${rMax}]`} />
         <ExplainResult text={explain} />
       </div>}
     ><canvas ref={canvasRef} width={W} height={H} className="h-auto w-full rounded-lg" /></StudioChrome>

@@ -5,6 +5,7 @@ import { project } from "@/lib/engines/threeD";
 import { hidpi, useShareableNumbers } from "@/lib/studioKit";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 
 const W = 760, H = 480;
 type V3 = [number, number, number];
@@ -108,6 +109,7 @@ print("Lorenz trajectory:", pts.shape[0], "points")`;
         <Stat label="Points" value={pts.length.toLocaleString()} />
         <Stat label="ρ (rho)" value={isLorenz ? String(rho) : "—"} />
         <Stat label="Type" value="Strange / chaotic" />
+        {isLorenz && <Equation tex={`\\begin{aligned} \\dot{x} &= \\sigma(y - x) = ${sigma}(y - x) \\\\ \\dot{y} &= x(\\rho - z) - y = x(${rho} - z) - y \\\\ \\dot{z} &= xy - \\beta z = xy - ${+beta.toFixed(3)}\\,z \\end{aligned}`} />}
         <ExplainResult text={explain} />
       </div>}
     >
