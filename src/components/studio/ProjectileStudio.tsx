@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
+import { Equation } from "./Equation";
 import { PALETTE, hidpi, useShareableNumbers } from "@/lib/studioKit";
 
 const W = 760, H = 480;
@@ -144,6 +145,7 @@ print("range", max(xs), "apex", max(ys))`;
           <Stat label="Range" value={`${range.toFixed(1)} m`} />
           <Stat label="Max height" value={`${apex.toFixed(1)} m`} />
           <Stat label="Drag model" value={drag === 0 ? "none (ideal)" : "quadratic"} />
+          <Equation tex={`\\dot v_x = -${drag}\\,v\\,v_x,\\quad \\dot v_y = -30 - ${drag}\\,v\\,v_y`} />
           <ExplainResult text={explain} />
         </div>
       }
