@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageShell, H2 } from "@/components/PageShell";
 import { PricingTiers } from "@/components/PricingTiers";
+import { SpecializedPackages } from "@/components/SpecializedPackages";
 import { faqLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -27,6 +28,8 @@ export default function PricingPage() {
       lede="Local rendering is free forever. Scale to the cloud only when reality gets heavy — no quotes, no sales calls."
     >
       <div className="mt-8"><PricingTiers /></div>
+
+      <SpecializedPackages />
 
       <H2>How we compare</H2>
       <div className="mt-4 overflow-x-auto rounded-2xl border border-slate-200 dark:border-slate-800">
