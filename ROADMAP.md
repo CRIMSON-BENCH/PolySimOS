@@ -347,14 +347,14 @@ The "make them look pro / take the solvers up a notch" program. Built a reusable
 
 ---
 
-# PART I — High-leverage new bets (BUILD FIRST, before G5–G8)
+# PART I — High-leverage new bets ✅ DONE (built + deployed)
 
 Chosen for moat + distribution. Order = build order.
 
-- **I1. Pyodide / Octave WASM console** — run real Python (NumPy/SciPy/Matplotlib) in-browser on a dedicated page, sitting next to our 365 solvers. THE reason a MATLAB user switches. Pyodide loads from CDN (~10MB), 100% client-side = still $0 backend. New route `/console`. Ties into "Copy as Python" (paste-and-run).
-- **I2. Embeddable solvers** — a chrome-less `/embed/[slug]` route rendering just the solver, plus an "Embed" button that copies an `<iframe>` snippet. Teachers/bloggers drop a live sim into any page → built-in distribution. Pairs with the share-URL work.
-- **I3. Record GIF / MP4** — a shared "Record" button in `StudioChrome` using `canvas.captureStream()` + `MediaRecorder` (native, no dep) to capture a few seconds of the animation as webm and download it. Hits all 67 animated solvers at once. The thing people post to socials.
-- **I4. Copy-as-code in MATLAB + Julia** — extend `ShareBar` with a best-effort transpile of the per-solver Python snippet to MATLAB/Julia (heuristic shared transform), giving MATLAB users a one-click migration path.
+- ✅ **I1. Pyodide / Octave WASM console** — run real Python (NumPy/SciPy/Matplotlib) in-browser on a dedicated page, sitting next to our 365 solvers. THE reason a MATLAB user switches. Pyodide loads from CDN (~10MB), 100% client-side = still $0 backend. New route `/console`. Ties into "Copy as Python" (paste-and-run).
+- ✅ **I2. Embeddable solvers** — a chrome-less `/embed/[slug]` route rendering just the solver, plus an "Embed" button that copies an `<iframe>` snippet. Teachers/bloggers drop a live sim into any page → built-in distribution. Pairs with the share-URL work.
+- ✅ **I3. Record GIF / MP4** — a shared "Record" button in `StudioChrome` using `canvas.captureStream()` + `MediaRecorder` (native, no dep) to capture a few seconds of the animation as webm and download it. Hits all 67 animated solvers at once. The thing people post to socials.
+- ✅ **I4. Copy-as-code in MATLAB + Julia** — extend `ShareBar` with a best-effort transpile of the per-solver Python snippet to MATLAB/Julia (heuristic shared transform), giving MATLAB users a one-click migration path.
 
 # PART H — Launch readiness (do AFTER G5–G8)
 
