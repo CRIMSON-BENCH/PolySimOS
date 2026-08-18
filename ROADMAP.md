@@ -344,3 +344,26 @@ The "make them look pro / take the solvers up a notch" program. Built a reusable
 - **G8. Tableau-style nav + dashboard polish (F2)** — top-bar dropdown menus, card/filter system, restrained color.
 
 **Order rationale:** finish the two remaining *global* wins first (G1 retina, G2 finder) so every page benefits, then the shared *instrument* upgrade (G3 transport), then grind *per-solver depth* (G4), then the advanced per-solver features (G5–G7), then system-wide visual polish (G8).
+
+---
+
+# PART I — High-leverage new bets (BUILD FIRST, before G5–G8)
+
+Chosen for moat + distribution. Order = build order.
+
+- **I1. Pyodide / Octave WASM console** — run real Python (NumPy/SciPy/Matplotlib) in-browser on a dedicated page, sitting next to our 365 solvers. THE reason a MATLAB user switches. Pyodide loads from CDN (~10MB), 100% client-side = still $0 backend. New route `/console`. Ties into "Copy as Python" (paste-and-run).
+- **I2. Embeddable solvers** — a chrome-less `/embed/[slug]` route rendering just the solver, plus an "Embed" button that copies an `<iframe>` snippet. Teachers/bloggers drop a live sim into any page → built-in distribution. Pairs with the share-URL work.
+- **I3. Record GIF / MP4** — a shared "Record" button in `StudioChrome` using `canvas.captureStream()` + `MediaRecorder` (native, no dep) to capture a few seconds of the animation as webm and download it. Hits all 67 animated solvers at once. The thing people post to socials.
+- **I4. Copy-as-code in MATLAB + Julia** — extend `ShareBar` with a best-effort transpile of the per-solver Python snippet to MATLAB/Julia (heuristic shared transform), giving MATLAB users a one-click migration path.
+
+# PART H — Launch readiness (do AFTER G5–G8)
+
+Not features — the things that make it safe to charge money + drive traffic.
+
+- **H1. Payments end-to-end** — verify a real test purchase succeeds; confirm entitlements are **account-synced** via the Stripe webhook → store (not just device-local `localStorage`), so Pro follows the user across devices.
+- **H2. Auth in prod** — confirm Clerk signup/login completes and gates paid features.
+- **H3. Legal pages** — Terms of Service, Privacy Policy, Refund policy, cookie/consent notice (Stripe requires these for a live account).
+- **H4. AI rate-limiting** — per-session/IP cap on the Gemini "Ask AI" endpoint to protect the token budget on a public launch.
+- **H5. Analytics + error monitoring** — Plausible/GA + Sentry so we can see what converts and what breaks.
+- **H6. Solver-correctness QA** — spot-check the top ~40 most-trafficked solvers' numerics + explain text (many were agent-built).
+- **H7. Mobile pass** — confirm solver canvases + controls are usable on a phone.
