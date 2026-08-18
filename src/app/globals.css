@@ -17,3 +17,43 @@ html {
     linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
   background-size: 28px 28px;
 }
+
+/* ---------------------------------------------------------------------------
+   Clerk sign-in / sign-up widget — force readable colors.
+   The Clerk `appearance` prop (incl. baseTheme:dark) is being dropped at runtime
+   (theme-package/JS version mismatch), so it falls back to light-theme text on
+   our dark card = dark-on-dark. These override Clerk's stable .cl-* classes
+   directly so readability never depends on the appearance system.
+--------------------------------------------------------------------------- */
+.cl-card,
+.cl-rootBox .cl-card {
+  background-color: #0b1220 !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+.cl-headerTitle { color: #f8fafc !important; }
+.cl-headerSubtitle,
+.cl-dividerText,
+.cl-footerActionText,
+.cl-footer,
+.cl-identityPreviewText,
+.cl-formFieldInfoText,
+.cl-formHeaderSubtitle { color: #cbd5e1 !important; }
+.cl-formFieldLabel { color: #e2e8f0 !important; }
+/* Google / social buttons: standard white button with dark label + brand logo */
+.cl-socialButtonsBlockButton,
+.cl-socialButtonsIconButton {
+  background-color: #ffffff !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+}
+.cl-socialButtonsBlockButton:hover { background-color: #f1f5f9 !important; }
+.cl-socialButtonsBlockButtonText { color: #1e293b !important; }
+/* Text inputs: dark field, light text to match the card */
+.cl-formFieldInput {
+  background-color: #0f172a !important;
+  color: #f1f5f9 !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+.cl-formFieldInput::placeholder { color: #64748b !important; }
+.cl-dividerLine { background-color: rgba(255, 255, 255, 0.15) !important; }
+.cl-footerActionLink { color: #22d3ee !important; }
+.cl-footerActionLink:hover { color: #67e8f9 !important; }
