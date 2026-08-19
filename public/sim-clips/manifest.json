@@ -7,8 +7,8 @@
     "poster": "jpg"
   },
   "usage": "silent looping preview / Open Graph video — autoplay muted loop",
-  "generatedAt": "2026-08-19T04:09:31.994Z",
-  "count": 107,
+  "generatedAt": "2026-08-19T15:42:08.958Z",
+  "count": 397,
   "clips": {
     "3d": {
       "mp4": "3d.mp4",
@@ -18,6 +18,24 @@
       "source": "capture",
       "mp4KB": 452,
       "webmKB": 576
+    },
+    "ab-test": {
+      "mp4": "ab-test.mp4",
+      "webm": "ab-test.webm",
+      "jpg": "ab-test.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 44,
+      "webmKB": 91
+    },
+    "active-filter": {
+      "mp4": "active-filter.mp4",
+      "webm": "active-filter.webm",
+      "jpg": "active-filter.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 76
     },
     "additive-synthesis": {
       "mp4": "additive-synthesis.mp4",
@@ -55,6 +73,15 @@
       "mp4KB": 169,
       "webmKB": 383
     },
+    "amortization": {
+      "mp4": "amortization.mp4",
+      "webm": "amortization.webm",
+      "jpg": "amortization.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 60,
+      "webmKB": 122
+    },
     "ant-colony": {
       "mp4": "ant-colony.mp4",
       "webm": "ant-colony.webm",
@@ -72,6 +99,24 @@
       "source": "library",
       "mp4KB": 57,
       "webmKB": 108
+    },
+    "arrhenius-rate": {
+      "mp4": "arrhenius-rate.mp4",
+      "webm": "arrhenius-rate.webm",
+      "jpg": "arrhenius-rate.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 76
+    },
+    "atmospheric-stability": {
+      "mp4": "atmospheric-stability.mp4",
+      "webm": "atmospheric-stability.webm",
+      "jpg": "atmospheric-stability.jpg",
+      "preset": "storm",
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 86
     },
     "attractors": {
       "mp4": "attractors.mp4",
@@ -91,6 +136,24 @@
       "mp4KB": 42,
       "webmKB": 82
     },
+    "battery-storage": {
+      "mp4": "battery-storage.mp4",
+      "webm": "battery-storage.webm",
+      "jpg": "battery-storage.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 26,
+      "webmKB": 64
+    },
+    "bayes-inference": {
+      "mp4": "bayes-inference.mp4",
+      "webm": "bayes-inference.webm",
+      "jpg": "bayes-inference.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 46,
+      "webmKB": 101
+    },
     "beam-deflection": {
       "mp4": "beam-deflection.mp4",
       "webm": "beam-deflection.webm",
@@ -108,6 +171,15 @@
       "source": "library",
       "mp4KB": 234,
       "webmKB": 517
+    },
+    "ber-snr": {
+      "mp4": "ber-snr.mp4",
+      "webm": "ber-snr.webm",
+      "jpg": "ber-snr.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 58,
+      "webmKB": 127
     },
     "bernoulli": {
       "mp4": "bernoulli.mp4",
@@ -136,6 +208,24 @@
       "mp4KB": 44,
       "webmKB": 100
     },
+    "binding-energy": {
+      "mp4": "binding-energy.mp4",
+      "webm": "binding-energy.webm",
+      "jpg": "binding-energy.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 90
+    },
+    "binomial-option": {
+      "mp4": "binomial-option.mp4",
+      "webm": "binomial-option.webm",
+      "jpg": "binomial-option.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 82
+    },
     "bipartite-matching": {
       "mp4": "bipartite-matching.mp4",
       "webm": "bipartite-matching.webm",
@@ -144,6 +234,24 @@
       "source": "library",
       "mp4KB": 81,
       "webmKB": 155
+    },
+    "birthday-paradox": {
+      "mp4": "birthday-paradox.mp4",
+      "webm": "birthday-paradox.webm",
+      "jpg": "birthday-paradox.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 46,
+      "webmKB": 85
+    },
+    "bjt-amplifier": {
+      "mp4": "bjt-amplifier.mp4",
+      "webm": "bjt-amplifier.webm",
+      "jpg": "bjt-amplifier.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 69
     },
     "black-scholes": {
       "mp4": "black-scholes.mp4",
@@ -181,6 +289,24 @@
       "mp4KB": 30,
       "webmKB": 59
     },
+    "block-diagram": {
+      "mp4": "block-diagram.mp4",
+      "webm": "block-diagram.webm",
+      "jpg": "block-diagram.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 61,
+      "webmKB": 113
+    },
+    "bode-nyquist": {
+      "mp4": "bode-nyquist.mp4",
+      "webm": "bode-nyquist.webm",
+      "jpg": "bode-nyquist.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 73
+    },
     "bode-plot": {
       "mp4": "bode-plot.mp4",
       "webm": "bode-plot.webm",
@@ -199,6 +325,24 @@
       "mp4KB": 427,
       "webmKB": 735
     },
+    "bond-duration": {
+      "mp4": "bond-duration.mp4",
+      "webm": "bond-duration.webm",
+      "jpg": "bond-duration.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 76
+    },
+    "bond-pricing": {
+      "mp4": "bond-pricing.mp4",
+      "webm": "bond-pricing.webm",
+      "jpg": "bond-pricing.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 42,
+      "webmKB": 82
+    },
     "bootstrap": {
       "mp4": "bootstrap.mp4",
       "webm": "bootstrap.webm",
@@ -207,6 +351,15 @@
       "source": "library",
       "mp4KB": 63,
       "webmKB": 133
+    },
+    "bragg-mirror": {
+      "mp4": "bragg-mirror.mp4",
+      "webm": "bragg-mirror.webm",
+      "jpg": "bragg-mirror.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 71
     },
     "buck-converter": {
       "mp4": "buck-converter.mp4",
@@ -217,6 +370,15 @@
       "mp4KB": 52,
       "webmKB": 100
     },
+    "buffer-solution": {
+      "mp4": "buffer-solution.mp4",
+      "webm": "buffer-solution.webm",
+      "jpg": "buffer-solution.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 63
+    },
     "buoyancy": {
       "mp4": "buoyancy.mp4",
       "webm": "buoyancy.webm",
@@ -225,6 +387,33 @@
       "source": "library",
       "mp4KB": 39,
       "webmKB": 66
+    },
+    "capm-beta": {
+      "mp4": "capm-beta.mp4",
+      "webm": "capm-beta.webm",
+      "jpg": "capm-beta.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 42,
+      "webmKB": 76
+    },
+    "carbon-cycle": {
+      "mp4": "carbon-cycle.mp4",
+      "webm": "carbon-cycle.webm",
+      "jpg": "carbon-cycle.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 76,
+      "webmKB": 167
+    },
+    "carbon-footprint": {
+      "mp4": "carbon-footprint.mp4",
+      "webm": "carbon-footprint.webm",
+      "jpg": "carbon-footprint.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 61,
+      "webmKB": 117
     },
     "cardiac-action-potential": {
       "mp4": "cardiac-action-potential.mp4",
@@ -253,6 +442,15 @@
       "mp4KB": 50,
       "webmKB": 89
     },
+    "cas": {
+      "mp4": "cas.mp4",
+      "webm": "cas.webm",
+      "jpg": "cas.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 90
+    },
     "cellular-automata": {
       "mp4": "cellular-automata.mp4",
       "webm": "cellular-automata.webm",
@@ -270,6 +468,15 @@
       "source": "library",
       "mp4KB": 86,
       "webmKB": 167
+    },
+    "centrality": {
+      "mp4": "centrality.mp4",
+      "webm": "centrality.webm",
+      "jpg": "centrality.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 74
     },
     "cfd-3d": {
       "mp4": "cfd-3d.mp4",
@@ -289,6 +496,15 @@
       "mp4KB": 78,
       "webmKB": 168
     },
+    "classical-ciphers": {
+      "mp4": "classical-ciphers.mp4",
+      "webm": "classical-ciphers.webm",
+      "jpg": "classical-ciphers.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 63,
+      "webmKB": 119
+    },
     "cloth": {
       "mp4": "cloth.mp4",
       "webm": "cloth.webm",
@@ -297,6 +513,24 @@
       "source": "library",
       "mp4KB": 419,
       "webmKB": 857
+    },
+    "cnc-feeds-speeds": {
+      "mp4": "cnc-feeds-speeds.mp4",
+      "webm": "cnc-feeds-speeds.webm",
+      "jpg": "cnc-feeds-speeds.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 59,
+      "webmKB": 121
+    },
+    "cobb-douglas": {
+      "mp4": "cobb-douglas.mp4",
+      "webm": "cobb-douglas.webm",
+      "jpg": "cobb-douglas.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 44,
+      "webmKB": 86
     },
     "collision-lab": {
       "mp4": "collision-lab.mp4",
@@ -325,6 +559,51 @@
       "mp4KB": 21,
       "webmKB": 53
     },
+    "comparative-advantage": {
+      "mp4": "comparative-advantage.mp4",
+      "webm": "comparative-advantage.webm",
+      "jpg": "comparative-advantage.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 67
+    },
+    "complex": {
+      "mp4": "complex.mp4",
+      "webm": "complex.webm",
+      "jpg": "complex.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 55,
+      "webmKB": 79
+    },
+    "compound-interest": {
+      "mp4": "compound-interest.mp4",
+      "webm": "compound-interest.webm",
+      "jpg": "compound-interest.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 81
+    },
+    "compressible-nozzle": {
+      "mp4": "compressible-nozzle.mp4",
+      "webm": "compressible-nozzle.webm",
+      "jpg": "compressible-nozzle.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 47,
+      "webmKB": 91
+    },
+    "concrete-beam": {
+      "mp4": "concrete-beam.mp4",
+      "webm": "concrete-beam.webm",
+      "jpg": "concrete-beam.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 27,
+      "webmKB": 55
+    },
     "confidence-interval": {
       "mp4": "confidence-interval.mp4",
       "webm": "confidence-interval.webm",
@@ -333,6 +612,51 @@
       "source": "library",
       "mp4KB": 45,
       "webmKB": 108
+    },
+    "control-chart": {
+      "mp4": "control-chart.mp4",
+      "webm": "control-chart.webm",
+      "jpg": "control-chart.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 42,
+      "webmKB": 94
+    },
+    "convex-hull": {
+      "mp4": "convex-hull.mp4",
+      "webm": "convex-hull.webm",
+      "jpg": "convex-hull.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 78
+    },
+    "convolution": {
+      "mp4": "convolution.mp4",
+      "webm": "convolution.webm",
+      "jpg": "convolution.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 75,
+      "webmKB": 111
+    },
+    "coriolis": {
+      "mp4": "coriolis.mp4",
+      "webm": "coriolis.webm",
+      "jpg": "coriolis.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 45,
+      "webmKB": 78
+    },
+    "coupled-oscillators": {
+      "mp4": "coupled-oscillators.mp4",
+      "webm": "coupled-oscillators.webm",
+      "jpg": "coupled-oscillators.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 85,
+      "webmKB": 137
     },
     "critical-path": {
       "mp4": "critical-path.mp4",
@@ -343,6 +667,60 @@
       "mp4KB": 58,
       "webmKB": 93
     },
+    "curve-fitting": {
+      "mp4": "curve-fitting.mp4",
+      "webm": "curve-fitting.webm",
+      "jpg": "curve-fitting.jpg",
+      "preset": "random",
+      "source": "capture",
+      "mp4KB": 68,
+      "webmKB": 116
+    },
+    "daisyworld": {
+      "mp4": "daisyworld.mp4",
+      "webm": "daisyworld.webm",
+      "jpg": "daisyworld.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 94
+    },
+    "dc-motor": {
+      "mp4": "dc-motor.mp4",
+      "webm": "dc-motor.webm",
+      "jpg": "dc-motor.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 76
+    },
+    "dcf-valuation": {
+      "mp4": "dcf-valuation.mp4",
+      "webm": "dcf-valuation.webm",
+      "jpg": "dcf-valuation.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 83
+    },
+    "dead-reckoning": {
+      "mp4": "dead-reckoning.mp4",
+      "webm": "dead-reckoning.webm",
+      "jpg": "dead-reckoning.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 82
+    },
+    "decision-tree": {
+      "mp4": "decision-tree.mp4",
+      "webm": "decision-tree.webm",
+      "jpg": "decision-tree.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 108,
+      "webmKB": 153
+    },
     "dft-analysis": {
       "mp4": "dft-analysis.mp4",
       "webm": "dft-analysis.webm",
@@ -351,6 +729,60 @@
       "source": "library",
       "mp4KB": 73,
       "webmKB": 144
+    },
+    "dice-probability": {
+      "mp4": "dice-probability.mp4",
+      "webm": "dice-probability.webm",
+      "jpg": "dice-probability.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 74
+    },
+    "differential-drive": {
+      "mp4": "differential-drive.mp4",
+      "webm": "differential-drive.webm",
+      "jpg": "differential-drive.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 49,
+      "webmKB": 89
+    },
+    "diffie-hellman": {
+      "mp4": "diffie-hellman.mp4",
+      "webm": "diffie-hellman.webm",
+      "jpg": "diffie-hellman.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 63,
+      "webmKB": 149
+    },
+    "diffraction-grating": {
+      "mp4": "diffraction-grating.mp4",
+      "webm": "diffraction-grating.webm",
+      "jpg": "diffraction-grating.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 46,
+      "webmKB": 92
+    },
+    "digital-modulation": {
+      "mp4": "digital-modulation.mp4",
+      "webm": "digital-modulation.webm",
+      "jpg": "digital-modulation.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 50,
+      "webmKB": 106
+    },
+    "direction-field": {
+      "mp4": "direction-field.mp4",
+      "webm": "direction-field.webm",
+      "jpg": "direction-field.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 66,
+      "webmKB": 98
     },
     "distributions": {
       "mp4": "distributions.mp4",
@@ -361,6 +793,33 @@
       "mp4KB": 23,
       "webmKB": 68
     },
+    "dividend-discount": {
+      "mp4": "dividend-discount.mp4",
+      "webm": "dividend-discount.webm",
+      "jpg": "dividend-discount.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 74
+    },
+    "dla": {
+      "mp4": "dla.mp4",
+      "webm": "dla.webm",
+      "jpg": "dla.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 16,
+      "webmKB": 19
+    },
+    "doppler": {
+      "mp4": "doppler.mp4",
+      "webm": "doppler.webm",
+      "jpg": "doppler.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 596,
+      "webmKB": 899
+    },
     "double-pendulum": {
       "mp4": "double-pendulum.mp4",
       "webm": "double-pendulum.webm",
@@ -369,6 +828,24 @@
       "source": "capture",
       "mp4KB": 271,
       "webmKB": 775
+    },
+    "double-slit": {
+      "mp4": "double-slit.mp4",
+      "webm": "double-slit.webm",
+      "jpg": "double-slit.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 81
+    },
+    "driven-resonance": {
+      "mp4": "driven-resonance.mp4",
+      "webm": "driven-resonance.webm",
+      "jpg": "driven-resonance.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 86
     },
     "dynamics": {
       "mp4": "dynamics.mp4",
@@ -379,6 +856,51 @@
       "mp4KB": 151,
       "webmKB": 360
     },
+    "edge-detection": {
+      "mp4": "edge-detection.mp4",
+      "webm": "edge-detection.webm",
+      "jpg": "edge-detection.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 63,
+      "webmKB": 105
+    },
+    "efficient-frontier": {
+      "mp4": "efficient-frontier.mp4",
+      "webm": "efficient-frontier.webm",
+      "jpg": "efficient-frontier.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 32,
+      "webmKB": 62
+    },
+    "eigenvectors": {
+      "mp4": "eigenvectors.mp4",
+      "webm": "eigenvectors.webm",
+      "jpg": "eigenvectors.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 43,
+      "webmKB": 79
+    },
+    "elasticity": {
+      "mp4": "elasticity.mp4",
+      "webm": "elasticity.webm",
+      "jpg": "elasticity.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 75
+    },
+    "electrolysis": {
+      "mp4": "electrolysis.mp4",
+      "webm": "electrolysis.webm",
+      "jpg": "electrolysis.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 32,
+      "webmKB": 63
+    },
     "electromagnetics": {
       "mp4": "electromagnetics.mp4",
       "webm": "electromagnetics.webm",
@@ -387,6 +909,15 @@
       "source": "capture",
       "mp4KB": 85,
       "webmKB": 143
+    },
+    "elliptic-curve": {
+      "mp4": "elliptic-curve.mp4",
+      "webm": "elliptic-curve.webm",
+      "jpg": "elliptic-curve.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 78
     },
     "elo-rating": {
       "mp4": "elo-rating.mp4",
@@ -397,6 +928,51 @@
       "mp4KB": 49,
       "webmKB": 105
     },
+    "energy-balance": {
+      "mp4": "energy-balance.mp4",
+      "webm": "energy-balance.webm",
+      "jpg": "energy-balance.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 55,
+      "webmKB": 119
+    },
+    "entropy": {
+      "mp4": "entropy.mp4",
+      "webm": "entropy.webm",
+      "jpg": "entropy.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 531,
+      "webmKB": 779
+    },
+    "enzyme-kinetics": {
+      "mp4": "enzyme-kinetics.mp4",
+      "webm": "enzyme-kinetics.webm",
+      "jpg": "enzyme-kinetics.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 82
+    },
+    "eoq": {
+      "mp4": "eoq.mp4",
+      "webm": "eoq.webm",
+      "jpg": "eoq.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 46,
+      "webmKB": 102
+    },
+    "epidemic-network": {
+      "mp4": "epidemic-network.mp4",
+      "webm": "epidemic-network.webm",
+      "jpg": "epidemic-network.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 91,
+      "webmKB": 164
+    },
     "equal-temperament": {
       "mp4": "equal-temperament.mp4",
       "webm": "equal-temperament.webm",
@@ -405,6 +981,60 @@
       "source": "library",
       "mp4KB": 32,
       "webmKB": 68
+    },
+    "equilibrium": {
+      "mp4": "equilibrium.mp4",
+      "webm": "equilibrium.webm",
+      "jpg": "equilibrium.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 51,
+      "webmKB": 106
+    },
+    "escape-velocity": {
+      "mp4": "escape-velocity.mp4",
+      "webm": "escape-velocity.webm",
+      "jpg": "escape-velocity.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 69,
+      "webmKB": 123
+    },
+    "ev-efficiency": {
+      "mp4": "ev-efficiency.mp4",
+      "webm": "ev-efficiency.webm",
+      "jpg": "ev-efficiency.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 78
+    },
+    "evacuation": {
+      "mp4": "evacuation.mp4",
+      "webm": "evacuation.webm",
+      "jpg": "evacuation.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 164,
+      "webmKB": 367
+    },
+    "exoplanet-transit": {
+      "mp4": "exoplanet-transit.mp4",
+      "webm": "exoplanet-transit.webm",
+      "jpg": "exoplanet-transit.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 76
+    },
+    "eye-diagram": {
+      "mp4": "eye-diagram.mp4",
+      "webm": "eye-diagram.webm",
+      "jpg": "eye-diagram.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 104,
+      "webmKB": 238
     },
     "fatigue": {
       "mp4": "fatigue.mp4",
@@ -424,6 +1054,42 @@
       "mp4KB": 36,
       "webmKB": 64
     },
+    "fea-3d": {
+      "mp4": "fea-3d.mp4",
+      "webm": "fea-3d.webm",
+      "jpg": "fea-3d.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 137,
+      "webmKB": 251
+    },
+    "feedback-loop": {
+      "mp4": "feedback-loop.mp4",
+      "webm": "feedback-loop.webm",
+      "jpg": "feedback-loop.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 35,
+      "webmKB": 71
+    },
+    "fft": {
+      "mp4": "fft.mp4",
+      "webm": "fft.webm",
+      "jpg": "fft.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 77
+    },
+    "fiber-optics": {
+      "mp4": "fiber-optics.mp4",
+      "webm": "fiber-optics.webm",
+      "jpg": "fiber-optics.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 56,
+      "webmKB": 98
+    },
     "fields": {
       "mp4": "fields.mp4",
       "webm": "fields.webm",
@@ -432,6 +1098,51 @@
       "source": "library",
       "mp4KB": 87,
       "webmKB": 79
+    },
+    "filter-designer": {
+      "mp4": "filter-designer.mp4",
+      "webm": "filter-designer.webm",
+      "jpg": "filter-designer.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 85
+    },
+    "fin-cooling": {
+      "mp4": "fin-cooling.mp4",
+      "webm": "fin-cooling.webm",
+      "jpg": "fin-cooling.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 59
+    },
+    "fir-filter": {
+      "mp4": "fir-filter.mp4",
+      "webm": "fir-filter.webm",
+      "jpg": "fir-filter.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 42,
+      "webmKB": 75
+    },
+    "fire-spread": {
+      "mp4": "fire-spread.mp4",
+      "webm": "fire-spread.webm",
+      "jpg": "fire-spread.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 129,
+      "webmKB": 293
+    },
+    "fission-reactor": {
+      "mp4": "fission-reactor.mp4",
+      "webm": "fission-reactor.webm",
+      "jpg": "fission-reactor.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 26,
+      "webmKB": 51
     },
     "fluid": {
       "mp4": "fluid.mp4",
@@ -451,6 +1162,51 @@
       "mp4KB": 1112,
       "webmKB": 1132
     },
+    "forward-kinematics": {
+      "mp4": "forward-kinematics.mp4",
+      "webm": "forward-kinematics.webm",
+      "jpg": "forward-kinematics.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 21,
+      "webmKB": 45
+    },
+    "fourier": {
+      "mp4": "fourier.mp4",
+      "webm": "fourier.webm",
+      "jpg": "fourier.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 67,
+      "webmKB": 124
+    },
+    "fractals": {
+      "mp4": "fractals.mp4",
+      "webm": "fractals.webm",
+      "jpg": "fractals.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 42,
+      "webmKB": 88
+    },
+    "fusion-lawson": {
+      "mp4": "fusion-lawson.mp4",
+      "webm": "fusion-lawson.webm",
+      "jpg": "fusion-lawson.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 36,
+      "webmKB": 78
+    },
+    "gamblers-ruin": {
+      "mp4": "gamblers-ruin.mp4",
+      "webm": "gamblers-ruin.webm",
+      "jpg": "gamblers-ruin.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 144,
+      "webmKB": 260
+    },
     "game-theory": {
       "mp4": "game-theory.mp4",
       "webm": "game-theory.webm",
@@ -459,6 +1215,60 @@
       "source": "library",
       "mp4KB": 57,
       "webmKB": 118
+    },
+    "gas": {
+      "mp4": "gas.mp4",
+      "webm": "gas.webm",
+      "jpg": "gas.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 478,
+      "webmKB": 804
+    },
+    "gaussian-beam": {
+      "mp4": "gaussian-beam.mp4",
+      "webm": "gaussian-beam.webm",
+      "jpg": "gaussian-beam.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 54,
+      "webmKB": 105
+    },
+    "gaussian-process": {
+      "mp4": "gaussian-process.mp4",
+      "webm": "gaussian-process.webm",
+      "jpg": "gaussian-process.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 71,
+      "webmKB": 128
+    },
+    "gear-train": {
+      "mp4": "gear-train.mp4",
+      "webm": "gear-train.webm",
+      "jpg": "gear-train.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 146,
+      "webmKB": 525
+    },
+    "genetic-algorithm": {
+      "mp4": "genetic-algorithm.mp4",
+      "webm": "genetic-algorithm.webm",
+      "jpg": "genetic-algorithm.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 62,
+      "webmKB": 84
+    },
+    "genetic-drift": {
+      "mp4": "genetic-drift.mp4",
+      "webm": "genetic-drift.webm",
+      "jpg": "genetic-drift.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 100,
+      "webmKB": 267
     },
     "geostrophic-wind": {
       "mp4": "geostrophic-wind.mp4",
@@ -469,6 +1279,15 @@
       "mp4KB": 36,
       "webmKB": 81
     },
+    "glide": {
+      "mp4": "glide.mp4",
+      "webm": "glide.webm",
+      "jpg": "glide.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 30,
+      "webmKB": 73
+    },
     "gps-trilateration": {
       "mp4": "gps-trilateration.mp4",
       "webm": "gps-trilateration.webm",
@@ -478,6 +1297,15 @@
       "mp4KB": 37,
       "webmKB": 67
     },
+    "gpu": {
+      "mp4": "gpu.mp4",
+      "webm": "gpu.webm",
+      "jpg": "gpu.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 1052,
+      "webmKB": 763
+    },
     "gpu-fluid": {
       "mp4": "gpu-fluid.mp4",
       "webm": "gpu-fluid.webm",
@@ -486,6 +1314,15 @@
       "source": "capture",
       "mp4KB": 40,
       "webmKB": 57
+    },
+    "gpu-fluid-3d": {
+      "mp4": "gpu-fluid-3d.mp4",
+      "webm": "gpu-fluid-3d.webm",
+      "jpg": "gpu-fluid-3d.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 25,
+      "webmKB": 22
     },
     "gpu-nbody": {
       "mp4": "gpu-nbody.mp4",
@@ -505,6 +1342,15 @@
       "mp4KB": 1028,
       "webmKB": 874
     },
+    "gpu-pde": {
+      "mp4": "gpu-pde.mp4",
+      "webm": "gpu-pde.webm",
+      "jpg": "gpu-pde.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 75,
+      "webmKB": 87
+    },
     "gradient-descent": {
       "mp4": "gradient-descent.mp4",
       "webm": "gradient-descent.webm",
@@ -513,6 +1359,33 @@
       "source": "capture",
       "mp4KB": 88,
       "webmKB": 75
+    },
+    "graph": {
+      "mp4": "graph.mp4",
+      "webm": "graph.webm",
+      "jpg": "graph.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 66,
+      "webmKB": 106
+    },
+    "graph-coloring": {
+      "mp4": "graph-coloring.mp4",
+      "webm": "graph-coloring.webm",
+      "jpg": "graph-coloring.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 80
+    },
+    "graph-traversal": {
+      "mp4": "graph-traversal.mp4",
+      "webm": "graph-traversal.webm",
+      "jpg": "graph-traversal.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 95,
+      "webmKB": 193
     },
     "grapher": {
       "mp4": "grapher.mp4",
@@ -523,6 +1396,51 @@
       "mp4KB": 53,
       "webmKB": 92
     },
+    "gravity-well": {
+      "mp4": "gravity-well.mp4",
+      "webm": "gravity-well.webm",
+      "jpg": "gravity-well.jpg",
+      "preset": "orbit",
+      "source": "capture",
+      "mp4KB": 84,
+      "webmKB": 162
+    },
+    "groundwater": {
+      "mp4": "groundwater.mp4",
+      "webm": "groundwater.webm",
+      "jpg": "groundwater.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 29,
+      "webmKB": 67
+    },
+    "gyroscope": {
+      "mp4": "gyroscope.mp4",
+      "webm": "gyroscope.webm",
+      "jpg": "gyroscope.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 99,
+      "webmKB": 201
+    },
+    "hamming-code": {
+      "mp4": "hamming-code.mp4",
+      "webm": "hamming-code.webm",
+      "jpg": "hamming-code.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 61,
+      "webmKB": 129
+    },
+    "hardy-weinberg": {
+      "mp4": "hardy-weinberg.mp4",
+      "webm": "hardy-weinberg.webm",
+      "jpg": "hardy-weinberg.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 73
+    },
     "harmonic-series": {
       "mp4": "harmonic-series.mp4",
       "webm": "harmonic-series.webm",
@@ -531,6 +1449,51 @@
       "source": "library",
       "mp4KB": 61,
       "webmKB": 111
+    },
+    "hash-avalanche": {
+      "mp4": "hash-avalanche.mp4",
+      "webm": "hash-avalanche.webm",
+      "jpg": "hash-avalanche.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 66,
+      "webmKB": 130
+    },
+    "haversine": {
+      "mp4": "haversine.mp4",
+      "webm": "haversine.webm",
+      "jpg": "haversine.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 30,
+      "webmKB": 58
+    },
+    "hazmat-plume": {
+      "mp4": "hazmat-plume.mp4",
+      "webm": "hazmat-plume.webm",
+      "jpg": "hazmat-plume.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 44,
+      "webmKB": 70
+    },
+    "heat-3d": {
+      "mp4": "heat-3d.mp4",
+      "webm": "heat-3d.webm",
+      "jpg": "heat-3d.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 21,
+      "webmKB": 39
+    },
+    "heat-exchanger": {
+      "mp4": "heat-exchanger.mp4",
+      "webm": "heat-exchanger.webm",
+      "jpg": "heat-exchanger.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 36,
+      "webmKB": 65
     },
     "heat-pump": {
       "mp4": "heat-pump.mp4",
@@ -541,6 +1504,60 @@
       "mp4KB": 39,
       "webmKB": 75
     },
+    "helmholtz-resonator": {
+      "mp4": "helmholtz-resonator.mp4",
+      "webm": "helmholtz-resonator.webm",
+      "jpg": "helmholtz-resonator.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 26,
+      "webmKB": 48
+    },
+    "histogram-equalization": {
+      "mp4": "histogram-equalization.mp4",
+      "webm": "histogram-equalization.webm",
+      "jpg": "histogram-equalization.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 95
+    },
+    "hose-flow": {
+      "mp4": "hose-flow.mp4",
+      "webm": "hose-flow.webm",
+      "jpg": "hose-flow.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 53,
+      "webmKB": 110
+    },
+    "hr-diagram": {
+      "mp4": "hr-diagram.mp4",
+      "webm": "hr-diagram.webm",
+      "jpg": "hr-diagram.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 79
+    },
+    "hubble-law": {
+      "mp4": "hubble-law.mp4",
+      "webm": "hubble-law.webm",
+      "jpg": "hubble-law.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 74
+    },
+    "huffman": {
+      "mp4": "huffman.mp4",
+      "webm": "huffman.webm",
+      "jpg": "huffman.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 61,
+      "webmKB": 120
+    },
     "hurricane": {
       "mp4": "hurricane.mp4",
       "webm": "hurricane.webm",
@@ -549,6 +1566,69 @@
       "source": "library",
       "mp4KB": 316,
       "webmKB": 546
+    },
+    "hydro-power": {
+      "mp4": "hydro-power.mp4",
+      "webm": "hydro-power.webm",
+      "jpg": "hydro-power.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 56
+    },
+    "hydrogen-orbitals": {
+      "mp4": "hydrogen-orbitals.mp4",
+      "webm": "hydrogen-orbitals.webm",
+      "jpg": "hydrogen-orbitals.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 68
+    },
+    "hypothesis-test": {
+      "mp4": "hypothesis-test.mp4",
+      "webm": "hypothesis-test.webm",
+      "jpg": "hypothesis-test.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 45,
+      "webmKB": 82
+    },
+    "ideal-gas": {
+      "mp4": "ideal-gas.mp4",
+      "webm": "ideal-gas.webm",
+      "jpg": "ideal-gas.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 62,
+      "webmKB": 106
+    },
+    "image-convolution": {
+      "mp4": "image-convolution.mp4",
+      "webm": "image-convolution.webm",
+      "jpg": "image-convolution.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 176,
+      "webmKB": 362
+    },
+    "image-fft": {
+      "mp4": "image-fft.mp4",
+      "webm": "image-fft.webm",
+      "jpg": "image-fft.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 26,
+      "webmKB": 55
+    },
+    "indifference-curves": {
+      "mp4": "indifference-curves.mp4",
+      "webm": "indifference-curves.webm",
+      "jpg": "indifference-curves.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 49,
+      "webmKB": 86
     },
     "inverse-kinematics": {
       "mp4": "inverse-kinematics.mp4",
@@ -568,6 +1648,24 @@
       "mp4KB": 1132,
       "webmKB": 919
     },
+    "kalman-filter": {
+      "mp4": "kalman-filter.mp4",
+      "webm": "kalman-filter.webm",
+      "jpg": "kalman-filter.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 63,
+      "webmKB": 113
+    },
+    "kelly-criterion": {
+      "mp4": "kelly-criterion.mp4",
+      "webm": "kelly-criterion.webm",
+      "jpg": "kelly-criterion.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 72
+    },
     "kepler": {
       "mp4": "kepler.mp4",
       "webm": "kepler.webm",
@@ -576,6 +1674,33 @@
       "source": "library",
       "mp4KB": 24,
       "webmKB": 51
+    },
+    "kmeans": {
+      "mp4": "kmeans.mp4",
+      "webm": "kmeans.webm",
+      "jpg": "kmeans.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 80
+    },
+    "kmeans-cluster": {
+      "mp4": "kmeans-cluster.mp4",
+      "webm": "kmeans-cluster.webm",
+      "jpg": "kmeans-cluster.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 60,
+      "webmKB": 91
+    },
+    "knapsack": {
+      "mp4": "knapsack.mp4",
+      "webm": "knapsack.webm",
+      "jpg": "knapsack.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 59,
+      "webmKB": 125
     },
     "knn-classifier": {
       "mp4": "knn-classifier.mp4",
@@ -586,6 +1711,51 @@
       "mp4KB": 71,
       "webmKB": 115
     },
+    "l-system": {
+      "mp4": "l-system.mp4",
+      "webm": "l-system.webm",
+      "jpg": "l-system.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 106
+    },
+    "laffer-curve": {
+      "mp4": "laffer-curve.mp4",
+      "webm": "laffer-curve.webm",
+      "jpg": "laffer-curve.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 51,
+      "webmKB": 89
+    },
+    "lagrange-points": {
+      "mp4": "lagrange-points.mp4",
+      "webm": "lagrange-points.webm",
+      "jpg": "lagrange-points.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 62,
+      "webmKB": 89
+    },
+    "langtons-ant": {
+      "mp4": "langtons-ant.mp4",
+      "webm": "langtons-ant.webm",
+      "jpg": "langtons-ant.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 56,
+      "webmKB": 117
+    },
+    "lapse-rate": {
+      "mp4": "lapse-rate.mp4",
+      "webm": "lapse-rate.webm",
+      "jpg": "lapse-rate.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 71
+    },
     "laser-cavity": {
       "mp4": "laser-cavity.mp4",
       "webm": "laser-cavity.webm",
@@ -594,6 +1764,60 @@
       "source": "library",
       "mp4KB": 50,
       "webmKB": 95
+    },
+    "law-of-large-numbers": {
+      "mp4": "law-of-large-numbers.mp4",
+      "webm": "law-of-large-numbers.webm",
+      "jpg": "law-of-large-numbers.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 124
+    },
+    "lcoe": {
+      "mp4": "lcoe.mp4",
+      "webm": "lcoe.webm",
+      "jpg": "lcoe.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 84
+    },
+    "lead-lag": {
+      "mp4": "lead-lag.mp4",
+      "webm": "lead-lag.webm",
+      "jpg": "lead-lag.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 70
+    },
+    "learning-curve": {
+      "mp4": "learning-curve.mp4",
+      "webm": "learning-curve.webm",
+      "jpg": "learning-curve.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 73
+    },
+    "least-squares": {
+      "mp4": "least-squares.mp4",
+      "webm": "least-squares.webm",
+      "jpg": "least-squares.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 86
+    },
+    "led": {
+      "mp4": "led.mp4",
+      "webm": "led.webm",
+      "jpg": "led.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 60,
+      "webmKB": 124
     },
     "line-balancing": {
       "mp4": "line-balancing.mp4",
@@ -604,6 +1828,51 @@
       "mp4KB": 40,
       "webmKB": 88
     },
+    "linear-programming": {
+      "mp4": "linear-programming.mp4",
+      "webm": "linear-programming.webm",
+      "jpg": "linear-programming.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 66
+    },
+    "linear-regression": {
+      "mp4": "linear-regression.mp4",
+      "webm": "linear-regression.webm",
+      "jpg": "linear-regression.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 79
+    },
+    "linear-transform": {
+      "mp4": "linear-transform.mp4",
+      "webm": "linear-transform.webm",
+      "jpg": "linear-transform.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 56,
+      "webmKB": 91
+    },
+    "lissajous": {
+      "mp4": "lissajous.mp4",
+      "webm": "lissajous.webm",
+      "jpg": "lissajous.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 64,
+      "webmKB": 109
+    },
+    "littles-law": {
+      "mp4": "littles-law.mp4",
+      "webm": "littles-law.webm",
+      "jpg": "littles-law.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 106,
+      "webmKB": 287
+    },
     "logic-gates": {
       "mp4": "logic-gates.mp4",
       "webm": "logic-gates.webm",
@@ -612,6 +1881,15 @@
       "source": "library",
       "mp4KB": 35,
       "webmKB": 89
+    },
+    "logistic-growth": {
+      "mp4": "logistic-growth.mp4",
+      "webm": "logistic-growth.webm",
+      "jpg": "logistic-growth.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 75
     },
     "logistic-regression": {
       "mp4": "logistic-regression.mp4",
@@ -622,6 +1900,51 @@
       "mp4KB": 63,
       "webmKB": 117
     },
+    "lorenz-gini": {
+      "mp4": "lorenz-gini.mp4",
+      "webm": "lorenz-gini.webm",
+      "jpg": "lorenz-gini.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 36,
+      "webmKB": 79
+    },
+    "lotka-volterra": {
+      "mp4": "lotka-volterra.mp4",
+      "webm": "lotka-volterra.webm",
+      "jpg": "lotka-volterra.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 64,
+      "webmKB": 141
+    },
+    "lottery-odds": {
+      "mp4": "lottery-odds.mp4",
+      "webm": "lottery-odds.webm",
+      "jpg": "lottery-odds.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 65,
+      "webmKB": 126
+    },
+    "lqr": {
+      "mp4": "lqr.mp4",
+      "webm": "lqr.webm",
+      "jpg": "lqr.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 60,
+      "webmKB": 108
+    },
+    "mach-cone": {
+      "mp4": "mach-cone.mp4",
+      "webm": "mach-cone.webm",
+      "jpg": "mach-cone.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 51,
+      "webmKB": 104
+    },
     "magnetic-pendulum": {
       "mp4": "magnetic-pendulum.mp4",
       "webm": "magnetic-pendulum.webm",
@@ -631,6 +1954,15 @@
       "mp4KB": 35,
       "webmKB": 71
     },
+    "magnus-effect": {
+      "mp4": "magnus-effect.mp4",
+      "webm": "magnus-effect.webm",
+      "jpg": "magnus-effect.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 42,
+      "webmKB": 87
+    },
     "map-projection": {
       "mp4": "map-projection.mp4",
       "webm": "map-projection.webm",
@@ -639,6 +1971,60 @@
       "source": "library",
       "mp4KB": 75,
       "webmKB": 153
+    },
+    "marathon-pacing": {
+      "mp4": "marathon-pacing.mp4",
+      "webm": "marathon-pacing.webm",
+      "jpg": "marathon-pacing.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 106
+    },
+    "markov": {
+      "mp4": "markov.mp4",
+      "webm": "markov.webm",
+      "jpg": "markov.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 54,
+      "webmKB": 101
+    },
+    "matched-filter": {
+      "mp4": "matched-filter.mp4",
+      "webm": "matched-filter.webm",
+      "jpg": "matched-filter.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 76,
+      "webmKB": 118
+    },
+    "matrix": {
+      "mp4": "matrix.mp4",
+      "webm": "matrix.webm",
+      "jpg": "matrix.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 47,
+      "webmKB": 104
+    },
+    "matrix-elimination": {
+      "mp4": "matrix-elimination.mp4",
+      "webm": "matrix-elimination.webm",
+      "jpg": "matrix-elimination.jpg",
+      "preset": "random",
+      "source": "capture",
+      "mp4KB": 77,
+      "webmKB": 126
+    },
+    "max-flow": {
+      "mp4": "max-flow.mp4",
+      "webm": "max-flow.webm",
+      "jpg": "max-flow.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 60,
+      "webmKB": 95
     },
     "maxwell-boltzmann": {
       "mp4": "maxwell-boltzmann.mp4",
@@ -667,6 +2053,42 @@
       "mp4KB": 124,
       "webmKB": 200
     },
+    "michaelis-menten": {
+      "mp4": "michaelis-menten.mp4",
+      "webm": "michaelis-menten.webm",
+      "jpg": "michaelis-menten.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 79
+    },
+    "milankovitch": {
+      "mp4": "milankovitch.mp4",
+      "webm": "milankovitch.webm",
+      "jpg": "milankovitch.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 106,
+      "webmKB": 277
+    },
+    "mirror": {
+      "mp4": "mirror.mp4",
+      "webm": "mirror.webm",
+      "jpg": "mirror.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 73
+    },
+    "mohrs-circle": {
+      "mp4": "mohrs-circle.mp4",
+      "webm": "mohrs-circle.webm",
+      "jpg": "mohrs-circle.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 72
+    },
     "molecular-dynamics": {
       "mp4": "molecular-dynamics.mp4",
       "webm": "molecular-dynamics.webm",
@@ -675,6 +2097,60 @@
       "source": "library",
       "mp4KB": 645,
       "webmKB": 905
+    },
+    "moment-of-inertia": {
+      "mp4": "moment-of-inertia.mp4",
+      "webm": "moment-of-inertia.webm",
+      "jpg": "moment-of-inertia.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 32,
+      "webmKB": 62
+    },
+    "monopoly": {
+      "mp4": "monopoly.mp4",
+      "webm": "monopoly.webm",
+      "jpg": "monopoly.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 45,
+      "webmKB": 81
+    },
+    "monte-carlo": {
+      "mp4": "monte-carlo.mp4",
+      "webm": "monte-carlo.webm",
+      "jpg": "monte-carlo.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 75,
+      "webmKB": 149
+    },
+    "monte-carlo-retirement": {
+      "mp4": "monte-carlo-retirement.mp4",
+      "webm": "monte-carlo-retirement.webm",
+      "jpg": "monte-carlo-retirement.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 68
+    },
+    "monty-hall": {
+      "mp4": "monty-hall.mp4",
+      "webm": "monty-hall.webm",
+      "jpg": "monty-hall.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 83
+    },
+    "morphology": {
+      "mp4": "morphology.mp4",
+      "webm": "morphology.webm",
+      "jpg": "morphology.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 91
     },
     "motor-torque-speed": {
       "mp4": "motor-torque-speed.mp4",
@@ -685,6 +2161,51 @@
       "mp4KB": 54,
       "webmKB": 109
     },
+    "mutation-selection": {
+      "mp4": "mutation-selection.mp4",
+      "webm": "mutation-selection.webm",
+      "jpg": "mutation-selection.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 72
+    },
+    "naive-bayes": {
+      "mp4": "naive-bayes.mp4",
+      "webm": "naive-bayes.webm",
+      "jpg": "naive-bayes.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 44,
+      "webmKB": 89
+    },
+    "nernst-cell": {
+      "mp4": "nernst-cell.mp4",
+      "webm": "nernst-cell.webm",
+      "jpg": "nernst-cell.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 30,
+      "webmKB": 69
+    },
+    "neural-net": {
+      "mp4": "neural-net.mp4",
+      "webm": "neural-net.webm",
+      "jpg": "neural-net.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 79,
+      "webmKB": 126
+    },
+    "neuron": {
+      "mp4": "neuron.mp4",
+      "webm": "neuron.webm",
+      "jpg": "neuron.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 56,
+      "webmKB": 123
+    },
     "neutron-transport": {
       "mp4": "neutron-transport.mp4",
       "webm": "neutron-transport.webm",
@@ -693,6 +2214,69 @@
       "source": "library",
       "mp4KB": 158,
       "webmKB": 329
+    },
+    "newton": {
+      "mp4": "newton.mp4",
+      "webm": "newton.webm",
+      "jpg": "newton.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 27,
+      "webmKB": 54
+    },
+    "notebook": {
+      "mp4": "notebook.mp4",
+      "webm": "notebook.webm",
+      "jpg": "notebook.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 113
+    },
+    "numerical-integration": {
+      "mp4": "numerical-integration.mp4",
+      "webm": "numerical-integration.webm",
+      "jpg": "numerical-integration.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 79
+    },
+    "numerical-methods": {
+      "mp4": "numerical-methods.mp4",
+      "webm": "numerical-methods.webm",
+      "jpg": "numerical-methods.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 76
+    },
+    "ode-methods": {
+      "mp4": "ode-methods.mp4",
+      "webm": "ode-methods.webm",
+      "jpg": "ode-methods.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 47,
+      "webmKB": 91
+    },
+    "oee": {
+      "mp4": "oee.mp4",
+      "webm": "oee.webm",
+      "jpg": "oee.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 64,
+      "webmKB": 139
+    },
+    "op-amp": {
+      "mp4": "op-amp.mp4",
+      "webm": "op-amp.webm",
+      "jpg": "op-amp.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 42,
+      "webmKB": 88
     },
     "open-channel": {
       "mp4": "open-channel.mp4",
@@ -703,6 +2287,42 @@
       "mp4KB": 31,
       "webmKB": 72
     },
+    "optimize": {
+      "mp4": "optimize.mp4",
+      "webm": "optimize.webm",
+      "jpg": "optimize.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 69
+    },
+    "option-payoff": {
+      "mp4": "option-payoff.mp4",
+      "webm": "option-payoff.webm",
+      "jpg": "option-payoff.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 29,
+      "webmKB": 56
+    },
+    "options-greeks": {
+      "mp4": "options-greeks.mp4",
+      "webm": "options-greeks.webm",
+      "jpg": "options-greeks.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 77
+    },
+    "orbital-elements": {
+      "mp4": "orbital-elements.mp4",
+      "webm": "orbital-elements.webm",
+      "jpg": "orbital-elements.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 43,
+      "webmKB": 79
+    },
     "orbital-transfer": {
       "mp4": "orbital-transfer.mp4",
       "webm": "orbital-transfer.webm",
@@ -711,6 +2331,15 @@
       "source": "library",
       "mp4KB": 48,
       "webmKB": 101
+    },
+    "otto-cycle": {
+      "mp4": "otto-cycle.mp4",
+      "webm": "otto-cycle.webm",
+      "jpg": "otto-cycle.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 71
     },
     "oxygen-dissociation": {
       "mp4": "oxygen-dissociation.mp4",
@@ -721,6 +2350,42 @@
       "mp4KB": 65,
       "webmKB": 113
     },
+    "pagerank": {
+      "mp4": "pagerank.mp4",
+      "webm": "pagerank.webm",
+      "jpg": "pagerank.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 55,
+      "webmKB": 85
+    },
+    "parallax": {
+      "mp4": "parallax.mp4",
+      "webm": "parallax.webm",
+      "jpg": "parallax.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 55,
+      "webmKB": 88
+    },
+    "parametric": {
+      "mp4": "parametric.mp4",
+      "webm": "parametric.webm",
+      "jpg": "parametric.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 82,
+      "webmKB": 156
+    },
+    "particle-box": {
+      "mp4": "particle-box.mp4",
+      "webm": "particle-box.webm",
+      "jpg": "particle-box.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 78
+    },
     "particles": {
       "mp4": "particles.mp4",
       "webm": "particles.webm",
@@ -730,6 +2395,15 @@
       "mp4KB": 250,
       "webmKB": 342
     },
+    "pathfinding": {
+      "mp4": "pathfinding.mp4",
+      "webm": "pathfinding.webm",
+      "jpg": "pathfinding.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 132,
+      "webmKB": 294
+    },
     "pca": {
       "mp4": "pca.mp4",
       "webm": "pca.webm",
@@ -738,6 +2412,51 @@
       "source": "library",
       "mp4KB": 90,
       "webmKB": 128
+    },
+    "pendulum-wave": {
+      "mp4": "pendulum-wave.mp4",
+      "webm": "pendulum-wave.webm",
+      "jpg": "pendulum-wave.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 449,
+      "webmKB": 657
+    },
+    "perceptron": {
+      "mp4": "perceptron.mp4",
+      "webm": "perceptron.webm",
+      "jpg": "perceptron.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 119,
+      "webmKB": 239
+    },
+    "percolation": {
+      "mp4": "percolation.mp4",
+      "webm": "percolation.webm",
+      "jpg": "percolation.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 183,
+      "webmKB": 462
+    },
+    "ph": {
+      "mp4": "ph.mp4",
+      "webm": "ph.webm",
+      "jpg": "ph.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 51,
+      "webmKB": 115
+    },
+    "pharmacokinetics": {
+      "mp4": "pharmacokinetics.mp4",
+      "webm": "pharmacokinetics.webm",
+      "jpg": "pharmacokinetics.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 49,
+      "webmKB": 81
     },
     "phase-diagram": {
       "mp4": "phase-diagram.mp4",
@@ -757,6 +2476,51 @@
       "mp4KB": 50,
       "webmKB": 96
     },
+    "phylo-distance": {
+      "mp4": "phylo-distance.mp4",
+      "webm": "phylo-distance.webm",
+      "jpg": "phylo-distance.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 53,
+      "webmKB": 110
+    },
+    "pid-control": {
+      "mp4": "pid-control.mp4",
+      "webm": "pid-control.webm",
+      "jpg": "pid-control.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 80
+    },
+    "pid-tuner": {
+      "mp4": "pid-tuner.mp4",
+      "webm": "pid-tuner.webm",
+      "jpg": "pid-tuner.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 72
+    },
+    "pipe-flow": {
+      "mp4": "pipe-flow.mp4",
+      "webm": "pipe-flow.webm",
+      "jpg": "pipe-flow.jpg",
+      "preset": "turbulent",
+      "source": "capture",
+      "mp4KB": 30,
+      "webmKB": 58
+    },
+    "pitot-tube": {
+      "mp4": "pitot-tube.mp4",
+      "webm": "pitot-tube.webm",
+      "jpg": "pitot-tube.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 61
+    },
     "point-in-polygon": {
       "mp4": "point-in-polygon.mp4",
       "webm": "point-in-polygon.webm",
@@ -765,6 +2529,51 @@
       "source": "library",
       "mp4KB": 34,
       "webmKB": 71
+    },
+    "poker-odds": {
+      "mp4": "poker-odds.mp4",
+      "webm": "poker-odds.webm",
+      "jpg": "poker-odds.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 60,
+      "webmKB": 134
+    },
+    "polarization": {
+      "mp4": "polarization.mp4",
+      "webm": "polarization.webm",
+      "jpg": "polarization.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 30,
+      "webmKB": 76
+    },
+    "pole-zero": {
+      "mp4": "pole-zero.mp4",
+      "webm": "pole-zero.webm",
+      "jpg": "pole-zero.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 41,
+      "webmKB": 83
+    },
+    "predator-prey": {
+      "mp4": "predator-prey.mp4",
+      "webm": "predator-prey.webm",
+      "jpg": "predator-prey.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 462,
+      "webmKB": 511
+    },
+    "prism": {
+      "mp4": "prism.mp4",
+      "webm": "prism.webm",
+      "jpg": "prism.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 85
     },
     "process-capability": {
       "mp4": "process-capability.mp4",
@@ -793,6 +2602,51 @@
       "mp4KB": 58,
       "webmKB": 99
     },
+    "psychrometrics": {
+      "mp4": "psychrometrics.mp4",
+      "webm": "psychrometrics.webm",
+      "jpg": "psychrometrics.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 67,
+      "webmKB": 127
+    },
+    "pump-curve": {
+      "mp4": "pump-curve.mp4",
+      "webm": "pump-curve.webm",
+      "jpg": "pump-curve.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 44,
+      "webmKB": 87
+    },
+    "pythagorean-expectation": {
+      "mp4": "pythagorean-expectation.mp4",
+      "webm": "pythagorean-expectation.webm",
+      "jpg": "pythagorean-expectation.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 75
+    },
+    "q-learning": {
+      "mp4": "q-learning.mp4",
+      "webm": "q-learning.webm",
+      "jpg": "q-learning.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 59,
+      "webmKB": 95
+    },
+    "quadcopter": {
+      "mp4": "quadcopter.mp4",
+      "webm": "quadcopter.webm",
+      "jpg": "quadcopter.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 24,
+      "webmKB": 53
+    },
     "quantization-noise": {
       "mp4": "quantization-noise.mp4",
       "webm": "quantization-noise.webm",
@@ -801,6 +2655,51 @@
       "source": "library",
       "mp4KB": 100,
       "webmKB": 210
+    },
+    "quantum-harmonic": {
+      "mp4": "quantum-harmonic.mp4",
+      "webm": "quantum-harmonic.webm",
+      "jpg": "quantum-harmonic.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 35,
+      "webmKB": 88
+    },
+    "quantum-tunneling": {
+      "mp4": "quantum-tunneling.mp4",
+      "webm": "quantum-tunneling.webm",
+      "jpg": "quantum-tunneling.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 36,
+      "webmKB": 76
+    },
+    "queueing": {
+      "mp4": "queueing.mp4",
+      "webm": "queueing.webm",
+      "jpg": "queueing.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 22,
+      "webmKB": 47
+    },
+    "radiation-dose": {
+      "mp4": "radiation-dose.mp4",
+      "webm": "radiation-dose.webm",
+      "jpg": "radiation-dose.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 62,
+      "webmKB": 125
+    },
+    "radiation-shielding": {
+      "mp4": "radiation-shielding.mp4",
+      "webm": "radiation-shielding.webm",
+      "jpg": "radiation-shielding.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 57
     },
     "radio-range": {
       "mp4": "radio-range.mp4",
@@ -811,6 +2710,24 @@
       "mp4KB": 32,
       "webmKB": 69
     },
+    "radioactive-decay": {
+      "mp4": "radioactive-decay.mp4",
+      "webm": "radioactive-decay.webm",
+      "jpg": "radioactive-decay.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 52,
+      "webmKB": 98
+    },
+    "radiometric-dating": {
+      "mp4": "radiometric-dating.mp4",
+      "webm": "radiometric-dating.webm",
+      "jpg": "radiometric-dating.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 43,
+      "webmKB": 83
+    },
     "random-walk": {
       "mp4": "random-walk.mp4",
       "webm": "random-walk.webm",
@@ -819,6 +2736,24 @@
       "source": "library",
       "mp4KB": 180,
       "webmKB": 379
+    },
+    "rankine-vortex": {
+      "mp4": "rankine-vortex.mp4",
+      "webm": "rankine-vortex.webm",
+      "jpg": "rankine-vortex.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 67,
+      "webmKB": 193
+    },
+    "ray-optics": {
+      "mp4": "ray-optics.mp4",
+      "webm": "ray-optics.webm",
+      "jpg": "ray-optics.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 70
     },
     "reaction-diffusion": {
       "mp4": "reaction-diffusion.mp4",
@@ -829,6 +2764,15 @@
       "mp4KB": 141,
       "webmKB": 253
     },
+    "reaction-equilibrium": {
+      "mp4": "reaction-equilibrium.mp4",
+      "webm": "reaction-equilibrium.webm",
+      "jpg": "reaction-equilibrium.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 32,
+      "webmKB": 68
+    },
     "reaction-kinetics": {
       "mp4": "reaction-kinetics.mp4",
       "webm": "reaction-kinetics.webm",
@@ -837,6 +2781,51 @@
       "source": "library",
       "mp4KB": 37,
       "webmKB": 74
+    },
+    "reactor-kinetics": {
+      "mp4": "reactor-kinetics.mp4",
+      "webm": "reactor-kinetics.webm",
+      "jpg": "reactor-kinetics.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 46,
+      "webmKB": 94
+    },
+    "reentry": {
+      "mp4": "reentry.mp4",
+      "webm": "reentry.webm",
+      "jpg": "reentry.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 70
+    },
+    "retaining-wall": {
+      "mp4": "retaining-wall.mp4",
+      "webm": "retaining-wall.webm",
+      "jpg": "retaining-wall.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 24,
+      "webmKB": 51
+    },
+    "reverb-time": {
+      "mp4": "reverb-time.mp4",
+      "webm": "reverb-time.webm",
+      "jpg": "reverb-time.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 90
+    },
+    "rhumb-line": {
+      "mp4": "rhumb-line.mp4",
+      "webm": "rhumb-line.webm",
+      "jpg": "rhumb-line.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 45,
+      "webmKB": 87
     },
     "riemann": {
       "mp4": "riemann.mp4",
@@ -847,6 +2836,33 @@
       "mp4KB": 51,
       "webmKB": 127
     },
+    "rlc": {
+      "mp4": "rlc.mp4",
+      "webm": "rlc.webm",
+      "jpg": "rlc.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 67
+    },
+    "roche-limit": {
+      "mp4": "roche-limit.mp4",
+      "webm": "roche-limit.webm",
+      "jpg": "roche-limit.jpg",
+      "preset": "orbit",
+      "source": "capture",
+      "mp4KB": 35,
+      "webmKB": 74
+    },
+    "rocket": {
+      "mp4": "rocket.mp4",
+      "webm": "rocket.webm",
+      "jpg": "rocket.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 46,
+      "webmKB": 118
+    },
     "rocket-equation": {
       "mp4": "rocket-equation.mp4",
       "webm": "rocket-equation.webm",
@@ -855,6 +2871,24 @@
       "source": "library",
       "mp4KB": 44,
       "webmKB": 87
+    },
+    "rocket-staging": {
+      "mp4": "rocket-staging.mp4",
+      "webm": "rocket-staging.webm",
+      "jpg": "rocket-staging.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 21,
+      "webmKB": 44
+    },
+    "rolling-motion": {
+      "mp4": "rolling-motion.mp4",
+      "webm": "rolling-motion.webm",
+      "jpg": "rolling-motion.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 70,
+      "webmKB": 156
     },
     "room-modes": {
       "mp4": "room-modes.mp4",
@@ -865,6 +2899,60 @@
       "mp4KB": 51,
       "webmKB": 134
     },
+    "root-finding": {
+      "mp4": "root-finding.mp4",
+      "webm": "root-finding.webm",
+      "jpg": "root-finding.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 57,
+      "webmKB": 83
+    },
+    "root-locus": {
+      "mp4": "root-locus.mp4",
+      "webm": "root-locus.webm",
+      "jpg": "root-locus.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 57
+    },
+    "rossby-waves": {
+      "mp4": "rossby-waves.mp4",
+      "webm": "rossby-waves.webm",
+      "jpg": "rossby-waves.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 209,
+      "webmKB": 669
+    },
+    "roulette": {
+      "mp4": "roulette.mp4",
+      "webm": "roulette.webm",
+      "jpg": "roulette.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 57,
+      "webmKB": 112
+    },
+    "rrt": {
+      "mp4": "rrt.mp4",
+      "webm": "rrt.webm",
+      "jpg": "rrt.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 63,
+      "webmKB": 106
+    },
+    "rsa": {
+      "mp4": "rsa.mp4",
+      "webm": "rsa.webm",
+      "jpg": "rsa.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 58,
+      "webmKB": 117
+    },
     "sampling-theorem": {
       "mp4": "sampling-theorem.mp4",
       "webm": "sampling-theorem.webm",
@@ -874,6 +2962,51 @@
       "mp4KB": 141,
       "webmKB": 284
     },
+    "sandpile": {
+      "mp4": "sandpile.mp4",
+      "webm": "sandpile.webm",
+      "jpg": "sandpile.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 1021,
+      "webmKB": 1026
+    },
+    "schelling": {
+      "mp4": "schelling.mp4",
+      "webm": "schelling.webm",
+      "jpg": "schelling.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 310,
+      "webmKB": 920
+    },
+    "second-order-response": {
+      "mp4": "second-order-response.mp4",
+      "webm": "second-order-response.webm",
+      "jpg": "second-order-response.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 56,
+      "webmKB": 98
+    },
+    "seismic": {
+      "mp4": "seismic.mp4",
+      "webm": "seismic.webm",
+      "jpg": "seismic.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 45,
+      "webmKB": 74
+    },
+    "sequence-alignment": {
+      "mp4": "sequence-alignment.mp4",
+      "webm": "sequence-alignment.webm",
+      "jpg": "sequence-alignment.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 90
+    },
     "shannon-entropy": {
       "mp4": "shannon-entropy.mp4",
       "webm": "shannon-entropy.webm",
@@ -882,6 +3015,51 @@
       "source": "library",
       "mp4KB": 46,
       "webmKB": 108
+    },
+    "shear-moment": {
+      "mp4": "shear-moment.mp4",
+      "webm": "shear-moment.webm",
+      "jpg": "shear-moment.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 83
+    },
+    "shortest-path": {
+      "mp4": "shortest-path.mp4",
+      "webm": "shortest-path.webm",
+      "jpg": "shortest-path.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 52,
+      "webmKB": 93
+    },
+    "shot-arc": {
+      "mp4": "shot-arc.mp4",
+      "webm": "shot-arc.webm",
+      "jpg": "shot-arc.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 35,
+      "webmKB": 67
+    },
+    "simulated-annealing": {
+      "mp4": "simulated-annealing.mp4",
+      "webm": "simulated-annealing.webm",
+      "jpg": "simulated-annealing.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 45,
+      "webmKB": 79
+    },
+    "single-slit": {
+      "mp4": "single-slit.mp4",
+      "webm": "single-slit.webm",
+      "jpg": "single-slit.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 32,
+      "webmKB": 67
     },
     "sir-model": {
       "mp4": "sir-model.mp4",
@@ -901,6 +3079,51 @@
       "mp4KB": 31,
       "webmKB": 61
     },
+    "small-world": {
+      "mp4": "small-world.mp4",
+      "webm": "small-world.webm",
+      "jpg": "small-world.jpg",
+      "preset": "random",
+      "source": "capture",
+      "mp4KB": 77,
+      "webmKB": 205
+    },
+    "snells-law": {
+      "mp4": "snells-law.mp4",
+      "webm": "snells-law.webm",
+      "jpg": "snells-law.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 29,
+      "webmKB": 65
+    },
+    "soil-bearing": {
+      "mp4": "soil-bearing.mp4",
+      "webm": "soil-bearing.webm",
+      "jpg": "soil-bearing.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 53,
+      "webmKB": 113
+    },
+    "solar-panel": {
+      "mp4": "solar-panel.mp4",
+      "webm": "solar-panel.webm",
+      "jpg": "solar-panel.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 76
+    },
+    "solubility": {
+      "mp4": "solubility.mp4",
+      "webm": "solubility.webm",
+      "jpg": "solubility.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 60,
+      "webmKB": 87
+    },
     "sorting": {
       "mp4": "sorting.mp4",
       "webm": "sorting.webm",
@@ -909,6 +3132,60 @@
       "source": "library",
       "mp4KB": 95,
       "webmKB": 273
+    },
+    "sound-levels": {
+      "mp4": "sound-levels.mp4",
+      "webm": "sound-levels.webm",
+      "jpg": "sound-levels.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 90
+    },
+    "spanning-tree": {
+      "mp4": "spanning-tree.mp4",
+      "webm": "spanning-tree.webm",
+      "jpg": "spanning-tree.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 50,
+      "webmKB": 81
+    },
+    "spatial-interpolation": {
+      "mp4": "spatial-interpolation.mp4",
+      "webm": "spatial-interpolation.webm",
+      "jpg": "spatial-interpolation.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 57,
+      "webmKB": 77
+    },
+    "special-relativity": {
+      "mp4": "special-relativity.mp4",
+      "webm": "special-relativity.webm",
+      "jpg": "special-relativity.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 49,
+      "webmKB": 81
+    },
+    "spectrogram": {
+      "mp4": "spectrogram.mp4",
+      "webm": "spectrogram.webm",
+      "jpg": "spectrogram.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 105,
+      "webmKB": 185
+    },
+    "standard-atmosphere": {
+      "mp4": "standard-atmosphere.mp4",
+      "webm": "standard-atmosphere.webm",
+      "jpg": "standard-atmosphere.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 37,
+      "webmKB": 83
     },
     "standing-waves": {
       "mp4": "standing-waves.mp4",
@@ -919,6 +3196,60 @@
       "mp4KB": 315,
       "webmKB": 538
     },
+    "state-observer": {
+      "mp4": "state-observer.mp4",
+      "webm": "state-observer.webm",
+      "jpg": "state-observer.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 56,
+      "webmKB": 118
+    },
+    "state-space": {
+      "mp4": "state-space.mp4",
+      "webm": "state-space.webm",
+      "jpg": "state-space.jpg",
+      "preset": "orbit",
+      "source": "capture",
+      "mp4KB": 44,
+      "webmKB": 83
+    },
+    "step-response": {
+      "mp4": "step-response.mp4",
+      "webm": "step-response.webm",
+      "jpg": "step-response.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 35,
+      "webmKB": 69
+    },
+    "stern-gerlach": {
+      "mp4": "stern-gerlach.mp4",
+      "webm": "stern-gerlach.webm",
+      "jpg": "stern-gerlach.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 46,
+      "webmKB": 95
+    },
+    "stress-strain": {
+      "mp4": "stress-strain.mp4",
+      "webm": "stress-strain.webm",
+      "jpg": "stress-strain.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 71
+    },
+    "supply-demand": {
+      "mp4": "supply-demand.mp4",
+      "webm": "supply-demand.webm",
+      "jpg": "supply-demand.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 35,
+      "webmKB": 80
+    },
     "surface-3d": {
       "mp4": "surface-3d.mp4",
       "webm": "surface-3d.webm",
@@ -927,6 +3258,51 @@
       "source": "library",
       "mp4KB": 423,
       "webmKB": 592
+    },
+    "surrogate": {
+      "mp4": "surrogate.mp4",
+      "webm": "surrogate.webm",
+      "jpg": "surrogate.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 68
+    },
+    "svd": {
+      "mp4": "svd.mp4",
+      "webm": "svd.webm",
+      "jpg": "svd.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 52,
+      "webmKB": 88
+    },
+    "svm-margin": {
+      "mp4": "svm-margin.mp4",
+      "webm": "svm-margin.webm",
+      "jpg": "svm-margin.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 32,
+      "webmKB": 71
+    },
+    "taylor": {
+      "mp4": "taylor.mp4",
+      "webm": "taylor.webm",
+      "jpg": "taylor.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 86
+    },
+    "telescope": {
+      "mp4": "telescope.mp4",
+      "webm": "telescope.webm",
+      "jpg": "telescope.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 62
     },
     "thermal-expansion": {
       "mp4": "thermal-expansion.mp4",
@@ -937,6 +3313,15 @@
       "mp4KB": 31,
       "webmKB": 76
     },
+    "thermal-resistance": {
+      "mp4": "thermal-resistance.mp4",
+      "webm": "thermal-resistance.webm",
+      "jpg": "thermal-resistance.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 33,
+      "webmKB": 74
+    },
     "thin-film": {
       "mp4": "thin-film.mp4",
       "webm": "thin-film.webm",
@@ -945,6 +3330,123 @@
       "source": "library",
       "mp4KB": 47,
       "webmKB": 90
+    },
+    "three-phase": {
+      "mp4": "three-phase.mp4",
+      "webm": "three-phase.webm",
+      "jpg": "three-phase.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 443,
+      "webmKB": 856
+    },
+    "thresholding": {
+      "mp4": "thresholding.mp4",
+      "webm": "thresholding.webm",
+      "jpg": "thresholding.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 76,
+      "webmKB": 143
+    },
+    "timer-555": {
+      "mp4": "timer-555.mp4",
+      "webm": "timer-555.webm",
+      "jpg": "timer-555.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 31,
+      "webmKB": 65
+    },
+    "titration": {
+      "mp4": "titration.mp4",
+      "webm": "titration.webm",
+      "jpg": "titration.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 30,
+      "webmKB": 66
+    },
+    "titration-curve": {
+      "mp4": "titration-curve.mp4",
+      "webm": "titration-curve.webm",
+      "jpg": "titration-curve.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 38,
+      "webmKB": 77
+    },
+    "tolerance-stackup": {
+      "mp4": "tolerance-stackup.mp4",
+      "webm": "tolerance-stackup.webm",
+      "jpg": "tolerance-stackup.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 32,
+      "webmKB": 80
+    },
+    "tournament-bracket": {
+      "mp4": "tournament-bracket.mp4",
+      "webm": "tournament-bracket.webm",
+      "jpg": "tournament-bracket.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 76
+    },
+    "traffic": {
+      "mp4": "traffic.mp4",
+      "webm": "traffic.webm",
+      "jpg": "traffic.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 661,
+      "webmKB": 1180
+    },
+    "transistor-bias": {
+      "mp4": "transistor-bias.mp4",
+      "webm": "transistor-bias.webm",
+      "jpg": "transistor-bias.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 40,
+      "webmKB": 79
+    },
+    "transmission-line": {
+      "mp4": "transmission-line.mp4",
+      "webm": "transmission-line.webm",
+      "jpg": "transmission-line.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 267,
+      "webmKB": 665
+    },
+    "triage": {
+      "mp4": "triage.mp4",
+      "webm": "triage.webm",
+      "jpg": "triage.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 54,
+      "webmKB": 113
+    },
+    "tsunami": {
+      "mp4": "tsunami.mp4",
+      "webm": "tsunami.webm",
+      "jpg": "tsunami.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 44,
+      "webmKB": 88
+    },
+    "tumor-growth": {
+      "mp4": "tumor-growth.mp4",
+      "webm": "tumor-growth.webm",
+      "jpg": "tumor-growth.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 71
     },
     "turing-machine": {
       "mp4": "turing-machine.mp4",
@@ -955,6 +3457,24 @@
       "mp4KB": 48,
       "webmKB": 105
     },
+    "value-at-risk": {
+      "mp4": "value-at-risk.mp4",
+      "webm": "value-at-risk.webm",
+      "jpg": "value-at-risk.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 39,
+      "webmKB": 74
+    },
+    "van-der-waals": {
+      "mp4": "van-der-waals.mp4",
+      "webm": "van-der-waals.webm",
+      "jpg": "van-der-waals.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 34,
+      "webmKB": 75
+    },
     "vector-field": {
       "mp4": "vector-field.mp4",
       "webm": "vector-field.webm",
@@ -964,6 +3484,15 @@
       "mp4KB": 165,
       "webmKB": 300
     },
+    "viewshed": {
+      "mp4": "viewshed.mp4",
+      "webm": "viewshed.webm",
+      "jpg": "viewshed.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 28,
+      "webmKB": 52
+    },
     "wave-interference": {
       "mp4": "wave-interference.mp4",
       "webm": "wave-interference.webm",
@@ -972,6 +3501,87 @@
       "source": "library",
       "mp4KB": 303,
       "webmKB": 405
+    },
+    "wavelet": {
+      "mp4": "wavelet.mp4",
+      "webm": "wavelet.webm",
+      "jpg": "wavelet.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 55,
+      "webmKB": 148
+    },
+    "win-probability": {
+      "mp4": "win-probability.mp4",
+      "webm": "win-probability.webm",
+      "jpg": "win-probability.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 43,
+      "webmKB": 79
+    },
+    "wind-chill": {
+      "mp4": "wind-chill.mp4",
+      "webm": "wind-chill.webm",
+      "jpg": "wind-chill.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 61,
+      "webmKB": 114
+    },
+    "wind-power": {
+      "mp4": "wind-power.mp4",
+      "webm": "wind-power.webm",
+      "jpg": "wind-power.jpg",
+      "preset": "storm",
+      "source": "capture",
+      "mp4KB": 43,
+      "webmKB": 74
+    },
+    "windkessel": {
+      "mp4": "windkessel.mp4",
+      "webm": "windkessel.webm",
+      "jpg": "windkessel.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 105
+    },
+    "window-functions": {
+      "mp4": "window-functions.mp4",
+      "webm": "window-functions.webm",
+      "jpg": "window-functions.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 48,
+      "webmKB": 89
+    },
+    "wolfram-ca": {
+      "mp4": "wolfram-ca.mp4",
+      "webm": "wolfram-ca.webm",
+      "jpg": "wolfram-ca.jpg",
+      "preset": "chaos",
+      "source": "capture",
+      "mp4KB": 202,
+      "webmKB": 741
+    },
+    "xg-model": {
+      "mp4": "xg-model.mp4",
+      "webm": "xg-model.webm",
+      "jpg": "xg-model.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 35,
+      "webmKB": 70
+    },
+    "z-transform": {
+      "mp4": "z-transform.mp4",
+      "webm": "z-transform.webm",
+      "jpg": "z-transform.jpg",
+      "preset": null,
+      "source": "capture",
+      "mp4KB": 55,
+      "webmKB": 92
     }
   }
 }
