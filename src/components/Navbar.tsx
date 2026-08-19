@@ -108,6 +108,8 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
           { name: "vs Ansys", href: "/compare/ansys" },
           { name: "vs COMSOL", href: "/compare/comsol" },
           { name: "vs MATLAB", href: "/compare/matlab" },
+          { name: "vs Simulink", href: "/compare/simulink" },
+          { name: "Free MATLAB Alternative", href: "/matlab-alternative" },
         ],
       },
       {
