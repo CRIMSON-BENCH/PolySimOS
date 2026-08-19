@@ -5,6 +5,7 @@ import { PageShell, H2, Prose } from "@/components/PageShell";
 import { getComparison, getAllComparisonSlugs } from "@/lib/comparisons";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { premiumUpsell } from "@/lib/products";
+import { ClipShowcase } from "@/components/ClipShowcase";
 import { faqLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -51,6 +52,9 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
           </tbody>
         </table>
       </div>
+      <H2>See PolySim in action</H2>
+      <div className="mt-5"><ClipShowcase slugs={["fluid", "double-pendulum", "attractors", "dynamics", "bode-plot", "bloch-sphere"]} max={6} /></div>
+
       <Prose><p className="font-medium text-slate-800 dark:text-slate-200">{c.verdict}</p></Prose>
       <PremiumCTA product={premiumUpsell(c.slug)} heading={`Ready to leave ${c.competitor}?`} />
       <div className="mt-6 flex flex-wrap gap-4">

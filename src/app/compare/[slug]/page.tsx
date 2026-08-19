@@ -6,6 +6,7 @@ import { getComparison, getAllComparisonSlugs } from "@/lib/comparisons";
 import { ProductGrid } from "@/components/ProductCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
+import { ClipShowcase } from "@/components/ClipShowcase";
 import { faqLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -50,6 +51,12 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
           <p className="text-sm font-bold text-slate-500">{c.competitor}</p>
           <p className="mt-1 text-lg font-black text-slate-900 dark:text-slate-100">{c.theirPricing}</p>
         </div>
+      </div>
+
+      <H2>See PolySim in action</H2>
+      <p className="mt-2 max-w-3xl text-slate-600 dark:text-slate-400">Live, interactive simulators that run free in your browser — no install, no license.</p>
+      <div className="mt-5">
+        <ClipShowcase slugs={["fluid", "double-pendulum", "attractors", "dynamics", "bode-plot", "bloch-sphere"]} max={6} />
       </div>
 
       <H2>Feature comparison</H2>

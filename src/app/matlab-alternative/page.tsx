@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { PageShell, H2 } from "@/components/PageShell";
+import { ClipShowcase } from "@/components/ClipShowcase";
 import { faqLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -135,6 +136,12 @@ export default function MatlabAlternativePage() {
         <Link href="/studio" className="rounded-lg bg-cyan-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-cyan-700">Launch the Studio — free →</Link>
         <Link href="/compare/matlab" className="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-cyan-400 dark:border-slate-700 dark:text-slate-300">MATLAB vs PolySim →</Link>
         <Link href="/compare/simulink" className="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-semibold text-slate-700 transition hover:border-cyan-400 dark:border-slate-700 dark:text-slate-300">Simulink vs PolySim →</Link>
+      </div>
+
+      <H2>See it run</H2>
+      <p className="mt-2 max-w-3xl text-slate-600 dark:text-slate-400">A few of the live simulators — every one runs in your browser, free.</p>
+      <div className="mt-5">
+        <ClipShowcase slugs={["fluid", "double-pendulum", "attractors", "bode-plot", "dynamics", "bloch-sphere", "aliasing", "black-scholes"]} max={6} />
       </div>
 
       <H2>MATLAB toolbox → PolySim, tool for tool</H2>
