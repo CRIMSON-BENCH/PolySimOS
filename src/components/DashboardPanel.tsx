@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useAuth } from "@/lib/auth";
 import { useEntitlementKeys } from "@/lib/entitlements";
+import { SavedScenarios } from "@/components/SavedScenarios";
 
 function labelFor(key: string): { kind: string; name: string } {
   const [type, ...rest] = key.split(":");
@@ -74,6 +75,8 @@ export function DashboardPanel() {
           <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">No unlocks yet. Every solver and workflow has a one-time unlock, or go Pro for all of them.</p>
         )}
       </div>
+
+      <SavedScenarios />
     </div>
   );
 }

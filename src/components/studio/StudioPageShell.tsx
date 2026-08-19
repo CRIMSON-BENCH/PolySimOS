@@ -7,6 +7,7 @@ import { EmbedButton } from "./EmbedButton";
 import { MonetizationBar } from "@/components/monetization/Slots";
 import { ProGatedUpsell } from "@/components/monetization/ProGatedUpsell";
 import { SaveResultsPrompt } from "@/components/monetization/SaveResultsPrompt";
+import { SaveScenarioButton } from "./SaveScenarioButton";
 import { AiSolverAssist } from "./AiSolverAssist";
 import { SIMS } from "@/app/studio/page";
 
@@ -358,8 +359,9 @@ export function StudioPageShell({
       <MonetizationBar kind="solver" slug={slug} name={name} next={`/studio/${slug}`} />
 
       <div className="mt-4 flex flex-wrap items-center gap-3">
+        <SaveScenarioButton slug={slug} name={name} />
         <EmbedButton slug={slug} name={name} />
-        <span className="text-xs text-slate-400">Drop this simulation into your own site, docs, or course page.</span>
+        <span className="text-xs text-slate-400">Save your tuned setup, or drop this simulation into your own site, docs, or course page.</span>
       </div>
 
       <SaveResultsPrompt slug={slug} name={name} />
