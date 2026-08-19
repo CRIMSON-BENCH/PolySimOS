@@ -6,6 +6,7 @@ import { softwareAppLd, faqLd, howToLd } from "@/lib/seo";
 import { EmbedButton } from "./EmbedButton";
 import { MonetizationBar } from "@/components/monetization/Slots";
 import { ProGatedUpsell } from "@/components/monetization/ProGatedUpsell";
+import { SaveResultsPrompt } from "@/components/monetization/SaveResultsPrompt";
 import { AiSolverAssist } from "./AiSolverAssist";
 import { SIMS } from "@/app/studio/page";
 
@@ -360,6 +361,8 @@ export function StudioPageShell({
         <EmbedButton slug={slug} name={name} />
         <span className="text-xs text-slate-400">Drop this simulation into your own site, docs, or course page.</span>
       </div>
+
+      <SaveResultsPrompt slug={slug} name={name} />
 
       <section className="mt-8 rounded-2xl border border-slate-200 bg-white p-6 dark:border-slate-800 dark:bg-slate-900">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">How it works</h2>
