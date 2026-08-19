@@ -1,11 +1,11 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 640, H = 480;
 
@@ -22,6 +22,7 @@ export function OrbitalTransferStudio() {
   const r1Ref = useRef(r1); r1Ref.current = r1;
   const r2Ref = useRef(r2); r2Ref.current = r2;
   const t = useRef(0);
+  const draggingRef = useRef(false);
 
   const { dv1, dv2, total, tof } = useMemo(() => {
     const mu = 8000; const a = (r1 + r2) / 2;
@@ -63,10 +64,36 @@ print("dv1", dv1, "dv2", dv2, "total", dv1 + dv2, "tof", tof)`;
     const a = (r1 + r2) / 2, b = Math.sqrt(r1 * r2), ec = cx - (a - r1);
     ctx.strokeStyle = "rgba(244,114,182,0.85)"; ctx.setLineDash([5, 4]); ctx.beginPath(); ctx.ellipse(ec, cy, a, b, 0, 0, Math.PI * 2); ctx.stroke(); ctx.setLineDash([]);
     const ang = t.current; const sx = cx + Math.cos(ang) * r1, sy = cy + Math.sin(ang) * r1; ctx.fillStyle = "#38bdf8"; ctx.beginPath(); ctx.arc(sx, sy, 6, 0, 7); ctx.fill();
+    // draggable handle on the outer (destination) orbit — drag it to set r2
+    const hx = cx + r2, hy = cy;
+    ctx.strokeStyle = "rgba(163,230,53,0.9)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(hx, hy, draggingRef.current ? 11 : 9, 0, 7); ctx.stroke();
+    ctx.fillStyle = draggingRef.current ? "#a3e635" : "rgba(163,230,53,0.85)"; ctx.beginPath(); ctx.arc(hx, hy, 6, 0, 7); ctx.fill();
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("Hohmann transfer ellipse (pink) between two circular orbits", 12, 22);
+    ctx.fillText("Drag the ● handle on the outer (green) orbit to set its radius", 12, 40);
   };
 
   const tr = useTransport(frame);
+
+  // Direct-canvas drag: grab the handle on the outer orbit to set the destination radius (r2).
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (x, y) => {
+      const cx = W / 2, cy = H / 2;
+      const hx = cx + r2Ref.current, hy = cy;
+      if (Math.hypot(x - hx, y - hy) > 20) return false;
+      draggingRef.current = true;
+      tr.pause(); // pause the animation while the user is dragging
+      return true;
+    },
+    move: (x, y) => {
+      const cx = W / 2, cy = H / 2;
+      const nr = Math.hypot(x - cx, y - cy);
+      update({ r2: Math.round(Math.max(120, Math.min(230, nr))) });
+    },
+    up: () => { draggingRef.current = false; },
+  });
+
+  // Redraw on radius change so the ellipse/handle track the drag even while the animation is paused.
+  useEffect(() => { frame(0); }, [r1, r2]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <StudioChrome title="Orbital Transfer (Hohmann)" tagline="minimum-energy orbit change"

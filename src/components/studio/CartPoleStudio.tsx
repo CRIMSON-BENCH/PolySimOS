@@ -5,7 +5,7 @@ import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { gain: number; disturb: number }> = {
   "Gentle hold": { gain: 1.0, disturb: 0.2 },
@@ -13,6 +13,14 @@ const PRESETS: Record<string, { gain: number; disturb: number }> = {
   "Tight controller": { gain: 2.5, disturb: 0.5 },
   "Barely stable": { gain: 0.5, disturb: 0.4 },
 };
+
+// Canvas geometry (logical coords). Shared by the renderer and the drag handlers so a
+// grabbed cart/pole maps back to physical state exactly the way it was drawn.
+const W = 540, H = 320;
+const CY = H - 80;          // track height
+const PPU = 90;             // pixels per cart-position unit
+const POLE = 120;           // pole length in pixels
+const cxOf = (x: number) => W / 2 + x * PPU;
 
 // Inverted pendulum on a cart, stabilized by state feedback.
 export function CartPoleStudio() {
@@ -27,6 +35,23 @@ export function CartPoleStudio() {
   const rngRef = useRef(3);
 
   const reset = () => { st.current = { x: 0, xd: 0, th: 0.15, thd: 0 }; };
+
+  // Render only — reads st.current, never advances it. Shared by the physics tick (after
+  // it integrates) and by drag-move (which repositions cart/pole directly). `hint` swaps
+  // the on-canvas caption to acknowledge the grab.
+  const draw = (hint?: string) => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const p = st.current;
+    const bal = Math.abs(p.th) < 0.5;
+    const ctx = hidpi(canvas, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const cy = CY, cx = cxOf(p.x); ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(0, cy + 16); ctx.lineTo(W, cy + 16); ctx.stroke();
+    ctx.fillStyle = "#22d3ee"; ctx.fillRect(cx - 30, cy, 60, 16);
+    const px = cx + Math.sin(p.th) * POLE, py = cy - Math.cos(p.th) * POLE;
+    ctx.strokeStyle = bal ? "#a3e635" : "#ef4444"; ctx.lineWidth = 6; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, py); ctx.stroke();
+    ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(px, py, 12, 0, 7); ctx.fill();
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText(hint ?? "drag the cart along the track, or the pink bob to set the pole angle, then release", 12, 20);
+  };
 
   const frame = (steps: number) => {
     const canvas = canvasRef.current;
@@ -47,15 +72,47 @@ export function CartPoleStudio() {
       }
     }
     setBalanced(Math.abs(p.th) < 0.5);
-    const W = 540, H = 320; const ctx = hidpi(canvas, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-    const cy = H - 80, cx = W / 2 + p.x * 90; ctx.strokeStyle = "#334155"; ctx.beginPath(); ctx.moveTo(0, cy + 16); ctx.lineTo(W, cy + 16); ctx.stroke();
-    ctx.fillStyle = "#22d3ee"; ctx.fillRect(cx - 30, cy, 60, 16);
-    const px = cx + Math.sin(p.th) * 120, py = cy - Math.cos(p.th) * 120;
-    ctx.strokeStyle = balanced ? "#a3e635" : "#ef4444"; ctx.lineWidth = 6; ctx.lineCap = "round"; ctx.beginPath(); ctx.moveTo(cx, cy); ctx.lineTo(px, py); ctx.stroke();
-    ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(px, py, 12, 0, 7); ctx.fill();
+    draw();
   };
 
   const t = useTransport(frame);
+
+  // Grab the cart to slide it along the track, or the pole bob to set a new start angle;
+  // playback pauses while dragging (velocities zeroed) and resumes on release if it was
+  // running, letting the controller/physics take over from the state you set by hand.
+  const dragPart = useRef<"cart" | "pole" | null>(null);
+  const wasPlaying = useRef(false);
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (px, py) => {
+      const p = st.current;
+      const cx = cxOf(p.x), cy = CY;
+      const bobx = cx + Math.sin(p.th) * POLE, boby = cy - Math.cos(p.th) * POLE;
+      if (Math.hypot(bobx - px, boby - py) < 18) dragPart.current = "pole";
+      else if (Math.abs(px - cx) < 40 && py > cy - 20 && py < cy + 32) dragPart.current = "cart";
+      else return false;
+      wasPlaying.current = t.playing;
+      t.pause();
+      return true;
+    },
+    move: (px, py) => {
+      const p = st.current;
+      if (dragPart.current === "cart") {
+        p.x = Math.max(-2.4, Math.min(2.4, (px - W / 2) / PPU)); p.xd = 0;
+        setBalanced(Math.abs(p.th) < 0.5);
+        draw("release the cart to run the controller from here");
+      } else if (dragPart.current === "pole") {
+        const cx = cxOf(p.x);
+        p.th = Math.atan2(px - cx, CY - py); p.thd = 0;
+        setBalanced(Math.abs(p.th) < 0.5);
+        draw("release the pole to run the controller from here");
+      }
+    },
+    up: () => {
+      dragPart.current = null;
+      draw();
+      if (wasPlaying.current) t.play(); else t.step();
+    },
+  });
 
   const explain = !control
     ? "Controller off: with no feedback force to fight gravity, the pole topples within a fraction of a second."

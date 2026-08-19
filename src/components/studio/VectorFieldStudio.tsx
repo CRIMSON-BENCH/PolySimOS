@@ -1,24 +1,46 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { sampleVectorField } from "@/lib/engines/fieldmath";
+import { sampleVectorField, evalXY } from "@/lib/engines/fieldmath";
+import { parse } from "@/lib/engines/cas";
 import { StudioChrome, Stat } from "./StudioChrome";
 import { ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi } from "@/lib/studioKit";
+import { hidpi, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 640, H = 480;
+// Logical [-5,5]² domain <-> canvas pixels.
+const toX = (x: number) => ((x + 5) / 10) * W;
+const toY = (y: number) => H - ((y + 5) / 10) * H;
+const fromX = (px: number) => (px / W) * 10 - 5;
+const fromY = (py: number) => ((H - py) / H) * 10 - 5;
 
 export function VectorFieldStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [fx, setFx] = useState("-y");
   const [fy, setFy] = useState("x");
   const [err, setErr] = useState("");
+  // The draggable probe point that seeds the live flow line lives in React state.
+  const [seed, setSeed] = useState<[number, number]>([2.5, 0]);
 
   const arrows = useMemo(() => {
     try { setErr(""); return sampleVectorField(fx, fy, [-5, 5], [-5, 5], 22, 17); }
     catch (e) { setErr((e as Error).message); return []; }
   }, [fx, fy]);
+
+  // Parsed field for integrating a streamline through the dragged probe point.
+  const trees = useMemo(() => {
+    try { return { u: parse(fx), v: parse(fy) }; } catch { return null; }
+  }, [fx, fy]);
+
+  // Drag the probe handle anywhere over the field; the flow line re-integrates live.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (px, py) => Math.hypot(toX(seed[0]) - px, toY(seed[1]) - py) < 16,
+    move: (px, py) => setSeed([
+      Math.max(-5, Math.min(5, fromX(px))),
+      Math.max(-5, Math.min(5, fromY(py))),
+    ]),
+  });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
@@ -38,7 +60,32 @@ export function VectorFieldStudio() {
       ctx.lineTo(x1 - 5 * Math.cos(ang + 0.5), y1 - 5 * Math.sin(ang + 0.5)); ctx.stroke();
     }
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(W / 2, 0); ctx.lineTo(W / 2, H); ctx.moveTo(0, H / 2); ctx.lineTo(W, H / 2); ctx.stroke();
-  }, [arrows]);
+
+    // Live flow line: integrate the field through the dragged probe point (arc-length RK2, both directions).
+    if (trees) {
+      const ds = 0.04;
+      ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 2.5;
+      for (const dir of [1, -1]) {
+        let x = seed[0], y = seed[1];
+        ctx.beginPath(); ctx.moveTo(sx(x), sy(y));
+        for (let i = 0; i < 600; i++) {
+          const u1 = evalXY(trees.u, x, y), v1 = evalXY(trees.v, x, y);
+          const m1 = Math.hypot(u1, v1); if (!isFinite(m1) || m1 < 1e-6) break;
+          const hx = x + dir * ds / 2 * (u1 / m1), hy = y + dir * ds / 2 * (v1 / m1);
+          const u2 = evalXY(trees.u, hx, hy), v2 = evalXY(trees.v, hx, hy);
+          const m2 = Math.hypot(u2, v2); if (!isFinite(m2) || m2 < 1e-6) break;
+          x += dir * ds * (u2 / m2); y += dir * ds * (v2 / m2);
+          if (Math.abs(x) > 5 || Math.abs(y) > 5) break;
+          ctx.lineTo(sx(x), sy(y));
+        }
+        ctx.stroke();
+      }
+      // draggable probe handle
+      ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(sx(seed[0]), sy(seed[1]), 7, 0, 7); ctx.fill();
+      ctx.strokeStyle = "#020617"; ctx.lineWidth = 2; ctx.beginPath(); ctx.arc(sx(seed[0]), sy(seed[1]), 7, 0, 7); ctx.stroke();
+    }
+    ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("drag the green probe to trace the flow line through it", 12, 20);
+  }, [arrows, seed, trees]);
 
   const presets: [string, string, string][] = [["Rotation", "-y", "x"], ["Source", "x", "y"], ["Saddle", "x", "-y"], ["Shear", "y", "0"], ["Spiral", "-y-0.2*x", "x-0.2*y"]];
 
@@ -63,7 +110,7 @@ plt.quiver(x, y, u, v); plt.gca().set_aspect("equal"); plt.show()`;
   return (
     <StudioChrome
       title="Vector Field Studio"
-      tagline="F(x,y) = (u, v) · quiver plot"
+      tagline="F(x,y) = (u, v) · quiver plot · drag to trace a flow line"
       controls={
         <div>
           <label className="mb-1 block text-xs text-slate-500">u = fx(x, y)</label>
@@ -79,7 +126,7 @@ plt.quiver(x, y, u, v); plt.gca().set_aspect("equal"); plt.show()`;
           <ShareBar code={code} />
         </div>
       }
-      inspector={<div><Stat label="Arrows" value={String(arrows.length)} /><Stat label="Domain" value="[-5,5]²" /><Stat label="Variables" value="x, y" /><Equation tex={`\\mathbf{F}(x,y) = \\big(\\,P,\\ Q\\,\\big) = \\big(\\,${fx.replace(/\*/g, " \\cdot ")},\\ ${fy.replace(/\*/g, " \\cdot ")}\\,\\big)`} /><ExplainResult text={explain} /></div>}
+      inspector={<div><Stat label="Arrows" value={String(arrows.length)} /><Stat label="Domain" value="[-5,5]²" /><Stat label="Probe" value={`(${seed[0].toFixed(1)}, ${seed[1].toFixed(1)})`} /><Equation tex={`\\mathbf{F}(x,y) = \\big(\\,P,\\ Q\\,\\big) = \\big(\\,${fx.replace(/\*/g, " \\cdot ")},\\ ${fy.replace(/\*/g, " \\cdot ")}\\,\\big)`} /><ExplainResult text={explain} /></div>}
     >
       <canvas ref={canvasRef} width={W} height={H} className="mx-auto h-auto max-h-[460px] rounded-lg" />
     </StudioChrome>

@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { waist: number; wavelength: number }> = {
   "HeNe pointer": { waist: 50, wavelength: 633 },
@@ -13,22 +13,41 @@ const PRESETS: Record<string, { waist: number; wavelength: number }> = {
   "Wide collimated": { waist: 200, wavelength: 800 },
 };
 
+const W = 540, H = 280, CY = H / 2, PX_PER_M = 5e5; // fixed physical vertical scale (px per metre of beam radius)
+
 export function GaussianBeamStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [{ waist, wavelength }, update] = useShareableNumbers({ waist: 50, wavelength: 633 });
 
   const w0 = waist * 1e-6; const lam = wavelength * 1e-9; const zR = Math.PI * w0 * w0 / lam; const div = lam / (Math.PI * w0) * 1000; // mrad
 
+  // Drag the waist handle (●) vertically to resize the beam radius w₀ — envelope, Rayleigh range & divergence update live.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (x, y) => {
+      const hy = CY - Math.min(CY - 10, waist * 1e-6 * PX_PER_M);
+      return Math.hypot(x - W / 2, y - hy) < 18;
+    },
+    move: (_x, y) => {
+      const nextW0 = (CY - y) / PX_PER_M;           // px back to metres
+      const nextWaist = Math.round(nextW0 * 1e6);   // metres → µm
+      update({ waist: Math.max(5, Math.min(200, nextWaist)) });
+    },
+  });
+
   useEffect(() => {
-    const W = 540, H = 280; const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-    const cy = H / 2; const zMax = zR * 4; const scaleZ = W / (2 * zMax); const scaleW = 40 / w0;
+    const ctx = hidpi(canvasRef.current!, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    const cy = CY; const zMax = zR * 4; const scaleZ = W / (2 * zMax); const scaleW = PX_PER_M;
     const wz = (z: number) => w0 * Math.sqrt(1 + (z / zR) ** 2);
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2;
     for (const sign of [1, -1]) { ctx.beginPath(); for (let px = 0; px <= W; px++) { const z = (px - W / 2) / scaleZ; const w = wz(z) * scaleW; const y = cy - sign * Math.min(cy - 10, w); px ? ctx.lineTo(px, y) : ctx.moveTo(px, y); } ctx.stroke(); }
     ctx.fillStyle = "rgba(34,211,238,0.1)"; ctx.beginPath(); for (let px = 0; px <= W; px++) { const z = (px - W / 2) / scaleZ; const w = wz(z) * scaleW; ctx.lineTo(px, cy - Math.min(cy - 10, w)); } for (let px = W; px >= 0; px--) { const z = (px - W / 2) / scaleZ; const w = wz(z) * scaleW; ctx.lineTo(px, cy + Math.min(cy - 10, w)); } ctx.fill();
     // Rayleigh range markers
     ctx.strokeStyle = "#a3e635"; ctx.setLineDash([3, 3]); [zR, -zR].forEach((z) => { const px = W / 2 + z * scaleZ; ctx.beginPath(); ctx.moveTo(px, 10); ctx.lineTo(px, H - 10); ctx.stroke(); }); ctx.setLineDash([]);
-    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("beam waist w₀ at center", W / 2 - 60, cy - 44); ctx.fillStyle = "#bef264"; ctx.fillText("±Rayleigh range", W / 2 + zR * scaleZ - 40, 22);
+    // draggable waist handle (●) at the beam radius
+    const hy = cy - Math.min(cy - 10, w0 * scaleW);
+    ctx.strokeStyle = "rgba(190,242,100,0.5)"; ctx.setLineDash([2, 3]); ctx.beginPath(); ctx.moveTo(W / 2, cy); ctx.lineTo(W / 2, hy); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(W / 2, hy, 6, 0, 7); ctx.fill(); ctx.strokeStyle = "#020617"; ctx.lineWidth = 2; ctx.stroke();
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("drag ● to resize waist w₀", W / 2 + 12, hy + 3); ctx.fillStyle = "#bef264"; ctx.fillText("±Rayleigh range", W / 2 + zR * scaleZ - 40, 22);
   }, [waist, wavelength]);
 
   const explain =

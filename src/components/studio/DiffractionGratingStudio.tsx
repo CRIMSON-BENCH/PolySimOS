@@ -4,9 +4,11 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 760, H = 440;
+const THETA_SPAN = 1.6; // full angular width mapped across the canvas (±0.8 rad)
+const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
 const PRESETS: Record<string, { slits: number; spacing: number; lambda: number }> = {
   "Two slits": { slits: 2, spacing: 30, lambda: 20 },
@@ -19,14 +21,36 @@ export function DiffractionGratingStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [{ slits, spacing, lambda }, update] = useShareableNumbers({ slits: 5, spacing: 30, lambda: 20 });
 
+  // Drag the first-order bright fringe horizontally: its angle fixes the grating spacing via d·sinθ = λ.
+  // Slide it toward the centre for a wider spacing (finer angular splitting), toward the edge for a tighter one.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (_x, y) => y <= 130, // grab within the intensity band along the top of the canvas
+    move: (x) => {
+      const theta = Math.abs(((x - W / 2) / W) * THETA_SPAN);
+      const s = Math.sin(theta);
+      if (s < 0.02) { update({ spacing: 60 }); return; } // near centre → widest spacing
+      update({ spacing: clamp(Math.round(lambda / s), 15, 60) });
+    },
+  });
+
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     const inten = (theta: number) => { const phi = Math.PI * spacing * Math.sin(theta) / lambda; if (Math.abs(Math.sin(phi)) < 1e-6) return 1; const v = Math.sin(slits * phi) / (slits * Math.sin(phi)); return v * v; };
-    for (let px = 0; px < W; px++) { const theta = ((px - W / 2) / W) * 1.6; const I = inten(theta); const c = Math.round(I * 255); ctx.fillStyle = `rgb(${c * 0.2},${c * 0.85},${c})`; ctx.fillRect(px, 0, 1, 120); }
+    for (let px = 0; px < W; px++) { const theta = ((px - W / 2) / W) * THETA_SPAN; const I = inten(theta); const c = Math.round(I * 255); ctx.fillStyle = `rgb(${c * 0.2},${c * 0.85},${c})`; ctx.fillRect(px, 0, 1, 120); }
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();
-    for (let px = 0; px < W; px++) { const theta = ((px - W / 2) / W) * 1.6; const y = H - 20 - inten(theta) * (H - 180); px ? ctx.lineTo(px, y) : ctx.moveTo(px, y); } ctx.stroke();
+    for (let px = 0; px < W; px++) { const theta = ((px - W / 2) / W) * THETA_SPAN; const y = H - 20 - inten(theta) * (H - 180); px ? ctx.lineTo(px, y) : ctx.moveTo(px, y); } ctx.stroke();
+
+    // Draggable first-order (m=1) maximum handle: sits where d·sinθ = λ, clamped to the visible span.
+    const ratio = lambda / spacing;
+    const th1 = ratio <= 1 ? Math.min(Math.asin(ratio), THETA_SPAN / 2) : THETA_SPAN / 2;
+    const hx = clamp(W / 2 + (th1 / THETA_SPAN) * W, 8, W - 8);
+    ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 2; ctx.setLineDash([4, 4]);
+    ctx.beginPath(); ctx.moveTo(hx, 0); ctx.lineTo(hx, 120); ctx.stroke(); ctx.setLineDash([]);
+    ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(hx, 12, 6, 0, 7); ctx.fill();
+
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`${slits} slits — sharper, brighter maxima as slit count grows`, 14, 150);
+    ctx.fillText(`drag the green m=1 fringe ↔ to set spacing d = ${spacing}`, 14, 168);
   }, [slits, spacing, lambda]);
 
   const ratio = lambda / spacing;

@@ -5,7 +5,7 @@ import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { ratio: number; impact: number }> = {
   "Hot Jupiter": { ratio: 0.15, impact: 0.1 },
@@ -13,6 +13,19 @@ const PRESETS: Record<string, { ratio: number; impact: number }> = {
   "Grazing transit": { ratio: 0.1, impact: 0.95 },
   "Super-Earth": { ratio: 0.04, impact: 0.3 },
 };
+
+// Overlap of the planet disk over the star disk → relative brightness (1 = no dip).
+function transitFlux(d: number, Rs: number, Rp: number, depthV: number): number {
+  if (d >= Rs + Rp) return 1;
+  if (d <= Rs - Rp) return 1 - depthV;
+  const r1 = Rs, r2 = Rp;
+  const a = (d * d + r1 * r1 - r2 * r2) / (2 * d);
+  const h = Math.sqrt(Math.max(0, r1 * r1 - a * a));
+  const A1 = r1 * r1 * Math.acos(Math.min(1, Math.max(-1, a / r1)));
+  const A2 = r2 * r2 * Math.acos(Math.min(1, Math.max(-1, (d - a) / r2)));
+  const area = A1 + A2 - d * h;
+  return 1 - area / (Math.PI * Rs * Rs);
+}
 
 export function ExoplanetTransitStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -25,25 +38,23 @@ export function ExoplanetTransitStudio() {
   const depth = ratio * ratio;
 
   const W = 520, H = 360;
+  const starX = W / 2, starY = 120, Rs = 70;
+  const planetX = (t: number) => (t * 2 - 1) * (W * 0.55) + starX;
+
   const frame = (steps: number) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-    const starX = W / 2, starY = 120, Rs = 70;
     const ratioV = ratioRef.current, impactV = impactRef.current, depthV = ratioV * ratioV;
     const Rp = ratioV * Rs;
-    let px = 0, py = 0;
     for (let s = 0; s < steps; s++) {
       phase.current += 0.008; if (phase.current > 1) { phase.current = 0; curve.current = []; }
-      const t = phase.current; px = (t * 2 - 1) * (W * 0.55) + starX; py = starY + impactV * Rs;
-      // brightness: overlap of planet disk over star disk
-      const d = Math.hypot(px - starX, py - starY);
-      let flux = 1;
-      if (d < Rs + Rp) { if (d <= Rs - Rp) flux = 1 - depthV; else { // partial overlap area
-        const r1 = Rs, r2 = Rp; const a = (d * d + r1 * r1 - r2 * r2) / (2 * d); const h = Math.sqrt(Math.max(0, r1 * r1 - a * a));
-        const A1 = r1 * r1 * Math.acos(Math.min(1, Math.max(-1, a / r1))); const A2 = r2 * r2 * Math.acos(Math.min(1, Math.max(-1, (d - a) / r2)));
-        const area = A1 + A2 - d * h; flux = 1 - (area / (Math.PI * Rs * Rs)); } }
+      const px = planetX(phase.current), py = starY + impactV * Rs;
+      const flux = transitFlux(Math.hypot(px - starX, py - starY), Rs, Rp, depthV);
       curve.current.push(flux); if (curve.current.length > 260) curve.current.shift();
     }
+    // Always recompute the planet position from the current phase/impact so drawing is
+    // correct even on a steps=0 redraw (used while dragging with playback paused).
+    const px = planetX(phase.current), py = starY + impactV * Rs;
     const ctx = hidpi(canvas, W, H); ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
     // star
     const g = ctx.createRadialGradient(starX, starY, 10, starX, starY, Rs); g.addColorStop(0, "#fff7ed"); g.addColorStop(0.7, "#fbbf24"); g.addColorStop(1, "#f59e0b");
@@ -55,9 +66,40 @@ export function ExoplanetTransitStudio() {
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.beginPath();
     curve.current.forEach((f, i) => { const x = 30 + (i / 260) * (W - 40); const y = 250 + (1 - f) * 900; i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); }); ctx.stroke();
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("relative brightness vs time", 30, 275);
+    ctx.fillText("drag the planet → across for phase, up/down for impact b", 12, 20);
   };
 
   const tr = useTransport(frame);
+
+  // Fill the light curve with the full modelled transit for the current geometry, so
+  // dragging the planet updates the dip live (not just when playback is running).
+  const rebuildCurve = () => {
+    const ratioV = ratioRef.current, depthV = ratioV * ratioV, Rp = ratioV * Rs;
+    const next: number[] = [];
+    for (let i = 0; i < 260; i++) {
+      const px = planetX(i / 260), py = starY + impactRef.current * Rs;
+      next.push(transitFlux(Math.hypot(px - starX, py - starY), Rs, Rp, depthV));
+    }
+    curve.current = next;
+  };
+
+  // Drag the planet: horizontal sets orbital phase, vertical sets the impact parameter b
+  // (how centrally it crosses the star). Grabbing pauses playback; the curve updates live.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (x, y) => {
+      const Rp = ratioRef.current * Rs;
+      const px = planetX(phase.current), py = starY + impactRef.current * Rs;
+      if (Math.hypot(px - x, py - y) > Math.max(Rp + 12, 18)) return false;
+      tr.pause(); return true;
+    },
+    move: (x, y) => {
+      phase.current = Math.min(1, Math.max(0, ((x - starX) / (W * 0.55) + 1) / 2));
+      const b = Math.min(1, Math.max(0, (y - starY) / Rs));
+      update({ impact: Math.round(b * 100) / 100 });
+      rebuildCurve();
+      frame(0);
+    },
+  });
 
   const code = `import numpy as np
 ratio, impact = ${ratio}, ${impact}   # Rp/Rs, impact parameter b
@@ -77,7 +119,7 @@ print("transit depth:", depth)`;
         <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
         <Slider label="Planet/star radius (Rp/Rs)" value={ratio} min={0.02} max={0.3} step={0.01} onChange={(v) => update({ ratio: v })} />
         <Slider label="Impact parameter b" value={impact} min={0} max={1} step={0.05} onChange={(v) => update({ impact: v })} />
-        <p className="mt-3 text-xs text-slate-500">As a planet crosses its star, it blocks a tiny fraction of the light — a dip of depth (Rp/Rs)². This is how Kepler and TESS have found thousands of exoplanets. Impact parameter sets how centrally the planet crosses, changing the transit shape and duration.</p>
+        <p className="mt-3 text-xs text-slate-500">As a planet crosses its star, it blocks a tiny fraction of the light — a dip of depth (Rp/Rs)². This is how Kepler and TESS have found thousands of exoplanets. Impact parameter sets how centrally the planet crosses, changing the transit shape and duration. Drag the planet across the star to set its phase, or up and down to set the impact parameter — the light curve updates live.</p>
         <ShareBar code={code} />
       </div>}
       inspector={<div><Stat label="Transit depth" value={`${(depth * 100).toFixed(2)}%`} /><Stat label="Rp/Rs" value={ratio.toFixed(2)} /><Stat label="Impact b" value={impact.toFixed(2)} /><Equation tex={`\\dfrac{\\Delta F}{F} = \\left(\\dfrac{R_p}{R_\\star}\\right)^2 = (${ratio.toFixed(2)})^2 = ${(depth * 100).toFixed(2)}\\%`} /><ExplainResult text={explain} /></div>}
