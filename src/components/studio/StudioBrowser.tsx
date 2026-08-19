@@ -13,10 +13,10 @@ function domainOf(tag: string): string {
   if (/(bio|med|gene)/.test(t)) return "Biology";
   if (/(finance|quant|econ|market)/.test(t)) return "Finance";
   if (/(astro|space|orbit|earth|climate|weather|geo|meteor)/.test(t)) return "Earth & Space";
-  if (/(signal|dsp|acoustic|electr|circuit|antenna|filter)/.test(t)) return "Signals & EE";
-  if (/(cs|ai|ml|data|network|graph|crypto)/.test(t)) return "CS & AI";
+  if (/(signal|dsp|acoustic|electr|circuit|antenna|filter|control|comm|image)/.test(t)) return "Signals & EE";
+  if (/(cs|ai|ml|data|network|graph|crypto|machine|learning)/.test(t)) return "CS & AI";
   if (/(engineer|fea|cfd|structural|civil|mech|robot|aero|manufactur)/.test(t)) return "Engineering";
-  if (/(math|pde|cas|calculus|stat|probab)/.test(t)) return "Math";
+  if (/(math|pde|cas|calculus|stat|probab|algebra|numerical)/.test(t)) return "Math";
   if (/(phys|flagship)/.test(t)) return "Physics";
   return "Other";
 }

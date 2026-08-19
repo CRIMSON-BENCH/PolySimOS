@@ -35,6 +35,7 @@ const COLUMNS: { title: string; links: { name: string; href: string }[] }[] = [
       { name: "Curriculum", href: "/curriculum" },
       { name: "High Schools", href: "/schools" },
       { name: "Alternatives", href: "/alternatives" },
+      { name: "MATLAB Alternative", href: "/matlab-alternative" },
       { name: "Glossary", href: "/glossary" },
       { name: "Blog", href: "/blog" },
     ],
