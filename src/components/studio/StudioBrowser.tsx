@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Link from "next/link";
+import { SIM_CLIPS } from "@/lib/simClips";
 
 type Sim = { slug: string; name: string; desc: string; tag: string };
 
@@ -36,11 +37,32 @@ function scoreSim(s: Sim, words: string[]): number {
 }
 
 function Card({ s }: { s: Sim }) {
+  const hasClip = SIM_CLIPS.has(s.slug);
+  const vref = useRef<HTMLVideoElement>(null);
   return (
     <Link
       href={`/studio/${s.slug}`}
-      className="group rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-cyan-400 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-cyan-500"
+      onMouseEnter={() => { const v = vref.current; if (v) v.play().catch(() => {}); }}
+      onMouseLeave={() => { const v = vref.current; if (v) { v.pause(); v.currentTime = 0; } }}
+      className="group overflow-hidden rounded-2xl border border-slate-200 bg-white p-6 transition hover:border-cyan-400 hover:shadow-lg dark:border-slate-800 dark:bg-slate-900 dark:hover:border-cyan-500"
     >
+      {hasClip && (
+        // Full-bleed 16:9 preview: poster loads now, video bytes only on hover (preload=none).
+        <div className="-mx-6 -mt-6 mb-4 aspect-video overflow-hidden bg-slate-950">
+          <video
+            ref={vref}
+            poster={`/sim-clips/${s.slug}.jpg`}
+            muted
+            loop
+            playsInline
+            preload="none"
+            className="h-full w-full object-cover transition group-hover:scale-[1.03]"
+          >
+            <source src={`/sim-clips/${s.slug}.webm`} type="video/webm" />
+            <source src={`/sim-clips/${s.slug}.mp4`} type="video/mp4" />
+          </video>
+        </div>
+      )}
       <span className="text-xs font-bold uppercase tracking-wide text-cyan-600 dark:text-cyan-400">{s.tag}</span>
       <h2 className="mt-1 text-lg font-bold text-slate-900 group-hover:text-cyan-600 dark:text-slate-100 dark:group-hover:text-cyan-400">{s.name}</h2>
       <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{s.desc}</p>
