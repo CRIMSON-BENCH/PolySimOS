@@ -5,7 +5,7 @@ import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { TransportBar, useTransport } from "./Transport";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { sma: number; ecc: number; argp: number }> = {
   "LEO (circular)": { sma: 7000, ecc: 0, argp: 0 },
@@ -22,6 +22,11 @@ export function OrbitalElementsStudio() {
   const eccRef = useRef(ecc); eccRef.current = ecc;
   const argpRef = useRef(argp); argpRef.current = argp;
   const theta = useRef(0);
+  // Live geometry + satellite screen position, refreshed every frame so the drag handlers
+  // (which need the current ellipse) and hit-testing can read them without recomputing.
+  const satPos = useRef({ x: 0, y: 0 });
+  const geom = useRef({ cx: 0, cy: 0, a: 0, b: 0, cshift: 0, w: 0 });
+  const wasPlaying = useRef(false);
 
   const Re = 6371; const mu = 398600;
   const period = 2 * Math.PI * Math.sqrt(sma ** 3 / mu); // s
@@ -37,6 +42,7 @@ export function OrbitalElementsStudio() {
     ctx.fillStyle = "#1e40af"; ctx.beginPath(); ctx.arc(cx, cy, Re * scale, 0, 7); ctx.fill();
     // orbit ellipse: focus at Earth
     const a = sma * scale, b = a * Math.sqrt(1 - ecc * ecc), cshift = a * ecc; const w = argp * Math.PI / 180;
+    geom.current = { cx, cy, a, b, cshift, w };
     ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 1.5; ctx.beginPath();
     for (let e = 0; e <= 6.29; e += 0.05) { const x = a * Math.cos(e) - cshift, y = b * Math.sin(e); const rx = x * Math.cos(w) - y * Math.sin(w), ry = x * Math.sin(w) + y * Math.cos(w); e === 0 ? ctx.moveTo(cx + rx, cy + ry) : ctx.lineTo(cx + rx, cy + ry); } ctx.closePath(); ctx.stroke();
     // satellite position — advance MEAN anomaly uniformly in time (Kepler's 2nd law),
@@ -45,11 +51,35 @@ export function OrbitalElementsStudio() {
     let e = M + ecc * Math.sin(M); // good initial guess
     for (let k = 0; k < 8; k++) e = e - (e - ecc * Math.sin(e) - M) / (1 - ecc * Math.cos(e));
     const x = a * Math.cos(e) - cshift, y = b * Math.sin(e); const rx = x * Math.cos(w) - y * Math.sin(w), ry = x * Math.sin(w) + y * Math.cos(w);
+    satPos.current = { x: cx + rx, y: cy + ry };
     ctx.fillStyle = "#f472b6"; ctx.beginPath(); ctx.arc(cx + rx, cy + ry, 5, 0, 7); ctx.fill();
     ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("orbit (focus = Earth center)", 12, 20);
+    ctx.fillText("drag the satellite along its orbit to set its position", 12, H - 12);
   };
 
   const t = useTransport(frame);
+
+  // Direct-canvas drag: grab the satellite and slide it along the orbit to set the current
+  // anomaly. We invert the drawing transform to recover the eccentric anomaly E at the pointer,
+  // then Kepler's equation forward (M = E − e·sinE) gives the mean anomaly the animation tracks.
+  useCanvasDrag(canvasRef, 420, 380, {
+    pick: (x, y) => {
+      const hit = Math.hypot(satPos.current.x - x, satPos.current.y - y) < 16;
+      if (hit) { wasPlaying.current = t.playing; t.pause(); }
+      return hit;
+    },
+    move: (x, y) => {
+      const { cx, cy, a, b, cshift, w } = geom.current;
+      const dx = x - cx, dy = y - cy;
+      // un-rotate by the argument of periapsis, then read E off the ellipse parametrization
+      const ux = dx * Math.cos(w) + dy * Math.sin(w);
+      const uy = -dx * Math.sin(w) + dy * Math.cos(w);
+      const E = Math.atan2(uy / b, (ux + cshift) / a);
+      theta.current = E - eccRef.current * Math.sin(E); // mean anomaly
+      frame(0); // redraw at the new position without advancing time (loop is paused)
+    },
+    up: () => { if (wasPlaying.current) t.play(); },
+  });
 
   const explain =
     ecc < 0.05

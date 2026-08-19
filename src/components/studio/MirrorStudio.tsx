@@ -4,9 +4,10 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 760, H = 440;
+const CX = W - 120, CY = H / 2; // mirror pole (used by both the draw effect and the drag hit-test)
 
 const PRESETS: Record<string, { f: number; objDist: number }> = {
   "Beyond C (real, small)": { f: 120, objDist: 320 },
@@ -17,19 +18,31 @@ const PRESETS: Record<string, { f: number; objDist: number }> = {
 
 export function MirrorStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [{ f, objDist }, update] = useShareableNumbers({ f: 120, objDist: 220 });
+  const [{ f, objDist, objH }, update] = useShareableNumbers({ f: 120, objDist: 220, objH: 70 });
   const [concave, setConcave] = useState(true);
+
+  // Drag the object arrow in front of the mirror to set its distance (horizontal) and height (vertical).
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (x, y) => Math.abs(x - (CX - objDist)) < 20 && y >= CY - objH - 16 && y <= CY + 16,
+    move: (x, y) =>
+      update({
+        objDist: Math.round(Math.max(60, Math.min(340, CX - x)) / 10) * 10,
+        objH: Math.round(Math.max(20, Math.min(150, CY - y))),
+      }),
+  });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
     ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
-    const cx = W - 120, cy = H / 2, F = concave ? f : -f;
+    const cx = CX, cy = CY, F = concave ? f : -f;
     ctx.strokeStyle = "#1e293b"; ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
     // mirror arc
     ctx.strokeStyle = "#38bdf8"; ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(cx - (concave ? -400 : 400), cy, 400, concave ? Math.PI - 0.4 : -0.4, concave ? Math.PI + 0.4 : 0.4); ctx.stroke();
     ctx.fillStyle = "#64748b"; [cx - f].forEach((x) => { ctx.beginPath(); ctx.arc(x, cy, 3, 0, 7); ctx.fill(); });
-    const ox = cx - objDist, objH = 70;
+    const ox = cx - objDist;
     ctx.strokeStyle = "#a3e635"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(ox, cy); ctx.lineTo(ox, cy - objH); ctx.stroke();
+    // draggable handle at the arrow tip
+    ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(ox, cy - objH, 6, 0, 7); ctx.fill();
     // mirror eq 1/v + 1/u = 1/f, u = objDist
     const u = objDist; const v = 1 / (1 / F - 1 / u); const mag = -v / u; const imgH = objH * mag; const ix = cx - v;
     ctx.strokeStyle = "rgba(244,114,182,0.85)"; ctx.lineWidth = 1.4;
@@ -37,7 +50,8 @@ export function MirrorStudio() {
     ctx.strokeStyle = "rgba(251,191,36,0.85)"; ctx.beginPath(); ctx.moveTo(ox, cy - objH); ctx.lineTo(cx, cy); ctx.lineTo(ix, cy - imgH); ctx.stroke();
     ctx.strokeStyle = "#f472b6"; ctx.lineWidth = 2.5; ctx.beginPath(); ctx.moveTo(ix, cy); ctx.lineTo(ix, cy - imgH); ctx.stroke();
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(`${concave ? "concave" : "convex"} mirror · magnification ${mag.toFixed(2)}×`, 14, 24);
-  }, [f, objDist, concave]);
+    ctx.fillStyle = "#475569"; ctx.font = "11px system-ui"; ctx.fillText("drag the green object to change its distance & height", 14, H - 14);
+  }, [f, objDist, objH, concave]);
 
   // Image characteristics from the mirror equation (component scope; distinct names from the draw effect).
   const F0 = concave ? f : -f;

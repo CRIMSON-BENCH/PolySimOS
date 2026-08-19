@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const PRESETS: Record<string, { mu: number }> = {
   "Earth–Moon": { mu: 0.0123 },
@@ -13,14 +13,23 @@ const PRESETS: Record<string, { mu: number }> = {
   "Equal masses": { mu: 0.5 },
 };
 
+// Canvas geometry — shared by the draw effect and the drag handler (logical coords).
+const W = 480, H = 420, CX = W / 2, CY = H / 2, SCALE = 130;
+
 // Restricted 3-body: effective potential in rotating frame + L1-L5.
 export function LagrangeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [{ mu }, update] = useShareableNumbers({ mu: 0.15 }); // mass ratio m2/(m1+m2)
   const [showPot, setShowPot] = useState(true);
 
+  // Drag the secondary (blue) mass along the axis to set the mass ratio: it sits at x = 1-mu.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (x, y) => Math.hypot(CX + (1 - mu) * SCALE - x, CY - y) < 16,
+    move: (x) => { const X = (x - CX) / SCALE; update({ mu: Math.max(0.01, Math.min(0.5, 1 - X)) }); },
+  });
+
   useEffect(() => {
-    const W = 480, H = 420; const ctx = hidpi(canvasRef.current!, W, H); const cx = W / 2, cy = H / 2; const scale = 130;
+    const ctx = hidpi(canvasRef.current!, W, H); const cx = CX, cy = CY, scale = SCALE;
     // positions (rotating frame), primary at -mu, secondary at 1-mu
     const x1 = -mu, x2 = 1 - mu;
     const Omega = (X: number, Y: number) => { const r1 = Math.hypot(X - x1, Y), r2 = Math.hypot(X - x2, Y); return 0.5 * (X * X + Y * Y) + (1 - mu) / (r1 + 1e-6) + mu / (r2 + 1e-6); };
@@ -37,6 +46,9 @@ export function LagrangeStudio() {
     // bodies
     ctx.beginPath(); ctx.arc(cx + x1 * scale, cy, 10, 0, 7); ctx.fillStyle = "#fbbf24"; ctx.fill();
     ctx.beginPath(); ctx.arc(cx + x2 * scale, cy, 6, 0, 7); ctx.fillStyle = "#60a5fa"; ctx.fill();
+    // hint: the secondary mass is draggable
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.textAlign = "left";
+    ctx.fillText("drag the blue secondary mass to change μ", 10, H - 12);
   }, [mu, showPot]);
 
   const explain =

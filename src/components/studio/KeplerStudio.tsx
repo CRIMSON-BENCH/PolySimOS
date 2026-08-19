@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
 import { TransportBar, useTransport } from "./Transport";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 760, H = 480;
 
@@ -22,13 +22,18 @@ export function KeplerStudio() {
   const eccRef = useRef(ecc); eccRef.current = ecc;
   const st = useRef({ x: 0, y: 0, vx: 0, vy: 0 });
   const trail = useRef<[number, number][]>([]);
+  // Perihelion launch direction (radians). Dragging the planet rotates the orbit here;
+  // the sliders leave it untouched, so 0 keeps the classic perihelion-on-+x-axis start.
+  const [theta0, setTheta0] = useState(0);
 
   const reset = () => {
     const GM = 4000; const rp = a * (1 - ecc);
-    st.current = { x: rp, y: 0, vx: 0, vy: Math.sqrt((GM / a) * (1 + ecc) / (1 - ecc)) };
+    const c = Math.cos(theta0), s = Math.sin(theta0);
+    const speed = Math.sqrt((GM / a) * (1 + ecc) / (1 - ecc));
+    // start at perihelion along theta0, velocity perpendicular to it (rotate +90°: (-s, c))
+    st.current = { x: rp * c, y: rp * s, vx: -s * speed, vy: c * speed };
     trail.current = [];
   };
-  useEffect(() => { reset(); /* eslint-disable-next-line */ }, [ecc, a]);
 
   const frame = (steps: number) => {
     const canvas = canvasRef.current;
@@ -44,9 +49,34 @@ export function KeplerStudio() {
     ctx.fillStyle = "#fbbf24"; ctx.beginPath(); ctx.arc(cx, cy, 12, 0, 7); ctx.fill(); // star at focus
     ctx.fillStyle = "#a3e635"; ctx.beginPath(); ctx.arc(cx + s.x, cy + s.y, 6, 0, 7); ctx.fill();
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText(eccRef.current < 0.01 ? "circle" : eccRef.current < 1 ? "ellipse" : "hyperbola", 16, 22);
+    ctx.fillText("drag the planet to reposition its orbit", 16, H - 16);
   };
 
+  // Re-seed on any orbit change (sliders, presets, or a drag) and redraw immediately —
+  // frame(0) draws the current state without advancing it, so a paused planet still updates.
+  useEffect(() => { reset(); frame(0); /* eslint-disable-next-line */ }, [ecc, a, theta0]);
+
   const t = useTransport(frame);
+
+  // Drag the orbiting planet to set its starting position: the cursor's distance from the
+  // star sets the semi-major axis (initial radius) and its direction sets the perihelion.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (px, py) => {
+      const cx = W / 2, cy = H / 2;
+      const bx = cx + st.current.x, by = cy + st.current.y;
+      if (Math.hypot(bx - px, by - py) < 16) { t.pause(); return true; }
+      return false;
+    },
+    move: (px, py) => {
+      const cx = W / 2, cy = H / 2;
+      const dx = px - cx, dy = py - cy;
+      const dist = Math.max(1, Math.hypot(dx, dy));
+      // perihelion radius rp = a(1-e) sits where the cursor is; invert for the semi-major axis
+      const newA = dist / Math.max(0.05, 1 - eccRef.current);
+      setTheta0(Math.atan2(dy, dx));
+      update({ a: Math.min(200, Math.max(80, Math.round(newA / 5) * 5)) });
+    },
+  });
 
   const explain =
     ecc < 0.01
@@ -79,7 +109,7 @@ plt.axis('equal'); plt.show()`;
     <StudioChrome title="Kepler Orbit Studio" tagline="two-body gravity · conic-section orbits"
       controls={<div>
         <TransportBar playing={t.playing} onToggle={t.toggle} onStep={t.step} onReset={() => { reset(); t.step(); }} speed={t.speed} onSpeed={t.setSpeed} />
-        <p className="mb-3 text-xs text-slate-500">Set the eccentricity to trace Kepler{"'"}s orbits — a circle, ellipse, or (past e=1) an escape hyperbola. The star sits at the focus.</p>
+        <p className="mb-3 text-xs text-slate-500">Set the eccentricity to trace Kepler{"'"}s orbits — a circle, ellipse, or (past e=1) an escape hyperbola. The star sits at the focus. Drag the planet on the canvas to reposition its starting point and reshape the orbit.</p>
         <Presets
           presets={Object.keys(PRESETS).map((label) => ({ label }))}
           onApply={(label) => update(PRESETS[label])}

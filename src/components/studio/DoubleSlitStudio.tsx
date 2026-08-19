@@ -4,9 +4,11 @@ import { useEffect, useRef } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const W = 760, H = 480;
+const SLIT_LINE_Y = 158; // y of the on-canvas slit apparatus (drag a slit to change separation d)
+const SLIT_SCALE = 3.5; // px per unit of slit separation d, for the draggable markers
 
 const PRESETS: Record<string, { d: number; a: number; lambda: number }> = {
   "Interference-dominated": { d: 70, a: 4, lambda: 20 },
@@ -18,6 +20,15 @@ const PRESETS: Record<string, { d: number; a: number; lambda: number }> = {
 export function DoubleSlitStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [{ d, a, lambda }, update] = useShareableNumbers({ d: 40, a: 8, lambda: 20 });
+
+  // Drag either slit on the canvas to set the slit separation d; the pattern updates live.
+  useCanvasDrag(canvasRef, W, H, {
+    pick: (_x, y) => Math.abs(y - SLIT_LINE_Y) < 28,
+    move: (x) => {
+      const nd = Math.round((2 * Math.abs(x - W / 2)) / SLIT_SCALE);
+      update({ d: Math.max(15, Math.min(80, nd)) });
+    },
+  });
 
   useEffect(() => {
     const ctx = hidpi(canvasRef.current!, W, H);
@@ -36,6 +47,17 @@ export function DoubleSlitStudio() {
     for (let px = 0; px < W; px++) { const y = (px - W / 2) * 0.6; const I = intensity(y); const yy = H - 20 - I * (H - 200); px ? ctx.lineTo(px, yy) : ctx.moveTo(px, yy); }
     ctx.stroke();
     ctx.fillStyle = "#94a3b8"; ctx.font = "12px system-ui"; ctx.fillText("intensity on screen", 16, 168); ctx.fillText("interference + diffraction envelope", 16, H - 10);
+
+    // draggable slit apparatus: two markers separated by d — drag a slit to change the separation
+    const half = (d / 2) * SLIT_SCALE;
+    ctx.strokeStyle = "rgba(163,230,53,0.55)"; ctx.lineWidth = 2; ctx.setLineDash([2, 3]);
+    ctx.beginPath(); ctx.moveTo(W / 2 - half, SLIT_LINE_Y); ctx.lineTo(W / 2 + half, SLIT_LINE_Y); ctx.stroke(); ctx.setLineDash([]);
+    ctx.strokeStyle = "rgba(148,163,184,0.5)"; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(W / 2, SLIT_LINE_Y - 9); ctx.lineTo(W / 2, SLIT_LINE_Y + 9); ctx.stroke();
+    ctx.fillStyle = "#a3e635";
+    for (const cx of [W / 2 - half, W / 2 + half]) { ctx.beginPath(); ctx.arc(cx, SLIT_LINE_Y, 7, 0, 7); ctx.fill(); }
+    ctx.fillStyle = "#a3e635"; ctx.font = "11px system-ui"; ctx.textAlign = "center";
+    ctx.fillText("← drag a slit to set separation d →", W / 2, SLIT_LINE_Y - 16); ctx.textAlign = "left";
   }, [d, a, lambda]);
 
   const fringes = Math.max(1, Math.round((2 * d) / a));

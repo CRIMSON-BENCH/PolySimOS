@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { StudioChrome, Slider, Stat } from "./StudioChrome";
 import { Presets, ExplainResult, ShareBar } from "./SolverExtras";
 import { Equation } from "./Equation";
-import { hidpi, useShareableNumbers } from "@/lib/studioKit";
+import { hidpi, useShareableNumbers, useCanvasDrag } from "@/lib/studioKit";
 
 const CW = 540, CH = 460;
 
@@ -19,17 +19,32 @@ export function ConvexHullStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [{ n }, update] = useShareableNumbers({ n: 30 });
   const [seed, setSeed] = useState(1);
-  const pts = useRef<[number, number][]>([]);
+  const [pts, setPts] = useState<[number, number][]>([]);
   const [hullSize, setHullSize] = useState(0);
+  const dragIdx = useRef(-1);
 
   useEffect(() => {
     let s = seed * 2246822519 >>> 0; const rnd = () => { s = (s * 1664525 + 1013904223) >>> 0; return s / 4294967296; };
-    pts.current = Array.from({ length: Math.round(n) }, () => [40 + rnd() * 460, 40 + rnd() * 380] as [number, number]);
+    setPts(Array.from({ length: Math.round(n) }, () => [40 + rnd() * 460, 40 + rnd() * 380] as [number, number]));
   }, [n, seed]);
+
+  useCanvasDrag(canvasRef, CW, CH, {
+    pick: (x, y) => {
+      let best = -1, bestD = 15;
+      pts.forEach(([px, py], i) => { const d = Math.hypot(px - x, py - y); if (d < bestD) { bestD = d; best = i; } });
+      dragIdx.current = best;
+      return best >= 0;
+    },
+    move: (x, y) => {
+      if (dragIdx.current < 0) return;
+      setPts((prev) => prev.map((p, i) => (i === dragIdx.current ? [x, y] : p)));
+    },
+    up: () => { dragIdx.current = -1; },
+  });
 
   useEffect(() => {
     const canvas = canvasRef.current!; const ctx = hidpi(canvas, CW, CH);
-    const P = [...pts.current].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
+    const P = [...pts].sort((a, b) => a[0] - b[0] || a[1] - b[1]);
     const cross = (o: number[], a: number[], b: number[]) => (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
     const lower: [number, number][] = []; for (const p of P) { while (lower.length >= 2 && cross(lower[lower.length - 2], lower[lower.length - 1], p) <= 0) lower.pop(); lower.push(p); }
     const upper: [number, number][] = []; for (let i = P.length - 1; i >= 0; i--) { const p = P[i]; while (upper.length >= 2 && cross(upper[upper.length - 2], upper[upper.length - 1], p) <= 0) upper.pop(); upper.push(p); }
@@ -37,9 +52,10 @@ export function ConvexHullStudio() {
     ctx.fillStyle = "#0b1220"; ctx.fillRect(0, 0, CW, CH);
     ctx.beginPath(); hull.forEach((p, i) => (i ? ctx.lineTo(p[0], p[1]) : ctx.moveTo(p[0], p[1]))); ctx.closePath();
     ctx.fillStyle = "rgba(34,211,238,0.12)"; ctx.fill(); ctx.strokeStyle = "#22d3ee"; ctx.lineWidth = 2; ctx.stroke();
-    for (const [x, y] of pts.current) { ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 7); ctx.fillStyle = "#e2e8f0"; ctx.fill(); }
+    for (const [x, y] of pts) { ctx.beginPath(); ctx.arc(x, y, 3.5, 0, 7); ctx.fillStyle = "#e2e8f0"; ctx.fill(); }
     for (const [x, y] of hull) { ctx.beginPath(); ctx.arc(x, y, 5, 0, 7); ctx.fillStyle = "#f472b6"; ctx.fill(); }
-  }, [n, seed]);
+    ctx.fillStyle = "#94a3b8"; ctx.font = "11px sans-serif"; ctx.fillText("drag any point to reshape the set — the hull recomputes live", 10, CH - 12);
+  }, [pts]);
 
   const nRound = Math.round(n);
   const interior = Math.max(nRound - hullSize, 0);
@@ -72,7 +88,7 @@ print("hull vertices", len(hull))`;
         <Presets presets={Object.keys(PRESETS).map((label) => ({ label }))} onApply={(label) => update(PRESETS[label])} />
         <Slider label="Points" value={n} min={5} max={120} step={1} onChange={(v) => update({ n: v })} />
         <button onClick={() => setSeed((k) => k + 1)} className="mt-3 w-full rounded-lg bg-cyan-600 px-3 py-1.5 text-sm font-semibold text-white">New points</button>
-        <p className="mt-3 text-xs text-slate-500">The convex hull is the smallest convex polygon containing every point — the shape a rubber band snaps to. Computed here with Andrew&apos;s monotone-chain algorithm in O(n log n).</p>
+        <p className="mt-3 text-xs text-slate-500">The convex hull is the smallest convex polygon containing every point — the shape a rubber band snaps to. Drag any point on the canvas to reshape the set and watch the hull recompute live. Computed here with Andrew&apos;s monotone-chain algorithm in O(n log n).</p>
         <ShareBar code={code} />
       </div>}
       inspector={<div>
