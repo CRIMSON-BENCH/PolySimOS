@@ -7,7 +7,14 @@ import { copyText } from "@/lib/studioKit";
 export function EmbedButton({ slug, name = "Live simulation" }: { slug: string; name?: string }) {
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
-  const snippet = `<iframe src="https://www.polysimos.com/embed/${slug}" width="640" height="540" style="border:0;border-radius:12px;max-width:100%" title="${name} — PolySim OS" loading="lazy"></iframe>`;
+  // The attribution link lives OUTSIDE the iframe, in the host page's own HTML,
+  // so it counts as a real followed backlink to the solver (not an iframe-internal link).
+  const snippet = `<div style="max-width:640px;margin:0 auto">
+  <iframe src="https://www.polysimos.com/embed/${slug}" width="640" height="540" style="border:0;border-radius:12px;max-width:100%;width:100%" title="${name} — PolySim OS" loading="lazy"></iframe>
+  <p style="margin:6px 0 0;font:13px/1.4 -apple-system,Segoe UI,Roboto,sans-serif;text-align:right">
+    <a href="https://www.polysimos.com/studio/${slug}" target="_blank" rel="noopener" style="color:#0891b2;text-decoration:none">Made with PolySim OS →</a>
+  </p>
+</div>`;
 
   return (
     <div className="mt-4">

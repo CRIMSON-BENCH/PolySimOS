@@ -2,7 +2,7 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { Disclaimer } from "@/components/Disclaimer";
 import { JsonLd } from "@/components/JsonLd";
 import { CrossLinks } from "@/components/CrossLinks";
-import { softwareAppLd, faqLd } from "@/lib/seo";
+import { softwareAppLd, faqLd, howToLd } from "@/lib/seo";
 import { EmbedButton } from "./EmbedButton";
 import { MonetizationBar } from "@/components/monetization/Slots";
 import { ProGatedUpsell } from "@/components/monetization/ProGatedUpsell";
@@ -338,7 +338,16 @@ export function StudioPageShell({
   ];
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">
-      <JsonLd data={[softwareAppLd({ name, description: lede, path: `/studio/${slug}` }), faqLd(faqs)]} />
+      <JsonLd data={[softwareAppLd({ name, description: lede, path: `/studio/${slug}` }), faqLd(faqs), howToLd({
+        name: `How to use the ${name} simulator`,
+        description: lede,
+        steps: [
+          { name: "Open the simulator", text: `Open ${name} at polysimos.com/studio/${slug} — it runs instantly in your browser, with no install or account.` },
+          { name: "Adjust the parameters", text: "Use the sliders and presets — and drag directly on the canvas where supported — to change the inputs." },
+          { name: "Read the live results", text: "Watch the visualization, the live governing equations, and the computed outputs update in real time." },
+          { name: "Export or share", text: "Copy the setup as runnable Python, MATLAB, or Julia code, or share a link to your exact configuration." },
+        ],
+      })]} />
       <Breadcrumbs items={[{ name: "Home", path: "/" }, { name: "Studio", path: "/studio" }, { name, path: `/studio/${slug}` }]} />
       <h1 className="text-3xl font-black tracking-tight text-slate-900 dark:text-slate-100 sm:text-4xl">{name}</h1>
       <p className="mt-3 max-w-3xl text-lg text-slate-600 dark:text-slate-400">{lede}</p>
