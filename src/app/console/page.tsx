@@ -13,7 +13,7 @@ export default function ConsolePage() {
     <PageShell
       crumbs={[{ name: "Home", path: "/" }, { name: "Python Console", path: "/console" }]}
       title="Python console — in your browser"
-      lede="Real Python with NumPy, SciPy, and Matplotlib, running 100% client-side via WebAssembly. Nothing to install, nothing sent to a server. Paste the “Copy as Python” snippet from any of our 365 solvers and run it live."
+      lede="Real Python with NumPy, SciPy, and Matplotlib, running 100% client-side via WebAssembly. Nothing to install, nothing sent to a server. Paste the “Copy as Python” snippet from any of our 390+ solvers and run it live."
     >
       <PyConsole />
 

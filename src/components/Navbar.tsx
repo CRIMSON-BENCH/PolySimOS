@@ -63,7 +63,7 @@ const MENU: { label: string; sections: { title: string; links: { name: string; h
         links: [
           { name: "Aerospace", href: "/for/aerospace" },
           { name: "Automotive", href: "/for/automotive" },
-          { name: "Biotech", href: "/for/biotech" },
+          { name: "Biotech", href: "/for/biotech-pharma" },
           { name: "Energy", href: "/for/energy" },
           { name: "All industries", href: "/for" },
         ],

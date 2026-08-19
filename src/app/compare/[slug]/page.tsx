@@ -7,6 +7,7 @@ import { ProductGrid } from "@/components/ProductCard";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { contextualProducts, premiumUpsell } from "@/lib/products";
 import { ClipShowcase } from "@/components/ClipShowcase";
+import { MIGRATION_SLUGS } from "@/lib/migrations";
 import { faqLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -101,9 +102,11 @@ export default async function ComparePage({ params }: { params: Promise<{ slug: 
       <PremiumCTA product={premiumUpsell(c.slug)} heading={`Switching from ${c.competitor}?`} />
       <ProductGrid products={contextualProducts(c.slug, 6)} title="Popular products" />
 
-      <div className="mt-8">
-        <Link href={`/migrate/${c.slug}`} className="text-cyan-600 hover:underline dark:text-cyan-400">See the {c.competitor} → PolySim migration guide →</Link>
-      </div>
+      {MIGRATION_SLUGS.includes(c.slug) && (
+        <div className="mt-8">
+          <Link href={`/migrate/${c.slug}`} className="text-cyan-600 hover:underline dark:text-cyan-400">See the {c.competitor} → PolySim migration guide →</Link>
+        </div>
+      )}
     </PageShell>
   );
 }

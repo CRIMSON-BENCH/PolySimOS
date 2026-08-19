@@ -63,7 +63,7 @@ export default async function Page({ params }: { params: Promise<{ usecase: stri
       <section className="mt-10 max-w-3xl">
         <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100">About this simulation</h2>
         <p className="mt-3 text-slate-600 dark:text-slate-400">
-          The full <Link href={`/studio/${u.toolSlug}`} className="text-cyan-600 hover:underline dark:text-cyan-400">{u.toolName}</Link> tool models {u.app} with the same numerics engineers and scientists use — running entirely client-side. Change any parameter and the result updates in real time, so you can build intuition, check a design, or teach the concept without spreadsheets or installs.
+          The full <Link href={u.kind === "multi" ? `/multi/${u.toolSlug}` : `/studio/${u.toolSlug}`} className="text-cyan-600 hover:underline dark:text-cyan-400">{u.toolName}</Link> tool models {u.app} with the same numerics engineers and scientists use — running entirely client-side. Change any parameter and the result updates in real time, so you can build intuition, check a design, or teach the concept without spreadsheets or installs.
         </p>
       </section>
 

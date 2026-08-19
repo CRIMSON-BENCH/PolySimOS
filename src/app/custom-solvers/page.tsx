@@ -48,7 +48,7 @@ export default function CustomSolversPage() {
 
       <div className="mt-8 flex flex-wrap gap-3">
         <a href="mailto:custom@polysimos.com?subject=Custom%20Solver%20Set%20Inquiry" className="rounded-lg bg-cyan-600 px-6 py-3 font-semibold text-white hover:bg-cyan-700">Start a project →</a>
-        <Link href="/studio" className="rounded-lg border border-slate-300 px-6 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">See the 79 live solvers</Link>
+        <Link href="/studio" className="rounded-lg border border-slate-300 px-6 py-3 font-semibold text-slate-700 hover:bg-slate-100 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800">See the 390+ live solvers</Link>
       </div>
     </PageShell>
   );

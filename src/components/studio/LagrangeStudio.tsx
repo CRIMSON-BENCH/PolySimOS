@@ -33,11 +33,17 @@ export function LagrangeStudio() {
     // positions (rotating frame), primary at -mu, secondary at 1-mu
     const x1 = -mu, x2 = 1 - mu;
     const Omega = (X: number, Y: number) => { const r1 = Math.hypot(X - x1, Y), r2 = Math.hypot(X - x2, Y); return 0.5 * (X * X + Y * Y) + (1 - mu) / (r1 + 1e-6) + mu / (r2 + 1e-6); };
-    if (showPot) { const img = ctx.createImageData(W, H);
+    ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H);
+    if (showPot) {
+      // Render the potential to an offscreen native-size canvas, then drawImage it.
+      // putImageData ignores the hi-DPI transform and would only fill a quarter on retina.
+      const off = document.createElement("canvas"); off.width = W; off.height = H;
+      const octx = off.getContext("2d")!; const img = octx.createImageData(W, H);
       for (let py = 0; py < H; py++) for (let px = 0; px < W; px++) { const X = (px - cx) / scale, Y = (py - cy) / scale; let v = Omega(X, Y); v = Math.min(3.5, v); const t = (v - 1.4) / 2.1;
         const idx = (py * W + px) * 4; const band = (Math.sin(v * 24) * 0.5 + 0.5) * 30; img.data[idx] = 11 + t * 40 + band; img.data[idx + 1] = 18 + t * 60; img.data[idx + 2] = 32 + (1 - t) * 90 + band; img.data[idx + 3] = 255; }
-      ctx.putImageData(img, 0, 0);
-    } else { ctx.fillStyle = "#020617"; ctx.fillRect(0, 0, W, H); }
+      octx.putImageData(img, 0, 0);
+      ctx.drawImage(off, 0, 0, W, H);
+    }
     // L points (approx). Collinear via series; triangular exact.
     const L1 = x2 - Math.pow(mu / 3, 1 / 3), L2 = x2 + Math.pow(mu / 3, 1 / 3), L3 = -1 - (5 / 12) * mu;
     const pts: [number, number, string][] = [[L1, 0, "L1"], [L2, 0, "L2"], [L3, 0, "L3"], [0.5 - mu, Math.sqrt(3) / 2, "L4"], [0.5 - mu, -Math.sqrt(3) / 2, "L5"]];

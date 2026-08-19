@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function PricingPage() {
   const faqs = [
-    { q: "Is PolySim really free?", a: "Yes — all 370+ solvers run locally in your browser, free forever. You only pay for Pro features (saves, data import, exports, AI) or cloud compute." },
+    { q: "Is PolySim really free?", a: "Yes — all 390+ solvers run locally in your browser, free forever. You only pay for Pro features (saves, data import, exports, AI) or cloud compute." },
     { q: "Do I have to subscribe?", a: "No. You can unlock any single solver for $2 or a full multi-solver workflow for $5 — one-time, no subscription. Pro just unlocks everything at once." },
     { q: "What's the difference between Pro and Team?", a: "Pro is for one person. Team adds a shared workspace, pooled compute, admin controls, and seats for a lab, class, or firm." },
     { q: "Do students and educators get a discount?", a: "Local use is free for everyone. Verified students and classrooms get additional discounts — just reach out." },
@@ -30,7 +30,7 @@ export default function PricingPage() {
       {/* iOS free-companion notice — shown ONLY inside the app (see globals.css). */}
       <div className="only-in-app rounded-2xl border border-cyan-300/40 bg-cyan-500/10 p-6 text-center">
         <p className="text-lg font-bold text-slate-900 dark:text-slate-100">Everything in the app is free.</p>
-        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">All 370+ simulators run at no cost, with no account required. Enjoy exploring.</p>
+        <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">All 390+ simulators run at no cost, with no account required. Enjoy exploring.</p>
       </div>
 
       <div data-hide-in-app>

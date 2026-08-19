@@ -7,7 +7,7 @@ type Tier = { name: string; slug: string | null; monthly: number | null; tagline
 
 const TIERS: Tier[] = [
   { name: "Free", slug: null, monthly: 0, tagline: "For learning & tinkering", cta: "Start free", href: "/signup",
-    features: ["All 370+ solvers, free forever", "Runs in your browser (web app)", "Basic exports", "Save your work with an account"] },
+    features: ["All 390+ solvers, free forever", "Runs in your browser (web app)", "Basic exports", "Save your work with an account"] },
   { name: "Pro", slug: "pro-unlimited", monthly: 29, tagline: "For serious individual work", popular: true, cta: "Get Pro",
     features: ["Everything in Free", "Desktop app for Mac & Windows (offline)", "Every solver & multi-solver unlocked", "Unlimited saved projects & presets", "Import your own data (CSV / HDF5)", "Watermark-free exports", "AI copilot & priority compute"] },
   { name: "Team", slug: "team-starter", monthly: 129, tagline: "For labs, classes & firms", cta: "Get Team",

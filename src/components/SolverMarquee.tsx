@@ -41,7 +41,7 @@ function Row({ items, reverse = false }: { items: string[]; reverse?: boolean })
   );
 }
 
-export function SolverMarquee({ count = 370 }: { count?: number }) {
+export function SolverMarquee({ count = 390 }: { count?: number }) {
   return (
     <section className="border-y border-slate-200 bg-slate-50 py-12 dark:border-slate-800 dark:bg-slate-950">
       <style>{`@keyframes polysim-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }`}</style>

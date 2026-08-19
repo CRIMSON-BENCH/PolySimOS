@@ -18,6 +18,7 @@ import { STANDARDS } from "@/lib/curriculum";
 import { SCHOOLS } from "@/lib/schools";
 import { AUDIENCES } from "@/lib/audiences";
 import { CATEGORIES, CONSTANTS, allPairs } from "@/lib/units";
+import { SIMS } from "@/app/studio/page";
 import { MULTIS } from "@/lib/multi";
 import { USECASES, FEATURED } from "@/lib/usecases";
 import { AUDIENCES as UC_AUDIENCES } from "@/lib/audiences";
@@ -37,7 +38,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...AUDIENCES.map((a) => u(`/guides/${a.slug}`, 0.6)),
     ...countrySlugs().map((c) => u(`/education/country/${c.slug}`, 0.6)),
     u("/templates", 0.6), u("/about", 0.5), u("/for-business", 0.6), u("/custom-solvers", 0.8), u("/developers", 0.6), u("/multi", 0.9), u("/use-cases", 0.9),
-    u("/developers/sdk", 0.4), u("/developers/webhooks", 0.4), u("/login", 0.3), u("/signup", 0.4), u("/dashboard", 0.3),
+    u("/developers/sdk", 0.4), u("/developers/webhooks", 0.4), u("/login", 0.3), u("/signup", 0.4),
     u("/terms", 0.3), u("/privacy", 0.3), u("/refund", 0.3), u("/acceptable-use", 0.3),
     u("/security", 0.3), u("/cookies", 0.3), u("/dpa", 0.3),
     u("/studio/graph", 0.9), u("/studio/particles", 0.8), u("/studio/fluid", 0.8), u("/studio/dynamics", 0.8), u("/studio/fields", 0.8), u("/studio/cas", 0.8), u("/studio/surrogate", 0.8),
@@ -82,6 +83,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const dynamic: MetadataRoute.Sitemap = [
+    // Every studio solver, derived from the registry so the sitemap is never stale.
+    ...SIMS.map((s) => u(`/studio/${s.slug}`, 0.7)),
     ...DOMAINS.map((d) => u(`/domains/${d.slug}`, 0.7)),
     ...allDomainTopicPairs().map((p) => u(`/domains/${p.domain}/${p.topic}`)),
     ...METHODS.map((m) => u(`/methods/${m.slug}`)),
@@ -113,5 +116,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...FEATURED.flatMap((uc) => UC_AUDIENCES.map((a) => u(`/use-cases/${uc.slug}/for/${a.slug}`, 0.4))),
   ];
 
-  return [...staticPages, ...dynamic];
+  // Dedupe by URL (curated studio entries above may repeat a registry-derived one;
+  // keep the first, which carries the higher curated priority).
+  const seen = new Set<string>();
+  return [...staticPages, ...dynamic].filter((e) => {
+    if (seen.has(e.url)) return false;
+    seen.add(e.url);
+    return true;
+  });
 }

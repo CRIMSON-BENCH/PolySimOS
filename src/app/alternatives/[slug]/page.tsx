@@ -6,6 +6,7 @@ import { getComparison, getAllComparisonSlugs } from "@/lib/comparisons";
 import { PremiumCTA } from "@/components/PremiumCTA";
 import { premiumUpsell } from "@/lib/products";
 import { ClipShowcase } from "@/components/ClipShowcase";
+import { MIGRATION_SLUGS } from "@/lib/migrations";
 import { faqLd } from "@/lib/seo";
 
 export function generateStaticParams() {
@@ -59,7 +60,7 @@ export default async function AlternativePage({ params }: { params: Promise<{ sl
       <PremiumCTA product={premiumUpsell(c.slug)} heading={`Ready to leave ${c.competitor}?`} />
       <div className="mt-6 flex flex-wrap gap-4">
         <Link href={`/compare/${c.slug}`} className="text-cyan-600 hover:underline dark:text-cyan-400">Full comparison →</Link>
-        <Link href={`/migrate/${c.slug}`} className="text-cyan-600 hover:underline dark:text-cyan-400">Migration guide →</Link>
+        {MIGRATION_SLUGS.includes(c.slug) && <Link href={`/migrate/${c.slug}`} className="text-cyan-600 hover:underline dark:text-cyan-400">Migration guide →</Link>}
       </div>
     </PageShell>
   );

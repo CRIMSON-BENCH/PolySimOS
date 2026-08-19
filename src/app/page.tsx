@@ -54,7 +54,7 @@ export default function Home() {
       </section>
 
       {/* Honest social proof: a scrolling wall of the REAL simulators (no fabricated logos) */}
-      <SolverMarquee count={370} />
+      <SolverMarquee count={390} />
 
       {/* Unified canvas */}
       <section className="mx-auto max-w-6xl px-4 py-16">
@@ -119,7 +119,7 @@ export default function Home() {
       <section className="border-y border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900/50">
         <div className="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-4 py-12 text-center sm:grid-cols-4">
           {[
-            ["370+", "live simulators"],
+            ["390+", "live simulators"],
             [`${PRODUCT_COUNT}+`, "products & plans"],
             ["100%", "runs in-browser"],
             ["$0", "to start"],

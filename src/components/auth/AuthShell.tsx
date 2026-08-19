@@ -59,7 +59,7 @@ export function AuthShell({ mode }: { mode: "sign-in" | "sign-up" }) {
             The Everything Engine<br />for simulation.
           </h1>
           <p className="mt-5 max-w-md text-lg text-slate-300">
-            Run 300+ real physics, math, and engineering solvers — plus 22,000 ready-made use cases — right in your browser.
+            Run 390+ real physics, math, and engineering solvers — plus thousands of ready-made use cases — right in your browser.
           </p>
           <ul className="mt-8 space-y-3 text-slate-200">
             {["Free forever, runs locally — no install", "Save your work and unlock advanced tools", "Built for students, engineers & researchers"].map((t) => (
