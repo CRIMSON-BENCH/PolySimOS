@@ -65,6 +65,7 @@ export const SIMS = [
   { slug: "hardware-bridge", name: "Hardware Bridge", desc: "Connect a real Arduino/sensor/motor over WebSerial — live data in your browser, no install.", tag: "Hardware" },
   { slug: "controller-code", name: "Controller → Code", desc: "Tune a PID, preview the closed loop, and export a ready-to-flash Arduino/C/Python sketch.", tag: "Hardware" },
   { slug: "fabricate", name: "Fabricate", desc: "Design a plate/bracket and export exact DXF, STL, and a bill of materials — make it real.", tag: "Fabrication" },
+  { slug: "model-fit", name: "Model Fit & Validate", desc: "Paste real measured data and fit a validated model (R², residuals) — identify your system.", tag: "Machine Learning" },
   { slug: "notebook", name: "Notebook", desc: "Cells of prose + symbolic math + compute.", tag: "Math" },
   { slug: "double-pendulum", name: "Double Pendulum", desc: "The textbook chaotic system, integrated with RK4.", tag: "Physics" },
   { slug: "projectile", name: "Projectile Motion", desc: "Ballistics with air drag; tune angle and speed.", tag: "Physics" },
