@@ -66,6 +66,7 @@ export const SIMS = [
   { slug: "controller-code", name: "Controller → Code", desc: "Tune a PID, preview the closed loop, and export a ready-to-flash Arduino/C/Python sketch.", tag: "Hardware" },
   { slug: "fabricate", name: "Fabricate", desc: "Design a plate/bracket and export exact DXF, STL, and a bill of materials — make it real.", tag: "Fabrication" },
   { slug: "model-fit", name: "Model Fit & Validate", desc: "Paste real measured data and fit a validated model (R², residuals) — identify your system.", tag: "Machine Learning" },
+  { slug: "design-optimizer", name: "Design Optimizer", desc: "State a load + deflection spec; get the lightest or cheapest material and section that meets it.", tag: "Fabrication" },
   { slug: "notebook", name: "Notebook", desc: "Cells of prose + symbolic math + compute.", tag: "Math" },
   { slug: "double-pendulum", name: "Double Pendulum", desc: "The textbook chaotic system, integrated with RK4.", tag: "Physics" },
   { slug: "projectile", name: "Projectile Motion", desc: "Ballistics with air drag; tune angle and speed.", tag: "Physics" },
