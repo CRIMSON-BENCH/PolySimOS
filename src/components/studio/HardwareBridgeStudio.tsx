@@ -27,11 +27,21 @@ void loop() {
   delay(20);
 }`;
 
+const BOARDS: [string, number][] = [["Arduino Uno / Nano", 115200], ["ESP32 / ESP8266", 115200], ["micro:bit", 115200], ["Generic 9600", 9600]];
+
+function download(name: string, content: string, mime: string) {
+  const blob = new Blob([content], { type: mime });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a"); a.href = url; a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
 export function HardwareBridgeStudio() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [connected, setConnected] = useState(false);
   const [mode, setMode] = useState<"idle" | "serial" | "demo">("idle");
   const [baud, setBaud] = useState(115200);
+  const [labels, setLabels] = useState("sensor");
   const [control, setControl] = useState(0);
   const [status, setStatus] = useState("Not connected");
   const [rate, setRate] = useState(0);
@@ -48,6 +58,8 @@ export function HardwareBridgeStudio() {
   const countRef = useRef({ n: 0, t: Date.now() });
 
   useEffect(() => { controlRef.current = control; }, [control]);
+  const labelsRef = useRef(labels);
+  useEffect(() => { labelsRef.current = labels; }, [labels]);
   useEffect(() => { setSupported(typeof navigator !== "undefined" && "serial" in navigator); }, []);
 
   function pushLine(line: string) {
@@ -130,6 +142,17 @@ export function HardwareBridgeStudio() {
     }
   }
 
+  function exportCSV() {
+    const buf = bufRef.current;
+    if (!buf.length) return;
+    const nCh = Math.max(...buf.map((s) => s.v.length));
+    const names = labels.split(",").map((s) => s.trim()).filter(Boolean);
+    const header = ["t_s", ...Array.from({ length: nCh }, (_, i) => names[i] || `ch${i}`)].join(",");
+    const t0 = buf[0].t;
+    const rows = buf.map((s) => [((s.t - t0) / 1000).toFixed(3), ...s.v.map((v) => v.toFixed(3))].join(","));
+    download(`polysim-session-${buf.length}samples.csv`, [header, ...rows].join("\n"), "text/csv");
+  }
+
   // sample-rate meter
   useEffect(() => {
     const id = setInterval(() => {
@@ -170,6 +193,14 @@ export function HardwareBridgeStudio() {
         }
         ctx.fillStyle = "#64748b"; ctx.font = "11px sans-serif";
         ctx.fillText(max.toFixed(1), 6, 14); ctx.fillText(min.toFixed(1), 6, H - 6);
+        // channel legend (live labels)
+        const names = labelsRef.current.split(",").map((s) => s.trim());
+        ctx.font = "12px sans-serif"; ctx.textAlign = "left";
+        for (let ch = 0; ch < nCh; ch++) {
+          const ly = 16 + ch * 18;
+          ctx.fillStyle = PALETTE.series[ch % PALETTE.series.length]; ctx.fillRect(W - 130, ly - 8, 12, 8);
+          ctx.fillStyle = "#cbd5e1"; ctx.fillText(names[ch] || `ch${ch}`, W - 112, ly);
+        }
       } else {
         ctx.fillStyle = "#64748b"; ctx.font = "13px sans-serif"; ctx.textAlign = "center";
         ctx.fillText("Connect a device or start the demo to see live data", W / 2, H / 2);
@@ -208,12 +239,21 @@ export function HardwareBridgeStudio() {
               <button onClick={stopAll} className="rounded-lg bg-rose-600 px-3 py-1.5 text-sm font-semibold text-white hover:bg-rose-700">■ Disconnect</button>
             )}
             <button onClick={() => { bufRef.current = []; }} className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-300">↺ Clear</button>
+            <button onClick={exportCSV} className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-semibold text-slate-600 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-300">⤓ CSV</button>
           </div>
-          <div className="mb-2 flex items-center gap-2 text-xs">
+          <div className="mb-2 flex flex-wrap items-center gap-2 text-xs">
+            <label className="text-slate-500">Board</label>
+            <select onChange={(e) => setBaud(Number(e.target.value))} disabled={connected} className="rounded border border-slate-300 bg-white px-2 py-1 dark:border-slate-700 dark:bg-slate-950">
+              {BOARDS.map(([n, b]) => <option key={n} value={b}>{n}</option>)}
+            </select>
             <label className="text-slate-500">Baud</label>
             <select value={baud} onChange={(e) => setBaud(Number(e.target.value))} disabled={connected} className="rounded border border-slate-300 bg-white px-2 py-1 dark:border-slate-700 dark:bg-slate-950">
               {[9600, 19200, 57600, 115200, 250000].map((b) => <option key={b} value={b}>{b}</option>)}
             </select>
+          </div>
+          <div className="mb-2 flex items-center gap-2 text-xs">
+            <label className="text-slate-500">Channels</label>
+            <input value={labels} onChange={(e) => setLabels(e.target.value)} placeholder="sensor, output" className="flex-1 rounded border border-slate-300 bg-white px-2 py-1 dark:border-slate-700 dark:bg-slate-950" />
           </div>
           <Slider label="Control output → device" value={control} min={0} max={255} step={1} onChange={sendControl} />
           <details className="mt-3">
