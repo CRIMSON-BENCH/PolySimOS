@@ -14,7 +14,7 @@ function domainOf(tag: string): string {
   if (/(bio|med|gene)/.test(t)) return "Biology";
   if (/(finance|quant|econ|market)/.test(t)) return "Finance";
   if (/(astro|space|orbit|earth|climate|weather|geo|meteor)/.test(t)) return "Earth & Space";
-  if (/(hardware|serial|arduino|iot|sensor|embedded)/.test(t)) return "Hardware & IoT";
+  if (/(hardware|serial|arduino|iot|sensor|embedded|fabricat|manufactur|maker|3d.?print)/.test(t)) return "Hardware & Making";
   if (/(signal|dsp|acoustic|electr|circuit|antenna|filter|control|comm|image)/.test(t)) return "Signals & EE";
   if (/(cs|ai|ml|data|network|graph|crypto|machine|learning)/.test(t)) return "CS & AI";
   if (/(engineer|fea|cfd|structural|civil|mech|robot|aero|manufactur)/.test(t)) return "Engineering";
@@ -23,7 +23,7 @@ function domainOf(tag: string): string {
   return "Other";
 }
 
-const DOMAIN_ORDER = ["Physics", "Math", "Engineering", "Signals & EE", "Hardware & IoT", "CS & AI", "Chemistry", "Biology", "Finance", "Earth & Space", "GPU & 3D", "Other"];
+const DOMAIN_ORDER = ["Physics", "Math", "Engineering", "Signals & EE", "Hardware & Making", "CS & AI", "Chemistry", "Biology", "Finance", "Earth & Space", "GPU & 3D", "Other"];
 
 function scoreSim(s: Sim, words: string[]): number {
   const name = s.name.toLowerCase(), desc = s.desc.toLowerCase(), tag = s.tag.toLowerCase();
