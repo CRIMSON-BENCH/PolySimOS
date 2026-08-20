@@ -32,7 +32,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     u("/", 1.0), u("/studio", 0.9), u("/pricing", 0.8), u("/domains", 0.8), u("/methods", 0.7),
     u("/for", 0.7), u("/materials", 0.7), u("/models", 0.7), u("/glossary", 0.7), u("/tools", 0.8),
     u("/compare", 0.7), u("/migrate", 0.7), u("/education", 0.7), u("/simulate", 0.7), u("/blog", 0.7),
-    u("/courses", 0.7), u("/curriculum", 0.7), u("/schools", 0.7), u("/alternatives", 0.7), u("/matlab-alternative", 0.9), u("/convert", 0.7), u("/constants", 0.7),
+    u("/courses", 0.7), u("/curriculum", 0.7), u("/schools", 0.7), u("/alternatives", 0.7), u("/matlab-alternative", 0.9), u("/making", 0.9), u("/convert", 0.7), u("/constants", 0.7),
     ...CATEGORIES.map((c) => u(`/convert/${c.slug}`, 0.6)),
     ...CONSTANTS.map((c) => u(`/constants/${c.slug}`, 0.5)),
     ...AUDIENCES.map((a) => u(`/guides/${a.slug}`, 0.6)),
