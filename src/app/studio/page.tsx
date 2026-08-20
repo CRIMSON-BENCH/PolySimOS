@@ -62,6 +62,7 @@ export const SIMS = [
   { slug: "ber-snr", name: "BER vs SNR", desc: "Waterfall BER vs Eb/N0 for BPSK/QPSK, 16/64-QAM & BFSK — theory + AWGN Monte-Carlo.", tag: "Communications" },
   { slug: "gaussian-process", name: "Gaussian Process", desc: "Interactive 1D GP regression with live posterior mean, 95% uncertainty band, and samples.", tag: "Machine Learning" },
   { slug: "block-diagram", name: "Block Diagram Simulator", desc: "Wire block diagrams and run them with RK4 in your browser — a free Simulink alternative.", tag: "Control Systems" },
+  { slug: "hardware-bridge", name: "Hardware Bridge", desc: "Connect a real Arduino/sensor/motor over WebSerial — live data in your browser, no install.", tag: "Hardware" },
   { slug: "notebook", name: "Notebook", desc: "Cells of prose + symbolic math + compute.", tag: "Math" },
   { slug: "double-pendulum", name: "Double Pendulum", desc: "The textbook chaotic system, integrated with RK4.", tag: "Physics" },
   { slug: "projectile", name: "Projectile Motion", desc: "Ballistics with air drag; tune angle and speed.", tag: "Physics" },
