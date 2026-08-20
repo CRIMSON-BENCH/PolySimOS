@@ -31,6 +31,18 @@ const SEEDS: Seed[] = [
   ["Sports & Wearables", "Engineer performance gear and wearable devices.", ["Aerodynamics", "Comfort and fit", "Battery life"], ["Cycling aerodynamics", "Fabric drape", "Wearable thermal design"]],
   ["Education & Research", "Teach and discover with accessible simulation.", ["License cost", "Reproducibility", "Accessibility"], ["Classroom labs", "Reproducible research", "Interactive coursework"]],
   ["AgTech", "Model crops, irrigation, and agricultural machinery.", ["Water transport", "Soil mechanics", "Yield optimization"], ["Irrigation flow", "Soil DEM", "Greenhouse airflow"]],
+  ["Makers & Hobbyists", "Prototype, control, and fabricate real projects from a browser — no license, no install.", ["Expensive desktop tools", "Bridging simulation to hardware", "Fast iteration"], ["Arduino control loops", "3D-print part design", "Sensor data logging"]],
+  ["Hardware Startups", "Go from prototype to product without a toolbox tax.", ["Tight budgets", "Fast iteration", "Design-to-fab handoff"], ["Controller prototyping", "Bracket fabrication", "Model validation from test data"]],
+  ["Electric Vehicles", "Engineer EV powertrains, batteries, and thermal systems.", ["Battery thermal runaway", "Range efficiency", "Motor control"], ["Battery pack cooling", "Motor-control tuning", "Aerodynamic range"]],
+  ["Renewable Energy", "Optimize solar, wind, and storage systems.", ["Intermittency", "Thermal cycling", "Grid integration"], ["Wind-farm CFD", "PV thermal modeling", "Battery storage sizing"]],
+  ["Nuclear", "Model reactors, shielding, and radiation transport.", ["Neutron transport", "Thermal-hydraulics", "Safety margins"], ["Reactor kinetics", "Shielding attenuation", "Decay-heat modeling"]],
+  ["HVAC & Buildings", "Model airflow, comfort, and energy use in built spaces.", ["Thermal comfort", "Energy efficiency", "Air quality"], ["Room airflow CFD", "Building energy modeling", "Duct design"]],
+  ["Water & Wastewater", "Design treatment, distribution, and hydraulics.", ["Flow assurance", "Mixing and aeration", "Contaminant transport"], ["Pipe-network hydraulics", "Aeration mixing", "Contaminant dispersion"]],
+  ["Rail & Transit", "Engineer rolling stock and rail infrastructure.", ["Aerodynamics", "Track loading", "Braking thermal"], ["Train aerodynamics", "Rail structural FEA", "Brake thermal analysis"]],
+  ["Mining & Geotech", "Model excavation, slope stability, and ore processing.", ["Slope stability", "Groundwater", "Comminution"], ["Slope FEA", "Groundwater flow", "Particle DEM"]],
+  ["Food & Beverage", "Model processing, mixing, and thermal safety.", ["Mixing uniformity", "Thermal pasteurization", "Shelf life"], ["Mixing CFD", "Sterilization heat transfer", "Diffusion modeling"]],
+  ["Packaging", "Design protective, efficient, sustainable packaging.", ["Drop protection", "Material cost", "Sustainability"], ["Drop-test FEA", "Cushioning analysis", "Material optimization"]],
+  ["Textiles & Apparel", "Simulate fabric, fit, and wearables.", ["Drape and fit", "Thermal comfort", "Durability"], ["Cloth simulation", "Thermal comfort modeling", "Seam stress"]],
 ];
 
 export const INDUSTRIES: Industry[] = SEEDS.map((s) => {

@@ -15,6 +15,19 @@ const MATERIALS: Record<string, { rho: number; cost: number; process: string }> 
   "PLA (3D print)": { rho: 1.24, cost: 25, process: "3D print" },
 };
 
+// Fab services to route the exported file to (add your affiliate/referral IDs to the URLs).
+const FAB_SERVICES: Record<string, { name: string; url: string }[]> = {
+  cut: [
+    { name: "SendCutSend", url: "https://sendcutsend.com/" },
+    { name: "Xometry", url: "https://www.xometry.com/quote/" },
+    { name: "Ponoko", url: "https://www.ponoko.com/" },
+  ],
+  print: [
+    { name: "Craftcloud", url: "https://craftcloud3d.com/" },
+    { name: "Treatstock", url: "https://www.treatstock.com/" },
+  ],
+};
+
 function boltFor(dia: number): string {
   const table: [number, string][] = [[3.4, "M3"], [4.5, "M4"], [5.5, "M5"], [6.6, "M6"], [9, "M8"], [11, "M10"]];
   for (const [d, name] of table) if (dia <= d) return name;
@@ -206,6 +219,16 @@ Find fasteners: https://www.amazon.com/s?k=${bolt}+socket+head+cap+screw`;
             <button onClick={() => download(`polysim-${shape}.dxf`, genDXF(g, r), "application/dxf")} className="rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-cyan-700">⤓ DXF (laser/CNC)</button>
             <button onClick={() => download(`polysim-${shape}.stl`, stlObj.stl, "model/stl")} className="rounded-lg bg-cyan-600 px-3 py-1.5 text-xs font-semibold text-white hover:bg-cyan-700">⤓ STL (3D print)</button>
             <button onClick={() => download(`polysim-${shape}-BOM.txt`, bomText, "text/plain")} className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-600 hover:border-cyan-400 dark:border-slate-700 dark:text-slate-300">⤓ Bill of Materials</button>
+          </div>
+          <div className="mt-3 rounded-lg border border-cyan-300/40 bg-cyan-500/5 p-3 text-xs dark:border-cyan-500/30">
+            <div className="font-semibold text-slate-800 dark:text-slate-200">Get it made</div>
+            <p className="mt-0.5 text-slate-500">Upload your {mat.process.includes("3D print") ? "STL" : "DXF"} for an instant quote:</p>
+            <div className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+              {(FAB_SERVICES[mat.process.includes("3D print") ? "print" : "cut"]).map((s) => (
+                <a key={s.name} href={s.url} target="_blank" rel="noopener" className="font-medium text-cyan-700 hover:underline dark:text-cyan-400">{s.name} →</a>
+              ))}
+              <a href={`https://www.amazon.com/s?k=${bolt}+socket+head+cap+screw`} target="_blank" rel="noopener" className="font-medium text-cyan-700 hover:underline dark:text-cyan-400">{bolt} fasteners →</a>
+            </div>
           </div>
         </div>
       }
