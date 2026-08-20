@@ -10,7 +10,14 @@ import { hidpi, PALETTE, copyText } from "@/lib/studioKit";
 const CW = 760, CH = 420;
 
 type Pt = { x: number; y: number };
-type Model = { key: string; name: string; init: (d: Pt[]) => number[]; f: (x: number, b: number[]) => number; latex: (b: number[]) => string; params: string[] };
+type Model = {
+  key: string; name: string; params: string[];
+  init: (d: Pt[]) => number[];
+  f: (x: number, b: number[]) => number;
+  latex: (b: number[]) => string;
+  bounds?: (d: Pt[]) => [number[], number[]];       // per-param [lo, hi] clamps
+  grid?: (d: Pt[]) => { i: number; values: number[] }; // coarse search over one param (e.g. dead time)
+};
 
 const MODELS: Model[] = [
   {
@@ -27,6 +34,21 @@ const MODELS: Model[] = [
     key: "fostep", name: "First-order step K(1−e^{−x/τ})", params: ["K", "tau"],
     init: (d) => [d[d.length - 1]?.y || 1, (d[d.length - 1]?.x || 1) / 3], f: (x, b) => b[0] * (1 - Math.exp(-x / Math.max(1e-3, b[1]))),
     latex: (b) => `y = ${b[0].toFixed(3)}\\left(1-e^{-x/${b[1].toFixed(3)}}\\right)`,
+  },
+  {
+    key: "fopdt", name: "First-order + dead time (FOPDT)", params: ["K", "tau", "theta"],
+    init: (d) => [d[d.length - 1]?.y || 1, (d[d.length - 1]?.x || 3) / 3, 0],
+    f: (x, b) => (x <= b[2] ? 0 : b[0] * (1 - Math.exp(-(x - b[2]) / Math.max(1e-3, b[1])))),
+    latex: (b) => `y = ${b[0].toFixed(2)}\\left(1-e^{-(x-${b[2].toFixed(2)})/${b[1].toFixed(2)}}\\right),\\ x>${b[2].toFixed(2)}`,
+    bounds: (d) => { const xm = Math.max(...d.map((p) => p.x)); return [[1e-3, 0.05, 0], [1e6, 1e6, xm * 0.9]]; },
+    grid: (d) => { const xm = Math.max(...d.map((p) => p.x)); return { i: 2, values: Array.from({ length: 13 }, (_, k) => (k / 12) * xm * 0.6) }; },
+  },
+  {
+    key: "so2", name: "Second-order underdamped step", params: ["K", "omega", "zeta"],
+    init: (d) => [d[d.length - 1]?.y || 1, 2, 0.4],
+    f: (x, b) => { const z = b[2], w = b[1]; if (z >= 1) return b[0] * (1 - Math.exp(-w * x) * (1 + w * x)); const wd = w * Math.sqrt(1 - z * z); return b[0] * (1 - Math.exp(-z * w * x) * (Math.cos(wd * x) + (z * w / wd) * Math.sin(wd * x))); },
+    latex: (b) => `K=${b[0].toFixed(2)},\\ \\omega=${b[1].toFixed(2)},\\ \\zeta=${b[2].toFixed(2)}`,
+    bounds: () => [[1e-3, 0.05, 0.02], [1e6, 50, 0.99]],
   },
   {
     key: "logistic", name: "Logistic L/(1+e^{−k(x−x₀)})", params: ["L", "k", "x0"],
@@ -52,32 +74,41 @@ function solveLin(A: number[][], b: number[]): number[] {
   return M.map((_, i) => M[i][n] / M[i][i]); // fully reduced to diagonal above
 }
 
-function fit(model: Model, data: Pt[]) {
-  let beta = model.init(data);
+function fitGN(model: Model, init: number[], data: Pt[]) {
+  let beta = init.slice();
   const np = beta.length, h = 1e-5;
-  let lambda = 1e-3;
+  const [lo, hi] = model.bounds ? model.bounds(data) : [[], []];
+  let lambda = 1e-2;
   const sse = (b: number[]) => data.reduce((s, p) => { const e = p.y - model.f(p.x, b); return s + e * e; }, 0);
-  for (let iter = 0; iter < 60; iter++) {
+  for (let iter = 0; iter < 100; iter++) {
     const JtJ = Array.from({ length: np }, () => new Array(np).fill(0));
     const Jtr = new Array(np).fill(0);
     for (const p of data) {
       const r = p.y - model.f(p.x, beta);
-      const J = beta.map((_, k) => { const bb = [...beta]; bb[k] += h; return (model.f(p.x, bb) - model.f(p.x, beta)) / h; });
+      const J = beta.map((_, k) => { const bb = beta.slice(); bb[k] += h; return (model.f(p.x, bb) - model.f(p.x, beta)) / h; });
       for (let i = 0; i < np; i++) { Jtr[i] += J[i] * r; for (let j = 0; j < np; j++) JtJ[i][j] += J[i] * J[j]; }
     }
     for (let i = 0; i < np; i++) JtJ[i][i] *= (1 + lambda);
     let delta: number[];
     try { delta = solveLin(JtJ, Jtr); } catch { break; }
-    const next = beta.map((v, i) => v + delta[i]);
-    if (sse(next) < sse(beta)) { beta = next; lambda = Math.max(1e-7, lambda * 0.7); } else { lambda = Math.min(1e3, lambda * 2.5); }
-    if (delta.every((d) => Math.abs(d) < 1e-8)) break;
+    let next = beta.map((v, i) => v + delta[i]);
+    if (model.bounds) next = next.map((v, i) => Math.max(lo[i], Math.min(hi[i], v)));
+    if (sse(next) < sse(beta)) { beta = next; lambda = Math.max(1e-7, lambda * 0.7); } else { lambda = Math.min(1e4, lambda * 2.5); }
+    if (delta.every((d) => Math.abs(d) < 1e-9)) break;
   }
   const mean = data.reduce((s, p) => s + p.y, 0) / data.length;
   const ssTot = data.reduce((s, p) => s + (p.y - mean) ** 2, 0);
   const ssRes = sse(beta);
-  const r2 = ssTot > 0 ? 1 - ssRes / ssTot : 1;
-  const rmse = Math.sqrt(ssRes / data.length);
-  return { beta, r2, rmse };
+  return { beta, r2: ssTot > 0 ? 1 - ssRes / ssTot : 1, rmse: Math.sqrt(ssRes / data.length) };
+}
+
+function fit(model: Model, data: Pt[]) {
+  const base = model.init(data);
+  if (!model.grid) return fitGN(model, base, data);
+  const { i, values } = model.grid(data);
+  let best: ReturnType<typeof fitGN> | null = null;
+  for (const v of values) { const init = base.slice(); init[i] = v; const r = fitGN(model, init, data); if (!best || r.r2 > best.r2) best = r; }
+  return best ?? fitGN(model, base, data);
 }
 
 function demoData(): string {
@@ -129,11 +160,10 @@ export function ModelFitStudio() {
 
   // FOPDT-based PID suggestion (IMC tuning) when the first-order model is chosen.
   const pidHint = useMemo(() => {
-    if (modelKey !== "fostep" || !result) return null;
-    const [K, tau] = result.beta; if (K <= 0 || tau <= 0) return null;
-    const lambda = tau; // moderate IMC closed-loop time constant
-    const Kc = tau / (K * lambda);
-    return { Kp: Kc, Ki: Kc / tau, Kd: 0, K, tau };
+    if (!result) return null;
+    if (modelKey === "fostep") { const [K, tau] = result.beta; if (K <= 0 || tau <= 0) return null; const lam = tau; const Kc = tau / (K * lam); return { Kp: Kc, Ki: Kc / tau, K, tau, theta: 0 }; }
+    if (modelKey === "fopdt") { const [K, tau, theta] = result.beta; if (K <= 0 || tau <= 0) return null; const lam = Math.max(theta, 0.1 * tau); const Kc = tau / (K * (theta + lam)); const Ti = Math.min(tau, 4 * (theta + lam)); return { Kp: Kc, Ki: Kc / Ti, K, tau, theta }; }
+    return null;
   }, [modelKey, result]);
 
   const explain = !result
@@ -165,7 +195,7 @@ export function ModelFitStudio() {
           </select>
           {pidHint && (
             <div className="mt-3 rounded-lg border border-cyan-300/40 bg-cyan-500/10 p-3 text-xs text-slate-700 dark:border-cyan-500/30 dark:text-slate-300">
-              Identified plant K={pidHint.K.toFixed(2)}, τ={pidHint.tau.toFixed(2)}. Suggested PID (IMC): Kp≈{pidHint.Kp.toFixed(2)}, Ki≈{pidHint.Ki.toFixed(2)}. <Link href="/studio/controller-code" className="font-semibold text-cyan-700 underline dark:text-cyan-400">Design & export it →</Link>
+              Identified plant K={pidHint.K.toFixed(2)}, τ={pidHint.tau.toFixed(2)}{pidHint.theta > 0 ? `, θ=${pidHint.theta.toFixed(2)}` : ""}. Suggested PID: Kp≈{pidHint.Kp.toFixed(2)}, Ki≈{pidHint.Ki.toFixed(2)}. <Link href="/studio/controller-code" className="font-semibold text-cyan-700 underline dark:text-cyan-400">Design & export it →</Link>
             </div>
           )}
         </div>
